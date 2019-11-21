@@ -135,12 +135,24 @@
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';	
 					$('.container-fluid').html("내 정보 수정");
 				}
-				if(index == 4)
+				if(index == 4){
+					$(".container-fluid").empty();
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-				if(index == 5)
+					$('.container-fluid').html("관심 컨텐츠");
+				}
+				if(index == 5){
+					$(".container-fluid").empty();
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-				if(index == 6)
+					$('.container-fluid').html("내 리뷰 관리");
+				}
+				if(index == 6){
+					$(".container-fluid").empty();
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
+					$('.container-fluid').html("숨김 컨텐츠 관리");
+				}
+				if(index == 7){
+					$(".container-fluid").empty();
+				}
 			$('#field').load("<%=request.getContextPath()%>" + link);
 
 		}
