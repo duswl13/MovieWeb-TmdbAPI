@@ -25,7 +25,6 @@
 		<div class="sidebar-header">
 			<h3>
 				<a href="#" onclick="load(0);">VOSHU</a>
-
 			</h3>
 
 		</div>
