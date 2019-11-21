@@ -6,16 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지:내 정보 수정</title>
 <style>
-*{margin:0; box-sizing: border-box; text-decoration: none;}
-html,body{/*height:100%;*/
-			height:400px;}
-header {
-	background-color: yellow;
-	height: 100px;
-	width: 100%;
-	line-height: 100px;
-	text-align: center;
-}
+
 </style>
 </head>
 <body>

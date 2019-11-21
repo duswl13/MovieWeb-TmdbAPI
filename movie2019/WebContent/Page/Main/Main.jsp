@@ -118,13 +118,20 @@
 				
 				var link = '';
 				
-				if(index == 0)
+				if(index == 0){
+					$(".container-fluid").empty();
 					link = '/Page/MainPage/Mainpage.html';
-				if(index == 1)
+				}
+				if(index == 1){
+					$(".container-fluid").empty();
 					link = "/list.ch";
-				if(index == 2)
+				}
+				if(index == 2){
+					$(".container-fluid").empty();
 					link = '/Page/Board/NewFile.html';
+				}
 				if(index == 3){
+					$(".container-fluid").empty();
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';	
 					$('.container-fluid').html("내 정보 수정");
 				}
