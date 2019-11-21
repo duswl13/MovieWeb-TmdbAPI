@@ -125,7 +125,7 @@
 				if(index == 2)
 					link = '/Page/Board/NewFile.html';
 				if(index == 3){
-					link = '/Page/MyPage/MyInfo/MyInfo.jsp';	
+					link = '/Page/MyPage/MyInfo/Myinfo.jsp';	
 					$('.container-fluid').html("내 정보 수정");
 				}
 				if(index == 4)
@@ -134,6 +134,9 @@
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
 				if(index == 6)
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
+				
+				
+			alert("<%=request.getContextPath()%>" + link);
 			$('#field').load("<%=request.getContextPath()%>" + link);
 
 		}
