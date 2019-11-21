@@ -12,7 +12,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Our Custom CSS -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/Main/Mainstyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/Page/Main/Mainstyle.css">
 
 </head>
 <body>
@@ -105,7 +105,7 @@
 				$(this).toggleClass('active');
 			});
 
-			$('#field').load("<%=request.getContextPath()%>/MainPage/MainPage.html");
+			$('#field').load("<%=request.getContextPath()%>/Page/MainPage/MainPage.html");
 		});
 	</script>
 </body>
