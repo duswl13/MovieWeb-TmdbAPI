@@ -52,10 +52,10 @@
 			<li class="active"><a href="#pageSubmenu" data-toggle="collapse"
 				aria-expanded="false" class="dropdown-item">마이페이지</a>
 				<ul class="collapse list-unstyled" id="pageSubmenu">
-					<li><a href="#" onclick="load(3);">내 정보</a></li>
-					<li><a href="#" onclick="load(4);">관심</a></li>
-					<li><a href="#" onclick="load(5);">리뷰</a></li>
-					<li><a href="#" onclick="load(6);">숨김</a></li>
+					<li><a href="#" onclick="load(3);">내 정보 수정</a></li>
+					<li><a href="#" onclick="load(4);">관심 컨텐츠</a></li>
+					<li><a href="#" onclick="load(5);">내 리뷰 관리</a></li>
+					<li><a href="#" onclick="load(6);">숨김 컨텐츠 관리</a></li>
 				</ul></li>
 			<li><a href="#" onclick="load(7);">공지사항</a></li>
 
@@ -71,7 +71,7 @@
 		<div id="content">
 
 			<nav class="navbar navbar-expand-lg navbar-light">
-			<div class="container-fluid">
+			<div class="container-fluid" style="font-size: 50px;color: yellow">
 
 				<!-- Menu button -->
 				<button type="button" id="sidebarCollapse" class="navbar-btn active">
