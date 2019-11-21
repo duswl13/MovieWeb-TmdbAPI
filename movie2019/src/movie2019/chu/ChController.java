@@ -53,12 +53,18 @@ public class ChController extends HttpServlet {
 		String page = null;
 		BCommand command = null;
 		String uri = request.getRequestURI();
+		System.out.println(uri);
 		String conPath = request.getContextPath();
+		System.out.println(conPath);
 		String com = uri.substring(conPath.length());
+		System.out.println(com);
 		
 		if(com.equals("/list.ch")) {
-			page = "Chucheon/list.jsp";
+			System.out.println("½ÇÇà");
+			page = "Page/Chu/list.jsp";
 		}
+		
+		
 		request.getRequestDispatcher(page).forward(request, response);
 			
 	}

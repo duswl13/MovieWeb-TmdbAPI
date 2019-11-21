@@ -120,9 +120,11 @@
 				
 				if(index == 0)
 					link = '/Page/MainPage/Mainpage.html';
+				if(index == 1)
+					link = "/list.ch";
 				if(index == 2)
 					link = '/Page/Board/NewFile.html';
-					
+				
 			$('#field').load("<%=request.getContextPath()%>" + link);
 
 		}
