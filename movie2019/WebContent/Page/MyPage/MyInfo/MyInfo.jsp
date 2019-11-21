@@ -7,12 +7,10 @@
 <title>마이페이지:내 정보 수정</title>
 <style>
 
-
-
 </style>
 </head>
 <body>
-
+ <div class="container">
 
     <form name="joinform">
     
@@ -48,6 +46,6 @@
           <button type="reset" class="cancelbtn">다시작성</button>
         </div>
      </form>
-
+  </div>
 </body>
 </html>
