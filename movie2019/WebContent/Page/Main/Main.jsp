@@ -46,7 +46,7 @@
 					<li><a href="#">평점</a></li>
 				</ul></li>
 			<li><a href="#">추천</a></li>
-			<li><a href="#">게시판</a></li>
+			<li><a href="javascript:load();">게시판</a></li>
 
 			<li class="active"><a href="#pageSubmenu" data-toggle="collapse"
 				aria-expanded="false" class="dropdown-item">마이페이지</a>
@@ -106,6 +106,13 @@
 			});
 
 			$('#field').load("<%=request.getContextPath()%>/Page/MainPage/MainPage.html");
+		
+			function load(){
+		
+					$('#field').load("<%=request.getContextPath()%>/Page/Board/NewFile.html");
+				
+			}
+		
 		});
 	</script>
 </body>
