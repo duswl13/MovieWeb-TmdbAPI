@@ -5,12 +5,10 @@
 <title>Insert title here</title>
 
 <style>
-* {
-	box-sizing: border-box;
-}
 
+/*유투브 백그라운드*/
 .video-background {
-	background: #000;
+	background: #141414;
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -19,6 +17,7 @@
 	z-index: -99;
 }
 
+/*유투브 백그라운드*/
 .video-foreground, .video-background iframe {
 	position: absolute;
 	top: 0;
@@ -28,10 +27,13 @@
 	pointer-events: none;
 }
 
+/*유투브 백그라운드*/
 @media ( min-aspect-ratio : 16/9) {
 	.video-foreground {
-		height: 300%;
-		top: -100%;
+	    height: 100%;
+   		top: -10%;
+		/*height: 300%;
+		top: -100%; /*상단 유투브 제목 안보이게하려고*/
 	}
 }
 
@@ -41,68 +43,75 @@
 		left: -100%;
 	}
 }
-
-@media all and (max-width: 600px) {
-	.vid-info {
-		width: 50%;
-		padding: .5rem;
-	}
-	.vid-info h1 {
-		margin-bottom: .2rem;
-	}
-}
-
-@media all and (max-width: 500px) {
-	.vid-info .acronym {
-		display: none;
-	}
-}
-
+/*유투브 백그라운드 불투명도*/
 iframe {
-	opacity: 0.7;
+	opacity: 0.8;
 }
 
+/*메인 영화소개*/
 #h {
 	color: white;
 	font-size: 10em;
 	text-align: right;
-
 }
 
+/*메인 영화소개*/
 #b {
-clear:right;
+	clear: right;
 	color: white;
 	font-size: 1em;
 	text-align: right;
-
 }
 
-#main_box{
-margin-right: 30px;
-float:right;
-width:50%;
-height:100%;
+/*메인 영화소개*/
+.main_box {
+	margin-right: 30px;
+	float: right;
+	width: 50%;
+	height: 70vh;
+	display: table;
 }
 
-.starR{
-float:right;
-  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
-  background-size: auto 100%;
-  width: 25px;
-  height: 25px;
-  display: inline-block;
-  text-indent: -9999px;
+/*메인 영화소개 vert 맞추려고*/
+.main_box2 {
+	display: table-cell;
+	vertical-align: middle;
 }
-.starR.on{background-position:0 0;}
 
-.starRev{
-	float:right;
+
+/*메인 영화소개 별점*/
+.starR {
+	float: right;
+	background:
+		url('http://miuu227.godohosting.com/images/icon/ico_review.png')
+		no-repeat right 0;
+	background-size: auto 100%;
+	width: 25px;
+	height: 25px;
+	display: inline-block;
+	text-indent: -9999px;
+}
+
+
+.starR.on {
+	background-position: 0 0;
+}
+
+.starRev {
+	float: right;
 	margin-bottom: 8px;
 }
 
-.gray{
+.gray {
 	color: #141414;
 }
+
+
+
+
+
+
+
 </style>
 
 
@@ -112,28 +121,37 @@ float:right;
 
 	<div class="video-background">
 		<div class="video-foreground">
-			<iframe class="ww"
-				src="https://www.youtube.com/embed/Zi4LMpSDccc?mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0"
+
+			<iframe
+				src="https://www.youtube.com/embed/Zi4LMpSDccc?version=3&mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0&playlist=Zi4LMpSDccc"
 				frameborder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 				allowfullscreen> </iframe>
 		</div>
+
+
+	</div>
+
+	<div class="main_box">
+
+		<div class="main_box2">
+			<h1 id="h">Frozen2</h1>
+
+			<div class="starRev">
+				<span class="starR on">별1</span> <span class="starR">별2</span> <span
+					class="starR">별3</span> <span class="starR">별4</span> <span
+					class="starR">별5</span>
+			</div>
+			<p id="b" class="gray">147 Reviews 2019 1h 37min Cert.PG</p>
+			<p id="b">어느 날 부턴가 의문의 목소리가 엘사를 부르고, 평화로운 아렌델 왕국을 위협한다. 트롤은 모든 것은
+				과거에서 시작되었음을 알려주며 엘사의 힘의 비밀과 진실을 찾아 떠나야한다고 조언한다. 위험에 빠진 아렌델 왕국을 구해야만
+				하는 엘사와 안나는 숨겨진 과거의 진실을 찾아 크리스토프, 올라프 그리고 스벤과 함께 위험천만한 놀라운 모험을 떠나게
+				된다. 자신의 힘을 두려워했던 엘사는 이제 이 모험을 헤쳐나가기에 자신의 힘이 충분하다고 믿어야만 하는데…</p>
+
+		</div>
 	</div>
 
 
-
-			<div id="main_box">
-			<h1 id="h">Frozen2</h1>
-			<div class="starRev">
-  			<span class="starR on">별1</span>
- 			<span class="starR">별2</span>
-  			<span class="starR">별3</span>
-  			<span class="starR">별4</span>
-  			<span class="starR">별5</span>
-			<p id="b" class="gray"> 147 Reviews 2019 1h 37min Cert.PG</p>
-			<p id="b">어느 날 부턴가 의문의 목소리가 엘사를 부르고, 평화로운 아렌델 왕국을 위협한다. 트롤은 모든 것은 과거에서 시작되었음을 알려주며 엘사의 힘의 비밀과 진실을 찾아 떠나야한다고 조언한다. 위험에 빠진 아렌델 왕국을 구해야만 하는 엘사와 안나는 숨겨진 과거의 진실을 찾아 크리스토프, 올라프 그리고 스벤과 함께 위험천만한 놀라운 모험을 떠나게 된다. 자신의 힘을 두려워했던 엘사는 이제 이 모험을 헤쳐나가기에 자신의 힘이 충분하다고 믿어야만 하는데…</p>
-			</div>
-			</div>
 
 </body>
 

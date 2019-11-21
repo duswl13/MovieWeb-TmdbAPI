@@ -16,17 +16,21 @@
    href="<%=request.getContextPath()%>/Page/Main/Mainstyle.css">
 
 </head>
+
+
 <body>
 
-   <div class="wrapper">
-      <!-- Sidebar Holder -->
-      <!-- active : 사이드 바의 너비를 사용하여 필요하지 않은 요소를 화면 밖으로 밀어냅니다.  -->
-      <nav id="sidebar" class="active">
-      <div class="sidebar-header">
-         <h3>
-            <a href="#" onclick="load(0);">VOSHU</a>
 
-         </h3>
+<!-- header -->
+	<div class="wrapper">
+		<!-- Sidebar Holder -->
+		<!-- active : 사이드 바의 너비를 사용하여 필요하지 않은 요소를 화면 밖으로 밀어냅니다.  -->
+		<nav id="sidebar" class="active">
+		<div class="sidebar-header">
+			<h3>
+				<a href="#" onclick="load(0);">VOSHU</a>
+			</h3>
+
 
       </div>
       <input type="text" id="search-form" class="btn-search"
@@ -100,20 +104,28 @@
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <script type="text/javascript">
    
+   
+   
+   
          $('#field').load("<%=request.getContextPath()%>/Page/MainPage/MainPage.html");
 
+         
+         
+         
          $('#sidebarCollapse').on('click', function() {
             $('#sidebar').toggleClass('active');
             $(this).toggleClass('active');
          });
 
-         
+
          $('#login').click(function(){
             
             location.href="<%=request.getContextPath()%>/Page/Login/login.html";
             
          });
       
+         
+         
          function load(index){
             
             var link = '';
@@ -153,7 +165,56 @@
             if(index == 7){
                $(".container-fluid").empty();
             }
+            
+            
+            
          $('#field').load("<%=request.getContextPath()%>" + link);
+         
+         
+         }
+         
+         
+			
+			$('#login').click(function(){
+				
+				location.href="<%=request.getContextPath()%>/Page/Login/login.html";
+				
+			});
+		
+			function load(index){
+				
+				var link = '';
+				
+				if(index == 0)
+					link = '/Page/MainPage/Mainpage.html';
+				if(index == 1)
+					link = "/list.ch";
+				if(index == 2)
+					link = '/Page/Board/NewFile.html';
+	            if(index == 3){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
+	                $('.container-fluid').html("내 정보 수정");
+	             }
+	             if(index == 4){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/Like/Like.jsp';
+	                $('.container-fluid').html("관심 컨텐츠");
+	             }
+	             if(index == 5){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/MyReview/MyReview.jsp';
+	                $('.container-fluid').html("내 리뷰 관리");
+	             }
+	             if(index == 6){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/Hidden/Hidden.jsp';
+	                $('.container-fluid').html("숨김 컨텐츠 관리");
+	             }
+				
+				
+		
+			$('#field').load("<%=request.getContextPath()%>" + link);
 
       }
    </script>
