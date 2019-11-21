@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¸¶ÀÌÆäÀÌÁö:³» Á¤º¸ ¼öÁ¤</title>
+<meta charset="UTF-8">
+<title>ë§ˆì´íŽ˜ì´ì§€:ë‚´ ì •ë³´ ìˆ˜ì •</title>
 <style>
 *{margin:0; box-sizing: border-box; text-decoration: none;}
 html,body{/*height:100%;*/
@@ -24,35 +24,35 @@ header {
     <form name="joinform">
     
        <div>
-          <b>¾ÆÀÌµð</b>
+          <b>ì•„ì´ë””</b>
           <input type="text" placeholder="Enter id" id="id" name="id" maxLength="12" required>
           <span id="message"></span>
        </div>
        <div>
-           <b>ºñ¹Ð¹øÈ£</b>
+           <b>ë¹„ë°€ë²ˆí˜¸</b>
            <input type="password" placeholder="Enter password" name="pass" required>
        </div>
        <div>
-          <b>ÀÌ¸§</b>
+          <b>ì´ë¦„</b>
           <input type="text" placeholder="Enter name"  name="name" maxLength="15" required>
        </div>
        <div>
-          <b>³ªÀÌ</b>
+          <b>ë‚˜ì´</b>
           <input type="text" placeholder="Enter age"  name="age" maxLength=2 required>
        </div>
        <div>
-          <b>¼ºº°</b>
-          <input type="radio" name="gender" value="³²" checked><span>³²ÀÚ</span>
-          <input type="radio" name="gender" value="¿©"><span>¿©ÀÚ</span>
+          <b>ì„±ë³„</b>
+          <input type="radio" name="gender" value="ë‚¨" checked><span>ë‚¨ìž</span>
+          <input type="radio" name="gender" value="ì—¬"><span>ì—¬ìž</span>
        </div>
        <div>
-          <b>ÀÌ¸ÞÀÏ ÁÖ¼Ò</b>
+          <b>ì´ë©”ì¼ ì£¼ì†Œ</b>
           <input type="text" placeholder="Enter email"  name="email" required>
           <span id="email_message"></span>
        </div>
        <div class="clearfix">
-          <button type="submit" class="submitbtn">·Î±×ÀÎ</button>
-          <button type="reset" class="cancelbtn">´Ù½ÃÀÛ¼º</button>
+          <button type="submit" class="submitbtn">ë¡œê·¸ì¸</button>
+          <button type="reset" class="cancelbtn">ë‹¤ì‹œìž‘ì„±</button>
         </div>
      </form>
   </div>
