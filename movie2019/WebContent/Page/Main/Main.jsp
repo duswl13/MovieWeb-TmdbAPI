@@ -12,7 +12,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Our Custom CSS -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/Page/Main/Mainstyle.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/Page/Main/Mainstyle.css">
 
 </head>
 <body>
@@ -23,13 +24,13 @@
 		<nav id="sidebar" class="active">
 		<div class="sidebar-header">
 			<h3>
-				<a href="#">VOSHU</a>
+				<a href="#" onclick="load(0);">VOSHU</a>
 
 			</h3>
-		
+
 		</div>
-		<input type="text" id="search-form"
-			class="btn-search" placeholder="Search">
+		<input type="text" id="search-form" class="btn-search"
+			placeholder="Search">
 		<ul class="list-unstyled components">
 
 
@@ -45,18 +46,18 @@
 					<li><a href="#">최신</a></li>
 					<li><a href="#">평점</a></li>
 				</ul></li>
-			<li><a href="#">추천</a></li>
-			<li><a href="javascript:load();">게시판</a></li>
+			<li><a href="#" onclick="load(1);">추천</a></li>
+			<li><a href="#" onclick="load(2);">게시판</a></li>
 
 			<li class="active"><a href="#pageSubmenu" data-toggle="collapse"
 				aria-expanded="false" class="dropdown-item">마이페이지</a>
 				<ul class="collapse list-unstyled" id="pageSubmenu">
-					<li><a href="#">내 정보</a></li>
-					<li><a href="#">관심</a></li>
-					<li><a href="#">리뷰</a></li>
-					<li><a href="#">숨김</a></li>
+					<li><a href="#" onclick="load(3);">내 정보</a></li>
+					<li><a href="#" onclick="load(4);">관심</a></li>
+					<li><a href="#" onclick="load(5);">리뷰</a></li>
+					<li><a href="#" onclick="load(6);">숨김</a></li>
 				</ul></li>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="#" onclick="load(7);">공지사항</a></li>
 
 
 
@@ -64,7 +65,7 @@
 
 
 		<button type="button" class="btn-search" id="login">Login</button>
-		<!-- Search bar -->  </nav>
+		<!-- Search bar --> </nav>
 
 		<!-- Page Content Holder -->
 		<div id="content">
@@ -98,22 +99,33 @@
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
+	
+			$('#field').load("<%=request.getContextPath()%>/Page/MainPage/MainPage.html");
 
 			$('#sidebarCollapse').on('click', function() {
 				$('#sidebar').toggleClass('active');
 				$(this).toggleClass('active');
 			});
 
-			$('#field').load("<%=request.getContextPath()%>/Page/MainPage/MainPage.html");
-		
-			function load(){
-		
-					$('#field').load("<%=request.getContextPath()%>/Page/Board/NewFile.html");
+			
+			$('#login').click(function(){
 				
-			}
+				location.href="<%=request.getContextPath()%>/Page/Login/login.html";
+				
+			});
 		
-		});
+			function load(index){
+				
+				var link = '';
+				
+				if(index == 0)
+					link = '/Page/MainPage/Mainpage.html';
+				if(index == 2)
+					link = '/Page/Board/NewFile.html';
+					
+			$('#field').load("<%=request.getContextPath()%>" + link);
+
+		}
 	</script>
 </body>
 </html>
