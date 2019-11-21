@@ -136,7 +136,7 @@
 					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
 				
 				
-			alert("<%=request.getContextPath()%>" + link);
+		
 			$('#field').load("<%=request.getContextPath()%>" + link);
 
 		}
