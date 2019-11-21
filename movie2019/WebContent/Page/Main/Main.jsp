@@ -123,16 +123,26 @@
 					link = "/list.ch";
 				if(index == 2)
 					link = '/Page/Board/NewFile.html';
-				if(index == 3){
-					link = '/Page/MyPage/MyInfo/Myinfo.jsp';	
-					$('.container-fluid').html("내 정보 수정");
-				}
-				if(index == 4)
-					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-				if(index == 5)
-					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-				if(index == 6)
-					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
+	            if(index == 3){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
+	                $('.container-fluid').html("내 정보 수정");
+	             }
+	             if(index == 4){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/Like/Like.jsp';
+	                $('.container-fluid').html("관심 컨텐츠");
+	             }
+	             if(index == 5){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/MyReview/MyReview.jsp';
+	                $('.container-fluid').html("내 리뷰 관리");
+	             }
+	             if(index == 6){
+	                $(".container-fluid").empty();
+	                link = '/Page/MyPage/Hidden/Hidden.jsp';
+	                $('.container-fluid').html("숨김 컨텐츠 관리");
+	             }
 				
 				
 		
