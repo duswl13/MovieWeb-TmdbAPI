@@ -1,10 +1,129 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <title>Insert title here</title>
+
+<style>
+body {
+	color: white;
+	background: #141414; /*페이지 배경색*/
+	font-size: 10pt;
+	justify-content: center;
+}
+
+form {
+	float: center;
+	position: relative; /*상대위치*/
+	left: 30%;
+	top: 200px;
+	border: 0px;
+	width: 300px;
+	height: 400px;
+	background: #000;
+	border-radius: 30px;
+}
+
+fieldset {
+	border: 0px;
+}
+
+div {
+	margin: 13px;
+}
+
+.logintitle {
+	font-size: 17pt;
+	font-weight: bolder
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	color: SteelBlue;
+	text-decoration: none;
+}
+
+#inputtext {
+	width: 220px;
+	height: 30px;
+	border: 0px;
+	border-radius: 5px;
+}
+
+#loginbtn {
+	width: 220px;
+	height: 30px; border : 0px; border-radius : 5px;
+	box-shadow: none;
+	background: SteelBlue;
+	color: white;
+	border: none;
+	box-shadow: none;
+	border: 0px;
+	border-radius: 5px;
+}
+
+#loginbtn:hover {
+	opacity: 70%;
+}
+
+.loginCheck {
+	font-size: 8pt;
+	margin-right: 20px;
+}
+
+.find {
+	font-size: 8pt;
+	margin-right: 15px;
+}
+</style>
+
 </head>
 <body>
-<h1>로그인♥</h1>
+	<form method=get action=result.html id=loginform float-center>
+		<fieldset>
+			<div>
+				<div>
+					<span class=logintitle>로그인</span>
+				</div>
+				<div>
+					<input name="id" placeholder="아이디"  id="inputtext"
+						autocomplete="off" type="id"> <span id=idalert></span>
+				</div>
+				<div>
+					<input name="password" placeholder="비번" id="inputtext"
+						autocomplete="off" type="password"> <span id=passalert></span>
+				</div>
+				<div>
+					<button type="submit" id=loginbtn>로그인</button>
+				</div>
+				<div class="loginCheck">
+					<input type="checkbox" id="saveSess" name="saveSess"> <label
+						for="saveSess">자동로그인</label> <input type="checkbox" id="saveId"
+						name="saveId" checked> <label for="saveId">아이디저장</label>
+				</div>
+
+				<hr color=dimgray>
+
+				<div class="snslogin">
+					<a href="" class="openid naver"> <img src=img/naver.png
+						width=220px><br>
+					</a> <a href="" class="openid kakao"> <img src=img/kakao.png
+						width=220px>
+					</a>
+				</div>
+
+
+				<div class="findwrap">
+					<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a> <a class=find>회원가입</a>
+				</div>
+
+			</div>
+		</fieldset>
+	</form>
 </body>
 </html>
