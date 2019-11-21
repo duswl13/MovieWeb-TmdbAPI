@@ -124,7 +124,16 @@
 					link = "/list.ch";
 				if(index == 2)
 					link = '/Page/Board/NewFile.html';
-				
+				if(index == 3){
+					link = '/Page/MyPage/MyInfo/MyInfo.jsp';	
+					$('.container-fluid').html("내 정보 수정");
+				}
+				if(index == 4)
+					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
+				if(index == 5)
+					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
+				if(index == 6)
+					link = '/Page/MyPage/MyInfo/MyInfo.jsp';
 			$('#field').load("<%=request.getContextPath()%>" + link);
 
 		}
