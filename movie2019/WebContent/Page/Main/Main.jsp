@@ -28,7 +28,7 @@
 		<nav id="sidebar" class="active">
 		<div class="sidebar-header">
 			<h3>
-				<a href="#" onclick="load(0);">VOSHU</a>
+				<a href="#" onclick="load(0);"><img src="<%=request.getContextPath()%>/Page/Main/logo2.gif" width="100"></a>
 			</h3>
 
 
