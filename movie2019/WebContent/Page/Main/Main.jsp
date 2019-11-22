@@ -180,6 +180,7 @@
 				location.href="<%=request.getContextPath()%>/Page/Login/login.html";
 				
 			});
+			
 		
 			function load(index){
 				
