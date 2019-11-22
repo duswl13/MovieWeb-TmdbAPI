@@ -3,12 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style>
 
 /*유투브 백그라운드*/
 .video-background {
-	background: #141414;
+	background: #000;
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -30,8 +29,8 @@
 /*유투브 백그라운드*/
 @media ( min-aspect-ratio : 16/9) {
 	.video-foreground {
-	    height: 100%;
-   		top: -10%;
+		height: 100vh;
+		top: -10vh;
 		/*height: 300%;
 		top: -100%; /*상단 유투브 제목 안보이게하려고*/
 	}
@@ -39,8 +38,8 @@
 
 @media ( max-aspect-ratio : 16/9) {
 	.video-foreground {
-		width: 300%;
-		left: -100%;
+		width: 100vh;
+		left: -10vh;
 	}
 }
 /*유투브 백그라운드 불투명도*/
@@ -78,7 +77,6 @@ iframe {
 	vertical-align: middle;
 }
 
-
 /*메인 영화소개 별점*/
 .starR {
 	float: right;
@@ -91,7 +89,6 @@ iframe {
 	display: inline-block;
 	text-indent: -9999px;
 }
-
 
 .starR.on {
 	background-position: 0 0;
@@ -112,6 +109,110 @@ iframe {
 
 
 
+/*영화 리스트*/
+.img-responsive {
+	width: 100%;
+	height: auto;
+}
+
+.multi-item-carousel .carousel-inner {
+	text-align: center;
+}
+
+.multi-item-carousel .carousel-inner>.item>a {
+	text-align: center;
+}
+
+.multi-item-carousel .carousel-inner .item a .img-responsive {
+	margin: auto;
+	display: inline-block;
+}
+
+.multi-item-carousel .carousel-inner>.item {
+	transition: 500ms ease-in-out left;
+}
+
+.multi-item-carousel .carousel-inner .active.left {
+	left: -33%;
+}
+
+.multi-item-carousel .carousel-inner .active.right {
+	left: 33%;
+}
+
+.multi-item-carousel .carousel-inner .next {
+	left: 33%;
+}
+
+.multi-item-carousel .carousel-inner .prev {
+	left: -33%;
+}
+
+.carousel-control {
+	opacity: 1;
+}
+
+.carousel-control:hover {
+	opacity: 0.6;
+}
+
+.carousel-control.left {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+65,7db9e8+100&1+27,0+100 */
+	background: -moz-linear-gradient(left, rgba(0, 0, 0, 1) 27%,
+		rgba(0, 0, 0, 0.48) 65%, rgba(125, 185, 232, 0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, rgba(0, 0, 0, 1) 27%,
+		rgba(0, 0, 0, 0.48) 65%, rgba(125, 185, 232, 0) 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, rgba(0, 0, 0, 1) 27%,
+		rgba(0, 0, 0, 0.48) 65%, rgba(125, 185, 232, 0) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000',
+		endColorstr='#007db9e8', GradientType=1); /* IE6-9 */
+}
+
+.carousel-control.right {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,000000+33&0+0,1+100 */
+	background: -moz-linear-gradient(left, rgba(125, 185, 232, 0) 0%,
+		rgba(0, 0, 0, 0.33) 33%, rgba(0, 0, 0, 1) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, rgba(125, 185, 232, 0) 0%,
+		rgba(0, 0, 0, 0.33) 33%, rgba(0, 0, 0, 1) 100%);
+	/* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, rgba(125, 185, 232, 0) 0%,
+		rgba(0, 0, 0, 0.33) 33%, rgba(0, 0, 0, 1) 100%);
+	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8',
+		endColorstr='#000000', GradientType=1); /* IE6-9 */
+}
+
+@media all and (-ms-high-contrast: none) , ( -ms-high-contrast : active)
+	{
+	/* IE10+ CSS */
+	.multi-item-carousel .carousel-inner .active.left {
+		left: 0%;
+	}
+	.multi-item-carousel .carousel-inner .active.right {
+		left: 0%;
+	}
+	.multi-item-carousel .carousel-inner .next {
+		left: 0%;
+	}
+	.multi-item-carousel .carousel-inner .prev {
+		left: 0%;
+	}
+}
+
+@media all and (transform-3d) , ( -webkit-transform-3d ) {
+	.multi-item-carousel .carousel-inner>.item {
+		transition: 500ms ease-in-out left;
+		backface-visibility: visible;
+		transform: none !important;
+	}
+}
+
+.multi-item-carousel .carouse-control.left, .multi-item-carousel .carouse-control.right
+	{
+	background-image: none;
+}
 </style>
 
 
@@ -153,6 +254,122 @@ iframe {
 
 
 
+
+
+
+
+
+
+
+
+
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="carousel slide multi-item-carousel" id="theCarousel">
+					<div class="carousel-inner">
+						<div class="item active">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/8S2AFd8DF539pxdn7TCIDqXlwRA.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/nIoDNiWWOtCFdJRi89aFI98cdj0.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/742vR63T1AcXzYwHypQpzZd89vh.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/qlBePshN1ujPwm27JzT6bP6XVeR.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<!-- add  more items here -->
+						<!-- Example item start:  -->
+
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/ePXuKdXZuJx8hHMNr2yM4jY2L7Z.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+
+
+						<!--  Example item end -->
+					</div>
+					<a class="left carousel-control" href="#theCarousel"
+						data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+					<a class="right carousel-control" href="#theCarousel"
+						data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<script>
+		//Instantiate the Bootstrap carousel
+		$('.multi-item-carousel').carousel({
+			interval : false
+		});
+		// for every slide in carousel, copy the next slide's item in the slide.
+		// Do the same for the next, next item.
+
+		$('.multi-item-carousel .item').each(
+				function() {
+					var next = $(this).next();
+					if (!next.length) {
+						next = $(this).siblings(':first');
+					}
+					next.children(':first-child').clone().appendTo($(this));
+
+					if (next.next().length > 0) {
+						next.next().children(':first-child').clone().appendTo(
+								$(this));
+					} else {
+						$(this).siblings(':first').children(':first-child')
+								.clone().appendTo($(this));
+					}
+				});
+	</script>
+
+
+
+
 </body>
+
+
+
+
 
 </html>
