@@ -111,7 +111,7 @@ iframe {
 
 /*영화 리스트*/
 .img-responsive {
-	width: 100%;
+	width: 33.3333%; /*크기*/
 	height: auto;
 }
 
@@ -156,6 +156,8 @@ iframe {
 	opacity: 0.6;
 }
 
+
+/*사이드 왼쪽 그라데이션*/
 .carousel-control.left {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+65,7db9e8+100&1+27,0+100 */
 	background: -moz-linear-gradient(left, rgba(0, 0, 0, 1) 27%,
@@ -170,6 +172,7 @@ iframe {
 		endColorstr='#007db9e8', GradientType=1); /* IE6-9 */
 }
 
+/*사이드 오른쪽 그라데이션*/
 .carousel-control.right {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,000000+33&0+0,1+100 */
 	background: -moz-linear-gradient(left, rgba(125, 185, 232, 0) 0%,
@@ -183,6 +186,8 @@ iframe {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8',
 		endColorstr='#000000', GradientType=1); /* IE6-9 */
 }
+
+
 
 @media all and (-ms-high-contrast: none) , ( -ms-high-contrast : active)
 	{
@@ -338,16 +343,21 @@ iframe {
 
 
 	<script>
-		//Instantiate the Bootstrap carousel
+		//부트스트랩 carousel 옵션
 		$('.multi-item-carousel').carousel({
-			interval : false
+			interval : 5000 //자동 슬라이드 여부, 5초마다 다음걸로 자동 슬라이드
 		});
-		// for every slide in carousel, copy the next slide's item in the slide.
-		// Do the same for the next, next item.
+		
+		
+		
+		// 슬라이드 쇼의 슬라이드마다 슬라이드의 다음 슬라이드 항목을 복사합니다.
+		// 다음, 다음 항목에 대해서도 동일하게 수행합니다.
 
 		$('.multi-item-carousel .item').each(
 				function() {
+				
 					var next = $(this).next();
+					
 					if (!next.length) {
 						next = $(this).siblings(':first');
 					}
