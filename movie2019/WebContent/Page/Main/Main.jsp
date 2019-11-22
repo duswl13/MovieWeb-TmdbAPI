@@ -90,9 +90,21 @@
          </nav>
 
          <div id="field"></div>
-
+		
       </div>
    </div>
+
+<!-- Footer -->
+<footer class="page-footer main-footer1">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright: 운명이조
+     김건수 손연수 이지연 장연지 홍찬미</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
 
    <!-- jQuery CDN -->

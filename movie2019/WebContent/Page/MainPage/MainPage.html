@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.main_box, .main-list-padding {
+	padding-left: 5em;
+	padding-right: 5em;
+}
+
+/*리스트들 사이 간격*/
+.main-list-padding {
+	margin-bottom: 10em;
+}
 
 /*유투브 백그라운드*/
 .video-background {
@@ -64,10 +73,9 @@ iframe {
 
 /*메인 영화소개*/
 .main_box {
-	margin-right: 30px;
 	float: right;
 	width: 50%;
-	height: 70vh;
+	height: 80vh;
 	display: table;
 }
 
@@ -103,13 +111,25 @@ iframe {
 	color: #141414;
 }
 
-
-
-
-
-
-
 /*영화 리스트*/
+
+.container-fluid {
+	clear: right;
+}
+
+
+
+.more {
+	color: white;
+	font-size: 1em;
+	padding-left: 1em;
+}
+
+.col-md-12 h3 {
+	display: inline-block;
+	color: white;
+}
+
 .img-responsive {
 	width: 80%; /*크기*/
 	height: auto;
@@ -156,7 +176,6 @@ iframe {
 	opacity: 0.6;
 }
 
-
 /*사이드 왼쪽 그라데이션*/
 .carousel-control.left {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+65,7db9e8+100&1+27,0+100 */
@@ -187,8 +206,6 @@ iframe {
 		endColorstr='#000000', GradientType=1); /* IE6-9 */
 }
 
-
-
 @media all and (-ms-high-contrast: none) , ( -ms-high-contrast : active)
 	{
 	/* IE10+ CSS */
@@ -217,6 +234,10 @@ iframe {
 .multi-item-carousel .carouse-control.left, .multi-item-carousel .carouse-control.right
 	{
 	background-image: none;
+}
+
+footer {
+	background: #141414
 }
 </style>
 
@@ -269,13 +290,14 @@ iframe {
 
 
 
-	<div class="container-fluid">
+	<div class="container-fluid main-list-padding">
 
 		<div class="row">
-		
+
 			<div class="col-md-12">
 				<h3>인기 영화</h3>
-				<div class="carousel slide multi-item-carousel" id="theCarousel">
+				<span class="more">더보기</span>
+				<div class="carousel slide multi-item-carousel" id="theCarousel1">
 					<div class="carousel-inner">
 						<div class="item active">
 							<div class="col-xs-4">
@@ -333,9 +355,9 @@ iframe {
 
 						<!--  Example item end -->
 					</div>
-					<a class="left carousel-control" href="#theCarousel"
+					<a class="left carousel-control" href="#theCarousel1"
 						data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-					<a class="right carousel-control" href="#theCarousel"
+					<a class="right carousel-control" href="#theCarousel1"
 						data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 				</div>
 			</div>
@@ -345,22 +367,215 @@ iframe {
 
 
 
+
+
+	<div class="container-fluid main-list-padding">
+
+		<div class="row">
+
+			<div class="col-md-12">
+				<h3>최신 영화</h3>
+				<span class="more">더보기</span>
+				<div class="carousel slide multi-item-carousel" id="theCarousel2">
+					<div class="carousel-inner">
+						<div class="item active">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/8S2AFd8DF539pxdn7TCIDqXlwRA.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/nIoDNiWWOtCFdJRi89aFI98cdj0.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/742vR63T1AcXzYwHypQpzZd89vh.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/qlBePshN1ujPwm27JzT6bP6XVeR.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<!-- add  more items here -->
+						<!-- Example item start:  -->
+
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/ePXuKdXZuJx8hHMNr2yM4jY2L7Z.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+
+
+						<!--  Example item end -->
+					</div>
+					<a class="left carousel-control" href="#theCarousel2"
+						data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+					<a class="right carousel-control" href="#theCarousel2"
+						data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+	<div class="container-fluid main-list-padding">
+
+		<div class="row">
+
+			<div class="col-md-12">
+				<h3>평점 높은 영화</h3>
+				<span class="more">더보기</span>
+				<div class="carousel slide multi-item-carousel" id="theCarousel3">
+					<div class="carousel-inner">
+						<div class="item active">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/8S2AFd8DF539pxdn7TCIDqXlwRA.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/nIoDNiWWOtCFdJRi89aFI98cdj0.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/742vR63T1AcXzYwHypQpzZd89vh.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/qlBePshN1ujPwm27JzT6bP6XVeR.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+						<!-- add  more items here -->
+						<!-- Example item start:  -->
+
+						<div class="item">
+							<div class="col-xs-4">
+								<a href="#1"><img
+									src="https://image.tmdb.org/t/p/w500/ePXuKdXZuJx8hHMNr2yM4jY2L7Z.jpg"
+									class="img-responsive"></a>
+							</div>
+						</div>
+
+
+						<!--  Example item end -->
+					</div>
+					<a class="left carousel-control" href="#theCarousel3"
+						data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+					<a class="right carousel-control" href="#theCarousel3"
+						data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<script>
 		//부트스트랩 carousel 옵션
 		$('.multi-item-carousel').carousel({
-			interval : 5000 //자동 슬라이드 여부, 5초마다 다음걸로 자동 슬라이드
+			interval : 5000
+		//자동 슬라이드 여부, 5초마다 다음걸로 자동 슬라이드
 		});
-		
-		
-		
+
 		// 슬라이드 쇼의 슬라이드마다 슬라이드의 다음 슬라이드 항목을 복사합니다.
 		// 다음, 다음 항목에 대해서도 동일하게 수행합니다.
 
-		$('.multi-item-carousel .item').each(
-				function() {
+		$('.multi-item-carousel:eq(0) .item').each(
+				function(index) {
+					
+					var next = $(this).next();
+
+					if (!next.length) {
+						next = $(this).siblings(':first');
+					}
+					next.children(':first-child').clone().appendTo($(this));
+
+					if (next.next().length > 0) {
+						next.next().children(':first-child').clone().appendTo(
+								$(this));
+					} else {
+						$(this).siblings(':first').children(':first-child')
+								.clone().appendTo($(this));
+					}
+				});
+		
+		$('.multi-item-carousel:eq(1) .item').each(
+				function(index) {
 				
 					var next = $(this).next();
-					
+
+					if (!next.length) {
+						next = $(this).siblings(':first');
+					}
+					next.children(':first-child').clone().appendTo($(this));
+
+					if (next.next().length > 0) {
+						next.next().children(':first-child').clone().appendTo(
+								$(this));
+					} else {
+						$(this).siblings(':first').children(':first-child')
+								.clone().appendTo($(this));
+					}
+				});
+		
+		$('.multi-item-carousel:eq(2) .item').each(
+				function(index) {
+			
+					var next = $(this).next();
+
 					if (!next.length) {
 						next = $(this).siblings(':first');
 					}

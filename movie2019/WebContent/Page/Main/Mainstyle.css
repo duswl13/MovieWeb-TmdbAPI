@@ -172,7 +172,7 @@ a.download {
 ----------------------------------------------------- */
 #content {
     width: 100%;
-    padding: 20px;
+  
     min-height: 100vh;
     transition: all 0.3s;
 }
@@ -244,4 +244,23 @@ a.download {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 
+}
+
+
+
+/**
+#field{
+	padding-left: 5em;
+	padding-right: 5em;
+	
+}**/
+
+
+
+
+.main-footer1{
+	padding:2em;
+	color:#cdcdcd;
+	font-size: 1em;
+	
 }
