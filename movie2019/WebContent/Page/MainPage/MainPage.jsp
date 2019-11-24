@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="Page/MainPage/MainPagestyle.css">
+<link rel="stylesheet" href="css/MainPagestyle.css">
 <%
 	String apikey = application.getInitParameter("APIKEY");
 %>
@@ -49,13 +49,6 @@
 
 
 
-
-
-
-
-
-
-
 	<div class="container-fluid main-list-padding">
 
 		<div class="row">
@@ -66,77 +59,8 @@
 				<div class="carousel slide multi-item-carousel" id="theCarousel1">
 					<div class="carousel-inner">
 
-						<div class="item active">
-							<div class="col-xs-4">
-								<a href="#1"> <img
-									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
-									class="img-responsive">
 
-								</a>
-
-								<div class="centered">
-									<h1>Jocker</h1>
-									<h5>홀어머니와 사는 아서 플렉(호아킨 피닉스)은 코미디언을 꿈꾸지만 그의 삶은 좌절과 절망으로 가득
-										차 있다. 광대 아르바이트는 그에게...</h5>
-									<!-- 메인으로 movieDetail id값을 parameter로 보내야 -->
-									<a href="moviedatail"><img src="Page/Png/view.png"></a> <a
-										href="#"><img src="Page/Png/delete.png"></a>
-
-								</div>
-
-							</div>
-
-						</div>
-
-
-
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/8S2AFd8DF539pxdn7TCIDqXlwRA.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/nIoDNiWWOtCFdJRi89aFI98cdj0.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/742vR63T1AcXzYwHypQpzZd89vh.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/qlBePshN1ujPwm27JzT6bP6XVeR.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<!-- add  more items here -->
-						<!-- Example item start:  -->
-
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/ePXuKdXZuJx8hHMNr2yM4jY2L7Z.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-
-
+					
 						<!--  Example item end -->
 					</div>
 					<a class="left carousel-control" href="#theCarousel1"
@@ -153,161 +77,64 @@
 
 
 
-	<div class="container-fluid main-list-padding">
-
-		<div class="row">
-
-			<div class="col-md-12">
-				<h3>최신 영화</h3>
-				<span class="more">더보기</span>
-				<div class="carousel slide multi-item-carousel" id="theCarousel2">
-					<div class="carousel-inner">
-						<div class="item active">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/8S2AFd8DF539pxdn7TCIDqXlwRA.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/nIoDNiWWOtCFdJRi89aFI98cdj0.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/742vR63T1AcXzYwHypQpzZd89vh.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/qlBePshN1ujPwm27JzT6bP6XVeR.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<!-- add  more items here -->
-						<!-- Example item start:  -->
-
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/ePXuKdXZuJx8hHMNr2yM4jY2L7Z.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
 
 
-						<!--  Example item end -->
+		<div class="container-fluid main-list-padding">
+
+			<div class="row">
+
+				<div class="col-md-12">
+					<h3>최신 영화</h3>
+					<span class="more">더보기</span>
+					<div class="carousel slide multi-item-carousel" id="theCarousel2">
+						<div class="carousel-inner">
+							
+
+							<!--  Example item end -->
+						</div>
+						<a class="left carousel-control" href="#theCarousel2"
+							data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+						<a class="right carousel-control" href="#theCarousel2"
+							data-slide="next"><i
+							class="glyphicon glyphicon-chevron-right"></i></a>
 					</div>
-					<a class="left carousel-control" href="#theCarousel2"
-						data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-					<a class="right carousel-control" href="#theCarousel2"
-						data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
 
 
 
 
-	<div class="container-fluid main-list-padding">
+		<div class="container-fluid main-list-padding">
 
-		<div class="row">
+			<div class="row">
 
-			<div class="col-md-12">
-				<h3>평점 높은 영화</h3>
-				<span class="more">더보기</span>
-				<div class="carousel slide multi-item-carousel" id="theCarousel3">
-					<div class="carousel-inner">
-						<div class="item active">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
-									class="img-responsive"></a>
-							</div>
+				<div class="col-md-12">
+					<h3>개봉 예정 영화</h3>
+					<span class="more">더보기</span>
+					<div class="carousel slide multi-item-carousel" id="theCarousel3">
+						<div class="carousel-inner">
+							
+
+							<!--  Example item end -->
 						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/8S2AFd8DF539pxdn7TCIDqXlwRA.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/nIoDNiWWOtCFdJRi89aFI98cdj0.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/742vR63T1AcXzYwHypQpzZd89vh.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/wrCwH6WOvXQvVuqcKNUrLDCDxdw.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/qlBePshN1ujPwm27JzT6bP6XVeR.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-						<!-- add  more items here -->
-						<!-- Example item start:  -->
-
-						<div class="item">
-							<div class="col-xs-4">
-								<a href="#1"><img
-									src="https://image.tmdb.org/t/p/w500/ePXuKdXZuJx8hHMNr2yM4jY2L7Z.jpg"
-									class="img-responsive"></a>
-							</div>
-						</div>
-
-
-						<!--  Example item end -->
+						<a class="left carousel-control" href="#theCarousel3"
+							data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+						<a class="right carousel-control" href="#theCarousel3"
+							data-slide="next"><i
+							class="glyphicon glyphicon-chevron-right"></i></a>
 					</div>
-					<a class="left carousel-control" href="#theCarousel3"
-						data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-					<a class="right carousel-control" href="#theCarousel3"
-						data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<script>
+
+
+
+		<script>
 	
 	
 		//api 접근해서 목록 만들기
@@ -318,8 +145,8 @@
 					success : function(data) {
 						console.log('인기목록 성공');
 						var list = data.results;
-						loadVideo(list[randomRange(0,list.length-1)]);
-						
+						loadVideo(list[randomRange(0,5)]);
+						printMovie(list,0);
 						
 
 					}, //HTTP 요청이 성공한 경우 실행
@@ -332,7 +159,81 @@
 
 					} 
 				});
+		
+		
+		
+		var today = new Date();
+		//이전달 첫날 
+		
+		
+		function getDt3(month){
+			
+			var today = new Date();
+			today.setMonth( today.getMonth() + month );
+			
+			var year = today.getFullYear();
+			var mon = today.getMonth()+1;
+		
+			if(mon<10){
+				mon = "0"+mon;
+			};
+			
+			var day = today.getDate();
+			if(day<10){
+				day = "-0"+day;
+			}
+			
+			return year+"-"+mon+"-"+day;		
+			}
 
+	
+		
+		
+		$.ajax({
+					url : 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(-1)+'&release_date.lte='+getDt3(0), //요청 전송 url
+					dataType : 'json',
+					cache : false,
+					success : function(data) {
+						console.log('최신목록 성공');
+						var list = data.results;
+
+						printMovie(list,1);
+						
+
+					}, //HTTP 요청이 성공한 경우 실행
+					error : function(request, status, error) {
+						console.log('최신목록 error');
+
+					},
+					complete : function() {
+						console.log('최신목록 완료');
+
+					} 
+				});
+		
+
+		
+		$.ajax({
+			url : 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(0)+'&release_date.lte='+getDt3(3), //요청 전송 url
+			dataType : 'json',
+			cache : false,
+			success : function(data) {
+				console.log('예정목록 성공');
+				var list = data.results;
+
+				printMovie(list,2);
+				
+
+			}, //HTTP 요청이 성공한 경우 실행
+			error : function(request, status, error) {
+				console.log('예정목록 error');
+
+			},
+			complete : function() {
+				console.log('예정목록 완료');
+
+			} 
+		});
 		
 		function loadVideo(listData){
 			
@@ -341,11 +242,12 @@
 			
 			$.ajax({
 				//id:474350, titleIt Chapter Two
-				url : 'http://api.themoviedb.org/3/movie/'+id+'/videos?api_key=<%=apikey%>',
+				url : 'http://api.themoviedb.org/3/movie/'
+				+id+'/videos?api_key=<%=apikey%>',
 				dataType : 'json',
 				cache : false,
 				success : function(data) {
-					
+
 					console.log('비디오 셋팅 성공');
 					var list = data.results;
 
@@ -353,10 +255,10 @@
 					printTitleVideo(listData);
 				},
 				error : function(request, status, error) {
-					//alert("에러났습니다.");
+					console.log('비디오 error');
 				},
 				complete : function() {
-					//alert("완료했습니다.");
+					console.log('비디오 완료');
 
 				}
 			});
@@ -374,7 +276,6 @@
 									+ videokey);
 		}
 
-		
 		function printTitleVideo(listData) {
 
 			var title = listData.original_title;
@@ -386,16 +287,39 @@
 			$('#m_content').text(content);
 
 		}
-		
+
+		function printMovie(list,count) {
+
+			var print = '';
+
+			for (var i = 0; i < 5; i++) {
+
+				if (i == 0)
+					print += '<div class="item active">\n';
+				else
+					print += '<div class="item">\n';
+
+				print += '<div class="col-xs-4">\n';
+				print += '<a href="main.ml?load=10&id=' + list[i].id + '">\n';
+				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
+				print += '</a>\n<div class="centered">\n';
+				print += '<h1>' + list[i].original_title + '</h1>\n';
+				print += '<h5>' + list[i].overview + '</h5>\n';
+				print += '<a href="#"><img src="Png/view.png"></a>\n';
+				print += '<a href="#"><img src="Png/delete.png"></a>\n</div></div></div>\n';
+			}
+
+			console.log(print);
+			$('.carousel-inner:eq('+count+')').html(print);
+			carouselSetting(count);
+			
+			
+
+		}
 
 		function randomRange(n1, n2) {
 			return Math.floor((Math.random() * (n2 - n1 + 1)) + n1);
 		}
-		
-		
-		
-		
-		
 
 		//부트스트랩 carousel 옵션
 		$('.multi-item-carousel').carousel({
@@ -406,67 +330,31 @@
 		// 슬라이드 쇼의 슬라이드마다 슬라이드의 다음 슬라이드 항목을 복사합니다.
 		// 다음, 다음 항목에 대해서도 동일하게 수행합니다.
 
-		$('.multi-item-carousel:eq(0) .item').each(
-				function(index) {
+		function carouselSetting(count){
+			
+			$('.multi-item-carousel:eq('+count+') .item').each(
+					function(index) {
 
-					var next = $(this).next();
+						var next = $(this).next();
 
-					if (!next.length) {
-						next = $(this).siblings(':first');
-					}
-					next.children(':first-child').clone().appendTo($(this));
+						if (!next.length) {
+							next = $(this).siblings(':first');
+						}
+						next.children(':first-child').clone().appendTo($(this));
 
-					if (next.next().length > 0) {
-						next.next().children(':first-child').clone().appendTo(
-								$(this));
-					} else {
-						$(this).siblings(':first').children(':first-child')
-								.clone().appendTo($(this));
-					}
-				});
+						if (next.next().length > 0) {
+							next.next().children(':first-child').clone().appendTo(
+									$(this));
+						} else {
+							$(this).siblings(':first').children(':first-child')
+									.clone().appendTo($(this));
+						}
+					});
+			
+		}
 
-		$('.multi-item-carousel:eq(1) .item').each(
-				function(index) {
-
-					var next = $(this).next();
-
-					if (!next.length) {
-						next = $(this).siblings(':first');
-					}
-					next.children(':first-child').clone().appendTo($(this));
-
-					if (next.next().length > 0) {
-						next.next().children(':first-child').clone().appendTo(
-								$(this));
-					} else {
-						$(this).siblings(':first').children(':first-child')
-								.clone().appendTo($(this));
-					}
-				});
-
-		$('.multi-item-carousel:eq(2) .item').each(
-				function(index) {
-
-					var next = $(this).next();
-
-					if (!next.length) {
-						next = $(this).siblings(':first');
-					}
-					next.children(':first-child').clone().appendTo($(this));
-
-					if (next.next().length > 0) {
-						next.next().children(':first-child').clone().appendTo(
-								$(this));
-					} else {
-						$(this).siblings(':first').children(':first-child')
-								.clone().appendTo($(this));
-					}
-				});
+	
 	</script>
-
-
-
-
 </body>
 
 

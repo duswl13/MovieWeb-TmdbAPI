@@ -13,8 +13,19 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Our Custom CSS -->
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/Page/Main/Mainstyle.css">
+	href="css/Mainstyle.css">
 
+<!-- jQuery CDN -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!--    <script type="text/javascript"
+      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
+	<!-- Bootstrap Js CDN -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+   	
+   
+	
 </head>
 
 
@@ -44,13 +55,7 @@
                dropdown-toggle : 접을수있다는 표시(삼각형 이미지 제공)
                href="#homeSubmenu" : 펼치면 homeSubmenu 아이디의 li를 보여줌
                드롭다운 메뉴homeSubmenu 에서도 collapse class가 적용되어있어야함 -->
-			<li class="active"><a href="#homeSubmenu" data-toggle="collapse"
-				aria-expanded="false" class="dropdown-item">영화</a>
-				<ul class="collapse list-unstyled" id="homeSubmenu">
-					<li><a href="#">인기</a></li>
-					<li><a href="#">최신</a></li>
-					<li><a href="#">평점</a></li>
-				</ul></li>
+			<li><a href="#" onclick="load(-1);">영화</a></li>
 			<li><a href="#" onclick="load(1);">추천</a></li>
 			<li><a href="#" onclick="load(2);">게시판</a></li>
 
@@ -102,21 +107,34 @@
 	</div>
 	<!-- Copyright --> </footer>
 	<!-- Footer -->
+</body>
 
 
-	<!-- jQuery CDN -->
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<!--    <script type="text/javascript"
-      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
-	<!-- Bootstrap Js CDN -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-   	
+
+
+
+
+		<script type="text/javascript">
    
-   
-   
+   		<%
+   		
+   		int load =0;
+   		int option = 0;
+   		
+   		if(request.getParameter("load") != null)
+   		load  = Integer.parseInt(request.getParameter("load"));
+   		
+   		
+   		if(load == -1){
+   			if(request.getParameter("option") != null)
+   				option  = Integer.parseInt(request.getParameter("option"));
+   		
+   		
+   		%>
+   		load(-1);
+   		<%}else{%>
    		load(0);
+   		<%}%>
 
          
          
@@ -139,8 +157,10 @@
 			function load(index){
 				
 				var link = '';
-				
-				if(index == 0)
+				if(index == -1){
+					link = '/MovieList.ml?option=<%=option%>';
+					
+				}if(index == 0)
 					link = '/MainPage.ml';
 				if(index == 1)
 					link = "/list.ch";
@@ -173,5 +193,8 @@
 
 		}
 	</script>
-</body>
+	
+
+
+
 </html>
