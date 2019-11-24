@@ -65,13 +65,13 @@
 
 /*유투브 백그라운드 불투명도*/
 iframe {
-	opacity: 0.8;
+	opacity: 0.65;
 }
 
 /*메인 영화소개*/
 #m_head {
 	color: white;
-	font-size: 10em;
+	font-size: 8em;
 	text-align: right;
 }
 

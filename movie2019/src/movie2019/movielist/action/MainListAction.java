@@ -10,8 +10,6 @@ public class MainListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		
-		
-		MovieDAO dao = new MovieDAO();
 
 		response.setContentType("text/html;charset=utf-8");
 
