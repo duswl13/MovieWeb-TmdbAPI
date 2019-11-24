@@ -386,10 +386,16 @@
 			$('#m_content').text(content);
 
 		}
+		
 
 		function randomRange(n1, n2) {
 			return Math.floor((Math.random() * (n2 - n1 + 1)) + n1);
 		}
+		
+		
+		
+		
+		
 
 		//부트스트랩 carousel 옵션
 		$('.multi-item-carousel').carousel({
