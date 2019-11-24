@@ -69,14 +69,14 @@ iframe {
 }
 
 /*메인 영화소개*/
-#h {
+#m_head {
 	color: white;
 	font-size: 10em;
 	text-align: right;
 }
 
 /*메인 영화소개*/
-#b {
+#m_reviews, #m_content {
 	clear: right;
 	color: white;
 	font-size: 1em;
