@@ -125,8 +125,16 @@ iframe {
 
 
 /*영화 리스트*/
+@keyframes tutsFade {
+  to {
+    opacity: 0.4;
+  }
+}
 .col-xs-4:hover > a >  img{
-opacity: 0.4;}
+  animation: tutsFade 0.5s;
+  animation-fill-mode: forwards;
+
+}
 .col-xs-4:hover > .centered{
 display:block;}
 
@@ -145,14 +153,6 @@ background:#141414;
 padding:10px;
 width:3em;
 height:3em;}
-
-
-.centered h5 {
-
-  text-overflow: ellipsis;
-
-
-}
 
 
 .container-fluid {

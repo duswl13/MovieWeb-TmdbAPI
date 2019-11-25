@@ -300,6 +300,8 @@
 					continue;
 				}
 				
+				list[i].overview = list[i].overview.substring(0,100)+'...';
+				
 				if (check == 0)
 					print += '<div class="item active">\n';
 				else
