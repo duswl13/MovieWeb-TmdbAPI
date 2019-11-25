@@ -25,8 +25,7 @@
 <script>
 function enterkey() {
     if (window.event.keyCode == 13) {
-    	
-    	var link ='/Search.ml?key='+$('#search-form').val();
+    	var link ='/Search.ml?key='+$('#search-form').val().replace(/(\s*)/g, "");
 		$('#field').load("<%=request.getContextPath()%>" + link);
     }
 }

@@ -300,7 +300,7 @@
 					continue;
 				}
 				
-				list[i].overview = list[i].overview.substring(0,100)+'...';
+				
 				
 				if (check == 0)
 					print += '<div class="item active">\n';
@@ -312,7 +312,7 @@
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '</a>\n<div class="centered">\n';
 				print += '<h1>' + list[i].original_title + '</h1>\n';
-				print += '<h5>' + list[i].overview + '</h5>\n';
+				print += '<h5>' + list[i].overview.substring(0,100)+'...' + '</h5>\n';
 				print += '<a href="#"><img src="Png/view.png"></a>\n';
 				print += '<a href="#"><img src="Png/delete.png"></a>\n</div></div></div>\n';
 				i++;
