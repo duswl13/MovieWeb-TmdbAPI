@@ -130,7 +130,8 @@ iframe {
     opacity: 0.4;
   }
 }
-.col-xs-4:hover > a >  img{
+.col-xs-4:hover > a > 
+ img{
   animation: tutsFade 0.5s;
   animation-fill-mode: forwards;
 
