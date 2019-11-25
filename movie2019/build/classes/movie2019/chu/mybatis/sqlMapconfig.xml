@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</environments>
 	<!-- 실제 sql query -->
 	<mappers>
-		<mapper resource="chat/mapper/chat.xml" />
+		<!-- <mapper resource="chat/mapper/chat.xml" />gong,chu -->
 		
 	</mappers>
 </configuration>

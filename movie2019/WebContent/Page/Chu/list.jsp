@@ -10,7 +10,13 @@
 body{
 color: white;
 }
-
+#slidemenu {
+	background: black;
+	position: absolute;
+	width: 250px;
+	top: 50px;
+	right: 10px;
+}
 .cardClear {
 	clear: both;
 }
@@ -21,20 +27,34 @@ color: white;
 	padding: 10px;
 	padding-left: 20px;
 	margin: 10px;
-	width: 400px;
-	height: 200px;
-	font-size: 14px;
+	width: 230px;
+	height: 180px;
+	font-size: 12px;
 	text-align: left;
 	float: left;
+
 }
 
-p {
-	color: red;
+p, a {
+	color: white;
+	
 }
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
+	var currentPosition = parseInt($("#slidemenu").css("top"));
+	
+	$(window).scroll(function() { //현재창에서 스크롤 이벤트
+		var position = $(window).scrollTop(); //스크롤 바에 위에
+		console.log(position);
+		console.log(currentPosition);
+		console.log(position + currentPosition);
+		
+		$("#slidemenu").stop().animate({
+			"top" : position + currentPosition + "px"}, 500);
+	});
+
 	var newDate = new Date();
 	var year = newDate.getFullYear();
 	var mon = newDate.getMonth()+1;
@@ -62,7 +82,7 @@ $(function() {
 			}		
 			$(data).find("dailyBoxOffice").each(function() {	
 				//링크
-				str = str +"<a href='#' onclick='javascript:movie("+$(this).find("movieCd").text()+")'>";
+				str = str +"<a href='#2' onclick='javascript:movie("+$(this).find("movieCd").text()+")'>";
 				
 				//순위
 				str = str +$(this).find("rank").text()+"위";					
@@ -96,7 +116,8 @@ function movie(movieCd) {
 			str = "<h1>"+$(data).find("movieNm").text()+"</h1>";
 			str =str+"<h3>"+$(data).find("movieNmEn").text()+"<h3>";
 			str =str+ "<p>상영시간 : "+$(data).find("showTm").text()+"</p>";
-			str = str + "<ul>";
+			str = str + "<ul><p>등장인물</p>";
+			
 			$(data).find("actor").each(function() {
 				str = str+ "<li>"+$(this).find("peopleNm").text()+"</li>";
 			});
@@ -114,9 +135,177 @@ function movie(movieCd) {
 
 </head>
 <body>
-	<div id="msg"></div>
+	<div id="text">
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br> <br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+	</div>
+
+	<div id="slidemenu">
+	어제 날짜기준 순위
+		<div id="msg"></div>
 	<!-- 순위 -->
 	<div class="cardClear"></div>
-<div class="box3"></div>
 	<!-- 상세 -->
+	<div class="box3"></div>
+	</div>
 </body>

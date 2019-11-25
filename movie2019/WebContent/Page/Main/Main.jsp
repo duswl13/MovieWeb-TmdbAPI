@@ -200,6 +200,7 @@ function enterkey() {
 	                $('.container-fluid').html("숨김 컨텐츠 관리");
 	             }
 		            if(index == 7){
+		            	link = "/list.gong";
 		            }
 		            if(index == 8){
 		                link = '/Page/AdminPage/FAQ/FAQList.jsp';

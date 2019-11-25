@@ -1,4 +1,4 @@
-package movie2019.chu;
+package movie2019.gong;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import movie2019.chu.command.BCommand;
 
-@WebServlet("*.ch")
-public class ChController extends HttpServlet {
+@WebServlet("*.gong")
+public class GongController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ChController() {
+	public GongController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,8 +40,8 @@ public class ChController extends HttpServlet {
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
 
-		if (com.equals("/list.ch")) {
-			page = "Page/Chu/list.jsp";
+		if (com.equals("/list.gong")) {
+			page = "Page/gong/list.jsp";
 		}
 
 		request.getRequestDispatcher(page).forward(request, response);
