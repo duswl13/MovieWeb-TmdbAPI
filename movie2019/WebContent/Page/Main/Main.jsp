@@ -12,20 +12,19 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Our Custom CSS -->
-<link rel="stylesheet"
-	href="css/Mainstyle.css">
+<link rel="stylesheet" href="css/Mainstyle.css">
 
 <!-- jQuery CDN -->
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
-	<!--    <script type="text/javascript"
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--    <script type="text/javascript"
       src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
-	<!-- Bootstrap Js CDN -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Bootstrap Js CDN -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-   	
-   
-	
+
+
+
 </head>
 
 
@@ -71,19 +70,19 @@
 
 
 
-   <li class="active"><a href="#adminSubmenu"
-            data-toggle="collapse" aria-expanded="false" class="dropdown-item">관리자페이지</a>
-            <ul class="collapse list-unstyled" id="adminSubmenu">
-               <li><a href="#" onclick="load(8);">공지사항 관리</a></li>
-               <li><a href="#" onclick="load(9);">FAQ 관리</a></li>
-               <li><a href="#" onclick="load(10);">회원 관리</a></li>
-            </ul></li>
+			<li class="active"><a href="#adminSubmenu"
+				data-toggle="collapse" aria-expanded="false" class="dropdown-item">관리자페이지</a>
+				<ul class="collapse list-unstyled" id="adminSubmenu">
+					<li><a href="#" onclick="load(8);">공지사항 관리</a></li>
+					<li><a href="#" onclick="load(9);">FAQ 관리</a></li>
+					<li><a href="#" onclick="load(10);">회원 관리</a></li>
+				</ul></li>
 
-      </ul>
+		</ul>
 
 
-		
-		
+
+
 
 
 		<button type="button" class="btn-search" id="login">Login</button>
@@ -102,8 +101,7 @@
 
 
 
-         <span class="title" style="font-size: 50px; color: yellow">
-         </span>
+				<span class="title" style="font-size: 50px; color: yellow"> </span>
 
 
 			</div>
@@ -128,25 +126,19 @@
 
 
 
-		<script type="text/javascript">
+<script type="text/javascript">
    
-   		<%
-   		
-   		int load =0;
-   		int option = 0;
-   		
-   		if(request.getParameter("load") != null)
-   		load  = Integer.parseInt(request.getParameter("load"));
-   		
-   		
-   		if(load == -1){
-   			if(request.getParameter("option") != null)
-   				option  = Integer.parseInt(request.getParameter("option"));
-   		
-   		
-   		%>
+   		<%int load = 0;
+			int option = 0;
+
+			if (request.getParameter("load") != null)
+				load = Integer.parseInt(request.getParameter("load"));
+
+			if (load == -1) {
+				if (request.getParameter("option") != null)
+					option = Integer.parseInt(request.getParameter("option"));%>
    		load(-1);
-   		<%}else{%>
+   		<%} else {%>
    		load(0);
    		<%}%>
 
@@ -182,22 +174,22 @@
 					link = "/list.ch";
 				if(index == 2)
 					link = '/Page/Board/NewFile.html';
-				 if(index == 3){
-		               link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
-		               $('.title').html("내 정보 수정");
-		            }
-		            if(index == 4){
-		               link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-		               $('.title').html("관심 컨텐츠");
-		            }
-		            if(index == 5){
-		               link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-		               $('.title').html("내 리뷰 관리");
-		            }
-		            if(index == 6){
-		               link = '/Page/MyPage/MyInfo/MyInfo.jsp';
-		               $('.title').html("숨김 컨텐츠 관리");
-		            }
+	            if(index == 3){
+	                link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
+	                $('.container-fluid').html("내 정보 수정");
+	             }
+	             if(index == 4){
+	                link = '/Page/MyPage/Like/Like.jsp';
+	                $('.container-fluid').html("관심 컨텐츠");
+	             }
+	             if(index == 5){
+	                link = '/Page/MyPage/MyReview/MyReview.jsp';
+	                $('.container-fluid').html("내 리뷰 관리");
+	             }
+	             if(index == 6){
+	                link = '/Page/MyPage/Hidden/Hidden.jsp';
+	                $('.container-fluid').html("숨김 컨텐츠 관리");
+	             }
 		            if(index == 7){
 		            }
 		            if(index == 8){
@@ -218,9 +210,9 @@
 		
 			$('#field').load("<%=request.getContextPath()%>" + link);
 
-		}
-	</script>
-	
+	}
+</script>
+
 
 
 
