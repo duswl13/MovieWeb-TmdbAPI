@@ -65,22 +65,33 @@ public class MovieListController extends HttpServlet {
 		Action action = null;
 
 		if (command.equals("/main.ml")) {
+			//파라미터 있음
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("Page/Main/Main.jsp");
 		} else if (command.equals("/MainPage.ml")) {
+			//파라미터 없음
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("Page/MainPage/MainPage.jsp");
 		}else if (command.equals("/MovieList.ml")) {
+			//파라미터 있음
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("Page/MovieList/MovieList.jsp");
 		}else if (command.equals("/Search.ml")) {
+			//파라미터 있음
 			forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("Page/Search/Search.jsp");
+		}else if (command.equals("/MovieDetail.ml")) {
+			//파라미터 있음
+			forward = new ActionForward();
+			forward.setRedirect(false);
+			forward.setPath("Page/MovieDetail/MovieDetail.html");
 		}
+		
+		
 
 		if (forward != null) {
 			if (forward.isRedirect()) {

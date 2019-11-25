@@ -136,8 +136,11 @@ function enterkey() {
 
 <script type="text/javascript">
    
-   		<%int load = 0;
-			int option = 0;
+   		<%  
+   		
+   			int load = 0;
+			int option = 1;
+			String id = "";
 
 			if (request.getParameter("load") != null)
 				load = Integer.parseInt(request.getParameter("load"));
@@ -145,8 +148,17 @@ function enterkey() {
 			if (load == -1) {
 				if (request.getParameter("option") != null)
 					option = Integer.parseInt(request.getParameter("option"));%>
-   		load(-1);
-   		<%} else {%>
+					
+   			load(-1);
+   			
+   		<%} else if (load == -2) {
+   		
+   			if (request.getParameter("id") != null)
+   				id = request.getParameter("id"); %>
+			
+			load(-2);
+   			<%} else {%>
+   		
    		load(0);
    		<%}%>
 
@@ -176,7 +188,13 @@ function enterkey() {
 				if(index == -1){
 					link = '/MovieList.ml?option=<%=option%>';
 					
-				}if(index == 0)
+				}
+				if(index == -2){
+					link = '/MovieDetail.ml?id=<%=id%>';
+					
+				}
+				
+				if(index == 0)
 					link = '/MainPage.ml';
 				if(index == 1)
 					link = "/list.ch";

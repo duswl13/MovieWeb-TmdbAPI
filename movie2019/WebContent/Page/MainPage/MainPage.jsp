@@ -55,7 +55,7 @@
 
 			<div class="col-md-12">
 				<h3>인기 영화</h3>
-				<span class="more">더보기</span>
+				<span class="more"><a href="main.ml?load=-1&option=1">더보기</a></span>
 				<div class="carousel slide multi-item-carousel" id="theCarousel1">
 					<div class="carousel-inner">
 
@@ -85,7 +85,7 @@
 
 				<div class="col-md-12">
 					<h3>최신 영화</h3>
-					<span class="more">더보기</span>
+					<span class="more"><a href="main.ml?load=-1&option=2">더보기</a></span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel2">
 						<div class="carousel-inner">
 							
@@ -113,7 +113,7 @@
 
 				<div class="col-md-12">
 					<h3>개봉 예정 영화</h3>
-					<span class="more">더보기</span>
+					<span class="more"><a href="main.ml?load=-1&option=3">더보기</a></span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel3">
 						<div class="carousel-inner">
 							
@@ -308,7 +308,7 @@
 					print += '<div class="item">\n';
 
 				print += '<div class="col-xs-4">\n';
-				print += '<a href="main.ml?load=10&id=' + list[i].id + '">\n';
+				print += '<a href="main.ml?load=-2&id=' + list[i].id + '">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '</a>\n<div class="centered">\n';
 				print += '<h1>' + list[i].original_title + '</h1>\n';

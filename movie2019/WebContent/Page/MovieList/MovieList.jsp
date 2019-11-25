@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/MovieList.css">
 <%
 	String apikey = application.getInitParameter("APIKEY");
+	int option = Integer.parseInt(request.getParameter("option"));
 %>
 <title>Insert title here</title>
 </head>
@@ -73,7 +74,9 @@
 
 	
 
-	var sort1 = 1;
+	var sort1 = <%=option%>;
+	
+	$("#sel1").val(sort1).prop("selected", true);
 	var sort2 = 0;
 	
 	var allpages = 0;
@@ -104,7 +107,6 @@
 	
 	function readyList(page){
 	//api 접근해서 목록 만들기
-	
 	
 	
 	var link ='';
