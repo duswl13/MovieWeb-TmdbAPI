@@ -318,7 +318,7 @@
 				i++;
 			}
 
-			console.log(print);
+			//console.log(print);
 			$('.carousel-inner:eq('+count+')').html(print);
 			carouselSetting(count);
 			
