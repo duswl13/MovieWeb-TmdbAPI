@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- <style type="text/css">
- ul{
+ <style type="text/css">
+.navi ul{
 	list-style: none;
 	height: 40px;
 	padding-top: 10px;
@@ -25,7 +25,7 @@
 body {
 	background-color:white; 
 }
- -->
+
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
