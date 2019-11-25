@@ -147,6 +147,13 @@ width:3em;
 height:3em;}
 
 
+.centered h5 {
+
+  text-overflow: ellipsis;
+
+
+}
+
 
 .container-fluid {
 	clear: right;

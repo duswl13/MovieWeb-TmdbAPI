@@ -291,10 +291,16 @@
 		function printMovie(list,count) {
 
 			var print = '';
-
-			for (var i = 0; i < 5; i++) {
-
-				if (i == 0)
+			var i = 0;
+			for (var check = 0; check < 5; check++) {
+				
+				if(list[i].poster_path == null){
+					check--;
+					i++;
+					continue;
+				}
+				
+				if (check == 0)
 					print += '<div class="item active">\n';
 				else
 					print += '<div class="item">\n';
@@ -307,6 +313,7 @@
 				print += '<h5>' + list[i].overview + '</h5>\n';
 				print += '<a href="#"><img src="Png/view.png"></a>\n';
 				print += '<a href="#"><img src="Png/delete.png"></a>\n</div></div></div>\n';
+				i++;
 			}
 
 			console.log(print);
