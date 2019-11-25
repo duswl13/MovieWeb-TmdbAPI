@@ -24,9 +24,23 @@
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
    	
+   	
+   <script>
+   
+	function enterkey() {
+    if (window.event.keyCode == 13) {
+    	
+			var text = $('#search-form').val();
+			alert(text);
+			$('#field').load("Search.ml?keyword=" + text);
+    }
+}
+	
+</script>
    
 	
 </head>
+
 
 
 <body>
@@ -45,7 +59,7 @@
 
 
 		</div>
-		<input type="text" id="search-form" class="btn-search"
+		<input type="text" id="search-form" class="btn-search" onkeyup="enterkey();"
 			placeholder="Search">
 		<ul class="list-unstyled components">
 
@@ -217,6 +231,10 @@
 				
 		
 			$('#field').load("<%=request.getContextPath()%>" + link);
+
+			
+		
+
 
 		}
 	</script>

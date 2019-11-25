@@ -16,29 +16,39 @@
 		<div class="row">
 			<div class="form-group col-xs-2">
 				<select class="form-control" id="sel1">
-					<option selected value="popular.desc">인기순</option>
-					<option value="release_date.desc">최신순</option>
-					<option value="db.desc">평가순</option>
+					<option selected value=1>인기순</option>
+					<option value=2>최신순</option>
+					<option value=3>개봉예정순</option>
 				</select>
 			</div>
 
 			<div class="form-group col-xs-2">
 				<select class="form-control" id="sel2">
-					<option selected value="1">모든 장르</option>
-					<option value="2">액션</option>
-					<option value="3">판타지</option>
+					<option selected value="0">모든 장르</option>
+					<option value="28">액션</option>
+					<option value="12">모험</option>
+					<option value="16">애니메이션</option>
+					<option value="35">코미디</option>
+					<option value="80">범죄</option>
+					<option value="99">다큐멘터리</option>
+					<option value="18">드라마</option>
+					<option value="10751">가족</option>
+					<option value="14">판타지</option>
+					<option value="36">역사</option>
+					<option value="27">공포</option>
+					<option value="10402">음악</option>
+					<option value="9648">미스터리</option>
+					<option value="10749">로맨스</option>
+					<option value="878">SF</option>
+					<option value="10770">TV 영화</option>
+					<option value="53">스릴러</option>
+					<option value="10752">전쟁</option>
+					<option value="37">서부</option>
 				</select>
 			</div>
 
 
 
-			<div class="form-group col-xs-2">
-				<select class="form-control" id="sel3">
-					<option selected value="1">모든 키워드</option>
-					<option value="2">모험</option>
-					<option value="3">사랑</option>
-				</select>
-			</div>
 		</div>
 
 
@@ -62,24 +72,73 @@
 <script>
 
 	
-	var page = 1;
-	var sort1 = 0;
+
+	var sort1 = 1;
+	var sort2 = 0;
+	
 	var allpages = 0;
 	
-	readyList(page,sort1);
+	readyList(1);
 	
 	
-	function readyList(page, sort1){
+	
+	function getDt3(month){
+		
+		var today = new Date();
+		today.setMonth( today.getMonth() + month );
+		
+		var year = today.getFullYear();
+		var mon = today.getMonth()+1;
+	
+		if(mon<10){
+			mon = "0"+mon;
+		};
+		
+		var day = today.getDate();
+		if(day<10){
+			day = "0"+day;
+		}
+		
+		return year+"-"+mon+"-"+day;		
+		}
+	
+	function readyList(page){
 	//api 접근해서 목록 만들기
 	
-	console.log('이동할 페이지 :'+ page);
+	
+	
+	var link ='';
+	//인기, 최신, 개봉예정 필터
+	alert('sort1 :' + sort1);
+	switch(parseInt(sort1)){
+	case 1:
+		link = 'https://api.themoviedb.org/3/movie/popular?api_key=<%=apikey%>&language=ko-KO&page='+page+'&region=KR';
+		break;
+	case 2:
+		
+		link = 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&page='+page+'&region=KR&sort_by=release_date.desc&release_date.lte='+getDt3(0);
+		break;
+	case 3:
+		link = 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&page='+page+'&region=KR&sort_by=release_date.asc&include_adult=false&release_date.gte='+getDt3(0)+'&release_date.lte='+getDt3(5);
+		break;
+	}
+	
+	
+	//장르 필터
+	var option = '';
+	if(sort2 != 0){
+		option = '&with_genres='+sort2;
+	}
+	
+	
+	console.log('이동할 페이지 :'+ page+","+link);
 
 	$.ajax({
-				url : 'https://api.themoviedb.org/3/movie/popular?api_key=<%=apikey%>&language=ko-KO&page='+page+'&region=KR', //요청 전송 url
+				url : link+option, //요청 전송 url
 				dataType : 'json',
 				cache : false,
 				success : function(data) {
-					console.log('인기목록 성공');
+					
 					var list = data.results;
 					allpages = data.total_pages;
 					printMovie(list);
@@ -87,16 +146,34 @@
 
 				}, //HTTP 요청이 성공한 경우 실행
 				error : function(request, status, error) {
-					console.log('인기목록 error');
+					console.log('목록 error');
 
 				},
 				complete : function() {
-					console.log('인기목록완료');
+					console.log('목록완료');
 
 				} 
 			});
 	
 	}
+	
+	$('#sel1').change(function(){
+		var value = $(this).val();
+		sort1 = value;
+		alert('바뀜'+sort1);
+		readyList(1);
+		$('.page-link:eq(1)').text(1);
+		$('.page-link:eq(2)').text(2);
+		$('.page-link:eq(3)').text(3);
+	});
+	
+	$('#sel2').change(function(){
+		var value = $(this).val();
+		sort2 = value;
+		alert('바뀜'+sort2);
+		readyList(1);
+	});
+	
 	
 	$('.pagination > li').click(function(){
 		
@@ -106,7 +183,7 @@
 		var select3 = $('#sel3').val();
 		
 		if(page1 != '다음' && page1 != '이전'){
-			readyList(page1,0);
+			readyList(page1);
 		}else{
 			
 			var start = $('.page-link:eq(1)').text();
@@ -115,7 +192,7 @@
 			if(page1 == '다음'){
 				end++;
 				if(end < allpages){
-				readyList(end,sort1);
+				readyList(end);
 				$('.page-link:eq(1)').text(end++);
 				}
 				if(end < allpages)
@@ -134,7 +211,7 @@
 				$('.page-link:eq(2)').text(start--);
 				if(start > 0)
 				$('.page-link:eq(1)').text(start);
-				readyList(start,sort1);
+				readyList(start);
 				
 			}
 			
@@ -153,16 +230,19 @@
 		
 		
 		
-		for (var i = 0; i < 4; i++) {
+		for (var i = 0; i < 5; i++) {
 			
 			text += '<div class="row">';
 			
 			for(var j=0; j < 4; j++){
 				
-				if(list[check].poster_path == null){
+				if(check < list.length){
+				if(list[check].poster_path == null || list[check].overview == null || list[check].genre_ids == null || list[check].overview == ""
+						|| list[check].genre_ids == "" || list[check].overview.includes('섹스')){
 					j--;
-					console.log('포스터가 없으므로 넘김');
 					check++;
+					console.log('이상한 거니까 넘김'+check);
+					
 					continue;
 				}
 			
@@ -176,6 +256,7 @@
 			text += '</div>';
 			
 			check++;
+			}
 			}
 			text += '</div>';
 			

@@ -180,7 +180,7 @@
 			
 			var day = today.getDate();
 			if(day<10){
-				day = "-0"+day;
+				day = "0"+day;
 			}
 			
 			return year+"-"+mon+"-"+day;		
@@ -294,7 +294,8 @@
 			var i = 0;
 			for (var check = 0; check < 5; check++) {
 				
-				if(list[i].poster_path == null){
+				if(list[i].poster_path == null || list[i].overview == null || list[i].genre_ids == null || list[i].overview == "" || list[i].overview.includes('섹스')
+					|| list[i].genre_ids == ""){
 					check--;
 					i++;
 					continue;
