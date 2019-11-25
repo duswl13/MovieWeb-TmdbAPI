@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
+<!-- <style type="text/css">
  ul{
 	list-style: none;
 	height: 40px;
@@ -25,7 +25,7 @@
 body {
 	background-color:white; 
 }
-
+ -->
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
