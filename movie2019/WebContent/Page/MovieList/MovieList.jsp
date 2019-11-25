@@ -4,9 +4,109 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet"
+	href="css/MovieList.css">
 <title>Insert title here</title>
 </head>
 <body>
-<h1>ㅎㅇㅎㅇ</h1>
+<div class="all">
+
+<div class="row">
+<div class="form-group col-xs-2">
+  <select class="form-control" id="sel1">
+    <option>인기순</option>
+    <option>최신순</option>
+    <option>평가순</option>
+  </select>
+</div>
+
+<div class="form-group col-xs-2">
+  <select class="form-control" id="sel1">
+    <option>모든 장르</option>
+    <option>액션</option>
+    <option>판타지</option>
+  </select>
+  </div>
+
+  
+
+<div class="form-group col-xs-2">
+  <select class="form-control" id="sel1">
+    <option>모든 키워드</option>
+    <option>모험</option>
+    <option>사랑</option>
+  </select>
+</div>
+</div>
+
+
+<div class="movieList">
+
+</div>
+
+</div>
 </body>
+
+<script>
+
+var text = '<div class="row">';
+
+for(var i = 0; i < 4; i++){
+	text +=	'<div class="col-xs-3">';
+	text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg">';
+	text += '<div class="centered">\n';
+	text += '<h5>' + '확인확인11' + '</h5>\n';
+	text += '<p>' + '확인확인22' + '</p></div>\n';
+	text += '<h5>기생충</h5>';
+	text += '</div>';
+}
+text += '</div>';
+
+
+text += '<div class="row">';
+
+for(var i = 0; i < 4; i++){
+	text +=	'<div class="col-xs-3">';
+	text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg">';
+	text += '<div class="centered">\n';
+	text += '<h5>' + '확인확인11' + '</h5>\n';
+	text += '<p>' + '확인확인22' + '</p></div>\n';
+	text += '<h5>기생충</h5>';
+	text += '</div>';
+}
+text += '</div>';
+
+
+
+
+text += '<div class="row">';
+
+for(var i = 0; i < 4; i++){
+	text +=	'<div class="col-xs-3">';
+	text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg">';
+	text += '<div class="centered">\n';
+	text += '<h5>' + '확인확인11' + '</h5>\n';
+	text += '<p>' + '확인확인22' + '</p></div>\n';
+	text += '<h5>기생충</h5>';
+	text += '</div>';
+}
+text += '</div>';
+
+
+
+text += '<div class="row">';
+
+for(var i = 0; i < 4; i++){
+	text +=	'<div class="col-xs-3">';
+	text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg">';
+	text += '<div class="centered">\n';
+	text += '<h5>' + '확인확인11' + '</h5>\n';
+	text += '<p>' + '확인확인22' + '</p></div>\n';
+	text += '<h5>기생충</h5>';
+	text += '</div>';
+}
+text += '</div>';
+text += '</div>';
+	$('.movieList').html(text);
+</script>
 </html>
