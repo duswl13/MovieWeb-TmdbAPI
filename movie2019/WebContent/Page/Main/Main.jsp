@@ -167,7 +167,7 @@
 				if(index == 2)
 					link = '/Page/Board/NewFile.html';
 	            if(index == 3){
-	                $(".container-fluid").empty();
+	              
 	                link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
 	                $('.container-fluid').html("내 정보 수정");
 	             }
@@ -186,7 +186,25 @@
 	                link = '/Page/MyPage/Hidden/Hidden.jsp';
 	                $('.container-fluid').html("숨김 컨텐츠 관리");
 	             }
-				
+	             if(index == 7){
+		               
+	             }
+	             if(index == 8){
+	                 
+	                 link = '/Page/AdminPage/FAQ/FAQList.jsp';
+	                 $('.container-fluid').html("공지사항 관리");
+	              }
+	             if(index == 9){
+	              
+	                 link = '/Page/AdminPage/Notice/NoticeList.jsp';
+	                 $('.container-fluid').html("FAQ 관리");
+	              }
+	             if(index == 10){
+	                 
+	                 link = '/Page/AdminPage/UserList/UserList.jsp';
+	                 $('.container-fluid').html("회원 관리");
+	              }
+
 				
 		
 			$('#field').load("<%=request.getContextPath()%>" + link);
