@@ -71,7 +71,19 @@
 
 
 
-		</ul>
+   <li class="active"><a href="#adminSubmenu"
+            data-toggle="collapse" aria-expanded="false" class="dropdown-item">관리자페이지</a>
+            <ul class="collapse list-unstyled" id="adminSubmenu">
+               <li><a href="#" onclick="load(8);">공지사항 관리</a></li>
+               <li><a href="#" onclick="load(9);">FAQ 관리</a></li>
+               <li><a href="#" onclick="load(10);">회원 관리</a></li>
+            </ul></li>
+
+      </ul>
+
+
+		
+		
 
 
 		<button type="button" class="btn-search" id="login">Login</button>

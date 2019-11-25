@@ -63,3 +63,9 @@ color:white;
 	
 }
 
+
+.pagination>li>a{
+    color: #fff;
+    background-color: inherit;
+    border: 1px solid #fff;
+}
