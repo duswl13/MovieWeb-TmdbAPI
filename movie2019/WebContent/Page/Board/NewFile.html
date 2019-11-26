@@ -1,10 +1,102 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>토론 게시판</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+  $(function(){
+	 $("button").click(function(){
+		location.href="Board/NewFile1.html"; 
+	 }); 
+  });
+</script>
+<style>
+* {color:white}
+h1,th {text-align:center;}
+.container {display:block; 
+            }
+table {margin:0 0 0 100px; width:80%; height:30%; text-align:center;}
+button {float:right;}
+.center-block {display:flex;
+               justify-content: center;}
+.pagination {clear:right;}
+
+</style>
 </head>
 <body>
-hi
+   <div class="container">
+   <h1>토론 게시판</h1>
+   <br><br><br>
+   <table border=3>
+    <thead>       
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>내용</th>
+        <th >글쓴이</th>
+        <th >조회수</th>
+     </tr> 
+     </thead>
+     <tbody>
+       <tr>
+         <td>3</td>
+         <td><a href="#">겨울왕국2 보신 분 같이 얘기해요</a></td>
+         <td>엘사 안나 최고</td>
+         <td><a href="#">올라프</a></td>
+         <td>2</td>
+       </tr>
+       <tr>
+         <td>2</td>
+         <td><a href="#">다크페이트 보셨나요</a></td>
+         <td>그레이스 내꺼하자</td>
+         <td><a href="#">맥켄지</a></td>
+         <td>5</td>
+       </tr>
+       <tr>
+         <td>1</td>
+         <td><a href="#">같이 좋아하는 영화 얘기해요</a></td>
+         <td>오늘의 영화는?</td>
+         <td><a href="#">씨네필</a></td>
+         <td>1</td>
+       </tr>
+     </tbody> 
+   </table>
+   <br>
+   <button class="btn btn-info">글쓰기</button>
+   <div class="center-block"> 
+     <div class="row">
+       <div class="col">
+         <ul class="pagination" >
+            <li class="page-item">
+            <a class="page-link" href="#">&lt;&lt;</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">1</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">2</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">4</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">5</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">6</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">7</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">8</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">9</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">10</a></li>
+            <li class="page-item">
+            <a class="page-link" href="#">&gt;&gt;</a></li>
+        </ul>
+       </div>
+     </div>
+    </div>
+   </div>
 </body>
 </html>
