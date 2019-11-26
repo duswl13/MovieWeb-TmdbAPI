@@ -248,11 +248,14 @@
 			
 			list[check].overview = list[check].overview.substring(0,100)+'...';
 			text += '<div class="col-xs-3">';
+			text += '<a href="main.ml?load=-2&id=' + list[check].id + '">\n';
 			text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
+			text += '</a>';
 			text += '<div class="centered">\n';
 			text += '<h5>' + list[check].original_title + '</h5>\n';
 			text += '<p>' + list[check].overview + '</p></div>\n';
 			text += '<h5>'+list[check].original_title+'</h5>';
+
 			text += '</div>';
 			
 			check++;
