@@ -14,86 +14,90 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("*.ml")
 public class MovieListController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public MovieListController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+   /**
+    * @see HttpServlet#HttpServlet()
+    */
+   public MovieListController() {
+      super();
+      // TODO Auto-generated constructor stub
+   }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doProcess(request, response);
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+    *      response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      doProcess(request, response);
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doProcess(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+    *      response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      doProcess(request, response);
+   }
 
-	private void doProcess(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+   private void doProcess(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
 
-		String RequestURI = request.getRequestURI();
-		System.out.println("RequestURI = " + RequestURI);
+      String RequestURI = request.getRequestURI();
+      System.out.println("RequestURI = " + RequestURI);
 
-		// getContextPath() : ÄÁÅØ½ºÆ® °æ·Î°¡ ¹İÈ¯µË´Ï´Ù.
-		// contextPath´Â "/JspProject" °¡ ¹İÈ¯ÇÕ´Ï´Ù.
-		String contextPath = request.getContextPath();
-		System.out.println("contextPath = " + contextPath);
+      // getContextPath() : ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
+      // contextPathëŠ” "/JspProject" ê°€ ë°˜í™˜í•©ë‹ˆë‹¤.
+      String contextPath = request.getContextPath();
+      System.out.println("contextPath = " + contextPath);
 
-		// RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ °ªÀÇ ÀÎµ¦½º À§Ä¡ÀÇ ¹®ÀÚºÎÅÍ
-		// ¸¶Áö¸· À§Ä¡ ¹®ÀÚ±îÁö ÃßÃâÇÕ´Ï´Ù.
-		// command´Â 'login.net'À» ¹İÈ¯ÇÕ´Ï´Ù.
+      // RequestURIì—ì„œ ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ê¸¸ì´ ê°’ì˜ ì¸ë±ìŠ¤ ìœ„ì¹˜ì˜ ë¬¸ìë¶€í„°
+      // ë§ˆì§€ë§‰ ìœ„ì¹˜ ë¬¸ìê¹Œì§€ ì¶”ì¶œí•©ë‹ˆë‹¤.
+      // commandëŠ” 'login.net'ì„ ë°˜í™˜í•©ë‹ˆë‹¤.
 
-		String command = RequestURI.substring(contextPath.length());
-		System.out.println("command = " + command);
+      String command = RequestURI.substring(contextPath.length());
+      System.out.println("command = " + command);
 
-		// ÃÊ±âÈ­
-		ActionForward forward = null;
-		Action action = null;
+      // ì´ˆê¸°í™”
+      ActionForward forward = null;
+      Action action = null;
 
-		if (command.equals("/main.ml")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Page/Main/Main.jsp");
-		} else if (command.equals("/MainPage.ml")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Page/MainPage/MainPage.jsp");
-		}else if (command.equals("/MovieList.ml")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Page/MovieList/MovieList.jsp");
-		}else if (command.equals("/Search.ml")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Page/Search/Search.jsp");
-		}
+      if (command.equals("/main.ml")) {
+         forward = new ActionForward();
+         forward.setRedirect(false);
+         forward.setPath("Page/Main/Main.jsp");
+      } else if (command.equals("/MainPage.ml")) {
+         forward = new ActionForward();
+         forward.setRedirect(false);
+         forward.setPath("Page/MainPage/MainPage.jsp");
+      }else if (command.equals("/MovieList.ml")) {
+         forward = new ActionForward();
+         forward.setRedirect(false);
+         forward.setPath("Page/MovieList/MovieList.jsp");
+      }else if (command.equals("/Search.ml")) {
+         forward = new ActionForward();
+         forward.setRedirect(false);
+         forward.setPath("Page/Search/Search.jsp");
+      }else if (command.equals("/MovieDetail.ml")) {
+      forward = new ActionForward();
+      forward.setRedirect(false);
+      forward.setPath("Page/MovieDetail/MovieDetail.html");
+   }
 
-		if (forward != null) {
-			if (forward.isRedirect()) {
-				System.out.println("sendRedirect ÀÌµ¿ :" + forward.getPath());
-				response.sendRedirect(forward.getPath());
-			} else { // Æ÷¿öµùµË´Ï´Ù.
-				System.out.println("dispather ÀÌµ¿ :" + forward.getPath());
-				RequestDispatcher dispather = request.getRequestDispatcher(forward.getPath());
-				dispather.forward(request, response);
+      if (forward != null) {
+         if (forward.isRedirect()) {
+            System.out.println("sendRedirect ì´ë™ :" + forward.getPath());
+            response.sendRedirect(forward.getPath());
+         } else { // í¬ì›Œë”©ë©ë‹ˆë‹¤.
+            System.out.println("dispather ì´ë™ :" + forward.getPath());
+            RequestDispatcher dispather = request.getRequestDispatcher(forward.getPath());
+            dispather.forward(request, response);
 
-			}
-		}
+         }
+      }
 
-	}
+   }
 
 }
