@@ -14,8 +14,6 @@
 .all {
 
 margin-top:22vh;
-	padding-left: 5em;
-	padding-right: 5em;
 	color: white;
 }
 
@@ -35,7 +33,9 @@ margin-top:22vh;
 }
 
 .movie_info {
-background: #000;
+padding-left: 5em;
+	padding-right: 5em;
+ background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1));
 }
 
 .pickgradient {
@@ -128,22 +128,33 @@ color:white;
 
 
 /*유투브 백그라운드*/
+.video-background {
+	background: #000;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -99;
+}
+
+/*유투브 백그라운드*/
 .video-foreground, .video-background iframe {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 80%;
+	height: 100%;
 	pointer-events: none;
 }
 
 /*유투브 백그라운드*/
 @media ( min-aspect-ratio : 16/9) {
 	.video-foreground {
-		height: 80vh;
-		
+		height: 100vh;
+		top: -10vh;
 		/*height: 300%;
-		top: -100%; /*상단 유투브 제목 안보이게하려고*/
+		top: -100%; *//*상단 유투브 제목 안보이게하려고*/
 	}
 }
 
@@ -154,12 +165,11 @@ color:white;
 	}
 }
 
-
 /*유투브 백그라운드*/
 @media ( min-aspect-ratio : 1/1) {
 	.video-foreground {
-		height: 80vh;
-		
+		height: 100vh;
+		top: -10vh;
 		/*height: 300%;
 		top: -100%; /*상단 유투브 제목 안보이게하려고*/
 	}
@@ -184,8 +194,7 @@ iframe {
 
 <div class="video-background">
 		<div class="video-foreground">
-
-			<iframe id="detailVideo"
+				<iframe id="detailVideo"
 				src="video/aurora.mp4"
 				frameborder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
