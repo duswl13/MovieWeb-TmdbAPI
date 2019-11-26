@@ -294,7 +294,8 @@
 			var i = 0;
 			for (var check = 0; check < 5; check++) {
 				
-				if(list[i].poster_path == null){
+				if(list[i].poster_path == null || list[i].overview == null || list[i].genre_ids == null || list[i].overview == ""
+					|| list[i].genre_ids == "" || list[i].overview.includes('섹스')){
 					check--;
 					i++;
 					continue;
@@ -308,7 +309,7 @@
 					print += '<div class="item">\n';
 
 				print += '<div class="col-xs-4">\n';
-				print += '<a href="main.ml?load=10&id=' + list[i].id + '">\n';
+				print += '<a href="main.ml?load=-2&id=' + list[i].id + '">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '</a>\n<div class="centered">\n';
 				print += '<h1>' + list[i].original_title + '</h1>\n';

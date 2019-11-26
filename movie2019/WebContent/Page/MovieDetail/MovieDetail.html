@@ -3,8 +3,347 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+<style>
+.all {
+	padding-left: 5em;
+	padding-right: 5em;
+	color: white;
+}
+
+.col-xs-12 {
+	text-align: center;
+	background: #000;
+}
+
+.col-xs-4, .col-xs-8 {
+	text-align: center;
+	background: #ccc;
+	height: 500px;
+}
+
+.col-xs-8 {
+	background: #bbb;
+}
+
+.movie_info {
+	background: #141414;
+}
+
+.pickgradient {
+	position: relative;
+	display: inline-block;
+}
+
+.pickgradient:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	background: linear-gradient(to left, #000, rgba(0, 0, 0, 0.4),
+		rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4), #000); /* W3C */
+}
+
+img {
+	display: block;
+}
+
+.user_mv {
+	padding: 16px;
+	background: #333;
+}
+
+.top_margin {
+	margin-top: 5em;
+}
+
+.col-xs-4 {
+	height: auto;
+	background: inherit;
+}
+
+.review {
+	padding: 3em;
+	background: #333;
+}
+
+.review_id {
+	float: left;
+}
+
+.review_Star {
+	float: right;
+}
+</style>
 </head>
 <body>
-<h1>연습</h1>
+	<div class="all">
+		<div class="row">
+			<div class="col-xs-12">
+
+				<div class="text-center pickgradient">
+					<img
+						src="https://image.tmdb.org/t/p/w500/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg"
+						class="rounded">
+				</div>
+
+
+			</div>
+		</div>
+
+		<div class="row movie_info">
+			<div class="col-xs-2">
+				<img class="img-responsive"
+					src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
+			</div>
+			<div class="col-xs-10">
+				<h2>
+					<b>기생충</b>
+				</h2>
+				<h5>스릴러 2019</h5>
+				<p>전원 백수로 살 길 막막하지만 사이는 좋은 기택(송강호) 가족. 장남 기우(최우식)에게 명문대생 친구가
+					연결시켜 준 고액 과외 자리는 모처럼 싹튼 고정수입의 희망이다. 온 가족의 도움과 기대 속에 박 사장(이선균) 집으로
+					향하는 기우. 글로벌 IT기업의 CEO인 박 사장의 저택에 도착하자 젊고 아름다운 사모님 연교(조여정)와 가정부
+					충숙(장혜진)이 기우를 맞이한다. 큰 문제 없이 박 사장의 딸 다혜(정지소)의 과외를 시작한 기우. 그러나 이렇게 시작된
+					두 가족의 만남 뒤로, 걷잡을 수 없는 사건이 기다리고 있는데...</p>
+
+				<div class="user_mv">
+					<table>
+						<tr>
+							<td>이미 본 작품인가요?</td>
+							<td>★★★★★</td>
+							<td>취향 좋아요 싫어요</td>
+						</tr>
+					</table>
+				</div>
+
+
+				<h4 class="top_margin">
+					<b>출연진</b>
+				</h4>
+				<div class="mv_guest row">
+
+					<div class="col-xs-2">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/joAXWwyjeed7qRDJ6jxSiMi7f5i.jpg">
+						<p>Song Kang-ho</p>
+					</div>
+
+					<div class="col-xs-2">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/nnwVLKIQPYoF88ohshnFfbSB0UW.jpg">
+						<p>Lee Sun-kyun</p>
+					</div>
+
+					<div class="col-xs-2">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/5MgWM8pkUiYkj9MEaEpO0Ir1FD9.jpg">
+						<p>Cho Yeo-jeong</p>
+					</div>
+
+
+					<div class="col-xs-2">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/qy2SEScTNOjtcjm7UafbIlXMqbG.jpg">
+						<p>Choi Woo-shik/p>
+					</div>
+
+					<div class="col-xs-2">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/uWppIvypWODMjCxiGDWX92y86ci.jpg">
+						<p>Park So-dam</p>
+					</div>
+
+					<div class="col-xs-2">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/45qpdANxxvU3danQPEhpGSQM9MX.jpg">
+						<p>Lee Jung-eun</p>
+					</div>
+
+				</div>
+
+
+
+				<h4 class="top_margin">
+					<b>평가 분포</b>
+				</h4>
+				<div class="row">
+					<div class="col-xs-6">
+
+						<canvas id="myChart" height="60vh" width="80vw"></canvas>
+
+					</div>
+
+					<div class="col-xs-6">
+
+						<canvas id="myChart2" height="60vh" width="80vw"></canvas>
+
+					</div>
+
+				</div>
+
+
+				<h4 class="top_margin">
+					<b>리뷰</b>
+				</h4>
+
+				<div class="row">
+					<div class="col-xs-4">
+						<div class="review">
+							<div>
+								<span class="review_id">duswl13</span> <span class="review_star">★3.5</span>
+							</div>
+							<hr>
+							<h4>별로였어요</h4>
+							<p>별로였어요 별로였어요별로였어요별로였어요별로였어요별로였어요별로였어요</p>
+						</div>
+					</div>
+
+					<div class="col-xs-4">
+						<div class="review">
+							duswl13 ★3.5
+							<hr>
+							<h4>별로였어요</h4>
+							<p>별로였어요 별로였어요별로였어요별로였어요별로였어요별로였어요별로였어요</p>
+						</div>
+					</div>
+
+					<div class="col-xs-4">
+						<div class="review">
+							duswl13 ★3.5
+							<hr>
+							<h4>별로였어요</h4>
+							<p>별로였어요 별로였어요별로였어요별로였어요별로였어요별로였어요별로였어요</p>
+						</div>
+					</div>
+
+				</div>
+
+
+
+				<h4 class="top_margin">
+					<b>비슷한 영화</b>
+				</h4>
+
+				<div class="row">
+					<div class="col-xs-3">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
+						<p>기생충</p>
+					</div>
+
+					<div class="col-xs-3">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
+						<p>기생충</p>
+					</div>
+
+					<div class="col-xs-3">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
+						<p>기생충</p>
+					</div>
+
+					<div class="col-xs-3">
+						<img class="img-responsive"
+							src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
+						<p>기생충</p>
+					</div>
+				</div>
+
+
+
+
+
+
+
+				<div></div>
+
+			</div>
+		</div>
+
+
+
+
+	</div>
 </body>
+
+<script>
+	// 우선 컨텍스트를 가져옵니다. 
+	var ctx = document.getElementById("myChart").getContext('2d');
+	var ctx2 = document.getElementById("myChart2").getContext('2d');
+	/*
+	 - Chart를 생성하면서, 
+	 - ctx를 첫번째 argument로 넘겨주고, 
+	 - 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
+	 */
+
+	Chart.defaults.global.defaultFontColor = 'white';
+
+	var myPieChart = new Chart(ctx,
+			{
+				type : 'doughnut',
+
+				data : {
+
+					labels : [ "1", "2", "3", "4", "5" ],
+					datasets : [ {
+						label : '# of Votes',
+						data : [ 5, 10, 30, 15, 40 ],
+						backgroundColor : [ 'rgba(255, 99, 132, 0.8)',
+								'rgba(54, 162, 235, 0.8)',
+								'rgba(255, 206, 86, 0.8)',
+								'rgba(75, 192, 192, 0.8)',
+								'rgba(153, 102, 255, 0.8)' ],
+						borderColor : [ 'rgba(255,99,132,1)',
+								'rgba(54, 162, 235, 1)',
+								'rgba(255, 206, 86, 1)',
+								'rgba(75, 192, 192, 1)',
+								'rgba(153, 102, 255, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+					scales : {
+						yAxes : [ {
+							ticks : {
+								display : false
+							}
+						} ]
+					}
+				}
+			});
+
+	var myPieChart2 = new Chart(ctx2,
+			{
+				type : 'doughnut',
+				data : {
+					labels : [ "좋아요", "싫어요" ],
+					datasets : [ {
+						label : '# of Votes',
+						data : [ 75, 25 ],
+						backgroundColor : [ 'rgba(255, 99, 132, 0.8)',
+								'rgba(54, 162, 235, 0.8)' ],
+						borderColor : [ 'rgba(255,99,132,1)',
+								'rgba(54, 162, 235, 1)' ],
+						borderWidth : 1
+					} ]
+				},
+				options : {
+					maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
+					scales : {
+						yAxes : [ {
+							ticks : {
+								display : false
+							}
+						} ]
+					}
+				}
+			});
+</script>
 </html>

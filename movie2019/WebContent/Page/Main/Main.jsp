@@ -22,6 +22,10 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	
 <script>
 function enterkey() {
     if (window.event.keyCode == 13) {
@@ -136,17 +140,23 @@ function enterkey() {
 
 <script type="text/javascript">
    
-   		<%int load = 0;
+   		<%
+   			int load = 0;
 			int option = 0;
-
+			int id = 0;
 			if (request.getParameter("load") != null)
 				load = Integer.parseInt(request.getParameter("load"));
 
 			if (load == -1) {
 				if (request.getParameter("option") != null)
 					option = Integer.parseInt(request.getParameter("option"));%>
-   		load(-1);
-   		<%} else {%>
+   			load(-1);
+   		<%}else if(load == -2){
+   		if (request.getParameter("id") != null){
+   			id = Integer.parseInt(request.getParameter("id"));%>
+   			load(-2);
+   		<%}
+   		} else {%>
    		load(0);
    		<%}%>
 
@@ -172,6 +182,11 @@ function enterkey() {
 				
 				var link = '';
 				 $(".title").empty();
+				 
+				 if(index == -2){
+						link = '/MovieDetail.ml?id=<%=option%>';
+						
+					}
 				 
 				if(index == -1){
 					link = '/MovieList.ml?option=<%=option%>';
