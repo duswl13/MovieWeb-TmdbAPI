@@ -10,7 +10,8 @@
 
 <style>
 label {
-	color: #337ab7;
+<%--	color: #337ab7;--%>
+	color: white;
 	padding-right:50px;
 }
 
