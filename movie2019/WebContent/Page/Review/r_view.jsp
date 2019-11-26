@@ -6,16 +6,78 @@
 <head>
 
 <style>
-tr.center-block {text-align:center}
-h1 {font-size:1.5rem; text-align:center; color:CadetBlue}
-.container {width:60%}
-label {font-weight:bold}
-#upfile {display:none}
-img {width:200px;}
-button { width:100px; height:50px; background:thistle; 
-	border:0px; border-radius:10px; font-size:10pt; color:white;}
-button:hover {opacity:60%}
+
+* {
+	margin: 0 auto
+}
+
+body {
+	background: #141414;
+	color: white;
+}
+
+tr.center-block {
+	text-align: center
+}
+
+h1 {
+	font-size: 1.5rem;
+	color: CadetBlue
+}
+
+.container {
+	width: 60%
+}
+
+label {
+	font-weight: bold
+}
+
+#upfile {
+	display: none
+}
+
+img {
+	width: 200px;
+}
+
+button {
+	width: 100px;
+	height: 40px;
+	background: CadetBlue;
+	border: 0px;
+	border-radius: 10px;
+	font-size: 10pt;
+	color: white;
+}
+
+button:hover {
+	opacity: 60%
+}
+
+span {
+	font-size: 8pt;
+}
+
+input {
+	background: #141414;
+	border: 1.5px dotted gray;
+	border-radius: 10px;
+	color: white;
+	padding: 5px;
+	margin: 5px;
+}
+
+textarea {
+	background: #141414;
+	border: 1.5px dotted white;
+	border-radius: 10px;
+	font-color: white;
+	padding: 5px;
+	margin: 5px;
+}
 </style>
+
 
 </head>
 <body>
@@ -23,7 +85,8 @@ button:hover {opacity:60%}
 <div class=container>
 <table class="table table-striped">
 <tr>
-	<th colspan=2>MVC게시판 - view페이지</th>
+	<th colspan=2><h1>내가 쓴 리뷰 하나만 선택해서 보는 페이지</h1></th>
+	<br>
 </tr>	
 <tr>
 	<td><div>글쓴이</div></td> 
@@ -40,7 +103,6 @@ button:hover {opacity:60%}
 
 <c:if test="${!empty boarddata.BOARD_FILE }">
 <tr>
-	<td>첨부파일</td>
 	<td><a href="BoardFileDown.bo?filename=${boarddata.BOARD_FILE }">${boarddata.BOARD_FILE}</a>
 	</td>
 </tr>
@@ -49,7 +111,7 @@ button:hover {opacity:60%}
 <tr>
 	<td colspan=2 class=center>
 		<a href="BoardReplyView.bo?num${boarddata.BOARD_NUM }">
-		<button>답변</button></a>
+		<button>댓글</button></a>
 	<c:if test="${boarddata.BOARD_NAME == id || id == 'admin'}">
 		<a href="BoardModifyView.bo?num${boarddata.BOARD_NUM }">
 		<button>수정</button></a>
@@ -58,7 +120,7 @@ button:hover {opacity:60%}
 		<button>삭제</button></a>
 	</c:if>
 		<a href="BoardList.bo">
-		<button>목록</button></a>	
+		<button>전체목록</button></a>	
 	</td>	
 </tr>
 </table>
