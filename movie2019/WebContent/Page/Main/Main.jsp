@@ -68,6 +68,7 @@ function enterkey() {
                드롭다운 메뉴homeSubmenu 에서도 collapse class가 적용되어있어야함 -->
 			<li><a href="#" onclick="load(-1);">영화</a></li>
 			<li><a href="#" onclick="load(1);">추천</a></li>
+			<li><a href="#" onclick="load(-3);">리뷰</a></li>
 			<li><a href="#" onclick="load(2);">게시판</a></li>
 
 			<li class="active"><a href="#pageSubmenu" data-toggle="collapse"
@@ -183,6 +184,10 @@ function enterkey() {
 				var link = '';
 			
 				 
+			      if(index == -3){
+		                $(".title").empty();
+		                  link = '/Page/Review/r_list.jsp';         
+		               }
 			      if(index == -2){
 		                $(".title").empty();
 		                  link = '/MovieDetail.ml?id=<%=option%>';         
