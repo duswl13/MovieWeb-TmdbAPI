@@ -181,57 +181,71 @@ function enterkey() {
 			function load(index){
 				
 				var link = '';
-				 $(".title").empty();
+			
 				 
-				 if(index == -2){
-						link = '/MovieDetail.ml?id=<%=option%>';
-						
-					}
-				 
-				if(index == -1){
-					link = '/MovieList.ml?option=<%=option%>';
-					
-				}if(index == 0)
-					link = '/MainPage.ml';
-				if(index == 1)
-					link = "/list.ch";
-				if(index == 2)
-					link = '/Page/Board/NewFile.html';
-	            if(index == 3){
-	                link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
-	                $('.container-fluid').html("내 정보 수정");
-	             }
-	             if(index == 4){
-	                link = '/Page/MyPage/Like/Like.jsp';
-	                $('.container-fluid').html("관심 컨텐츠");
-	             }
-	             if(index == 5){
-	                link = '/Page/MyPage/MyReview/MyReview.jsp';
-	                $('.container-fluid').html("내 리뷰 관리");
-	             }
-	             if(index == 6){
-	                link = '/Page/MyPage/Hidden/Hidden.jsp';
-	                $('.container-fluid').html("숨김 컨텐츠 관리");
-	             }
+			      if(index == -2){
+		                $(".title").empty();
+		                  link = '/MovieDetail.ml?id=<%=option%>';         
+		               }
+		             
+		            if(index == -1){
+		                $(".title").empty();
+		               link = '/MovieList.ml?option=<%=option%>';
+		               
+		            }if(index == 0){
+		                $(".title").empty();
+		                  link = '/MainPage.ml';
+		            }
+		            if(index == 1){
+		                $(".title").empty();
+		               link = "/list.ch";
+		            }
+		            if(index == 2){
+		                $(".title").empty();
+		               link = '/Page/Board/NewFile.html';
+		            }
+		               if(index == 3){
+		                $(".title").empty();
+		                   link = '/Page/MyPage/MyInfo/MyInfo.jsp';   
+		                   $('.title').html("내 정보 수정");
+		                }
+		                if(index == 4){
+		                $(".title").empty();
+		                   link = '/Page/MyPage/Like/Like.jsp';
+		                   $('.title').html("관심 컨텐츠");
+		                }
+		                if(index == 5){
+		                $(".title").empty();
+		                   link = '/Page/MyPage/MyReview/MyReview.jsp';
+		                   $('.title').html("내 리뷰 관리");
+		                }
+		                if(index == 6){
+		                $(".title").empty();
+		                   link = '/Page/MyPage/Hidden/Hidden.jsp';
+		                   $('.title').html("숨김 컨텐츠 관리");
+		                }
 		            if(index == 7){
+		            	link = "/list.gong";
+		                $(".title").empty();
 		            }
 		            if(index == 8){
-		                link = '/Page/AdminPage/FAQ/FAQList.jsp';
-		                $('.title').html("공지사항 관리");
-		             }
-		            if(index == 9){
-		          
-		                link = '/Page/AdminPage/Notice/NoticeList.jsp';
-		                $('.title').html("FAQ 관리");
-		             }
-		            if(index == 10){
-		        
-		                link = '/Page/AdminPage/UserList/UserList.jsp';
-		                $('.title').html("회원 관리");
-		             }
-				
-		
-			$('#field').load("<%=request.getContextPath()%>" + link);
+		                   $(".title").empty();
+		                      link = '/Page/AdminPage/FAQ/FAQList.jsp';
+		                      $('.title').html("공지사항 관리");
+		                   }
+		                  if(index == 9){
+		                   $(".title").empty();
+		                      link = '/Page/AdminPage/Notice/NoticeList.jsp';
+		                      $('.title').html("FAQ 관리");
+		                   }
+		                  if(index == 10){
+		                   $(".title").empty();
+		                      link = '/Page/AdminPage/UserList/UserList.jsp';
+		                      $('.title').html("회원 관리");
+		                   }
+		            
+		      
+		         $('#field').load("<%=request.getContextPath()%>" + link);
 
 	}
 </script>
