@@ -190,7 +190,7 @@ function enterkey() {
 		               }
 			      if(index == -2){
 		                $(".title").empty();
-		                  link = '/MovieDetail.ml?id=<%=option%>';         
+		                  link = '/MovieDetail.ml?id=<%=id%>';         
 		               }
 		             
 		            if(index == -1){
