@@ -7,6 +7,8 @@
 
 <style>
 .all {
+
+margin-top:22vh;
 	padding-left: 5em;
 	padding-right: 5em;
 	color: white;
@@ -28,7 +30,7 @@
 }
 
 .movie_info {
-	background: #141414;
+	background: #000;
 }
 
 .pickgradient {
@@ -78,21 +80,80 @@ img {
 .review_Star {
 	float: right;
 }
+
+
+
+/*유투브 백그라운드*/
+.video-foreground, .video-background iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 80%;
+	pointer-events: none;
+}
+
+/*유투브 백그라운드*/
+@media ( min-aspect-ratio : 16/9) {
+	.video-foreground {
+		height: 80vh;
+		
+		/*height: 300%;
+		top: -100%; /*상단 유투브 제목 안보이게하려고*/
+	}
+}
+
+@media ( max-aspect-ratio : 16/9) {
+	.video-foreground {
+		width: 100vh;
+		left: -10vh;
+	}
+}
+
+/*유투브 백그라운드*/
+@media ( min-aspect-ratio : 1/1) {
+	.video-foreground {
+		height: 80vh;
+		
+		/*height: 300%;
+		top: -100%; /*상단 유투브 제목 안보이게하려고*/
+	}
+}
+
+@media ( max-aspect-ratio : 1/1) {
+	.video-foreground {
+		width: 100vh;
+		left: -10vh;
+	}
+}
+
+/*유투브 백그라운드 불투명도*/
+iframe {
+	opacity: 0.45;
+}
+
+
 </style>
 </head>
 <body>
+
+<div class="video-background">
+		<div class="video-foreground">
+
+			<iframe
+				src="https://www.youtube.com/embed/isOGD_7hNIY?version=3&mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0&playlist=Zi4LMpSDccc"
+				frameborder="0"
+				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen> </iframe>
+		</div>
+
+
+	</div>
+
+
 	<div class="all">
 		<div class="row">
-			<div class="col-xs-12">
-
-				<div class="text-center pickgradient">
-					<img
-						src="https://image.tmdb.org/t/p/w500/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg"
-						class="rounded">
-				</div>
-
-
-			</div>
+			
 		</div>
 
 		<div class="row movie_info">
