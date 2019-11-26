@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import movie2019.chu.command.BCommand;
+import movie2019.gong.command.GCommand;
+import movie2019.gong.command.GListCommand;
 
 @WebServlet("*.gong")
 public class GongController extends HttpServlet {
@@ -32,18 +34,19 @@ public class GongController extends HttpServlet {
 
 	private void actionDo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("actionDo");
-		request.setCharacterEncoding("UTF-8");
 		String page = null;
-		BCommand command = null;
+		GCommand command = null;
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
 
 		if (com.equals("/list.gong")) {
-			page = "Page/gong/list.jsp";
+			page = "Page/gong/list2.jsp";
+		}else if(com.equals("/gonglist.gong")) {			
+			command = new GListCommand();
+			command.execute(request, response);
+			page="Page/gong/gonglist.jsp";
 		}
-
 		request.getRequestDispatcher(page).forward(request, response);
 
 	}
