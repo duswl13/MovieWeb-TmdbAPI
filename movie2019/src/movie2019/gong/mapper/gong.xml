@@ -15,4 +15,20 @@ select count(*) from notice_tbl
 
 </select>
 
+<select id="faqList" resultType="f">
+select FAQ_SUBJECT, FAQ_CONTENT,TO_CHAR(FAQ_DATE, 'YYYY-MM-DD') 
+as FAQ_DATE
+ from(select A.*,rownum as rn from
+ (select FAQ_SUBJECT,FAQ_CONTENT, FAQ_DATE from
+ faq_tbl order by FAQ_DATE desc) A) 
+where rn between #{start} and #{end}
+</select>
+
+<select id="faqCount" resultType="int">
+select count(*) from FAQ
+
+</select>
+
+
+
 </mapper> 
