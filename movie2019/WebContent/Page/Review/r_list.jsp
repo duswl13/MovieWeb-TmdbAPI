@@ -11,7 +11,7 @@ h1 {color:white}
 button {
 	width: 200px;
 	height: 50px;
-	background: CadetBlue;
+	background: SteelBlue;
 	border: 0px;
 	border-radius: 10px;
 	font-size: 10pt;
@@ -139,7 +139,7 @@ $(function() {
 		<font size=5>등록된 글이 없다...</font>
 </c:if><br>
 
-<a href=review_write.jsp><button type=button>리뷰쓰기</button></a>
+<a href=Page/Review/review_write.jsp><button type=button>리뷰쓰기</button></a>
 
 </div>
 </body>
