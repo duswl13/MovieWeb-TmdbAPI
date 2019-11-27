@@ -7,6 +7,16 @@
 <style>
 * {margin:0 auto;}
 .center-block { display:flex; justify-content:center; /*가운데정렬*/ }
+h1 {color:white}
+button {
+	width: 200px;
+	height: 50px;
+	background: CadetBlue;
+	border: 0px;
+	border-radius: 10px;
+	font-size: 10pt;
+	color: white;
+}
 </style>
 <script>
 $(function() {
@@ -17,7 +27,7 @@ $(function() {
 </script>
 </head>
 <body>
-<h1>실시간 리뷰 같은 거</h1>
+<h1>실시간 리뷰 보기 게시판</h1>
 <div class=container>
 
 <%--게시글이 있는 경우 --%>
@@ -129,7 +139,7 @@ $(function() {
 		<font size=5>등록된 글이 없다...</font>
 </c:if><br>
 
-<button type=button class="btn btn-info float-right">글쓰기</button>
+<a href=review_write.jsp><button type=button>리뷰쓰기</button></a>
 
 </div>
 </body>
