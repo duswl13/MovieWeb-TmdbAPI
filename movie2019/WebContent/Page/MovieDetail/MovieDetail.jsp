@@ -60,7 +60,7 @@ margin-top:22vh;
 .movie_info {
 padding-left: 5em;
 	padding-right: 5em;
- background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1));
+ background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1));
 }
 
 .pickgradient {
@@ -217,7 +217,7 @@ color:white;
 
 /*유투브 백그라운드 불투명도*/
 iframe {
-	opacity: 0.45;
+	opacity: 0.6;
 }
 
 
@@ -239,7 +239,7 @@ iframe {
 <div class="video-background">
 		<div class="video-foreground">
 				<iframe id="detailVideo"
-				src="video/cam.mp4"
+				src="video/aurora.mp4"
 				frameborder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 				allowfullscreen> </iframe>

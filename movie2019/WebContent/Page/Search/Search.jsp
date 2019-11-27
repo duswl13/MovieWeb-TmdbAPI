@@ -9,8 +9,7 @@
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Our Custom CSS -->
-<link rel="stylesheet" href="css/MainPagestyle.css">
+
 
 <!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
