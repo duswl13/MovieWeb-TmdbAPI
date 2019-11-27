@@ -207,7 +207,7 @@ function enterkey() {
 		            }
 		            if(index == 2){
 		                $(".title").empty();
-		               link = '/Page/Board/NewFile.html';
+		               link = '/Page/Board/board/board_list.jsp';
 		            }
 		               if(index == 3){
 		                $(".title").empty();

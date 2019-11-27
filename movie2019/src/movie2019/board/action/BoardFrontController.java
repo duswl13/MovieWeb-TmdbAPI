@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-@WebServlet("*.bo")
+@WebServlet("*.bd")
 public class BoardFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, 

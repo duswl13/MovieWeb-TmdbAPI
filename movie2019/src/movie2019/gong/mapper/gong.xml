@@ -3,10 +3,15 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- <mapper namespace="chat">
-<select id="listAll"  resultType="chat.dto.ChatDTO">
-select idx,writer,memo, to_char(post_date,'mm-dd-HH24:MI:SS') post_date 
-from memo order by idx desc
+ <mapper namespace="gong"><!-- 10개출력 -->
+<select id="gongList"  resultType="g"> 
+select title,content,TO_CHAR(gong_date, 'YYYY-MM-DD') as gong_date
+ from(select A.*,rownum as rn from(select title,content,gong_date from gong order by gong_date desc) A) 
+where rn between #{start} and #{end}
+</select>
+<select id="gongCount" resultType="int"><!-- 카운트 페이징처리 -->
+select count(*) from gong
+
 </select>
 
-</mapper> -->
+</mapper> 
