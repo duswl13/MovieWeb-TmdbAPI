@@ -30,6 +30,5 @@ public class ActionForward {
 		path = string;
 	}
 
-	//이동에 필요한 정보를 받는 클래스
     
 }

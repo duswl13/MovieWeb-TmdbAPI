@@ -52,6 +52,20 @@ public class BoardFrontController extends HttpServlet {
 	         forward = new ActionForward();
 	         forward.setRedirect(false); //포워딩 방식으로 주소가 바뀌지 않는다
 	         forward.setPath("Page/Board/board/board_write.jsp");
+	    }else if(command.equals("/BoardAddAction.bo")) { 
+	    	action=new BoardAddAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }else if(command.equals("/BoardDetailAction.bo")) { 
+	    	action=new BoardDetailAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
 	    }  
 	    
 	    //여기는 건들면 안돼~

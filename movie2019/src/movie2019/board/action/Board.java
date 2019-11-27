@@ -1,7 +1,7 @@
 package movie2019.board.action;
 
 import java.sql.Date;
-
+//º¸µå..
 public class Board {
     private int    BOARD_NUM;
     private String BOARD_NAME;
