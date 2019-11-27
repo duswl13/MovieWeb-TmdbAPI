@@ -150,6 +150,8 @@ function enterkey() {
 </head>
 <body>
 
+
+
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
@@ -166,26 +168,26 @@ function enterkey() {
 
 			<ul>
 				<li>
-					<h2>영화</h2>
+					<h2><a href='MovieList.ml?option=0'>영화</a></h2>
 
 				</li>
 				<li>
-					<h2>추천</h2>
+					<h2><a href="list.ch">추천</a></h2>
 				</li>
 				<li>
-					<h2>리뷰</h2>
+					<h2><a href='Page/Review/r_list.jsp'>리뷰</a></h2>
 				</li>
 				<li>
-					<h2>게시판</h2>
+					<h2><a href="Page/Board/board/board_list.jsp">게시판</a></h2>
 				</li>
 
 				<li>
 					<h2>마이페이지</h2>
 					<ul>
-						<li><a href="#">내 정보 수정</a></li>
-						<li><a href="#">관심 콘텐츠</a></li>
-						<li><a href="#">내 리뷰 관리</a></li>
-						<li><a href="#">숨긴 콘텐츠 관리</a></li>
+						<li><a href="Page/MyPage/MyInfo/MyInfo.jsp">내 정보 수정</a></li>
+						<li><a href="Page/MyPage/Like/Like.jsp">관심 콘텐츠</a></li>
+						<li><a href="Page/MyPage/MyReview/MyReview.jsp">내 리뷰 관리</a></li>
+						<li><a href="Page/MyPage/Hidden/Hidden.jsp">숨긴 콘텐츠 관리</a></li>
 					</ul>
 				</li>
 				<li>
@@ -194,9 +196,9 @@ function enterkey() {
 				<li>
 					<h2>관리자 페이지</h2>
 					<ul>
-						<li><a href="#">공지사항 관리</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">회원 관리</a></li>
+						<li><a href="NoticeList.bo">공지사항 관리</a></li>
+						<li><a href="Page/AdminPage/FAQ/FAQList.jsp">FAQ 관리</a></li>
+						<li><a href="Page/AdminPage/UserList/UserList.jsp">회원 관리</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -207,7 +209,6 @@ function enterkey() {
 			
 		</div>
 	</div>
-
 
 	<script>
 	
