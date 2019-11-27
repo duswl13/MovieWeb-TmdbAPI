@@ -7,6 +7,7 @@
 <style>
 * {margin:0 auto;}
 .center-block { display:flex; justify-content:center; /*가운데정렬*/ }
+h1 {color:white}
 button {
 	width: 200px;
 	height: 50px;
@@ -26,7 +27,7 @@ $(function() {
 </script>
 </head>
 <body>
-<h1>실시간 리뷰 같은 거</h1>
+<h1>실시간 리뷰 보기 게시판</h1>
 <div class=container>
 
 <%--게시글이 있는 경우 --%>
