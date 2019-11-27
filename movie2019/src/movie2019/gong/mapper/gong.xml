@@ -25,7 +25,7 @@ where rn between #{start} and #{end}
 </select>
 
 <select id="faqCount" resultType="int">
-select count(*) from FAQ
+select count(*) from faq_tbl
 
 </select>
 

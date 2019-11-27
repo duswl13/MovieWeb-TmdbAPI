@@ -24,6 +24,7 @@ public class FAQDAO {
 	public int FAQCount() {
 		SqlSession session = MybatisManager.getInstance().openSession();
 		int count = session.selectOne("gong.faqCount");
+		
 		session.close();
 		return count;
 	}

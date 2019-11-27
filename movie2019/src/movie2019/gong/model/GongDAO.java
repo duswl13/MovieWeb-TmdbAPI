@@ -25,6 +25,7 @@ public class GongDAO {
 		SqlSession session = MybatisManager.getInstance().openSession();
 		//�Ǽ��� selectone�̶� List�� �ް���������
 		int count = session.selectOne("gong.gongCount");
+	
 		session.close();
 		return count;
 		
