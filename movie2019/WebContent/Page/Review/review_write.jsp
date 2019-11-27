@@ -1,3 +1,4 @@
+
 <%--https://cloudstudying.kr/lectures/236 별점참고 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -23,13 +24,13 @@ tr.center-block {
 }
 
 h2 {
-	color: white;
+	color: SteelBlue;
 }
 
 .container {
 	background:#3b3b3b;
-	width: 450px;
-	padding: 50px;
+	width: 500px;
+	padding: 70px;
 }
 
 label {
@@ -86,6 +87,7 @@ textarea {
 <br><br>
 	<div class=container>
 		<form action="" method=post name=review_write_form>
+
 			<h2>내가 본 영화 리뷰 쓰기</h2>
 			<br>
 
@@ -97,7 +99,7 @@ textarea {
 
 			<div class=form-group>
 				<input name=BOARD_PASS id=board_pass value="" type=password size=20
-					maxlength=10 class=form-control placeholder="비밀번호">
+					maxlength=10 class=form-control placeholder="비밀번호 입력">
 			</div>
 
 			<div class=form-group>
@@ -107,7 +109,7 @@ textarea {
 			
 			<div class=form-group>
 				<input name=BOARD_SUBJECT id=board_subject value="" type=text
-					size=35 maxlength=50 class=form-control placeholder="제목">
+					size=35 maxlength=50 class=form-control placeholder="제목 입력">
 			</div>
 			
 			<br> <span>신호등 별점 신호등 별점 신호등 별점 신호등 별점 신호등 별점 신호등 별점 </span> <br>
