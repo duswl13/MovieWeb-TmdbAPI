@@ -21,6 +21,7 @@
 
 
 
+
 <%
 boolean open = Boolean.parseBoolean(request.getParameter("open"));
 	String apikey = application.getInitParameter("APIKEY");
@@ -45,11 +46,15 @@ boolean open = Boolean.parseBoolean(request.getParameter("open"));
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 			
-<div class="all">
-
+		<div class="container all">
+	
 		<div class="movieList"></div>
 
-
+		<div class="row">
+		<div class="col-xs-6 col-centered text-center">
+			<button class="more">더보기</button>
+		</div>
+		</div>
 		
 	</div>
 	</div>
@@ -62,14 +67,14 @@ if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 		
 
-	var allpages = 0;
-	var page = 1;
+	var page = 0;
 	
 	
-	searchList(page);
+	searchList();
 	
 	
-	function searchList(page){
+	function searchList(){
+		page++;
 	var link = 'https://api.themoviedb.org/3/search/movie?api_key=<%=apikey%>&language=ko-KO&query=<%=request.getParameter("key")%>&page='+page+'&include_adult=false&region=KR';
 
 	
@@ -102,50 +107,7 @@ if(<%=open%>)
 	
 	}
 	
-	$('.pagination > li').click(function(){
-		
-		var page1 = $(this).text();
-		var select1 = $('#sel1').val();
-		var select2 = $('#sel2').val();
-		var select3 = $('#sel3').val();
-		
-		if(page1 != '다음' && page1 != '이전'){
-			searchList(page1);
-		}else{
-			
-			var start = $('.page-link:eq(1)').text();
-			var end = $('.page-link:eq(3)').text();
-			
-			if(page1 == '다음'){
-				end++;
-				if(end < allpages){
-					searchList(end);
-				$('.page-link:eq(1)').text(end++);
-				}
-				if(end < allpages)
-				$('.page-link:eq(2)').text(end++);
-				if(end < allpages)
-				$('.page-link:eq(3)').text(end);
-				
-				
-				
-			}else{
-				start--;
-				
-				if(start > 0)
-				$('.page-link:eq(3)').text(start--);
-				if(start > 0)
-				$('.page-link:eq(2)').text(start--);
-				if(start > 0)
-				$('.page-link:eq(1)').text(start);
-				searchList(start);
-				
-			}
-			
-			
-		}
-
-	});
+	
 	
 	
 	
@@ -154,7 +116,7 @@ if(<%=open%>)
 		var text = '';
 		var check = 0;
 		
-		
+	
 		
 		
 		for (var i = 0; i < 5; i++) {
@@ -197,9 +159,24 @@ if(<%=open%>)
 		}
 
 		console.log('check : '+ check);
+		
+		if(page == 1)
 		$('.movieList').html(text);
+		else
+		$('.movieList').html($('.movieList').html()+text);	
+		
+	
+		if(list.length != 20)
+			$('.more').css('visibility','hidden');
+		else
+			$('.more').css('visibility','visible');
 		
 	}
+	
+	
+	$('.more').click(function(){
+		searchList();
+	});
 	
 	
 </script>

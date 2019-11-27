@@ -1,13 +1,26 @@
 .all {
-	padding-left: 5em;
-	padding-right: 5em;
 	color:white;
-	
+	margin-bottom: 3em;
 }
 body{
 	background:#000;
 }
 
+
+.more{
+background:#000;
+border: 1px solid white;
+width:100%;
+margin: 0 auto;
+padding:8px;
+color:WHITE;
+visibility: hidden;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
 
 .form-group {
 	padding:8px;

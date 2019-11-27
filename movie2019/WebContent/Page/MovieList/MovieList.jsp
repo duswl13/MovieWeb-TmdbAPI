@@ -30,74 +30,73 @@
 <body>
 
 
-<% if(!open) {%>
-<jsp:include page="/Page/Navi/Navi.jsp" />
-<%} else{ %>
-<jsp:include page="/Page/Navi/Navi3.jsp" />
-<%} %>
+	<%
+		if (!open) {
+	%>
+	<jsp:include page="/Page/Navi/Navi.jsp" />
+	<%
+		} else {
+	%>
+	<jsp:include page="/Page/Navi/Navi3.jsp" />
+	<%
+		}
+	%>
 
 
-<div id="main">
+	<div id="main">
 
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
-			
-	<div class="all">
 
-		<div class="row">
-			<div class="form-group col-xs-2">
-				<select class="form-control" id="sel1">
-					<option selected value=1>인기순</option>
-					<option value=2>최신순</option>
-					<option value=3>개봉예정순</option>
-				</select>
+		<div class="all container">
+
+			<div class="row">
+				<div class="form-group col-xs-2">
+					<select class="form-control" id="sel1">
+						<option selected value=1>인기순</option>
+						<option value=2>최신순</option>
+						<option value=3>개봉예정순</option>
+					</select>
+				</div>
+
+				<div class="form-group col-xs-2">
+					<select class="form-control" id="sel2">
+						<option selected value="0">모든 장르</option>
+						<option value="28">액션</option>
+						<option value="12">모험</option>
+						<option value="16">애니메이션</option>
+						<option value="35">코미디</option>
+						<option value="80">범죄</option>
+						<option value="99">다큐멘터리</option>
+						<option value="18">드라마</option>
+						<option value="10751">가족</option>
+						<option value="14">판타지</option>
+						<option value="36">역사</option>
+						<option value="27">공포</option>
+						<option value="10402">음악</option>
+						<option value="9648">미스터리</option>
+						<option value="10749">로맨스</option>
+						<option value="878">SF</option>
+						<option value="10770">TV 영화</option>
+						<option value="53">스릴러</option>
+						<option value="10752">전쟁</option>
+						<option value="37">서부</option>
+					</select>
+				</div>
+
+
+
 			</div>
 
-			<div class="form-group col-xs-2">
-				<select class="form-control" id="sel2">
-					<option selected value="0">모든 장르</option>
-					<option value="28">액션</option>
-					<option value="12">모험</option>
-					<option value="16">애니메이션</option>
-					<option value="35">코미디</option>
-					<option value="80">범죄</option>
-					<option value="99">다큐멘터리</option>
-					<option value="18">드라마</option>
-					<option value="10751">가족</option>
-					<option value="14">판타지</option>
-					<option value="36">역사</option>
-					<option value="27">공포</option>
-					<option value="10402">음악</option>
-					<option value="9648">미스터리</option>
-					<option value="10749">로맨스</option>
-					<option value="878">SF</option>
-					<option value="10770">TV 영화</option>
-					<option value="53">스릴러</option>
-					<option value="10752">전쟁</option>
-					<option value="37">서부</option>
-				</select>
-			</div>
 
+			<div class="movieList"></div>
 
-
-		</div>
-
-
-		<div class="movieList"></div>
-
-
-		<div class="row">
-			<div class="text-center">
-				<ul class="pagination">
-					<li class="page-item"><a class="page-link" href="#">이전</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">다음</a></li>
-				</ul>
+			<div class="row">
+				<div class="col-xs-6 col-centered text-center">
+					<button class="more">더보기</button>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 
@@ -111,9 +110,9 @@ if(<%=open%>)
 	var sort1 = 1;
 	var sort2 = 0;
 	
-	var allpages = 0;
+	var page = 0;
 	
-	readyList(1);
+	readyList();
 	
 	
 	
@@ -137,11 +136,11 @@ if(<%=open%>)
 		return year+"-"+mon+"-"+day;		
 		}
 	
-	function readyList(page){
+	
+	function readyList(){
 	//api 접근해서 목록 만들기
 	
-	
-	
+	page ++;
 	var link ='';
 	//인기, 최신, 개봉예정 필터
 	//alert('sort1 :' + sort1);
@@ -155,9 +154,9 @@ if(<%=open%>)
 		break;
 	case 3:
 		link = 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&page='
-					+ page
-					+ '&region=KR&sort_by=release_date.asc&include_adult=false&release_date.gte='
-					+ getDt3(0) + '&release_date.lte=' + getDt3(5);
+				+ page
+				+ '&region=KR&sort_by=release_date.asc&include_adult=false&release_date.gte='
+				+ getDt3(0) + '&release_date.lte=' + getDt3(5);
 			break;
 		}
 
@@ -196,7 +195,8 @@ if(<%=open%>)
 		var value = $(this).val();
 		sort1 = value;
 		//alert('바뀜'+sort1);
-		readyList(1);
+		page = 0;
+		readyList();
 		$('.page-link:eq(1)').text(1);
 		$('.page-link:eq(2)').text(2);
 		$('.page-link:eq(3)').text(3);
@@ -205,51 +205,16 @@ if(<%=open%>)
 	$('#sel2').change(function() {
 		var value = $(this).val();
 		sort2 = value;
-		//alert('바뀜'+sort2);
-		readyList(1);
+		page = 0;
+		readyList();
 	});
-
-	$('.pagination > li').click(function() {
-
-		var page1 = $(this).text();
-		var select1 = $('#sel1').val();
-		var select2 = $('#sel2').val();
-		var select3 = $('#sel3').val();
-
-		if (page1 != '다음' && page1 != '이전') {
-			readyList(page1);
-		} else {
-
-			var start = $('.page-link:eq(1)').text();
-			var end = $('.page-link:eq(3)').text();
-
-			if (page1 == '다음') {
-				end++;
-				if (end < allpages) {
-					readyList(end);
-					$('.page-link:eq(1)').text(end++);
-				}
-				if (end < allpages)
-					$('.page-link:eq(2)').text(end++);
-				if (end < allpages)
-					$('.page-link:eq(3)').text(end);
-
-			} else {
-				start--;
-
-				if (start > 0)
-					$('.page-link:eq(3)').text(start--);
-				if (start > 0)
-					$('.page-link:eq(2)').text(start--);
-				if (start > 0)
-					$('.page-link:eq(1)').text(start);
-				readyList(start);
-
-			}
-
-		}
-
+	
+	
+	$('.more').click(function(){
+		readyList();
 	});
+	
+
 
 	function printMovie(list) {
 
@@ -280,8 +245,8 @@ if(<%=open%>)
 							100)
 							+ '...';
 					text += '<div class="col-xs-3">';
-					text += '<a href="moviedetail.ml?open=false&id=' + list[check].id
-							+ '">\n';
+					text += '<a href="moviedetail.ml?open=false&id='
+							+ list[check].id + '">\n';
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 					text += '</a>';
 					text += '<div class="centered">\n';
@@ -298,8 +263,18 @@ if(<%=open%>)
 
 		}
 
-		console.log('check : ' + check);
-		$('.movieList').html(text);
+	
+		
+		if(page == 1)
+			$('.movieList').html(text);
+			else
+			$('.movieList').html($('.movieList').html()+text);	
+			
+	
+			if(list.length != 20)
+				$('.more').css('visibility','hidden');
+			else
+				$('.more').css('visibility','visible');
 
 	}
 </script>

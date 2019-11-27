@@ -58,8 +58,7 @@ margin-top:22vh;
 }
 
 .movie_info {
-padding-left: 5em;
-	padding-right: 5em;
+
  background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1));
 }
 
@@ -86,7 +85,7 @@ img {
 }
 
 .user_mv {
-	padding: 16px;
+	
 	background: #333;
 }
 
@@ -219,8 +218,9 @@ color:white;
 iframe {
 	opacity: 0.6;
 }
-
-
+.detail_similar{
+padding-bottom: 3em;
+}
 </style>
 </head>
 <body>
@@ -250,11 +250,13 @@ iframe {
 
 
 	<div class="all">
+	
 		<div class="row">
 			
 		</div>
 
 		<div class="row movie_info">
+		<div class="container">
 			<div class="col-xs-2">
 				<img class="img-responsive" id="detail_poster"
 					src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
@@ -364,7 +366,7 @@ iframe {
 			</div>
 		</div>
 
-
+</div>
 
 </div>
 	</div>

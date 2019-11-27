@@ -37,7 +37,6 @@
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-
 	<div class="video-background">
 		<div class="video-foreground">
 
@@ -50,7 +49,6 @@
 
 
 	</div>
-
 
 
 	<div class="main_box">
@@ -68,7 +66,6 @@
 
 		</div>
 	</div>
-
 
 
 

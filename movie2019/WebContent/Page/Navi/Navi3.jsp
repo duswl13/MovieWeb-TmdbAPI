@@ -42,7 +42,9 @@
 
 #main {
 	transition: margin-left .5s;
-	padding: 16px;
+		padding-top: 16px;
+	padding-left: 16px;
+	padding-right: 16px;
 }
 
 @media screen and (max-height: 450px) {
@@ -154,7 +156,7 @@ ul {
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 		<a href="main.ml"><img
-			src="<%=request.getContextPath()%>/Page/Main/logo2.gif"
+			src="<%=request.getContextPath()%>/Page/MainPage/logo2.gif"
 			style="width: 100px; height: auto; margin: 16px;"></a>
 
 		<div id="accordian">
