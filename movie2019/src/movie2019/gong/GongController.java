@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import movie2019.chu.command.BCommand;
+import movie2019.gong.command.FListCommand;
 import movie2019.gong.command.GCommand;
 import movie2019.gong.command.GListCommand;
 
@@ -42,10 +43,16 @@ public class GongController extends HttpServlet {
 
 		if (com.equals("/list.gong")) {
 			page = "Page/gong/list2.jsp";
-		}else if(com.equals("/gonglist.gong")) {			
+		}else if(com.equals("/gonglist.gong")) {
 			command = new GListCommand();
 			command.execute(request, response);
+			
 			page="Page/gong/gonglist.jsp";
+		}else if(com.equals("/faq.gong")) {
+			command = new FListCommand();
+			command.execute(request, response);
+			
+			page="Page/gong/faqlist.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);
 

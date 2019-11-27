@@ -10,7 +10,7 @@ public class BoardAddAction implements Action {
 		HttpServletResponse response) throws Exception {
 
 		ActionForward forward = new ActionForward();
-		forward.setPath("BoardList.bo");
+		forward.setPath("BoardList.bd");
 		return forward;
 	}
 

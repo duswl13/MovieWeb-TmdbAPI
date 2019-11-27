@@ -36,7 +36,7 @@ $(document).ready(function(){
 <body>
 <div class="container">
 <!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
- <form action="BoardDetailAction.bo" method="post"
+ <form action="BoardDetailAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
  <table>
  <tr>
@@ -74,25 +74,25 @@ $(document).ready(function(){
      </td>
      <td>
        <img src="image/jisung.jpg" alt="지성">
-    <a href="BoardFileDown.bo?filename=${boarddata.BOARD_FILE }">
+    <a href="BoardFileDown.bd?filename=${boarddata.BOARD_FILE }">
         ${boarddata.BOARD_FILE}</a></td> 
  </tr>
  </c:if>
  <tr> 
   <td colspan="2" class="center">
-   <a href="BoardReplyView.bo?num=${boarddata.BOARD_NUM }">
+   <a href="BoardReplyView.bd?num=${boarddata.BOARD_NUM }">
    <button type="button" class="btn btn-primary">답변</button>
    </a>
    <c:if test="${boarddata.BOARD_NAME == id || id == 'admin' }">
-    <a href="BoardModifyView.bo?num=${boarddata.BOARD_NUM}">
+    <a href="BoardModifyView.bd?num=${boarddata.BOARD_NUM}">
     <button type="button" class="btn btn-info">수정</button>
     </a>
     
-    <a href="BoardDelete.bo?num=${boarddata.BOARD_NUM}">
+    <a href="BoardDelete.bd?num=${boarddata.BOARD_NUM}">
     <button type="button" class="btn btn-danger">삭제</button>
     </a>
    </c:if>
-   <a href="BoardList.bo">
+   <a href="BoardList.bd">
     <button type="reset" class="btn btn-primary">취소</button>
    </a>
    </td>

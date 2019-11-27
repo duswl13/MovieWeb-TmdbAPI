@@ -34,7 +34,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="container">
- <form action="BoardAddAction.bo" method="post"
+ <form action="BoardAddAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
   <h1>글 쓰기</h1>
   <div class="form-group">

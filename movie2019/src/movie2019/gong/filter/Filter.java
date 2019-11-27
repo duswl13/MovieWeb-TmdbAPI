@@ -18,7 +18,7 @@ public class Filter implements javax.servlet.Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
-		//System.out.println("필터실행");
+		
 		chain.doFilter(request, response);
 	}
 

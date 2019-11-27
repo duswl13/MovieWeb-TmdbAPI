@@ -9,9 +9,21 @@
 <%@include file="header.jsp" %>
 <script type="text/javascript">
 $(function() {
-	list("1"); //페이지로딩되고 1페이지부터시작임
+	$("#gong").click(function() {
+		$("#result").html("");
+		list("1");
+	})
+	$("#faq").click(function() {
+		$("#result").html("");
+		flist("1");
+	})
 	
-})
+	
+	
+	
+	
+});
+//list("1"); //페이지로딩되고 1페이지부터시작임
 function list(curPage) {
 	$.ajax({
 		type:"post",
@@ -28,15 +40,31 @@ function list(curPage) {
 	
 }
 
+function flist(curPage) {
+	$.ajax({
+		type:"post",
+		url:"faq.gong",
+		data:{"curPage":curPage},
+		success:function(result){
+			$("#result").html(result);
+			
+		},error:function(err){
+			alert("통신X");
+		}
+		
+	});
+	
+}
+
+
+
 </script>
 <title>Insert title here</title>
 </head>
 <body>
-<div><h3 style="color: blue;">되나</h3></div>
+<div onclick="gong" id="gong"><h3 style="color: blue;">공지</h3></div>
+<div onclick="faq" id ="faq"><h3 style="color: red;">FAQ</h3></div>
 
-<h3>되나</h3>
-<h3>되나</h3>
-<h3>되나</h3>
 <div id="result"></div>
 
 </body>

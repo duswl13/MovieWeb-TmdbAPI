@@ -10,21 +10,22 @@ import org.apache.ibatis.session.SqlSession;
 import movie2019.chu.mybatis.MybatisManager;
 
 public class GongDAO {
-	public List<GongVO> GongList(int start, int end){//°øÁö»çÇ× ¸®½ºÆ®
+	public List<GongVO> GongList(int start, int end){//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 		SqlSession session = MybatisManager.getInstance().openSession();		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		List<GongVO> items =session.selectList("gong.gongList",map);
-		session.close();			
+		session.close();	
 		return items;
 		
 	}
 	
-	public int GongCount() {//Ä«¿îÆ® ÆäÀÌÂ¡Ã³¸®
+	public int GongCount() {//Ä«ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Â¡Ã³ï¿½ï¿½
 		SqlSession session = MybatisManager.getInstance().openSession();
-		//°Ç¼ö¾ß selectoneÀÌ¶û List¶û ÇÞ°¥¸®Áö¸¶¶ó
+		//ï¿½Ç¼ï¿½ï¿½ï¿½ selectoneï¿½Ì¶ï¿½ Listï¿½ï¿½ ï¿½Þ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int count = session.selectOne("gong.gongCount");
+	
 		session.close();
 		return count;
 		

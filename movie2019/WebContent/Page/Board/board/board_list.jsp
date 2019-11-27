@@ -16,7 +16,7 @@
 <script>
  $(function(){
 	 $("button").click(function(){
-		 location.href="BoardWrite.bo";
+		 location.href="BoardWrite.bd";
 	 })
  })
 </script>
@@ -76,7 +76,7 @@
               &nbsp;
              </c:if>
              
-             <a href="BoardDetailAction.bo?num=${b.BOARD_NUM }">
+             <a href="BoardDetailAction.bd?num=${b.BOARD_NUM }">
                 ${b.BOARD_SUBJECT}
              </a>
            </div>
@@ -105,7 +105,7 @@
           </c:if>
           <c:if test="${page > 1 }">
             <li class="page-item">
-            <a href="BoardList.bo?page=${page-1 }"
+            <a href="BoardList.bd?page=${page-1 }"
                 class="page-link">이전</a>&nbsp;
             </li>
           </c:if>
@@ -117,7 +117,7 @@
             </c:if>
             <c:if test="${a != page }">
               <li class="page-item">
-              <a href="BoardList.bo?page=${a }"
+              <a href="BoardList.bd?page=${a }"
                  class="page-link">${a }</a>
               </li>
             </c:if>
@@ -129,7 +129,7 @@
           </c:if>
           <c:if test="${page < maxpage }">
             <li class="page-item">
-            <a href="BoardList.bo?page=${page+1 }"
+            <a href="BoardList.bd?page=${page+1 }"
                 class="page-link">&nbsp;다음</a>
             </li>
           </c:if>
@@ -152,7 +152,7 @@
           </c:if>
           <c:if test="${page > 1 }">
             <li class="page-item">
-            <a href="BoardList.bo?page=${page-1 }"
+            <a href="BoardList.bd?page=${page-1 }"
                 class="page-link">이전</a>&nbsp;
             </li>
           </c:if>
@@ -164,7 +164,7 @@
             </c:if>
             <c:if test="${a != page }">
               <li class="page-item">
-              <a href="BoardList.bo?page=${a }"
+              <a href="BoardList.bd?page=${a }"
                  class="page-link">${a }</a>
               </li>
             </c:if>
@@ -176,7 +176,7 @@
           </c:if>
           <c:if test="${page < maxpage }">
             <li class="page-item">
-            <a href="BoardList.bo?page=${page+1 }"
+            <a href="BoardList.bd?page=${page+1 }"
                 class="page-link">&nbsp;다음</a>
             </li>
           </c:if>

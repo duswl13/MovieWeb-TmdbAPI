@@ -40,7 +40,7 @@ public class BoardFrontController extends HttpServlet {
 	    ActionForward forward=null;
 	    Action action=null;
 	    
-	    if(command.equals("/BoardList.bo")) { 
+	    if(command.equals("/BoardList.bd")) { 
 	    	action=new BoardListAction(); //다형성에 의한 업캐스팅
 	          try {
 	        	  forward=action.execute(request, response);
@@ -48,19 +48,47 @@ public class BoardFrontController extends HttpServlet {
 	        	  e.printStackTrace();
 	          }
 	 
-	    }else if(command.equals("/BoardWrite.bo")) { 
+	    }else if(command.equals("/BoardWrite.bd")) { 
 	         forward = new ActionForward();
 	         forward.setRedirect(false); //포워딩 방식으로 주소가 바뀌지 않는다
 	         forward.setPath("Page/Board/board/board_write.jsp");
-	    }else if(command.equals("/BoardAddAction.bo")) { 
+	    }else if(command.equals("/BoardAddAction.bd")) { 
 	    	action=new BoardAddAction();
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	    }else if(command.equals("/BoardDetailAction.bo")) { 
+	    }else if(command.equals("/BoardDetailAction.bd")) { 
 	    	action=new BoardDetailAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }else if(command.equals("/BoardReplyView.bd")) { 
+	    	action=new BoardReplyView();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }else if(command.equals("/BoardReplyAction.bd")) { 
+	    	action=new BoardReplyAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }else if(command.equals("/BoardModifyView.bd")) { 
+	    	action=new BoardModifyView();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }else if(command.equals("/BoardModifyAction.bd")) { 
+	    	action=new BoardModifyAction();
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {

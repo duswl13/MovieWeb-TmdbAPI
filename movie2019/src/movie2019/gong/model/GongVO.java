@@ -1,33 +1,38 @@
 package movie2019.gong.model;
 
 public class GongVO {
+	private String NOTICE_SUBJECT;
+	private String NOTICE_CONTENT;
+	private String NOTICE_DATE;
 
-	private String title;
-	private String content;
-	private String gong_date;
-	public String getTitle() {
-		return title;
+	public String getNOTICE_SUBJECT() {
+		return NOTICE_SUBJECT;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setNOTICE_SUBJECT(String nOTICE_SUBJECT) {
+		NOTICE_SUBJECT = nOTICE_SUBJECT;
 	}
-	public String getContent() {
-		return content;
+
+	public String getNOTICE_CONTENT() {
+		return NOTICE_CONTENT;
 	}
-	public void setContent(String content) {
-		this.content = content;
+
+	public void setNOTICE_CONTENT(String nOTICE_CONTENT) {
+		NOTICE_CONTENT = nOTICE_CONTENT;
 	}
-	public String getGong_date() {
-		return gong_date;
+
+	public String getNOTICE_DATE() {
+		return NOTICE_DATE;
 	}
-	public void setGong_date(String gong_date) {
-		this.gong_date = gong_date;
+
+	public void setNOTICE_DATE(String nOTICE_DATE) {
+		NOTICE_DATE = nOTICE_DATE;
 	}
+
 	@Override
 	public String toString() {
-		return "GongVO [title=" + title + ", content=" + content + ", gong_date=" + gong_date + "]";
+		return "GongVO [NOTICE_SUBJECT=" + NOTICE_SUBJECT + ", NOTICE_CONTENT=" + NOTICE_CONTENT + ", NOTICE_DATE="
+				+ NOTICE_DATE + "]";
 	}
-	
-	
-	
+
 }
