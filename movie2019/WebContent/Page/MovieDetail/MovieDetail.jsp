@@ -115,6 +115,8 @@ color:white;}
 }
 
 
+.col-xs-2:hover > .centered{
+display:block;}
 
 .col-xs-3:hover > .centered{
 display:block;}
@@ -150,12 +152,18 @@ color:white;
 }
 
 
+.col-xs-2:hover img{
+  animation: leaves 0.5s;
+  animation-fill-mode: forwards;
+
+}
+
 
 
 /*유투브 백그라운드*/
 .video-background {
 	background: #000;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
@@ -231,7 +239,7 @@ iframe {
 <div class="video-background">
 		<div class="video-foreground">
 				<iframe id="detailVideo"
-				src="video/aurora.mp4"
+				src="video/cam.mp4"
 				frameborder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 				allowfullscreen> </iframe>
@@ -451,9 +459,9 @@ document.getElementById("main").style.marginLeft = "250px";
 		dataType : 'json',
 		cache : false,
 		success : function(data) {
-			console.log('비슷한 영화 성공');
+			
 			var list = data.results;
-
+			console.log('비슷한 영화 성공 , 갯수 :' + list.length);
 			printSimilar(list);
 			
 
@@ -525,8 +533,12 @@ document.getElementById("main").style.marginLeft = "250px";
 			console.log("이름:"+list[check].name);
 			console.log("포스터:"+list[check].profile_path);
 			tag += '<div class="col-xs-2">';
-			tag += '<img class="img-responsive"';
-			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'">';
+			tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'"><img class="img-responsive"';
+			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'"></a>';
+			
+			tag += '<div class="centered">\n';
+			tag += '<h5>' + list[check].name + '</h5></div>\n';
+			
 			tag += '<p>'+list[check].name+'</p>';
 			tag += '</div>';
 			check ++;
@@ -542,21 +554,40 @@ document.getElementById("main").style.marginLeft = "250px";
 		var tag = '';
 		
 	
-	
+		var check = 0;
+		
 		for(var i = 0; i < 4; i++){
-			if(i < list.length){
+			if(check < list.length){
+				
+				if (list[check].poster_path == null
+						|| list[check].overview == null
+						|| list[check].genre_ids == null
+						|| list[check].overview == ""
+						|| list[check].genre_ids == ""
+						|| list[check].overview.includes('섹스')){
+					
+					i--;
+					check++;
+					console.log('이상한 거니까 넘김' + check);
+
+					continue;
+					
+				}
+				
+				
 				tag+= '<div class="col-xs-3">';
-				tag += '<a href="main.ml?load=-2&id=' + list[i].id + '">\n';
+				tag += '<a href="moviedetail.ml?open=false&id=' + list[check].id + '">\n';
 				tag+= '<img class="img-responsive"';
-				tag+= '	src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'">';
+				tag+= '	src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 				tag+= '</a>';
 				
 				tag += '<div class="centered">\n';
-				tag += '<h5>' + list[i].original_title + '</h5>\n';
-				tag += '<p>' + list[i].overview.substring(0,50) + '...</p></div>\n';
-				tag+= '<p>'+list[i].original_title+'</p>';
+				tag += '<h5>' + list[check].original_title + '</h5>\n';
+				tag += '<p>' + list[check].overview.substring(0,50) + '...</p></div>\n';
+				tag+= '<p>'+list[check].original_title+'</p>';
 				
 				tag+= '</div>';
+				check++;
 			}
 		}
 	

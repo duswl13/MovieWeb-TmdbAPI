@@ -8,7 +8,7 @@
 <script>
 	function enterkey() {
 		if (window.event.keyCode == 13) {
-			location.href = 'Search.ml?open=true&key='
+			location.href = 'Search.ml?open=false&key='
 					+ $('#search-form').val().replace(/(\s*)/g, "");
 		}
 	}
@@ -153,7 +153,7 @@ ul {
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 
-	<a href="main"><img
+	<a href="main.ml"><img
 						src="<%=request.getContextPath()%>/Page/Main/logo2.gif"
 						style="width:100px; height:auto; margin:16px;"></a>
 						
