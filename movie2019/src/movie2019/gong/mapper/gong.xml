@@ -5,12 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
  <mapper namespace="gong"><!-- 10개출력 -->
 <select id="gongList"  resultType="g"> 
-select title,content,TO_CHAR(gong_date, 'YYYY-MM-DD') as gong_date
- from(select A.*,rownum as rn from(select title,content,gong_date from gong order by gong_date desc) A) 
+select NOTICE_SUBJECT, NOTICE_CONTENT,TO_CHAR(NOTICE_DATE, 'YYYY-MM-DD') as NOTICE_DATE
+ from(select A.*,rownum as rn from(select NOTICE_SUBJECT,NOTICE_CONTENT, NOTICE_DATE from notice_tbl order by NOTICE_DATE desc) A) 
 where rn between #{start} and #{end}
+
 </select>
 <select id="gongCount" resultType="int"><!-- 카운트 페이징처리 -->
-select count(*) from gong
+select count(*) from notice_tbl
 
 </select>
 
