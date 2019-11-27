@@ -18,17 +18,7 @@ button {
 	color: white;
 }
 </style>
-<script>
-if(<%=open%>)
-	document.getElementById("main").style.marginLeft = "250px";
 
-$(function() {
-
-	$("button").click(function() {
-		location.href="BoardWrite.bo";
-	})
-})
-</script>
 </head>
 <body>
 <% 
@@ -44,7 +34,17 @@ if(request.getParameter("open") != null){
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
 
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
 
+$(function() {
+
+	$("button").click(function() {
+		location.href="BoardWrite.bo";
+	})
+})
+</script>
 
 <h1>실시간 리뷰 보기 게시판</h1>
 <div class=container>
