@@ -138,7 +138,7 @@ $(function() {
 		<font size=5>등록된 글이 없다...</font>
 </c:if><br>
 
-<a href=WebContent/Page/Review/review_write.jsp><button type=button>리뷰쓰기</button></a>
+<a href=review_write.jsp><button type=button>리뷰쓰기</button></a>
 
 </div>
 </body>
