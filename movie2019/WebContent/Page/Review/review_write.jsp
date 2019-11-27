@@ -28,8 +28,8 @@ h2 {
 
 .container {
 	background:#3b3b3b;
-	width: 60%;
-	padding:30px;
+	width: 500px;
+	padding: 70px;
 }
 
 label {
@@ -83,10 +83,10 @@ textarea {
 
 </head>
 <body>
-
+<br><br>
 	<div class=container>
 		<form action="" method=post name=review_write_form>
-<br>
+
 			<h2>내가 본 영화 리뷰 쓰기</h2>
 			<br>
 
