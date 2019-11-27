@@ -23,13 +23,13 @@ tr.center-block {
 }
 
 h2 {
-	color: SteelBlue;
+	color: white;
 }
 
 .container {
 	background:#3b3b3b;
-	width: 60%;
-	padding:30px;
+	width: 450px;
+	padding: 50px;
 }
 
 label {
@@ -83,10 +83,9 @@ textarea {
 
 </head>
 <body>
-
+<br><br>
 	<div class=container>
 		<form action="" method=post name=review_write_form>
-<br>
 			<h2>내가 본 영화 리뷰 쓰기</h2>
 			<br>
 
@@ -98,7 +97,7 @@ textarea {
 
 			<div class=form-group>
 				<input name=BOARD_PASS id=board_pass value="" type=password size=20
-					maxlength=10 class=form-control placeholder="비밀번호 입력">
+					maxlength=10 class=form-control placeholder="비밀번호">
 			</div>
 
 			<div class=form-group>
@@ -108,7 +107,7 @@ textarea {
 			
 			<div class=form-group>
 				<input name=BOARD_SUBJECT id=board_subject value="" type=text
-					size=35 maxlength=50 class=form-control placeholder="제목 입력">
+					size=35 maxlength=50 class=form-control placeholder="제목">
 			</div>
 			
 			<br> <span>신호등 별점 신호등 별점 신호등 별점 신호등 별점 신호등 별점 신호등 별점 </span> <br>

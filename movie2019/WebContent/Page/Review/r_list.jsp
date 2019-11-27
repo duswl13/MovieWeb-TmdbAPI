@@ -6,6 +6,7 @@
 <head>
 <style>
 * {margin:0 auto;}
+body {background:#141414;}
 .center-block { display:flex; justify-content:center; /*가운데정렬*/ }
 h1 {color:white}
 button {
@@ -21,6 +22,8 @@ button {
 
 </head>
 <body>
+
+<!-- 메뉴 부분  <script>는 body 아래에-->
 <% 
 boolean open = false;
 if(request.getParameter("open") != null){
@@ -34,19 +37,13 @@ if(request.getParameter("open") != null){
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
 
-<script>
-if(<%=open%>)
-	document.getElementById("main").style.marginLeft = "250px";
 
-$(function() {
+<div id="main">
 
-	$("button").click(function() {
-		location.href="BoardWrite.bo";
-	})
-})
-</script>
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 
-<h1>실시간 리뷰 보기 게시판</h1>
+<h1>여기는 실시간 리뷰 보기 게시판</h1>
 <div class=container>
 
 <%--게시글이 있는 경우 --%>
@@ -158,8 +155,26 @@ $(function() {
 		<font size=5>등록된 글이 없다...</font>
 </c:if><br>
 
+
+<br><br><br>
 <a href="review_write.jsp"><button type=button>리뷰쓰기</button></a>
 
 </div>
+</div> <!-- 추가... -->
+
+
+<script>
+//메뉴부분
+if(<%=!open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+//여기까지
+
+$(function() {
+
+	$("button").click(function() {
+		location.href="BoardWrite.bo";
+	})
+})
+</script>
 </body>
 </html>

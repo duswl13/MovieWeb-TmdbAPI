@@ -181,7 +181,7 @@ ul {
 						</li>
 						<li>
 							<h2>
-								<a href='Page/Review/r_list.jsp'>¸®ºä</a>
+								<a href='Page/Review/r_list.jsp?open=true'>¸®ºä</a>
 							</h2>
 						</li>
 						<li>
