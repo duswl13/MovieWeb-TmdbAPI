@@ -17,11 +17,13 @@ public class BoardFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, 
 		       HttpServletResponse response) 
 		   throws ServletException, IOException {
+		
 		/*
 		 * 요청된 전체 URL중에서 포트 번호 다음부터 마지막 문자열까지 반환된다.
 		 * 예)http://localhost:8088/JspProject/login.net인 경우
 		 * "/JspProject/login.jsp" 반환된다.
 		 */
+		
 		String RequestURI= request.getRequestURI();
 		System.out.println("RequestURI"+ RequestURI);
 	

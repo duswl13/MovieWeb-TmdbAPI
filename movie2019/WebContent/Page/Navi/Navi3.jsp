@@ -20,13 +20,13 @@
 }
 
 .sidenav a {
-	padding: 8px 8px 8px 32px;
 	text-decoration: none;
-	font-size: 25px;
-	color: #818181;
+	font-size: 14px;
+	color: #fff;
 	display: block;
 	transition: 0.3s;
 }
+
 
 .sidenav a:hover {
 	color: #f1f1f1;
@@ -140,7 +140,7 @@ ul {
 <script>
 	function enterkey() {
 		if (window.event.keyCode == 13) {
-			location.href = 'Search.ml?open=true&key='
+			location.href = 'Search.ml?open=false&key='
 					+ $('#search-form').val().replace(/(\s*)/g, "");
 		}
 	}
@@ -153,7 +153,7 @@ ul {
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-		<a href="main"><img
+		<a href="main.ml"><img
 			src="<%=request.getContextPath()%>/Page/Main/logo2.gif"
 			style="width: 100px; height: auto; margin: 16px;"></a>
 
