@@ -138,14 +138,12 @@ ul {
 }
 </style>
 <script>
-
-function enterkey() {
-    if (window.event.keyCode == 13) {
-    	location.href='Search.ml?open=true&key='+$('#search-form').val().replace(/(\s*)/g, "");
-    }
-}
-
-
+	function enterkey() {
+		if (window.event.keyCode == 13) {
+			location.href = 'Search.ml?open=true&key='
+					+ $('#search-form').val().replace(/(\s*)/g, "");
+		}
+	}
 </script>
 </head>
 <body>
@@ -155,11 +153,13 @@ function enterkey() {
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-
+		<a href="main"><img
+			src="<%=request.getContextPath()%>/Page/Main/logo2.gif"
+			style="width: 100px; height: auto; margin: 16px;"></a>
 
 		<div id="accordian">
 
-			
+
 
 			<ul>
 				<li><input type="text" id="search-form" placeholder="Search"
@@ -168,17 +168,25 @@ function enterkey() {
 
 			<ul>
 				<li>
-					<h2><a href='MovieList.ml?option=0'>영화</a></h2>
+					<h2>
+						<a href='MovieList.ml?option=0'>영화</a>
+					</h2>
 
 				</li>
 				<li>
-					<h2><a href="list.ch">추천</a></h2>
+					<h2>
+						<a href="list.ch">추천</a>
+					</h2>
 				</li>
 				<li>
-					<h2><a href='Page/Review/r_list.jsp'>리뷰</a></h2>
+					<h2>
+						<a href='Page/Review/r_list.jsp'>리뷰</a>
+					</h2>
 				</li>
 				<li>
-					<h2><a href="Page/Board/board/board_list.jsp">게시판</a></h2>
+					<h2>
+						<a href="Page/Board/board/board_list.jsp">게시판</a>
+					</h2>
 				</li>
 
 				<li>
@@ -202,18 +210,17 @@ function enterkey() {
 					</ul>
 				</li>
 			</ul>
-			
+
 			<ul>
-				<li><button type="button" id="login">Login</button></li>
+				<li><button type="button" id="login" onclick="location.href='Page/Login/login.html'">Login</button></li>
 			</ul>
-			
+
 		</div>
 	</div>
 
 	<script>
-	
-	openNav();
-	
+		openNav();
+
 		function openNav() {
 			document.getElementById("mySidenav").style.width = "250px";
 			document.getElementById("main").style.marginLeft = "250px";

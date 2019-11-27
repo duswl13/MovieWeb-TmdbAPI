@@ -6,13 +6,12 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
-
-function enterkey() {
-    if (window.event.keyCode == 13) {
-    	location.href='Search.ml?open=true&key='+$('#search-form').val().replace(/(\s*)/g, "");
-    }
-}
-
+	function enterkey() {
+		if (window.event.keyCode == 13) {
+			location.href = 'Search.ml?open=true&key='
+					+ $('#search-form').val().replace(/(\s*)/g, "");
+		}
+	}
 </script>
 
 <style>
@@ -36,8 +35,6 @@ function enterkey() {
 	display: block;
 	transition: 0.3s;
 }
-
-
 
 .sidenav a:hover {
 	color: #f1f1f1;
@@ -156,57 +153,69 @@ ul {
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 
-
+	<a href="main"><img
+						src="<%=request.getContextPath()%>/Page/Main/logo2.gif"
+						style="width:100px; height:auto; margin:16px;"></a>
+						
 		<div id="accordian">
 
-			
+		
 
-			<ul>
-				<li><input type="text" id="search-form" placeholder="Search"
-					onkeyup="enterkey();"></li>
-			</ul>
 
-			<ul>
-				<li>
-					<h2><a href='MovieList.ml?option=0'>영화</a></h2>
-
-				</li>
-				<li>
-					<h2><a href="list.ch">추천</a></h2>
-				</li>
-				<li>
-					<h2><a href='Page/Review/r_list.jsp'>리뷰</a></h2>
-				</li>
-				<li>
-					<h2><a href="Page/Board/board/board_list.jsp">게시판</a></h2>
-				</li>
-
-				<li>
-					<h2>마이페이지</h2>
 					<ul>
-						<li><a href="Page/MyPage/MyInfo/MyInfo.jsp">내 정보 수정</a></li>
-						<li><a href="Page/MyPage/Like/Like.jsp">관심 콘텐츠</a></li>
-						<li><a href="Page/MyPage/MyReview/MyReview.jsp">내 리뷰 관리</a></li>
-						<li><a href="Page/MyPage/Hidden/Hidden.jsp">숨긴 콘텐츠 관리</a></li>
+						<li><input type="text" id="search-form" placeholder="Search"
+							onkeyup="enterkey();"></li>
 					</ul>
-				</li>
-				<li>
-					<h2>공지사항</h2>
-				</li>
-				<li>
-					<h2>관리자 페이지</h2>
+
 					<ul>
-						<li><a href="NoticeList.bo">공지사항 관리</a></li>
-						<li><a href="Page/AdminPage/FAQ/FAQList.jsp">FAQ 관리</a></li>
-						<li><a href="Page/AdminPage/UserList/UserList.jsp">회원 관리</a></li>
+						<li>
+							<h2>
+								<a href='MovieList.ml?option=0'>영화</a>
+							</h2>
+
+						</li>
+						<li>
+							<h2>
+								<a href="list.ch">추천</a>
+							</h2>
+						</li>
+						<li>
+							<h2>
+								<a href='Page/Review/r_list.jsp'>리뷰</a>
+							</h2>
+						</li>
+						<li>
+							<h2>
+								<a href="Page/Board/board/board_list.jsp">게시판</a>
+							</h2>
+						</li>
+
+						<li>
+							<h2>마이페이지</h2>
+							<ul>
+								<li><a href="Page/MyPage/MyInfo/MyInfo.jsp">내 정보 수정</a></li>
+								<li><a href="Page/MyPage/Like/Like.jsp">관심 콘텐츠</a></li>
+								<li><a href="Page/MyPage/MyReview/MyReview.jsp">내 리뷰 관리</a></li>
+								<li><a href="Page/MyPage/Hidden/Hidden.jsp">숨긴 콘텐츠 관리</a></li>
+							</ul>
+						</li>
+						<li>
+							<h2>공지사항</h2>
+						</li>
+						<li>
+							<h2>관리자 페이지</h2>
+							<ul>
+								<li><a href="NoticeList.bo">공지사항 관리</a></li>
+								<li><a href="Page/AdminPage/FAQ/FAQList.jsp">FAQ 관리</a></li>
+								<li><a href="Page/AdminPage/UserList/UserList.jsp">회원
+										관리</a></li>
+							</ul>
+						</li>
 					</ul>
-				</li>
-			</ul>
-			
-			<ul>
-				<li><button type="button" id="login">Login</button></li>
-			</ul>
-			
+
+					<ul>
+						<li><button type="button" id="login" onclick="location.href='Page/Login/login.html'">Login</button></li>
+					</ul>
 		</div>
 	</div>
 

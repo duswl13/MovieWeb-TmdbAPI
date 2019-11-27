@@ -27,7 +27,11 @@
 
 <% 
 String id = request.getParameter("id");
-boolean open = Boolean.parseBoolean(request.getParameter("open"));
+
+boolean open = false;
+if(request.getParameter("open") != null){
+	open = Boolean.parseBoolean(request.getParameter("open"));
+}
 String apikey = application.getInitParameter("APIKEY");
 
 %>
