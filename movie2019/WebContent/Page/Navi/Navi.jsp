@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +74,7 @@ ul {
 	margin-right: 10px;
 }
 
-/* ¸Þ´º ½ºÅ¸ÀÏ */
+/* ë©”ë‰´ ìŠ¤íƒ€ì¼ */
 #accordian h2 {
 	font-size: 14px;
 	line-height: 34px;
@@ -86,7 +86,7 @@ ul {
 	text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
-/* ¾ÆÀÌÄÜÆùÆ® ½ºÅ¸ÀÏ */
+/* ì•„ì´ì½˜í°íŠ¸ ìŠ¤íƒ€ì¼ */
 #accordian h2 span {
 	font-size: 16px;
 	margin-right: 10px;
@@ -96,7 +96,7 @@ ul {
 	list-style-type: none;
 }
 
-/* ¼­ºê¸Þ´º ½ºÅ¸ÀÏ */
+/* ì„œë¸Œë©”ë‰´ ìŠ¤íƒ€ì¼ */
 #accordian ul ul li a {
 	color: white;
 	text-decoration: none;
@@ -119,7 +119,7 @@ ul {
 	border-left: 5px solid #09c;
 }
 
-/* active Å¬·¡½º ¿Ü¿¡ °ÍÀº º¸ÀÌÁö ¾Ê°Ô ÇÏ±â */
+/* active í´ëž˜ìŠ¤ ì™¸ì— ê²ƒì€ ë³´ì´ì§€ ì•Šê²Œ í•˜ê¸° */
 #accordian ul ul {
 	display: none;
 }
@@ -170,45 +170,45 @@ ul {
 					<ul>
 						<li>
 							<h2>
-								<a href='MovieList.ml?option=0'>¿µÈ­</a>
+								<a href='MovieList.ml?option=0'>ì˜í™”</a>
 							</h2>
 
 						</li>
 						<li>
 							<h2>
-								<a href="list.ch">ÃßÃµ</a>
+								<a href="list.ch">ì¶”ì²œ</a>
 							</h2>
 						</li>
 						<li>
 							<h2>
-								<a href='Page/Review/r_list.jsp'>¸®ºä</a>
+								<a href='Page/Review/r_list.jsp'>ë¦¬ë·°</a>
 							</h2>
 						</li>
 						<li>
 							<h2>
-								<a href="Page/Board/board/board_list.jsp">°Ô½ÃÆÇ</a>
+								<a href="Page/Board/board/board_list.jsp">ê²Œì‹œíŒ</a>
 							</h2>
 						</li>
 
 						<li>
-							<h2>¸¶ÀÌÆäÀÌÁö</h2>
+							<h2>ë§ˆì´íŽ˜ì´ì§€</h2>
 							<ul>
-								<li><a href="Page/MyPage/MyInfo/MyInfo.jsp">³» Á¤º¸ ¼öÁ¤</a></li>
-								<li><a href="Page/MyPage/Like/Like.jsp">°ü½É ÄÜÅÙÃ÷</a></li>
-								<li><a href="Page/MyPage/MyReview/MyReview.jsp">³» ¸®ºä °ü¸®</a></li>
-								<li><a href="Page/MyPage/Hidden/Hidden.jsp">¼û±ä ÄÜÅÙÃ÷ °ü¸®</a></li>
+								<li><a href="Page/MyPage/MyInfo/MyInfo.jsp">ë‚´ ì •ë³´ ìˆ˜ì •</a></li>
+								<li><a href="Page/MyPage/Like/Like.jsp">ê´€ì‹¬ ì½˜í…ì¸ </a></li>
+								<li><a href="Page/MyPage/MyReview/MyReview.jsp">ë‚´ ë¦¬ë·° ê´€ë¦¬</a></li>
+								<li><a href="Page/MyPage/Hidden/Hidden.jsp">ìˆ¨ê¸´ ì½˜í…ì¸  ê´€ë¦¬</a></li>
 							</ul>
 						</li>
 						<li>
-							<h2>°øÁö»çÇ×</h2>
+							<h2>ê³µì§€ì‚¬í•­</h2>
 						</li>
 						<li>
-							<h2>°ü¸®ÀÚ ÆäÀÌÁö</h2>
+							<h2>ê´€ë¦¬ìž íŽ˜ì´ì§€</h2>
 							<ul>
-								<li><a href="NoticeList.bo">°øÁö»çÇ× °ü¸®</a></li>
-								<li><a href="Page/AdminPage/FAQ/FAQList.jsp">FAQ °ü¸®</a></li>
-								<li><a href="Page/AdminPage/UserList/UserList.jsp">È¸¿ø
-										°ü¸®</a></li>
+								<li><a href="NoticeList.bo">ê³µì§€ì‚¬í•­ ê´€ë¦¬</a></li>
+								<li><a href="Page/AdminPage/FAQ/FAQList.jsp">FAQ ê´€ë¦¬</a></li>
+								<li><a href="Page/AdminPage/UserList/UserList.jsp">íšŒì›
+										ê´€ë¦¬</a></li>
 							</ul>
 						</li>
 					</ul>
