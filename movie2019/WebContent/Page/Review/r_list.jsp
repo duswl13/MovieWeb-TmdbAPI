@@ -19,7 +19,11 @@ button {
 }
 </style>
 <script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+
 $(function() {
+
 	$("button").click(function() {
 		location.href="BoardWrite.bo";
 	})
@@ -27,6 +31,21 @@ $(function() {
 </script>
 </head>
 <body>
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+
+
 <h1>실시간 리뷰 보기 게시판</h1>
 <div class=container>
 
