@@ -22,12 +22,14 @@ tr.center-block {
 	text-align: center
 }
 
-h4 {
-	color: white;
+h2 {
+	color: SteelBlue;
 }
 
 .container {
-	width: 60%
+	background:#3b3b3b;
+	width: 60%;
+	padding:30px;
 }
 
 label {
@@ -61,17 +63,17 @@ span {
 }
 
 input {
-	background: #141414;
+	background: white;
 	border: 1px solid SteelBlue;
-	border-radius: 10px;
+	border-radius: 5px;
 	color: white;
 	padding: 5px;
 	margin: 5px;
 }
 
 textarea {
-	background: #141414;
-	border: 2px dotted SteelBlue;
+	background: white;
+	border: 1px solid SteelBlue;
 	border-radius: 10px;
 	color: white;
 	padding: 5px;
@@ -85,7 +87,7 @@ textarea {
 	<div class=container>
 		<form action="" method=post name=review_write_form>
 <br>
-			<h4>내가 본 영화 리뷰 쓰기</h4>
+			<h2>내가 본 영화 리뷰 쓰기</h2>
 			<br>
 
 			<div class=form-group>
