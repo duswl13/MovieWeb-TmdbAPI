@@ -4,7 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Our Custom CSS -->
+<link rel="stylesheet" href="css/MainPagestyle.css">
+
+<!-- jQuery CDN -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--    <script type="text/javascript"
+      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
+<!-- Bootstrap Js CDN -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 <%
+boolean open = Boolean.parseBoolean(request.getParameter("open"));
 	String apikey = application.getInitParameter("APIKEY");
 %>
 <title>Insert title here</title>
@@ -12,6 +31,21 @@
 </head>
 <body>
 
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+
+
+
+<div id="main">
+
+		<span style="font-size: 30px; cursor: pointer; color: white;"
+			onclick="openNav()">&#9776;</span>
+			
 <div class="all">
 
 		<div class="movieList"></div>
@@ -19,11 +53,15 @@
 
 		
 	</div>
+	</div>
 </body>
 
 <script>
 
-	
+
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+		
 
 	var allpages = 0;
 	var page = 1;
@@ -142,7 +180,7 @@
 				
 			list[check].overview = list[check].overview.substring(0,100)+'...';
 			text += '<div class="col-xs-3">';
-			text += '<a href="main.ml?load=-2&id=' + list[check].id + '">\n';
+			text += '<a href="moviedetail.ml?open=false&id=' + list[check].id + '">\n';
 			text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 			text += '</a>';
 			text += '<div class="centered">\n';

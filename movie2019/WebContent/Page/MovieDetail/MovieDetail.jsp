@@ -4,10 +4,31 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery CDN -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--    <script type="text/javascript"
+      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
+<!-- Bootstrap Js CDN -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+	
+
 <title>Insert title here</title>
 
-<% String id = request.getParameter("id");
-   String apikey = application.getInitParameter("APIKEY");
+<% 
+String id = request.getParameter("id");
+boolean open = Boolean.parseBoolean(request.getParameter("open"));
+String apikey = application.getInitParameter("APIKEY");
 
 %>
 <style>
@@ -192,6 +213,17 @@ iframe {
 </head>
 <body>
 
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+
+		<span style="font-size: 30px; cursor: pointer; color: white;"
+			onclick="openNav()">&#9776;</span>
+
 <div class="video-background">
 		<div class="video-foreground">
 				<iframe id="detailVideo"
@@ -322,14 +354,15 @@ iframe {
 
 
 
-
+</div>
 	</div>
 </body>
 
 <script>
 
-	
 
+if(<%=open%>)
+document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	

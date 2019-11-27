@@ -5,12 +5,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Insert title here</title>
+
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- Our Custom CSS -->
 <link rel="stylesheet" href="css/MainPagestyle.css">
+
+<!-- jQuery CDN -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--    <script type="text/javascript"
+      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
+<!-- Bootstrap Js CDN -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
 <%
 	String apikey = application.getInitParameter("APIKEY");
 %>
 </head>
 <body>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+
+<div id="main">
+
+		<span style="font-size: 30px; cursor: pointer; color: white;"
+			onclick="openNav()">&#9776;</span>
 
 
 	<div class="video-background">
@@ -132,6 +157,8 @@
 
 
 
+			
+</div>
 
 
 		<script>
@@ -309,7 +336,7 @@
 					print += '<div class="item">\n';
 
 				print += '<div class="col-xs-4">\n';
-				print += '<a href="main.ml?load=-2&id=' + list[i].id + '">\n';
+				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id + '">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '</a>\n<div class="centered">\n';
 				print += '<h1>' + list[i].original_title + '</h1>\n';
