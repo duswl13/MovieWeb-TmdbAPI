@@ -24,7 +24,7 @@ tr.center-block {
 
 h1 {
 	font-size: 1.5rem;
-	color: CadetBlue
+	color: SteelBlue
 }
 
 .container {
@@ -46,7 +46,7 @@ img {
 button {
 	width: 200px;
 	height: 50px;
-	background: CadetBlue;
+	background: SteelBlue;
 	border: 0px;
 	border-radius: 10px;
 	font-size: 10pt;
