@@ -235,12 +235,13 @@ function enterkey() {
 		            }
 		            if(index == 8){
 		                   $(".title").empty();
-		                      link = '/Page/AdminPage/FAQ/FAQList.jsp';
+		             //       link = '/Page/AdminPage/Notice/NoticeList.jsp';
+		                      link = '/NoticeList.bo';
 		                      $('.title').html("공지사항 관리");
 		                   }
 		                  if(index == 9){
 		                   $(".title").empty();
-		                      link = '/Page/AdminPage/Notice/NoticeList.jsp';
+		                   link = '/Page/AdminPage/FAQ/FAQList.jsp';
 		                      $('.title').html("FAQ 관리");
 		                   }
 		                  if(index == 10){
