@@ -3,7 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
 <title>마이페이지:내 정보 수정</title>
  
  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -18,12 +25,33 @@ label {
 p{
 	color: grey;
 }
-
+body{
+	background : black;
+}
 
 
 </style>
+
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	if(<%=open%>)
+		document.getElementById("main").style.marginLeft = "250px";
+
+});
+
+</script>
 </head>
 <body>
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
         <article class="container">
             <div class="col-sm-6 col-md-offset-20">
                 <form role="form">
@@ -64,6 +92,6 @@ p{
                 </form>
             </div>
         </article>
-
+</div>
 </body>
 </html>

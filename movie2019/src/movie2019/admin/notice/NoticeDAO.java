@@ -176,50 +176,12 @@ public class NoticeDAO {
 		return null;
 	}
 
-	public void setReadCountUpdate(int num) {
-		String sql = "update NOTICE " + "set NOTICE_READCOUNT=NOTICE_READCOUNT+1 " + "where NOTICE_NUM=?";
-		try {
-
-			con = ds.getConnection();
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, num);
-
-			pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("getReadCountUpdate() ¿¡·¯: " + e);
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
-
-	}
-
+	
 	public NoticeVO getDetail(int num) {
 		NoticeVO notice = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select * from NOTICE where NOTICE_NUM=?");
+			pstmt = con.prepareStatement("select * from NOTICE_TBL where NOTICE_NUM=?");
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 
