@@ -7,6 +7,15 @@
 <style>
 * {margin:0 auto;}
 .center-block { display:flex; justify-content:center; /*가운데정렬*/ }
+button {
+	width: 200px;
+	height: 50px;
+	background: CadetBlue;
+	border: 0px;
+	border-radius: 10px;
+	font-size: 10pt;
+	color: white;
+}
 </style>
 <script>
 $(function() {
@@ -129,7 +138,7 @@ $(function() {
 		<font size=5>등록된 글이 없다...</font>
 </c:if><br>
 
-<button type=button class="btn btn-info float-right">글쓰기</button>
+<a href=WebContent/Page/Review/review_write.jsp><button type=button>리뷰쓰기</button></a>
 
 </div>
 </body>

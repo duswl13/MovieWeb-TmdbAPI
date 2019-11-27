@@ -74,7 +74,7 @@ textarea {
 	background: #141414;
 	border: 1.5px dotted white;
 	border-radius: 10px;
-	font-color: white;
+	color: white;
 	padding: 5px;
 	margin: 5px;
 }
