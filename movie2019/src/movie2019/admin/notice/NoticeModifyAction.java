@@ -11,7 +11,7 @@ public class NoticeModifyAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//파라미터로 가져올 떄 한글이 꺠지지 않도록 하기 위한 문장입니다.
-		request.setCharacterEncoding("euc-kr");
+		request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
 		Boolean result = false;
 
@@ -25,7 +25,7 @@ public class NoticeModifyAction implements Action {
 		boolean usercheck=boarddao.isBoardWriter(num, request.getParameter("BOARD_PASS"));
 		//비밀번호가 다른 경우
 		if(usercheck==false) {
-			response.setContentType("text/html;charset=euc-kr");
+			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
 			out.println("alert('비밀번호가 다릅니다.');");

@@ -6,6 +6,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
 <title>관리자페이지:게시판관리</title>
 <style>
 body{
@@ -48,17 +57,35 @@ table, td {
 	display:flex;
 	justify-content:center;	/* 가운데 정렬 */
 }
-
+span{
+	background-color:grey;
+}
 </style>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
 	$("button").click(function(){
 		location.href="NoticeWrite.bo";
 	})
 })
+$(function(){
+	if(<%=open%>)
+		document.getElementById("main").style.marginLeft = "250px";
+
+});
+
 </script>
 </head>
 <body>
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <div class="container">
 	<%--게시글이 있는 경우 --%>
 	<c:if test="${listcount>0 }">
@@ -149,7 +176,7 @@ $(function(){
 		<font size=5>등록된 글이 없습니다.</font>
 	</c:if><br>
 	<button type="button" class="btn btn-info float-right">글쓰기</button>
-	
+	</div>
 </div>
 </body>
 </html>

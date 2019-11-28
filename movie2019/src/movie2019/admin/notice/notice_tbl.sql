@@ -8,3 +8,4 @@ create table notice_tbl(
 );
 
 select * from notice_tbl
+

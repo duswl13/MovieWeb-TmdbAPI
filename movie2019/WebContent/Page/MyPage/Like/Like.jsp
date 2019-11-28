@@ -4,6 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
 <title>마이페이지:관심 컨텐츠</title>
 <style>
 p {
@@ -18,9 +24,30 @@ p {
 	margin:10px;
 	margin-bottom:50px;
 }
+body{
+	background : black;
+}
 </style>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(function(){
+	if(<%=open%>)
+		document.getElementById("main").style.marginLeft = "250px";
+
+});
+
+</script>
 </head>
 <body>
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <div id="like1">
 	<p>관심 장르</p>
 	<button type="button" class="btn btn-secondary" title="" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover Title">Left</button>
@@ -42,6 +69,7 @@ sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover 
 sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover Title">Bottom</button>
 
 <button type="button" class="btn btn-secondary" title="" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." data-original-title="Popover Title">Right</button>
+</div>
 </div>
 </body>
 </html>
