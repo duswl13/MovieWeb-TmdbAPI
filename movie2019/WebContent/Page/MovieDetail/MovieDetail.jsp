@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +22,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <title>Insert title here</title>
 
@@ -119,6 +121,7 @@ display:block;}
 
 .col-xs-3:hover > .centered{
 display:block;}
+
 .centered p{
 color:white;}
 /* Centered text */
@@ -159,7 +162,7 @@ color:white;
 
 
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 .video-background {
 	background: #000;
 	position: absolute;
@@ -170,7 +173,7 @@ color:white;
 	z-index: -99;
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 .video-foreground, .video-background iframe {
 	position: absolute;
 	top: 0;
@@ -180,13 +183,13 @@ color:white;
 	pointer-events: none;
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 @media ( min-aspect-ratio : 16/9) {
 	.video-foreground {
 		height: 100vh;
 		top: -10vh;
 		/*height: 300%;
-		top: -100%; *//*»ó´Ü À¯Åõºê Á¦¸ñ ¾Èº¸ÀÌ°ÔÇÏ·Á°í*/
+		top: -100%; *//*ìƒë‹¨ ìœ íˆ¬ë¸Œ ì œëª© ì•ˆë³´ì´ê²Œí•˜ë ¤ê³ */
 	}
 }
 
@@ -197,13 +200,13 @@ color:white;
 	}
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 @media ( min-aspect-ratio : 1/1) {
 	.video-foreground {
 		height: 100vh;
 		top: -10vh;
 		/*height: 300%;
-		top: -100%; /*»ó´Ü À¯Åõºê Á¦¸ñ ¾Èº¸ÀÌ°ÔÇÏ·Á°í*/
+		top: -100%; /*ìƒë‹¨ ìœ íˆ¬ë¸Œ ì œëª© ì•ˆë³´ì´ê²Œí•˜ë ¤ê³ */
 	}
 }
 
@@ -214,13 +217,28 @@ color:white;
 	}
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå ºÒÅõ¸íµµ*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ ë¶ˆíˆ¬ëª…ë„*/
 iframe {
 	opacity: 0.8;
 }
 .detail_similar{
 padding-bottom: 3em;
 }
+
+
+/* Centered text */
+.centered {
+	cursor:pointer;
+display:none;
+color:white;
+width:80%;
+height:80%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 </style>
 </head>
 <body>
@@ -271,16 +289,16 @@ padding-bottom: 3em;
 				<div class="user_mv">
 					<table>
 						<tr>
-							<td>ÀÌ¹Ì º» ÀÛÇ°ÀÎ°¡¿ä?</td>
-							<td>¡Ú¡Ú¡Ú¡Ú¡Ú</td>
-							<td>ÃëÇâ ÁÁ¾Æ¿ä ½È¾î¿ä</td>
+							<td>ì´ë¯¸ ë³¸ ì‘í’ˆì¸ê°€ìš”?</td>
+							<td>â˜…â˜…â˜…â˜…â˜…</td>
+							<td>ì·¨í–¥ ì¢‹ì•„ìš” ì‹«ì–´ìš”</td>
 						</tr>
 					</table>
 				</div>
 
 
 				<h4 class="top_margin">
-					<b>Ãâ¿¬Áø</b>
+					<b>ì¶œì—°ì§„</b>
 				</h4>
 				<div class="mv_guest row">
 
@@ -291,7 +309,7 @@ padding-bottom: 3em;
 
 
 				<h4 class="top_margin">
-					<b>Æò°¡ ºĞÆ÷</b>
+					<b>í‰ê°€ ë¶„í¬</b>
 				</h4>
 				<div class="row">
 					<div class="col-xs-6">
@@ -310,36 +328,36 @@ padding-bottom: 3em;
 
 
 				<h4 class="top_margin">
-					<b>¸®ºä</b>
+					<b>ë¦¬ë·°</b>
 				</h4>
 
 				<div class="row">
 					<div class="col-xs-4">
 						<div class="review">
 							<div>
-								<span class="review_id">duswl13</span> <span class="review_star">¡Ú3.5</span>
+								<span class="review_id">duswl13</span> <span class="review_star">â˜…3.5</span>
 							</div>
 							<hr>
-							<h4>º°·Î¿´¾î¿ä</h4>
-							<p>º°·Î¿´¾î¿ä º°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿ä</p>
+							<h4>ë³„ë¡œì˜€ì–´ìš”</h4>
+							<p>ë³„ë¡œì˜€ì–´ìš” ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4">
 						<div class="review">
-							duswl13 ¡Ú3.5
+							duswl13 â˜…3.5
 							<hr>
-							<h4>º°·Î¿´¾î¿ä</h4>
-							<p>º°·Î¿´¾î¿ä º°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿ä</p>
+							<h4>ë³„ë¡œì˜€ì–´ìš”</h4>
+							<p>ë³„ë¡œì˜€ì–´ìš” ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”</p>
 						</div>
 					</div>
 
 					<div class="col-xs-4">
 						<div class="review">
-							duswl13 ¡Ú3.5
+							duswl13 â˜…3.5
 							<hr>
-							<h4>º°·Î¿´¾î¿ä</h4>
-							<p>º°·Î¿´¾î¿ä º°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿äº°·Î¿´¾î¿ä</p>
+							<h4>ë³„ë¡œì˜€ì–´ìš”</h4>
+							<p>ë³„ë¡œì˜€ì–´ìš” ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”ë³„ë¡œì˜€ì–´ìš”</p>
 						</div>
 					</div>
 
@@ -348,7 +366,7 @@ padding-bottom: 3em;
 
 
 				<h4 class="top_margin" id="div_similar">
-					<b>ºñ½ÁÇÑ ¿µÈ­</b>
+					<b>ë¹„ìŠ·í•œ ì˜í™”</b>
 				</h4>
 
 				<div class="detail_similar row">
@@ -388,7 +406,7 @@ document.getElementById("main").style.marginLeft = "250px";
 		cache : false,
 		success : function(data) {
 
-			console.log('ºñµğ¿À ¼ÂÆÃ ¼º°ø');
+			console.log('ë¹„ë””ì˜¤ ì…‹íŒ… ì„±ê³µ');
 			var list = data.results;
 
 			if(list[0].key != null)
@@ -396,10 +414,10 @@ document.getElementById("main").style.marginLeft = "250px";
 			
 		},
 		error : function(request, status, error) {
-			console.log('ºñµğ¿À error');
+			console.log('ë¹„ë””ì˜¤ error');
 		},
 		complete : function() {
-			console.log('ºñµğ¿À ¿Ï·á');
+			console.log('ë¹„ë””ì˜¤ ì™„ë£Œ');
 
 		}
 	});
@@ -408,23 +426,23 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	$.ajax({
-				url : 'https://api.themoviedb.org/3/movie/<%=id%>?api_key=<%=apikey%>&language=ko-KO', //¿äÃ» Àü¼Û url
+				url : 'https://api.themoviedb.org/3/movie/<%=id%>?api_key=<%=apikey%>&language=ko-KO', //ìš”ì²­ ì „ì†¡ url
 				dataType : 'json',
 				cache : false,
 				success : function(data) {
-					console.log('¼¼ºÎÁ¤º¸ ¼º°ø');
+					console.log('ì„¸ë¶€ì •ë³´ ì„±ê³µ');
 					var list = data;
 
 					printDetail(list);
 					
 
-				}, //HTTP ¿äÃ»ÀÌ ¼º°øÇÑ °æ¿ì ½ÇÇà
+				}, //HTTP ìš”ì²­ì´ ì„±ê³µí•œ ê²½ìš° ì‹¤í–‰
 				error : function(request, status, error) {
-					console.log('¼¼ºÎÁ¤º¸ error');
+					console.log('ì„¸ë¶€ì •ë³´ error');
 
 				},
 				complete : function() {
-					console.log('¼¼ºÎÁ¤º¸ ¿Ï·á');
+					console.log('ì„¸ë¶€ì •ë³´ ì™„ë£Œ');
 
 				} 
 			});
@@ -433,23 +451,23 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	$.ajax({
-		url : 'https://api.themoviedb.org/3/movie/<%=id%>/credits?api_key=<%=apikey%>', //¿äÃ» Àü¼Û url
+		url : 'https://api.themoviedb.org/3/movie/<%=id%>/credits?api_key=<%=apikey%>', //ìš”ì²­ ì „ì†¡ url
 		dataType : 'json',
 		cache : false,
 		success : function(data) {
-			console.log('Å©·¹µ÷ ¼º°ø');
+			console.log('í¬ë ˆë”§ ì„±ê³µ');
 			var list = data;
 
 			printCredits(list.cast);
 			
 
-		}, //HTTP ¿äÃ»ÀÌ ¼º°øÇÑ °æ¿ì ½ÇÇà
+		}, //HTTP ìš”ì²­ì´ ì„±ê³µí•œ ê²½ìš° ì‹¤í–‰
 		error : function(request, status, error) {
-			console.log('Å©·¹µ÷ error');
+			console.log('í¬ë ˆë”§ error');
 
 		},
 		complete : function() {
-			console.log('Å©·¹µ÷ ¿Ï·á');
+			console.log('í¬ë ˆë”§ ì™„ë£Œ');
 
 		} 
 	});
@@ -457,23 +475,23 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	$.ajax({
-		url : 'https://api.themoviedb.org/3/movie/<%=id%>/similar?api_key=<%=apikey%>&language=ko-KO&page=1', //¿äÃ» Àü¼Û url
+		url : 'https://api.themoviedb.org/3/movie/<%=id%>/similar?api_key=<%=apikey%>&language=ko-KO&page=1', //ìš”ì²­ ì „ì†¡ url
 		dataType : 'json',
 		cache : false,
 		success : function(data) {
 			
 			var list = data.results;
-			console.log('ºñ½ÁÇÑ ¿µÈ­ ¼º°ø , °¹¼ö :' + list.length);
+			console.log('ë¹„ìŠ·í•œ ì˜í™” ì„±ê³µ , ê°¯ìˆ˜ :' + list.length);
 			printSimilar(list);
 			
 
-		}, //HTTP ¿äÃ»ÀÌ ¼º°øÇÑ °æ¿ì ½ÇÇà
+		}, //HTTP ìš”ì²­ì´ ì„±ê³µí•œ ê²½ìš° ì‹¤í–‰
 		error : function(request, status, error) {
-			console.log('Å©·¹µ÷ error');
+			console.log('í¬ë ˆë”§ error');
 
 		},
 		complete : function() {
-			console.log('Å©·¹µ÷ ¿Ï·á');
+			console.log('í¬ë ˆë”§ ì™„ë£Œ');
 
 		} 
 	});
@@ -532,8 +550,8 @@ document.getElementById("main").style.marginLeft = "250px";
 				}
 					
 				
-			console.log("ÀÌ¸§:"+list[check].name);
-			console.log("Æ÷½ºÅÍ:"+list[check].profile_path);
+			console.log("ì´ë¦„:"+list[check].name);
+			console.log("í¬ìŠ¤í„°:"+list[check].profile_path);
 			tag += '<div class="col-xs-2">';
 			tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'"><img class="img-responsive"';
 			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'"></a>';
@@ -559,7 +577,7 @@ document.getElementById("main").style.marginLeft = "250px";
 			return;
 		}
 		
-		var tag = '';
+		var text = '';
 		
 	
 		var check = 0;
@@ -572,47 +590,55 @@ document.getElementById("main").style.marginLeft = "250px";
 						|| list[check].genre_ids == null
 						|| list[check].overview == ""
 						|| list[check].genre_ids == ""
-						|| list[check].overview.includes('¼½½º')){
+						|| list[check].overview.includes('ì„¹ìŠ¤')){
 					
 					i--;
 					check++;
-					console.log('ÀÌ»óÇÑ °Å´Ï±î ³Ñ±è' + check);
+					console.log('ì´ìƒí•œ ê±°ë‹ˆê¹Œ ë„˜ê¹€' + check);
 
 					continue;
 					
 				}
 				
 				
-				tag+= '<div class="col-xs-3">';
-				tag += '<a href="moviedetail.ml?open=false&id=' + list[check].id + '">\n';
-				tag+= '<img class="img-responsive"';
-				tag+= '	src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
-				tag+= '</a>';
+				text += '<div class="col-xs-3">';
+				//text += '<a href="moviedetail.ml?open=false&id=' + list[check].id + '">\n';
+				text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
+			
+				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">ìˆ¨ê¹€</a>';
+				text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 				
-				tag += '<div class="centered">\n';
-				tag += '<h5>' + list[check].original_title + '</h5>\n';
-				tag += '<p>' + list[check].overview.substring(0,50) + '...</p></div>\n';
-				tag+= '<p>'+list[check].original_title+'</p>';
+				text += ' <div>';
+				text += '<span class="fa fa-star"></span>';
+				text += '<span class="fa fa-star"></span>';
+				text += '<span class="fa fa-star"></span>';
+				text += '<span class="fa fa-star"></span>';
+				text += '<span class="fa fa-star"></span>';
+				text += ' </div>';
+				text +='</div>\n';
+				text += '<h5>' + list[check].original_title + '</h5>';
+			
+				text += '</div>';
 				
-				tag+= '</div>';
 				check++;
 			}
+			text += '</div>';
 		}
 	
-		$('.detail_similar').html(tag);
+		$('.detail_similar').html(text);
 	}
 
 
 
 
 
-	// ¿ì¼± ÄÁÅØ½ºÆ®¸¦ °¡Á®¿É´Ï´Ù. 
+	// ìš°ì„  ì»¨í…ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤. 
 	var ctx = document.getElementById("myChart").getContext('2d');
 	var ctx2 = document.getElementById("myChart2").getContext('2d');
 	/*
-	 - Chart¸¦ »ı¼ºÇÏ¸é¼­, 
-	 - ctx¸¦ Ã¹¹øÂ° argument·Î ³Ñ°ÜÁÖ°í, 
-	 - µÎ¹øÂ° argument·Î ±×¸²À» ±×¸±¶§ ÇÊ¿äÇÑ ¿ä¼ÒµéÀ» ¸ğµÎ ³Ñ°ÜÁİ´Ï´Ù. 
+	 - Chartë¥¼ ìƒì„±í•˜ë©´ì„œ, 
+	 - ctxë¥¼ ì²«ë²ˆì§¸ argumentë¡œ ë„˜ê²¨ì£¼ê³ , 
+	 - ë‘ë²ˆì§¸ argumentë¡œ ê·¸ë¦¼ì„ ê·¸ë¦´ë•Œ í•„ìš”í•œ ìš”ì†Œë“¤ì„ ëª¨ë‘ ë„˜ê²¨ì¤ë‹ˆë‹¤. 
 	 */
 
 	Chart.defaults.global.defaultFontColor = 'white';
@@ -641,7 +667,7 @@ document.getElementById("main").style.marginLeft = "250px";
 					} ]
 				},
 				options : {
-					maintainAspectRatio : true, // default value. falseÀÏ °æ¿ì Æ÷ÇÔµÈ divÀÇ Å©±â¿¡ ¸ÂÃç¼­ ±×·ÁÁü.
+					maintainAspectRatio : true, // default value. falseì¼ ê²½ìš° í¬í•¨ëœ divì˜ í¬ê¸°ì— ë§ì¶°ì„œ ê·¸ë ¤ì§.
 					scales : {
 						yAxes : [ {
 							ticks : {
@@ -656,7 +682,7 @@ document.getElementById("main").style.marginLeft = "250px";
 			{
 				type : 'doughnut',
 				data : {
-					labels : [ "ÁÁ¾Æ¿ä", "½È¾î¿ä" ],
+					labels : [ "ì¢‹ì•„ìš”", "ì‹«ì–´ìš”" ],
 					datasets : [ {
 						label : '# of Votes',
 						data : [ 75, 25 ],
@@ -668,7 +694,7 @@ document.getElementById("main").style.marginLeft = "250px";
 					} ]
 				},
 				options : {
-					maintainAspectRatio : true, // default value. falseÀÏ °æ¿ì Æ÷ÇÔµÈ divÀÇ Å©±â¿¡ ¸ÂÃç¼­ ±×·ÁÁü.
+					maintainAspectRatio : true, // default value. falseì¼ ê²½ìš° í¬í•¨ëœ divì˜ í¬ê¸°ì— ë§ì¶°ì„œ ê·¸ë ¤ì§.
 					scales : {
 						yAxes : [ {
 							ticks : {
