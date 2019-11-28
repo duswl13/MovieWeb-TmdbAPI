@@ -89,6 +89,13 @@ public class NoticeFrontController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
+		}else if(command.equals("/NoticeDetailAction.bo")) {
+			action = new NoticeDetailAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
 		
 		}
 		
