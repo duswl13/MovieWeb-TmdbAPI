@@ -44,14 +44,13 @@ public class GongController extends HttpServlet {
 		if (com.equals("/list.gong")) {
 			page = "Page/gong/list2.jsp";
 		}else if(com.equals("/gonglist.gong")) {
+			
 			command = new GListCommand();
 			command.execute(request, response);
-			
-			page="Page/gong/gonglist.jsp";
+			page="Page/gong/list.jsp";
 		}else if(com.equals("/faq.gong")) {
 			command = new FListCommand();
-			command.execute(request, response);
-			
+			command.execute(request, response);			
 			page="Page/gong/faqlist.jsp";
 		}
 		request.getRequestDispatcher(page).forward(request, response);

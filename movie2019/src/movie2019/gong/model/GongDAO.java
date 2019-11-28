@@ -16,6 +16,8 @@ public class GongDAO {
 		map.put("start", start);
 		map.put("end", end);
 		List<GongVO> items =session.selectList("gong.gongList",map);
+		
+		
 		session.close();	
 		return items;
 		
