@@ -216,7 +216,7 @@ color:white;
 
 /*유투브 백그라운드 불투명도*/
 iframe {
-	opacity: 0.6;
+	opacity: 0.8;
 }
 .detail_similar{
 padding-bottom: 3em;
@@ -347,7 +347,7 @@ padding-bottom: 3em;
 
 
 
-				<h4 class="top_margin">
+				<h4 class="top_margin" id="div_similar">
 					<b>비슷한 영화</b>
 				</h4>
 
@@ -553,6 +553,12 @@ document.getElementById("main").style.marginLeft = "250px";
 	}
 	
 	function printSimilar(list){
+		
+		if(list.length == 0){
+			$('#div_similar ').remove();
+			return;
+		}
+		
 		var tag = '';
 		
 	

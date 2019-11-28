@@ -23,6 +23,11 @@ body{
 background: #141414;
 color:white;
 }
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+
 </style>
 </head>
 <%
@@ -56,6 +61,12 @@ if(request.getParameter("open") != null){
 
 
 		<div class="movieList"></div>
+			<div class="row">
+				<div class="col-xs-6 col-centered text-center">
+					<button class="more">더보기</button>
+				</div>
+			</div>
+			
 
 </div>
 </div>
@@ -66,10 +77,19 @@ document.getElementById("main").style.marginLeft = "250px";
 
 
 
+readyList();
 
+
+
+
+function readyList(){
+	
+
+	
+	console.log('https://api.themoviedb.org/3/person/<%=id%>/movie_credits?api_key=<%=apikey%>&language=ko-KO&page='+page);
 $.ajax({
 
-	url : 'https://api.themoviedb.org/3/person/<%=id%>/movie_credits?api_key=<%=apikey%>&language=ko-KO',
+	url : 'https://api.themoviedb.org/3/person/<%=id%>/movie_credits?api_key=<%=apikey%>&language=ko-KO&page='+page,
 	dataType : 'json',
 	cache : false,
 	success : function(data) {
@@ -89,10 +109,21 @@ $.ajax({
 	}
 });
 
+}
+
+
+$('.more').click(function(){
+	readyList();
+});
+
+
+
+var check = 0;
+var page = false;
 function printPerson(list){
 	
 		var text = '';
-		var check = 0;
+		
 
 		for (var i = 0; i < 5; i++) {
 
@@ -136,10 +167,20 @@ function printPerson(list){
 
 		}
 
-		console.log('check : ' + check);
-		$('.movieList').html(text);
-
+		
+			if(page == false)
+			$('.movieList').html(text);
+			else
+			$('.movieList').html($('.movieList').html()+text);	
+			
 	
+		console.log('check: '+ check + "list.length:"+list.length);
+			if (check < list.length) 
+				$('.more').css('visibility','visible');
+			else
+				$('.more').css('visibility','hidden');
+			
+			page = true;
 }
 
 </script>
