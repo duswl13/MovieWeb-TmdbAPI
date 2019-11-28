@@ -224,49 +224,8 @@ public class NoticeDAO {
 	}
 
 
-	public boolean isNoticeWriter(int num, String pass) {
-		String NOTICE_sql="select * from NOTICE where NOTICE_NUM=?";
-		
-		try {
-			con=ds.getConnection();
-			pstmt=con.prepareStatement(NOTICE_sql);
-			pstmt.setInt(1, num);
-			rs=pstmt.executeQuery();
-			if(rs.next())
-				if(pass.equals(rs.getString("NOTICE_PASS"))) {
-					return true;
-				}
-		}catch(SQLException ex) {
-			System.out.println("isNOTICEWriter() 에러"+ex);
-		}
-			finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if (pstmt != null) {
-					try {
-						pstmt.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		return false;
-	}
-
 	public Boolean NoticeModify(NoticeVO modifyNotice) {
-		String sql = "update NOTICE set NOTICE_SUBJECT=?, NOTICE_CONTENT=? where NOTICE_NUM=?";
+		String sql = "update NOTICE_TBL set NOTICE_SUBJECT=?, NOTICE_CONTENT=? where NOTICE_NUM=?";
 
 		try {
 			con=ds.getConnection();
@@ -305,5 +264,46 @@ public class NoticeDAO {
 			}
 		return false;
 	}
+	
+	public Boolean noticeDelete(int num) {
+		String sql="delete from NOTICE_TBL where NOTICE_NUM=? ";
+		try {
+			con=ds.getConnection();
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			int result=pstmt.executeUpdate();
+
+			System.out.println(result+"개 삭제 되었습니다.");
+			if(result>=1)
+				return true;
+			
+		}catch(SQLException ex) {
+			System.out.println("boardDelete() 에러"+ex);
+		}
+			finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}		
+		return false;
+	}	
 
 }

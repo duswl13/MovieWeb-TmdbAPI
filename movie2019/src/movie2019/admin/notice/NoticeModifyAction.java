@@ -14,33 +14,20 @@ public class NoticeModifyAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
 		Boolean result = false;
-
+System.out.println("TTTTT");
 		//전달받은 파라미터 num 변수에 저장합니다.
-		int num=Integer.parseInt(request.getParameter("BOARD_NUM"));
+		int num=Integer.parseInt(request.getParameter("NOTICE_NUM"));
 		
-		BoardDAO boarddao = new BoardDAO();
-		BoardBean boarddata = new BoardBean();
+		NoticeDAO noticedao=new NoticeDAO();
+		NoticeVO notice = new NoticeVO();
 
-		//글쓴이 인지 확인하기 위해 저장된 비밀번호와 입력한 비밀번호를 비교합니다.
-		boolean usercheck=boarddao.isBoardWriter(num, request.getParameter("BOARD_PASS"));
-		//비밀번호가 다른 경우
-		if(usercheck==false) {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("alert('비밀번호가 다릅니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-			out.close();
-			return null;
-		}
 		//비밀번호가 일치하는 경우 수정 내용을 설정합니다.
-		boarddata.setBOARD_NUM(num);
-		boarddata.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
-		boarddata.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT"));
+		notice.setNOTICE_NUM(num);
+		notice.setNOTICE_SUBJECT(request.getParameter("NOTICE_SUBJECT"));
+		notice.setNOTICE_CONTENT(request.getParameter("NOTICE_CONTENT"));
 		
 		//DAO에서 수정 메서드 호출하여 수정합니다.
-		result = boarddao.boardModify(boarddata);
+		result = noticedao.NoticeModify(notice);
 		//수정에 실패한 경우
 		if(result==false) {
 			System.out.println("게시판 수정 실패");
@@ -55,7 +42,7 @@ public class NoticeModifyAction implements Action {
 		
 		forward.setRedirect(true);
 		//수정한 글 내용을 확인하기 위해 글 내용 보기 페이지를 경로로 설정합니다.
-		forward.setPath("BoardDetailAction.bo?num="+boarddata.getBOARD_NUM());
+		forward.setPath("BoardDetailAction.bo?num="+notice.getNOTICE_NUM());
 		
 		return forward;
 	}

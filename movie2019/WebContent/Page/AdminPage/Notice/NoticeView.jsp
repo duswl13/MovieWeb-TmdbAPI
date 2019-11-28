@@ -57,7 +57,7 @@ $(function(){
 				<a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUM}">
 					<button class="btn btn-info">수정</button>
 				</a>
-				<a href="NoticeDelete.bo?num=${noticedata.NOTICE_NUM}">
+				<a href="NoticeDeleteAction.bo?num=${noticedata.NOTICE_NUM}">
 					<button class="btn btn-danger">삭제</button>
 				</a>
 				<a href="NoticeList.bo?">
