@@ -553,11 +553,12 @@ document.getElementById("main").style.marginLeft = "250px";
 			console.log("이름:"+list[check].name);
 			console.log("포스터:"+list[check].profile_path);
 			tag += '<div class="col-xs-2">';
-			tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'"><img class="img-responsive"';
-			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'"></a>';
+			//tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'">
+			tag += '<img class="img-responsive"';
+			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'">';
 			
-			tag += '<div class="centered">\n';
-			tag += '<h5>' + list[check].name + '</h5></div>\n';
+			tag += '<div class="centered" Onclick="location.href=\'PersonDetail.ml?id='+list[check].id  + '&name='+list[check].name+'\'">';
+			tag += '<h3>' + list[check].name + '</h3></div>\n';
 			
 			tag += '<p>'+list[check].name+'</p>';
 			tag += '</div>';
