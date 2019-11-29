@@ -15,6 +15,23 @@
 </style>
 </head>
 <body>
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <div class="container">
  <form action="BoardModifyAction.bd" method="post" name="modifyform">
  <input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM }">
@@ -57,6 +74,7 @@
                          onClick="history.go(-1)">취소</button>
   </div>  
  </form>
+</div>
 </div>
 </body>
 </html>

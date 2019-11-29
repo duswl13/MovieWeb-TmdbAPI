@@ -34,6 +34,23 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <div class="container">
 <!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
  <form action="BoardDetailAction.bd" method="post"
@@ -99,6 +116,7 @@ $(document).ready(function(){
  </tr>
  </table> 
  </form>
+</div>
 </div>
 </body>
 </html>

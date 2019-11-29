@@ -52,6 +52,7 @@ public class BoardFrontController extends HttpServlet {
 	         forward = new ActionForward();
 	         forward.setRedirect(false); //포워딩 방식으로 주소가 바뀌지 않는다
 	         forward.setPath("Page/Board/board/board_write.jsp");
+	  
 	    }else if(command.equals("/BoardAddAction.bd")) { 
 	    	action=new BoardAddAction();
 	          try {
@@ -59,6 +60,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
+	   
 	    }else if(command.equals("/BoardDetailAction.bd")) { 
 	    	action=new BoardDetailAction();
 	          try {
@@ -66,6 +68,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
+	  
 	    }else if(command.equals("/BoardReplyView.bd")) { 
 	    	action=new BoardReplyView();
 	          try {
@@ -73,6 +76,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
+	    
 	    }else if(command.equals("/BoardReplyAction.bd")) { 
 	    	action=new BoardReplyAction();
 	          try {
@@ -80,6 +84,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
+	   
 	    }else if(command.equals("/BoardModifyView.bd")) { 
 	    	action=new BoardModifyView();
 	          try {
@@ -87,6 +92,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
+	  
 	    }else if(command.equals("/BoardModifyAction.bd")) { 
 	    	action=new BoardModifyAction();
 	          try {
