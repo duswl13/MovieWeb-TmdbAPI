@@ -68,14 +68,14 @@ public class NoticeFrontController extends HttpServlet {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/BoardModifyView.bo")) {
+		}else if(command.equals("/NoticeModifyView.bo")) {
 			action = new NoticeModifyView();
 			try {
 				forward=action.execute(request, response);
 			}catch(Exception e) {
 				e.printStackTrace();
-			}
-		}else if(command.equals("/BoardModifyAction.bo")) {
+			}	
+		}else if(command.equals("/NoticeModifyAction.bo")) {
 			action = new NoticeModifyAction();
 			try {
 				forward=action.execute(request, response);
@@ -97,7 +97,14 @@ public class NoticeFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		
-		}
+		}else if(command.equals("/NoticeDeleteAction.bo")) {
+			action = new NoticeDeleteAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+	}
 		
 		if(forward!=null) {
 			if(forward.isRedirect()) {//리다이렉트 됩니다.

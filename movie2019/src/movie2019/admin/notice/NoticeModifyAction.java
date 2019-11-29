@@ -10,52 +10,39 @@ public class NoticeModifyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//ÆÄ¶ó¹ÌÅÍ·Î °¡Á®¿Ã ‹š ÇÑ±ÛÀÌ ƒÆÁöÁö ¾Êµµ·Ï ÇÏ±â À§ÇÑ ¹®ÀåÀÔ´Ï´Ù.
+		//íŒŒë¼ë¯¸í„°ë¡œ ê°€ì ¸ì˜¬ Â‹Âš í•œê¸€ì´ ÂƒíŒç—´ ì•Šë„ë¡ í•˜ê¸° ìœ„í•œ ë¬¸ì¥ì…ë‹ˆë‹¤.
 		request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
 		Boolean result = false;
-
-		//Àü´Ş¹ŞÀº ÆÄ¶ó¹ÌÅÍ num º¯¼ö¿¡ ÀúÀåÇÕ´Ï´Ù.
-		int num=Integer.parseInt(request.getParameter("BOARD_NUM"));
+System.out.println("TTTTT");
+		//ì „ë‹¬ë°›ì€ íŒŒë¼ë¯¸í„° num ë³€ìˆ˜ì— ì €ì¥í•©ë‹ˆë‹¤.
+		int num=Integer.parseInt(request.getParameter("NOTICE_NUM"));
 		
-		BoardDAO boarddao = new BoardDAO();
-		BoardBean boarddata = new BoardBean();
+		NoticeDAO noticedao=new NoticeDAO();
+		NoticeVO notice = new NoticeVO();
 
-		//±Û¾´ÀÌ ÀÎÁö È®ÀÎÇÏ±â À§ÇØ ÀúÀåµÈ ºñ¹Ğ¹øÈ£¿Í ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£¸¦ ºñ±³ÇÕ´Ï´Ù.
-		boolean usercheck=boarddao.isBoardWriter(num, request.getParameter("BOARD_PASS"));
-		//ºñ¹Ğ¹øÈ£°¡ ´Ù¸¥ °æ¿ì
-		if(usercheck==false) {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out=response.getWriter();
-			out.println("<script>");
-			out.println("alert('ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.');");
-			out.println("history.back();");
-			out.println("</script>");
-			out.close();
-			return null;
-		}
-		//ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì ¼öÁ¤ ³»¿ëÀ» ¼³Á¤ÇÕ´Ï´Ù.
-		boarddata.setBOARD_NUM(num);
-		boarddata.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
-		boarddata.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT"));
+		//ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ëŠ” ê²½ìš° ìˆ˜ì • ë‚´ìš©ì„ ì„¤ì •í•©ë‹ˆë‹¤.
+		notice.setNOTICE_NUM(num);
+		notice.setNOTICE_SUBJECT(request.getParameter("NOTICE_SUBJECT"));
+		notice.setNOTICE_CONTENT(request.getParameter("NOTICE_CONTENT"));
 		
-		//DAO¿¡¼­ ¼öÁ¤ ¸Ş¼­µå È£ÃâÇÏ¿© ¼öÁ¤ÇÕ´Ï´Ù.
-		result = boarddao.boardModify(boarddata);
-		//¼öÁ¤¿¡ ½ÇÆĞÇÑ °æ¿ì
+		//DAOì—ì„œ ìˆ˜ì • ë©”ì„œë“œ í˜¸ì¶œí•˜ì—¬ ìˆ˜ì •í•©ë‹ˆë‹¤.
+		result = noticedao.NoticeModify(notice);
+		//ìˆ˜ì •ì— ì‹¤íŒ¨í•œ ê²½ìš°
 		if(result==false) {
-			System.out.println("°Ô½ÃÆÇ ¼öÁ¤ ½ÇÆĞ");
+			System.out.println("ê²Œì‹œíŒ ìˆ˜ì • ì‹¤íŒ¨");
 			forward.setRedirect(false);
-			request.setAttribute("message", "°Ô½ÃÆÇ ¼öÁ¤ ÀÛ¼º ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "ê²Œì‹œíŒ ìˆ˜ì • ì‘ì„± ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		
-		//¼öÁ¤ ¼º°øÀÇ °æ¿ì
-		System.out.println("°Ô½ÃÆÇ ¼öÁ¤ ¿Ï·á");
+		//ìˆ˜ì • ì„±ê³µì˜ ê²½ìš°
+		System.out.println("ê²Œì‹œíŒ ìˆ˜ì • ì™„ë£Œ");
 		
 		forward.setRedirect(true);
-		//¼öÁ¤ÇÑ ±Û ³»¿ëÀ» È®ÀÎÇÏ±â À§ÇØ ±Û ³»¿ë º¸±â ÆäÀÌÁö¸¦ °æ·Î·Î ¼³Á¤ÇÕ´Ï´Ù.
-		forward.setPath("BoardDetailAction.bo?num="+boarddata.getBOARD_NUM());
+		//ìˆ˜ì •í•œ ê¸€ ë‚´ìš©ì„ í™•ì¸í•˜ê¸° ìœ„í•´ ê¸€ ë‚´ìš© ë³´ê¸° í˜ì´ì§€ë¥¼ ê²½ë¡œë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
+		forward.setPath("BoardDetailAction.bo?num="+notice.getNOTICE_NUM());
 		
 		return forward;
 	}
