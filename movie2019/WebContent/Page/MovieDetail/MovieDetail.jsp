@@ -24,9 +24,6 @@
 	
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-<title>Insert title here</title>
-
 <% 
 String id = request.getParameter("id");
 
@@ -38,6 +35,7 @@ String apikey = application.getInitParameter("APIKEY");
 
 %>
 <style>
+
 .all {
 
 margin-top:22vh;

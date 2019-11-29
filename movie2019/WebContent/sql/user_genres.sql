@@ -36,3 +36,6 @@ INSERT INTO USER_GENRES VALUES((select nvl(max(USER_GENRES_NUMBER),0) from USER_
 INSERT INTO USER_GENRES VALUES((select nvl(max(USER_GENRES_NUMBER),0) from USER_GENRES)+1,
 9648,'jiyeon');
 
+
+/*유저의 관심 목록 가져오기*/
+/*select * from USER_GENRES where USER_ID = 'duswl13';*/
