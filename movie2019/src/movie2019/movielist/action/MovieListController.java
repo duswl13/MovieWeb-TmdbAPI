@@ -66,7 +66,7 @@ public class MovieListController extends HttpServlet {
 
 		if (command.equals("/main.ml")) {
 			forward = new ActionForward();
-			forward.setRedirect(true);
+			forward.setRedirect(false);
 			forward.setPath("Page/MainPage/MainPage.jsp");
 		} else if (command.equals("/MovieList.ml")) {
 			forward = new ActionForward(); // parameter ¿÷¿Ω

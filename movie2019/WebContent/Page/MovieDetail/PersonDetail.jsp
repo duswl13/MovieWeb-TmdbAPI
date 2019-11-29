@@ -16,6 +16,7 @@
 <!-- Bootstrap Js CDN -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <title>Insert title here</title>
 <style>
@@ -149,15 +150,23 @@ function printPerson(list){
 							100)
 							+ '...';
 					text += '<div class="col-xs-3">';
-					text += '<a href="moviedetail.ml?open=false&id=' + list[check].id
-							+ '">\n';
+					//text += '<a href="moviedetail.ml?open=false&id=' + list[check].id
+					//		+ '">\n';
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
-					text += '</a>';
-					text += '<div class="centered">\n';
-					text += '<h5>' + list[check].original_title + '</h5>\n';
-					text += '<p>' + list[check].overview + '</p></div>\n';
+					//text += '</a>';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					
+					text += ' <div>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += ' </div>';
+					text +='</div>\n';
 					text += '<h5>' + list[check].original_title + '</h5>';
-
+				
 					text += '</div>';
 
 					check++;
