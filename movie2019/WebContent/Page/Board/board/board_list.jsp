@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <style>
+ body {background:#141414;}
  select {justify-content:center;}
  .center-block {display:flex;
                 justify-content:center; /* 가운데 정렬 */}
@@ -35,6 +35,23 @@
 <title>영화 토론 게시판</title>
 </head>
 <body>
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <h1>영화 토론 게시판</h1>
 <div class="container">
 <%-- 게시글이 있는 경우 --%>
@@ -196,8 +213,15 @@
  <option>글쓴이</option>
  </select>
  <input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
- <button type="button" id="btnSearch">검색</button>
+ <input type="button" id="btnSearch" value="검색">
 
 </div>
+</div>
 </body>
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+
+
+</script>
 </html>

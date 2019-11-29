@@ -33,6 +33,23 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <div class="container">
  <form action="BoardAddAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
@@ -66,6 +83,7 @@ $(document).ready(function(){
     <button type="reset" class="btn btn-danger">취소</button>
   </div>  
  </form>
+</div>
 </div>
 </body>
 </html>

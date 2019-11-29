@@ -13,6 +13,23 @@
 </style>
 </head>
 <body>
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+<div id="main">
+
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
 <div class="container">
  <form action="BoardReplyAction.bd" method="post"
        name="boardform">
@@ -53,6 +70,7 @@
            value="취소" onClick="history.go(-1)">
    </div>  
  </form>
+</div>
 </div>
 </body>
 </html>
