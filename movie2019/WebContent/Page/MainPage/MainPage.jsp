@@ -13,7 +13,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <!-- Our Custom CSS -->
-<link rel="stylesheet" href="css/MainPagestyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/MainPagestyle.css">
 
 <!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -23,6 +23,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 <%
@@ -331,15 +332,24 @@
 					print += '<div class="item active">\n';
 				else
 					print += '<div class="item">\n';
-
+					
+					
 				print += '<div class="col-xs-4">\n';
 				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id + '">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
-				print += '</a>\n<div class="centered">\n';
-				print += '<h1>' + list[i].original_title + '</h1>\n';
-				print += '<h5>' + list[i].overview.substring(0,100)+'...' + '</h5>\n';
-				print += '<a href="#"><img src="Png/view.png"></a>\n';
-				print += '<a href="#"><img src="Png/delete.png"></a>\n</div></div></div>\n';
+				print += '\n<div class="centered">\n';
+				print += '<a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+				print += '<h1 style="clear:right; float:right;">' + list[i].original_title + '</h1>\n';
+
+				print += ' <div style="clear:right; float:right;>';
+				print += '<span class="fa fa-star"></span>';
+				print += '<span class="fa fa-star"></span>';
+				print += '<span class="fa fa-star"></span>';
+				print += '<span class="fa fa-star"></span>';
+				print += '<span class="fa fa-star"></span>';
+				print += ' </div>';
+				
+				print += '\n</div></a></div></div>\n';
 				i++;
 			}
 

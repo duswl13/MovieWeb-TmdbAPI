@@ -72,6 +72,9 @@ iframe {
 	opacity: 0.65;
 }
 
+h1{
+	text-align: right;
+}
 /*메인 영화소개*/
 #m_head {
 	color: white;
@@ -145,6 +148,7 @@ display:block;}
 
 /* Centered text */
 .centered {
+	width: 60%;
 display:none;
 color:white;
   position: absolute;
