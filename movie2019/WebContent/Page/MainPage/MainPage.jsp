@@ -168,7 +168,7 @@
 					dataType : 'json',
 					cache : false,
 					success : function(data) {
-						console.log('인기목록 성공');
+						console.log('인기목록 성공 :'+'https://api.themoviedb.org/3/movie/popular?api_key=<%=apikey%>&language=ko-KO&page=1&region=KR');
 						var list = data.results;
 						loadVideo(list[randomRange(0,5)]);
 						printMovie(list,0);
@@ -205,7 +205,7 @@
 			
 			var day = today.getDate();
 			if(day<10){
-				day = "-0"+day;
+				day = "0"+day;
 			}
 			
 			return year+"-"+mon+"-"+day;		
@@ -219,7 +219,7 @@
 					dataType : 'json',
 					cache : false,
 					success : function(data) {
-						console.log('최신목록 성공');
+						console.log('최신목록 성공 :' +'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(-1)+'&release_date.lte='+getDt3(0));
 						var list = data.results;
 
 						printMovie(list,1);
@@ -243,7 +243,7 @@
 			dataType : 'json',
 			cache : false,
 			success : function(data) {
-				console.log('예정목록 성공');
+				console.log('예정목록 성공:'+'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(0)+'&release_date.lte='+getDt3(3));
 				var list = data.results;
 
 				printMovie(list,2);
