@@ -91,7 +91,7 @@ $(function(){
 	<c:if test="${listcount>0 }">
 		<table class="table table-striped">
 			<tr>
-				<th colspan="3">MVC 게시판 -LIST</th>
+				<th colspan="3">공지사항 게시판 -LIST</th>
 				<th colspan="2"><font size=3>글 개수:${listcount }</font>
 				</th>
 			</tr>
@@ -111,7 +111,7 @@ $(function(){
 				<td>
 					<div>
 			
-						<a href="NoticeDetailAction.bo?num=${b.NOTICE_NUM }">
+						<a href="NoticeDetailAction.bo?num=${b.NOTICE_NUMBER }">
 							${b.NOTICE_SUBJECT }
 						</a>
 					</div>

@@ -210,7 +210,7 @@ ul {
 							<h2>관리자 페이지</h2>
 							<ul>
 								<li><a href="NoticeList.bo">공지사항 관리</a></li>
-								<li><a href="Page/AdminPage/FAQ/FAQList.jsp">FAQ 관리</a></li>
+								<li><a href="FAQList.fa">FAQ 관리</a></li>
 								<li><a href="Page/AdminPage/UserList/UserList.jsp">회원
 										관리</a></li>
 							</ul>
