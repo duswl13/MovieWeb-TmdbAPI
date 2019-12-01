@@ -26,9 +26,34 @@ where rn between #{start} and #{end}
 
 <select id="faqCount" resultType="int">
 select count(*) from faq_tbl
-
+</select>
+<select id="gongSearch" resultType="g">
+select NOTICE_SUBJECT, NOTICE_CONTENT,TO_CHAR(NOTICE_DATE, 'YYYY-MM-DD') as NOTICE_DATE
+ from(select A.*,rownum as rn from(select NOTICE_SUBJECT,NOTICE_CONTENT, NOTICE_DATE from notice_tbl 
+ where NOTICE_SUBJECT like '%'||#{keyword}||'%' or NOTICE_CONTENT like '%'||#{keyword}||'%'
+ order by NOTICE_DATE desc) A) 
+where rn between #{start} and #{end}
+</select>
+<select id="gongSearchCount" resultType="int">
+select count(*)
+ from notice_tbl
+where NOTICE_SUBJECT like '%'||#{keyword}||'%' or NOTICE_CONTENT like '%'||#{keyword}||'%'
 </select>
 
+
+<select id="fSearch" resultType="f">
+select FAQ_SUBJECT, FAQ_CONTENT,TO_CHAR(FAQ_DATE, 'YYYY-MM-DD') 
+as FAQ_DATE
+ from(select A.*,rownum as rn from
+ (select FAQ_SUBJECT,FAQ_CONTENT, FAQ_DATE from
+ faq_tbl  where FAQ_SUBJECT like '%'||#{keyword}||'%' or FAQ_CONTENT like '%'||#{keyword}||'%' order by FAQ_DATE desc) A) 
+where rn between #{start} and #{end}
+</select>
+<select id="FSearchCount" resultType="int">
+select count(*)
+ from faq_tbl
+where FAQ_SUBJECT like '%'||#{keyword}||'%' or FAQ_CONTENT like '%'||#{keyword}||'%'
+</select>
 
 
 </mapper> 

@@ -13,37 +13,19 @@ color: white;
 </style>
 <script type="text/javascript">
 	$(function() {
-		$("#oclick1").click(function(){
-			$("#divresult1").slideToggle('midle');});		
-			$("#oclick2").click(function(){
-				$("#divresult2").slideToggle('midle');});			
-				$("#oclick3").click(function(){
-					$("#divresult3").slideToggle('midle');});				
-						$("#oclick4").click(function(){
-							$("#divresult4").slideToggle('midle');});
-							$("#oclick5").click(function(){
-								$("#divresult5").slideToggle('midle');});
-								$("#oclick6").click(function(){
-									$("#divresult6").slideToggle('midle');});
-									$("#oclick7").click(function(){
-										$("#divresult7").slideToggle('midle');});
-										$("#oclick8").click(function(){
-											$("#divresult8").slideToggle('midle');});
-											$("#oclick9").click(function(){
-												$("#divresult9").slideToggle('midle');});
-												$("#oclick10").click(function(){
-													$("#divresult10").slideToggle('midle');});
+		for(let a =1; a<11;a++){
+		$("#oclick"+a).click(function(){
+			$("#divresult"+a).slideToggle('midle');});		
+		}
 		
 	});
 </script>
 </head>
 <body>
-ㅁㄴㅇㅁㄴㅇㅁㄴㅇㄴㅁㅇㅁㄴㅇ
-
 	<table border="1" width="500px">
 		<tr>
-			<th>타이틀</th>
-			<th>날짜</th>
+			<th>제목</th>
+			<th width="100px">날짜</th>
 		</tr>
 		<c:forEach var="row" items="${list}" varStatus="status">
 			<tr>

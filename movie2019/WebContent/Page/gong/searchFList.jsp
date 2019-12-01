@@ -22,9 +22,12 @@
 
 	<table border="1" width="500px">
 		<tr>
-			<th>타이틀</th>
-			<th>날짜</th>
+			<th>제목</th>
+			<th width="100px">날짜</th>
 		</tr>
+		<c:choose>
+	<c:when test="${list eq '[]'}"><tr><td colspan="2" style="color: red;">검색결과가없습니다</td></tr></c:when>		
+<c:otherwise>
 		<c:forEach var="row" items="${list}" varStatus="status">
 			<tr>
 				<td id="oclick${status.count }">${row.FAQ_SUBJECT }</td>			
@@ -35,13 +38,15 @@
 			</tr>
 			
 		</c:forEach>
+		</c:otherwise>
+		</c:choose>
 	</table>
 	<table width="500px">
 	<tr>
 	<td colspan="2">
-	<c:if test="${current_page>1 }"><a href="#" onclick="flist('1')">[처음]</a></c:if>
+	<c:if test="${current_page>1 }"><a href="#" onclick="faqSearch('1')">[처음]</a></c:if>
 	<c:if test="${current_block>1 }">
-	<a href="#2" onclick="flist('${prev_page}')">[이전]</a>
+	<a href="#2" onclick="faqSearch('${prev_page}')">[이전]</a>
 	</c:if>
 	<c:forEach var="page" begin="${block_start }" end="${block_end }">
 	<!-- 현재페이지 하이퍼링크 제거 -->
@@ -50,14 +55,14 @@
 	</c:if>
 	<!-- 현재페이지가 아니면 하이퍼링크 표시 -->
 	<c:if test="${page!=current_page }">
-	<a href="#1" onclick="flist('${page}')">[${page}]</a>
+	<a href="#1" onclick="faqSearch('${page}')">[${page}]</a>
 	</c:if>
 	</c:forEach>
 	<c:if test="${current_block<total_block }">
-	<a href="#4" onclick="flist('${next_page}')">[다음]</a>
+	<a href="#4" onclick="faqSearch('${next_page}')">[다음]</a>
 	</c:if>
 	<c:if test="${current_page<total_page }">
-	<a href="#5" onclick="flist('${total_page}')">[끝]</a>
+	<a href="#5" onclick="faqSearch('${total_page}')">[끝]</a>
 	</c:if>
 	</td>
 	</tr>
