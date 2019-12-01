@@ -1,4 +1,4 @@
-package movie2019.admin.notice;
+package movie2019.admin.faq;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-public class NoticeDAO {
+public class FAQDAO {
 	DataSource ds;
 	Connection con;
 	PreparedStatement pstmt;
@@ -19,7 +19,7 @@ public class NoticeDAO {
 	int result;
 	Boolean bool;
 
-	public NoticeDAO() {
+	public FAQDAO() {
 		try {
 			Context init = new InitialContext();
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
@@ -28,23 +28,23 @@ public class NoticeDAO {
 			System.out.println("DB 연결 실패 : " + ex);
 		}
 	}
-	public boolean NoticeInsert(NoticeVO nv) {
+	public boolean FAQInsert(FAQVO nv) {
 		try {
 			con = ds.getConnection();
-			String sql = "insert into NOTICE(NOTICE_NUMBER," 
-					+ "NOTICE_NAME, NOTICE_SUBJECT, "
-					+ "NOTICE_CONTENT, NOTICE_DATE) "
-					+ "values((select nvl(max(NOTICE_NUMBER),0)+1 from NOTICE)," 
+			String sql = "insert into FAQ(FAQ_NUMBER," 
+					+ "FAQ_NAME, FAQ_SUBJECT, "
+					+ "FAQ_CONTENT, FAQ_DATE) "
+					+ "values((select nvl(max(FAQ_NUMBER),0)+1 from FAQ)," 
 					+ "?,?,?,sysdate)";
 			pstmt = con.prepareStatement(sql);
-		//	pstmt.setInt(1, nv.getNOTICE_NUMBER());
-			pstmt.setString(1, nv.getNOTICE_NAME());
-			pstmt.setString(2, nv.getNOTICE_SUBJECT());
-			pstmt.setString(3, nv.getNOTICE_CONTENT());
-//			pstmt.setDate(4, nv.getNOTICE_DATE());
+		//	pstmt.setInt(1, nv.getFAQ_NUMBER());
+			pstmt.setString(1, nv.getFAQ_NAME());
+			pstmt.setString(2, nv.getFAQ_SUBJECT());
+			pstmt.setString(3, nv.getFAQ_CONTENT());
+//			pstmt.setDate(4, nv.getFAQ_DATE());
 	
 			result = pstmt.executeUpdate();
-			System.out.println("TESTdoa=>" + nv.getNOTICE_NAME());
+			System.out.println("TESTdoa=>" + nv.getFAQ_NAME());
 			if (result == 1) {
 				bool = true;
 			} else {
@@ -77,7 +77,7 @@ public class NoticeDAO {
 		int x = 0;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select count(*) from NOTICE");
+			pstmt = con.prepareStatement("select count(*) from FAQ");
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
@@ -113,16 +113,16 @@ public class NoticeDAO {
 		return x;
 	}
 
-	public List<NoticeVO> getNoticeList(int page, int limit) {
+	public List<FAQVO> getFAQList(int page, int limit) {
 		// page : 페이지
 		// limit : 페이지 당 목록의 수
-		// NOTICE_RE_REF desc, NOTICE_RE_SEQ asc에 의해 정렬한 것을
+		// FAQ_RE_REF desc, FAQ_RE_SEQ asc에 의해 정렬한 것을
 		// 조건절에 맞는 rnum의 범위 만큼 가져오는 쿼리문입니다.
 
-		String sql = "select * from NOTICE"
-				+ "	where NOTICE_NUMBER>=? and NOTICE_NUMBER<=?";
+		String sql = "select * from FAQ"
+				+ "	where FAQ_NUMBER>=? and FAQ_NUMBER<=?";
 
-		List<NoticeVO> list = new ArrayList<NoticeVO>();
+		List<FAQVO> list = new ArrayList<FAQVO>();
 		// 한 페이지당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지...
 		int startrow = (page - 1) * limit + 1;
 		// 읽기 시작할 row 번호( 1 11 21 31 ...
@@ -138,13 +138,13 @@ public class NoticeDAO {
 
 			// DB에서 가져온 데이터를 VO객체에 담습니다.
 			while (rs.next()) {
-				NoticeVO notice = new NoticeVO();
-				notice.setNOTICE_NUMBER(rs.getInt("NOTICE_NUMBER"));
-				notice.setNOTICE_NAME(rs.getString("NOTICE_NAME"));
-				notice.setNOTICE_SUBJECT(rs.getString("NOTICE_SUBJECT"));
-				notice.setNOTICE_CONTENT(rs.getString("NOTICE_CONTENT"));
-				notice.setNOTICE_DATE(rs.getDate("NOTICE_DATE"));
-				list.add(notice);
+				FAQVO faq = new FAQVO();
+				faq.setFAQ_NUMBER(rs.getInt("FAQ_NUMBER"));
+				faq.setFAQ_NAME(rs.getString("FAQ_NAME"));
+				faq.setFAQ_SUBJECT(rs.getString("FAQ_SUBJECT"));
+				faq.setFAQ_CONTENT(rs.getString("FAQ_CONTENT"));
+				faq.setFAQ_DATE(rs.getDate("FAQ_DATE"));
+				list.add(faq);
 			}
 			return list; // 값을 담을 객체를 저장한 리스트를 호출한 곳으로 가져갑니다.
 		} catch (Exception e) {
@@ -177,23 +177,23 @@ public class NoticeDAO {
 	}
 
 	
-	public NoticeVO getDetail(int num) {
-		NoticeVO notice = null;
+	public FAQVO getDetail(int num) {
+		FAQVO faq = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select * from NOTICE where NOTICE_NUMBER=?");
+			pstmt = con.prepareStatement("select * from FAQ where FAQ_NUMBER=?");
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				notice = new NoticeVO();
-				notice.setNOTICE_NUMBER(rs.getInt("NOTICE_NUMBER"));
-				notice.setNOTICE_NAME(rs.getString("NOTICE_NAME"));
-				notice.setNOTICE_SUBJECT(rs.getString("NOTICE_SUBJECT"));
-				notice.setNOTICE_CONTENT(rs.getString("NOTICE_CONTENT"));
-				// NOTICE.setNOTICE_DATE(rs.getDate("NOTICE_DATE"));
+				faq = new FAQVO();
+				faq.setFAQ_NUMBER(rs.getInt("FAQ_NUMBER"));
+				faq.setFAQ_NAME(rs.getString("FAQ_NAME"));
+				faq.setFAQ_SUBJECT(rs.getString("FAQ_SUBJECT"));
+				faq.setFAQ_CONTENT(rs.getString("FAQ_CONTENT"));
+				// FAQ.setFAQ_DATE(rs.getDate("FAQ_DATE"));
 			}
-			return notice;
+			return faq;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("getDetail() 에러: " + e);
@@ -224,20 +224,20 @@ public class NoticeDAO {
 	}
 
 
-	public Boolean NoticeModify(NoticeVO modifyNotice) {
-		String sql = "update NOTICE set NOTICE_SUBJECT=?, NOTICE_CONTENT=? where NOTICE_NUMBER=?";
+	public Boolean FAQModify(FAQVO modifyFAQ) {
+		String sql = "update FAQ set FAQ_SUBJECT=?, FAQ_CONTENT=? where FAQ_NUMBER=?";
 
 		try {
 			con=ds.getConnection();
 			pstmt=con.prepareStatement(sql);
-			pstmt.setString(1, modifyNotice.getNOTICE_SUBJECT());
-			pstmt.setString(2, modifyNotice.getNOTICE_CONTENT());
-			pstmt.setInt(3, modifyNotice.getNOTICE_NUMBER());
+			pstmt.setString(1, modifyFAQ.getFAQ_SUBJECT());
+			pstmt.setString(2, modifyFAQ.getFAQ_CONTENT());
+			pstmt.setInt(3, modifyFAQ.getFAQ_NUMBER());
 			int result=pstmt.executeUpdate();
 			if(result==1)
 				return true;
 		}catch(SQLException ex) {
-			System.out.println("NOTICEModify() 에러"+ex);
+			System.out.println("FAQModify() 에러"+ex);
 		}
 			finally {
 				if (rs != null) {
@@ -265,8 +265,8 @@ public class NoticeDAO {
 		return false;
 	}
 	
-	public Boolean noticeDelete(int num) {
-		String sql="delete from NOTICE where NOTICE_NUMBER=? ";
+	public Boolean faqDelete(int num) {
+		String sql="delete from FAQ where FAQ_NUMBER=? ";
 		try {
 			con=ds.getConnection();
 			pstmt=con.prepareStatement(sql);

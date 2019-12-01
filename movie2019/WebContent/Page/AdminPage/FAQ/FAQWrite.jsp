@@ -47,20 +47,20 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 <%session.setAttribute("id","admin1"); %>
-	<form action="NoticeAddAction.bo" method="post" name="noticeform">
-		<h1>공지사항</h1>
+	<form action="FAQAddAction.fa" method="post" name="faqform">
+		<h1>FAQ</h1>
 		<div class="form-group">
-			<label for="notice_name">글쓴이</label>
-			<input name="NOTICE_NAME" id="notice_name" value="${id }" readOnly type="text" size="10" maxlength="30"
-					class="form-control" placeholder="Enter notice_name">
+			<label for="faq_name">글쓴이</label>
+			<input name="FAQ_NAME" id="faq_name" value="${id }" readOnly type="text" size="10" maxlength="30"
+					class="form-control" placeholder="Enter faq_name">
 		</div>
 		<div class="form-group">
-			<label for="notice_subject">제목</label>
-			<textarea name="NOTICE_SUBJECT" id="notice_subject" cols="67" rows="1" class="form-control"></textarea>
+			<label for="faq_subject">제목</label>
+			<textarea name="FAQ_SUBJECT" id="faq_subject" cols="67" rows="1" class="form-control"></textarea>
 		</div>
 		<div class="form-group">
-			<label for="notice_content">내용</label>
-			<textarea name="NOTICE_CONTENT" id="notice_content" cols="67" rows="10" class="form-control"></textarea>
+			<label for="faq_content">내용</label>
+			<textarea name="FAQ_CONTENT" id="faq_content" cols="67" rows="10" class="form-control"></textarea>
 		</div>
 		<div class="form-group">
 			<button type=submit class="btn btn-primary">등록</button>

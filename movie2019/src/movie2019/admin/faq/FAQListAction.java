@@ -1,4 +1,4 @@
-package movie2019.admin.notice;
+package movie2019.admin.faq;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,13 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-public class NoticeListAction implements Action{
+public class FAQListAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		NoticeDAO noticedao=new NoticeDAO();
-		List<NoticeVO> noticelist=new ArrayList<NoticeVO>();
+		FAQDAO faqdao=new FAQDAO();
+		List<FAQVO> faqlist=new ArrayList<FAQVO>();
 		
 		int page=1;
 		int limit=10;
@@ -24,11 +24,11 @@ public class NoticeListAction implements Action{
 		System.out.println("넘어온 페이지 = "+page);
 		
 		//총 리스트 수를 받아옵니다.
-		int listcount=noticedao.getListCount();
+		int listcount=faqdao.getListCount();
 		System.out.println("리스트 수"+listcount);
 		
 		//리스트를 받아옵니다.
-		noticelist = noticedao.getNoticeList(page,limit);
+		faqlist = faqdao.getFAQList(page,limit);
 		
 		/*
 		총 페이지 수 = 
@@ -83,15 +83,15 @@ public class NoticeListAction implements Action{
 		request.setAttribute("listcount", listcount);
 	
 		//해당 페이지의 글 목록을 갖고 있는 리스트
-		request.setAttribute("noticelist", noticelist);
+		request.setAttribute("faqlist", faqlist);
 		
 		ActionForward forward=new ActionForward();
 		forward.setRedirect(false);
 		
 		//글 목록 페이지로 이동하기 위해 경로를 설정합니다.
-		forward.setPath("Page/AdminPage/Notice/NoticeList.jsp");
+		forward.setPath("Page/AdminPage/FAQ/FAQList.jsp");
 		
-		return forward;	//noticeFrontController.java로 리턴됩니다.
+		return forward;	//FAQFrontController.java로 리턴됩니다.
 	}
 
 }

@@ -12,7 +12,7 @@ span{
 	background-color:grey;
 }
 </style>
-<title>공지사항 게시판</title>
+<title>FAQ 게시판</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -44,23 +44,23 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<table class="table table-striped">
-		<tr><th colspan="2"><strong>공지사항 게시판-view페이지</strong></th></tr>
+		<tr><th colspan="2"><strong>FAQ 게시판-view페이지</strong></th></tr>
 		<tr><td>글쓴이</td>
-			<td>${noticedata.NOTICE_NAME }</td></tr>
+			<td>${faqdata.FAQ_NAME }</td></tr>
 		<tr><td>제목</td>
-			<td>${noticedata.NOTICE_SUBJECT }</td></tr>
+			<td>${faqdata.FAQ_SUBJECT }</td></tr>
 		<tr><td>내용</td>
 			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">
-			${noticedata.NOTICE_CONTENT }</textarea></td></tr>	
+			${faqdata.FAQ_CONTENT }</textarea></td></tr>	
 		<tr>
 			<td colspan="2" class="center">
-				<a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUMBER}">
+				<a href="FAQModifyView.fa?num=${faqdata.FAQ_NUMBER}">
 					<button class="btn btn-info">수정</button>
 				</a>
-				<a href="NoticeDeleteAction.bo?num=${noticedata.NOTICE_NUMBER}">
+				<a href="FAQDeleteAction.fa?num=${faqdata.FAQ_NUMBER}">
 					<button class="btn btn-danger">삭제</button>
 				</a>
-				<a href="NoticeList.bo?">
+				<a href="FAQList.fa?">
 					<button class="btn btn-primary">목록</button>
 				</a>
 			</td>

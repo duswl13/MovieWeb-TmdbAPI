@@ -3,16 +3,16 @@ package movie2019.admin.notice;
 import java.sql.Date;
 
 public class NoticeVO {
-	private int NOTICE_NUM;
+	private int NOTICE_NUMBER;
 	private String NOTICE_NAME;
 	private String NOTICE_SUBJECT;
 	private String NOTICE_CONTENT;
 	private Date NOTICE_DATE;
-	public int getNOTICE_NUM() {
-		return NOTICE_NUM;
+	public int getNOTICE_NUMBER() {
+		return NOTICE_NUMBER;
 	}
-	public void setNOTICE_NUM(int nOTICE_NUM) {
-		NOTICE_NUM = nOTICE_NUM;
+	public void setNOTICE_NUMBER(int nOTICE_NUMBER) {
+		NOTICE_NUMBER = nOTICE_NUMBER;
 	}
 	public String getNOTICE_NAME() {
 		return NOTICE_NAME;

@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<script src="notice/writeform.js" charset="UTF-8"></script>
 <style>
 tr.center-block{text-align:center}
 h1{font-size:1.5rem;text-align:center;color:#1a92b9}
@@ -44,23 +43,23 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
-	<form action="NoticeModifyAction.bo" method="post" 
+	<form action="FAQModifyAction.fa" method="post" 
 	name="modifyform">
-	<input type="hidden" name="NOTICE_NUMBER" value="${notice.NOTICE_NUMBER }">
-		<h1>공지사항 게시판-Modify</h1>
+	<input type="hidden" name="FAQ_NUMBER" value="${faq.FAQ_NUMBER }">
+		<h1>FAQ 게시판-Modify</h1>
 		<div class="form-group">
-			<label for="notice_name">글쓴이</label>
-			<input name="NOTICE_NAME" id="notice_name" value="${notice.NOTICE_NAME }" readOnly type="text"
+			<label for="faq_name">글쓴이</label>
+			<input name="FAQ_NAME" id="faq_name" value="${faq.FAQ_NAME }" readOnly type="text"
 					class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="notice_subject">제목</label>
-			<input name="NOTICE_SUBJECT" id="notice_subject" type="text" 
-			value="${notice.NOTICE_SUBJECT }" class="form-control" maxlength="100" value="${notice.NOTICE_SUBJECT }">
+			<label for="faq_subject">제목</label>
+			<input name="FAQ_SUBJECT" id="faq_subject" type="text" 
+			value="${faq.FAQ_SUBJECT }" class="form-control" maxlength="100" value="${faq.FAQ_SUBJECT }">
 		</div>
 		<div class="form-group">
-			<label for="notice_content">내용</label>
-			<textarea name="NOTICE_CONTENT" id="notice_content" rows="10" class="form-control">${notice.NOTICE_CONTENT }</textarea>
+			<label for="faq_content">내용</label>
+			<textarea name="FAQ_CONTENT" id="faq_content" rows="10" class="form-control">${faq.FAQ_CONTENT }</textarea>
 		</div>
 		
 		<div class="form-group">
