@@ -1,180 +1,197 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
 <style>
-* {margin:0 auto;}
-body {background:#141414;}
-.center-block { display:flex; justify-content:center; /*가운데정렬*/ }
-h1 {color:white}
+* {
+	margin: 0;
+	padding: 0;
+}
+body {
+	background: #141414;
+	font-family: montserrat, arial, verdana;
+}
+
+.center-block {
+	display: flex;
+	justify-content: center; /*가운데정렬*/
+}
+
+h1, h2 {
+	color: #edf1f2
+}
+
 button {
-	width: 200px;
-	height: 50px;
-	background: SteelBlue;
-	border: 0px;
-	border-radius: 10px;
-	font-size: 10pt;
+	width: 100px;
+	height: 40px;
+	line-height: 30px;
+	background: #27AE60;
+	font-weight: bold;
 	color: white;
+	border: 0 none;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 10px 5px;
+}
+
+button:hover {
+	opacity: 50%;
 }
 </style>
 
 </head>
 <body>
 
-<!-- 메뉴 부분  <script>는 body 아래에-->
-<% 
-boolean open = false;
-if(request.getParameter("open") != null){
-   open = Boolean.parseBoolean(request.getParameter("open"));
-}
-%>
+	<!-- 메뉴 부분  <script>는 body 아래에-->
+	<%
+		boolean open = false;
+		if (request.getParameter("open") != null) {
+			open = Boolean.parseBoolean(request.getParameter("open"));
+		}
+	%>
 
-<% if(!open) {%>
-<jsp:include page="/Page/Navi/Navi.jsp" />
-<%} else{ %>
-<jsp:include page="/Page/Navi/Navi3.jsp" />
-<%} %>
+	<%
+		if (!open) {
+	%>
+	<jsp:include page="/Page/Navi/Navi.jsp" />
+	<%
+		} else {
+	%>
+	<jsp:include page="/Page/Navi/Navi3.jsp" />
+	<%
+		}
+	%>
 
 
-<div id="main">
+	<div id="main">
 
-      <span style="font-size: 30px; cursor: pointer; color: white;"
-         onclick="openNav()">&#9776;</span>
+		<span style="font-size: 30px; cursor: pointer; color: white;"
+			onclick="openNav()">&#9776;</span>
 
-<h1>여기는 실시간 리뷰 보기 게시판</h1>
-<div class=container>
+		<h1>지금 이 순간,</h1>
+		<h2>보슈의 다른 회원들은 어떤 영화를 보고, 또 평가하고 있을까요?</h2>
+		<div class=container>
 
-<%--게시글이 있는 경우 --%>
-<c:if test="${listcount > 0 }">
-<table class="table table-striped">
-<tr>
-	<th colspan=3>MVC게시판 - list
-	</th>
-	<th colspan=2><font size=3>글 개수 : ${listcount } </font>
-	</th>
-</tr>
-<tr>
-	<th width=8%><div>번호</div>
-	</th>
-	<th width=50%><div>제목</div>
-	</th>
-	<th width=14%><div>작성자</div>
-	</th>
-	<th width=17%><div>날짜</div>
-	</th>
-	<th width=11%><div>조회수</div>
-	</th>
-</tr>
-<c:set var="num" value="${listcount-(page-1)*10}"/>
-<c:forEach var="b" items="${boardlist}">
-	<tr>
-		<td>
-		<c:out value="${num}"/> <%--num출력 --%>
-		<c:set var="num" value="${num-1}"/> <%-- num=num-1; 의미 --%>
-		</td>
-		<td>
-			<div>
-			<%--답변글 제목 앞에 여백 처리 부분
+			<%--게시글이 있는 경우 --%>
+			<c:if test="${listcount > 0 }">
+				<table class="table table-striped">
+					<tr>
+						<th colspan=3>MVC게시판 - list</th>
+						<th colspan=2><font size=3>글 개수 : ${listcount } </font></th>
+					</tr>
+					<tr>
+						<th width=8%><div>번호</div></th>
+						<th width=50%><div>제목</div></th>
+						<th width=14%><div>작성자</div></th>
+						<th width=17%><div>날짜</div></th>
+						<th width=11%><div>조회수</div></th>
+					</tr>
+					<c:set var="num" value="${listcount-(page-1)*10}" />
+					<c:forEach var="b" items="${boardlist}">
+						<tr>
+							<td><c:out value="${num}" /> <%--num출력 --%> <c:set var="num"
+									value="${num-1}" /> <%-- num=num-1; 의미 --%></td>
+							<td>
+								<div>
+									<%--답변글 제목 앞에 여백 처리 부분
 			 BOARD_RE_LEV, BOARD_NUM, BOARD_SUBJECT, 
 			 BOARD_NAME, BOARD_DATE, BOARD_READCOUNT : property 이름  --%>
-			<c:if test="${b.BOARD_RE_LEV != 0}"> <!-- 답글인 경우 -->
-				<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }" step="1">
+									<c:if test="${b.BOARD_RE_LEV != 0}">
+										<!-- 답글인 경우 -->
+										<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }"
+											step="1">
 				&nbsp;
 				</c:forEach>
-			</c:if>
-			<c:if test="${b.BOARD_RE_LEV == 0}"> <!-- 원문인 경우 -->
+									</c:if>
+									<c:if test="${b.BOARD_RE_LEV == 0}">
+										<!-- 원문인 경우 -->
 				&nbsp;
 			</c:if>
-			
-			<a href="BoardDetailAction.bo?num=${b.BOARD_NUM}">${b.BOARD_SUBJECT}</a>			
-			</div>
-		</td>
-		<td>
-			<div>${b.BOARD_NAME }</div>
-		</td>
-		<td>
-			<div>${b.BOARD_DATE }</div>
-		</td>
-		<td>
-			<div>${b.BOARD_READCOUNT }</div>
-		</td>
-	</tr>	
-</c:forEach>	
-</table>
 
-<div class="center-block">
-	<div class=row>
-		<div class=col>
-			<ul class=pagination>
-			
-		<c:if test="${page <= 1 }">
-			<li class=page-item>
-			<a class=page-link href=#>이전&nbsp;</a>
-			</li>
-		</c:if>
-		<c:if test="${page > 1 }">
-			<li class=page-item>
-			<a class=page-link href="BoardList.bo?page=${page-1}">이전&nbsp;</a>
-			</li>
-		</c:if>		
-		
-		<c:forEach var="a" begin="${startpage }" end="${endpage }">
-			<c:if test="${a == page }">
-				<li class=page-item>
-				<a class=page-link href=#>${a }</a>
-				</li>
+									<a href="BoardDetailAction.bo?num=${b.BOARD_NUM}">${b.BOARD_SUBJECT}</a>
+								</div>
+							</td>
+							<td>
+								<div>${b.BOARD_NAME }</div>
+							</td>
+							<td>
+								<div>${b.BOARD_DATE }</div>
+							</td>
+							<td>
+								<div>${b.BOARD_READCOUNT }</div>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
+
+				<div class="center-block">
+					<div class=row>
+						<div class=col>
+							<ul class=pagination>
+
+								<c:if test="${page <= 1 }">
+									<li class=page-item><a class=page-link href=#>이전&nbsp;</a>
+									</li>
+								</c:if>
+								<c:if test="${page > 1 }">
+									<li class=page-item><a class=page-link
+										href="BoardList.bo?page=${page-1}">이전&nbsp;</a></li>
+								</c:if>
+
+								<c:forEach var="a" begin="${startpage }" end="${endpage }">
+									<c:if test="${a == page }">
+										<li class=page-item><a class=page-link href=#>${a }</a></li>
+									</c:if>
+									<c:if test="${a != page }">
+										<li class=page-item><a class=page-link
+											href="BoardList.bo?page=${a }">${a }</a></li>
+									</c:if>
+								</c:forEach>
+
+								<c:if test="${page >= maxpage }">
+									<li class=page-item><a class=page-link href=#>&nbsp;다음</a>
+									</li>
+								</c:if>
+								<c:if test="${page < maxpage }">
+									<li class=page-item><a class=page-link
+										href="BoardList.bo?page=${page+1 }">&nbsp;다음</a></li>
+								</c:if>
+							</ul>
+						</div>
+					</div>
+
+				</div>
 			</c:if>
-			<c:if test="${a != page }">
-				<li class=page-item>
-					<a class=page-link href="BoardList.bo?page=${a }">${a }</a>	
-				</li>	
+			<!-- ddddd -->
+			<!-- 게시글이 없는 경우 -->
+			<c:if test="${listcount == 0 }">
+				<font size=5>등록된 글이 없다...</font>
 			</c:if>
-		</c:forEach>
-		
-		<c:if test="${page >= maxpage }">
-			<li class=page-item>
-				<a class=page-link href=#>&nbsp;다음</a>
-			</li>
-		</c:if>
-		<c:if test="${page < maxpage }">
-			<li class=page-item>
-				<a class=page-link href="BoardList.bo?page=${page+1 }">&nbsp;다음</a>	
-			</li>
-			</c:if>		
-			</ul>	
+			<br> <br>
+			<br>
+			<br> <a href="rv_write.jsp"><button type=button>리뷰쓰기</button></a>
+
 		</div>
 	</div>
-
-</div>
-</c:if>
-<!-- ddddd -->
-<!-- 게시글이 없는 경우 -->
-<c:if test="${listcount == 0 }">
-		<font size=5>등록된 글이 없다...</font>
-</c:if><br>
+	<!-- 추가... -->
 
 
-<br><br><br>
-<a href="review_write.jsp"><button type=button>리뷰쓰기</button></a>
+	<script>
+		//메뉴부분
+		if (
+	<%=open%>
+		)
+			document.getElementById("main").style.marginLeft = "250px";
+		//여기까지
 
-</div>
-</div> <!-- 추가... -->
+		$(function() {
 
-
-<script>
-//메뉴부분
-if(<%=open%>)
-	document.getElementById("main").style.marginLeft = "250px";
-//여기까지
-
-$(function() {
-
-	$("button").click(function() {
-		location.href="BoardWrite.bo";
-	})
-})
-</script>
+			$("button").click(function() {
+				location.href = "BoardWrite.bo";
+			})
+		})
+	</script>
 </body>
 </html>
