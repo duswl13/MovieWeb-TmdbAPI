@@ -10,6 +10,8 @@ REVIEW_DATE DATE,
 CONSTRAINT review_primarykey PRIMARY KEY (MOVIE_ID, USER_ID)
 );
 
+
+SELECT * FROM review;
 INSERT INTO review VALUES ((select nvl(max(REVIEW_NUMBER),0) from review)+1,
 330457,'duswl13','생각보단 별로','너무 기대하고 본것같아요ㅠㅠ 전작보다 별로임ㅠㅠㅠ',sysdate);
 

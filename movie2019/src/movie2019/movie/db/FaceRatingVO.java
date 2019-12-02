@@ -1,4 +1,4 @@
-package movie2019.movie.action;
+package movie2019.movie.db;
 
 public class FaceRatingVO {
 
