@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
 
 <style>
-
 * {
 	margin: 0 auto
 }
@@ -81,50 +80,50 @@ textarea {
 
 </head>
 <body>
-
-<div class=container>
-<table class="table table-striped">
-<tr>
-	<th colspan=2><h1>내가 쓴 리뷰 하나만 선택해서 보는 페이지</h1></th>
+<body>
 	<br>
-</tr>	
-<tr>
-	<td><div>글쓴이</div></td> 
-	<td><div> ${boarddata.BOARD_NAME }</div></td>
-</tr>	
-<tr>
-	<td><div>제목</div></td> 
-	<td><div> ${boarddata.BOARD_SUBJECT }</div></td>
-</tr>	
-<tr>
-	<td><div>내용</div></td> 
-	<td><textarea class=form-control rows=5 readOnly style=width:100%> ${boarddata.BOARD_CONTENT }</textarea>
-</tr>	
+	<br>
+	<div class=container>
+		<form action="" method=post name=review_write_form>
 
-<c:if test="${!empty boarddata.BOARD_FILE }">
-<tr>
-	<td><a href="BoardFileDown.bo?filename=${boarddata.BOARD_FILE }">${boarddata.BOARD_FILE}</a>
-	</td>
-</tr>
-</c:if>	
 
-<tr>
-	<td colspan=2 class=center>
-		<a href="BoardReplyView.bo?num${boarddata.BOARD_NUM }">
-		<button>댓글</button></a>
-	<c:if test="${boarddata.BOARD_NAME == id || id == 'admin'}">
-		<a href="BoardModifyView.bo?num${boarddata.BOARD_NUM }">
-		<button>수정</button></a>
-		
-		<a href="BoardDelete.bo?num${boarddata.BOARD_NUM }">
-		<button>삭제</button></a>
-	</c:if>
-		<a href="BoardList.bo">
-		<button>전체목록</button></a>	
-	</td>	
-</tr>
-</table>
-</div>
+			<div class=search>
+				리뷰할 영화 고르기<input type=text size=30 class=search_title
+					placeholder="영화 제목 입력" onkeyup="enterkey();">
+				<!-- <button class=search_mv>검색</button>-->
+
+			</div>
+
+			<table>
+				<tr>
+					<td>영화이미지<br> <span>표정 점수 </span><br> <span>★★★☆☆</span></td>
+					<td>
+						<div class=write_form>
+							<textarea name=write_form id=write_form cols=50 rows=10
+								class=write_form placeholder="아~아아아~"></textarea>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+
+			<br>
+			<div>
+				<c:if test="${boarddata.BOARD_NAME == id || id == 'admin'}">
+					<a href="BoardModifyView.bo?num${boarddata.BOARD_NUM }">
+						<button>수정</button>
+					</a>
+
+					<a href="BoardDelete.bo?num${boarddata.BOARD_NUM }">
+						<button>삭제</button>
+					</a>
+				</c:if>
+				<a href="BoardList.bo">
+					<button>전체목록</button>
+				</a>
+			</div>
+		</form>
+	</div>
 
 </body>
 </html>
