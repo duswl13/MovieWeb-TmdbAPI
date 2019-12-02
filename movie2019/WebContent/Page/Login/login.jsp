@@ -99,7 +99,7 @@ a:hover {color: #27AE60; text-decoration:underline;}
 	background: #27AE60;
 	font-weight: bold;
 	color: white;
-	border: 1px dotted #27AE60;
+	border: 1px solid #27AE60;
 	border-radius: 1px;
 	cursor: pointer;
 	padding: 10px 5px;
@@ -118,16 +118,49 @@ a:hover {color: #27AE60; text-decoration:underline;}
 	margin: 10px 5px;
 }
 
+.join {
+	background: #27AE60;
+	font-weight: bold;
+	font-size:10pt;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 80px;
+	margin: 10px 5px;
+	text-decoration:none;
+}
+
+.join:hover {
+	background: #27AE60;
+	font-weight: bold;
+	font-size:10pt;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 80px;
+	margin: 10px 5px;
+	text-decoration:none;
+}
+
 #msform .action-button:hover, #msform .action-button:focus, 
-.voshu-button:hover, #msform .voshu-button:focus {
+.voshu-button:hover, #msform .voshu-button:focus, .join:hover, .join:focus{
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
 /*headings*/
 .fs-title {
-	font-size: 15px;
+	font-size: 17px;
 	text-transform: uppercase;
 	color: #2C3E50;
 	margin-bottom: 10px;
+}
+
+.jointext {
+	font-size: 12px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 15px;
 }
 
 /*progressbar*/
@@ -178,7 +211,10 @@ a:hover {color: #27AE60; text-decoration:underline;}
 }
 
 span {color:red; font-size:8px; text-align:center;}
+
+
 </style>
+
 
 
 <body><br><br>
@@ -206,7 +242,12 @@ span {color:red; font-size:8px; text-align:center;}
     <input type="button" name="next" class="next action-button" value="SNS로그인" />
     
     <div class="findwrap">
-	<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a> <a href="<%=request.getContextPath()%>/Page/Sign/RenewSign.html" class=find>회원가입</a>
+	<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a>
+	</div>
+	<br><hr><br>
+	<div class=joinwrap>
+	<h3 class=jointext>네? 아직도 VOSHU 회원이 아니시라구여?</h3>
+	<a href="<%=request.getContextPath()%>/Page/Sign/RenewSign.html" class=join>회원가입</a>
 	</div>
 	<br>
   </fieldset>
@@ -223,7 +264,7 @@ span {color:red; font-size:8px; text-align:center;}
     <input type="button" name="previous" class="previous voshu-button" value="VOSHU 아이디로 로그인 하기" />
 <br><br>    
   </fieldset>
-  
+
 </form>
 </body>
 
