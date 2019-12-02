@@ -14,3 +14,5 @@ CREATE TABLE BOARD(
 	BOARD_DATE DATE, --글의 작성 날짜
 	PRIMARY KEY(BOARD_NUM)
 );
+
+select * from BOARD;

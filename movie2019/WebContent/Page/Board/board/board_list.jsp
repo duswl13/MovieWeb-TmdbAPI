@@ -5,14 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 <style>
- body {background:#141414;}
+ * {color:white; background:#141414;}
  select {justify-content:center;}
  .center-block {display:flex;
                 justify-content:center; /* 가운데 정렬 */}
+ .rows {padding:5px;width:80px;text-align:center;float:right;}
  #id {text-align:center;}
- h1 {text-align:center; color:beige;}
+ h1 {text-align:center; color:#27AE60;}
 </style>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
  $(function(){
 	 $("button").click(function(){
@@ -20,18 +25,7 @@
 	 })
  })
 </script>
-<script>
-	$(document).on('click', '#btnSearch', function(e){
-		e.preventDefault();
-
-		var url = "${pageContext.request.contextPath}/board/board_list.jsp";
-		url = url + "?searchType=" + $('#searchType').val();
-		url = url + "&keyword=" + $('#keyword').val();
-
-		location.href = url;
-		console.log(url);
-	});	
-</script>
+<script src="list.js"></script>
 <title>영화 토론 게시판</title>
 </head>
 <body>
@@ -52,13 +46,25 @@ if(request.getParameter("open") != null){
 
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
+
 <h1>영화 토론 게시판</h1>
 <div class="container">
-<%-- 게시글이 있는 경우 --%>
+ <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount>0 }">
+  <div class="rows">
+   <span>줄보기</span>
+   <select class="form-control" id="viewcount">
+    <option value="1">1</option>
+    <option value="3">3</option>
+    <option value="5">5</option>
+    <option value="7">7</option>
+    <option value="10" selected>10</option>
+   </select>
+  </div>
    <table class="table table-striped">
+   <thead>
      <tr>
-       <th colspan="3">목록</th>
+       <th colspan="3">list</th>
        <th colspan="2">
           <font size=3>글 개수: ${listcount }</font>
        </th>
@@ -70,6 +76,8 @@ if(request.getParameter("open") != null){
        <th width="17%"><div>날짜</div></th>
        <th width="11%"><div>조회수</div></th>
      </tr>
+    </thead>
+    <tbody>
     <c:set var="num" value="${listcount-(page-1)*10 }"/>
     <c:forEach var="b" items="${boardlist }">
       <tr>
@@ -110,7 +118,7 @@ if(request.getParameter("open") != null){
       </tr>
     </c:forEach>
    </table>
-   
+   </tbody>
    <div class="center-block">
      <div class="row">
        <div class="col">
@@ -155,66 +163,12 @@ if(request.getParameter("open") != null){
      </div>
    </div>
  </c:if>
-<c:if test="${listcount==0 }">
-     <font id="f" size=5>등록된 글이 없습니다.</font>
- <br>
- <div class="center-block">
-     <div class="row">
-       <div class="col">
-          <ul class="pagination">
-          <c:if test="${page <= 1 }">
-            <li class="page-item">
-            <a class="page-link" href="#">이전&nbsp;</a>
-            </li>
-          </c:if>
-          <c:if test="${page > 1 }">
-            <li class="page-item">
-            <a href="BoardList.bd?page=${page-1 }"
-                class="page-link">이전</a>&nbsp;
-            </li>
-          </c:if>
-          <c:forEach var="a" begin="${startpage }" end="${endpage }">
-            <c:if test="${a == page }">
-              <li class="page-item">
-              <a class="page-link" href="#">${a }</a>
-              </li>
-            </c:if>
-            <c:if test="${a != page }">
-              <li class="page-item">
-              <a href="BoardList.bd?page=${a }"
-                 class="page-link">${a }</a>
-              </li>
-            </c:if>
-          </c:forEach>
-          <c:if test="${page >= maxpage }">
-            <li class="page-item">
-            <a class="page-link" href="#">&nbsp;다음</a>
-            </li>
-          </c:if>
-          <c:if test="${page < maxpage }">
-            <li class="page-item">
-            <a href="BoardList.bd?page=${page+1 }"
-                class="page-link">&nbsp;다음</a>
-            </li>
-          </c:if>
-          </ul>
-       </div>
-     </div>
-   </div>
- </c:if>
- <br>
- 
+ <%-- 게시글이 없는 경우 --%>
+ <c:if test="${listcount==0 }">
+     <font size=5>등록된 글이 없습니다.</font>
+ </c:if><br>
  <button type="button"
          class="btn btn-info float-right">글쓰기</button>
-<br>
- <select id="searchType">
- <option selected>제목</option>
- <option>내용</option>
- <option>글쓴이</option>
- </select>
- <input type="text" class="form-control form-control-sm" name="keyword" id="keyword">
- <input type="button" id="btnSearch" value="검색">
-
 </div>
 </div>
 </body>

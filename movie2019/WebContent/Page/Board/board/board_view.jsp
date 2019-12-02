@@ -4,7 +4,9 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-
+<script src="js/writeform.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <script>
 $(document).ready(function(){
 	  $("form").submit(function(){
@@ -26,11 +28,13 @@ $(document).ready(function(){
 	}); //ready() end
 </script>
 <style>
+* {color:white; background:#141414;}
   th, .center {text-align:center;}
   .container {width:60%;}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
+  #myModal {display:none;}
 </style>
 </head>
 <body>
@@ -52,12 +56,9 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
-<!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
- <form action="BoardDetailAction.bd" method="post"
-       enctype="multipart/form-data" name="boardform">
- <table>
+ <table class="table table-striped">
  <tr>
-  <th colspan="2">영화 토론 게시판</th>
+  <th colspan="2"> view 페이지</th>
  </tr>
  <tr>
   <td>
@@ -80,7 +81,7 @@ if(request.getParameter("open") != null){
      <div>내용</div>
   </td>
     <td><textarea name="BOARD_CONTENT" id="board_content" 
-            cols="67" rows="10" class="form-control" ></textarea>
+             rows="10" class="form-control" >${boarddata.BOARD_CONTENT}</textarea>
   </td>  
  </tr>
  <tr> 
@@ -104,19 +105,51 @@ if(request.getParameter("open") != null){
     <a href="BoardModifyView.bd?num=${boarddata.BOARD_NUM}">
     <button type="button" class="btn btn-info">수정</button>
     </a>
-    
-    <a href="BoardDelete.bd?num=${boarddata.BOARD_NUM}">
-    <button type="button" class="btn btn-danger">삭제</button>
+   <!-- delete어쩌구에서 modal로 변경 -->
+    <a href="#">
+    <button class="btn btn-danger" data-toggle="modal"
+             data-target="#myModal">삭제</button>
     </a>
    </c:if>
-   <a href="BoardList.bd">
-    <button type="reset" class="btn btn-primary">취소</button>
+   <a href="./BoardList.bd">
+    <button type="button" class="btn btn-primary">목록</button>
    </a>
    </td>
  </tr>
  </table> 
- </form>
-</div>
-</div>
+  <%-- 게시판 수정 end --%>
+  <%-- modal 시작 --%>
+      <div class="modal" id="myModal">
+      <div class="modal-dialog">
+         <div class="modal-content">
+
+
+            <!-- Modal body -->
+            <div class="modal-body">
+               <form name="deleteForm" action="BoardDeleteAction.bd"
+                  method="post">
+                  <input type="hidden" name="num" value="${param.num}">
+
+                  <div class="form-group">
+                     <label for="pwd">비밀번호</label> 
+                        <input type="password"
+                        class="form-control" placeholder="Enter password"
+                        name="BOARD_PASS" id="board_pass">
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Submit</button>
+                   <button type="button" class="btn btn-danger">Close</button>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   </div>
 </body>
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+
+
+</script>
 </html>

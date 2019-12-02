@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie2019.board.action.Action;
+import movie2019.board.action.ActionForward;
+
 
 
 @WebServlet("*.bd")
@@ -100,7 +103,26 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	    }  
+	    }else if(command.equals("/BoardFileDown.bd")) { 
+	    	action=new BoardFileDownAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }else if(command.equals("/BoardDelete.bd")) { 
+	    	forward = new ActionForward();
+	    	forward.setRedirect(false);//포워딩 방식으로 주소가 바뀌지 않음
+	    	forward.setPath("Page/Board/board/board_delete.jsp");
+	    
+	    }else if(command.equals("/BoardDeleteAction.bd")) { 
+	    	action=new BoardDeleteAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    }
 	    
 	    //여기는 건들면 안돼~
 	    if(forward!=null) {

@@ -1,8 +1,14 @@
 eclipse.preferences.version=1
 encoding//WebContent/Page/MainPage/NewFile.html=UTF-8
+encoding//WebContent/Page/Sign/Signup.jsp=UTF-8
 encoding//src/movie2019/admin/faq/FAQModifyAction.java=UTF-8
 encoding//src/movie2019/admin/notice/NoticeModifyAction.java=UTF-8
+encoding//src/movie2019/board/action/BoardDAO.java=UTF-8
+encoding//src/movie2019/board/action/BoardDeleteAction.java=UTF-8
+encoding//src/movie2019/board/action/BoardFileDownAction.java=UTF-8
+encoding//src/movie2019/board/action/BoardVO.java=UTF-8
 encoding//src/movie2019/gong/command/FSListCommand.java=UTF-8
 encoding//src/movie2019/gong/command/SListCommand.java=UTF-8
 encoding//src/movie2019/gong/model/GongDAO.java=UTF-8
 encoding//src/movie2019/gong/model/SearchDAO.java=UTF-8
+encoding//src/movie2019/signup/action/SignUpAction.java=UTF-8
