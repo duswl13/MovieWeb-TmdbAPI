@@ -183,7 +183,7 @@ span {color:red; font-size:8px;}
 
 <body><br><br>
 <!-- multistep form -->
-<form id="msform">
+<form id="msform" method=post action=loginProcess.net>
 
   
   <!-- fieldsets 1 -->
