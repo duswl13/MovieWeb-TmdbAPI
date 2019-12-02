@@ -27,7 +27,6 @@
 	transition: 0.3s;
 }
 
-
 .sidenav a:hover {
 	color: #f1f1f1;
 }
@@ -42,7 +41,7 @@
 
 #main {
 	transition: margin-left .5s;
-		padding-top: 16px;
+	padding-top: 16px;
 	padding-left: 16px;
 	padding-right: 16px;
 }
@@ -142,7 +141,8 @@ ul {
 <script>
 	function enterkey() {
 		if (window.event.keyCode == 13) {
-			location.href = 'Search.ml?open=false&key='
+			location.href = '<%=request.getContextPath()%>
+	/Search.ml?open=false&key='
 					+ $('#search-form').val().replace(/(\s*)/g, "");
 		}
 	}
@@ -155,7 +155,7 @@ ul {
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-		<a href="main.ml"><img
+		<a href="<%=request.getContextPath()%>/main.ml"><img
 			src="<%=request.getContextPath()%>/Page/MainPage/logo2.gif"
 			style="width: 100px; height: auto; margin: 16px;"></a>
 
@@ -171,50 +171,72 @@ ul {
 			<ul>
 				<li>
 					<h2>
-						<a href='MovieList.ml?option=0'>영화</a>
+						<a href='<%=request.getContextPath()%>/MovieList.ml?option=0'>영화</a>
 					</h2>
 
 				</li>
 				<li>
 					<h2>
-						<a href="list.ch">추천</a>
+						<a href="<%=request.getContextPath()%>/list.ch">추천</a>
 					</h2>
 				</li>
 				<li>
 					<h2>
-						<a href='Page/Review/r_list.jsp?open=true'>리뷰</a>
+						<a
+							href='<%=request.getContextPath()%>/Page/Review/r_list.jsp?open=true'>리뷰</a>
 					</h2>
 				</li>
 				<li>
 					<h2>
-						<a href="Page/Board/board/board_list.jsp">게시판</a>
+						<a
+							href="<%=request.getContextPath()%>/Page/Board/board/board_list.jsp">게시판</a>
 					</h2>
 				</li>
 
 				<li>
 					<h2>마이페이지</h2>
 					<ul>
-						<li><a href="Page/MyPage/MyInfo/MyInfo.jsp">내 정보 수정</a></li>
-						<li><a href="Page/MyPage/Like/Like.jsp">관심 콘텐츠</a></li>
-						<li><a href="Page/MyPage/MyReview/MyReview.jsp">내 리뷰 관리</a></li>
-						<li><a href="Page/MyPage/Hidden/Hidden.jsp">숨긴 콘텐츠 관리</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/MyPage/MyInfo/MyInfo.jsp">내
+								정보 수정</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/MyPage/Like/Like.jsp">관심
+								콘텐츠</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/MyPage/MyReview/MyReview.jsp">내
+								리뷰 관리</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/MyPage/Hidden/Hidden.jsp">숨긴
+								콘텐츠 관리</a></li>
 					</ul>
 				</li>
 				<li>
 					<h2>공지사항</h2>
 				</li>
 				<li>
+
+					<h2>
+						<a href="<%=request.getContextPath()%>/list.gong">공지사항</a>
+					</h2>
+
+				</li>
+				<li>
 					<h2>관리자 페이지</h2>
 					<ul>
-						<li><a href="NoticeList.bo">공지사항 관리</a></li>
-						<li><a href="FAQList.fa">FAQ 관리</a></li>
-						<li><a href="Page/AdminPage/UserList/UserList.jsp">회원 관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/NoticeList.bo">공지사항
+								관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/FAQList.fa">FAQ
+								관리</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/AdminPage/UserList/UserList.jsp">회원
+								관리</a></li>
 					</ul>
 				</li>
 			</ul>
 
 			<ul>
-				<li><button type="button" id="login" onclick="location.href='Page/Login/login.html'">Login</button></li>
+				<li><button type="button" id="login"
+						onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.html'">Login</button></li>
 			</ul>
 
 		</div>
