@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("*.net")
+@WebServlet("*.lg")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -53,13 +53,13 @@ public class FrontController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 
-		if (command.equals("/login.net")) {
+		if (command.equals("/login.lg")) {
 			forward = new ActionForward();
 			forward.setRedirect(false); // 주소 변경 없이 jsp페이지의 내용을 보여준다.
 			forward.setPath("login/login.jsp");
 
 
-		} else if (command.equals("/idcheck.net")) {
+		} else if (command.equals("/idcheck.lg")) {
 			action = new IdCheckAction();
 			try {
 				forward = action.execute(request, response);
@@ -68,7 +68,7 @@ public class FrontController extends HttpServlet {
 			}
 
 
-		} else if (command.equals("/loginProcess.net")) {
+		} else if (command.equals("/loginProcess.lg")) {
 			action = new LoginProcessAction();
 			try {
 				forward = action.execute(request, response);
@@ -79,7 +79,7 @@ public class FrontController extends HttpServlet {
 
 
 
-		} else if (command.equals("/logout.net")) {
+		} else if (command.equals("/logout.lg")) {
 			action = new LogoutAction();
 			try {
 				forward = action.execute(request, response);

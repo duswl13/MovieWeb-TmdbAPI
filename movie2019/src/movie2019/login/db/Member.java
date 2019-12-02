@@ -14,9 +14,7 @@ public class Member {
 
 	private String id;
 	private String password;
-	private String name;
-	private int age;
-	private String gender;
+	private String nickname;
 	private String email;
 	public String getId() {
 		return id;
@@ -30,23 +28,11 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getName() {
-		return name;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public String getEmail() {
 		return email;

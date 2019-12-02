@@ -33,7 +33,7 @@ public class LoginProcessAction implements Action {
 			// 로그인 성공
 			session.setAttribute("id", id);
 			forward.setRedirect(true);
-			forward.setPath("BoardList.bo");
+			forward.setPath("BoardList.lg");
 //			forward.setPath("BoardWrite.bo");
 			return forward;
 
@@ -45,7 +45,7 @@ public class LoginProcessAction implements Action {
 
 			out.println("<script>");
 			out.println("alert('" + message + "');");
-			out.println("location.href='login.net';");
+			out.println("location.href='login.lg';");
 			out.println("</script>");
 			out.close();
 			return null;
