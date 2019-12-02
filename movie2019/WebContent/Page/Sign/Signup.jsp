@@ -1,11 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
 <title>회원가입</title>
 </head>
+<script src="jquery-3.4.1.js" ></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
+</script>
 <style>
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
@@ -18,8 +21,8 @@ html {
 	/*Image only BG fallback*/
 	
 	/*background = gradient + image pattern combo*/
-	background: 
-		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
+	/* linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6)); */
+	background: #141414;
 }
 
 body {
@@ -132,19 +135,155 @@ body {
 	/*connector not needed before the first step*/
 	content: none; 
 }
+
 /*marking active/completed steps green*/
 /*The number of the step and the connector before it = green*/
+
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: white;
 }
 
+.container {
+    max-width: 640px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
 
+ul.ks-cboxtags {
+    list-style: none;
+    padding: 10px;
+}
+ul.ks-cboxtags li{
+  display: inline;
+}
+ul.ks-cboxtags li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    margin: 3px 0px;
+    transition: all .1s;
+}
 
+ul.ks-cboxtags li label {
+    padding: 4px 6px;
+    cursor: pointer;
+}
 
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+   
+    transition: transform .1s ;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    
+    transform: rotate(-360deg);
+    transition: transform .1s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .1s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
 </style>
-<script>
+<body>
+<!-- multistep form -->
+<form id="msform" action="joinProcess.net" method="post">
+  <!-- progressbar -->
+  <ul id="progressbar">
+    <li class="active">기본 정보</li>
+    <li>상세 정보</li>
+    <li>선호 장르</li>
+  </ul>
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">기본 정보 입력</h2>
+    <h3 class="fs-subtitle">step 1</h3>
+    <input type="text" name="USER_ID" id="USER_ID" placeholder="아이디" required/>
+    <input type="password" name="USER_PASS" id="USER_PASS" placeholder="비밀번호" required/>
+    <input type="text" name="USER_NICKNAME" id="USER_NICKNAME" placeholder="닉네임" required/>
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">상세 정보 입력</h2>
+    <h3 class="fs-subtitle">step 2</h3>
+    <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" />
+    <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" />
+    <!-- <input type="text" name="gplus" id="USER_ID" placeholder="Google Plus" /> -->
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">선호 장르 선택</h2>
+    <h3 class="fs-subtitle">3개 이상 선택하세요</h3>
+    <div class="container">
+  <ul class="ks-cboxtags">
+      <li><input type=checkbox name=ganre id=action value="28">
+      <label for="action">액션</label></li>
+      <li><input type=checkbox name=ganre id=adventure value="12">
+      <label for="advanture">모험</label></li>
+      <li><input type=checkbox name=ganre id=animation value="16">
+      <label for="animation">애니메이션</label></li>
+      <li><input type=checkbox name=ganre id=comedy value="35">
+      <label for="comedy">코미디</label></li>
+      <li><input type=checkbox name=ganre id=crime value="80">
+      <label for="crime">범죄</label></li>
+      <li><input type=checkbox name=ganre id=documentary value="99">
+      <label for="documentary">다큐멘터리</label></li>
+      <li><input type=checkbox name=ganre id=drama value="18">
+      <label for="drama">드라마</label></li>
+      <li><input type=checkbox name=ganre id=family value="10751">
+      <label for="family">가족</label></li>
+      <li><input type=checkbox name=ganre id=fantasy value="14">
+      <label for="fantasy">판타지</label></li>
+      <li><input type=checkbox name=ganre id=history value="36">
+      <label for="history">역사</label></li>
+      <li><input type=checkbox name=ganre id=horror value="27">
+      <label for="horror">공포</label></li>
+      <li><input type=checkbox name=ganre id=music value="10402">
+      <label for="music">음악</label></li>
+      <li><input type=checkbox name=ganre id=mystery value="9648">
+      <label for="mystery">미스터리</label></li>
+      <li><input type=checkbox name=ganre id=romance value="10749">
+      <label for="ramance">로맨스</label></li>
+      <li><input type=checkbox name=ganre id=sf value="878">
+      <label for="sf">SF</label></li>
+      <li><input type=checkbox name=ganre id=tv value="10770">
+      <label for="tv">TV영화</label></li>
+      <li><input type=checkbox name=ganre id=thriller value="53">
+      <label for="thriller">스릴러</label></li>
+      <li><input type=checkbox name=ganre id=war value="10752">
+      <label for="war">전쟁</label></li>
+      <li><input type=checkbox name=ganre id=western value="37">
+      <label for="western">서부</label></li>
+  </ul>
 
+</div>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+  </fieldset>
+</form>
+
+
+</body>
+<script>
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
@@ -223,48 +362,77 @@ $(".previous").click(function(){
 	});
 });
 
-$(".submit").click(function(){
-	return false;
-})
 
+$(document).ready(function(){
+ $("input:eq(0)").on('keyup',function(){
+	 $("#message").empty();
+	   var id = $('input:eq(0)').val();
+	   // \w는 [A-Za-z0-9]의 의미
+	   var pattern = /^\w{5,12}$/;
+	   if(!pattern.test(id)){
+		   $("#message").css('color','red')
+		               .html("영문자 숫자 _로 5~12자 가능합니다.")
+		   checkid=false; 
+		   return;
+	   }
+	   
+	   $.ajax({
+		   type: "post",
+			  url: "idcheck.net", 
+			  data: {"id": id},  
+			  success: function(resp){
+				 if(resp==-1){
+					 $("#message").css('color','green')
+					              .html("사용 가능한 아이디입니다.");
+				    checkid=true;
+				 }else{
+					 $("#message").css('color','blue')
+					              .html("사용 중인 아이디입니다.");
+				    checkid=false;
+				 }
+		     } //success end
+	   }); // ajax end
+    }); // keyup end
+    
+    var checkid=false;
+	 var checkmail=false;
+	 $('form').submit(function(){
+		 if(!checkid){
+			 alert("사용 가능한  id로 입력하세요.");
+			 $("input:eq(0)").val('').focus();
+			 $("#message").text('');
+			 return false;
+		 }
+		 
+		 if(!$.isNumeric($("input[name='age']").val())){
+			 alert("나이는 숫자를 입력하세요.");
+			 $("input[name='age']").val('');
+			 $("input[name='age']").focus();
+			 return false;
+		 }
+		 
+		 if(!checkemail){
+			 alert("email 형식을 확인하세요.");
+			 $("input:eq(6)").focus();
+			 return false;
+		 }
+	 }); //submit end
+	 
+	 
+    $("input:eq(6)").on('keyup',function(){
+   	 $("#email_message").empty();
+   	   var email = $('input:eq(6)').val();
+   	   //정규식: \w:대소문자,뭐어쩌구 그런거 +:플러스 [.]:점
+   	   var pattern = /^\w+@\w+[.]\w{3}$/; //@랑 .들어가게 꼭 적어야함!
+   	   
+   	   if(!pattern.test(email)){
+   		   $("#email_message").css('color','red')
+   		                      .html("이메일 형식이 맞지 않습니다.");
+   	   }else{
+   		   $("#email_message").css('color','green')
+   		                      .html("이메일 형식에 맞습니다.");
+   	   }
+    }); // keyup end
+   }); //ready end
 </script>
-<body>
-<!-- multistep form -->
-<form id="msform">
-  <!-- progressbar -->
-  <ul id="progressbar">
-    <li class="active">Account Setup</li>
-    <li>Social Profiles</li>
-    <li>Personal Details</li>
-  </ul>
-  <!-- fieldsets -->
-  <fieldset>
-    <h2 class="fs-title">Create your account</h2>
-    <h3 class="fs-subtitle">This is step 1</h3>
-    <input type="text" name="email" placeholder="Email" />
-    <input type="password" name="pass" placeholder="Password" />
-    <input type="password" name="cpass" placeholder="Confirm Password" />
-    <input type="button" name="next" class="next action-button" value="Next" />
-  </fieldset>
-  <fieldset>
-    <h2 class="fs-title">Social Profiles</h2>
-    <h3 class="fs-subtitle">Your presence on the social network</h3>
-    <input type="text" name="twitter" placeholder="Twitter" />
-    <input type="text" name="facebook" placeholder="Facebook" />
-    <input type="text" name="gplus" placeholder="Google Plus" />
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="button" name="next" class="next action-button" value="Next" />
-  </fieldset>
-  <fieldset>
-    <h2 class="fs-title">Personal Details</h2>
-    <h3 class="fs-subtitle">We will never sell it</h3>
-    <input type="text" name="fname" placeholder="First Name" />
-    <input type="text" name="lname" placeholder="Last Name" />
-    <input type="text" name="phone" placeholder="Phone" />
-    <textarea name="address" placeholder="Address"></textarea>
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="submit" name="submit" class="submit action-button" value="Submit" />
-  </fieldset>
-</form>
-</body>
 </html>

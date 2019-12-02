@@ -2,7 +2,9 @@
     pageEncoding="utf-8"%>
 <html>
 <head>
-
+<script src="js/writeform.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <script>
 $(document).ready(function(){
 	  $("form").submit(function(){
@@ -24,7 +26,8 @@ $(document).ready(function(){
 	}); //ready() end
 </script>
 <style>
-  tr.center-bloac {text-align:center;}
+* {color:white; background:#141414;}
+  tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%;}
   label {font-weight:bold;}
@@ -51,24 +54,31 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
  <form action="BoardAddAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
-  <h1>글 쓰기</h1>
+  <h1>write 페이지</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
     <input name="BOARD_NAME" id="board_name" value="${id }"
-            readOnly type="text" size="10" maxlength="30"
+            type="text" size="10" maxlength="30" required
             class="form-control" placeholder="Enter board_name">
   </div>
   <div class="form-group">
     <label for="board_pass">비밀번호</label>
-    <input name="BOARD_PASSA" id="board_PASS" value=""
-            type="password" size="10" maxlength="30"
+    <input name="BOARD_PASS" id="board_pass" value=""
+            type="password" size="10" maxlength="20" required
             class="form-control" placeholder="Enter board_pass">
   </div> 
   <div class="form-group">
+    <label for="board_subject">제목</label>
+    <input name="BOARD_SUBJECT" id="board_subject" value=""
+            type="text" size="10" maxlength="50" required
+            class="form-control" placeholder="Enter board_subject">
+  </div> 
+  <div class="form-group">
     <label for="board_content">내용</label>
-    <textarea name="BOARD_CONTENT" id="board_content" 
+    <textarea name="BOARD_CONTENT" id="board_content" required
             cols="67" rows="10" class="form-control" ></textarea>
   </div>   
    <div class="form-group">
@@ -80,10 +90,16 @@ if(request.getParameter("open") != null){
   </div>  
    <div class="form-group">
     <button type="submit" class="btn btn-primary">등록</button>
-    <button type="reset" class="btn btn-danger">취소</button>
+    <button type="reset" class="btn btn-danger" onClick="history.back()">취소</button>
   </div>  
  </form>
 </div>
 </div>
 </body>
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+
+
+</script>
 </html>

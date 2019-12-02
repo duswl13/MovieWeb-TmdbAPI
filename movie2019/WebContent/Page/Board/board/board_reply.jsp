@@ -2,8 +2,11 @@
     pageEncoding="utf-8"%>
 <html>
 <head>
-
+<script src="js/writeform.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
+* {color:white; background:#141414;}
   tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%;}
@@ -28,7 +31,7 @@ if(request.getParameter("open") != null){
 
 <div id="main">
 
-      <span style="font-size: 30px; cursor: pointer; color: white;"
+<span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
  <form action="BoardReplyAction.bd" method="post"
@@ -41,27 +44,27 @@ if(request.getParameter("open") != null){
           value="${boarddata.BOARD_RE_LEV }">
    <input type="hidden" name="BOARD_RE_SEQ"
           value="${boarddata.BOARD_RE_SEQ }">              
-  <h1>MVC 게시판 - reply 페이지</h1>
+  <h1>reply 페이지</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input name="BOARD_NAME" id="board_name" value="${id }"
-            readOnly type="text" size="10" maxlength="30"
+            type="text" size="10" maxlength="30" required
             class="form-control" placeholder="Enter board_name">
   </div>
   <div class="form-group">
     <label for="board_subject">제목</label>
      <input name="BOARD_SUBJECT" id="board_subject" 
-            type="text" size="10" maxlength="100"
+            type="text" size="10" maxlength="100" required
             class="form-control" value="Re: ${boarddata.BOARD_SUBJECT}"/>
   </div> 
   <div class="form-group">
     <label for="board_content">내용</label>
-    <textarea name="BOARD_CONTENT" id="board_content" 
+    <textarea name="BOARD_CONTENT" id="board_content" required
             cols="67" rows="10" class="form-control" ></textarea>
   </div>   
   <div class="form-group">
     <label for="board_pass">비밀번호</label>
-    <input name="BOARD_PASS" id="board_pass" 
+    <input name="BOARD_PASS" id="board_pass" required
             type="password" class="form-control" placeholder="Enter board_pass">
   </div> 
    <div class="form-group">
@@ -73,4 +76,10 @@ if(request.getParameter("open") != null){
 </div>
 </div>
 </body>
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+
+
+</script>
 </html>

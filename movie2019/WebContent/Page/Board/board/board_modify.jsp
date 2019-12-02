@@ -4,14 +4,16 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-
+<script src="js/writeform.js" charset="utf-8"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+ integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
+* {color:white; background:#141414;}
   tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%;}
   label {font-weight:bold;}
   #upfile {display:none;}
-  img {width:20px;}
 </style>
 </head>
 <body>
@@ -33,7 +35,8 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
- <form action="BoardModifyAction.bd" method="post" name="modifyform">
+ <form action="BoardModifyAction.bd" method="post" 
+       enctype="multipart/form-data" name="modifyform">
  <input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM }">
   <h1>MVC 게시판 - modify 페이지</h1>
   <div class="form-group">
@@ -44,21 +47,26 @@ if(request.getParameter("open") != null){
   <div class="form-group">
     <label for="board_subject">제목</label>
     <input name="BOARD_SUBJECT" id="board_subject" 
-            type="text" size="10" maxlength="100"
+            type="text" size="10" maxlength="100" required
             class="form-control" value="${boarddata.BOARD_SUBJECT }">
   </div> 
   <div class="form-group">
     <label for="board_content">내용</label>
-    <textarea name="BOARD_CONTENT" id="board_content" 
+    <textarea name="BOARD_CONTENT" id="board_content" required
              rows="15" class="form-control" >${boarddata.BOARD_CONTENT }</textarea>
   </div>   
-  <!-- 파일이 첨부되어 있으면 -->
-  <c:if test="${!empty boarddata.BOARD_FILE }">
-   <div class="form-group">
+  <!-- 원문글 작성자만 파일첨부 수정 가능하게 한다 -->
+  <c:if test="${boarddata.BOARD_RE_LEV == 0}">
+   <div class="form-group read">
     <label for="board_file">파일 첨부</label>
-    <div class="form-control">
-       &nbsp;&nbsp;${boarddata.BOARD_FILE }</div>
-  </div>  
+    <label for="upfile">
+      <img src="image/attach.png" alt="파일첨부" width="20px">
+    </label>
+    <input type="file" id="upfile" name="BOARD_FILE">
+    <span id="filevalue">${boarddata.BOARD_FILE}</span>
+     <img src="image/remove.png" alt="파일삭제"
+           width="10px" class="remove">
+    </div>  
   </c:if>
   
   <div class="form-group">
@@ -77,4 +85,10 @@ if(request.getParameter("open") != null){
 </div>
 </div>
 </body>
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
+
+
+</script>
 </html>

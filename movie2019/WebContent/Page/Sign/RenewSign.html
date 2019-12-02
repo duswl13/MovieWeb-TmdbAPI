@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>íšŒì›ê°€ì…</title>
+<title>È¸¿ø°¡ÀÔ</title>
 </head>
 <script src="jquery-3.4.1.js" ></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
@@ -142,45 +141,145 @@ body {
 	background: #27AE60;
 	color: white;
 }
+
+.container {
+    max-width: 640px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+ul.ks-cboxtags {
+    list-style: none;
+    padding: 10px;
+}
+ul.ks-cboxtags li{
+  display: inline;
+}
+ul.ks-cboxtags li label{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    margin: 3px 0px;
+    transition: all .1s;
+}
+
+ul.ks-cboxtags li label {
+    padding: 4px 6px;
+    cursor: pointer;
+}
+
+ul.ks-cboxtags li label::before {
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 12px;
+   
+    transition: transform .1s ;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+    
+    transform: rotate(-360deg);
+    transition: transform .1s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+    border: 2px solid #1bdbf8;
+    background-color: #12bbd4;
+    color: #fff;
+    transition: all .1s;
+}
+
+ul.ks-cboxtags li input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+ul.ks-cboxtags li input[type="checkbox"]:focus + label {
+  border: 2px solid #e9a1ff;
+}
 </style>
 <body>
 <!-- multistep form -->
-<form id="msform">
+<form id="msform" action="joinProcess.net" method="post">
   <!-- progressbar -->
   <ul id="progressbar">
-    <li class="active">ê¸°ë³¸ ì •ë³´</li>
-    <li>ìƒì„¸ ì •ë³´</li>
-    <li>ì„ í˜¸ ì¥ë¥´</li>
+    <li class="active">±âº» Á¤º¸</li>
+    <li>»ó¼¼ Á¤º¸</li>
+    <li>¼±È£ Àå¸£</li>
   </ul>
   <!-- fieldsets -->
   <fieldset>
-    <h2 class="fs-title">ê¸°ë³¸ ì •ë³´ ì…ë ¥</h2>
+    <h2 class="fs-title">±âº» Á¤º¸ ÀÔ·Â</h2>
     <h3 class="fs-subtitle">step 1</h3>
-    <input type="text" name="USER_ID" id="USER_ID" placeholder="ì•„ì´ë””" required/>
-    <input type="password" name="USER_PASS" id="USER_PASS" placeholder="ë¹„ë°€ë²ˆí˜¸" required/>
-    <input type="password" name="USER_NICKNAME" id="USER_NICKNAME" placeholder="ë‹‰ë„¤ì„" required/>
-    <input type="button" name="next" class="next action-button" value="Next" />
+    <input type="text" name="USER_ID" id="USER_ID" placeholder="¾ÆÀÌµğ" required/>
+    <input type="password" name="USER_PASS" id="USER_PASS" placeholder="ºñ¹Ğ¹øÈ£" required/>
+    <input type="text" name="USER_NICKNAME" id="USER_NICKNAME" placeholder="´Ğ³×ÀÓ" required/>
+    <input type="button" name="next" class="next action-button" value="´ÙÀ½" />
   </fieldset>
   <fieldset>
-    <h2 class="fs-title">ìƒì„¸ ì •ë³´ ì…ë ¥</h2>
+    <h2 class="fs-title">»ó¼¼ Á¤º¸ ÀÔ·Â</h2>
     <h3 class="fs-subtitle">step 2</h3>
-    <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="ì´ë©”ì¼" />
-    <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="ì „í™”ë²ˆí˜¸" />
+    <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="ÀÌ¸ŞÀÏ" />
+    <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="ÀüÈ­¹øÈ£" />
     <!-- <input type="text" name="gplus" id="USER_ID" placeholder="Google Plus" /> -->
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="button" name="next" class="next action-button" value="Next" />
+    <input type="button" name="previous" class="previous action-button" value="ÀÌÀü" />
+    <input type="button" name="next" class="next action-button" value="´ÙÀ½" />
   </fieldset>
   <fieldset>
-    <h2 class="fs-title">ì„ í˜¸ ì¥ë¥´ ì„ íƒ</h2>
-    <h3 class="fs-subtitle">step 3</h3>
-    <input type="text" name="fname" placeholder="First Name" />
-    <input type="text" name="lname" placeholder="Last Name" />
-    <input type="text" name="phone" placeholder="Phone" />
-    <textarea name="address" placeholder="Address"></textarea>
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+    <h2 class="fs-title">¼±È£ Àå¸£ ¼±ÅÃ</h2>
+    <h3 class="fs-subtitle">3°³ ÀÌ»ó ¼±ÅÃÇÏ¼¼¿ä</h3>
+    <div class="container">
+  <ul class="ks-cboxtags">
+      <li><input type=checkbox name=ganre id=action value="28">
+      <label for="action">¾×¼Ç</label></li>
+      <li><input type=checkbox name=ganre id=adventure value="12">
+      <label for="advanture">¸ğÇè</label></li>
+      <li><input type=checkbox name=ganre id=animation value="16">
+      <label for="animation">¾Ö´Ï¸ŞÀÌ¼Ç</label></li>
+      <li><input type=checkbox name=ganre id=comedy value="35">
+      <label for="comedy">ÄÚ¹Ìµğ</label></li>
+      <li><input type=checkbox name=ganre id=crime value="80">
+      <label for="crime">¹üÁË</label></li>
+      <li><input type=checkbox name=ganre id=documentary value="99">
+      <label for="documentary">´ÙÅ¥¸àÅÍ¸®</label></li>
+      <li><input type=checkbox name=ganre id=drama value="18">
+      <label for="drama">µå¶ó¸¶</label></li>
+      <li><input type=checkbox name=ganre id=family value="10751">
+      <label for="family">°¡Á·</label></li>
+      <li><input type=checkbox name=ganre id=fantasy value="14">
+      <label for="fantasy">ÆÇÅ¸Áö</label></li>
+      <li><input type=checkbox name=ganre id=history value="36">
+      <label for="history">¿ª»ç</label></li>
+      <li><input type=checkbox name=ganre id=horror value="27">
+      <label for="horror">°øÆ÷</label></li>
+      <li><input type=checkbox name=ganre id=music value="10402">
+      <label for="music">À½¾Ç</label></li>
+      <li><input type=checkbox name=ganre id=mystery value="9648">
+      <label for="mystery">¹Ì½ºÅÍ¸®</label></li>
+      <li><input type=checkbox name=ganre id=romance value="10749">
+      <label for="ramance">·Î¸Ç½º</label></li>
+      <li><input type=checkbox name=ganre id=sf value="878">
+      <label for="sf">SF</label></li>
+      <li><input type=checkbox name=ganre id=tv value="10770">
+      <label for="tv">TV¿µÈ­</label></li>
+      <li><input type=checkbox name=ganre id=thriller value="53">
+      <label for="thriller">½º¸±·¯</label></li>
+      <li><input type=checkbox name=ganre id=war value="10752">
+      <label for="war">ÀüÀï</label></li>
+      <li><input type=checkbox name=ganre id=western value="37">
+      <label for="western">¼­ºÎ</label></li>
+  </ul>
+
+</div>
+    <input type="button" name="previous" class="previous action-button" value="ÀÌÀü" />
+    <input type="submit" name="submit" class="submit action-button" value="°¡ÀÔ" />
   </fieldset>
 </form>
+
+
 </body>
 <script>
 //jQuery time
@@ -261,8 +360,77 @@ $(".previous").click(function(){
 	});
 });
 
-$(".submit").click(function(){
-	return false;
-})
+
+$(document).ready(function(){
+ $("input:eq(0)").on('keyup',function(){
+	 $("#message").empty();
+	   var id = $('input:eq(0)').val();
+	   // \w´Â [A-Za-z0-9]ÀÇ ÀÇ¹Ì
+	   var pattern = /^\w{5,12}$/;
+	   if(!pattern.test(id)){
+		   $("#message").css('color','red')
+		               .html("¿µ¹®ÀÚ ¼ıÀÚ _·Î 5~12ÀÚ °¡´ÉÇÕ´Ï´Ù.")
+		   checkid=false; 
+		   return;
+	   }
+	   
+	   $.ajax({
+		   type: "post",
+			  url: "idcheck.net", 
+			  data: {"id": id},  
+			  success: function(resp){
+				 if(resp==-1){
+					 $("#message").css('color','green')
+					              .html("»ç¿ë °¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+				    checkid=true;
+				 }else{
+					 $("#message").css('color','blue')
+					              .html("»ç¿ë ÁßÀÎ ¾ÆÀÌµğÀÔ´Ï´Ù.");
+				    checkid=false;
+				 }
+		     } //success end
+	   }); // ajax end
+    }); // keyup end
+    
+    var checkid=false;
+	 var checkmail=false;
+	 $('form').submit(function(){
+		 if(!checkid){
+			 alert("»ç¿ë °¡´ÉÇÑ  id·Î ÀÔ·ÂÇÏ¼¼¿ä.");
+			 $("input:eq(0)").val('').focus();
+			 $("#message").text('');
+			 return false;
+		 }
+		 
+		 if(!$.isNumeric($("input[name='age']").val())){
+			 alert("³ªÀÌ´Â ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+			 $("input[name='age']").val('');
+			 $("input[name='age']").focus();
+			 return false;
+		 }
+		 
+		 if(!checkemail){
+			 alert("email Çü½ÄÀ» È®ÀÎÇÏ¼¼¿ä.");
+			 $("input:eq(6)").focus();
+			 return false;
+		 }
+	 }); //submit end
+	 
+	 
+    $("input:eq(6)").on('keyup',function(){
+   	 $("#email_message").empty();
+   	   var email = $('input:eq(6)').val();
+   	   //Á¤±Ô½Ä: \w:´ë¼Ò¹®ÀÚ,¹¹¾îÂ¼±¸ ±×·±°Å +:ÇÃ·¯½º [.]:Á¡
+   	   var pattern = /^\w+@\w+[.]\w{3}$/; //@¶û .µé¾î°¡°Ô ²À Àû¾î¾ßÇÔ!
+   	   
+   	   if(!pattern.test(email)){
+   		   $("#email_message").css('color','red')
+   		                      .html("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+   	   }else{
+   		   $("#email_message").css('color','green')
+   		                      .html("ÀÌ¸ŞÀÏ Çü½Ä¿¡ ¸Â½À´Ï´Ù.");
+   	   }
+    }); // keyup end
+   }); //ready end
 </script>
 </html>

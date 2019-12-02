@@ -192,7 +192,7 @@ ul {
 						</li>
 						<li>
 							<h2>
-								<a href="<%=request.getContextPath()%>/Page/Board/board/board_list.jsp">게시판</a>
+								<a href="BoardList.bd">게시판</a>
 							</h2>
 						</li>
 
