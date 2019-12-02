@@ -34,7 +34,7 @@ public class MemberDAO {
 			con = ds.getConnection();
 			System.out.println("getConnection");
 
-			String sql = "select id from member where id=?";
+			String sql = "select id from users where id=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -76,7 +76,7 @@ public class MemberDAO {
 			con = ds.getConnection();
 			System.out.println("getConnection");
 
-			pstmt = con.prepareStatement("insert into member values (?,?,?,?,?,?)");
+			pstmt = con.prepareStatement("insert into users values (?,?,?,?,?,?)");
 			pstmt.setString(1, m.getId());
 			pstmt.setString(2, m.getPassword());
 			pstmt.setString(3, m.getName());
@@ -120,7 +120,7 @@ public class MemberDAO {
 			con = ds.getConnection();
 			System.out.println("getConnection");
 
-			String sql = "select id, password from member where id = ?";
+			String sql = "select id, password from users where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -167,7 +167,7 @@ public class MemberDAO {
 
 		try {
 			con = ds.getConnection();
-			String sql = "select* from member where id = ?";
+			String sql = "select* from users where id = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -214,7 +214,7 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 
-			String sql = "update member set name=?, " 
+			String sql = "update users set name=?, " 
 					+ "age=?, gender=?, email=? " 
 					+ "where id=?";
 
@@ -264,7 +264,7 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "select* from member where id != 'admin'";
+			String sql = "select* from users where id != 'admin'";
 			
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
@@ -326,7 +326,7 @@ public class MemberDAO {
 		int x = 0;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select count(*) from member where id != 'admin'");
+			pstmt = con.prepareStatement("select count(*) from users where id != 'admin'");
 
 			rs = pstmt.executeQuery();
 
@@ -365,7 +365,7 @@ public class MemberDAO {
 		
 			List<Member> list = new ArrayList<Member>();
 			String sql = "select * " + "from (select b.*, rownum rnum" 
-											+ " from (select* from member "
+											+ " from (select* from users "
 											+ " where id != 'admin'"
 									 		+ " order by id) b"
 											+ ")"
@@ -429,7 +429,7 @@ public class MemberDAO {
 		try {
 			con = ds.getConnection();
 			
-			String sql = "delete from member where id=?";
+			String sql = "delete from users where id=?";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -471,7 +471,7 @@ public class MemberDAO {
 		
 		try {
 			con = ds.getConnection();
-			String sql = "select count(*) from member "
+			String sql = "select count(*) from users "
 					+ " where id !='admin' "
 					+ "and "
 					+ field
@@ -520,7 +520,7 @@ public class MemberDAO {
 	         String sql = 
 	               "select * "
 	               +"from (select b.*, rownum rnum"
-	                     +" from (select * from member "
+	                     +" from (select * from users "
 	                     +" where id != 'admin' "
 	                     +" and "+field + " like ?"
 	                     +" order by id) b"
