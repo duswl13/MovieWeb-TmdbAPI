@@ -171,7 +171,7 @@ ul {
 			<ul>
 				<li>
 					<h2>
-						<a href='<%=request.getContextPath()%>/MovieList.ml?option=0'>영화</a>
+						<a href='<%=request.getContextPath()%>/MovieList.ml?option=1'>영화</a>
 					</h2>
 
 				</li>

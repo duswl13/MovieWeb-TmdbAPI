@@ -51,6 +51,7 @@
 <%
 	boolean open = Boolean.parseBoolean(request.getParameter("open"));
 	String apikey = application.getInitParameter("APIKEY");
+	int option = Integer.parseInt(request.getParameter("option"));
 %>
 <title>Insert title here</title>
 </head>
@@ -83,7 +84,7 @@
 			<div class="row">
 				<div class="form-group col-xs-2">
 					<select class="form-control" id="sel1">
-						<option selected value=1>인기순</option>
+						<option value=1>인기순</option>
 						<option value=2>최신순</option>
 						<option value=3>개봉예정순</option>
 					</select>
@@ -134,10 +135,11 @@
 
 if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
-		
-		
+	
 
-	var sort1 = 1;
+	var sort1 = <%=option%>;
+	
+	$('#sel1').val(sort1).prop("selected", true); 
 	var sort2 = 0;
 	
 	var page = 0;
@@ -206,6 +208,8 @@ if(<%=open%>)
 
 				var list = data.results;
 				allpages = data.total_pages;
+				
+				printMore(list.length);				
 				printMovie(list);
 
 			}, //HTTP 요청이 성공한 경우 실행
@@ -225,6 +229,7 @@ if(<%=open%>)
 		var value = $(this).val();
 		sort1 = value;
 		//alert('바뀜'+sort1);
+		listsize = 0;
 		page = 0;
 		readyList();
 		$('.page-link:eq(1)').text(1);
@@ -246,12 +251,24 @@ if(<%=open%>)
 	
 
 
+	var listsize = 0; //필터링으로 인한 영화 빈거 채우려고
+	
+	//api 결과가 20개가 아닌 경우 결과의 끝이라고 보고 더보기 숨김
+	function printMore(size){
+		if(size != 20)
+			$('.more').css('visibility','hidden');
+		else
+			$('.more').css('visibility','visible');
+	}
+	
 	function printMovie(list) {
 
 		var text = '';
-		var check = 0;
-
-		for (var i = 0; i < 5; i++) {
+		var check = 0; //필터링으로 인한 list의 몇번쨰 아이템인지 아려고
+		
+	
+		if(listsize == 0 || listsize % 4 == 0)
+			outer : for (var i = 0; i < 5; i++) {
 
 			text += '<div class="row">';
 
@@ -291,14 +308,80 @@ if(<%=open%>)
 					text += '<h5>' + list[check].original_title + '</h5>';
 				
 					text += '</div>';
-
+					listsize ++;
 					check++;
+				}else{
+					break 	outer;
 				}
+				
 			}
 			text += '</div>';
 
 		}
+		else{
+		
+			//listsize 가 4로 나누어 떨어지지 않았을 경우 빈 영화아이템이 있다는 뜻임
+			//4 - (listsize % 4) 로 몇개의 공간이 비어있는지 체크
+			var add = 4 - (listsize % 4);
+			//alert(add+"개의 공간이 비어있습니다.");
 
+			
+			
+			//빈 공간만큼 추가하기
+			for (var j = 0; j < add; j++) {
+
+				if (check < list.length) {
+					if (list[check].poster_path == null
+							|| list[check].overview == null
+							|| list[check].genre_ids == null
+							|| list[check].overview == ""
+							|| list[check].genre_ids == ""
+							|| list[check].overview.includes('섹스')) {
+						j--;
+						check++;
+						console.log('이상한 거니까 넘김' + check);
+
+						continue;
+					}
+
+					list[check].overview = list[check].overview.substring(0,
+							50)
+							+ '...';
+					text += '<div class="col-xs-3">';
+					
+					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+		
+					text += ' <div>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += ' </div>';
+					text +='</div>\n';
+					text += '<h5>' + list[check].original_title + '</h5>';
+				
+					text += '</div>';
+					listsize ++;
+					check++;
+				}
+				
+			}
+			
+			
+			
+			//빈 공간만큼 추가하기
+			$('.movieList > .row:last').html($('.movieList > .row:last').html()+text);
+			
+			//채운만큼 리스트삭제하기
+			 list.splice(0, check);
+			
+			//빈 공간이 채워졌으면 다시 printMovie이동
+			printMovie(list);
+			return; 
+		}
 	
 		
 		if(page == 1)
@@ -307,11 +390,6 @@ if(<%=open%>)
 			$('.movieList').html($('.movieList').html()+text);	
 			
 	
-			if(list.length != 20)
-				$('.more').css('visibility','hidden');
-			else
-				$('.more').css('visibility','visible');
-
 	}
 	
 	mybutton = document.getElementById("myBtn");
