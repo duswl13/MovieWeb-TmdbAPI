@@ -15,6 +15,8 @@ $(function() {
  
 
 function mail() {//메일
+	
+	
 	$.ajax({
 		type : "post",
 		url : "mailsend.gong",
@@ -27,11 +29,11 @@ function mail() {//메일
 		},
 		success : function(result) {
 			alert("메일보내기성공!");
-			$("#senderName").val("");
+			/* $("#senderName").val("");
 			$("#senderMail").val("");
 			$("#subject").val("");
-			$("#message").val("");
-			//location.href="list.gong"; 혹시 세션유지안되는지 확인해바야댐
+			$("#message").val(""); */
+			location.href="list.gong"; //혹시 세션유지안되는지 확인해바야댐
 		},
 		
 		error : function(err) {
