@@ -145,8 +145,30 @@ body, html {
 			$("#result").empty();
 			flist("1");
 		})
-
+		$("#mail").click(function() {
+			$("#result").empty();
+			mail();
+			
+		});
+		
+		
 	});
+	
+	function mail() { //메일
+		$.ajax({
+			type : "post",
+			url : "mail.gong",
+			success : function(result) {
+				$("#result").html(result);
+			},
+			error : function(err) {
+				alert("통신X");
+			}
+
+		});
+	}
+	
+	
 	function faqSearch(curPage) {//FAQ 서치결과
 		$.ajax({
 			type : "post",
@@ -262,7 +284,7 @@ body, html {
 					<button class="col btn btn-dark-moon btn-rounded"
 						style="width: 30%" onclick="faq" id="faq">FAQ(자주하는 질문)</button>
 						<button class="col btn btn-dark-moon btn-rounded"
-						style="width: 30%" onclick="faq" id="faq">Mail(고객문의)</button>
+						style="width: 30%" onclick="mail" id="mail">Mail(고객문의)</button>
 				</div>
 		
 

@@ -12,6 +12,7 @@ import movie2019.gong.command.FListCommand;
 import movie2019.gong.command.FSListCommand;
 import movie2019.gong.command.GCommand;
 import movie2019.gong.command.GListCommand;
+import movie2019.gong.command.MailCommand;
 import movie2019.gong.command.SListCommand;
 
 @WebServlet("*.gong")
@@ -66,7 +67,16 @@ public class GongController extends HttpServlet {
 				page = "Page/gong/list2.jsp";
 			}
 			
+		}else if(com.equals("/mail.gong")) {					
+			page="Page/gong/mail.jsp";			
+		}else if(com.equals("/mailsend.gong")) {
+			command = new MailCommand();
+			command.execute(request, response);
+			page="list.gong";
 		}
+		
+		
+		
 		request.getRequestDispatcher(page).forward(request, response);
 
 	}
