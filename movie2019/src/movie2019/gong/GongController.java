@@ -65,14 +65,13 @@ public class GongController extends HttpServlet {
 				page="Page/gong/searchFList.jsp";
 			}else {
 				page = "Page/gong/list2.jsp";
-			}
-			
+			}		
 		}else if(com.equals("/mail.gong")) {					
 			page="Page/gong/mail.jsp";			
 		}else if(com.equals("/mailsend.gong")) {
 			command = new MailCommand();
 			command.execute(request, response);
-			page="list.gong";
+			page="list.gong"; 
 			
 		}
 		
