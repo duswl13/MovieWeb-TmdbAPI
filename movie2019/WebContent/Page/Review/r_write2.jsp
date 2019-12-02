@@ -5,7 +5,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
-%>
+%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 <script type="text/javascript" src="<%=cp%>/data/jss/httpRequest.js %>"></script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
 * {
 	margin: 0;
@@ -24,7 +24,7 @@
 body {
 	background: #141414;
 	font-family: montserrat, arial, verdana;
-	font-size: 10pt;
+	font-size:10pt;
 }
 
 tr.center-block {
@@ -102,67 +102,69 @@ textarea {
 .save {
 	text-align: right;
 }
-
-#project-label {
-	display: block;
-	font-weight: bold;
-	margin-bottom: 1em;
-}
-
-#project-icon {
-	float: left;
-	height: 32px;
-	width: 32px;
-}
-
-#project-description {
-	margin: 0;
-	padding: 0;
-}
 </style>
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	$(function() {
-		var projects = [ {
-			value : "겨울왕국1",
-			label : "겨울왕국1",
-			desc : "렛잇고~",
-			icon : "jquery_32x32.png"
-		}, {
-			value : "겨울왕국2",
-			label : "겨울왕국2",
-			desc : "아~아아아~",
-			icon : "jqueryui_32x32.png"
-		}, {
-			value : "그냥 겨울",
-			label : "그냥 겨울",
-			desc : "ㅇㅇ",
-			icon : "sizzlejs_32x32.png"
-		} ];
-
-		$("#project").autocomplete({
-			minLength : 0,
-			source : projects,
-			focus : function(event, ui) {
-				$("#project").val(ui.item.label);
-				return false;
-			},
-			select : function(event, ui) {
-				$("#project").val(ui.item.label);
-				$("#project-id").val(ui.item.value);
-				$("#project-description").html(ui.item.desc);
-				$("#project-icon").attr("src", "images/" + ui.item.icon);
-
-				return false;
+	function sendKeyword() {
+		
+		var userKeyword = $(".search_title").val();
+		if (userKeyword == "") {
+			return;
+		}
+		var params = "userKeyword=" + userKeyword;
+		sendRequest("r_search.jsp", params, displaySuggest, "POST");
+	}
+	
+	function sendRequest() {
+		
+	}
+	
+	
+	function displaySuggest() {
+		if (httpRequest.readyState == 4) {
+			if (httpRequest.status == 200)
+				var resultText = httpRequest.responseText;
+			
+			var resultArray = resultText.split("|");
+			var count = parseint(resultArray[0]);
+			var keywordList = null;
+			
+			if (count > 0) {
+				keywordList = resultArray[1].split(".");
+				var html = "";
+				for (var i=0; i<keywordList.length; i++) {
+					html += "<a href=\"javascript:select('" +
+							keywordList[i] + "');\>" +
+							keywordList[i] + "</a><br/>";
+							
+				}
+				var suggestListDiv = document.getElementById("suggestListDiv");
+				suggestListDiv.innerHTML = html;
+				show();
+			} else {
+				hide();
 			}
-		}).autocomplete("instance")._renderItem = function(ul, item) {
-			return $("<li>").append(
-					"<div>" + item.label + "<br>" + item.desc + "</div>")
-					.appendTo(ul);
-		};
-	});
+		} else {
+			hide();
+		}
+	} //function end
+	
+	
+	function select (selectKeyword) {
+		document.mtForm.userKeyword.value = selectKeyword;
+		hide();
+	}
+	function show() {
+		var suggestDiv = document.getElementById("suggestListDiv");
+		suggestDiv.style.display = "block";
+	}
+	function hide() {
+		var suggestDiv = document.getElementById("suggestListDiv");
+		suggestDiv.style.display = "none";
+	}
+	window.onload = function() {
+		hide();
+	}
 </script>
 
 </head>
@@ -175,20 +177,17 @@ textarea {
 
 			<div class=search>
 				리뷰할 영화 고르기
-				<div id="project-label"></div>
-				<img id="project-icon" src="images/transparent_1x1.png"
-					class="ui-state-default" alt=""> <input id="project">
-				<input type="hidden" id="project-id">
-
+				<input type=text size=30 class=search_title placeholder="영화 제목 입력" 
+					name="userKeyword" onkeyup="sendKeyword();">
+				<div id=suggestDiv class=suggest>
+					<div id=suggestListDiv></div>
+				</div>
 
 			</div>
 
 			<table>
 				<tr>
-					<td>영화이미지<br>
-						<p id="project-description"></p>
-						<br>
-					<span>표정 점수 </span><br> <span>★★★☆☆</span></td>
+					<td>영화이미지<br> <span>표정 점수 </span><br> <span>★★★☆☆</span></td>
 					<td>
 						<div class=write_form>
 							<textarea name=write_form id=write_form cols=50 rows=15
