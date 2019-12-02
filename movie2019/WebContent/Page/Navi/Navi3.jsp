@@ -138,6 +138,7 @@ ul {
 	background-color: #141414;
 	margin-top: 3em;
 }
+.logo {font-size:35pt; font-weight:bold; text-decoration:none; color:#27AE60; align:center;}
 </style>
 <script>
 	function enterkey() {
@@ -155,9 +156,7 @@ ul {
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-		<a href="main.ml"><img
-			src="<%=request.getContextPath()%>/Page/MainPage/logo2.gif"
-			style="width: 100px; height: auto; margin: 16px;"></a>
+		<a href="main.ml"><span class=logo>VOSHU</span></a>
 
 		<div id="accordian">
 
@@ -214,7 +213,7 @@ ul {
 			</ul>
 
 			<ul>
-				<li><button type="button" id="login" onclick="location.href='Page/Login/login.html'">Login</button></li>
+				<li><button type="button" id="login" onclick="location.href='Page/Login/login.jsp'">Login</button></li>
 			</ul>
 
 		</div>
