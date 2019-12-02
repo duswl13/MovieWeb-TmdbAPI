@@ -119,8 +119,11 @@ public class NoticeDAO {
 		// NOTICE_RE_REF desc, NOTICE_RE_SEQ asc에 의해 정렬한 것을
 		// 조건절에 맞는 rnum의 범위 만큼 가져오는 쿼리문입니다.
 
-		String sql = "select * from NOTICE"
-				+ "	where NOTICE_NUMBER>=? and NOTICE_NUMBER<=?";
+		String sql = "select * from ("
+				+ "select rownum rnum, b.* from ("
+				+ "select * from NOTICE order by NOTICE_NUMBER DESC) b) "
+				+ "where rnum>=? and rnum<=? order by NOTICE_DATE DESC";
+		
 
 		List<NoticeVO> list = new ArrayList<NoticeVO>();
 		// 한 페이지당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지...

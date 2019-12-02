@@ -7,6 +7,8 @@ public class NoticeDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+
 		NoticeDAO noticedao = new NoticeDAO();
 		NoticeVO noticevo = new NoticeVO();
 

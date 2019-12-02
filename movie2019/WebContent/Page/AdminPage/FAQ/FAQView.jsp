@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <style>
 .center-block{
 	display:flex;
-	justify-content:center;	/* °¡¿îµ¥ Á¤·Ä */
+	justify-content:center;	/* ê°€ìš´ë° ì •ë ¬ */
 }
 span{
 	background-color:grey;
 }
 </style>
-<title>FAQ °Ô½ÃÆÇ</title>
+<title>FAQ ê²Œì‹œíŒ</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -44,24 +44,24 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<table class="table table-striped">
-		<tr><th colspan="2"><strong>FAQ °Ô½ÃÆÇ-viewÆäÀÌÁö</strong></th></tr>
-		<tr><td>±Û¾´ÀÌ</td>
+		<tr><th colspan="2"><strong>FAQ ê²Œì‹œíŒ-viewí˜ì´ì§€</strong></th></tr>
+		<tr><td>ê¸€ì“´ì´</td>
 			<td>${faqdata.FAQ_NAME }</td></tr>
-		<tr><td>Á¦¸ñ</td>
+		<tr><td>ì œëª©</td>
 			<td>${faqdata.FAQ_SUBJECT }</td></tr>
-		<tr><td>³»¿ë</td>
+		<tr><td>ë‚´ìš©</td>
 			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">
 			${faqdata.FAQ_CONTENT }</textarea></td></tr>	
 		<tr>
 			<td colspan="2" class="center">
 				<a href="FAQModifyView.fa?num=${faqdata.FAQ_NUMBER}">
-					<button class="btn btn-info">¼öÁ¤</button>
+					<button class="btn btn-info">ìˆ˜ì •</button>
 				</a>
 				<a href="FAQDeleteAction.fa?num=${faqdata.FAQ_NUMBER}">
-					<button class="btn btn-danger">»èÁ¦</button>
+					<button class="btn btn-danger">ì‚­ì œ</button>
 				</a>
 				<a href="FAQList.fa?">
-					<button class="btn btn-primary">¸ñ·Ï</button>
+					<button class="btn btn-primary">ëª©ë¡</button>
 				</a>
 			</td>
 		</tr>

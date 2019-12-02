@@ -11,7 +11,8 @@ public class NoticeListAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+		request.setCharacterEncoding("UTF-8");
+
 		NoticeDAO noticedao=new NoticeDAO();
 		List<NoticeVO> noticelist=new ArrayList<NoticeVO>();
 		

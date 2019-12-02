@@ -39,7 +39,6 @@ $(function(){
 <%} else{ %>
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
-
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>

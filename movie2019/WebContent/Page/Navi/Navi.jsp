@@ -211,8 +211,7 @@ ul {
 							<ul>
 								<li><a href="<%=request.getContextPath()%>/NoticeList.bo">공지사항 관리</a></li>
 								<li><a href="<%=request.getContextPath()%>/FAQList.fa">FAQ 관리</a></li>
-								<li><a href="<%=request.getContextPath()%>/Page/AdminPage/UserList/UserList.jsp">회원
-										관리</a></li>
+								<li><a href="<%=request.getContextPath()%>/user_list.ul">회원 관리</a></li>
 							</ul>
 						</li>
 					</ul>
