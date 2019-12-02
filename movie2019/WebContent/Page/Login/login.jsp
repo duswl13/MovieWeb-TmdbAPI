@@ -87,7 +87,7 @@ a:hover {color: #27AE60; text-decoration:underline;}
 	background: white;
 	font-weight: bold;
 	color: #27AE60;
-	border: 1px dotted #27AE60;
+	border: 1px solid #27AE60;
 	border-radius: 1px;
 	cursor: pointer;
 	padding: 10px 5px;
@@ -245,7 +245,7 @@ span {color:red; font-size:8px; text-align:center;}
 	</div>
 	<br><hr><br>
 	<div class=joinwrap>
-	<h3 class=jointext>네? 아직도 VOSHU 회원이 아니시라구여?</h3>
+	<h3 class=jointext>아직 보슈 회원이 아니신가요?</h3>
 	<a href="<%=request.getContextPath()%>/Page/Sign/RenewSign.html" class=join>회원가입</a>
 	</div>
 	<br>

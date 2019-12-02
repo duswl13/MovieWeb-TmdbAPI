@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.movielist.action.ActionForward;
+import movie2019.movie.action.ActionForward;
 
 /**
  * Servlet implementation class start
