@@ -73,6 +73,7 @@ public class GongController extends HttpServlet {
 			command = new MailCommand();
 			command.execute(request, response);
 			page="list.gong";
+			
 		}
 		
 		

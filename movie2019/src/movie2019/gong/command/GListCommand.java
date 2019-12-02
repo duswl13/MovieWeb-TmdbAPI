@@ -14,8 +14,8 @@ public class GListCommand implements GCommand{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		GongDAO dao = new GongDAO();
 		int curPage =Integer.parseInt(request.getParameter("curPage"));
-		int start =(curPage-1)*10+1; //시작번호 = (현재페이지 -1) * 페이지당게시물수 +1
-		int end=start+(10-1); //끝번호 = 시작페이지 +(페이지당 게시물수 -1)
+		int start =(curPage-1)*5+1; //시작번호 = (현재페이지 -1) * 페이지당게시물수 +1
+		int end=start+(5-1); //끝번호 = 시작페이지 +(페이지당 게시물수 -1)
 		List<GongVO> list = dao.GongList(start,end);
 		request.setAttribute("list", list);
 		

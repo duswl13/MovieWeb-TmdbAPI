@@ -87,6 +87,10 @@ body, html {
 	margin: 20px;
 	
 }
+
+#main span{
+color: green;
+}
 </style>
 
 <jsp:include page="header.jsp" />
@@ -139,34 +143,32 @@ body, html {
 
 		$("#gong").click(function() {
 			$("#result").empty();
+			$("#mail").attr('disabled',false);
 			list("1");
 		})
 		$("#faq").click(function() {
 			$("#result").empty();
+			$("#mail").attr('disabled',false);
 			flist("1");
 		})
-		$("#mail").click(function() {
-			$("#result").empty();
-			mail();
-			
+		$("#mail").click(function(e) {
+			$("#result").empty();			
+			$.ajax({
+				type : "post",
+				url : "mail.gong",
+				success : function(result) {
+					$("#result").html(result);
+				},
+				error : function(err) {
+					alert("통신X");
+				}
+
+			});
+			$("#mail").attr('disabled',true);	
 		});
 		
 		
 	});
-	
-	function mail() { //메일
-		$.ajax({
-			type : "post",
-			url : "mail.gong",
-			success : function(result) {
-				$("#result").html(result);
-			},
-			error : function(err) {
-				alert("통신X");
-			}
-
-		});
-	}
 	
 	
 	function faqSearch(curPage) {//FAQ 서치결과
@@ -284,7 +286,7 @@ body, html {
 					<button class="col btn btn-dark-moon btn-rounded"
 						style="width: 30%" onclick="faq" id="faq">FAQ(자주하는 질문)</button>
 						<button class="col btn btn-dark-moon btn-rounded"
-						style="width: 30%" onclick="mail" id="mail">Mail(고객문의)</button>
+						style="width: 30%" id="mail">Mail(고객문의)</button>
 				</div>
 		
 
