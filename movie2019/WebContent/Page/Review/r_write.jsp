@@ -67,7 +67,6 @@ button {
 
 button:hover {
 	opacity: 70%;
-	box-shadow: 0 0 0 1px white, 0 0 0 2px #27AE60;
 }
 
 span {
@@ -103,19 +102,23 @@ textarea {
 	text-align: right;
 }
 
-#project-label {
+#movie-label {
 	display: block;
 	font-weight: bold;
 	margin-bottom: 1em;
 }
 
-#project-icon {
+#movie-id {
+	background: white;
+}
+
+#movie-icon {
 	float: left;
 	height: 32px;
 	width: 32px;
 }
 
-#project-description {
+#movie-description {
 	margin: 0;
 	padding: 0;
 }
@@ -125,41 +128,35 @@ textarea {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 	$(function() {
-		var projects = [ {
+		var movies = [ {
 			value : "겨울왕국1",
-			label : "겨울왕국1",
-			desc : "렛잇고~",
 			icon : "jquery_32x32.png"
 		}, {
 			value : "겨울왕국2",
-			label : "겨울왕국2",
-			desc : "아~아아아~",
 			icon : "jqueryui_32x32.png"
 		}, {
-			value : "그냥 겨울",
-			label : "그냥 겨울",
-			desc : "ㅇㅇ",
+			value : "그냥 겨울 운명이조",
 			icon : "sizzlejs_32x32.png"
 		} ];
 
-		$("#project").autocomplete({
+		$("#movie").autocomplete({
 			minLength : 0,
-			source : projects,
+			source : movies,
 			focus : function(event, ui) {
-				$("#project").val(ui.item.label);
+				$("#movie").val(ui.item.label);
 				return false;
 			},
 			select : function(event, ui) {
-				$("#project").val(ui.item.label);
-				$("#project-id").val(ui.item.value);
-				$("#project-description").html(ui.item.desc);
-				$("#project-icon").attr("src", "images/" + ui.item.icon);
+				$("#movie").val(ui.item.label);
+				$("#movie-id").val(ui.item.value);
+				$("#movie-desc").html(ui.item.value);
+				$("#movie-icon").attr("src", "images/" + ui.item.icon);
 
 				return false;
 			}
 		}).autocomplete("instance")._renderItem = function(ul, item) {
-			return $("<li>").append(
-					"<div>" + item.label + "<br>" + item.desc + "</div>")
+			return $("<span>").append(
+					"<div>" + item.value + "</div>")
 					.appendTo(ul);
 		};
 	});
@@ -174,33 +171,35 @@ textarea {
 
 
 			<div class=search>
-				리뷰할 영화 고르기
-				<div id="project-label"></div>
-				<img id="project-icon" src="images/transparent_1x1.png"
-					class="ui-state-default" alt=""> <input id="project">
-				<input type="hidden" id="project-id">
-
+				
+				리뷰할 영화 고르기<div id="movie-label"></div>
+				<div>
+				<img id="movie-icon" src="images/transparent_1x1.png" class="ui-state-default" alt=""> 
+				<input type=text id="movie">
+				<div id="movie-id"></div>
+</div>
 
 			</div>
 
 			<table>
 				<tr>
 					<td>영화이미지<br>
-						<p id="project-description"></p>
+						<p id="movie-desc"></p>
 						<br>
-					<span>표정 점수 </span><br> <span>★★★☆☆</span></td>
+					<span>표정 점수 </span><br> <span>★★★☆☆</span>
+					</td>
+					
 					<td>
 						<div class=write_form>
 							<textarea name=write_form id=write_form cols=50 rows=15
-								class=write_form placeholder="아~아아아~"></textarea>
+								class=write_form placeholder="..."></textarea>
 						</div>
 					</td>
 				</tr>
 			</table>
 
 			<div class=save>
-				운명이조님이 작성한 리뷰를
-				<button type=submit>저장</button>
+				운명이조님이 작성한 리뷰를<button type=submit>저장</button>
 			</div>
 
 		</form>
