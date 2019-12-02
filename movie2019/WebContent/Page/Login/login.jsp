@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!--login02 조금 더 수정 -->
 <!DOCTYPE html>
 <html>
@@ -18,11 +21,13 @@
 
 body {
 	background: #141414;
+	font-family: montserrat, arial, verdana;
+	color: #141414;
 }
 
-body {
-	font-family: montserrat, arial, verdana;
-}
+a{color: #141414; text-decoration:none;}
+a:hover {color: #27AE60; text-decoration:underline;}
+
 /*form styles*/
 #msform {
 	width: 400px;
@@ -195,7 +200,7 @@ body {
     <input type="button" name="next" class="next action-button" value="SNS로그인" />
     
     <div class="findwrap">
-	<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a> <a class=find>회원가입</a>
+	<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a> <a href="<%=request.getContextPath()%>/Page/Sign/RenewSign.html" class=find>회원가입</a>
 	</div>
 	<br>
   </fieldset>
