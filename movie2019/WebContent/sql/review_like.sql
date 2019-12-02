@@ -10,4 +10,31 @@ LIKE_ID VARCHAR2(40) REFERENCES USERS (USER_ID)
 INSERT INTO REVIEW_LIKE VALUES(330457,'duswl13','sonyeonsoo');
 INSERT INTO REVIEW_LIKE VALUES(330457,'duswl13','jiyeon');
 
-select * from review where MOVIE_ID= ? and 
+INSERT INTO REVIEW_LIKE VALUES(330457,'sonyeonsoo','duswl13');
+INSERT INTO REVIEW_LIKE VALUES(330457,'sonyeonsoo','sonyeonsoo');
+INSERT INTO REVIEW_LIKE VALUES(330457,'sonyeonsoo','jiyeon');
+
+INSERT INTO REVIEW_LIKE VALUES(330457,'jiyeon','jiyeon');
+
+select * from review
+where MOVIE_ID= 330457 
+and USER_ID IN 
+			(SELECT USER_ID
+			FROM REVIEW_LIKE 
+			WHERE MOVIE_ID = 330457
+ 			GROUP BY USER_ID );
+
+ 			
+ 			
+(SELECT USER_ID, count(*) count
+			FROM REVIEW_LIKE 
+			WHERE MOVIE_ID = 330457
+ 			GROUP BY USER_ID 
+ 			ORDER BY count DESC
+ 			);
+
+
+/**리뷰 좋아요 순
+SELECT count(*),USER_ID FROM REVIEW_LIKE WHERE MOVIE_ID = 330457
+ GROUP BY USER_ID ORDER BY count(*) DESC;
+ **/
