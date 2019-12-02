@@ -85,7 +85,8 @@ img {
 }
 
 .user_mv {
-	
+
+	padding:16px;
 	background: #333;
 }
 
@@ -237,6 +238,25 @@ height:80%;
   transform: translate(-50%, -50%);
 }
 
+
+.rating span{
+cursor:pointer;
+font-size: 26px;}
+
+.user_mv img {
+cursor:pointer;
+display: inline-block;
+margin-left:1em;
+width:30px;
+float:right;
+}
+.user_mv table{
+width:100%;
+}
+.user_mv td{
+width:50%;
+}
+
 </style>
 </head>
 <body>
@@ -275,7 +295,7 @@ height:80%;
 		<div class="container">
 			<div class="col-xs-2">
 				<img class="img-responsive" id="detail_poster"
-					src="https://image.tmdb.org/t/p/w500/tcmj4YQ6p79OD8ECpRAbV8Yjk0c.jpg">
+					>
 			</div>
 			<div class="col-xs-10">
 				<h2>
@@ -287,9 +307,18 @@ height:80%;
 				<div class="user_mv">
 					<table>
 						<tr>
-							<td>이미 본 작품인가요?</td>
-							<td>★★★★★</td>
-							<td>취향 좋아요 싫어요</td>
+							<td><h4><b>이미 본 작품인가요?</b></h4></td>
+							<td><img src="<%=request.getContextPath()%>/Png/happy.svg"><img src="<%=request.getContextPath()%>/Png/neutral1.svg"></td>
+						</tr>
+						<tr>
+						<td>
+						
+					<div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>
+						
+						</td>
+							<td></td>
 						</tr>
 					</table>
 				</div>
@@ -495,7 +524,76 @@ document.getElementById("main").style.marginLeft = "250px";
 	});
 
 	
+	var rating = false;
+	//표정 점수이미지를 클릭할경우 변화
+	$('.user_mv img').click(function(){
+		
+		var check = $(".user_mv img").index(this); 
+		if(check == 0){
+			//좋아요
+			$('.user_mv img:eq(0)').prop('src',"<%=request.getContextPath()%>/Png/happy1.svg");
+			$('.user_mv img:eq(1)').prop('src',"<%=request.getContextPath()%>/Png/neutral1.svg");
+		}else{
+			//싫어요
+			$('.user_mv img:eq(0)').prop('src',"<%=request.getContextPath()%>/Png/happy.svg");
+			$('.user_mv img:eq(1)').prop('src',"<%=request.getContextPath()%>/Png/neutral.svg");
+		}
+	});
 	
+	
+	//별점 클릭 시 해당 점수 고정시키기
+	$(".rating").click(function(){
+		rating = !rating;
+	});
+	
+	
+	$(".rating span").hover(function(){
+		//별점 클릭 시 해당 점수 고정시키기
+		if(rating){
+			
+			return false;
+			
+		}
+		
+		//hover 된 요소가 몇번쨰 요소인지 확인
+		var check = $(".rating span").index(this);
+		
+		var checkText = '';
+		switch(check){
+		case 0:
+			checkText ='영화의 완성도가 너무 없어요.';
+			break;
+		case 1:
+			checkText ='영화의 완성도가 별로에요.';
+			break;
+		case 2:
+			checkText ='영화의 완성도가 보통이에요.';
+			break;
+		case 3:
+			checkText ='영화의 완성도가 괜찮아요.';
+			break;
+		case 4:
+			checkText ='영화의 완성도가 높아요.';
+			break;
+		}
+		
+		$('.user_mv b').text(checkText);
+		
+		//별점 변화
+		for(var i = 0; i < 5; i++){
+			if(i <= check){
+			$('.rating span:eq('+i+')').text('★');
+			$('.rating span:eq('+i+')').css('color','orange');
+			
+			}
+			else{
+			$('.rating span:eq('+i+')').css('color','white');
+			$('.rating span:eq('+i+')').text('☆');	
+			}
+		}
+		
+
+	});
 	
 	
 	

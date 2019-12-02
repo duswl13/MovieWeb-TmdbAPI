@@ -29,6 +29,26 @@ color:white;
     margin: 0 auto;
 }
 
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: red; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
 </style>
 </head>
 <%
@@ -56,6 +76,10 @@ if(request.getParameter("open") != null){
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 <div class="container">
+
+<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+	
+
 <h1 id="persionId"><%=name %></h1>
 
 <hr>
@@ -77,6 +101,8 @@ if(<%=open%>)
 document.getElementById("main").style.marginLeft = "250px";
 
 
+//search 검색 결과는 한 페이지에 모든 결과가 다 나옴.
+var list = null;
 
 readyList();
 
@@ -95,10 +121,11 @@ $.ajax({
 	cache : false,
 	success : function(data) {
 
-		console.log('사람 정보 성공');
-		var list = data.cast;
-
-		printPerson(list);
+	
+		list = data.cast;
+		console.log('사람 정보 성공 :'+list.length);
+		printMore(list.length);	
+		printPerson();
 		
 	},
 	error : function(request, status, error) {
@@ -114,19 +141,31 @@ $.ajax({
 
 
 $('.more').click(function(){
-	readyList();
+	printPerson();
 });
 
 
+//api 결과가 20개가 아닌 경우 결과의 끝이라고 보고 더보기 숨김
+function printMore(size){
+	if(size < 20)
+		$('.more').css('visibility','hidden');
+	else
+		$('.more').css('visibility','visible');
+}
 
-var check = 0;
-var page = false;
-function printPerson(list){
+
+
+var page = false; //search 결과는 한 페이지에 전부 다 나옴
+var listsize = 0; //필터링으로 인한 영화 빈칸 체크
+
+function printPerson(){
 	
 		var text = '';
+		var check = 0;
 		
-
-		for (var i = 0; i < 5; i++) {
+		//현재 영화 목록 개수가 4개로 나누어 떨어지는지 확인
+		if(listsize == 0  || listsize % 4 == 0)
+			outer :for (var i = 0; i < 5; i++) {
 
 			text += '<div class="row">';
 
@@ -150,10 +189,9 @@ function printPerson(list){
 							100)
 							+ '...';
 					text += '<div class="col-xs-3">';
-					//text += '<a href="moviedetail.ml?open=false&id=' + list[check].id
-					//		+ '">\n';
+				
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
-					//text += '</a>';
+					
 					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 					
@@ -168,12 +206,83 @@ function printPerson(list){
 					text += '<h5>' + list[check].original_title + '</h5>';
 				
 					text += '</div>';
-
+					listsize ++;
 					check++;
+				}else{
+					break outer;
 				}
 			}
 			text += '</div>';
 
+		}
+		else{
+			
+			//listsize 가 4로 나누어 떨어지지 않았을 경우 빈 영화아이템이 있다는 뜻임
+			//4 - (listsize % 4) 로 몇개의 공간이 비어있는지 체크
+			var add = 4 - (listsize % 4);
+			alert(add+"개의 공간이 비어있습니다.");
+
+			//빈 공간만큼 추가하기
+			for (var j = 0; j < add; j++) {
+
+				if (check < list.length) {
+					if (list[check].poster_path == null
+							|| list[check].overview == null
+							|| list[check].genre_ids == null
+							|| list[check].overview == ""
+							|| list[check].genre_ids == ""
+							|| list[check].overview.includes('섹스')) {
+						j--;
+						check++;
+						console.log('이상한 거니까 넘김' + check);
+
+						continue;
+					}
+
+					list[check].overview = list[check].overview.substring(0,
+							100)
+							+ '...';
+					text += '<div class="col-xs-3">';
+				
+					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
+					
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					
+					text += ' <div>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += '<span class="fa fa-star"></span>';
+					text += ' </div>';
+					text +='</div>\n';
+					text += '<h5>' + list[check].original_title + '</h5>';
+				
+					text += '</div>';
+					listsize ++;
+					check++;
+				}
+			}
+			
+			
+			//빈 공간만큼 추가하기
+			$('.movieList > .row:last').html($('.movieList > .row:last').html()+text);
+			
+			//채운만큼 리스트삭제하기
+			list.splice(0, check);
+			
+			console.log('남은 리스트 : '+ list.length);
+			//남은 리스트가 없으면 더이상 more 표출하지 않음
+			if(list.length == 0)
+				printMore(0);
+			else
+			printPerson(list);
+			
+			
+			return; 
+			
+			
 		}
 
 		
@@ -182,16 +291,37 @@ function printPerson(list){
 			else
 			$('.movieList').html($('.movieList').html()+text);	
 			
+			//채운만큼 리스트삭제하기
+			list.splice(0, check);
+			console.log('남은 리스트 : '+ list.length);
+			//남은 리스트가 없으면 더이상 more 표출하지 않음
+			if(list.length == 0)
+				printMore(0);
+			
 	
-		console.log('check: '+ check + "list.length:"+list.length);
-			if (check < list.length) 
-				$('.more').css('visibility','visible');
-			else
-				$('.more').css('visibility','hidden');
 			
 			page = true;
 }
 
+
+mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 </script>
 </body>
 </html>

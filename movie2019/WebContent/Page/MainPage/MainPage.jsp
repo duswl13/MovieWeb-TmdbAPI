@@ -58,9 +58,11 @@
 			<h1 id="m_head"></h1>
 
 			<div class="starRev">
-				<span class="starR on">별1</span> <span class="starR">별2</span> <span
-					class="starR">별3</span> <span class="starR">별4</span> <span
-					class="starR">별5</span>
+				<span class="starR on"></span>
+				<span class="starR"></span> 
+				<span class="starR"></span>
+				<span class="starR"></span>
+				<span class="starR"></span>
 			</div>
 			<p id="m_reviews" class="gray"></p>
 			<p id="m_content"></p>
@@ -78,7 +80,7 @@
 
 			<div class="col-md-12">
 				<h3>인기 영화</h3>
-				<span class="more">더보기</span>
+				<span class="more" onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=1'">더보기</span>
 				<div class="carousel slide multi-item-carousel" id="theCarousel1">
 					<div class="carousel-inner">
 
@@ -108,7 +110,8 @@
 
 				<div class="col-md-12">
 					<h3>최신 영화</h3>
-					<span class="more">더보기</span>
+					
+					<span class="more" onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=2'">더보기</span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel2">
 						<div class="carousel-inner">
 							
@@ -136,7 +139,7 @@
 
 				<div class="col-md-12">
 					<h3>개봉 예정 영화</h3>
-					<span class="more">더보기</span>
+					<span class="more" onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=3'">더보기</span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel3">
 						<div class="carousel-inner">
 							
@@ -310,6 +313,9 @@
 			$('#m_head').text(title);
 			$('#m_reviews').text('147 Reviews ' + date);
 			$('#m_content').text(content);
+			
+			//별점 DB 가져오기
+			
 
 		}
 

@@ -8,8 +8,13 @@
 <script>
 	function enterkey() {
 		if (window.event.keyCode == 13) {
+			var text = $('#search-form').val();
+			//$('#search-form').val().replace(/(\s*)/g, "")
+			if(text != '' && text != null)
 			location.href = '<%=request.getContextPath()%>/Search.ml?open=false&key='
-					+ $('#search-form').val().replace(/(\s*)/g, "");
+					+ text;
+			else
+				alert('검색어를 입력해주세요.');
 		}
 	}
 </script>
@@ -172,7 +177,7 @@ ul {
 					<ul>
 						<li>
 							<h2>
-								<a href='<%=request.getContextPath()%>/MovieList.ml?option=0'>영화</a>
+								<a href='<%=request.getContextPath()%>/MovieList.ml?option=1'>영화</a>
 							</h2>
 
 						</li>
