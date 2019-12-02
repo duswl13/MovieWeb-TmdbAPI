@@ -77,23 +77,39 @@ public class MovieListController extends HttpServlet {
 			forward.setRedirect(false);
 			forward.setPath("Page/Search/Search.jsp");
 		} else if (command.equals("/moviedetail.ml")) {
-			forward = new ActionForward();// parameter 있음
-			forward.setRedirect(false);
-			forward.setPath("Page/MovieDetail/MovieDetail.jsp");
+			action = new SelectMyRatingAction();
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+
 		} else if (command.equals("/PersonDetail.ml")) {
 			forward = new ActionForward();// parameter 있음
 			forward.setRedirect(false);
 			forward.setPath("Page/MovieDetail/PersonDetail.jsp");
 		} else if (command.equals("/InsertFaceRating.ml")) {
-		action = new InsertFaceRatingAction();// parameter 있음
-		
-		try {
-			forward = action.execute(request, response);
+			action = new InsertFaceRatingAction();// parameter 있음
 
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/InsertStarRating.ml")) {
+			action = new InsertStarRatingAction();// parameter 있음
+
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-	}
+
 
 		if (forward != null) {
 			if (forward.isRedirect()) {

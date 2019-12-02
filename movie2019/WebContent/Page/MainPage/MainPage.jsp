@@ -341,7 +341,7 @@
 					
 					
 				print += '<div class="col-xs-4">\n';
-				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id + '">\n';
+				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id + '&title='+list[i].original_title+'">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '\n<div class="centered">\n';
 				print += '<a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';

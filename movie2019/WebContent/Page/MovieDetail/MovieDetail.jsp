@@ -553,15 +553,19 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	$(".rating span").hover(function(){
+		var check = $(".rating span").index(this);
 		//별점 클릭 시 해당 점수 고정시키기
 		if(rating){
+			
+			//별점 insert
+			InsertStarRating(check);
 			
 			return false;
 			
 		}
 		
 		//hover 된 요소가 몇번쨰 요소인지 확인
-		var check = $(".rating span").index(this);
+	
 		
 		var checkText = '';
 		switch(check){
@@ -601,6 +605,38 @@ document.getElementById("main").style.marginLeft = "250px";
 	});
 	
 	
+function InsertStarRating(value){
+		
+		alert($('#detail_title').text());
+		$.ajax({
+
+			url : 'InsertStarRating.ml',
+			data : {
+				"movieId" : <%=id%>,
+				"movieStar" : value
+			},
+			dataType : 'json',
+			success : function(rdata) {
+
+				if (rdata == 1) {
+					alert('별점 점수 등록 성공!');
+					
+				} else {
+					alert('별점 점수 등록 실패!');
+				}
+
+			},
+			error : function() {
+				alert('에러');
+			},
+			complete : function() {
+				alert('완료');
+			}
+
+		});
+		
+	}
+	
 	function InsertFaceRating(value){
 		
 		alert($('#detail_title').text());
@@ -609,7 +645,6 @@ document.getElementById("main").style.marginLeft = "250px";
 			url : 'InsertFaceRating.ml',
 			data : {
 				"movieId" : <%=id%>,
-				"movieTitle" : $('#detail_title').text(),
 				"movieFace" : value
 			},
 			dataType : 'json',
@@ -668,12 +703,46 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 		
 		
-		//영화 ID가 테이블에 있는지 확인,없으면 가져오기
-		//있으면 별점과 표정점수 가져오기
+		
+		//별점과 표정점수 가져오기
 		
 		
 	
 	}
+	
+	
+	function SelectFaceRating(value){
+		
+		alert($('#detail_title').text());
+		$.ajax({
+
+			url : 'SelectFaceRating.ml',
+			data : {
+				"movieId" : <%=id%>,
+				"movieTitle" : $('#detail_title').text(),
+			},
+			dataType : 'json',
+			success : function(rdata) {
+
+				if (rdata == 1) {
+					alert('표정 점수 등록 성공!');
+					
+				} else {
+					alert('표정 점수 등록 실패!');
+				}
+
+			},
+			error : function() {
+				alert('에러');
+			},
+			complete : function() {
+				alert('완료');
+			}
+
+		});
+		
+	}
+	
 
 	
 	function printCredits(list){
