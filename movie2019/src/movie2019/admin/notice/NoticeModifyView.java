@@ -9,6 +9,8 @@ public class NoticeModifyView implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+
 		ActionForward forward = new ActionForward();
 		
 		NoticeDAO noticedao=new NoticeDAO();

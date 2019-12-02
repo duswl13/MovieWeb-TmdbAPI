@@ -9,6 +9,7 @@ public class FAQModifyView implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		ActionForward forward = new ActionForward();
 		
 		FAQDAO faqdao=new FAQDAO();

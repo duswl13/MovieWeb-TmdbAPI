@@ -119,8 +119,10 @@ public class FAQDAO {
 		// FAQ_RE_REF desc, FAQ_RE_SEQ asc에 의해 정렬한 것을
 		// 조건절에 맞는 rnum의 범위 만큼 가져오는 쿼리문입니다.
 
-		String sql = "select * from FAQ"
-				+ "	where FAQ_NUMBER>=? and FAQ_NUMBER<=?";
+		String sql = "select * from ("
+				+ "select rownum rnum, b.* from ("
+				+ "select * from FAQ order by FAQ_NUMBER DESC) b) "
+				+ "where rnum>=? and rnum<=? order by FAQ_DATE DESC";
 
 		List<FAQVO> list = new ArrayList<FAQVO>();
 		// 한 페이지당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지...

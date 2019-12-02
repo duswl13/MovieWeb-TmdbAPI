@@ -11,6 +11,7 @@ public class FAQListAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		
 		FAQDAO faqdao=new FAQDAO();
 		List<FAQVO> faqlist=new ArrayList<FAQVO>();

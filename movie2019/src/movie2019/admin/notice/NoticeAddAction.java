@@ -9,7 +9,8 @@ public class NoticeAddAction implements Action {
    @Override
    public ActionForward execute(HttpServletRequest request, 
       HttpServletResponse response) throws Exception {
-      
+	  request.setCharacterEncoding("UTF-8");
+  
       NoticeDAO noticedao = new NoticeDAO();
       NoticeVO noticevo = new NoticeVO();
       ActionForward forward = new ActionForward();
@@ -23,6 +24,8 @@ public class NoticeAddAction implements Action {
                 request.getParameter("NOTICE_NAME"));
     	   noticevo.setNOTICE_SUBJECT(
                 replaceParameter(request.getParameter("NOTICE_SUBJECT")));
+    	   System.out.println(request.getParameter("NOTICE_NAME"));
+    	   System.out.println(request.getParameter("NOTICE_SUBJECT"));
     	   noticevo.setNOTICE_CONTENT(
                 replaceParameter(request.getParameter("NOTICE_CONTENT")));
           

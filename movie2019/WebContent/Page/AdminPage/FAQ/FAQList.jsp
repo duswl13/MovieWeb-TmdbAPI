@@ -57,8 +57,21 @@ table, td {
 	display:flex;
 	justify-content:center;	/* 가운데 정렬 */
 }
-span{
-	background-color:grey;
+
+.table-striped tbody tr:nth-of-type(odd){
+	background : white;
+	color : black;
+}
+div, td, a, .page-link{
+	color:black;
+}
+table, td {
+	border-bottom : none;
+}
+.btn-info {
+	background-color:#27AE60;
+	margin-bottom : 50px;
+	boder-color:#27AE60;
 }
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -84,7 +97,7 @@ $(function(){
 <%} %>
 
 <div id="main">
-      <span style="font-size: 30px; cursor: pointer; color: white;"
+      <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<%--게시글이 있는 경우 --%>

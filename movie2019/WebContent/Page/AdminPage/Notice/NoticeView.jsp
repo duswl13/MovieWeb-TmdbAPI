@@ -1,18 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <style>
 .center-block{
 	display:flex;
-	justify-content:center;	/* °¡¿îµ¥ Á¤·Ä */
+	justify-content:center;	/* ê°€ìš´ë° ì •ë ¬ */
 }
 span{
 	background-color:grey;
 }
 </style>
-<title>°øÁö»çÇ× °Ô½ÃÆÇ</title>
+<title>ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -38,30 +38,29 @@ $(function(){
 <%} else{ %>
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
-
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<table class="table table-striped">
-		<tr><th colspan="2"><strong>°øÁö»çÇ× °Ô½ÃÆÇ-viewÆäÀÌÁö</strong></th></tr>
-		<tr><td>±Û¾´ÀÌ</td>
+		<tr><th colspan="2"><strong>ê³µì§€ì‚¬í•­ ê²Œì‹œíŒ-viewí˜ì´ì§€</strong></th></tr>
+		<tr><td>ê¸€ì“´ì´</td>
 			<td>${noticedata.NOTICE_NAME }</td></tr>
-		<tr><td>Á¦¸ñ</td>
+		<tr><td>ì œëª©</td>
 			<td>${noticedata.NOTICE_SUBJECT }</td></tr>
-		<tr><td>³»¿ë</td>
+		<tr><td>ë‚´ìš©</td>
 			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">
 			${noticedata.NOTICE_CONTENT }</textarea></td></tr>	
 		<tr>
 			<td colspan="2" class="center">
 				<a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUMBER}">
-					<button class="btn btn-info">¼öÁ¤</button>
+					<button class="btn btn-info">ìˆ˜ì •</button>
 				</a>
 				<a href="NoticeDeleteAction.bo?num=${noticedata.NOTICE_NUMBER}">
-					<button class="btn btn-danger">»èÁ¦</button>
+					<button class="btn btn-danger">ì‚­ì œ</button>
 				</a>
 				<a href="NoticeList.bo?">
-					<button class="btn btn-primary">¸ñ·Ï</button>
+					<button class="btn btn-primary">ëª©ë¡</button>
 				</a>
 			</td>
 		</tr>
