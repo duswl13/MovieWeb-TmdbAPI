@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
 <!--login02 조금 더 수정 -->
 <!DOCTYPE html>
 <html>
@@ -18,11 +21,13 @@
 
 body {
 	background: #141414;
+	font-family: montserrat, arial, verdana;
+	color: #141414;
 }
 
-body {
-	font-family: montserrat, arial, verdana;
-}
+a{color: #141414; text-decoration:none;}
+a:hover {color: #27AE60; text-decoration:underline;}
+
 /*form styles*/
 #msform {
 	width: 400px;
@@ -48,20 +53,21 @@ body {
 	display: none;
 }
 /*inputs*/
-.input2, #msform textarea {
+.input2 {
 	padding: 15px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
-	width: 95%;
+	width: 90%;
+	height: 40px;
 	box-sizing: border-box;
 	font-family: montserrat;
 	color: #2C3E50;
 	font-size: 13px;
 }
 
-.loginCheck {width:100%; padding: 10px; }
-.saveSess {width:40%; margin-right:50px;}
+.loginCheck {width:100%; padding: 5px; }
+.saveSess {width:40%; margin-right:10px;}
 
 /*buttons*/
 #msform .submit {
@@ -163,17 +169,21 @@ body {
 
 .check {
 	font-size: 8pt;
-	margin-right: 0px;
+	margin-right: 20px;
 }
 
 .find {
 	font-size: 8pt;
 	margin-right: 15px;
 }
+
+span {color:red; font-size:8px;}
 </style>
+
+
 <body><br><br>
 <!-- multistep form -->
-<form id="msform">
+<form id="msform" method=post action=loginProcess.net>
 
   
   <!-- fieldsets 1 -->
@@ -183,6 +193,7 @@ body {
     <br>
     <input type="text" name="USER_ID" id="USER_ID" class=input2 placeholder="아이디" required/>
     <input type="password" name="USER_PASS" id="USER_PASS" class=input2 placeholder="비밀번호" required/>
+    <br><span>아이디와 비밀번호가 일치하지 않습니다.</span>
     
     <div class="loginCheck">
 	<input type="checkbox" id="saveSess" name="saveSess"> 
@@ -195,7 +206,7 @@ body {
     <input type="button" name="next" class="next action-button" value="SNS로그인" />
     
     <div class="findwrap">
-	<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a> <a class=find>회원가입</a>
+	<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a> <a href="<%=request.getContextPath()%>/Page/Sign/RenewSign.html" class=find>회원가입</a>
 	</div>
 	<br>
   </fieldset>

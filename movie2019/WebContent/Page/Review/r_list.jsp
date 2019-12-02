@@ -171,7 +171,7 @@ button:hover {
 			</c:if>
 			<br> <br>
 			<br>
-			<br> <a href="rv_write.jsp"><button type=button>리뷰쓰기</button></a>
+			<br> <a href="r_write.jsp"><button type=button>리뷰쓰기</button></a>
 
 		</div>
 	</div>
