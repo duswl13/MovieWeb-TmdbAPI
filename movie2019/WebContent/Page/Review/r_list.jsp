@@ -9,6 +9,7 @@
 	margin: 0;
 	padding: 0;
 }
+
 body {
 	background: #141414;
 	font-family: montserrat, arial, verdana;
@@ -91,8 +92,8 @@ button:hover {
 					<c:set var="num" value="${listcount-(page-1)*10}" />
 					<c:forEach var="b" items="${boardlist}">
 						<tr>
-							<td><c:out value="${num}" /> <%--num출력 --%> <c:set var="num"
-									value="${num-1}" /> <%-- num=num-1; 의미 --%></td>
+							<td><c:out value="${num}" /> <%--num출력 --%> <c:set
+									var="num" value="${num-1}" /> <%-- num=num-1; 의미 --%></td>
 							<td>
 								<div>
 									<%--답변글 제목 앞에 여백 처리 부분
@@ -169,9 +170,8 @@ button:hover {
 			<c:if test="${listcount == 0 }">
 				<font size=5>등록된 글이 없다...</font>
 			</c:if>
-			<br> <br>
-			<br>
-			<br> <a href="r_write.jsp"><button type=button>리뷰쓰기</button></a>
+			<br> <br> <br> <br> <a href="r_write.jsp"><button
+					type=button>리뷰쓰기</button></a>
 
 		</div>
 	</div>
