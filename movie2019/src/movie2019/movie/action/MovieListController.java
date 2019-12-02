@@ -1,4 +1,4 @@
-package movie2019.movielist.action;
+package movie2019.movie.action;
 
 import java.io.IOException;
 
@@ -84,7 +84,16 @@ public class MovieListController extends HttpServlet {
 			forward = new ActionForward();// parameter 있음
 			forward.setRedirect(false);
 			forward.setPath("Page/MovieDetail/PersonDetail.jsp");
+		} else if (command.equals("/InsertFaceRating.ml")) {
+		action = new InsertFaceRatingAction();// parameter 있음
+		
+		try {
+			forward = action.execute(request, response);
+
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+	}
 
 		if (forward != null) {
 			if (forward.isRedirect()) {

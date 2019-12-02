@@ -1,4 +1,4 @@
-package movie2019.movielist.action;
+package movie2019.movie.action;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

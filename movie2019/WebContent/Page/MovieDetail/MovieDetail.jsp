@@ -533,11 +533,16 @@ document.getElementById("main").style.marginLeft = "250px";
 			//좋아요
 			$('.user_mv img:eq(0)').prop('src',"<%=request.getContextPath()%>/Png/happy1.svg");
 			$('.user_mv img:eq(1)').prop('src',"<%=request.getContextPath()%>/Png/neutral1.svg");
+		
+			
 		}else{
 			//싫어요
 			$('.user_mv img:eq(0)').prop('src',"<%=request.getContextPath()%>/Png/happy.svg");
 			$('.user_mv img:eq(1)').prop('src',"<%=request.getContextPath()%>/Png/neutral.svg");
 		}
+		
+		InsertFaceRating(++check);
+		
 	});
 	
 	
@@ -596,6 +601,39 @@ document.getElementById("main").style.marginLeft = "250px";
 	});
 	
 	
+	function InsertFaceRating(value){
+		
+		alert($('#detail_title').text());
+		$.ajax({
+
+			url : 'InsertFaceRating.ml',
+			data : {
+				"movieId" : <%=id%>,
+				"movieTitle" : $('#detail_title').text(),
+				"movieFace" : value
+			},
+			dataType : 'json',
+			success : function(rdata) {
+
+				if (rdata == 1) {
+					alert('표정 점수 등록 성공!');
+					
+				} else {
+					alert('표정 점수 등록 실패!');
+				}
+
+			},
+			error : function() {
+				alert('에러');
+			},
+			complete : function() {
+				alert('완료');
+			}
+
+		});
+		
+	}
+	
 	
 	function printVideo(videokey) {
 
@@ -609,10 +647,12 @@ document.getElementById("main").style.marginLeft = "250px";
 	}
 	
 	
+
 	function printDetail(list){
 		
 		if(list.original_language == "ko")
 			console.log(list.title);
+		
 		$('#detail_title').text(list.title);
 		
 		$("#detail_content").text(list.overview);
@@ -625,6 +665,14 @@ document.getElementById("main").style.marginLeft = "250px";
 		
 		$('#detail_genre_and_date').text(genre_text + " " + list.release_date);
 		$("#detail_poster").prop('src','https://image.tmdb.org/t/p/w500'+list.poster_path);
+	
+		
+		
+		//영화 ID가 테이블에 있는지 확인,없으면 가져오기
+		//있으면 별점과 표정점수 가져오기
+		
+		
+	
 	}
 
 	

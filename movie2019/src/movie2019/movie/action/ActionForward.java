@@ -1,4 +1,4 @@
-package movie2019.movielist.action;
+package movie2019.movie.action;
 
 public class ActionForward {
 	private boolean redirect = false;
