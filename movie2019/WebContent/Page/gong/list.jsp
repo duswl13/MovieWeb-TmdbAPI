@@ -25,7 +25,8 @@ body {
 <style type="text/css">
 .page-link{
 background-color: black;
-color: #ffc107;
+color: white;
+border: none;
 
 }
 .pagination{
@@ -59,7 +60,7 @@ justify-content:center;
 			<div class="col">			
 	<ul class="pagination">
 				<c:if test="${current_page>1 }">
-					<li class="page-item" style="background-color: gray;" ><a class="page-link" href="#" onclick="list('1')">First</a>
+					<li class="page-item" ><a class="page-link" href="#" onclick="list('1')">First</a>
 				</c:if>
 				<c:if test="${current_block>1 }">
 					<li class="page-item"><a class="page-link" href="#2"
@@ -68,7 +69,7 @@ justify-content:center;
 				<c:forEach var="page" begin="${block_start }" end="${block_end }">
 					<!-- 현재페이지 하이퍼링크 제거 -->
 					<c:if test="${page==current_page }">
-						<li class="page-item"><a class="page-link" href="#2" style="color: red;">${page}</a></li>
+						<li class="page-item"><a class="page-link" href="#2" style="color: #27AE60;">${page}</a></li>
 					</c:if>
 					<!-- 현재페이지가 아니면 하이퍼링크 표시 -->
 					<c:if test="${page!=current_page }">

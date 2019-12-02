@@ -280,7 +280,7 @@ color: green;
 			</div>
 		</div>
 		
-				<div class="row text-center" style="width: 100%">
+				<div class="row text-center" style="width: 80%; margin:0 auto; ">
 					<button class="col btn btn-dark-moon btn-rounded"
 						style="width: 30%" onclick="gong" id="gong">공지사항</button>
 					<button class="col btn btn-dark-moon btn-rounded"

@@ -26,7 +26,7 @@ public class GListCommand implements GCommand{
 		request.setAttribute("total_page", total_page);
 		
 		//블록당 표시 페이지 갯수 10개씩출력하겠다
-		int page_list_size=10;
+		int page_list_size=5;
 		//페이지 블록의 갯수(전체 페이지갯수 / 블록당 페이지 갯수)
 		int total_block=(int)Math.ceil(total_page*1.0/page_list_size);
 		//현재 페이지가 몇번째 블록인지 계산 공식=(현재페이지-1)/페이지블록단위+1
