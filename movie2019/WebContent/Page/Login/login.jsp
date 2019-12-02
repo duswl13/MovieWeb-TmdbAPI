@@ -177,7 +177,7 @@ a:hover {color: #27AE60; text-decoration:underline;}
 	margin-right: 15px;
 }
 
-span {color:red; font-size:8px;}
+span {color:red; font-size:8px; text-align:center;}
 </style>
 
 
