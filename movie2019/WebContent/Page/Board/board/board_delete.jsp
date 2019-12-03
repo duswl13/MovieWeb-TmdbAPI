@@ -2,18 +2,8 @@
 <html>
 <head>
 <title>영화 토론 게시판</title>
-
-<script src="js/delete.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script>
-  $(function(){
-	 
-	  $("button").last().click(function(){
-		  history.back();
-	  });
-  })
-</script>
 </head>
 <style>
 * {color:white; background:#141414;}
@@ -72,5 +62,14 @@ if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 
 
+</script>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+  $(function(){
+	 
+	  $("button").last().click(function(){
+		  history.back();
+	  });
+  })
 </script>
 </html>

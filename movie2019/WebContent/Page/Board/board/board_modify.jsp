@@ -4,14 +4,13 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<script src="js/writeform.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
 * {color:white; background:#141414;}
   tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
-  .container {width:60%;}
+  .container {width:60%;height:100%;}
   label {font-weight:bold;}
   #upfile {display:none;}
 </style>
@@ -91,4 +90,6 @@ if(<%=open%>)
 
 
 </script>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/writeform.js" charset="utf-8"></script>
 </html>
