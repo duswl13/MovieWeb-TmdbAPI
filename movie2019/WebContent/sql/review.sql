@@ -24,4 +24,4 @@ INSERT INTO review VALUES ((select nvl(max(REVIEW_NUMBER),0) from review)+1,
 330457,'jiyeon','음...','음....',sysdate);
 
 /* 별점 또는 얼굴 평가정보가 있는 경우에만 리뷰 남길수있게 하기*/
-
+SELECT * FROM review;

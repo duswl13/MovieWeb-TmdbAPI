@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,24 +21,22 @@
 
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-	
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<% 
-String id = request.getParameter("id");
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-boolean open = false;
-if(request.getParameter("open") != null){
-	open = Boolean.parseBoolean(request.getParameter("open"));
-}
-String apikey = application.getInitParameter("APIKEY");
+<%
+	String id = request.getParameter("id");
 
+	boolean open = false;
+	if (request.getParameter("open") != null) {
+		open = Boolean.parseBoolean(request.getParameter("open"));
+	}
+	String apikey = application.getInitParameter("APIKEY");
 %>
 <style>
-
 .all {
-
-margin-top:22vh;
+	margin-top: 22vh;
 	color: white;
 }
 
@@ -53,13 +51,15 @@ margin-top:22vh;
 	height: 500px;
 }
 
+
 .col-xs-8 {
 	background: #bbb;
 }
 
 .movie_info {
-
- background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1), rgba(0,0,0,1));
+	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0),
+		rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1),
+		rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 }
 
 .pickgradient {
@@ -79,14 +79,12 @@ margin-top:22vh;
 		rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4), #000); /* W3C */
 }
 
-
 img {
 	display: block;
 }
 
 .user_mv {
-
-	padding:16px;
+	padding: 16px;
 	background: #333;
 }
 
@@ -95,71 +93,72 @@ img {
 }
 
 .col-xs-4 {
-	height: auto;
-	background: inherit;
+padding:16px;
+width:32%;
+margin: 0.5%;
+	height:18em;
+	background: #141414;
 }
 
-.review {
-	padding: 3em;
-	background: #333;
+
+
+.detail_content {
+	color: white;
 }
-.detail_content{
-color:white;}
 
 .review_id {
 	float: left;
 }
 
-.review_Star {
+.review_star {
+	float: right;
+}
+.review_face {
 	float: right;
 }
 
+.col-xs-2:hover>.centered {
+	display: block;
+}
 
-.col-xs-2:hover > .centered{
-display:block;}
+.col-xs-3:hover>.centered {
+	display: block;
+}
 
-.col-xs-3:hover > .centered{
-display:block;}
-
-.centered p{
-color:white;}
+.centered p {
+	color: white;
+}
 /* Centered text */
 .centered {
-display:none;
-color:white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	display: none;
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
-
 
 @keyframes leaves {
-    0% {
-        transform: scale(1.0);
-        opacity: 1.0;
-    }
-    100% {
-        transform: scale(1.05);
-          opacity: 0.4;
-    }
+0% {
+	transform: scale(1.0);
+	opacity: 1.0;
 }
 
+100%{
+transform:scale(1.05);
 
-.col-xs-3:hover img{
-  animation: leaves 0.5s;
-  animation-fill-mode: forwards;
-
+          
+opacity:0.4;  }
+}
+.col-xs-3:hover img {
+	animation: leaves 0.5s;
+	animation-fill-mode: forwards;
 }
 
-
-.col-xs-2:hover img{
-  animation: leaves 0.5s;
-  animation-fill-mode: forwards;
-
+.col-xs-2:hover img {
+	animation: leaves 0.5s;
+	animation-fill-mode: forwards;
 }
-
-
 
 /*유투브 백그라운드*/
 .video-background {
@@ -188,7 +187,7 @@ color:white;
 		height: 100vh;
 		top: -10vh;
 		/*height: 300%;
-		top: -100%; *//*상단 유투브 제목 안보이게하려고*/
+		top: -100%; */ /*상단 유투브 제목 안보이게하려고*/
 	}
 }
 
@@ -220,204 +219,297 @@ color:white;
 iframe {
 	opacity: 0.8;
 }
-.detail_similar{
-padding-bottom: 3em;
-}
 
+.detail_similar {
+	padding-bottom: 3em;
+}
 
 /* Centered text */
 .centered {
-	cursor:pointer;
-display:none;
-color:white;
-width:80%;
-height:80%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+	cursor: pointer;
+	display: none;
+	color: white;
+	width: 80%;
+	height: 80%;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-
-.rating span{
-cursor:pointer;
-font-size: 26px;}
+.rating span {
+	cursor: pointer;
+	font-size: 26px;
+}
 
 .user_mv img {
-cursor:pointer;
-display: inline-block;
-margin-left:1em;
-width:30px;
-float:right;
-}
-.user_mv table{
-width:100%;
-}
-.user_mv td{
-width:50%;
+	cursor: pointer;
+	display: inline-block;
+	margin-left: 1em;
+	width: 30px;
+	float: right;
 }
 
+.user_mv table {
+	width: 100%;
+}
+.more {
+float:right;
+font-size:15px;
+	cursor:pointer;
+
+}
+
+
+.user_mv td {
+	width: 50%;
+}
 </style>
 </head>
 <body>
 
-<% if(!open) {%>
-<jsp:include page="/Page/Navi/Navi.jsp" />
-<%} else{ %>
-<jsp:include page="/Page/Navi/Navi3.jsp" />
-<%} %>
+	<%
+		if (!open) {
+	%>
+	<jsp:include page="/Page/Navi/Navi.jsp" />
+	<%
+		} else {
+	%>
+	<jsp:include page="/Page/Navi/Navi3.jsp" />
+	<%
+		}
+	%>
 
-<div id="main">
+	<div id="main">
 
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-<div class="video-background">
-		<div class="video-foreground">
-				<iframe id="detailVideo"
-				src="video/aurora.mp4"
-				frameborder="0"
-				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen> </iframe>
-		</div>
-
-
-	</div>
-
-
-	<div class="all">
-	
-		<div class="row">
-			
-		</div>
-
-		<div class="row movie_info">
-		<div class="container">
-			<div class="col-xs-2">
-				<img class="img-responsive" id="detail_poster"
-					>
+		<div class="video-background">
+			<div class="video-foreground">
+				<iframe id="detailVideo" src="video/aurora.mp4" frameborder="0"
+					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen> </iframe>
 			</div>
-			<div class="col-xs-10">
-				<h2>
-					<b id="detail_title"></b>
-				</h2>
-				<h5 id="detail_genre_and_date"></h5>
-				<p id="detail_content"></p>
-
-				<div class="user_mv">
-					<table>
-						<tr>
-							<td><h4><b>이미 본 작품인가요?</b></h4></td>
-							<td><img src="<%=request.getContextPath()%>/Png/happy.svg"><img src="<%=request.getContextPath()%>/Png/neutral1.svg"></td>
-						</tr>
-						<tr>
-						<td>
-						
-					<div class="rating">
-<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
-</div>
-						
-						</td>
-							<td></td>
-						</tr>
-					</table>
-				</div>
 
 
-				<h4 class="top_margin">
-					<b>출연진</b>
-				</h4>
-				<div class="mv_guest row">
-
-			
-
-				</div>
+		</div>
 
 
+		<div class="all">
 
-				<h4 class="top_margin">
-					<b>평가 분포</b>
-				</h4>
-				<div class="row">
-					<div class="col-xs-6">
+			<div class="row"></div>
 
-						<canvas id="myChart" height="60vh" width="80vw"></canvas>
-
+			<div class="row movie_info">
+				<div class="container">
+					<div class="col-xs-2">
+						<img class="img-responsive" id="detail_poster">
 					</div>
+					<div class="col-xs-10">
+						<h2>
+							<b id="detail_title"></b>
+						</h2>
+						<h5 id="detail_genre_and_date"></h5>
+						<p id="detail_content"></p>
 
-					<div class="col-xs-6">
+						<div class="user_mv">
+							<table>
+								<tr>
+									<td><h4>
+										<c:choose>
+											<c:when test="${star == -2 }">
+												<b>이 영화 에 대해 평가해주세요.</b>
+											</c:when>
+											<c:otherwise>
+												<b>이미 이 영화에 대해 평가하셨습니다.</b>
+											</c:otherwise>
+										</c:choose>
+									</h4></td>
+									<td><c:choose>
+											<c:when test="${face == 1 }">
+												<img src="Png/happy1.svg">
+												<img src="Png/neutral1.svg">
+											</c:when>
+											<c:when test="${face == 2 }">
+												<img src="Png/happy.svg">
+												<img src="Png/neutral.svg">
+											</c:when>
+											<c:otherwise>
+												<img src="Png/happy.svg">
+												<img src="Png/neutral1.svg">
+											</c:otherwise>
+										</c:choose></td>
+								</tr>
+								<tr>
+									<td>
 
-						<canvas id="myChart2" height="60vh" width="80vw"></canvas>
+										<div class="rating">
+											<c:choose>
+												<c:when test="${star == 1 }">
+													<span>★</span>
+													<span>☆</span>
+													<span>☆</span>
+													<span>☆</span>
+													<span>☆</span>
+												</c:when>
+												<c:when test="${star == 2 }">
+													<span>★</span>
+													<span>★</span>
+													<span>☆</span>
+													<span>☆</span>
+													<span>☆</span>
+												</c:when>
+												<c:when test="${star == 3 }">
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>☆</span>
+													<span>☆</span>
+												</c:when>
+												<c:when test="${star == 4 }">
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>☆</span>
+												</c:when>
+												<c:when test="${star == 5 }">
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+												</c:when>
+												<c:otherwise>
+													<span>☆</span>
+													<span>☆</span>
+													<span>☆</span>
+													<span>☆</span>
+													<span>☆</span>
+												</c:otherwise>
+											</c:choose>
+										</div>
 
-					</div>
+									</td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
 
-				</div>
+
+						<h4 class="top_margin">
+							<b>출연진</b>
+						</h4>
+						<div class="mv_guest row"></div>
 
 
-				<h4 class="top_margin">
-					<b>리뷰</b>
-				</h4>
 
-				<div class="row">
-					<div class="col-xs-4">
-						<div class="review">
-							<div>
-								<span class="review_id">duswl13</span> <span class="review_star">★3.5</span>
+						<h4 class="top_margin">
+							<b>평가 분포</b>
+						</h4>
+						<div class="row">
+							<div class="col-xs-6">
+
+								<canvas id="myChart" height="60vh" width="80vw"></canvas>
+
 							</div>
-							<hr>
-							<h4>별로였어요</h4>
-							<p>별로였어요 별로였어요별로였어요별로였어요별로였어요별로였어요별로였어요</p>
-						</div>
-					</div>
 
-					<div class="col-xs-4">
-						<div class="review">
-							duswl13 ★3.5
-							<hr>
-							<h4>별로였어요</h4>
-							<p>별로였어요 별로였어요별로였어요별로였어요별로였어요별로였어요별로였어요</p>
-						</div>
-					</div>
+							<div class="col-xs-6">
 
-					<div class="col-xs-4">
-						<div class="review">
-							duswl13 ★3.5
-							<hr>
-							<h4>별로였어요</h4>
-							<p>별로였어요 별로였어요별로였어요별로였어요별로였어요별로였어요별로였어요</p>
-						</div>
-					</div>
+								<canvas id="myChart2" height="60vh" width="80vw"></canvas>
 
+							</div>
+
+						</div>
+
+
+						<h4 class="top_margin">
+							<b>리뷰</b><span class="more">더보기</span>
+						</h4>
+
+						<div class="row">
+							<c:forEach var="p_review" items="${bestreview}">
+							
+							<div class="col-xs-4">
+								
+										<div style="height:10%;">
+										<span class="review_id">${ p_review.USER_ID}</span> 
+									
+									
+										
+										<span class="review_face">
+										
+										<c:forEach var="i" begin="1" end="${p_review.REVIEW_STAR}" step="1">
+										<span class="fa fa-star"></span>
+										</c:forEach>
+										
+										</span>
+										<span class="review_face">
+										
+										<c:choose>
+										<c:when test="${ p_review.REVIEW_FACE == 1}">
+										<!-- 좋아요 -->
+										<img src="Png/happy1.svg" style="width:20px; margin-right:5px">
+										</c:when>
+										<c:otherwise>
+										<!-- 싫어요 -->
+										<img src="Png/neutral.svg" style="width:20px; margin-right:5px">
+										</c:otherwise>
+										</c:choose>
+										
+										
+										</span>
+										</div>
+									
+									
+									<div style="height:80%;justify-content: center; display: flex;align-items: center;">
+									
+									<p><font size=3><b>${p_review.REVIEW_TITLE } </b></font><br> ${p_review.REVIEW_CONTENT }</p>
+									</div>
+									
+									<div style="height:10%;">	
+									
+										<span class="review_face">
+										
+  										${p_review.REVIEW_LIKE } like
+		
+										
+									</span>
+									</div>
+						
+							</div>
+							
+							</c:forEach>
+
+						</div>
+
+
+
+						<h4 class="top_margin" id="div_similar">
+							<b>비슷한 영화</b>
+						</h4>
+
+						<div class="detail_similar row"></div>
+
+
+
+
+
+
+
+						<div></div>
+
+					</div>
 				</div>
-
-
-
-				<h4 class="top_margin" id="div_similar">
-					<b>비슷한 영화</b>
-				</h4>
-
-				<div class="detail_similar row">
-					
-				</div>
-
-
-
-
-
-
-
-				<div></div>
 
 			</div>
+
 		</div>
-
-</div>
-
-</div>
 	</div>
 </body>
 
 <script>
+
 
 
 if(<%=open%>)
@@ -525,6 +617,12 @@ document.getElementById("main").style.marginLeft = "250px";
 
 	
 	var rating = false;
+	var rating_value = ${star};
+	var rating_face = ${face};
+	
+	if(rating_value != -2)
+		Change_star(rating_value);
+	
 	//표정 점수이미지를 클릭할경우 변화
 	$('.user_mv img').click(function(){
 		
@@ -539,137 +637,192 @@ document.getElementById("main").style.marginLeft = "250px";
 			//싫어요
 			$('.user_mv img:eq(0)').prop('src',"<%=request.getContextPath()%>/Png/happy.svg");
 			$('.user_mv img:eq(1)').prop('src',"<%=request.getContextPath()%>/Png/neutral.svg");
-		}
-		
-		InsertFaceRating(++check);
-		
-	});
-	
-	
+				}
+
+				if(rating_face != -2) //표정점수 갱신
+				UpdateFaceRating(++check);
+				else	//표정점수 등록
+				InsertFaceRating(++check);
+
+			});
+
 	//별점 클릭 시 해당 점수 고정시키기
-	$(".rating").click(function(){
-		rating = !rating;
-	});
-	
-	
-	$(".rating span").hover(function(){
-		var check = $(".rating span").index(this);
-		//별점 클릭 시 해당 점수 고정시키기
-		if(rating){
-			
-			//별점 insert
-			InsertStarRating(check);
-			
-			return false;
-			
+	$(".rating span").click(function() {
+		
+		if(rating_value > -2){
+			rating_value = -3; //별점 바꾸겠다.
+			rating = false;
+			return;
 		}
 		
-		//hover 된 요소가 몇번쨰 요소인지 확인
-	
+		rating = !rating;
 		
+		
+		var check = ($(".rating span").index(this))+1;
+		//별점 클릭 시 해당 점수 고정시키기
+		if (rating) {
+
+			
+			if(rating_value == -3){
+				//별점 갱신
+				UpdateStarRating(check);
+			}else{
+				//별점 등록
+				InsertStarRating(check);
+			}
+		
+			rating_value = check;
+			return false;
+
+		}
+	});
+
+	$(".rating span").hover(function() {
+		
+		if(rating_value > -2){
+			return;
+		}
+		var check = $(".rating span").index(this);
+		//hover 된 요소가 몇번쨰 요소인지 확인
+
 		var checkText = '';
-		switch(check){
+		switch (check) {
 		case 0:
-			checkText ='영화의 완성도가 너무 없어요.';
+			checkText = '영화의 완성도가 너무 없어요.';
 			break;
 		case 1:
-			checkText ='영화의 완성도가 별로에요.';
+			checkText = '영화의 완성도가 별로에요.';
 			break;
 		case 2:
-			checkText ='영화의 완성도가 보통이에요.';
+			checkText = '영화의 완성도가 보통이에요.';
 			break;
 		case 3:
-			checkText ='영화의 완성도가 괜찮아요.';
+			checkText = '영화의 완성도가 괜찮아요.';
 			break;
 		case 4:
-			checkText ='영화의 완성도가 높아요.';
+			checkText = '영화의 완성도가 높아요.';
 			break;
 		}
-		
+
 		$('.user_mv b').text(checkText);
-		
-		//별점 변화
-		for(var i = 0; i < 5; i++){
-			if(i <= check){
-			$('.rating span:eq('+i+')').text('★');
-			$('.rating span:eq('+i+')').css('color','orange');
-			
-			}
-			else{
-			$('.rating span:eq('+i+')').css('color','white');
-			$('.rating span:eq('+i+')').text('☆');	
-			}
-		}
-		
+
+		Change_star(check);
 
 	});
 	
-	
-function InsertStarRating(value){
+	function Change_star(check){
 		
-		alert($('#detail_title').text());
+		//별점 변화
+		for (var i = 0; i < 5; i++) {
+			if (i <= check) {
+				$('.rating span:eq(' + i + ')').text('★');
+				$('.rating span:eq(' + i + ')').css('color', 'orange');
+
+			} else {
+				$('.rating span:eq(' + i + ')').css('color', 'white');
+				$('.rating span:eq(' + i + ')').text('☆');
+			}
+		}
+	}
+
+	function InsertStarRating(value) {
+
+		
 		$.ajax({
 
 			url : 'InsertStarRating.ml',
 			data : {
-				"movieId" : <%=id%>,
+				"movieId" :
+<%=id%>
+	,
 				"movieStar" : value
 			},
 			dataType : 'json',
 			success : function(rdata) {
 
-				if (rdata == 1) {
-					alert('별점 점수 등록 성공!');
-					
-				} else {
-					alert('별점 점수 등록 실패!');
+				if (rdata != 1) {
+					alert('별점 등록에 실패했습니다.');
 				}
 
-			},
-			error : function() {
-				alert('에러');
-			},
-			complete : function() {
-				alert('완료');
 			}
 
 		});
-		
+
 	}
+
 	
-	function InsertFaceRating(value){
+	
+	function UpdateStarRating(value) {
 		
-		alert($('#detail_title').text());
+		
 		$.ajax({
 
-			url : 'InsertFaceRating.ml',
+			url : 'UpdateStarRating.ml',
 			data : {
-				"movieId" : <%=id%>,
+				"movieId" :
+<%=id%>
+	,
+				"movieStar" : value
+			},
+			dataType : 'json',
+			success : function(rdata) {
+
+				if (rdata != 1) {
+					alert('별점 점수 갱신 실패!');
+				}
+
+			}
+
+		});
+
+	}
+	
+	function UpdateFaceRating(value) {
+
+	
+		$.ajax({
+
+			url : 'UpdateFaceRating.ml',
+			data : {
+				"movieId" :<%=id%>,
 				"movieFace" : value
 			},
 			dataType : 'json',
 			success : function(rdata) {
 
-				if (rdata == 1) {
-					alert('표정 점수 등록 성공!');
-					
-				} else {
-					alert('표정 점수 등록 실패!');
+				if (rdata != 1) {
+					alert('표정 점수 갱신 실패!');
 				}
 
-			},
-			error : function() {
-				alert('에러');
-			},
-			complete : function() {
-				alert('완료');
 			}
 
 		});
-		
+
 	}
 	
-	
+	function InsertFaceRating(value) {
+
+		//alert($('#detail_title').text());
+		$.ajax({
+
+			url : 'InsertFaceRating.ml',
+			data : {
+				"movieId" :<%=id%>,
+				"movieFace" : value
+			},
+			dataType : 'json',
+			success : function(rdata) {
+
+				if (rdata != 1) {
+					alert('표정 점수 등록 실패!');
+				}
+
+			}
+
+		});
+
+	}
+
 	function printVideo(videokey) {
 
 		$('#detailVideo')
@@ -680,45 +833,39 @@ function InsertStarRating(value){
 								+ '?version=3&mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0&playlist='
 								+ videokey);
 	}
-	
-	
 
-	function printDetail(list){
-		
-		if(list.original_language == "ko")
+	function printDetail(list) {
+
+		if (list.original_language == "ko")
 			console.log(list.title);
-		
+
 		$('#detail_title').text(list.title);
-		
+
 		$("#detail_content").text(list.overview);
-		
+
 		var genre = list.genres;
 		var genre_text = '';
-		for(var i =0; i< genre.length; i++)
-			genre_text +=genre[i].name+" ";
-		
-		
+		for (var i = 0; i < genre.length; i++)
+			genre_text += genre[i].name + " ";
+
 		$('#detail_genre_and_date').text(genre_text + " " + list.release_date);
-		$("#detail_poster").prop('src','https://image.tmdb.org/t/p/w500'+list.poster_path);
-	
-		
-		
-		
+		$("#detail_poster").prop('src',
+				'https://image.tmdb.org/t/p/w500' + list.poster_path);
+
 		//별점과 표정점수 가져오기
-		
-		
-	
+
 	}
-	
-	
-	function SelectFaceRating(value){
-		
-		alert($('#detail_title').text());
+
+	function SelectFaceRating(value) {
+
+		//alert($('#detail_title').text());
 		$.ajax({
 
 			url : 'SelectFaceRating.ml',
 			data : {
-				"movieId" : <%=id%>,
+				"movieId" :
+<%=id%>
+	,
 				"movieTitle" : $('#detail_title').text(),
 			},
 			dataType : 'json',
@@ -726,7 +873,7 @@ function InsertStarRating(value){
 
 				if (rdata == 1) {
 					alert('표정 점수 등록 성공!');
-					
+
 				} else {
 					alert('표정 점수 등록 실패!');
 				}
@@ -740,88 +887,85 @@ function InsertStarRating(value){
 			}
 
 		});
-		
-	}
-	
 
-	
-	function printCredits(list){
-		
-		
-		
+	}
+
+	function printCredits(list) {
+
 		var tag = '';
-		console.log("list:"+list.length);
-	
+		console.log("list:" + list.length);
+
 		var check = 0;
-		for(var i = 0; i < 6; i++){
-			if(i < list.length){
-				
-				if(list[check].profile_path == null){
-					check ++;
+		for (var i = 0; i < 6; i++) {
+			if (i < list.length) {
+
+				if (list[check].profile_path == null) {
+					check++;
 					i--;
 					continue;
 				}
-					
-				
-			console.log("이름:"+list[check].name);
-			console.log("포스터:"+list[check].profile_path);
-			tag += '<div class="col-xs-2">';
-			//tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'">
-			tag += '<img class="img-responsive"';
+
+				console.log("이름:" + list[check].name);
+				console.log("포스터:" + list[check].profile_path);
+				tag += '<div class="col-xs-2">';
+				//tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'">
+				tag += '<img class="img-responsive"';
 			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'">';
-			
-			tag += '<div class="centered" Onclick="location.href=\'PersonDetail.ml?id='+list[check].id  + '&name='+list[check].name+'\'">';
-			tag += '<h3>' + list[check].name + '</h3></div>\n';
-			
-			tag += '<p>'+list[check].name+'</p>';
-			tag += '</div>';
-			check ++;
+
+				tag += '<div class="centered" Onclick="location.href=\'PersonDetail.ml?id='
+						+ list[check].id + '&name=' + list[check].name + '\'">';
+				tag += '<h3>' + list[check].name + '</h3></div>\n';
+
+				tag += '<p>' + list[check].name + '</p>';
+				tag += '</div>';
+				check++;
 			}
 		}
-		
-		console.log("tag : "+ tag);
+
+		console.log("tag : " + tag);
 		$('.mv_guest').html(tag);
-		
+
 	}
-	
-	function printSimilar(list){
-		
-		if(list.length == 0){
+
+	function printSimilar(list) {
+
+		if (list.length == 0) {
 			$('#div_similar ').remove();
 			return;
 		}
-		
+
 		var text = '';
-		
-	
+
 		var check = 0;
-		
-		for(var i = 0; i < 4; i++){
-			if(check < list.length){
-				
+
+		for (var i = 0; i < 4; i++) {
+			if (check < list.length) {
+
 				if (list[check].poster_path == null
 						|| list[check].overview == null
 						|| list[check].genre_ids == null
 						|| list[check].overview == ""
 						|| list[check].genre_ids == ""
-						|| list[check].overview.includes('섹스')){
-					
+						|| list[check].overview.includes('섹스')) {
+
 					i--;
 					check++;
 					console.log('이상한 거니까 넘김' + check);
 
 					continue;
-					
+
 				}
-				
-				
+
 				text += '<div class="col-xs-3">';
 				//text += '<a href="moviedetail.ml?open=false&id=' + list[check].id + '">\n';
 				text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
-			
-				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
-				text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
-				
+
+				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
+						+ list[check].id
+						+ '\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+				text += '<h3 style="clear:right;" class="centeredText"><b>'
+						+ list[check].original_title + '</b></h3>\n';
+
 				text += ' <div>';
 				text += '<span class="fa fa-star"></span>';
 				text += '<span class="fa fa-star"></span>';
@@ -829,22 +973,18 @@ function InsertStarRating(value){
 				text += '<span class="fa fa-star"></span>';
 				text += '<span class="fa fa-star"></span>';
 				text += ' </div>';
-				text +='</div>\n';
+				text += '</div>\n';
 				text += '<h5>' + list[check].original_title + '</h5>';
-			
+
 				text += '</div>';
-				
+
 				check++;
 			}
 			text += '</div>';
 		}
-	
+
 		$('.detail_similar').html(text);
 	}
-
-
-
-
 
 	// 우선 컨텍스트를 가져옵니다. 
 	var ctx = document.getElementById("myChart").getContext('2d');
