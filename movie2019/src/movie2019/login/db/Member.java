@@ -15,6 +15,7 @@ public class Member {
 	private String id;
 	private String password;
 	private String email;
+	
 	public String getId() {
 		return id;
 	}

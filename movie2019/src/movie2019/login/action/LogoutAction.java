@@ -13,7 +13,7 @@ public class LogoutAction implements Action {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		forward.setPath("login.net");
+		forward.setPath("login.lg");
 		forward.setRedirect(true);
 		return forward;
 	}

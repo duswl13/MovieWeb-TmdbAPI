@@ -9,7 +9,7 @@
 <meta charset="utf-8">
 <title>로그인</title>
 </head>
-<script src="jquery-3.4.1.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script
 	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <script
@@ -67,12 +67,12 @@ a:hover {
 	display: none;
 }
 /*inputs*/
-.input2 {
+.id, .password {
 	padding: 15px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	margin-bottom: 10px;
-	width: 90%;
+	width: 80%;
 	height: 40px;
 	box-sizing: border-box;
 	font-family: montserrat;
@@ -171,7 +171,7 @@ a:hover {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
 }
 /*headings*/
-.log_title {
+.log_title1, .log_title2 {
 	font-size: 17px;
 	text-transform: uppercase;
 	color: #2C3E50;
@@ -216,8 +216,7 @@ a:hover {
 	margin: 0 auto 5px auto;
 }
 
-/*marking active/completed steps green*/
-/*The number of the step and the connector before it = green*/
+
 #progressbar li.active:before, #progressbar li.active:after {
 	background: #27AE60;
 	color: white;
@@ -245,18 +244,20 @@ span {
 	<br>
 	<br>
 	<!-- multistep form -->
-	<form id="loginform" method=post action=loginProcess.net>
+	<form id="loginform" method=post action=loginProcess.lg>
 
 
 		<!-- fieldsets 1 -->
 		<fieldset>
 			<br>
-			<h2 class="log_title">VOSHU 아이디로 로그인 하기</h2>
-			<br> <input type="text" name="USER_ID" id="USER_ID" class=input2
-				placeholder="아이디" required /> <input type="password"
-				name="USER_PASS" id="USER_PASS" class=input2 placeholder="비밀번호"
+			<h2 class="log_title1">VOSHU 아이디로 로그인 하기</h2>
+			<br>
+			<input type="text" name="id" id="id" class=id
+				placeholder="아이디" required />
+			<input type="password"
+				name="password" id="password" class=password placeholder="비밀번호"
 				required /> <br>
-			<span>아이디와 비밀번호가 일치하지 않습니다.</span>
+			<span></span>
 
 			<div class="loginCheck">
 				<input type="checkbox" id="saveSess" name="saveSess"> <label
@@ -282,11 +283,11 @@ span {
 			</div>
 			<br>
 		</fieldset>
-
-		<!-- fieldsets 2 -->
+  
+<!-- fieldsets 2 //자꾸 이 부분이 펼쳐져 보임 ㅠ ㅠ
 		<fieldset>
 			<br>
-			<h2 class="log_title">SNS계정으로 간편 로그인하기</h2>
+			<h2 class="log_title2">SNS계정으로 간편 로그인하기</h2>
 			<br> <a href="" class="openid kakao"> <img src=img/kakao.png
 				width=220px>
 			</a> <a href="" class="openid google"> <img src=img/google.jpg
@@ -295,13 +296,13 @@ span {
 				class="previous voshu-button" value="VOSHU 아이디로 로그인 하기" /> <br>
 			<br>
 		</fieldset>
-
+-->
 	</form>
 </body>
 
 <script>
 	//jQuery time
-	var current_fs, next_fs, previous_fs; //fieldsets
+	var log_title1, log_title2; //fieldsets
 	var left, opacity, scale; //fieldset properties which we will animate
 	var animating; //flag to prevent quick multi-click glitches
 
@@ -311,90 +312,42 @@ span {
 					return false;
 				animating = true;
 
-				current_fs = $(this).parent();
-				next_fs = $(this).parent().next();
+				log_title1 = $(this).parent();
+				log_title2 = $(this).parent().next();
 
 				//activate next step on progressbar using the index of next_fs
 				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass(
 						"active");
 
 				//show the next fieldset
-				next_fs.show();
+				log_title2.show();
 				//hide the current fieldset with style
-				current_fs.animate({
+				log_title1.animate({
 					opacity : 0
 				}, {
 					step : function(now, mx) {
-						//as the opacity of current_fs reduces to 0 - stored in "now"
-						//1. scale current_fs down to 80%
+						
 						scale = 1 - (1 - now) * 0.2;
-						//2. bring next_fs from the right(50%)
 						left = (now * 50) + "%";
-						//3. increase opacity of next_fs to 1 as it moves in
 						opacity = 1 - now;
-						current_fs.css({
+						log_title1.css({
 							'transform' : 'scale(' + scale + ')',
 							'position' : 'absolute'
 						});
-						next_fs.css({
+						log_title2.css({
 							'left' : left,
 							'opacity' : opacity
 						});
 					},
 					duration : 800,
 					complete : function() {
-						current_fs.hide();
+						log_title1.hide();
 						animating = false;
 					},
-					//this comes from the custom easing plugin
 					easing : 'easeInOutBack'
 				});
 			});
 
-	$(".previous").click(
-			function() {
-				if (animating)
-					return false;
-				animating = true;
-
-				current_fs = $(this).parent();
-				previous_fs = $(this).parent().prev();
-
-				//de-activate current step on progressbar
-				$("#progressbar li").eq($("fieldset").index(current_fs))
-						.removeClass("active");
-
-				//show the previous fieldset
-				previous_fs.show();
-				//hide the current fieldset with style
-				current_fs.animate({
-					opacity : 0
-				}, {
-					step : function(now, mx) {
-						//as the opacity of current_fs reduces to 0 - stored in "now"
-						//1. scale previous_fs from 80% to 100%
-						scale = 0.8 + (1 - now) * 0.2;
-						//2. take current_fs to the right(50%) - from 0%
-						left = ((1 - now) * 50) + "%";
-						//3. increase opacity of previous_fs to 1 as it moves in
-						opacity = 1 - now;
-						current_fs.css({
-							'left' : left
-						});
-						previous_fs.css({
-							'transform' : 'scale(' + scale + ')',
-							'opacity' : opacity
-						});
-					},
-					duration : 800,
-					complete : function() {
-						current_fs.hide();
-						animating = false;
-					},
-					//this comes from the custom easing plugin
-					easing : 'easeInOutBack'
-				});
-			});
 
 	$(".submit").click(function() {
 		return false;

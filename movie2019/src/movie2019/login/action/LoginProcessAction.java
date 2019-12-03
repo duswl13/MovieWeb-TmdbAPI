@@ -19,11 +19,11 @@ public class LoginProcessAction implements Action {
 		PrintWriter out = response.getWriter();
 
 		String id = request.getParameter("id");
-		String pass = request.getParameter("pass");
+		String password = request.getParameter("password");
 
 		MemberDAO mdao = new MemberDAO();
 
-		int result = mdao.isId(id, pass);
+		int result = mdao.isId(id, password);
 
 		System.out.println("결과는 = " + result);
 
@@ -39,9 +39,9 @@ public class LoginProcessAction implements Action {
 
 		} else {
 			// 비밀번호 일치 X
-			String message = "비밀번호가 일치 X";
+			String message = "비밀번호가 일치하지 않습니다.";
 			if (result == -1)
-				message = "아이디가 존재 X";
+				message = "아이디가 존재하지 않습니다.";
 
 			out.println("<script>");
 			out.println("alert('" + message + "');");
