@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +15,11 @@ if(request.getParameter("open") != null){
 %>
 <title>마이페이지:내 정보 수정</title>
  
- <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <style>
 label {
-<%--	color: #337ab7;--%>
 	color: white;
 	padding-right:50px;
 }
@@ -26,14 +27,23 @@ label {
 p{
 	color: grey;
 }
-body{
-	background : black;
+
+container row{
+	margin:0 auto;
+	background-color: rgba( 255, 255, 255, 0.5 );
 }
-
-
+.panel{
+	background-color: rgba( 255, 255, 255, 0.5 );
+}
+h4{
+	text-align : center;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
 $(function(){
 	if(<%=open%>)
@@ -43,7 +53,7 @@ $(function(){
 
 </script>
 </head>
-<body>
+<body style="background-color:black;">
 <% if(!open) {%>
 <jsp:include page="/Page/Navi/Navi.jsp" />
 <%} else{ %>
@@ -53,46 +63,42 @@ $(function(){
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
-        <article class="container">
-            <div class="col-sm-6 col-md-offset-20">
-                <form role="form">
-                    <div class="form-group">
-                        <label for="inputId">아이디</label>
-                        <input type="text" class="form-control" id="inputId" placeholder="ID">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName">성명</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="이름을 입력해 주세요">
-                    </div>
-                    <div class="form-group">
-                        <label for="InputEmail">이메일 주소</label>
-                        <input type="email" class="form-control" id="InputEmail" placeholder="이메일 주소를 입력해주세요">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPassword">비밀번호</label>
-                        <input type="password" class="form-control" id="inputPassword" placeholder="비밀번호를 입력해주세요">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputPasswordCheck">비밀번호 확인</label>
-                        <input type="password" class="form-control" id="inputPasswordCheck" placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputMobile">전화 번호</label>
-                        <input type="tel" class="form-control" id="inputMobile" placeholder="휴대폰번호를 입력해 주세요">
-                    </div>
-
-              
-                    <div class="form-group text-center">
-                        <button type="submit" id="join-submit" class="btn btn-primary">
-                           수정완료<i class="fa fa-check spaceLeft"></i>
-                        </button>
-                        <button type="submit" class="btn btn-warning">
-                           수정취소<i class="fa fa-times spaceLeft"></i>
-                        </button>
-                    </div>
-                </form>
+       
+ <div class="container">    
+ <%session.setAttribute("id","admin1"); %>
+ 
+                  <div class="row">
+                      <div class="panel panel-default" style="margin:0 auto;">
+                      <div class="panel-heading" style="background-color : white; ">  <h4>나의 정보</h4></div>
+                       <div class="panel-body" style="background-color : white; ">
+                      <div class="col-xs-6 col-sm-3">
+                       <img alt="User Pic" src="Page/images/winter.jpg" 
+                       			id="profile-image1" class="img-thumbnail img-responsive" style="width:80%;"> 
+                     
+                 
+                      </div>
+                      <div class="col-xs-6 col-sm-6" >
+                          <div class="container" >
+                       		<c:set var="u" value="${userinfo }"/>                       				
+                            <h2>${u.USER_NICKNAME }</h2>         
+                          </div>
+                           <hr>
+                          <ul class="container details" >
+                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : ${u.USER_ID }</p></li>
+                            <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>이메일 : ${u.USER_EMAIL }</p></li>
+                            <li><p><span class="glyphicon glyphicon glyphicon-phone one" style="width:50px;"></span>핸드폰 번호 : ${u.USER_PHONE }</p></li>
+                            <li><p><span class="glyphicon glyphicon-time one" style="width:50px;"></span>가입일자 : ${u.USER_JOIN_DATE }</p></li>
+                          </ul>
+                          <hr>
+						</div>
+                        <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >
+                        <div><label><a href="user_edit.ul">정보 수정 하기<span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label></div>
+                     </div>
+      
+                </div>
             </div>
-        </article>
+            </div>
+         
 </div>
 </body>
 </html>

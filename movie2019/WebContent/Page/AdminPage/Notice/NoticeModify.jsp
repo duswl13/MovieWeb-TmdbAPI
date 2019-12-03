@@ -6,14 +6,10 @@
 <script src="notice/writeform.js" charset="UTF-8"></script>
 <style>
 tr.center-block{text-align:center}
-h1{font-size:1.5rem;text-align:center;color:#1a92b9}
+h1{font-size:1.5rem;text-align:center;color:#27AE60}
 .container{width:60%}
 label{font-weight:bold}
-#upfile{display:none}
 img{width:20px}
-span{
-	background-color:grey;
-}
 </style>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -40,13 +36,13 @@ $(function(){
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
 <div id="main">
-      <span style="font-size: 30px; cursor: pointer; color: white;"
+      <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<form action="NoticeModifyAction.bo" method="post" 
 	name="modifyform">
 	<input type="hidden" name="NOTICE_NUMBER" value="${notice.NOTICE_NUMBER }">
-		<h1>공지사항 게시판-Modify</h1>
+		<h1>공지사항 수정</h1>
 		<div class="form-group">
 			<label for="notice_name">글쓴이</label>
 			<input name="NOTICE_NAME" id="notice_name" value="${notice.NOTICE_NAME }" readOnly type="text"

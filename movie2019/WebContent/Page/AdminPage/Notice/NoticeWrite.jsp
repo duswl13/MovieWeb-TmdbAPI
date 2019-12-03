@@ -19,11 +19,8 @@ tr.center-block{text-align:center}
 h1{font-size:1.5rem;text-align:center;color:#1a92b9}
 .container{width:60%}
 label{font-weight:bold}
-#upfile{display:none}
 img{width:20px}
-span{
-	background-color:grey;
-}
+
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
@@ -42,7 +39,7 @@ $(function(){
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
 <div id="main">
-      <span style="font-size: 30px; cursor: pointer; color: white;"
+      <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
 <%session.setAttribute("id","admin1"); %>
