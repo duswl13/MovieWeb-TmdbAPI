@@ -10,6 +10,7 @@
 
 <style>
  * {color:white; background:#141414;}
+ .container {background:silver;}
  select {justify-content:center;}
  .center-block {display:flex;
                 justify-content:center; /* 가운데 정렬 */}

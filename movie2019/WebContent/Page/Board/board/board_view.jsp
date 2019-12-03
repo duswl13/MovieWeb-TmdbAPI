@@ -4,33 +4,13 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<script src="js/writeform.js" charset="utf-8"></script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-<script>
-$(document).ready(function(){
-	  $("form").submit(function(){
-		
-	  if($.trim($("textarea").val())==""){
-		  alert("내용을 입력하세요");
-		  $("textarea").focus();
-		  return false;
-	  }
-	 });
-	  
-	  $("#upfile").change(function(){
-		 $("#filevalue").val('');
-		 console.log($(this).val());
-		 var inputfile=$(this).val().split('\\');
-		 $("#filevalue").text(inputfile[inputfile.length-1]);
-	  });
-	  
-	}); //ready() end
-</script>
 <style>
 * {color:white; background:#141414;}
   th, .center {text-align:center;}
-  .container {width:60%;}
+  .container {width:60%; height:100%;}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
@@ -151,5 +131,26 @@ if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 
 
+</script>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	  $("form").submit(function(){
+		
+	  if($.trim($("textarea").val())==""){
+		  alert("내용을 입력하세요");
+		  $("textarea").focus();
+		  return false;
+	  }
+	 });
+	  
+	  $("#upfile").change(function(){
+		 $("#filevalue").val('');
+		 console.log($(this).val());
+		 var inputfile=$(this).val().split('\\');
+		 $("#filevalue").text(inputfile[inputfile.length-1]);
+	  });
+	  
+	}); //ready() end
 </script>
 </html>
