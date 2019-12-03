@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie2019.mypage.genres.USERGenresAction;
+
 @WebServlet("*.mu")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,6 +53,14 @@ public class FrontController extends HttpServlet {
 		Action action=null;
 		if(command.equals("/user_info.mu")) {
 			action=new USERInfoAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(command.equals("/user_genres.mu")) {
+			action=new USERGenresAction();
 			try {
 				forward=action.execute(request, response);
 			}catch(Exception e) {
