@@ -225,24 +225,15 @@ public class MovieDAO {
 	}
 
 	public ArrayList<AllReviewVO> BestReviewRating(int movieId) {
-		
-		String sql  = "SELECT * FROM " + 
-				"(SELECT " + 
-				"(SELECT COUNT(*) FROM " + 
-				"REVIEW_LIKE " + 
-				"WHERE REVIEW_LIKE.USER_ID = REVIEW.USER_ID AND " + 
-				"REVIEW_LIKE.MOVIE_ID = REVIEW.MOVIE_ID) count, " + 
-				"(SELECT RATING_FACE_value FROM " + 
-				"RATING_FACE " + 
-				"WHERE RATING_FACE.USER_ID = REVIEW.USER_ID AND " + 
-				"RATING_FACE.MOVIE_ID = REVIEW.MOVIE_ID) face, " + 
-				"(SELECT RATING_STAR_value FROM " + 
-				"RATING_STAR " + 
-				"WHERE RATING_STAR.USER_ID = REVIEW.USER_ID AND " + 
-				"RATING_STAR.MOVIE_ID = REVIEW.MOVIE_ID) star, " + 
-				"USER_ID,MOVIE_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE " + 
-				" FROM REVIEW WHERE MOVIE_ID= ? ORDER BY count DESC) where rownum <= 3" ;
-		
+
+		String sql = "SELECT * FROM " + "(SELECT " + "(SELECT COUNT(*) FROM " + "REVIEW_LIKE "
+				+ "WHERE REVIEW_LIKE.USER_ID = REVIEW.USER_ID AND " + "REVIEW_LIKE.MOVIE_ID = REVIEW.MOVIE_ID) count, "
+				+ "(SELECT RATING_FACE_value FROM " + "RATING_FACE " + "WHERE RATING_FACE.USER_ID = REVIEW.USER_ID AND "
+				+ "RATING_FACE.MOVIE_ID = REVIEW.MOVIE_ID) face, " + "(SELECT RATING_STAR_value FROM " + "RATING_STAR "
+				+ "WHERE RATING_STAR.USER_ID = REVIEW.USER_ID AND " + "RATING_STAR.MOVIE_ID = REVIEW.MOVIE_ID) star, "
+				+ "USER_ID,MOVIE_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE "
+				+ " FROM REVIEW WHERE MOVIE_ID= ? ORDER BY count DESC) where rownum <= 3";
+
 		ArrayList<AllReviewVO> result = null;
 		try {
 			con = ds.getConnection();
@@ -259,12 +250,12 @@ public class MovieDAO {
 					result = new ArrayList<AllReviewVO>();
 					check = true;
 				}
-				
+
 				AllReviewVO r = new AllReviewVO();
 				r.setREVIEW_LIKE(rs.getInt(1));
 				r.setREVIEW_FACE(rs.getInt(2));
 				r.setREVIEW_STAR(rs.getInt(3));
-		
+
 				r.setUSER_ID(rs.getString(4));
 				r.setMOVIE_ID(rs.getInt(5));
 				r.setREVIEW_TITLE(rs.getString(6));
@@ -324,6 +315,90 @@ public class MovieDAO {
 		} finally {
 			close();
 		}
+		return result;
+	}
+
+	public int InsertReviewLike(int movieId, String userId, String likeuserId) {
+		String sql = "insert into REVIEW_LIKE values(?,?,?)";
+		int result = 0;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, movieId);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, likeuserId);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+
+	// 해당 영화에 대한 별점 분포를 가져온다.
+	public int[] MovieAllStar(int movieId) {
+		String sql = "select RATING_STAR_value,count(*) from RATING_STAR where MOVIE_ID=? group by RATING_STAR_value order by RATING_STAR_value	";
+		int[] result = new int[5];
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, movieId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+				// 별점 점수 //해당 별점 갯수
+				result[(rs.getInt(1)) - 1] = rs.getInt(2);
+				// System.out.println((rs.getInt(1)-1)+"점 갯수 : "+rs.getInt(2));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return result;
+	}
+
+	public int[] MovieAllLike(int movieId) {
+		String sql = "select RATING_FACE_value,count(*) from RATING_FACE where MOVIE_ID=? group by RATING_FACE_value order by RATING_FACE_value	";
+		int[] result = new int[2];
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, movieId);
+
+			rs = pstmt.executeQuery();
+
+			
+			while (rs.next()) {
+
+				
+
+				// 별점 점수 //해당 별점 갯수
+				result[(rs.getInt(1)) - 1] = rs.getInt(2);
+				System.out.println((rs.getInt(1) - 1) + "점 갯수 : " + rs.getInt(2));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
 		return result;
 	}
 

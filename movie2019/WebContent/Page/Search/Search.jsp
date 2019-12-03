@@ -183,8 +183,8 @@ if(<%=open%>)
 			text += '<div class="col-xs-3">';
 		
 			text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
-		
-			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+
+			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 			text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 			
 			text += ' <div>';
