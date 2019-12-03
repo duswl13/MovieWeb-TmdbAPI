@@ -5,14 +5,11 @@
 <head>
 <style>
 tr.center-block{text-align:center}
-h1{font-size:1.5rem;text-align:center;color:#1a92b9}
+h1{font-size:1.5rem;text-align:center;color:#27AE60}
 .container{width:60%}
 label{font-weight:bold}
-#upfile{display:none}
 img{width:20px}
-span{
-	background-color:grey;
-}
+
 </style>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -40,13 +37,13 @@ $(function(){
 <%} %>
 
 <div id="main">
-      <span style="font-size: 30px; cursor: pointer; color: white;"
+      <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<form action="FAQModifyAction.fa" method="post" 
 	name="modifyform">
 	<input type="hidden" name="FAQ_NUMBER" value="${faq.FAQ_NUMBER }">
-		<h1>FAQ 게시판-Modify</h1>
+		<h1>FAQ 수정</h1>
 		<div class="form-group">
 			<label for="faq_name">글쓴이</label>
 			<input name="FAQ_NAME" id="faq_name" value="${faq.FAQ_NAME }" readOnly type="text"

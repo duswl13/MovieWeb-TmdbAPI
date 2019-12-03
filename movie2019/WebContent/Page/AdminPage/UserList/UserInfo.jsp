@@ -95,11 +95,11 @@ $(function(){
 <%} else{ %>
 <jsp:include page="/Page/Navi/Navi3.jsp" />
 <%} %>
-
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+
 	<table id=tbl class="table table-striped">
 		<c:set var="u" value="${userinfo }"/>		
 			<tr><td>아이디</td><td>${u.USER_ID }</td></tr>

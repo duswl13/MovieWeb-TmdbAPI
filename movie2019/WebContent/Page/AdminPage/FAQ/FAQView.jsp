@@ -8,9 +8,41 @@
 	display:flex;
 	justify-content:center;	/* 가운데 정렬 */
 }
-span{
-	background-color:grey;
+body{
+	background:white;
 }
+
+tr{
+	width:100%;
+}
+td{
+	padding:4px;
+	background:white;
+}
+th{
+	background:white;
+}
+
+#replace{
+	padding-bottom:50px;
+}
+
+table, td {
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+	background : white;
+	color : black;
+}
+div, td, a, .page-link{
+	color:black;
+}
+table, td {
+	border-bottom : none;
+}
+
 </style>
 <title>FAQ 게시판</title>
 <!-- Bootstrap CSS -->
@@ -40,7 +72,7 @@ $(function(){
 <%} %>
 
 <div id="main">
-      <span style="font-size: 30px; cursor: pointer; color: white;"
+      <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<table class="table table-striped">
