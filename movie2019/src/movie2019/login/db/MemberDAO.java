@@ -130,8 +130,7 @@ public class MemberDAO {
 				m = new Member();
 				m.setId(rs.getString(1));
 				m.setPassword(rs.getString(2));
-				m.setNickname(rs.getString(3));
-				m.setEmail(rs.getString(4));
+				m.setEmail(rs.getString(3));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,55 +159,6 @@ public class MemberDAO {
 		}
 		return m;
 	}
-
-
-	
-	
-	public int getListCount(String field, String value) {
-		int x = 0;
-		
-		try {
-			con = ds.getConnection();
-			String sql = "select count(*) from users "
-					+ " where id !='admin' "
-					+ "and "
-					+ field
-					+ " like ?";
-			System.out.println(sql);
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, "%" + value + "%");
-			rs = pstmt.executeQuery();
-			
-			if (rs.next())
-				x = rs.getInt(1);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			System.out.println("getListCount ¿¡·¯ : " + ex);
-		} finally {
-
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		}
-		return x;
-	}
-
 	
 
 }

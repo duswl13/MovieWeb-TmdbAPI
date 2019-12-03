@@ -152,7 +152,9 @@ ul {
 	background-color: #141414;
 	margin-top: 3em;
 }
-.logo {font-size:35pt; font-weight:bold; text-decoration:none; color:#27AE60; align:center;}
+.logo {font-size:42pt; font-weight:bold; text-decoration:none; color:#27AE60; 
+	display: flex;
+	justify-content: center; /*가운데정렬*/}
 </style>
 </head>
 <body>
@@ -187,7 +189,7 @@ ul {
 						</li>
 						<li>
 							<h2>
-								<a href='<%=request.getContextPath()%>/Page/Review/r_list.jsp?open=true'>리뷰</a>
+								<a href='<%=request.getContextPath()%>/Page/Review/review_list.jsp'>리뷰</a>
 							</h2>
 						</li>
 						<li>

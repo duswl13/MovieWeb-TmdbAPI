@@ -1,3 +1,6 @@
+<!-- 리뷰 클릭 시 첫 화면 -->
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -6,21 +9,23 @@
 <head>
 <style>
 * {
-	margin: 0;
-	padding: 0;
+	margin: 0px auto;
+	padding: 0px;
 }
 
 body {
+
 	background: #141414;
 	font-family: montserrat, arial, verdana;
 }
 
-.center-block {
+.main {100px;}
+.pagination_div {
 	display: flex;
 	justify-content: center; /*가운데정렬*/
 }
 
-h1, h2 {
+h2, h3 {
 	color: #edf1f2
 }
 
@@ -42,28 +47,23 @@ button:hover {
 }
 </style>
 
+
 </head>
 <body>
 
 	<!-- 메뉴 부분  <script>는 body 아래에-->
-	<%
-		boolean open = false;
-		if (request.getParameter("open") != null) {
-			open = Boolean.parseBoolean(request.getParameter("open"));
-		}
-	%>
+	<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
 
-	<%
-		if (!open) {
-	%>
-	<jsp:include page="/Page/Navi/Navi.jsp" />
-	<%
-		} else {
-	%>
-	<jsp:include page="/Page/Navi/Navi3.jsp" />
-	<%
-		}
-	%>
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
 
 
 	<div id="main">
@@ -71,63 +71,44 @@ button:hover {
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-		<h1>지금 이 순간,</h1>
-		<h2>보슈의 다른 회원들은 어떤 영화를 보고, 또 평가하고 있을까요?</h2>
+		<h2>지금 이 순간,</h2>
+		<h3>보슈의 다른 회원들은 어떤 영화를 보고, 또 평가하고 있을까요?</h3>
 		<div class=container>
 
 			<%--게시글이 있는 경우 --%>
 			<c:if test="${listcount > 0 }">
 				<table class="table table-striped">
-					<tr>
-						<th colspan=3>MVC게시판 - list</th>
-						<th colspan=2><font size=3>글 개수 : ${listcount } </font></th>
-					</tr>
+
 					<tr>
 						<th width=8%><div>번호</div></th>
 						<th width=50%><div>제목</div></th>
 						<th width=14%><div>작성자</div></th>
 						<th width=17%><div>날짜</div></th>
-						<th width=11%><div>조회수</div></th>
+
 					</tr>
 					<c:set var="num" value="${listcount-(page-1)*10}" />
-					<c:forEach var="b" items="${boardlist}">
+					<c:forEach var="b" items="${reviewlist}">
 						<tr>
 							<td><c:out value="${num}" /> <%--num출력 --%> <c:set
 									var="num" value="${num-1}" /> <%-- num=num-1; 의미 --%></td>
 							<td>
 								<div>
-									<%--답변글 제목 앞에 여백 처리 부분
-			 BOARD_RE_LEV, BOARD_NUM, BOARD_SUBJECT, 
-			 BOARD_NAME, BOARD_DATE, BOARD_READCOUNT : property 이름  --%>
-									<c:if test="${b.BOARD_RE_LEV != 0}">
-										<!-- 답글인 경우 -->
-										<c:forEach var="a" begin="0" end="${b.BOARD_RE_LEV*2 }"
-											step="1">
-				&nbsp;
-				</c:forEach>
-									</c:if>
-									<c:if test="${b.BOARD_RE_LEV == 0}">
-										<!-- 원문인 경우 -->
-				&nbsp;
-			</c:if>
-
-									<a href="BoardDetailAction.bo?num=${b.BOARD_NUM}">${b.BOARD_SUBJECT}</a>
+								
+									<a href="ReviewDetailAction.rv?num=${b.REVIEW_NUMBER}">${b.REVIEW_SUBJECT}</a>
 								</div>
 							</td>
 							<td>
-								<div>${b.BOARD_NAME }</div>
+								<div>${b.REVIEW_NAME }</div>
 							</td>
 							<td>
-								<div>${b.BOARD_DATE }</div>
+								<div>${b.REVIEW_DATE }</div>
 							</td>
-							<td>
-								<div>${b.BOARD_READCOUNT }</div>
-							</td>
+						
 						</tr>
 					</c:forEach>
 				</table>
 
-				<div class="center-block">
+				<div class="pagination_div">
 					<div class=row>
 						<div class=col>
 							<ul class=pagination>
@@ -138,7 +119,7 @@ button:hover {
 								</c:if>
 								<c:if test="${page > 1 }">
 									<li class=page-item><a class=page-link
-										href="BoardList.bo?page=${page-1}">이전&nbsp;</a></li>
+										href="ReviewList.rv?page=${page-1}">이전&nbsp;</a></li>
 								</c:if>
 
 								<c:forEach var="a" begin="${startpage }" end="${endpage }">
@@ -147,7 +128,7 @@ button:hover {
 									</c:if>
 									<c:if test="${a != page }">
 										<li class=page-item><a class=page-link
-											href="BoardList.bo?page=${a }">${a }</a></li>
+											href="ReviewList.rv?page=${a }">${a }</a></li>
 									</c:if>
 								</c:forEach>
 
@@ -157,7 +138,7 @@ button:hover {
 								</c:if>
 								<c:if test="${page < maxpage }">
 									<li class=page-item><a class=page-link
-										href="BoardList.bo?page=${page+1 }">&nbsp;다음</a></li>
+										href="ReviewList.rv?page=${page+1 }">&nbsp;다음</a></li>
 								</c:if>
 							</ul>
 						</div>
@@ -165,33 +146,23 @@ button:hover {
 
 				</div>
 			</c:if>
-			<!-- ddddd -->
+		
 			<!-- 게시글이 없는 경우 -->
 			<c:if test="${listcount == 0 }">
-				<font size=5>등록된 글이 없다...</font>
+				<font size=5>등록된 리뷰가 없습니다.</font>
 			</c:if>
-			<br> <br> <br> <br> <a href="r_write.jsp"><button
-					type=button>리뷰쓰기</button></a>
+			<br> <br> <br> <br> <a href="review_write.jsp"><button
+					type=button>내 리뷰쓰기</button></a>
 
 		</div>
 	</div>
 	<!-- 추가... -->
 
+<script>
+if(<%=open%>)
+	document.getElementById("main").style.marginLeft = "250px";
 
-	<script>
-		//메뉴부분
-		if (
-	<%=open%>
-		)
-			document.getElementById("main").style.marginLeft = "250px";
-		//여기까지
 
-		$(function() {
-
-			$("button").click(function() {
-				location.href = "BoardWrite.bo";
-			})
-		})
-	</script>
+</script>
 </body>
 </html>

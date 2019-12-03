@@ -29,12 +29,6 @@ public class ReviewFrontController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		/*
-		 * 요청된 전체 url 중에서 포트 번호 다음부터 마지막 문자열까지 반환.
-		 * 
-		 * ex) http://localhost:8088/JspProject/BoardList.bo 인 경우
-		 * "/JspProject/BoardList.bo" 부분만 반환.
-		 */
 
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI = " + RequestURI);
@@ -64,9 +58,9 @@ public class ReviewFrontController extends HttpServlet {
 		} else if (command.equals("/ReviewWrite.rv")) {
 			forward = new ActionForward();
 			forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
-			forward.setPath("review_review_write.jsp");
+			forward.setPath("review/review_write.jsp");
 
-		} else if (command.equals("/ReviewAddAction.borv")) {
+		} else if (command.equals("/ReviewAddAction.rv")) {
 			action = new ReviewAddAction();
 			try {
 				forward = action.execute(request, response);
@@ -77,7 +71,7 @@ public class ReviewFrontController extends HttpServlet {
 		} else if (command.equals("/ReviewDelete.rv")) {
 			forward = new ActionForward();
 			forward.setRedirect(false); // 포워드 방식으로 주소 바뀌지 않음
-			forward.setPath("review_review_delete.jsp");
+			forward.setPath("review/review_delete.jsp");
 
 		} else if (command.equals("/ReviewDeleteAction.rv")) {
 			action = new ReviewDeleteAction();

@@ -181,7 +181,7 @@ ul {
 				</li>
 				<li>
 					<h2>
-						<a href='<%=request.getContextPath()%>/Page/Review/r_list.jsp?open=true'>리뷰</a>
+						<a href='<%=request.getContextPath()%>/Page/Review/r_list.jsp'>리뷰</a>
 					</h2>
 				</li>
 				<li>

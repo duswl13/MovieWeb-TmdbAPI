@@ -38,7 +38,7 @@ public class ReviewDetailAction implements Action {
 		forward.setRedirect(false);
 
 		// 글 내용 보기 페이지로 이동하기 위해 경로를 설정review합니다.
-		forward.setPath("review/r_view.jsp");
+		forward.setPath("review/review_view.jsp");
 		return forward;
 	}
 
