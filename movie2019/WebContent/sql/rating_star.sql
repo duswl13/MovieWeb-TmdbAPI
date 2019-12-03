@@ -17,3 +17,4 @@ INSERT INTO RATING_STAR VALUES(330457,'sonyeonsoo',5,sysdate);
 
 INSERT INTO RATING_STAR VALUES(330457,'jiyeon',2,sysdate);
 
+select * from RATING_STAR where user_id='duswl13';

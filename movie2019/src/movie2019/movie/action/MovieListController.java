@@ -77,7 +77,7 @@ public class MovieListController extends HttpServlet {
 			forward.setRedirect(false);
 			forward.setPath("Page/Search/Search.jsp");
 		} else if (command.equals("/moviedetail.ml")) {
-			action = new SelectMyRatingAction();
+			action = new SelectRatingAction();
 			try {
 				forward = action.execute(request, response);
 
@@ -108,8 +108,29 @@ public class MovieListController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}else if (command.equals("/UpdateStarRating.ml")) {
+			action = new UpdateStarRatingAction();// parameter 있음
+
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if (command.equals("/UpdateFaceRating.ml")) {
+			action = new UpdateFaceRatingAction();// parameter 있음
+
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
+		
+	
+		
 
 		if (forward != null) {
 			if (forward.isRedirect()) {

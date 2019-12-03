@@ -5,12 +5,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import movie2019.review.db.AllReviewVO;
 import movie2019.review.db.ReviewVO;
 
 public class MovieDAO {
@@ -37,9 +39,35 @@ public class MovieDAO {
 
 	}
 
+	private void close() {
+
+		if (rs != null)
+			try {
+				rs.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		if (pstmt != null)
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		if (con != null)
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	}
+
 	public int InsertFaceRating(int movieId, int face, String userid) {
 		String sql = "insert into rating_face values(" + "?,?,?,sysdate)";
-		int result = 0;
+		int result = -2;
 
 		try {
 			con = ds.getConnection();
@@ -54,18 +82,7 @@ public class MovieDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
 		}
 		return result;
 	}
@@ -103,24 +120,7 @@ public class MovieDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
 		}
 		return result;
 	}
@@ -142,25 +142,14 @@ public class MovieDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
 		}
 		return result;
 	}
 
 	public int SelectFaceRating(int movieId, String userId) {
 		String sql = "select * from rating_face where MOVIE_ID= ? and USER_ID=?";
-		int result = -2;
+		int result = -2; // 점수표시를 아예 안했을 경우 -2
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -176,31 +165,14 @@ public class MovieDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
 		}
 		return result;
 	}
 
 	public int SelectStarRating(int movieId, String userId) {
 		String sql = "select * from rating_star where MOVIE_ID= ? and USER_ID=?";
-		int result = -2;
+		int result = -2; // 점수 표시를 아예 안했을 경우 -2 표시
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -216,24 +188,7 @@ public class MovieDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
 		}
 		return result;
 	}
@@ -250,7 +205,7 @@ public class MovieDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				
+
 				result = new ReviewVO();
 				result.setREVIEW_NUMBER(rs.getInt("REVIEW_NUMBER"));
 				result.setMOVIE_ID(rs.getInt("MOVIE_ID"));
@@ -258,80 +213,116 @@ public class MovieDAO {
 				result.setREVIEW_TITLE(rs.getString("REVIEW_TITLE"));
 				result.setREVIEW_CONTENT(rs.getString("REVIEW_CONTENT"));
 				result.setREVIEW_DATE(rs.getDate("REVIEW_DATE"));
-			
+
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
 		}
 		return result;
 	}
 
-	public ReviewVO[] BestReviewRating(int movieId) {
-		String sql = "select * from review where MOVIE_ID= ? and ";
-		ReviewVO[] result = null;
+	public ArrayList<AllReviewVO> BestReviewRating(int movieId) {
+		
+		String sql  = "SELECT * FROM " + 
+				"(SELECT " + 
+				"(SELECT COUNT(*) FROM " + 
+				"REVIEW_LIKE " + 
+				"WHERE REVIEW_LIKE.USER_ID = REVIEW.USER_ID AND " + 
+				"REVIEW_LIKE.MOVIE_ID = REVIEW.MOVIE_ID) count, " + 
+				"(SELECT RATING_FACE_value FROM " + 
+				"RATING_FACE " + 
+				"WHERE RATING_FACE.USER_ID = REVIEW.USER_ID AND " + 
+				"RATING_FACE.MOVIE_ID = REVIEW.MOVIE_ID) face, " + 
+				"(SELECT RATING_STAR_value FROM " + 
+				"RATING_STAR " + 
+				"WHERE RATING_STAR.USER_ID = REVIEW.USER_ID AND " + 
+				"RATING_STAR.MOVIE_ID = REVIEW.MOVIE_ID) star, " + 
+				"USER_ID,MOVIE_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE " + 
+				" FROM REVIEW WHERE MOVIE_ID= ? ORDER BY count DESC) where rownum <= 3" ;
+		
+		ArrayList<AllReviewVO> result = null;
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, movieId);
-			
+
 			rs = pstmt.executeQuery();
-			
-			int i = 0;
+
+			boolean check = false;
+
 			while (rs.next()) {
+
+				if (!check) {
+					result = new ArrayList<AllReviewVO>();
+					check = true;
+				}
 				
-				ReviewVO r = new ReviewVO();
-				r.setREVIEW_NUMBER(rs.getInt("REVIEW_NUMBER"));
-				r.setMOVIE_ID(rs.getInt("MOVIE_ID"));
-				r.setUSER_ID(rs.getString("USER_ID"));
-				r.setREVIEW_TITLE(rs.getString("REVIEW_TITLE"));
-				r.setREVIEW_CONTENT(rs.getString("REVIEW_CONTENT"));
-				r.setREVIEW_DATE(rs.getDate("REVIEW_DATE"));
-				
-				result[i++] = r;
-				
+				AllReviewVO r = new AllReviewVO();
+				r.setREVIEW_LIKE(rs.getInt(1));
+				r.setREVIEW_FACE(rs.getInt(2));
+				r.setREVIEW_STAR(rs.getInt(3));
+		
+				r.setUSER_ID(rs.getString(4));
+				r.setMOVIE_ID(rs.getInt(5));
+				r.setREVIEW_TITLE(rs.getString(6));
+				r.setREVIEW_CONTENT(rs.getString(7));
+				r.setREVIEW_DATE(rs.getDate(8));
+
+				result.add(r);
+
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (pstmt != null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (rs != null)
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			if (con != null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+			close();
+		}
+		return result;
+	}
+
+	public int UpdateStarRating(int movieId, int movieStar, String userId) {
+		String sql = "update rating_star set RATING_STAR_value = ? where MOVIE_ID =? and USER_ID=?";
+		int result = 0;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, movieStar);
+			pstmt.setInt(2, movieId);
+			pstmt.setString(3, userId);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+
+	public int UpdateFaceRating(int movieId, int movieFace, String userId) {
+		String sql = "update rating_face set RATING_FACE_value = ? where MOVIE_ID =? and USER_ID=?";
+		int result = 0;
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, movieFace);
+			pstmt.setInt(2, movieId);
+			pstmt.setString(3, userId);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
 		}
 		return result;
 	}
