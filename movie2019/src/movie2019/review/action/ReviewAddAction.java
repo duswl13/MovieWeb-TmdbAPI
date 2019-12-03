@@ -11,13 +11,10 @@ import movie2019.login.action.ActionForward;
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
 
-
-
 public class ReviewAddAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ReviewDAO reviewdao = new ReviewDAO();
 		ReviewVO reviewvo = new ReviewVO();
@@ -27,8 +24,7 @@ public class ReviewAddAction implements Action {
 
 		String saveFolder = "reviewupload"; // WebContent아래 폴더 생성.
 
-	
-		// 실제 저장 경로 지정.		
+		// 실제 저장 경로 지정.
 		ServletContext sc = request.getServletContext();
 		realFolder = sc.getRealPath(saveFolder);
 
@@ -37,15 +33,13 @@ public class ReviewAddAction implements Action {
 
 		try {
 			MultipartRequest multi = null;
-			multi = new MultipartRequest(request, realFolder,  
-						"UTF-8", new DefaultFileRenamePolicy());
+			multi = new MultipartRequest(request, realFolder, "UTF-8", new DefaultFileRenamePolicy());
 
 			// 글 등록 폼에서 입력받은 정보들을 BoardBean객체에 저장.
 			reviewdata.setBOARD_NAME(multi.getParameter("BOARD_NAME"));
 			reviewdata.setBOARD_PASS(multi.getParameter("BOARD_PASS"));
 			reviewdata.setBOARD_SUBJECT(replaceParameter(multi.getParameter("BOARD_SUBJECT")));
 			reviewdata.setBOARD_CONTENT(replaceParameter(multi.getParameter("BOARD_CONTENT")));
-
 
 			// 글 등록 처리를 위해 DAO의 boardInsert()메소드를 호출한다.
 			// 글 등록 폼에서 입력한 정보가 저장돼 있는 reviewdata객체를 전달.
@@ -71,6 +65,7 @@ public class ReviewAddAction implements Action {
 		return null;
 
 	}
+
 	private String replaceParameter(String param) {
 		String result = param;
 		if (param != null) {

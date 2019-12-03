@@ -13,12 +13,10 @@ import movie2019.login.action.ActionForward;
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
 
-
 public class ReviewModifyAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
-			throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -30,7 +28,7 @@ public class ReviewModifyAction implements Action {
 		String realFolder = "";
 
 		// WebContent 아래에 꼭 폴더를 생성하세요.
-		String saveFolder = "boardupload";
+		String saveFolder = "reviewupload";
 
 		int fileSize = 10 * 1024 * 1024; // 업로드할 파일의 최대 사이즈 입니다. 10MB
 
@@ -73,14 +71,14 @@ public class ReviewModifyAction implements Action {
 			System.out.println("check=" + check);
 
 			if (check != null) { // 기존 파일 그대로 사용하는 경우
-				boarddata.setBOARD_FILE(check);
+				reviewdata.setBOARD_FILE(check);
 			} else { // 시스템에 업로드된 실제 파일명 가져오기
 				String filename = multi.getFilesystemName("BOARD_FILE");
-				boarddata.setBOARD_FILE(filename);
+				reviewdata.setBOARD_FILE(filename);
 			}
 
 			// DAO에서 수정 메소드 호출해 수정하기
-			result = boarddao.boardModify(boarddata);
+			result = reviewdao.boardModify(reviewdata);
 
 			// 수정 실패한 경우
 			if (result == false) {
@@ -95,7 +93,7 @@ public class ReviewModifyAction implements Action {
 
 			forward.setRedirect(true);
 			// 수정한 글 내용 확인을 위해 글 내용보기 페이지를 경로로 설정
-			forward.setPath("BoardDetailAction.bo?num=" + boarddata.getBOARD_NUM());
+			forward.setPath("BoardDetailAction.bo?num=" + reviewdata.getBOARD_NUM());
 
 			return forward;
 		} catch (Exception e) {

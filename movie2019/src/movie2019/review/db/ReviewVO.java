@@ -10,7 +10,7 @@ public class ReviewVO {
 	private String REVIEW_TITLE;
 	private String REVIEW_CONTENT;
 	private Date REVIEW_DATE;
-	
+	 
 	public int getREVIEW_NUMBER() {
 		return REVIEW_NUMBER;
 	}

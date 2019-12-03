@@ -13,8 +13,6 @@ ActionForward : ¹ÝÈ¯Çü
 */
 
 public interface Action {
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
-	throws Exception;
-	
-	
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

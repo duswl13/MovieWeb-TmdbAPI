@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import movie2019.login.action.ActionForward;
-
-
 
 @WebServlet("*.rv")
 public class ReviewFrontController extends HttpServlet {
@@ -65,12 +62,12 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (command.equals("/ReviewWrite.rv")) {
 			forward = new ActionForward();
-			forward.setRedirect(false); //포워딩 방식으로 주소가 바뀌지 않음.
+			forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
 			forward.setPath("review_review_write.jsp");
-			
+
 		} else if (command.equals("/ReviewAddAction.borv")) {
 			action = new ReviewAddAction();
 			try {
@@ -79,12 +76,11 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		
 		} else if (command.equals("/ReviewDelete.rv")) {
 			forward = new ActionForward();
-			forward.setRedirect(false);  //포워드 방식으로 주소 바뀌지 않음
+			forward.setRedirect(false); // 포워드 방식으로 주소 바뀌지 않음
 			forward.setPath("review_review_delete.jsp");
-			
+
 		} else if (command.equals("/ReviewDeleteAction.rv")) {
 			action = new ReviewDeleteAction();
 			try {
@@ -92,8 +88,8 @@ public class ReviewFrontController extends HttpServlet {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-			}	
-			
+			}
+
 		} else if (command.equals("/ReviewModifyAction.rv")) {
 			action = new ReviewModifyAction();
 			try {
@@ -111,7 +107,7 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (command.equals("/ReviewDetailAction.rv")) {
 			action = new ReviewDetailAction();
 			try {
@@ -121,7 +117,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (forward != null) {
 			if (forward.isRedirect()) { // 리다이렉트 됨
 				response.sendRedirect(forward.getPath());
