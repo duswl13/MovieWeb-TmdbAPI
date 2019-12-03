@@ -7,6 +7,7 @@
 <head>
 
 <meta charset="UTF-8">
+
 <% 
 boolean open = false;
 if(request.getParameter("open") != null){
@@ -38,12 +39,17 @@ container row{
 h4{
 	text-align : center;
 }
+
+#ed{
+	float:right;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="js/myinfo.js" charset="UTF-8"></script>
 <script>
 $(function(){
 	if(<%=open%>)
@@ -84,15 +90,22 @@ $(function(){
                           </div>
                            <hr>
                           <ul class="container details" >
-                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : ${u.USER_ID }</p></li>
+                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : <span id="USER_ID">${u.USER_ID }</span></p></li>
                             <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>이메일 : ${u.USER_EMAIL }</p></li>
                             <li><p><span class="glyphicon glyphicon glyphicon-phone one" style="width:50px;"></span>핸드폰 번호 : ${u.USER_PHONE }</p></li>
                             <li><p><span class="glyphicon glyphicon-time one" style="width:50px;"></span>가입일자 : ${u.USER_JOIN_DATE }</p></li>
                           </ul>
                           <hr>
+                          <ul class="container details" >
+                             <c:set var="g" value="${genresinfo }"/>                       				
+                             <li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>관심 컨텐츠 : <span id="genres"></span></p></li>
+                          </ul>
 						</div>
                         <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >
-                        <div><label><a href="user_edit.ul">정보 수정 하기<span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label></div>
+                        <div id="ed">
+	                        <label><a href="user_edit.mu">정보 수정    <span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label><br><br>
+	                        <label><a href="user_delete.mu">회원 탈퇴    <span class="glyphicon glyphicon-minus-sign one" style="width:50px;"></span></a></label>
+                        </div>
                      </div>
       
                 </div>
