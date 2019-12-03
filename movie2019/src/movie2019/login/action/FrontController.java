@@ -32,7 +32,7 @@ public class FrontController extends HttpServlet {
 		/*
 		 * 요청된 전체 url 중에서 포트 번호 다음부터 마지막 문자열까지 반환.
 		 * 
-		 * ex) http://localhost:8088/JspProject/login.net 인 경우 "/JspProject/login.net"
+		 * ex) http://localhost:8088/JspProject/login.lg 인 경우 "/JspProject/login.lg"
 		 * 부분만 반환.
 		 */
 
@@ -45,7 +45,7 @@ public class FrontController extends HttpServlet {
 		System.out.println("contextPath = " + contextPath);
 
 		// RequestURI에서 컨텍스트 경로 길이값의 인덱스 문자부터 마지막 문자까지 추출.
-		// command는 "/login.net" 반환.
+		// command는 "/login.lg" 반환.
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command = " + command);
 
@@ -58,14 +58,6 @@ public class FrontController extends HttpServlet {
 			forward.setRedirect(false); // 주소 변경 없이 jsp페이지의 내용을 보여준다.
 			forward.setPath("login/login.jsp");
 
-
-		} else if (command.equals("/idcheck.lg")) {
-			action = new IdCheckAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 
 
 		} else if (command.equals("/loginProcess.lg")) {
