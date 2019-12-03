@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import movie2019.login.action.ActionForward;
 import movie2019.review.action.Action;
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;

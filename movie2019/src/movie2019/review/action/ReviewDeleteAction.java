@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.login.action.ActionForward;
 import movie2019.review.db.ReviewDAO;
 
 public class ReviewDeleteAction implements Action {
