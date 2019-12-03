@@ -1,11 +1,14 @@
 package movie2019.mypage.genres;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonArray;
+
+import movie2019.mypage.user.Action;
+import movie2019.mypage.user.ActionForward;
 import movie2019.mypage.user.Genres;
 import movie2019.mypage.user.GenresDAO;
 
@@ -13,32 +16,19 @@ public class USERGenresAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("테스투투투투투");
 
 		GenresDAO gdao = new GenresDAO();
-		List<Genres> genres=new ArrayList<Genres>();
-		System.out.println("테스투투투투투");
-		String id=request.getParameter("user_id");
-		genres=gdao.getGenres(id);
-		ActionForward forward = new ActionForward();
-		
-		if(genres==null) {
-			System.out.println("정보가져오기 실패");
-			forward.setRedirect(false);
-			request.setAttribute("message", "정보가져오기 실패입니다.");
-			forward.setPath("error/error.jsp");
-			return null;
-		}
-		System.out.println("장르정보 가져오기 성공");
-		
-		request.setAttribute("genresinfo",genres);
-		forward = new ActionForward();
-		forward.setRedirect(false);
-		
-		//글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
-		forward.setPath("Page/MyPage/MyInfo/MyInfo.jsp");
-		return forward;
+	//	Genres genres = new Genres();
+	//	genres.setUSER_ID(request.getParameter("USER_ID"));
+		String USER_ID=request.getParameter("USER_ID");
+	//	System.out.println("user_id>>"+genres.getUSER_ID());
+		System.out.println("USER_ID>>>"+USER_ID);
+		JsonArray json=gdao.getGenres(USER_ID);
+		response.setContentType("text/html;charset=utf-8");
+		response.setHeader("cache-control","no-cache,no-store");
+		PrintWriter out=response.getWriter();
+		out.print(json);
+		System.out.println(json);
+		return null;
 	}
-
-
 }

@@ -7,7 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import movie2019.admin.notice.NoticeVO;
 
@@ -19,13 +24,20 @@ public class GenresDAO {
 	int result;
 	Boolean bool;
 	
-	public List<Genres> getGenres(String id) {
+	public GenresDAO() {
+		try {
+			Context init = new InitialContext();
+			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
-		String sql = "select * from genres where USER_ID=?";
-		
+		} catch (Exception ex) {
+			System.out.println("DB 연결 실패 : " + ex);
+		}
+	}
 
-		List<Genres> list = new ArrayList<Genres>();
 
+	public JsonArray getGenres(String id) {
+		String sql = "select * from USER_GENRES where USER_ID=?";
+		JsonArray array=new JsonArray();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -34,14 +46,12 @@ public class GenresDAO {
 
 			// DB에서 가져온 데이터를 VO객체에 담습니다.
 			while (rs.next()) {
-				Genres genres = new Genres();
-				genres.setUSER_GENRES_NUMBER(rs.getInt("USER_GENRES_NUMBER"));
-				genres.setGENRES_ID(rs.getInt("GENRES_ID"));
-				genres.setUSER_ID(rs.getString("USER_ID"));
-
-				list.add(genres);
+				JsonObject object=new JsonObject();				
+				object.addProperty("USER_GENRES_NUMBER", rs.getInt(1));
+				object.addProperty("GENRES_ID", rs.getInt(2));
+				object.addProperty("USER_ID", rs.getString(3));
+				array.add(object);
 			}
-			return list; // 값을 담을 객체를 저장한 리스트를 호출한 곳으로 가져갑니다.
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("getGenres() 에러: " + e);
@@ -70,5 +80,4 @@ public class GenresDAO {
 		}
 		return null;
 	}
-
 }
