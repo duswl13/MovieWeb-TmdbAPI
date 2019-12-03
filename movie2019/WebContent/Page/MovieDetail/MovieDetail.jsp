@@ -27,7 +27,7 @@
 
 <%
 	String id = request.getParameter("id");
-
+	
 	boolean open = false;
 	if (request.getParameter("open") != null) {
 		open = Boolean.parseBoolean(request.getParameter("open"));
@@ -652,6 +652,7 @@ document.getElementById("main").style.marginLeft = "250px";
 		if(rating_value > -2){
 			rating_value = -3; //별점 바꾸겠다.
 			rating = false;
+			$(".user_mv b").text('영화에 대해 다시 평가를 하세요.');
 			return;
 		}
 		
@@ -997,16 +998,37 @@ document.getElementById("main").style.marginLeft = "250px";
 
 	Chart.defaults.global.defaultFontColor = 'white';
 
+	
+	
+	
+	
+	var allst = new Array();
+	
+	allst[0] = ${allstar[0]};
+	allst[1] = ${allstar[1]};
+	allst[2] = ${allstar[2]};
+	allst[3] = ${allstar[3]};
+	allst[4] = ${allstar[4]};
+
+	
+	var allfa = new Array();
+
+	allfa[0] = ${allface[0]};
+	allfa[1] = ${allface[1]};
+	
+	
+	
+	
 	var myPieChart = new Chart(ctx,
 			{
 				type : 'doughnut',
 
 				data : {
 
-					labels : [ "1", "2", "3", "4", "5" ],
+					labels : [ "1점", "2점", "3점", "4점", "5점" ],
 					datasets : [ {
 						label : '# of Votes',
-						data : [ 5, 10, 30, 15, 40 ],
+						data : [ allst[0], allst[1], allst[2], allst[3], allst[4] ],
 						backgroundColor : [ 'rgba(255, 99, 132, 0.8)',
 								'rgba(54, 162, 235, 0.8)',
 								'rgba(255, 206, 86, 0.8)',
@@ -1039,7 +1061,7 @@ document.getElementById("main").style.marginLeft = "250px";
 					labels : [ "좋아요", "싫어요" ],
 					datasets : [ {
 						label : '# of Votes',
-						data : [ 75, 25 ],
+						data : [ allfa[0], allfa[1] ],
 						backgroundColor : [ 'rgba(255, 99, 132, 0.8)',
 								'rgba(54, 162, 235, 0.8)' ],
 						borderColor : [ 'rgba(255,99,132,1)',

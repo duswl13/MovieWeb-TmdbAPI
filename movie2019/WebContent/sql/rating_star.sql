@@ -14,7 +14,12 @@ CONSTRAINT RATING_STAR_primarykey PRIMARY KEY (MOVIE_ID, USER_ID)
 INSERT INTO RATING_STAR VALUES(330457,'duswl13',4,sysdate);
 
 INSERT INTO RATING_STAR VALUES(330457,'sonyeonsoo',5,sysdate);
-
+INSERT INTO RATING_STAR VALUES(330457,'admin1',5,sysdate);
 INSERT INTO RATING_STAR VALUES(330457,'jiyeon',2,sysdate);
 
 select * from RATING_STAR where user_id='duswl13';
+
+/*해당 영화에 대한 별점 분포*/
+select RATING_STAR_value,count(*) from RATING_STAR where MOVIE_ID=330457 group by RATING_STAR_value;
+
+ 

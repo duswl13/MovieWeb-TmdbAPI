@@ -34,6 +34,14 @@ public class SelectRatingAction implements Action {
 			// 별점점수 가져오기
 			int star = movieDAO.SelectStarRating(movieId, userId);
 			System.out.println("내 별점 점수 : " + star);
+			
+			//해당 별점 분포
+			int[] movieStar = movieDAO.MovieAllStar(movieId);
+			//해당 좋아요 분포
+			int[] movieFace = movieDAO.MovieAllLike(movieId);
+			
+			
+			
 			// 내 리뷰 가져오기
 			ReviewVO review = movieDAO.MyReviewRating(movieId, userId);
 			if (review != null) {
@@ -47,6 +55,8 @@ public class SelectRatingAction implements Action {
 
 			request.setAttribute("face", face);
 			request.setAttribute("star", star);
+			request.setAttribute("allstar", movieStar);
+			request.setAttribute("allface", movieFace);
 			request.setAttribute("review", review);
 			request.setAttribute("bestreview", bestreview);
 
