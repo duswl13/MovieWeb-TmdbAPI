@@ -16,6 +16,7 @@ public class LoginProcessAction implements Action {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 
+		System.out.println("check");
 		PrintWriter out = response.getWriter();
 
 		String id = request.getParameter("id");
@@ -45,7 +46,7 @@ public class LoginProcessAction implements Action {
 
 			out.println("<script>");
 			out.println("alert('" + message + "');");
-			out.println("location.href='login.lg';");
+			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 			return null;

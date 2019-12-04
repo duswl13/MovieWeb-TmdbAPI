@@ -24,6 +24,10 @@ body{
 background: #141414;
 color:white;
 }
+
+.container{
+margin-bottom: 3em;
+}
 .col-centered{
     float: none;
     margin: 0 auto;
@@ -192,7 +196,11 @@ function printPerson(){
 				
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[i].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
+					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					
+					
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 					
 					text += ' <div>';
@@ -246,7 +254,12 @@ function printPerson(){
 				
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+					
+					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
+					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					
+					
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 					
 					text += ' <div>';
