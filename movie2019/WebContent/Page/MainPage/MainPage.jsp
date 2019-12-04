@@ -171,21 +171,26 @@
 		<c:forEach items="${hidden}" var="item">
 		hiddenlist.push("${item}");
 		</c:forEach>
+		ToInteger();
 		
+		function ToInteger(){
 		for(var j = 0;j < hiddenlist.length; j++)
 			hiddenlist[j] = hiddenlist[j]*1;
-		
+		}
 		function hiddenremove(list){
 			for(var i = 0; i < list.length; i++){
+				console.log('확인:'+list[i].id);
 				if(hiddenlist.includes(list[i].id)){
-					console.log('지움지움');
+					console.log('지움지움:'+list[i].id);
 					list.splice(i,1);
+					i--;
 				}
 			}
 			return list;
 		}
 		
-		
+		//인기, 최신, 예정
+		var p_list, l_list, y_list;
 		
 		//api 접근해서 목록 만들기
 		$.ajax({
@@ -197,9 +202,9 @@
 						
 						
 						
-						var list = hiddenremove(data.results);
-						loadVideo(list[randomRange(0,5)]);
-						printMovie(list,0);
+						p_list = hiddenremove(data.results);
+						loadVideo(p_list[randomRange(0,5)]);
+						printMovie(p_list,0);
 						
 
 					}, //HTTP 요청이 성공한 경우 실행
@@ -248,8 +253,8 @@
 					cache : false,
 					success : function(data) {
 						console.log('최신목록 성공 :' +'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(-1)+'&release_date.lte='+getDt3(0));
-						var list = hiddenremove(data.results);
-						printMovie(list,1);
+						l_list = hiddenremove(data.results);
+						printMovie(l_list,1);
 						
 
 					}, //HTTP 요청이 성공한 경우 실행
@@ -272,8 +277,8 @@
 			success : function(data) {
 				console.log('예정목록 성공:'+'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(0)+'&release_date.lte='+getDt3(3));
 			
-				var list = hiddenremove(data.results);
-				printMovie(list,2);
+				y_list = hiddenremove(data.results);
+				printMovie(y_list,2);
 				
 
 			}, //HTTP 요청이 성공한 경우 실행
@@ -348,16 +353,26 @@
 		}
 
 		function printMovie(list,count) {
-
+			console.log('printMovie:'+list.length);
+			if(list == null && list.length == 0){
+				//표시할 데이터없음
+				return;
+			}
 			var print = '';
 			var i = 0;
+			
+			
 			for (var check = 0; check < 5; check++) {
 				
+					if(i >= list.length){
+							break;
+						}
+					
 				if(list[i].poster_path == null || list[i].overview == null || list[i].genre_ids == null || list[i].overview == ""
 					|| list[i].genre_ids == "" || list[i].overview.includes('섹스')){
-					check--;
-					i++;
-					continue;
+						check--;
+						i++;
+							continue;
 				}
 				
 				
@@ -403,19 +418,36 @@
 		function hidden(movieId,movieTitle,ca){
 			//숨김 버튼 눌렀을 경우 서블릿으로 숨김 영화 insert
 			
-			$.ajax({
-
-				url : 'InsertHidden.ml',
-				data : {
+			var restData = {
 					"movieId" :movieId,
 					"movieTitle": movieTitle
-				},
+				};
+			
+			$.ajax({
+				url : 'InsertHidden.ml',
+				data : restData,
 				dataType : 'json',
 				success : function(rdata) {
-
-				alert("목록 없어지고 바껴야함...");
-				//$('h1:contains("'+movieTitle+'")').parents('.col-xs-4').html("<b>숨겨진 영화입니다.</b>");
-				
+					
+					alert("숨김처리되었습니다.");
+					hiddenlist = rdata;
+					ToInteger();
+					
+					switch(ca){
+					case 0:
+						p_list = hiddenremove(p_list);
+						printMovie(p_list,ca);
+						break;
+					case 1:
+						l_list = hiddenremove(l_list);
+						printMovie(l_list,ca);
+						break;
+					case 2:
+						y_list = hiddenremove(y_list);
+						printMovie(y_list,ca);
+						break;
+					
+					}
 				}
 
 			});

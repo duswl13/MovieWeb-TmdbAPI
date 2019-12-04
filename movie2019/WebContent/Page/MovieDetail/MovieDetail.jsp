@@ -960,8 +960,9 @@ function hiddenremove(list){
 		
 		if(list != null && list.length != 0){
 		for (var i = 0; i < 6; i++) {
-			if (i < list.length && check < list.length) {
-				
+			if (check >= list.length) {
+				break;
+			}
 				console.log("이름:" + list[check].name);
 				console.log("포스터:" + list[check].profile_path);
 				
@@ -984,7 +985,7 @@ function hiddenremove(list){
 				tag += '<p>' + list[check].name + '</p>';
 				tag += '</div>';
 				check++;
-			}
+			
 		}
 
 		console.log("tag : " + tag);
