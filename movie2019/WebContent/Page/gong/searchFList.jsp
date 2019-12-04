@@ -6,7 +6,24 @@
 <%@ include file="header.jsp"%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <jsp:include page="header.jsp"/>
+ <style type="text/css">
+body {
+	color: white;
+}
+.page-link{
+background-color: black;
+color: white;
+border: none;
+
+}
+.pagination{
+justify-content:center;
+}
+td, th{
+text-align: center;
+}
+.cursor_test {cursor: pointer;}
+</style>
 <script type="text/javascript">
 	$(function() {
 		
@@ -20,13 +37,15 @@
 <body>
 
 
-	<table border="1" width="500px">
+<div class="container">
+	<table class="table table-dark" >
 		<tr>
 			<th>제목</th>
-			<th width="100px">날짜</th>
+			<th width="200px">날짜</th>
 		</tr>
+		
 		<c:choose>
-	<c:when test="${list eq '[]'}"><tr><td colspan="2" style="color: red;">검색결과가없습니다</td></tr></c:when>		
+	<c:when test="${list eq '[]'}"><tr><td colspan="2" style="color: red; text-align: center;">검색결과가없습니다</td></tr></c:when>			
 <c:otherwise>
 		<c:forEach var="row" items="${list}" varStatus="status">
 			<tr>
@@ -41,32 +60,40 @@
 		</c:otherwise>
 		</c:choose>
 	</table>
-	<table width="500px">
-	<tr>
-	<td colspan="2">
-	<c:if test="${current_page>1 }"><a href="#" onclick="faqSearch('1')">[처음]</a></c:if>
+	<div class="center-block">
+		<div class="row">	 
+			<div class="col">			
+	<ul class="pagination">
+	<c:if test="${current_page>1 }">
+	<li class="page-item" ><a class="page-link" href="#" onclick="faqSearch('1')">First</a></c:if>
 	<c:if test="${current_block>1 }">
-	<a href="#2" onclick="faqSearch('${prev_page}')">[이전]</a>
+	<li class="page-item"><a class="page-link" href="#2" href="#2" onclick="faqSearch('${prev_page}')">Previous</a></li>
 	</c:if>
 	<c:forEach var="page" begin="${block_start }" end="${block_end }">
 	<!-- 현재페이지 하이퍼링크 제거 -->
 	<c:if test="${page==current_page }">
-	<span style="color: red;">[${page}]</span>
+	<li class="page-item"><a class="page-link" href="#2" style="color: #27AE60;">${page}</a></li>
 	</c:if>
 	<!-- 현재페이지가 아니면 하이퍼링크 표시 -->
 	<c:if test="${page!=current_page }">
-	<a href="#1" onclick="faqSearch('${page}')">[${page}]</a>
+	<li class="page-item"><a class="page-link" href="#1"
+							onclick="faqSearch('${page}')">${page}</a></li>
 	</c:if>
 	</c:forEach>
 	<c:if test="${current_block<total_block }">
-	<a href="#4" onclick="faqSearch('${next_page}')">[다음]</a>
+	<li class="page-item"><a class="page-link" href="#4"
+						onclick="faqSearch('${next_page}')">Next</a></li>
 	</c:if>
 	<c:if test="${current_page<total_page }">
-	<a href="#5" onclick="faqSearch('${total_page}')">[끝]</a>
+	<li class="page-item"><a class="page-link" href="#5"
+						onclick="faqSearch('${total_page}')">Last</a></li>
 	</c:if>
-	</td>
-	</tr>
-	</table>
+	</ul>
+	</div>
+	</div>
+	</div>
+	
+	</div>
 	
 </body>
 </html>

@@ -6,43 +6,54 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="header.jsp" %>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	$("#email").click(function() {
-		mail();
+		if($("#senderName").val()==""){
+			alert("받으실아이디 입력");
+			return;
+		}
+		if($("#subject").val()==""){
+			alert("제목입력");
+			return;
+		}
+		if($("#message").val()==""){
+			alert("내용입력");
+			return;
+		}
+		
+		$.ajax({
+			type : "post",
+			url : "mailsend.gong",
+			data : {
+				"senderName" : $("#senderName").val(),
+				"senderMail" : $("#senderMail").val(),
+				"receiveMail" : $("#receiveMail").val(),
+				"subject" :$("#subject").val(),
+				"message":$("#message").val()
+			},
+			success : function(result) {
+				alert("메일보내기성공!");
+				/*  $("#senderName").val("");
+				$("#senderMail").val("");
+				$("#subject").val("");
+				$("#message").val("");  */
+				location.href="list.gong"; //혹시 세션유지안되는지 확인해바야댐
+			},
+			
+			error : function(err) {
+				alert("실패:받으실이메일주소를 확인해주세요");
+			}
+
+		});
+			
+		
+	
 	});
 });
  
 
-function mail() {//메일
-		
-		
-	$.ajax({
-		type : "post",
-		url : "mailsend.gong",
-		data : {
-			"senderName" : $("#senderName").val(),
-			"senderMail" : $("#senderMail").val(),
-			"receiveMail" : $("#receiveMail").val(),
-			"subject" :$("#subject").val(),
-			"message":$("#message").val()
-		},
-		success : function(result) {
-			alert("메일보내기성공!");
-			/* $("#senderName").val("");
-			$("#senderMail").val("");
-			$("#subject").val("");
-			$("#message").val(""); */
-			location.href="list.gong"; //혹시 세션유지안되는지 확인해바야댐
-		},
-		
-		error : function(err) {
-			alert("실패:받으실이메일주소를 확인해주세요");
-		}
-
-	});
-
-}
 
 </script>
 </head>
@@ -73,15 +84,15 @@ function mail() {//메일
                             
                         </div>
 
-                        <form action="mailsend.gong">
+                        <form>
                            
-                                        <input type="email" class="form-control"  id="mailtip2" placeholder="Your e-mail" name="senderName" id="senderName">
+                                        <input type="email" class="form-control"  id="senderName" placeholder="Your e-mail" name="senderName" >
                                  
                                         <input class="form-control" type="text" placeholder="Subject" name="subject" id ="subject">
                                  
                                         <textarea class="form-control" rows="4" placeholder="Message text . . ." name="message" id="message"></textarea>
                                   
-                   <button class="btn btn-danger btn-sm" style="width: 100%;" id="email"><i class="fa fa-envelope-o" style="padding-right: 5px;"></i>Send</button>
+                   <button class="btn btn-danger btn-sm" style="width: 100%;" id="email">Send</button>
                             <input type="hidden" name="senderMail" id="senderMail" value="rjstn19339@gmail.com">
 <input type="hidden" name="receiveMail" id="receiveMail" value="rjstn19339@gmail.com">    
 

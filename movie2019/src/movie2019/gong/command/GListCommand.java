@@ -22,7 +22,7 @@ public class GListCommand implements GCommand{
 		
 		//페이지갯수 계산 ex 991/10 =>99.1 = > 올림 => 100 count쿼리
 		int rows =dao.GongCount();
-		int total_page=(int)(Math.ceil(rows/10.0));//ceil올림함수
+		int total_page=(int)(Math.ceil(rows/5.0));//ceil올림함수
 		request.setAttribute("total_page", total_page);
 		
 		//블록당 표시 페이지 갯수 10개씩출력하겠다

@@ -10,7 +10,19 @@
 body {
 	color: white;
 }
+.page-link{
+background-color: black;
+color: white;
+border: none;
 
+}
+.pagination{
+justify-content:center;
+}
+td, th{
+text-align: center;
+}
+.cursor_test {cursor: pointer;}
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -22,18 +34,7 @@ body {
 
 	});
 </script>
-<style type="text/css">
-.page-link{
-background-color: black;
-color: white;
-border: none;
 
-}
-.pagination{
-justify-content:center;
-}
-
-</style>
 </head>
 <body>
 <div class="container">
@@ -44,11 +45,12 @@ justify-content:center;
 		</tr>
 		<c:forEach var="row" items="${list}" varStatus="status">
 			<tr>
-				<td id="oclick${status.count }">${row.NOTICE_SUBJECT }</td>
+				<td id="oclick${status.count }" class="cursor_test">${row.NOTICE_SUBJECT }</td>
 				<td>${row.NOTICE_DATE }</td>
 			</tr>
 			<tr>
-				<td style="border-bottom: none;" colspan="2"><div id="divresult${status.count }" style="display: none; text-align: center;">${row.NOTICE_CONTENT } </div>
+				<td style="border-bottom: none;" colspan="2">
+				<div id="divresult${status.count }" style="display: none; text-align: center;">${row.NOTICE_CONTENT } </div>
 						</td>
 			</tr>
 

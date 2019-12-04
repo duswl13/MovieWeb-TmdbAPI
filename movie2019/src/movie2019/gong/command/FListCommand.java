@@ -16,18 +16,18 @@ public class FListCommand implements GCommand{
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		FAQDAO dao = new FAQDAO();
 		int curPage =Integer.parseInt(request.getParameter("curPage"));
-		int start =(curPage-1)*10+1;
-		int end=start+(10-1); 
+		int start =(curPage-1)*5+1;
+		int end=start+(5-1); 
 		List<FAQVO> list = dao.FAQList(start,end);
 		request.setAttribute("list", list);
 		
 		
 	
 		int rows =dao.FAQCount();
-		int total_page=(int)(Math.ceil(rows/10.0));
+		int total_page=(int)(Math.ceil(rows/5.0));
 		request.setAttribute("total_page", total_page);
 		
-		int page_list_size=10;		
+		int page_list_size=5;		
 		int total_block=(int)Math.ceil(total_page*1.0/page_list_size);		
 		int current_block=(int)Math.ceil((curPage-1)/page_list_size)+1;		
 		int block_start=(current_block-1)*page_list_size+1;

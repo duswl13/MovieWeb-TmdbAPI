@@ -18,19 +18,19 @@ public class SListCommand implements GCommand{
 		int curPage = Integer.parseInt(request.getParameter("curPage"));
 		
 			
-			int start =(curPage-1)*10+1; //���۹�ȣ = (���������� -1) * ��������Խù��� +1
-			int end=start+(10-1); //����ȣ = ���������� +(�������� �Խù��� -1)
+			int start =(curPage-1)*5+1; //���۹�ȣ = (���������� -1) * ��������Խù��� +1
+			int end=start+(5-1); //����ȣ = ���������� +(�������� �Խù��� -1)
 			List<GongVO> list = dao.GongSearchList(start,end,keyword);
 			request.setAttribute("list", list);
 		
 			
 			//���������� ��� ex 991/10 =>99.1 = > �ø� => 100 count����
 			int rows =dao.GongSearchCount(keyword);
-			int total_page=(int)(Math.ceil(rows/10.0));//ceil�ø��Լ�
+			int total_page=(int)(Math.ceil(rows/5.0));//ceil�ø��Լ�
 			request.setAttribute("total_page", total_page);
 			
 			//��ϴ� ǥ�� ������ ���� 10��������ϰڴ�
-			int page_list_size=10;
+			int page_list_size=5;
 			//������ ����� ����(��ü ���������� / ��ϴ� ������ ����)
 			int total_block=(int)Math.ceil(total_page*1.0/page_list_size);
 			//���� �������� ���° ������� ��� ����=(����������-1)/��������ϴ���+1
