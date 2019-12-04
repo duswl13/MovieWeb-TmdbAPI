@@ -65,17 +65,37 @@ public class MovieListController extends HttpServlet {
 		Action action = null;
 
 		if (command.equals("/main.ml")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Page/MainPage/MainPage.jsp");
+
+			action = new HiddenMovieAction();
+
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if (command.equals("/MovieList.ml")) {
-			forward = new ActionForward(); // parameter 있음
-			forward.setRedirect(false);
-			forward.setPath("Page/MovieList/MovieList.jsp");
+			action = new MovieListAction(); // parameter 있음
+
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if (command.equals("/Search.ml")) {
-			forward = new ActionForward();// parameter 있음
-			forward.setRedirect(false);
-			forward.setPath("Page/Search/Search.jsp");
+			action = new SearchMovieAction(); // parameter 있음
+
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			
 		} else if (command.equals("/moviedetail.ml")) {
 			action = new SelectRatingAction();
 			try {
@@ -84,7 +104,6 @@ public class MovieListController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 
 		} else if (command.equals("/PersonDetail.ml")) {
 			forward = new ActionForward();// parameter 있음
@@ -108,7 +127,7 @@ public class MovieListController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/UpdateStarRating.ml")) {
+		} else if (command.equals("/UpdateStarRating.ml")) {
 			action = new UpdateStarRatingAction();// parameter 있음
 
 			try {
@@ -117,7 +136,7 @@ public class MovieListController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/UpdateFaceRating.ml")) {
+		} else if (command.equals("/UpdateFaceRating.ml")) {
 			action = new UpdateFaceRatingAction();// parameter 있음
 
 			try {
@@ -126,11 +145,16 @@ public class MovieListController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		}else if (command.equals("/InsertHidden.ml")) {
+			action = new InsertHiddenAction();// parameter 있음
 
-		
-	
-		
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		if (forward != null) {
 			if (forward.isRedirect()) {

@@ -12,8 +12,7 @@
 
 <!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<!--    <script type="text/javascript"
-      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
+
 <!-- Bootstrap Js CDN -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -42,6 +41,11 @@
 
 
 
+a{
+color:white;
+}
+a:hover{
+color:#27AE60;}
 .col-xs-4 {
 	text-align: center;
 	background: #ccc;
@@ -258,6 +262,8 @@ font-size:15px;
 .user_mv td {
 	width: 50%;
 }
+
+
 </style>
 </head>
 <body>
@@ -303,7 +309,11 @@ font-size:15px;
 						<h2>
 							<b id="detail_title"></b>
 						</h2>
+						
 						<h5 id="detail_genre_and_date"></h5>
+						<h5 id="homepage"></h5>
+						<h5><b id="tag_line"></b></h5>
+						
 						<p id="detail_content"></p>
 
 						<div class="user_mv">
@@ -518,7 +528,28 @@ font-size:15px;
 if(<%=open%>)
 document.getElementById("main").style.marginLeft = "250px";
 	
+var hiddenlist = new Array();
+<c:forEach items="${hidden}" var="item">
+hiddenlist.push("${item}");
+</c:forEach>
+
+for(var j = 0;j < hiddenlist.length; j++)
+	hiddenlist[j] = hiddenlist[j]*1;
+
+function hiddenremove(list){
+	for(var i = 0; i < list.length; i++){
+		if(hiddenlist.includes(list[i].id)){
+			list.splice(i,1);
+		}
+	}
+	return list;
+}
+
+
 	
+	
+	console.log('http://api.themoviedb.org/3/movie/'
+			+<%=id%>+'/videos?api_key=<%=apikey%>');
 	
 	$.ajax({
 	
@@ -531,6 +562,8 @@ document.getElementById("main").style.marginLeft = "250px";
 			console.log('비디오 셋팅 성공');
 			var list = data.results;
 
+			
+			if(list != null && list.length != 0)
 			if(list[0].key != null)
 			printVideo(list[0].key);
 			
@@ -546,6 +579,7 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	
+	console.log('세부 정보 : ' + 'https://api.themoviedb.org/3/movie/<%=id%>?api_key=<%=apikey%>&language=ko-KO');
 	
 	$.ajax({
 				url : 'https://api.themoviedb.org/3/movie/<%=id%>?api_key=<%=apikey%>&language=ko-KO', //요청 전송 url
@@ -572,6 +606,7 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 	
 	
+	console.log("크레딧 : "+'https://api.themoviedb.org/3/movie/<%=id%>/credits?api_key=<%=apikey%>');
 	$.ajax({
 		url : 'https://api.themoviedb.org/3/movie/<%=id%>/credits?api_key=<%=apikey%>', //요청 전송 url
 		dataType : 'json',
@@ -604,7 +639,7 @@ document.getElementById("main").style.marginLeft = "250px";
 			
 			var list = data.results;
 			console.log('비슷한 영화 성공 , 갯수 :' + list.length);
-			printSimilar(list);
+			printSimilar(hiddenremove(list));
 			
 
 		}, //HTTP 요청이 성공한 경우 실행
@@ -691,7 +726,7 @@ document.getElementById("main").style.marginLeft = "250px";
 			
 			var checkText = '이 영화 에 대해 평가해주세요.'
 			$('.user_mv b').text(checkText);
-			
+			Change_star(-1);
 			
 		}
 		
@@ -868,6 +903,12 @@ document.getElementById("main").style.marginLeft = "250px";
 			genre_text += genre[i].name + " ";
 
 		$('#detail_genre_and_date').text(genre_text + " " + list.release_date);
+		if(list.homepage != null)
+		$('#homepage').html("<a href='"+list.homepage+"' target='_blank'>"+list.homepage+"</a>");
+		if(list.tagline != null)
+		$('#tag_line').text(list.tagline);
+	
+		
 		$("#detail_poster").prop('src',
 				'https://image.tmdb.org/t/p/w500' + list.poster_path);
 
@@ -915,21 +956,26 @@ document.getElementById("main").style.marginLeft = "250px";
 		console.log("list:" + list.length);
 
 		var check = 0;
+		
+		
+		if(list != null && list.length != 0){
 		for (var i = 0; i < 6; i++) {
-			if (i < list.length) {
-
-				if (list[check].profile_path == null) {
+			if (i < list.length && check < list.length) {
+				
+				console.log("이름:" + list[check].name);
+				console.log("포스터:" + list[check].profile_path);
+				
+				if (!list[check].profile_path || list[check].profile_path == null) {
 					check++;
 					i--;
 					continue;
 				}
 
-				console.log("이름:" + list[check].name);
-				console.log("포스터:" + list[check].profile_path);
+				
 				tag += '<div class="col-xs-2">';
 				//tag += '<a href="PersonDetail.ml?id=' + list[check].id + '&name='+list[check].name+'">
 				tag += '<img class="img-responsive"';
-			tag += '	src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'">';
+				tag += ' src="https://image.tmdb.org/t/p/w500'+list[check].profile_path+'">';
 
 				tag += '<div class="centered" Onclick="location.href=\'PersonDetail.ml?id='
 						+ list[check].id + '&name=' + list[check].name + '\'">';
@@ -943,7 +989,8 @@ document.getElementById("main").style.marginLeft = "250px";
 
 		console.log("tag : " + tag);
 		$('.mv_guest').html(tag);
-
+		
+		}
 	}
 
 	function printSimilar(list) {

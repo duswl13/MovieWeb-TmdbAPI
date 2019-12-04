@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie2019.movie.singleton.hiddenSingleton;
 import movie2019.review.db.AllReviewVO;
 import movie2019.review.db.ReviewVO;
 
@@ -18,6 +19,11 @@ public class SelectRatingAction implements Action {
 
 		MovieDAO movieDAO = new MovieDAO();
 
+		//hidden ½Ì±ÛÅæ
+		hiddenSingleton hidden = hiddenSingleton.getInstance();
+		
+	
+		
 		int movieId = Integer.parseInt(request.getParameter("id"));
 		String movieTitle = (String) request.getParameter("title");
 		String userId = "duswl13"; // Ãß ÈÄ session
@@ -59,7 +65,8 @@ public class SelectRatingAction implements Action {
 			request.setAttribute("allface", movieFace);
 			request.setAttribute("review", review);
 			request.setAttribute("bestreview", bestreview);
-
+			request.setAttribute("hidden", hidden.getHiddenList());
+			
 			forward.setRedirect(false);
 			forward.setPath("Page/MovieDetail/MovieDetail.jsp");
 			return forward;

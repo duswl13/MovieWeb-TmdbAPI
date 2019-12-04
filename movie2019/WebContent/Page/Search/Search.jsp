@@ -11,6 +11,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <!--    <script type="text/javascript"
@@ -104,6 +105,27 @@ if(<%=open%>)
 	searchList();
 	
 	
+
+	
+	var hiddenlist = new Array();
+	<c:forEach items="${hidden}" var="item">
+	hiddenlist.push("${item}");
+	</c:forEach>
+	
+	for(var j = 0;j < hiddenlist.length; j++)
+		hiddenlist[j] = hiddenlist[j]*1;
+	
+	function hiddenremove(list){
+		for(var i = 0; i < list.length; i++){
+			if(hiddenlist.includes(list[i].id)){
+				list.splice(i,1);
+			}
+		}
+		return list;
+	}
+	
+	
+	
 	function searchList(){
 		page++;
 	var link = 'https://api.themoviedb.org/3/search/movie?api_key=<%=apikey%>&language=ko-KO&query=<%=request.getParameter("key")%>&page='+page+'&include_adult=false&region=KR';
@@ -122,7 +144,7 @@ if(<%=open%>)
 					allpages = data.total_pages;
 					console.log('list.length:'+list.length);
 					printMore(list.length);				
-					printMovie(list);
+					printMovie(hiddenremove(list));
 					
 
 				}, //HTTP 요청이 성공한 경우 실행
@@ -145,7 +167,7 @@ if(<%=open%>)
 	
 	//api 결과가 20개가 아닌 경우 결과의 끝이라고 보고 더보기 숨김
 	function printMore(size){
-		if(size != 20)
+		if(size < 20)
 			$('.more').css('visibility','hidden');
 		else
 			$('.more').css('visibility','visible');
