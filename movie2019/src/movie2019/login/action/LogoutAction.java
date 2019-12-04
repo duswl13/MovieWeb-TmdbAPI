@@ -1,5 +1,7 @@
 package movie2019.login.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,13 +12,19 @@ public class LogoutAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		ActionForward forward = new ActionForward();
-		forward.setPath("index.jsp");
-		forward.setRedirect(true);
-		return forward;
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>");
+		out.println("alert('¾È³à¾û. ´ÙÀ½¿¡ ¶Ç º¸½´~')");
+		out.println("location.href='main.ml'"); 
+		out.println("</script>");
+		return null;
 	}
 
 }
