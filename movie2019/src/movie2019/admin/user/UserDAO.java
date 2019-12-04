@@ -84,11 +84,10 @@ public class UserDAO {
 				m=new Users();
 				m.setUSER_ID(rs.getString(1));
 				m.setUSER_PASS(rs.getString(2));
-				m.setUSER_NICKNAME(rs.getString(3));
-				m.setUSER_EMAIL(rs.getString(4));
-				m.setUSER_JOIN_DATE(rs.getDate(5));
-				m.setUSER_PHONE(rs.getString(6));
-				m.setUSER_TYPE(rs.getString(7));
+				m.setUSER_EMAIL(rs.getString(3));
+				m.setUSER_JOIN_DATE(rs.getDate(4));
+				m.setUSER_PHONE(rs.getString(5));
+				m.setUSER_TYPE(rs.getString(6));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -125,11 +124,10 @@ public class UserDAO {
 				Users m = new Users();
 				m.setUSER_ID(rs.getString(1));
 				m.setUSER_PASS(rs.getString(2));
-				m.setUSER_NICKNAME(rs.getString(3));
-				m.setUSER_EMAIL(rs.getString(4));
-				m.setUSER_JOIN_DATE(rs.getDate(5));
-				m.setUSER_PHONE(rs.getString(6));
-				m.setUSER_TYPE(rs.getString(7));
+				m.setUSER_EMAIL(rs.getString(3));
+				m.setUSER_JOIN_DATE(rs.getDate(4));
+				m.setUSER_PHONE(rs.getString(5));
+				m.setUSER_TYPE(rs.getString(6));
 				list.add(m);
 			}
 
@@ -227,7 +225,6 @@ public class UserDAO {
 				Users user = new Users();
 				user.setUSER_ID(rs.getString("USER_ID"));
 				user.setUSER_PASS(rs.getString("USER_PASS"));
-				user.setUSER_NICKNAME(rs.getString("USER_NICKNAME"));
 				user.setUSER_EMAIL(rs.getString("USER_EMAIL"));
 				user.setUSER_JOIN_DATE(rs.getDate("USER_JOIN_DATE"));
 				user.setUSER_PHONE(rs.getString("USER_PHONE"));
@@ -276,7 +273,7 @@ public class UserDAO {
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getList() 에러: " + e);
+			System.out.println("delete() 에러: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -285,6 +282,45 @@ public class UserDAO {
 					ex.printStackTrace();
 				}
 			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+
+	public int user_update(Users u) {
+		int result = 0;
+		try {
+			con = ds.getConnection();
+			String sql = "update users set USER_PASS=?, USER_EMAIL=?, USER_PHONE=? where USER_ID=?";
+
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, u.getUSER_PASS());
+			pstmt.setString(2, u.getUSER_EMAIL());
+			pstmt.setString(3, u.getUSER_PHONE());
+			pstmt.setString(4, u.getUSER_ID());
+
+			result = pstmt.executeUpdate();
+			System.out.println("updatetest"+result);
+
+		//primary key 제약조건을 위반했을 경우 발생하는 에러
+		} catch(java.sql.SQLIntegrityConstraintViolationException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();

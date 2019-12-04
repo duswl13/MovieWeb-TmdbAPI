@@ -9,8 +9,6 @@ import com.google.gson.JsonArray;
 
 import movie2019.mypage.user.Action;
 import movie2019.mypage.user.ActionForward;
-import movie2019.mypage.user.Genres;
-import movie2019.mypage.user.GenresDAO;
 
 public class USERGenresAction implements Action {
 
