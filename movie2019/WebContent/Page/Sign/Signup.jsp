@@ -201,6 +201,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 }
 </style>
 <body>
+
 <!-- multistep form -->
 <form id="msform" action="<%=request.getContextPath() %>/signProcess.su" method="post">
   <!-- progressbar -->
@@ -279,8 +280,8 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   </fieldset>
 </form>
 
-
 </body>
+
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="jquery-3.4.1.js" ></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>

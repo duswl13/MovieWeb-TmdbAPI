@@ -35,7 +35,7 @@ if(request.getParameter("open") != null){
 <!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
  <form action="BoardAddAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
-  <h1>write 페이지</h1>
+  <h1>글 작성 페이지</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
     <input name="BOARD_NAME" id="board_name" value="${id }"
@@ -62,7 +62,7 @@ if(request.getParameter("open") != null){
    <div class="form-group">
     <label for="board_file">파일 첨부</label>
     <label for="upfile">    <!-- alt: 이미지 안나오면 대체로 나오게 하는 거 -->
-       <img src="image/jisung.jpg" alt="지성"></label>
+       <img src="image/jisung.jpg" alt="파일"></label>
     <input type="file" id="upfile" name="BOARD_FILE">
     <span id="filevalue"></span>
   </div>  
