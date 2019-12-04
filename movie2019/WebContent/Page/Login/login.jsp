@@ -277,7 +277,7 @@ span {
 			<br>
 			<div class=joinwrap>
 				<h3 class=jointext>아직 보슈 회원이 아니신가요?</h3>
-				<a href="<%=request.getContextPath()%>/Page/Sign/RenewSign.html"
+				<a href="<%=request.getContextPath()%>/Page/Sign/Signup.jsp"
 					class=join>회원가입</a>
 			</div>
 			<br>
