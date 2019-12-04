@@ -19,6 +19,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="css/MovieList.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -147,6 +148,25 @@ if(<%=open%>)
 	readyList();
 	
 	
+	var hiddenlist = new Array();
+	<c:forEach items="${hidden}" var="item">
+	hiddenlist.push("${item}");
+	</c:forEach>
+	
+	for(var j = 0;j < hiddenlist.length; j++)
+		hiddenlist[j] = hiddenlist[j]*1;
+	
+	function hiddenremove(list){
+		for(var i = 0; i < list.length; i++){
+			if(hiddenlist.includes(list[i].id)){
+				list.splice(i,1);
+			}
+		}
+		return list;
+	}
+	
+	
+	
 	
 	function getDt3(month){
 		
@@ -209,8 +229,8 @@ if(<%=open%>)
 				var list = data.results;
 				allpages = data.total_pages;
 				
-				printMore(list.length);				
-				printMovie(list);
+				printMore(list.length);	
+				printMovie(hiddenremove(list));
 
 			}, //HTTP 요청이 성공한 경우 실행
 			error : function(request, status, error) {

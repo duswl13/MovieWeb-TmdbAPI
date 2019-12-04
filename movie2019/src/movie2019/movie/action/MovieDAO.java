@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import movie2019.movie.db.UserHiddenMovieVO;
 import movie2019.review.db.AllReviewVO;
 import movie2019.review.db.ReviewVO;
 
@@ -400,6 +401,56 @@ public class MovieDAO {
 		}
 
 		return result;
+	}
+
+	public ArrayList<Integer> getHiddenList(String user_id) {
+		
+		String sql = "select * from USER_HIDDEN_MOVIE where USER_ID = ?";
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,user_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				result.add(rs.getInt(2)); //¿µÈ­ ID
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return result;
+		
+	}
+
+
+	public int InsertHidden(int movie_id,String user_id) {
+		
+		String sql = "insert into USER_HIDDEN_MOVIE values(?,?)";
+		int result1 = -1;
+		
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1,user_id);
+			pstmt.setInt(2,movie_id);
+		
+			
+			result1 = pstmt.executeUpdate();
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		return result1;
+		
 	}
 
 }

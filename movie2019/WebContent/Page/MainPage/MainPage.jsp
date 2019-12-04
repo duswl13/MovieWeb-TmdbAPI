@@ -9,6 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Insert title here</title>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -158,13 +159,34 @@
 
 
 
-			
+		
 </div>
 
 
 		<script>
 	
 	
+		
+		var hiddenlist = new Array();
+		<c:forEach items="${hidden}" var="item">
+		hiddenlist.push("${item}");
+		</c:forEach>
+		
+		for(var j = 0;j < hiddenlist.length; j++)
+			hiddenlist[j] = hiddenlist[j]*1;
+		
+		function hiddenremove(list){
+			for(var i = 0; i < list.length; i++){
+				if(hiddenlist.includes(list[i].id)){
+					console.log('지움지움');
+					list.splice(i,1);
+				}
+			}
+			return list;
+		}
+		
+		
+		
 		//api 접근해서 목록 만들기
 		$.ajax({
 					url : 'https://api.themoviedb.org/3/movie/popular?api_key=<%=apikey%>&language=ko-KO&page=1&region=KR', //요청 전송 url
@@ -172,7 +194,10 @@
 					cache : false,
 					success : function(data) {
 						console.log('인기목록 성공 :'+'https://api.themoviedb.org/3/movie/popular?api_key=<%=apikey%>&language=ko-KO&page=1&region=KR');
-						var list = data.results;
+						
+						
+						
+						var list = hiddenremove(data.results);
 						loadVideo(list[randomRange(0,5)]);
 						printMovie(list,0);
 						
@@ -223,8 +248,7 @@
 					cache : false,
 					success : function(data) {
 						console.log('최신목록 성공 :' +'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(-1)+'&release_date.lte='+getDt3(0));
-						var list = data.results;
-
+						var list = hiddenremove(data.results);
 						printMovie(list,1);
 						
 
@@ -247,8 +271,8 @@
 			cache : false,
 			success : function(data) {
 				console.log('예정목록 성공:'+'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&region=KR&sort_by=release_date.desc&include_adult=false&release_date.gte='+getDt3(0)+'&release_date.lte='+getDt3(3));
-				var list = data.results;
-
+			
+				var list = hiddenremove(data.results);
 				printMovie(list,2);
 				
 
@@ -277,9 +301,13 @@
 				success : function(data) {
 
 					console.log('비디오 셋팅 성공');
-					var list = data.results;
-
+					var list =data.results;
+					
+					if(list != null && list.length != 0)
+					if(list[0].key != null)
 					printVideo(list[0].key);
+					
+					
 					printTitleVideo(listData);
 				},
 				error : function(request, status, error) {
@@ -348,7 +376,7 @@
 				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id + '&title='+list[i].original_title+'">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '\n<div class="centered">\n';
-				print += '<a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+				print += '<a href="javascript:hidden('+list[i].id+',\''+list[i].original_title+'\','+count+','+check+')" class="btn btn-danger hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 				print += '<h1 style="clear:right; float:right;">' + list[i].original_title + '</h1>\n';
 
 				print += ' <div style="clear:right; float:right;>';
@@ -369,6 +397,31 @@
 			
 			
 
+		}
+		
+						//몇번쨰 캐러셀의 몇번쨰 div인지...
+		function hidden(movieId,movieTitle,ca){
+			//숨김 버튼 눌렀을 경우 서블릿으로 숨김 영화 insert
+			
+			$.ajax({
+
+				url : 'InsertHidden.ml',
+				data : {
+					"movieId" :movieId,
+					"movieTitle": movieTitle
+				},
+				dataType : 'json',
+				success : function(rdata) {
+
+				alert("목록 없어지고 바껴야함...");
+				//$('h1:contains("'+movieTitle+'")').parents('.col-xs-4').html("<b>숨겨진 영화입니다.</b>");
+				
+				}
+
+			});
+
+			
+			
 		}
 
 		function randomRange(n1, n2) {
