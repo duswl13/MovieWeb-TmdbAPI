@@ -15,6 +15,13 @@
   #upfile {display:none;}
   img {width:20px;}
   #myModal {display:none;}
+  #count{
+  position:relative;
+  top:-10px;
+  left: -10px;
+  background:orange;
+  color:white;
+  border-radius:30%;}
 </style>
 </head>
 <body>
@@ -35,6 +42,8 @@ if(request.getParameter("open") != null){
 
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
+         
+<input type="hidden" id="loginid" value="${id}" name="loginid">         
 <div class="container">
  <table class="table table-striped">
  <tr>
@@ -45,7 +54,7 @@ if(request.getParameter("open") != null){
      <div>글쓴이</div>
   </td>
   <td>
-     <div>${boarddata.BOARD_NAME }</div>
+     <div >${boarddata.BOARD_NAME } </div>
   </td>
  </tr>
  <tr>
@@ -60,7 +69,7 @@ if(request.getParameter("open") != null){
   <td>
      <div>내용</div>
   </td>
-    <td><textarea name="BOARD_CONTENT" id="board_content" 
+    <td><textarea name="BOARD_CONTENT" id="board_content" readOnly
              rows="10" class="form-control" >${boarddata.BOARD_CONTENT}</textarea>
   </td>  
  </tr>
@@ -71,13 +80,17 @@ if(request.getParameter("open") != null){
         <div>첨부파일</div>
      </td>
      <td>
-       <img src="image/jisung.jpg" alt="지성">
+       <img src="image/jisung.jpg" alt="첨부파일">
     <a href="BoardFileDown.bd?filename=${boarddata.BOARD_FILE }">
         ${boarddata.BOARD_FILE}</a></td> 
  </tr>
  </c:if>
  <tr> 
   <td colspan="2" class="center">
+  
+   <button type="button" class="btn btn-primary start">댓글</button>
+   <span id="count">${count }</span>
+   
    <a href="BoardReplyView.bd?num=${boarddata.BOARD_NUM }">
    <button type="button" class="btn btn-primary">답변</button>
    </a>
@@ -125,6 +138,21 @@ if(request.getParameter("open") != null){
    </div>
    </div>
    </div>
+   <div id="comment">
+      <button class="btn btn-info float-left">총 50자까지 작성 가능</button>
+      <button id="write" class="btn btn-info float-right">등록</button>
+       <textarea rows=3 class="form-control"
+                 id="content" maxLength="50"></textarea>
+       <table class="table table-striped">
+        <thead>
+         <tr><td>아이디</td><td>내용</td><td>날짜</td></tr>
+        </thead>
+        <tbody>
+        
+        </tbody>
+       </table>
+        <div id="message"></div>
+        </div>
 </body>
 <script>
 if(<%=open%>)
