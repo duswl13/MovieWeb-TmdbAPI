@@ -13,7 +13,7 @@ package movie2019.login.db;
 public class Member {
 
 	private String id;
-	private String password;
+	private String pass;
 	private String email;
 	
 	public String getId() {
@@ -23,10 +23,10 @@ public class Member {
 		this.id = id;
 	}
 	public String getPassword() {
-		return password;
+		return pass;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPassword(String pass) {
+		this.pass = pass;
 	}
 
 	public String getEmail() {
