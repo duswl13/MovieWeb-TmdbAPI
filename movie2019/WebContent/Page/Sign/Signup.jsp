@@ -5,10 +5,7 @@
 <head>
 <title>회원가입</title>
 </head>
-<script src="jquery-3.4.1.js" ></script>
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
-<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
-</script>
+
 <style>
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
@@ -205,7 +202,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 </style>
 <body>
 <!-- multistep form -->
-<form id="msform" action="joinProcess.net" method="post">
+<form id="msform" action="<%=request.getContextPath() %>/signProcess.su" method="post">
   <!-- progressbar -->
   <ul id="progressbar">
     <li class="active">기본 정보</li>
@@ -217,72 +214,78 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     <h2 class="fs-title">기본 정보 입력</h2>
     <h3 class="fs-subtitle">step 1</h3>
     <input type="text" name="USER_ID" id="USER_ID" placeholder="아이디" required/>
+    <div></div>
     <input type="password" name="USER_PASS" id="USER_PASS" placeholder="비밀번호" required/>
-    <input type="text" name="USER_NICKNAME" id="USER_NICKNAME" placeholder="닉네임" required/>
-    <input type="button" name="next" class="next action-button" value="Next" />
+   
+    <input type="button" name="next" class="next action-button" value="다음" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">상세 정보 입력</h2>
     <h3 class="fs-subtitle">step 2</h3>
-    <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" />
-    <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" />
+    <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" required/>
+    <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" required/>
     <!-- <input type="text" name="gplus" id="USER_ID" placeholder="Google Plus" /> -->
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="button" name="next" class="next action-button" value="Next" />
+    <input type="button" name="previous" class="previous action-button" value="이전" />
+    <input type="button" name="next" class="next action-button" value="다음" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">선호 장르 선택</h2>
     <h3 class="fs-subtitle">3개 이상 선택하세요</h3>
     <div class="container">
   <ul class="ks-cboxtags">
-      <li><input type=checkbox name=ganre id=action value="28">
+      <li><input type=checkbox name=genre id=action value="28">
       <label for="action">액션</label></li>
-      <li><input type=checkbox name=ganre id=adventure value="12">
+      <li><input type=checkbox name=genre id=adventure value="12">
       <label for="advanture">모험</label></li>
-      <li><input type=checkbox name=ganre id=animation value="16">
+      <li><input type=checkbox name=genre id=animation value="16">
       <label for="animation">애니메이션</label></li>
-      <li><input type=checkbox name=ganre id=comedy value="35">
+      <li><input type=checkbox name=genre id=comedy value="35">
       <label for="comedy">코미디</label></li>
-      <li><input type=checkbox name=ganre id=crime value="80">
+      <li><input type=checkbox name=genre id=crime value="80">
       <label for="crime">범죄</label></li>
-      <li><input type=checkbox name=ganre id=documentary value="99">
+      <li><input type=checkbox name=genre id=documentary value="99">
       <label for="documentary">다큐멘터리</label></li>
-      <li><input type=checkbox name=ganre id=drama value="18">
+      <li><input type=checkbox name=genre id=drama value="18">
       <label for="drama">드라마</label></li>
-      <li><input type=checkbox name=ganre id=family value="10751">
+      <li><input type=checkbox name=genre id=family value="10751">
       <label for="family">가족</label></li>
-      <li><input type=checkbox name=ganre id=fantasy value="14">
+      <li><input type=checkbox name=genre id=fantasy value="14">
       <label for="fantasy">판타지</label></li>
-      <li><input type=checkbox name=ganre id=history value="36">
+      <li><input type=checkbox name=genre id=history value="36">
       <label for="history">역사</label></li>
-      <li><input type=checkbox name=ganre id=horror value="27">
+      <li><input type=checkbox name=genre id=horror value="27">
       <label for="horror">공포</label></li>
-      <li><input type=checkbox name=ganre id=music value="10402">
+      <li><input type=checkbox name=genre id=music value="10402">
       <label for="music">음악</label></li>
-      <li><input type=checkbox name=ganre id=mystery value="9648">
+      <li><input type=checkbox name=genre id=mystery value="9648">
       <label for="mystery">미스터리</label></li>
-      <li><input type=checkbox name=ganre id=romance value="10749">
+      <li><input type=checkbox name=genre id=romance value="10749">
       <label for="ramance">로맨스</label></li>
-      <li><input type=checkbox name=ganre id=sf value="878">
+      <li><input type=checkbox name=genre id=sf value="878">
       <label for="sf">SF</label></li>
-      <li><input type=checkbox name=ganre id=tv value="10770">
+      <li><input type=checkbox name=genre id=tv value="10770">
       <label for="tv">TV영화</label></li>
-      <li><input type=checkbox name=ganre id=thriller value="53">
+      <li><input type=checkbox name=genre id=thriller value="53">
       <label for="thriller">스릴러</label></li>
-      <li><input type=checkbox name=ganre id=war value="10752">
+      <li><input type=checkbox name=genre id=war value="10752">
       <label for="war">전쟁</label></li>
-      <li><input type=checkbox name=ganre id=western value="37">
+      <li><input type=checkbox name=genre id=western value="37">
       <label for="western">서부</label></li>
   </ul>
 
 </div>
-    <input type="button" name="previous" class="previous action-button" value="Previous" />
-    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+    <input type="button" name="previous" class="previous action-button" value="이전" />
+    <input type="submit" name="submit" class="submit action-button" value="가입" />
   </fieldset>
 </form>
 
 
 </body>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="jquery-3.4.1.js" ></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
+</script>
 <script>
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
