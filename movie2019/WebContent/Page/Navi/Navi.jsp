@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,8 +13,9 @@
 			var text = $('#search-form').val();
 			//$('#search-form').val().replace(/(\s*)/g, "")
 			if(text != '' && text != null)
-			location.href = '<%=request.getContextPath()%>/Search.ml?open=false&key='
-					+ text;
+			location.href = '<%=request.getContextPath()%>
+	/Search.ml?open=false&key='
+						+ text;
 			else
 				alert('검색어를 입력해주세요.');
 		}
@@ -154,9 +155,15 @@ ul {
 	background-color: #141414;
 	margin-top: 3em;
 }
-.logo {font-size:42pt; font-weight:bold; text-decoration:none; color:#27AE60; 
+
+.logo {
+	font-size: 42pt;
+	font-weight: bold;
+	text-decoration: none;
+	color: #27AE60;
 	display: flex;
-	justify-content: center; /*가운데정렬*/}
+	justify-content: center; /*가운데정렬*/
+}
 </style>
 </head>
 <body>
@@ -165,67 +172,96 @@ ul {
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 
-	<a href="<%=request.getContextPath()%>/main.ml"><span class=logo>VOSHU</span></a>
-						
+		<a href="<%=request.getContextPath()%>/main.ml"><span class=logo>VOSHU</span></a>
+
 		<div id="accordian">
 
-		
 
 
+
+			<ul>
+				<li><input type="text" id="search-form" placeholder="Search"
+					onkeyup="enterkey();"></li>
+			</ul>
+
+			<ul>
+				<li>
+					<h2>
+						<a href='<%=request.getContextPath()%>/MovieList.ml?option=1'>영화</a>
+					</h2>
+
+				</li>
+				<li>
+					<h2>
+						<a href="<%=request.getContextPath()%>/list.ch">추천</a>
+					</h2>
+				</li>
+				<li>
+					<h2>
+						<a
+							href='<%=request.getContextPath()%>/Page/Review/review_list.jsp'>리뷰</a>
+					</h2>
+				</li>
+				<li>
+					<h2>
+						<a href="BoardList.bd">게시판</a>
+					</h2>
+				</li>
+
+				<li>
+					<h2>마이페이지</h2>
 					<ul>
-						<li><input type="text" id="search-form" placeholder="Search"
-							onkeyup="enterkey();"></li>
-					</ul>
 
+						<li><a
+							href="<%=request.getContextPath()%>/user_info.mu">내
+								정보 수정</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/MyPage/MyReview/MyReview.jsp">내
+								리뷰 관리</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/MyPage/Hidden/Hidden.jsp">숨긴
+								콘텐츠 관리</a></li>
+
+					</ul>
+				</li>
+				<li>
+
+					<h2>
+						<a href="<%=request.getContextPath()%>/list.gong">공지사항</a>
+					</h2>
+
+				</li>
+				<li>
+					<h2>관리자 페이지</h2>
 					<ul>
-						<li>
-							<h2>
-								<a href='<%=request.getContextPath()%>/MovieList.ml?option=1'>영화</a>
-							</h2>
-
-						</li>
-						<li>
-							<h2>
-								<a href="<%=request.getContextPath()%>/list.ch">추천</a>
-							</h2>
-						</li>
-						<li>
-							<h2>
-								<a href='<%=request.getContextPath()%>/Page/Review/review_list.jsp'>리뷰</a>
-							</h2>
-						</li>
-						<li>
-							<h2>
-								<a href="BoardList.bd">게시판</a>
-							</h2>
-						</li>
-
-						<li>
-							<h2>마이페이지</h2>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/user_info.mu">내 정보 수정</a></li>
-								<li><a href="<%=request.getContextPath()%>/Page/MyPage/MyReview/MyReview.jsp">내 리뷰 관리</a></li>
-								<li><a href="<%=request.getContextPath()%>/Page/MyPage/Hidden/Hidden.jsp">숨긴 콘텐츠 관리</a></li>
-							</ul>
-						</li>
-						<li>
-							
-								<h2><a href="<%=request.getContextPath()%>/list.gong">공지사항</a></h2>
-							
-						</li>
-						<li>
-							<h2>관리자 페이지</h2>
-							<ul>
-								<li><a href="<%=request.getContextPath()%>/NoticeList.bo">공지사항 관리</a></li>
-								<li><a href="<%=request.getContextPath()%>/FAQList.fa">FAQ 관리</a></li>
-								<li><a href="<%=request.getContextPath()%>/user_list.ul">회원 관리</a></li>
-							</ul>
-						</li>
+						<li><a href="<%=request.getContextPath()%>/NoticeList.bo">공지사항
+								관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/FAQList.fa">FAQ
+								관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/user_list.ul">회원
+								관리</a></li>
 					</ul>
+				</li>
+			</ul>
+<br><br>
+			<ul>
+				<li><c:if test="${empty id}">
+						<button type="button" id="login"
+							onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.jsp'">로그인</button>
+					</c:if> <c:if test="${!empty id}">
+						<c:if test="${id=='admin'}">
+							<span>관리자 ${id}님 보슈~</span>
+							<button type="button" id="login"
+								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
+						</c:if>
 
-					<ul>
-						<li><button type="button" id="login" onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.jsp'">Login</button></li>
-					</ul>
+						<c:if test="${id!='admin'}">
+							<span>${id}님 보슈~</span>
+							<button type="button" id="login"
+								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
+						</c:if>
+					</c:if></li>
+			</ul>
 		</div>
 	</div>
 
