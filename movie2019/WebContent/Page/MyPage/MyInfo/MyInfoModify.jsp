@@ -112,7 +112,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="js/myinfo.js" charset="UTF-8"></script>
+<script src="js/myinfomodi.js" charset="UTF-8"></script>
 <script>
 $(function(){
 	if(<%=open%>)
@@ -134,7 +134,7 @@ $(function(){
          onclick="openNav()">&#9776;</span>
        
  <div class="container">    
- 	<form action="user_editaction.mu" method="post" name="user_edit">
+ 	<form action="user_editaction.mu"  method="post" name="user_edit">
                   <div class="row">
                       <div class="panel panel-default" style="margin:0 auto;">
                       <div class="panel-heading" style="background-color : white; ">  <h4>나의 정보 수정</h4></div>
@@ -148,26 +148,25 @@ $(function(){
                       <div class="col-xs-6 col-sm-6" >
                           <div class="container" >
                        		<c:set var="u" value="${userinfo }"/>                       				
-\                         	</div>
+                         	</div>
                            	<hr>
                           	<ul class="container details" >
                             <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>
                             	ID : <input style="padding-left: 5px; background-color:lightgrey;" name="INFO_ID" id="info_id" value="${u.USER_ID }" readOnly type="text"></p></li>
                             <li><p><span class="glyphicon glyphicon-star one" style="width:50px;"></span>
-                            	비밀번호 : <input style="padding-left: 5px;" name="INFO_PASS" id="info_email" type="password"></p></li>
+                            	비밀번호 : <input style="padding-left: 5px;" name="INFO_PASS" id="info_email" type="password" required></p></li>
                             <li><p><span class="glyphicon glyphicon-star-empty one" style="width:50px;"></span>
-                            	비밀번호 확인 : <input style="padding-left: 5px;" name="INFO_PASS_CHECK" id="info_email" type="password"></p></li>
+                            	비밀번호 확인 : <input style="padding-left: 5px;" name="INFO_PASS_CHECK" id="info_email_check" type="password" required></p></li>
                             <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>
-                            	이메일 : <input style="padding-left: 5px;" name="INFO_EMAIL" id="info_email" value="${u.USER_EMAIL }" type="text"></p></li>
+                            	이메일 : <input style="padding-left: 5px;" name="INFO_EMAIL" id="info_email" value="${u.USER_EMAIL }" type="text" required></p></li>
                             <li><p><span class="glyphicon glyphicon glyphicon-phone one" style="width:50px;"></span>
-                            	핸드폰 번호 : <input style="padding-left: 5px;" name="INFO_PHONE" id="info_phone" value="${u.USER_PHONE }" type="text"></p></li>
+                            	핸드폰 번호 : <input style="padding-left: 5px;" name="INFO_PHONE" id="info_phone" value="${u.USER_PHONE }" type="text" required></p></li>
                           </ul>
                           <hr>
                           <ul class="container details" >
                              <c:set var="g" value="${genresinfo }"/>                       				
-                             <li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>관심 장르: <span id="genres"></span></p></li>
+                             <li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>선호 장르를 3개 이상 선택하세요</p></li>
                           </ul>
-                          	<p>선호 장르를 3개 이상 선택하세요</p>
                             <ul class="ks-cboxtags">
 						      <li><input type=checkbox name=INFO_GENRES id=action value="28">
 						      <label for="action">액션</label></li>

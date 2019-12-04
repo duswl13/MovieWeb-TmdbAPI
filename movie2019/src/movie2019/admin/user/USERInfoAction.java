@@ -10,8 +10,7 @@ public class USERInfoAction implements Action {
 		UserDAO userdao = new UserDAO();
 		Users user = new Users();
 
-		String id=request.getParameter("id");
-
+		String id=request.getParameter("user_id");
 		user=userdao.user_info(id);
 		
 		ActionForward forward = new ActionForward();

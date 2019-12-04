@@ -83,4 +83,57 @@ public class GenresDAO {
 		}
 		return array;
 	}
+
+
+	public int update_genres(String[] genres, String id) {
+	      try{
+	          con = ds.getConnection();
+	          System.out.println("getConnection");
+	          String delete_sql = "delete from user_genres where user_id=?";
+	          pstmt = con.prepareStatement(delete_sql);
+	          pstmt.setString(1, id);
+	          pstmt.executeUpdate();
+	          
+	          
+	          String insert_sql = "INSERT ALL ";	    
+	             for(int i = 0; i < genres.length; i++) {	                               
+	            	 insert_sql += "INTO USER_GENRES VALUES("
+	                   + genres[i]+ ", '" +id+"') ";              
+	             }
+	                         
+	            insert_sql += " SELECT * FROM DUAL";
+	            pstmt = con.prepareStatement(insert_sql);
+	          
+	          result=pstmt.executeUpdate();
+	          
+	        } catch(java.sql.SQLIntegrityConstraintViolationException e) {
+	           e.printStackTrace();
+	        
+	          }catch(Exception e) {
+	             e.printStackTrace();
+	          } finally {
+	             if(rs!=null) {
+	                try {
+	                   pstmt.close();
+	                }catch(SQLException ex){
+	                   ex.printStackTrace();               
+	                }
+	             }
+	             if(con!=null) {
+	                try {
+	                   con.close();
+	                }catch(SQLException ex) {
+	                   ex.printStackTrace();
+	                }
+	             }
+	             if(pstmt!=null) {
+	                try {
+	                   pstmt.close();
+	                }catch(SQLException ex) {
+	                   ex.printStackTrace();
+	                }
+	             }
+	          }
+	          return result;
+	}
 }
