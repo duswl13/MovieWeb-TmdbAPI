@@ -69,9 +69,13 @@ $(function(){
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
-       
+<c:if test="${empty id}">       
+	<script>
+		location.href = "<%=request.getContextPath()%>/Page/Login/login.jsp";
+	</script>
+</c:if>
+
  <div class="container">    
- <%session.setAttribute("id","admin1"); %>
  
                   <div class="row">
                       <div class="panel panel-default" style="margin:0 auto;">
@@ -86,11 +90,11 @@ $(function(){
                       <div class="col-xs-6 col-sm-6" >
                           <div class="container" >
                        		<c:set var="u" value="${userinfo }"/>                       				
-\                          </div>
+                          </div>
                            <hr>
                           <ul class="container details" >
-                         	<input type="hidden" name="USER_ID" value="${u.USER_ID }" id="USER_ID">
-                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : ${u.USER_ID }</p></li>
+                         	<input type="hidden" name="USER_ID" value="${id }" id="USER_ID">
+                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : ${id }</p></li>
                             <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>이메일 : ${u.USER_EMAIL }</p></li>
                             <li><p><span class="glyphicon glyphicon glyphicon-phone one" style="width:50px;"></span>핸드폰 번호 : ${u.USER_PHONE }</p></li>
                             <li><p><span class="glyphicon glyphicon-time one" style="width:50px;"></span>가입일자 : ${u.USER_JOIN_DATE }</p></li>
@@ -111,7 +115,7 @@ $(function(){
                 </div>
             </div>
             </div>
-         
+         </div>
 </div>
 </body>
 </html>

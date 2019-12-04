@@ -10,7 +10,7 @@ public class USERInfoAction implements Action {
 		UserDAO userdao = new UserDAO();
 		Users user = new Users();
 
-		String id=request.getParameter("user_id");
+		String id=request.getParameter("id");
 
 		user=userdao.user_info(id);
 		
