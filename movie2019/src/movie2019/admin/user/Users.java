@@ -5,7 +5,6 @@ import java.sql.Date;
 public class Users {
 	private String USER_ID;
 	private String USER_PASS;
-	private String USER_NICKNAME;
 	private String USER_EMAIL;
 	private Date USER_JOIN_DATE;
 	private String USER_PHONE;
@@ -21,12 +20,6 @@ public class Users {
 	}
 	public void setUSER_PASS(String uSER_PASS) {
 		USER_PASS = uSER_PASS;
-	}
-	public String getUSER_NICKNAME() {
-		return USER_NICKNAME;
-	}
-	public void setUSER_NICKNAME(String uSER_NICKNAME) {
-		USER_NICKNAME = uSER_NICKNAME;
 	}
 	public String getUSER_EMAIL() {
 		return USER_EMAIL;

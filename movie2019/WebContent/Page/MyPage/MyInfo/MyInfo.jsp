@@ -86,8 +86,7 @@ $(function(){
                       <div class="col-xs-6 col-sm-6" >
                           <div class="container" >
                        		<c:set var="u" value="${userinfo }"/>                       				
-                            <h2>${u.USER_NICKNAME }</h2>         
-                          </div>
+\                          </div>
                            <hr>
                           <ul class="container details" >
                          	<input type="hidden" name="USER_ID" value="${u.USER_ID }" id="USER_ID">
@@ -104,7 +103,7 @@ $(function(){
 						</div>
                         <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >
                         <div id="ed">
-	                        <label><a href="user_edit.mu">정보 수정    <span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label><br><br>
+	                        <label><a href="user_editview.mu?user_id=${u.USER_ID } ">정보 수정    <span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label><br><br>
 	                        <label><a href="user_delete.mu">회원 탈퇴    <span class="glyphicon glyphicon-minus-sign one" style="width:50px;"></span></a></label>
                         </div>
                      </div>

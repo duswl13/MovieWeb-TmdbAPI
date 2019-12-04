@@ -1,4 +1,4 @@
-package movie2019.mypage.user;
+package movie2019.mypage.genres;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

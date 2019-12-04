@@ -73,6 +73,7 @@ table, td {
 	margin-bottom : 50px;
 	boder-color:#27AE60;
 }
+
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
@@ -108,19 +109,17 @@ $(function(){
 	<table class="table table-striped">
 		<thead>
 			<tr>
-			<th colspan="2">회원정보 LIST</th>
+			<th>회원정보 LIST</th>
 			<th><font size=3>회원 수 :${listcount }</font></th>	
 			</tr>
 		</thead>	
 		<tr>
 				<td>아이디</td>
-				<td>이름</td>
 				<td>삭제</td>
 		</tr>	
 		<c:forEach var="m" items="${totallist }">
 			<tr>
 				<td><a href="user_info.ul?user_id=${m.USER_ID }">${m.USER_ID }</a></td>
-				<td>${m.USER_NICKNAME }</td>
 				<td><a href="user_delete.ul?user_id=${m.USER_ID }">삭제</a></td>
 			</tr>
 		</c:forEach>

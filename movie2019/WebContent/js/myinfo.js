@@ -11,7 +11,7 @@ $(function(){
 					output='';
 					$(rdata).each(function(){
 						output+="<span>"+this.GENRES_NAME + "</span>";
-						output+="<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>";
+						output+="<span>&nbsp;&nbsp;&nbsp;</span>";
 					})
 					$("#genres").append(output);
 				}else{

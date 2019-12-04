@@ -1,4 +1,4 @@
-package movie2019.mypage.user;
+package movie2019.mypage.genres;
 
 public class Genres {
 	private int USER_GENRES_NUMBER;

@@ -75,6 +75,22 @@ public class FrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		else if(command.equals("/user_editview.mu")) {
+			action=new UserEditViewAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/user_editaction.mu")) {
+			action=new UserEditAction();
+			try {
+				forward=action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		if(forward!=null) {
 			if(forward.isRedirect()) {//리다이렉트 됩니다.

@@ -104,7 +104,6 @@ $(function(){
 		<c:set var="u" value="${userinfo }"/>		
 			<tr><td>아이디</td><td>${u.USER_ID }</td></tr>
 			<tr><td>비밀번호</td><td>${u.USER_PASS }</td></tr>
-			<tr><td>닉네임</td><td>${u.USER_NICKNAME }</td></tr>
 			<tr><td>이메일주소</td><td>${u.USER_EMAIL }</td></tr>
 			<tr><td>가입일자</td><td>${u.USER_JOIN_DATE }</td></tr>
 			<tr><td>핸드폰번호</td><td>${u.USER_PHONE }</td></tr>
