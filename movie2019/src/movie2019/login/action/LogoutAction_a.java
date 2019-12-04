@@ -9,12 +9,11 @@ public class LogoutAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		
+		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		ActionForward forward = new ActionForward();
-		forward.setPath("index.jsp");
+		forward.setPath("login.lg");
 		forward.setRedirect(true);
 		return forward;
 	}
