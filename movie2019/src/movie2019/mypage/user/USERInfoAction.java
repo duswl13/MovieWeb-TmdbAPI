@@ -2,6 +2,7 @@ package movie2019.mypage.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie2019.admin.user.UserDAO;
 import movie2019.admin.user.Users;
@@ -12,18 +13,13 @@ public class USERInfoAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		UserDAO userdao = new UserDAO();
 		Users user = new Users();
-
-		String id=request.getParameter("user_id");
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+	
 		user=userdao.user_info(id);
 		ActionForward forward = new ActionForward();
 		
-		if(user==null) {
-			System.out.println("정보가져오기 실패");
-			forward.setRedirect(false);
-			request.setAttribute("message", "정보가져오기 실패입니다.");
-			forward.setPath("error/error.jsp");
-			return null;
-		}
 		System.out.println("상세보기 성공");
 		
 		request.setAttribute("userinfo",user);
