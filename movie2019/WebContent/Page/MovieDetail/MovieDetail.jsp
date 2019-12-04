@@ -40,21 +40,15 @@
 	color: white;
 }
 
-.col-xs-12 {
-	text-align: center;
-	background: #000;
-}
 
-.col-xs-4, .col-xs-8 {
+
+.col-xs-4 {
 	text-align: center;
 	background: #ccc;
 	height: 500px;
 }
 
 
-.col-xs-8 {
-	background: #bbb;
-}
 
 .movie_info {
 	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0),
@@ -428,6 +422,9 @@ font-size:15px;
 						</h4>
 
 						<div class="row">
+							<c:choose>
+							<c:when test="${!empty bestreview}">
+							
 							<c:forEach var="p_review" items="${bestreview}">
 							
 							<div class="col-xs-4">
@@ -480,7 +477,13 @@ font-size:15px;
 							</div>
 							
 							</c:forEach>
-
+							</c:when>
+							<c:otherwise>
+							<div class="col-xs-12" style="padding:16px; background:#333;">
+							<h4>등록된 리뷰가 없습니다.</h4>
+							</div>
+							</c:otherwise>
+							</c:choose>
 						</div>
 
 
@@ -678,6 +681,21 @@ document.getElementById("main").style.marginLeft = "250px";
 		}
 	});
 
+	
+	
+	$(".user_mv").mouseleave(function(){
+		
+		
+		//별점을 매기지 않고 마우스가 변경되었을 경우 텍스트 원상복귀
+		if(rating_value <= -2){
+			
+			var checkText = '이 영화 에 대해 평가해주세요.'
+			$('.user_mv b').text(checkText);
+			
+			
+		}
+		
+	});
 	$(".rating span").hover(function() {
 		
 		if(rating_value > -2){
@@ -958,11 +976,15 @@ document.getElementById("main").style.marginLeft = "250px";
 				}
 
 				text += '<div class="col-xs-3">';
-				//text += '<a href="moviedetail.ml?open=false&id=' + list[check].id + '">\n';
+				
 				text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 
+				list[check].original_title = list[check].original_title.replace(/\"/gi, "");
+				list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+				
+				
 				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
-						+ list[check].id
+						+ list[check].id +'&title='+list[check].original_title
 						+ '\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 				text += '<h3 style="clear:right;" class="centeredText"><b>'
 						+ list[check].original_title + '</b></h3>\n';

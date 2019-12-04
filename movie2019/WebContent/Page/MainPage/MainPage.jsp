@@ -341,6 +341,10 @@
 					
 					
 				print += '<div class="col-xs-4">\n';
+				
+				list[i].original_title = list[i].original_title.replace(/\"/gi, "");
+				list[i].original_title = list[i].original_title.replace(/\'/gi, "");
+				
 				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id + '&title='+list[i].original_title+'">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '\n<div class="centered">\n';

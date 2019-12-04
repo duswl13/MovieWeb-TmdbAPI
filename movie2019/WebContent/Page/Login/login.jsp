@@ -244,7 +244,7 @@ span {
 	<br>
 	<br>
 	<!-- multistep form -->
-	<form id="loginform" method=post action=loginProcess.lg>
+	<form id="loginform" method=post action="<%=request.getContextPath() %>/loginProcess.lg">
 
 
 		<!-- fieldsets 1 -->
@@ -266,7 +266,7 @@ span {
 					class=check>아이디저장</label>
 			</div>
 
-			<input type="button" name="submit" class="submit action-button"
+			<input type="submit" name="submit" class="submit action-button"
 				value="로그인" /> <input type="button" name="next"
 				class="next action-button" value="SNS로그인" />
 
@@ -348,9 +348,8 @@ span {
 				});
 			});
 
+	
 
-	$(".submit").click(function() {
-		return false;
-	})
+	
 </script>
 </html>
