@@ -36,7 +36,10 @@ public class GenresDAO {
 
 
 	public JsonArray getGenres(String id) {
-		String sql = "select * from USER_GENRES where USER_ID=?";
+	//	String sql = "select * from USER_GENRES where USER_ID=?";
+		String sql = "select GENRES.genres_id, user_id, GENRES_NAME  "
+				+ "from USER_GENRES, GENRES  "
+				+ "where GENRES.GENRES_ID=USER_GENRES.GENRES_ID and user_id=?";
 		JsonArray array=new JsonArray();
 		try {
 			con = ds.getConnection();
@@ -47,9 +50,9 @@ public class GenresDAO {
 			// DB에서 가져온 데이터를 VO객체에 담습니다.
 			while (rs.next()) {
 				JsonObject object=new JsonObject();				
-				object.addProperty("USER_GENRES_NUMBER", rs.getInt(1));
-				object.addProperty("GENRES_ID", rs.getInt(2));
-				object.addProperty("USER_ID", rs.getString(3));
+				object.addProperty("GENRES_ID", rs.getInt(1));
+				object.addProperty("USER_ID", rs.getString(2));
+				object.addProperty("GENRES_NAME", rs.getString(3));
 				array.add(object);
 			}
 		} catch (Exception e) {
@@ -78,6 +81,6 @@ public class GenresDAO {
 				}
 			}
 		}
-		return null;
+		return array;
 	}
 }

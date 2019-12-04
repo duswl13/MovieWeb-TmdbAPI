@@ -8,11 +8,11 @@ $(function(){
 			success:function(rdata){
 				if(rdata.length>0){
 					$("#genres").text('');
-					output='<tr>';
+					output='';
 					$(rdata).each(function(){
-						output+="<td>"+this.genres + "</td>";
+						output+="<span>"+this.GENRES_NAME + "</span>";
+						output+="<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>";
 					})
-					output='</tr>';
 					$("#genres").append(output);
 				}else{
 					$("#genres").text("선호 장르가 없습니다.");
