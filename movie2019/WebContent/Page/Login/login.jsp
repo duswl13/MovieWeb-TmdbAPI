@@ -67,7 +67,7 @@ a:hover {
 	display: none;
 }
 /*inputs*/
-.id, .password {
+.id, .pass {
 	padding: 15px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -103,7 +103,7 @@ a:hover {
 	margin: 10px 5px;
 }
 
-#loginform .next {
+#loginform .snsgo {
 	width: 100px;
 	background: white;
 	font-weight: bold;
@@ -115,7 +115,7 @@ a:hover {
 	margin: 10px 5px;
 }
 
-#loginform .next:hover {
+#loginform .snsgo:hover {
 	width: 100px;
 	background: #27AE60;
 	font-weight: bold;
@@ -252,23 +252,22 @@ span {
 			<br>
 			<h2 class="log_title1">VOSHU 아이디로 로그인 하기</h2>
 			<br>
-			<input type="text" name="id" id="id" class=id
+			<input type="text" name="USER_ID" id="id" class=id
 				placeholder="아이디" required />
 			<input type="password"
-				name="password" id="password" class=password placeholder="비밀번호"
+				name="USER_PASS" id="pass" class=pass placeholder="비밀번호"
 				required /> <br>
 			<span></span>
 
 			<div class="loginCheck">
-				<input type="checkbox" id="saveSess" name="saveSess"> <label
-					for="saveSess" class=check>자동로그인</label> <input type="checkbox"
-					id="saveId" name="saveId" checked> <label for="saveId"
-					class=check>아이디저장</label>
+				<input type="checkbox" id="saveid" name="saveid" checked> 
+				<label for="saveid" class=check>아이디저장</label> 
+				<input type="checkbox" id="savepass" name="savepass"> 
+				<label for="savepass" class=check>비밀번호저장</label>
 			</div>
 
-			<input type="submit" name="submit" class="submit action-button"
-				value="로그인" /> <input type="button" name="next"
-				class="next action-button" value="SNS로그인" />
+			<input type="submit" name="submit" class="submit action-button" value="로그인" /> 
+			<input type="button" name="snsgo" class="snsgo action-button" value="SNS로그인" />
 
 			<div class="findwrap">
 				<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a>
@@ -306,20 +305,20 @@ span {
 	var left, opacity, scale; //fieldset properties which we will animate
 	var animating; //flag to prevent quick multi-click glitches
 
-	$(".next").click(
+	$(".snsgo").click(
 			function() {
 				if (animating)
 					return false;
 				animating = true;
 
 				log_title1 = $(this).parent();
-				log_title2 = $(this).parent().next();
+				log_title2 = $(this).parent().snsgo();
 
-				//activate next step on progressbar using the index of next_fs
-				$("#progressbar li").eq($("fieldset").index(next_fs)).addClass(
+				//activate snsgo step on progressbar using the index of snsgo_fs
+				$("#progressbar li").eq($("fieldset").index(snsgo_fs)).addClass(
 						"active");
 
-				//show the next fieldset
+				//show the snsgo fieldset
 				log_title2.show();
 				//hide the current fieldset with style
 				log_title1.animate({

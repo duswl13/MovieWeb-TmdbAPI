@@ -32,7 +32,7 @@ public class MemberDAO {
 			con = ds.getConnection();
 			System.out.println("getConnection");
 
-			String sql = "select id from users where id=?";
+			String sql = "select USER_ID from USERS where USER_ID=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -74,7 +74,7 @@ public class MemberDAO {
 			con = ds.getConnection();
 			System.out.println("getConnection");
 
-			String sql = "select id, password from users where id = ?";
+			String sql = "select USER_ID, USER_PASS from USERS where USER_ID = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -115,50 +115,5 @@ public class MemberDAO {
 		}
 		return result;
 	}
-
-	public Member member_info(String id) {
-		Member m = null;
-
-		try {
-			con = ds.getConnection();
-			String sql = "select* from users where id = ?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				m = new Member();
-				m.setId(rs.getString(1));
-				m.setPassword(rs.getString(2));
-				m.setEmail(rs.getString(3));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
-		return m;
-	}
-	
 
 }
