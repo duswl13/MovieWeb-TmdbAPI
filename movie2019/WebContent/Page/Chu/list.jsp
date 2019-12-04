@@ -27,7 +27,9 @@ if(request.getParameter("open") != null){
 }
 
 .title1{
- color: #ae5327;
+ text-shadow: 2px 2px 2px black;
+ color: white;
+ 
 }
 /* * {
 	margin: 0;
@@ -65,6 +67,7 @@ if(request.getParameter("open") != null){
 	background-size: cover;
 	border: 1px solid rgb(161, 161, 161);
 	height: 60px;
+	
 }
 
 .boxOfficeList li:hover {
@@ -188,6 +191,182 @@ iframe {
 	
 
 }
+/* 슬라이더 */
+.accordian{
+  width: 80%;
+  height: 333px;
+  overflow:hidden;
+  
+  margin: 100px auto;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0px 8px 6px -6px black;
+}
+
+
+.accordian li{
+  position: relative;
+  display:block;
+  width:140px;
+  float: left;
+  
+  border-left: 1px solid #888;
+  -webkit-box-shadow: 0 0 25px 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 0 25px 10px rgba(0,0,0,0.5);
+  
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+
+.accordian ul:hover li{
+  width: 50px;
+}
+
+.accordian ul li:hover{
+  width:500px;
+}
+
+.accordian li img{
+  display: block;
+}
+
+.image_title{
+  background: rgba(0,0,0,0.5);
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:500px;
+}
+
+.image_title a{
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding:20px;
+  font-size:16px;
+}
+/* 자동슬라이더 */
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+.slick-slider
+{
+    position: relative;
+    display: block;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
+}
+
+.slick-slide
+{
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+    float: right;
+}
+.slick-slide img
+{
+    display: block;
+}
+.slick-slide.slick-loading img
+{
+    display: none;
+}
+.slick-slide.dragging img
+{
+    pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+    display: block;
+}
+.slick-loading .slick-slide
+{
+    visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+    display: none;
+}
+
+.uc{
+	padding-left: 250px;
+	margin-right: 10px;
+}
 
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -203,19 +382,117 @@ iframe {
 			$("#slidemenu").stop().animate({
 				"top" : position + currentPosition + "px"}, 500);
 		});
+		
+		 $('.customer-logos').slick({
+		        slidesToShow: 6,
+		        slidesToScroll: 1,
+		        autoplay: true,
+		        autoplaySpeed: 1500,
+		        arrows: false,
+		        dots: false,
+		        pauseOnHover: false,
+		        responsive: [{
+		            breakpoint: 768,
+		            settings: {
+		                slidesToShow: 4
+		            }
+		        }, {
+		            breakpoint: 520,
+		            settings: {
+		                slidesToShow: 3
+		            }
+		        }]
+		    });
 	});
 	</script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
 </head>
 <body style="background-color: black;">
+<h2 style="font-size: 1em;"></h2>
 <!-- 시작부분 -->
 	<div id="main">	
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
+			<div class="accordian">
+  <ul class="uc">
+    <li>
+      <div class="image_title">
+        <a href="#">Wedding 1</a>
+      </div>
+      <a href="#">
+     <img src="http://farm3.staticflickr.com/2812/10121061143_e05f1619d7.jpg">
+			</a>
+    </li>
+       <li>
+      <div class="image_title">
+        <a href="#">Wedding 2</a>
+      </div>
+      <a href="#">
+     <img src="http://farm8.staticflickr.com/7435/10067483716_2b6a593ca8.jpg">
+			</a>
+    </li>
+          <li>
+      <div class="image_title">
+        <a href="#">Wedding 3</a>
+      </div>
+      <a href="#">
+     <img src="http://farm8.staticflickr.com/7310/10065811936_8debcccb71.jpg">
+			</a>
+    </li>
+             <li>
+      <div class="image_title">
+        <a href="#">Wedding 4</a>
+      </div>
+      <a href="#">
+     <img src="http://farm4.staticflickr.com/3715/10065692306_705364fa01.jpg">
+			</a>
+    </li>
+                <li>
+      <div class="image_title">
+        <a href="#">Wedding 5</a>
+      </div>
+      <a href="#">
+     <img src="http://farm4.staticflickr.com/3667/9759830873_7474bd9fc2.jpg">
+			</a>
+    </li>
+  </ul>
+</div>
+
+<!-- 자동슬라이더 -->
+<div class="container">
+  <h2>Our  Partners/ Our Clients</h2>
+   <section class="customer-logos slider">
+      <div class="slide"><img src="https://image.freepik.com/free-vector/luxury-letter-e-logo-design_1017-8903.jpg"></div>
+      <div class="slide"><img src="http://www.webcoderskull.com/img/logo.png"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/3d-box-logo_1103-876.jpg"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/blue-tech-logo_1103-822.jpg"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/colors-curl-logo-template_23-2147536125.jpg"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/abstract-cross-logo_23-2147536124.jpg"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/football-logo-background_1195-244.jpg"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/background-of-spots-halftone_1035-3847.jpg"></div>
+      <div class="slide"><img src="https://image.freepik.com/free-vector/retro-label-on-rustic-background_82147503374.jpg"></div>
+   </section>
+   
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">zzzf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+<h3 style="color: white;">wefwefafwesf</h3>
+
+
 		<div id="text"></div>
 		<!-- 슬라이더 -->
 		<div id="slidemenu">			
 				<div class="boxOffice">					
-					<p class="showRange" style="color: white;">어제 기준 순위</p>
+					<p class="showRange" style="color: white; text-align: center;">전날 날짜 순위</p>
 					<ul class="boxOfficeList"></ul>
 				</div>		
 			<div id="overlay">
@@ -272,7 +549,7 @@ const youtube = document.querySelector(".youtube");
                     //console.log(res);
                     //화면 디자인에 따라 필요한 DOM 요소들을 생성해 준다.
                     const myLi = document.createElement('li');
-                    const output = "<div><h2 class='title1'>"+element['movieNm']+"</h2></div>";
+                    const output = "<div><h2 style='font-size: 1em;' class='title1'>"+element['movieNm']+"</h2></div>";
                     myLi.innerHTML = output;
                    // console.log(res.results[0].id);
                     //myLi.setAttribute("onClick","viewTrailer("+res.results[0].id+','+base_url+""+res.results[0].poster_path+")");
