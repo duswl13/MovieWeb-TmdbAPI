@@ -71,13 +71,13 @@ public class GongController extends HttpServlet {
 		}else if(com.equals("/mailsend.gong")) {
 			command = new MailCommand();
 			command.execute(request, response);
-			page="list.gong"; 
+			
 			
 		}
 		
 		
-		
+		if(page!=null) {
 		request.getRequestDispatcher(page).forward(request, response);
-
+		}
 	}
 }
