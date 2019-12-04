@@ -11,6 +11,8 @@
 </head>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script
+	src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+<script
 	src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <script
 	src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
@@ -82,15 +84,19 @@ a:hover {
 
 .loginCheck {
 	width: 100%;
-	padding: 5px;
+	margin-left: 70px;
+	padding: 0px;
 }
 
-.saveSess {
+/* 아이디저장, 비밀번호저장 체크박스 텍스트 */
+.saveid, .savepass {
 	width: 40%;
 	margin-right: 10px;
+	font-size: 8pt;
 }
 
 /*buttons*/
+/*
 #loginform .submit {
 	width: 100px;
 	background: #27AE60;
@@ -102,7 +108,20 @@ a:hover {
 	padding: 10px 5px;
 	margin: 10px 5px;
 }
-
+*/
+#loginform .submit {
+	background: #27AE60;
+	font-weight: bold;
+	font-size: 10pt;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 80px;
+	margin: 10px 5px;
+	text-decoration: none;
+	}
+	
 #loginform .snsgo {
 	width: 100px;
 	background: white;
@@ -127,19 +146,10 @@ a:hover {
 	margin: 10px 5px;
 }
 
-#loginform .voshu-button {
-	width: 220px;
-	background: #27AE60;
-	font-weight: bold;
-	color: white;
-	border: 0 none;
-	border-radius: 1px;
-	cursor: pointer;
-	padding: 10px 5px;
-	margin: 10px 5px;
-}
 
-.join {
+#loginform .join, #loginform .submit {
+	width: 200px;
+	height:40px;
 	background: #27AE60;
 	font-weight: bold;
 	font-size: 10pt;
@@ -147,9 +157,14 @@ a:hover {
 	border: 0 none;
 	border-radius: 1px;
 	cursor: pointer;
-	padding: 10px 80px;
+	padding: 10px 10px;
 	margin: 10px 5px;
 	text-decoration: none;
+}
+
+#loginform .join {
+	padding: 10px 10px;
+	margin: 0px 0px;
 }
 
 .join:hover {
@@ -172,7 +187,7 @@ a:hover {
 }
 /*headings*/
 .log_title1, .log_title2 {
-	font-size: 17px;
+	font-size: 20px;
 	text-transform: uppercase;
 	color: #2C3E50;
 	margin-bottom: 10px;
@@ -237,9 +252,108 @@ span {
 	font-size: 8px;
 	text-align: center;
 }
+
+.cancel {
+	color: black;
+	font-size: 12px;
+	font-weight : bold;
+	float: right;
+}
+
+hr {
+	margin: 10px 0px;
+	}
 </style>
 
+<script>
+$(document).ready(function(){
+   
+    var inputid = getCookie("inputid");
+    $("input[id='id']").val(inputid); 
+     
+    if($("input[id='id']").val() != ""){ 
+        $("#saveidcheck").attr("checked", true); // check
+    }
+     
+    $("#saveidcheck").change(function(){ 
+        if($("#saveidcheck").is(":checked")){ 
+            var inputid = $("input[id='id']").val();
+            setCookie("inputid", inputid, 7); // save cookies for 7days
+        }else{ 
+            deleteCookie("inputid"); //delete
+        }
+    });
+     
+    $("input[id='id']").keyup(function(){ 
+        if($("#saveidcheck").is(":checked")){ 
+            var inputid = $("input[id='id']").val();
+            setCookie("inputid", inputid, 7); 
+        }
+    });
 
+
+    var inputpass = getCookie("inputpass");
+    $("input[pass='pass']").val(inputpass); 
+     
+    if($("input[pass='pass']").val() != ""){ 
+        $("#savepasscheck").attr("checked", true); // check
+    }
+     
+    $("#savepasscheck").change(function(){ 
+        if($("#savepasscheck").is(":checked")){ 
+            var inputpass = $("input[pass='pass']").val();
+            setCookie("inputpass", inputpass, 7); // save cookies for 7days
+        }else{ 
+            deleteCookie("inputpass"); //delete
+        }
+    });
+     
+    $("input[pass='pass']").keyup(function(){ 
+        if($("#savepasscheck").is(":checked")){ 
+            var inputpass = $("input[pass='pass']").val();
+            setCookie("inputpass", inputpass, 7); 
+        }
+    });
+    
+    
+    //f(x) for cookies 룰루
+    function setCookie(cookieName, value, exdays){
+        var exdate = new Date();
+        exdate.setDate(exdate.getDate() + exdays);
+        var cookieValue = escape(value) + ((exdays==null)?"":";expires="+exdate.toGMTString());
+        document.cookie = cookieName + "=" + cookieValue;
+    }
+     
+    function deleteCookie(cookieName){
+        var expireDate = new Date();
+        expireDate.setDate(expireDate.getDate() - 1);
+        document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
+    }
+     
+    function getCookie(cookieName) {
+        cookieName = cookieName + '=';
+        var cookieData = document.cookie;
+        var start = cookieData.indexOf(cookieName);
+        var cookieValue = '';
+        if(start != -1){
+            start += cookieName.length;
+            var end = cookieData.indexOf(';', start);
+            if(end == -1)end = cookieData.length;
+            cookieValue = cookieData.substring(start, end);
+        }
+        return unescape(cookieValue);
+    }
+    
+});
+
+
+$(function() {
+	$(".join").click(function() {
+		location.href="../Sign/Signup.jsp";
+	})
+})
+
+</script>
 <body>
 	<br>
 	<br>
@@ -249,41 +363,42 @@ span {
 
 		<!-- fieldsets 1 -->
 		<fieldset>
+			<a href="<%=request.getContextPath()%>/index.jsp"
+					><span class=cancel>X</span></a>
 			<br>
-			<h2 class="log_title1">VOSHU 아이디로 로그인 하기</h2>
+			<h2 class="log_title1">로그인해보슈</h2>
 			<br>
 			<input type="text" name="USER_ID" id="id" class=id
-				placeholder="아이디" required />
-			<input type="password"
-				name="USER_PASS" id="pass" class=pass placeholder="비밀번호"
-				required /> <br>
+				placeholder="아이디" required autocomplete="off"/>
+			<input type="password" name="USER_PASS" id="pass" class=pass 
+				placeholder="비밀번호" required autocomplete="off"/> <br>
 			<span></span>
 
 			<div class="loginCheck">
-				<input type="checkbox" id="saveid" name="saveid" checked> 
-				<label for="saveid" class=check>아이디저장</label> 
-				<input type="checkbox" id="savepass" name="savepass"> 
-				<label for="savepass" class=check>비밀번호저장</label>
+				<input type="checkbox" id="saveidcheck" name="saveidcheck" checked> 
+				<label for="saveid" id=saveid class=saveid>아이디 기억하기</label> 
+		<!-- 	<input type="checkbox" id="savepasscheck" name="savepasscheck">
+				<label for="savepass" id=savepass class=savepass>비밀번호저장</label>  -->
 			</div>
-
+			<div class=buttons>
 			<input type="submit" name="submit" class="submit action-button" value="로그인" /> 
-			<input type="button" name="snsgo" class="snsgo action-button" value="SNS로그인" />
-
-			<div class="findwrap">
-				<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a>
+	<!--	<input type="button" name="snsgo" class="snsgo action-button" value="SNS로그인" />-->
 			</div>
+			
+	<!--	<div class="findwrap">
+				<a class=find>아이디 찾기</a> <a class=find>비밀번호 찾기</a>
+			</div>-->
 			<br>
-			<hr>
+			<hr color=#c7c7c7>
 			<br>
 			<div class=joinwrap>
 				<h3 class=jointext>아직 보슈 회원이 아니신가요?</h3>
-				<a href="<%=request.getContextPath()%>/Page/Sign/Signup.jsp"
-					class=join>회원가입</a>
+				<input type=button name=join class="join" value="회원가입" />
 			</div>
 			<br>
 		</fieldset>
   
-<!-- fieldsets 2 //자꾸 이 부분이 펼쳐져 보임 ㅠ ㅠ
+<!-- fieldsets 2 //자꾸 이 부분이 펼쳐져 보임 ㅠ ㅠ 일단...
 		<fieldset>
 			<br>
 			<h2 class="log_title2">SNS계정으로 간편 로그인하기</h2>
