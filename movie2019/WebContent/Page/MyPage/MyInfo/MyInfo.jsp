@@ -90,7 +90,8 @@ $(function(){
                           </div>
                            <hr>
                           <ul class="container details" >
-                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : <span id="USER_ID">${u.USER_ID }</span></p></li>
+                         	<input type="hidden" name="USER_ID" value="${u.USER_ID }" id="USER_ID">
+                            <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>ID : ${u.USER_ID }</p></li>
                             <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>이메일 : ${u.USER_EMAIL }</p></li>
                             <li><p><span class="glyphicon glyphicon glyphicon-phone one" style="width:50px;"></span>핸드폰 번호 : ${u.USER_PHONE }</p></li>
                             <li><p><span class="glyphicon glyphicon-time one" style="width:50px;"></span>가입일자 : ${u.USER_JOIN_DATE }</p></li>
@@ -98,7 +99,7 @@ $(function(){
                           <hr>
                           <ul class="container details" >
                              <c:set var="g" value="${genresinfo }"/>                       				
-                             <li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>관심 컨텐츠 : <span id="genres"></span></p></li>
+                             <li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>관심 장르: <span id="genres">ㅎㅎ</span></p></li>
                           </ul>
 						</div>
                         <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >

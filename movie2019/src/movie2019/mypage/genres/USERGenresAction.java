@@ -18,10 +18,7 @@ public class USERGenresAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		GenresDAO gdao = new GenresDAO();
-	//	Genres genres = new Genres();
-	//	genres.setUSER_ID(request.getParameter("USER_ID"));
 		String USER_ID=request.getParameter("USER_ID");
-	//	System.out.println("user_id>>"+genres.getUSER_ID());
 		System.out.println("USER_ID>>>"+USER_ID);
 		JsonArray json=gdao.getGenres(USER_ID);
 		response.setContentType("text/html;charset=utf-8");
