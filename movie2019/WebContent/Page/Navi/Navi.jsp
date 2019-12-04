@@ -13,8 +13,7 @@
 			var text = $('#search-form').val();
 			//$('#search-form').val().replace(/(\s*)/g, "")
 			if(text != '' && text != null)
-			location.href = '<%=request.getContextPath()%>
-	/Search.ml?open=false&key='
+			location.href = '<%=request.getContextPath()%>/Search.ml?open=false&key='
 						+ text;
 			else
 				alert('검색어를 입력해주세요.');
