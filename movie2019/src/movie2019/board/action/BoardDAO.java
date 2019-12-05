@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.oreilly.servlet.MultipartRequest;
 
 public class BoardDAO {
 	DataSource ds;
@@ -24,11 +25,11 @@ public class BoardDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ¿¬°á ½ÇÆĞ : " + ex);
+			System.out.println("DB ì—°ê²° ì‹¤íŒ¨ : " + ex);
 		}
 	}
 
-	//±Û ÀÛ¼º 
+	//ê¸€ ì‘ì„± 
 	public boolean boardInsert(BoardVO boarddata) {
 		String sql = "";
 		boolean result = false;
@@ -40,8 +41,8 @@ public class BoardDAO {
 			sql = "insert into MBOARD(" + "BOARD_NUM, BOARD_NAME, BOARD_PASS,"
 					+ "BOARD_SUBJECT, BOARD_CONTENT, BOARD_FILE," + "BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ,"
 					+ "BOARD_READCOUNT, BOARD_DATE) " + "values((select nvl(max(BOARD_NUM),0)+1 from mboard),"
-					+ "?,?,?,?," // board_content±îÁö
-					+ "?,(select nvl(max(BOARD_NUM),0)+1 from mboard)," // board_re_ref±îÁö
+					+ "?,?,?,?," // board_contentê¹Œì§€
+					+ "?,(select nvl(max(BOARD_NUM),0)+1 from mboard)," // board_re_refê¹Œì§€
 					+ "?,?,?,sysdate)";
 
 			pstmt = con.prepareStatement(sql);
@@ -51,21 +52,21 @@ public class BoardDAO {
 			pstmt.setString(4, boarddata.getBOARD_CONTENT());
 			pstmt.setString(5, boarddata.getBOARD_FILE());
 
-			// ¿ø¹®ÀÇ °æ¿ì BOARD_RE_LEV, BOARD_RE_SEQ ÇÊµå °ªÀº 0ÀÌ´Ù.
-			pstmt.setInt(6, 0); // BOARD_RE_LEV ÇÊµå
-			pstmt.setInt(7, 0); // BOARD_RE_SEQ ÇÊµå
-			pstmt.setInt(8, 0); // BOARD_READCOUNT ÇÊµå
+			// ì›ë¬¸ì˜ ê²½ìš° BOARD_RE_LEV, BOARD_RE_SEQ í•„ë“œ ê°’ì€ 0ì´ë‹¤.
+			pstmt.setInt(6, 0); // BOARD_RE_LEV í•„ë“œ
+			pstmt.setInt(7, 0); // BOARD_RE_SEQ í•„ë“œ
+			pstmt.setInt(8, 0); // BOARD_READCOUNT í•„ë“œ
 
 			int result2 = pstmt.executeUpdate();
 
-			// result2°¡ 1ÀÌ¸é ¼º°øÀÌ¶ó true¹İÈ¯,0ÀÌ¸é ½ÇÆĞ¶ó false
+			// result2ê°€ 1ì´ë©´ ì„±ê³µì´ë¼ trueë°˜í™˜,0ì´ë©´ ì‹¤íŒ¨ë¼ false
 			if (result2 == 1) {
-				System.out.println("µ¥ÀÌÅÍ »ğÀÔÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
+				System.out.println("ë°ì´í„° ì‚½ì…ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
 				result = true;
 			}
 
 		} catch (Exception e) {
-			System.out.println("boardInsert()¿¡·¯:" + e);
+			System.out.println("boardInsert()ì—ëŸ¬:" + e);
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -107,7 +108,7 @@ public class BoardDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount()¿¡·¯:" + e);
+			System.out.println("getListCount()ì—ëŸ¬:" + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -135,22 +136,22 @@ public class BoardDAO {
 		return x;
 	}
 
-	// ±Û ¸ñ·Ï º¸±â
+	// ê¸€ ëª©ë¡ ë³´ê¸°
 	public List<BoardVO> getBoardList(int page, int limit) {
-		// page:ÆäÀÌÁö
-		// limit: ÆäÀÌÁö ´ç ¸ñ·ÏÀÇ ¼ö
-		// BOARD_RE_REF desc, BOARD_RE_SEQ asc¿¡ ÀÇÇØ Á¤·ÄÇÑ °ÍÀ»
-		// Á¶°ÇÀı¿¡ ¸Â´Â rnumÀÇ ¹üÀ§¸¸Å­ °¡Á®¿À´Â Äõ¸®¹®ÀÌ´Ù.
+		// page:í˜ì´ì§€
+		// limit: í˜ì´ì§€ ë‹¹ ëª©ë¡ì˜ ìˆ˜
+		// BOARD_RE_REF desc, BOARD_RE_SEQ ascì— ì˜í•´ ì •ë ¬í•œ ê²ƒì„
+		// ì¡°ê±´ì ˆì— ë§ëŠ” rnumì˜ ë²”ìœ„ë§Œí¼ ê°€ì ¸ì˜¤ëŠ” ì¿¼ë¦¬ë¬¸ì´ë‹¤.
 
 		String board_list_sql = "select * " + "from (select rownum rnum, b.* " + " from (select * from mboard "
 				+ " order by BOARD_RE_REF desc," + " BOARD_RE_SEQ asc) b) " + "where rnum>=? and rnum<=?";
 
 		List<BoardVO> list = new ArrayList<BoardVO>();
-		// ÇÑ ÆäÀÌÁö´ç 10°³¾¿ ¸ñ·ÏÀÎ °æ¿ì 1ÆäÀÌÁö,2ÆäÀÌÁö, 3ÆäÀÌÁö ...
+		// í•œ í˜ì´ì§€ë‹¹ 10ê°œì”© ëª©ë¡ì¸ ê²½ìš° 1í˜ì´ì§€,2í˜ì´ì§€, 3í˜ì´ì§€ ...
 		int startrow = (page - 1) * limit + 1;
-		// ÀĞ±â ½ÃÀÛÇÒ row ¹øÈ£(1, 11, 21 ...)
+		// ì½ê¸° ì‹œì‘í•  row ë²ˆí˜¸(1, 11, 21 ...)
 		int endrow = startrow + limit - 1;
-		// ÀĞÀ» ¸¶Áö¸· row ¹øÈ£(10, 20, 30...)
+		// ì½ì„ ë§ˆì§€ë§‰ row ë²ˆí˜¸(10, 20, 30...)
 
 		try {
 			con = ds.getConnection();
@@ -159,7 +160,7 @@ public class BoardDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			// DB¿¡»ç °¡Á®¿Â VO°´Ã¼¿¡ ´ã´Â´Ù.
+			// DBì—ì‚¬ ê°€ì ¸ì˜¨ VOê°ì²´ì— ë‹´ëŠ”ë‹¤.
 			while (rs.next()) {
 				BoardVO board = new BoardVO();
 				board.setBOARD_NUM(rs.getInt("BOARD_NUM"));
@@ -173,12 +174,12 @@ public class BoardDAO {
 				// board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
 				board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
 				board.setBOARD_DATE(rs.getDate("BOARD_DATE"));
-				list.add(board); // °ªÀ» ´ãÀº °´Ã¼¸¦ ¸®½ºÆ®¿¡ ÀúÀåÇÑ´Ù.
+				list.add(board); // ê°’ì„ ë‹´ì€ ê°ì²´ë¥¼ ë¦¬ìŠ¤íŠ¸ì— ì €ì¥í•œë‹¤.
 			}
-			return list; // °ªÀ» ´ãÀº °´Ã¼¸¦ ÀúÀåÇÑ ¸®½ºÆ®¸¦ È£ÃâÇÑ °÷À¸·Î °¡Á®°£´Ù.
+			return list; // ê°’ì„ ë‹´ì€ ê°ì²´ë¥¼ ì €ì¥í•œ ë¦¬ìŠ¤íŠ¸ë¥¼ í˜¸ì¶œí•œ ê³³ìœ¼ë¡œ ê°€ì ¸ê°„ë‹¤.
 
 		} catch (Exception e) {
-			System.out.println("getBoardList()¿¡·¯:" + e);
+			System.out.println("getBoardList()ì—ëŸ¬:" + e);
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -206,7 +207,7 @@ public class BoardDAO {
 		return null;
 	}
 
-	// Á¶È¸¼ö ¾÷µ¥ÀÌÆ® : ±Û¹øÈ£¿¡ ÇØ´çÇÏ´Â Á¶È¸¼ö¸¦ 1 Áõ°¡½ÃÅ²´Ù.
+	// ì¡°íšŒìˆ˜ ì—…ë°ì´íŠ¸ : ê¸€ë²ˆí˜¸ì— í•´ë‹¹í•˜ëŠ” ì¡°íšŒìˆ˜ë¥¼ 1 ì¦ê°€ì‹œí‚¨ë‹¤.
 	public void setReadCountUpdate(int num) {
 		String sql = "update MBOARD set " + "BOARD_READCOUNT = (BOARD_READCOUNT)+1 " + "where BOARD_NUM = ?";
 
@@ -217,7 +218,7 @@ public class BoardDAO {
 			pstmt.executeUpdate();
 
 		} catch (Exception e) {
-			System.out.println("setReadCountUpdate()¿¡·¯:" + e);
+			System.out.println("setReadCountUpdate()ì—ëŸ¬:" + e);
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -255,16 +256,16 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				board = new BoardVO();
-				// ÇÊ¿äÇÑ °Íµé¸¸ °¡Á®¿Í¼­ setter¿¡ ´ãÀ½
+				// í•„ìš”í•œ ê²ƒë“¤ë§Œ ê°€ì ¸ì™€ì„œ setterì— ë‹´ìŒ
 				board.setBOARD_NUM(rs.getInt("BOARD_NUM"));
 				board.setBOARD_NAME(rs.getString("BOARD_NAME"));
 				board.setBOARD_PASS(rs.getString("BOARD_PASS"));
 				board.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
 				board.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));
 				board.setBOARD_FILE(rs.getString("BOARD_FILE"));
-				board.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF")); //´äº¯ ´Ş ¶§ ÇÊ¿ä
-				board.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV")); //´äº¯ ´Ş ¶§ ÇÊ¿ä
-				board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ")); //´äº¯ ´Ş ¶§ ÇÊ¿ä
+				board.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF")); //ë‹µë³€ ë‹¬ ë•Œ í•„ìš”
+				board.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV")); //ë‹µë³€ ë‹¬ ë•Œ í•„ìš”
+				board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ")); //ë‹µë³€ ë‹¬ ë•Œ í•„ìš”
 				//board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
 				//board.setBOARD_DATE(rs.getDate("BOARD_DATE"));
 			}
@@ -297,44 +298,44 @@ public class BoardDAO {
 		return null;
 	}// getDetail
 	
-	//±Û ´äº¯
+	//ê¸€ ë‹µë³€
 	   public int boardReply(BoardVO board) {
-		      //board Å×ÀÌºíÀÇ board_num ÇÊµåÀÇ ÃÖ´ë°ªÀ» ±¸ÇØ¿Í¼­ ±ÛÀ» µî·ÏÇÒ ‹š
-		      //±Û ¹øÈ£¸¦ ¼øÂ÷ÀûÀ¸·Î ÁöÁ¤ÇÏ±â À§ÇÔÀÔ´Ï´Ù.
-		      //¶ÇÇÑ DB¿¡ ÀúÀåÇÑ ÈÄ ´Ù½Ã º¸¿©ÁÖ±â À§ÇØ board_num ÇÊµåÀÇ °ªÀ» ¸®ÅÏÇÕ´Ï´Ù.
+		      //board í…Œì´ë¸”ì˜ board_num í•„ë“œì˜ ìµœëŒ€ê°’ì„ êµ¬í•´ì™€ì„œ ê¸€ì„ ë“±ë¡í•  ë–„
+		      //ê¸€ ë²ˆí˜¸ë¥¼ ìˆœì°¨ì ìœ¼ë¡œ ì§€ì •í•˜ê¸° ìœ„í•¨ì…ë‹ˆë‹¤.
+		      //ë˜í•œ DBì— ì €ì¥í•œ í›„ ë‹¤ì‹œ ë³´ì—¬ì£¼ê¸° ìœ„í•´ board_num í•„ë“œì˜ ê°’ì„ ë¦¬í„´í•©ë‹ˆë‹¤.
 		      String board_max_sql="select max(board_num) from mboard";
 		    
 		      int num=0;
 		      /*
-		       * ´äº¯À» ÇÒ ¿ø¹® ±Û ±×·ì ¹øÈ£ÀÔ´Ï´Ù.
-		       * ´äº¯À» ´Ş°Ô µÇ¸é ´äº¯ ±ÛÀº ÀÌ ¹øÈ£¿Í °°Àº °ü·Ã ±Û ¹øÈ£¸¦ °®°Ô Ã³¸®µÇ¸é¼­ °°Àº ±×·ì¿¡ ¼ÓÇÏ°Ô µË´Ï´Ù.
-		       * ±Û ¸ñ·Ï¿¡¼­ º¸¿©ÁÙ ¶§ ÇÏ³ªÀÇ ±×·ìÀ¸·Î ¹­¿©¼­ Ãâ·ÂµË´Ï´Ù.
+		       * ë‹µë³€ì„ í•  ì›ë¬¸ ê¸€ ê·¸ë£¹ ë²ˆí˜¸ì…ë‹ˆë‹¤.
+		       * ë‹µë³€ì„ ë‹¬ê²Œ ë˜ë©´ ë‹µë³€ ê¸€ì€ ì´ ë²ˆí˜¸ì™€ ê°™ì€ ê´€ë ¨ ê¸€ ë²ˆí˜¸ë¥¼ ê°–ê²Œ ì²˜ë¦¬ë˜ë©´ì„œ ê°™ì€ ê·¸ë£¹ì— ì†í•˜ê²Œ ë©ë‹ˆë‹¤.
+		       * ê¸€ ëª©ë¡ì—ì„œ ë³´ì—¬ì¤„ ë•Œ í•˜ë‚˜ì˜ ê·¸ë£¹ìœ¼ë¡œ ë¬¶ì—¬ì„œ ì¶œë ¥ë©ë‹ˆë‹¤.
 		       */
 		      int re_ref=board.getBOARD_RE_REF();
 		      System.out.println("re_Ref="+re_ref);
 		      /*
-		       * ´ä±ÛÀÇ ±íÀÌ¸¦ ÀÇ¹ÌÇÕ´Ï´Ù.
-		       * ¿ø¹®¿¡ ´ëÇÑ ´ä±ÛÀÌ Ãâ·ÂµÉ ¶§ ÇÑ¹ø µé¿©¾²±â Ã³¸®°¡ µÇ°í ´ä±Û¿¡ ´ëÇÑ ´ä±ÛÀº µé¿©¾²±â°¡ µÎ¹ø Ã³¸®µÇ°Ô ÇÕ´Ï´Ù.
-		       * ¿ù¹®ÀÎ °æ¿ì ÀÌ °ªÀÌ 0ÀÌ°í ¿ø¹®ÀÇ ´ä±ÛÀº 1, ´ä±ÛÀÇ ´ä±ÛÀº 2°¡ µË´Ï´Ù.
+		       * ë‹µê¸€ì˜ ê¹Šì´ë¥¼ ì˜ë¯¸í•©ë‹ˆë‹¤.
+		       * ì›ë¬¸ì— ëŒ€í•œ ë‹µê¸€ì´ ì¶œë ¥ë  ë•Œ í•œë²ˆ ë“¤ì—¬ì“°ê¸° ì²˜ë¦¬ê°€ ë˜ê³  ë‹µê¸€ì— ëŒ€í•œ ë‹µê¸€ì€ ë“¤ì—¬ì“°ê¸°ê°€ ë‘ë²ˆ ì²˜ë¦¬ë˜ê²Œ í•©ë‹ˆë‹¤.
+		       * ì›”ë¬¸ì¸ ê²½ìš° ì´ ê°’ì´ 0ì´ê³  ì›ë¬¸ì˜ ë‹µê¸€ì€ 1, ë‹µê¸€ì˜ ë‹µê¸€ì€ 2ê°€ ë©ë‹ˆë‹¤.
 		       */
 		      int re_lev=board.getBOARD_RE_LEV();
 		      
-		      //°ªÀº °ü·Ã ±Û Áß¿¡¼­ ÇØ´ç ±ÛÀÌ Ãâ·ÂµÇ´Â ¼ø¼­ÀÔ´Ï´Ù.
+		      //ê°’ì€ ê´€ë ¨ ê¸€ ì¤‘ì—ì„œ í•´ë‹¹ ê¸€ì´ ì¶œë ¥ë˜ëŠ” ìˆœì„œì…ë‹ˆë‹¤.
 		      int re_seq=board.getBOARD_RE_SEQ();
 		      
 		      try {
 		         con=ds.getConnection();
-		         //Æ®·£Àè¼ÇÀ» ÀÌ¿ëÇÏ±Í À§ÇØ¼­ setAutoCommitÀ» false·Î ¼³Á¤ÇÕ´Ï´Ù.
+		         //íŠ¸ëœì­ì…˜ì„ ì´ìš©í•˜ê·€ ìœ„í•´ì„œ setAutoCommitì„ falseë¡œ ì„¤ì •í•©ë‹ˆë‹¤.
 		         con.setAutoCommit(false);
 		         
 		         pstmt=con.prepareStatement(board_max_sql);
 		         rs=pstmt.executeQuery();
 		         if(rs.next())
-		            num=rs.getInt(1)+1;   //´äº¯ »ğÀÔÇÒ ±Û¹øÈ£
+		            num=rs.getInt(1)+1;   //ë‹µë³€ ì‚½ì…í•  ê¸€ë²ˆí˜¸
 		         
-		         //BOARD_RE_REF, BOARD_RE_SEQ °ªÀ» È®ÀÎÇÏ¿© ¿ø¹® ±Û¿¡ ´Ù¸¥ ´ä±ÛÀÌ ÀÖÀ¸¸é
-		         //´Ù¸¥ ´ä±ÛµéÀÇ BOARD_RE_SEQ°ªÀ» 1¾¿ Áõ°¡½ÃÅµ´Ï´Ù.
-		         //ÇöÀç ±ÛÀ» ´Ù¸¥ ´ä±Ûº¸´Ù ¾Õ¿¡ Ãâ·ÂµÇ°Ô ÇÏ±â À§ÇØ¼­ÀÔ´Ï´Ù.
+		         //BOARD_RE_REF, BOARD_RE_SEQ ê°’ì„ í™•ì¸í•˜ì—¬ ì›ë¬¸ ê¸€ì— ë‹¤ë¥¸ ë‹µê¸€ì´ ìˆìœ¼ë©´
+		         //ë‹¤ë¥¸ ë‹µê¸€ë“¤ì˜ BOARD_RE_SEQê°’ì„ 1ì”© ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
+		         //í˜„ì¬ ê¸€ì„ ë‹¤ë¥¸ ë‹µê¸€ë³´ë‹¤ ì•ì— ì¶œë ¥ë˜ê²Œ í•˜ê¸° ìœ„í•´ì„œì…ë‹ˆë‹¤.
 		         
 		         String update_sql="update mboard" 
 		               + "         set BOARD_RE_SEQ = BOARD_RE_SEQ + 1" 
@@ -345,7 +346,7 @@ public class BoardDAO {
 		         pstmt.setInt(1, re_ref);
 		         pstmt.setInt(2, re_seq);
 		         int result1=pstmt.executeUpdate();
-		         //µî·ÏÇÒ ´äº¯ ±ÛÀÇ BOARD_RE_LEV, BOARD_RE_SEQ °ªÀ» ¿ø¹® ±Ûº¸´Ù 1¾¿ Áõ°¡½ÃÅµ´Ï´Ù.
+		         //ë“±ë¡í•  ë‹µë³€ ê¸€ì˜ BOARD_RE_LEV, BOARD_RE_SEQ ê°’ì„ ì›ë¬¸ ê¸€ë³´ë‹¤ 1ì”© ì¦ê°€ì‹œí‚µë‹ˆë‹¤.
 		         re_seq=re_seq+1;
 		         re_lev=re_lev+1;
 		         
@@ -368,11 +369,11 @@ public class BoardDAO {
 		         pstmt.setInt(7, re_ref);
 		         pstmt.setInt(8, re_lev);
 		         pstmt.setInt(9, re_seq);   
-		         pstmt.setInt(10, 0);      //BOARD_READCOUNT(Á¶È¸¼ö)´Â 0
+		         pstmt.setInt(10, 0);      //BOARD_READCOUNT(ì¡°íšŒìˆ˜)ëŠ” 0
 		         int result2=pstmt.executeUpdate();
 		         if(result1>=0&& result2==1) {
 		            con.commit();
-		            con.setAutoCommit(true);   //´Ù½Ã true·Î ¼³Á¤
+		            con.setAutoCommit(true);   //ë‹¤ì‹œ trueë¡œ ì„¤ì •
 		         }else {
 		            con.rollback();
 		            System.out.println("rollback()");
@@ -380,7 +381,7 @@ public class BoardDAO {
 		         
 		      }
 		      catch(SQLException ex) {
-		         System.out.println("boardReply()¿¡·¯:"+ex);
+		         System.out.println("boardReply()ì—ëŸ¬:"+ex);
 		         if(con!=null)
 		            try {
 		               con.rollback();
@@ -414,28 +415,26 @@ public class BoardDAO {
 		      return num;
 		   }//boardReply end
 	   
-	   //±Û ¼öÁ¤ - ÆÄÀÏ¾÷·Îµåµµ °°ÀÌ ÀÖÀ½
+	   //ê¸€ ìˆ˜ì • - íŒŒì¼ ì²¨ë¶€ ê²½ìš°
 	   public boolean boardModify(BoardVO modifyboard) {
 		   String sql = "update mboard "
-				       +"set BOARD_SUBJECT= ?, BOARD_CONTENT=?, "
-				       +"BOARD_FILE=? where BOARD_NUM=? ";
-
-			try {
-				con = ds.getConnection();
-    	        pstmt = con.prepareStatement(sql);
-			    pstmt.setString(1, modifyboard.getBOARD_SUBJECT());
-			    pstmt.setString(2, modifyboard.getBOARD_CONTENT());
-			    pstmt.setString(3, modifyboard.getBOARD_FILE());
-			    pstmt.setInt(4, modifyboard.getBOARD_NUM());
-			    
-			   
-				int result = pstmt.executeUpdate();
-				if (result == 1) {
-					System.out.println("¼öÁ¤ ¼º°ø");
-					return true;
-				}
+				      + "set BOARD_SUBJECT = ?, "
+				      + "BOARD_CONTENT=?, BOARD_FILE=? "
+				      + "where BOARD_NUM=? ";
+		   try {
+			   con = ds.getConnection();
+			   pstmt = con.prepareStatement(sql);
+			   pstmt.setString(1, modifyboard.getBOARD_SUBJECT());
+			   pstmt.setString(2, modifyboard.getBOARD_CONTENT());
+			   pstmt.setString(3, modifyboard.getBOARD_FILE());
+			   pstmt.setInt(4, modifyboard.getBOARD_NUM());
+			   int result =pstmt.executeUpdate();
+			   if(result==1) {
+				   System.out.println("ì—…ë°ì´íŠ¸ ì„±ê³µ");
+				   return true;
+			   }
 			} catch (Exception e) {
-				System.out.println("boardModify()¿¡·¯:" + e);
+				System.out.println("boardModify()ì—ëŸ¬:" + e);
 				e.printStackTrace();
 			} finally {
 				if (rs != null) {
@@ -463,7 +462,9 @@ public class BoardDAO {
 			return false;
 	   }//boardModify end
 
-	//±Û¾´ÀÌÀÎÁö È®ÀÎ - ºñ¹Ğ¹øÈ£·Î È®ÀÎÇÑ´Ù.
+	   
+	
+	//ê¸€ì“´ì´ì¸ì§€ í™•ì¸ - ë¹„ë°€ë²ˆí˜¸ë¡œ í™•ì¸í•œë‹¤.
 	public boolean isBoardWriter(int num, String pass) {
 
 		String board_sql = "select * from mboard "
@@ -479,7 +480,7 @@ public class BoardDAO {
 			   }
 			}
 		}catch (SQLException se) {
-			System.out.println("isBoardWriter()¿¡·¯"+se);
+			System.out.println("isBoardWriter()ì—ëŸ¬"+se);
 			se.printStackTrace();
 		}finally {
 			if (rs != null) {
@@ -507,7 +508,7 @@ public class BoardDAO {
 		return false;
 	}//isBoardWriter end
 	
-	//±Û »èÁ¦ (¾Æ·¡ ´Ş¸° ´äº¯±Ûµµ °°ÀÌ »èÁ¦)
+	//ê¸€ ì‚­ì œ (ì•„ë˜ ë‹¬ë¦° ë‹µë³€ê¸€ë„ ê°™ì´ ì‚­ì œ)
 	public boolean boardDelete(int num) {
 		String select_sql 
 		      = "select BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ "
@@ -527,7 +528,7 @@ public class BoardDAO {
 		      + "                          (SELECT max(board_re_seq)+1 "
 		      + "                            FROM  MBOARD "
 		      + "                            WHERE BOARD_RE_REF = ?)))";
-		//String board_delete_sql = "delete from board where board_num =?" ÇÏ¸é ¼±ÅÃÇÑ ±Û¸¸ »èÁ¦
+		//String board_delete_sql = "delete from board where board_num =?" í•˜ë©´ ì„ íƒí•œ ê¸€ë§Œ ì‚­ì œ
 		
 		try {
 			con = ds.getConnection();
@@ -550,14 +551,14 @@ public class BoardDAO {
 				pstmt.setInt(6, BOARD_RE_SEQ);
 				
 				pstmt.setInt(7, BOARD_RE_REF);
-				//Äõ¸® ½ÇÇà ÈÄ »èÁ¦µÈ ·Î¿ì(·¹ÄÚµå) °¹¼ö°¡ ¹İÈ¯µÈ´Ù.
+				//ì¿¼ë¦¬ ì‹¤í–‰ í›„ ì‚­ì œëœ ë¡œìš°(ë ˆì½”ë“œ) ê°¯ìˆ˜ê°€ ë°˜í™˜ëœë‹¤.
 				int result = pstmt.executeUpdate();
-				System.out.println(result+"°³ »èÁ¦µÇ¾ú½À´Ï´Ù.");
+				System.out.println(result+"ê°œ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.");
 				if(result >= 1)
 				   return true;
 			}
 		}catch(Exception e) {
-			System.out.println("boardDelete()¿¡·¯:"+e);
+			System.out.println("boardDelete()ì—ëŸ¬:"+e);
 			e.printStackTrace();
 		}finally {
 			if (rs != null) {

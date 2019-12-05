@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.JsonArray;
 
 
-public class CommentList implements Action {
+public class CommentList implements movie2019.board.action.Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, 
+	public movie2019.board.action.ActionForward execute(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 	
 		movie2019.board.comment.CommentDAO dao

@@ -3,46 +3,47 @@ package movie2019.board.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardReplyAction implements Action {
 
-	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward = new ActionForward();
-	      BoardDAO boarddao = new BoardDAO();
-	      BoardVO boarddata = new BoardVO();
-	      int result = 0;
-	      
-	      
-	      //ÆÄ¶ó¹ÌÅÍ·Î ³Ñ¾î¿Â °ªµéÀ» boarddata°´Ã¼¿¡ ÀúÀå
-	      boarddata.setBOARD_NAME(request.getParameter("BOARD_NAME"));
-	      boarddata.setBOARD_PASS(request.getParameter("BOARD_PASS"));
-	      boarddata.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
-	      boarddata.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT"));
-	      boarddata.setBOARD_RE_REF(Integer.parseInt(request.getParameter("BOARD_RE_REF")));
-	      boarddata.setBOARD_RE_LEV(Integer.parseInt(request.getParameter("BOARD_RE_LEV")));
-	      boarddata.setBOARD_RE_SEQ(Integer.parseInt(request.getParameter("BOARD_RE_SEQ")));
-	      
-	      //´äº¯À» DB¿¡ ÀúÀåÇÏ±â À§ÇØ boarddata°´Ã¼¸¦ ÆÄ¶ó¹ÌÅÍ·Î 
-	      //DAO¿¡ ÀÖ´Â boardReply¸Ş¼Òµå È£Ãâ
-	      result = boarddao.boardReply(boarddata);
-	      
-	      //´äº¯ ÀúÀå ½ÇÆĞ
-	      if (result == 0) {
-	         System.out.println("´äº¯ ½ÇÆĞ");
-	         forward.setRedirect(false);
-	         request.setAttribute("message", "´äº¯ ÀÛ¼º ½ÇÆĞ");
-	         forward.setPath("error/error.jsp");
-	         return forward;
-	      }
-	      //´äº¯ ÀúÀåÀÌ Á¦´ë·Î µÈ °æ¿ì
-	      System.out.println("´äº¯ ¿Ï·á");
-	      forward.setRedirect(true);
-	      //´äº¯ ±Û ³»¿ë È®ÀÎÀ» À§ÇØ ±Û ³»¿ëº¸±â ÆäÀÌÁö¸¦ °æ·Î·Î ¼³Á¤ 
-	      forward.setPath("BoardDetailAction.bd?num="+result);
+   @Override
+   public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
+         throws Exception {
+      
+      request.setCharacterEncoding("UTF-8");
+      
+      ActionForward forward = new ActionForward();
+      BoardDAO boarddao = new BoardDAO();
+      BoardVO boarddata = new BoardVO();
+      int result = 0;
+      
+      
+      //íŒŒë¼ë¯¸í„°ë¡œ ë„˜ì–´ì˜¨ ê°’ë“¤ì„ boarddataê°ì²´ì— ì €ì¥
+      boarddata.setBOARD_NAME(request.getParameter("BOARD_NAME"));
+      boarddata.setBOARD_PASS(request.getParameter("BOARD_PASS"));
+      boarddata.setBOARD_SUBJECT(request.getParameter("BOARD_SUBJECT"));
+      boarddata.setBOARD_CONTENT(request.getParameter("BOARD_CONTENT"));
+      boarddata.setBOARD_RE_REF(Integer.parseInt(request.getParameter("BOARD_RE_REF")));
+      boarddata.setBOARD_RE_LEV(Integer.parseInt(request.getParameter("BOARD_RE_LEV")));
+      boarddata.setBOARD_RE_SEQ(Integer.parseInt(request.getParameter("BOARD_RE_SEQ")));
+      
+      //ë‹µë³€ì„ DBì— ì €ì¥í•˜ê¸° ìœ„í•´ boarddataê°ì²´ë¥¼ íŒŒë¼ë¯¸í„°ë¡œ 
+      //DAOì— ìˆëŠ” boardReplyë©”ì†Œë“œ í˜¸ì¶œ
+      result = boarddao.boardReply(boarddata);
+      
+      //ë‹µë³€ ì €ì¥ ì‹¤íŒ¨
+      if (result == 0) {
+         System.out.println("ë‹µë³€ ì‹¤íŒ¨");
+         forward.setRedirect(false);
+         request.setAttribute("message", "ë‹µë³€ ì‘ì„± ì‹¤íŒ¨");
+         forward.setPath("error/error.jsp");
+         return forward;
+      }
+      //ë‹µë³€ ì €ì¥ì´ ì œëŒ€ë¡œ ëœ ê²½ìš°
+      System.out.println("ë‹µë³€ ì™„ë£Œ");
+      forward.setRedirect(true);
+      //ë‹µë³€ ê¸€ ë‚´ìš© í™•ì¸ì„ ìœ„í•´ ê¸€ ë‚´ìš©ë³´ê¸° í˜ì´ì§€ë¥¼ ê²½ë¡œë¡œ ì„¤ì • 
+      forward.setPath("BoardDetailAction.bd?num="+result);
 
-	      return forward;
-	   }
+      return forward;
+   }
 }

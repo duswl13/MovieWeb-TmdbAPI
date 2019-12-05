@@ -7,27 +7,24 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardAddAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, 
-		HttpServletResponse response) throws Exception {
-
+	   HttpServletResponse response) throws Exception {
+		
 		BoardDAO boarddao = new BoardDAO();
 		BoardVO boarddata = new BoardVO();
 		ActionForward forward = new ActionForward();
 		
 		String realFolder="";
 		
-		//WebContent�Ʒ��� ���� ����
+		//WebContent아래에 폴더 생성
 		String saveFolder="/boardupload1";
 		
-		int fileSize=10*1024*1024; //���ε��� ������ �ִ� ������. 10MB
+		int fileSize=10*1024*1024; //업로드할 파일의 최대 사이즈. 10MB
 		
-		//���� ���� ��θ� �����Ѵ�.
+		//실제 저장 경로를 지정한다.
 	    ServletContext sc = request.getServletContext();
 	    realFolder = sc.getRealPath(saveFolder);
 	    
@@ -40,7 +37,7 @@ public class BoardAddAction implements Action {
 	    			          realFolder, fileSize,
 	    			          "utf-8", new DefaultFileRenamePolicy());
 	    	
-	    	//BoardBean ��ü�� �� ��� ������ �Է� ���� �������� �����Ѵ�.
+	    	//BoardBean 객체에 글 등록 폼에서 입력 받은 정보들을 저장한다.
 	    	boarddata.setBOARD_NAME(
 	    			multi.getParameter("BOARD_NAME"));
 	    	boarddata.setBOARD_PASS(
@@ -50,26 +47,26 @@ public class BoardAddAction implements Action {
 	    	boarddata.setBOARD_CONTENT(
 	    			replaceParameter(multi.getParameter("BOARD_CONTENT")));
 	    	
-	    	//���ε��� ���ϸ��� ���ε��� ������ ��ü ��ο��� ���� �̸��� �����Ѵ�.
+	    	//업로드의 파일명은 업로드한 파일의 전체 경로에서 파일 이름만 저장한다.
 	    	boarddata.setBOARD_FILE(
 	    			multi.getFilesystemName("BOARD_FILE"));
 	    	
-	    	//�� ��� ������ �Է��� ������ ����Ǿ� �ִ� boarddata ��ü�� �����Ѵ�.
+	    	//글 등록 폼에서 입력한 정보가 저장되어 있는 boarddata 객체를 전달한다.
 	    	result = boarddao.boardInsert(boarddata);
 	    	
-	    	//�� ��Ͽ� ������ ��� false�� ��ȯ�Ѵ�.
+	    	//글 등록에 실패할 경우 false를 반환한다.
 	    	if(result==false) {
-	    		System.out.println("�Խ��� ��� ����");
+	    		System.out.println("게시판 등록 실패");
 	    		forward.setRedirect(false);
-	            request.setAttribute("message", "�Խ��� ��� �����Դϴ�.");
+	            request.setAttribute("message", "게시판 등록 실패입니다.");
 	            forward.setPath("error/error.jsp");
 	    		return forward;
 	    	}
-	    	System.out.println("�Խ��� ��� �Ϸ�");
-	    	//�� ����� �Ϸ�Ǹ� �� ����� �ܼ��� �����ֱ⸸ �� ���̹Ƿ�
-	    	//Redirect���θ� true�� �����Ѵ�.
+	    	System.out.println("게시판 등록 완료");
+	    	//글 등록이 완료되면 글 목록을 단순히 보여주기만 할 것이므로
+	    	//Redirect여부를 true로 설정한다.
 	    	forward.setRedirect(true);
-	    	//�̵��� ��θ� �����Ѵ�.
+	    	//이동할 경로를 지정한다.
 	    	forward.setPath("BoardList.bd");
 	    	return forward;
 	    }catch(Exception ex) {

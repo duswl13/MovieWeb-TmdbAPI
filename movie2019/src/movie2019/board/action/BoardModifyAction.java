@@ -9,25 +9,26 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardModifyAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 ActionForward forward = new ActionForward();
+	public ActionForward execute(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("UTF-8");
+	      
+	      ActionForward forward = new ActionForward();
 	      BoardDAO boarddao = new BoardDAO();
 	      BoardVO boarddata = new BoardVO();
 	      
 	      String realFolder="";
 			
-			//WebContent¾Æ·¡¿¡ Æú´õ »ı¼º
-			String saveFolder="boardupload";
+			//WebContentì•„ë˜ì— í´ë” ìƒì„±
+			String saveFolder="/boardupload1";
 			
-			int fileSize=10*1024*1024; //¾÷·ÎµåÇÒ ÆÄÀÏÀÇ ÃÖ´ë »çÀÌÁî. 10MB
+			int fileSize=10*1024*1024; //ì—…ë¡œë“œí•  íŒŒì¼ì˜ ìµœëŒ€ ì‚¬ì´ì¦ˆ. 10MB
 			
-			//½ÇÁ¦ ÀúÀå °æ·Î¸¦ ÁöÁ¤ÇÑ´Ù.
+			//ì‹¤ì œ ì €ì¥ ê²½ë¡œë¥¼ ì§€ì •í•œë‹¤.
 		    ServletContext sc = request.getServletContext();
 		    realFolder = sc.getRealPath(saveFolder);
 		    
@@ -40,27 +41,27 @@ public class BoardModifyAction implements Action {
 		    			          realFolder, fileSize,
 		    			          "utf-8", new DefaultFileRenamePolicy());
 	      
-	      //Àü´Ş¹ŞÀº ÆÄ¶ó¹ÌÅÍ num º¯¼ö¿¡ ÀúÀåÇÑ´Ù.
+	      //ì „ë‹¬ë°›ì€ íŒŒë¼ë¯¸í„° num ë³€ìˆ˜ì— ì €ì¥í•œë‹¤.
 	      int num = Integer.parseInt(multi.getParameter("BOARD_NUM"));
 	      String pass = multi.getParameter("BOARD_PASS");
-	      //±Û¾´ÀÌÀÎÁö È®ÀÎÇÏ±â À§ÇØ ÀúÀåµÈ ºñ¹Ğ¹øÈ£¿Í ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£¸¦ ºñ±³ÇÑ´Ù.
+	      //ê¸€ì“´ì´ì¸ì§€ í™•ì¸í•˜ê¸° ìœ„í•´ ì €ì¥ëœ ë¹„ë°€ë²ˆí˜¸ì™€ ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¹„êµí•œë‹¤.
 	      boolean usercheck = 
 	    		  boarddao.isBoardWriter(num,pass);
 	      
-	      System.out.println("ºñ¹Ğ¹øÈ£Ã¼Å©"+usercheck);
-	      //ºñ¹Ğ¹øÈ£°¡ ´Ù¸¥ °æ¿ì
+	      System.out.println("ë¹„ë°€ë²ˆí˜¸ì²´í¬"+usercheck);
+	      //ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¥¸ ê²½ìš°
 	      if(usercheck==false) {
 	    	  response.setContentType("text/html;charset=utf-8");
 	    	  PrintWriter out = response.getWriter();
 	    	  out.println("<script>");
-	    	  out.println("alert('ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.');");
+	    	  out.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.');");
 	    	  out.println("history.back();");
 	    	  out.println("</script>");
 	    	  out.close();
 	    	  return null;
 	      }
-         //ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì
-	      //¼öÁ¤ ³»¿ëÀ» ¼³Á¤ÇÑ´Ù.
+          //ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ëŠ” ê²½ìš°
+	      //ìˆ˜ì • ë‚´ìš©ì„ ì„¤ì •í•œë‹¤.
 	      boarddata.setBOARD_NUM(num);
 	      boarddata.setBOARD_SUBJECT(
 	    		  request.getParameter("BOARD_SUBJECT"));
@@ -69,30 +70,30 @@ public class BoardModifyAction implements Action {
 	     
 	      String check = multi.getParameter("check");
 	      System.out.println("check="+check);
-	      if(check!=null) {//±âÁ¸ÆÄÀÏ ±×´ë·Î »ç¿ëÇÏ´Â °æ¿ì
+	      if(check!=null) {//ê¸°ì¡´íŒŒì¼ ê·¸ëŒ€ë¡œ ì‚¬ìš©í•˜ëŠ” ê²½ìš°
 	    	  boarddata.setBOARD_FILE(check);
 	      }else {
-	    	  //¾÷·ÎµåµÈ ÆÄÀÏÀÇ ½Ã½ºÅÛ »ó¿¡ ¾÷·ÎµåµÈ ½ÇÁ¦ ÆÄÀÏ¸íÀ» ¾ò¾î¿Â´Ù.
+	    	  //ì—…ë¡œë“œëœ íŒŒì¼ì˜ ì‹œìŠ¤í…œ ìƒì— ì—…ë¡œë“œëœ ì‹¤ì œ íŒŒì¼ëª…ì„ ì–»ì–´ì˜¨ë‹¤.
 	    	  String filename = multi.getFilesystemName("BOARD_FILE");
 	    	  boarddata.setBOARD_FILE(filename);
 	      }
 	   
-	      //DAO¿¡¼­ ¼öÁ¤ ¸Ş¼­µå È£ÃâÇÏ¿© ¼öÁ¤ÇÑ´Ù.
+	      //DAOì—ì„œ ìˆ˜ì • ë©”ì„œë“œ í˜¸ì¶œí•˜ì—¬ ìˆ˜ì •í•œë‹¤.
 	      result = boarddao.boardModify(boarddata);
-	      //¼öÁ¤¿¡ ½ÇÆĞÇÑ °æ¿ì
+	      //ìˆ˜ì •ì— ì‹¤íŒ¨í•œ ê²½ìš°
 	      if(result==false) {
-	    	  System.out.println("°Ô½ÃÆÇ ¼öÁ¤ ½ÇÆĞ");
+	    	  System.out.println("ê²Œì‹œíŒ ìˆ˜ì • ì‹¤íŒ¨");
 	    	  forward.setRedirect(false);
-	    	  request.setAttribute("message","°Ô½ÃÆÇ ¼öÁ¤ ½ÇÆĞÀÔ´Ï´Ù.");
+	    	  request.setAttribute("message","ê²Œì‹œíŒ ìˆ˜ì • ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 	    	  forward.setPath("error/error.jsp");
 	    	  return forward;
 	      }
-	      //¼öÁ¤ ¼º°øÀÇ °æ¿ì
-	      System.out.println("°Ô½ÃÆÇ ¼öÁ¤ ¿Ï·á");
+	      //ìˆ˜ì • ì„±ê³µì˜ ê²½ìš°
+	      System.out.println("ê²Œì‹œíŒ ìˆ˜ì • ì™„ë£Œ");
 
 	      forward.setRedirect(true);
-	      //¼öÁ¤ÇÑ ±Û ³»¿ëÀ» º¸¿©ÁÖ±â À§ÇØ ±Û ³»¿ë º¸±â º¸±âÆäÀÌÁö·Î 
-	      //ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÑ´Ù.
+	      //ìˆ˜ì •í•œ ê¸€ ë‚´ìš©ì„ ë³´ì—¬ì£¼ê¸° ìœ„í•´ ê¸€ ë‚´ìš© ë³´ê¸° ë³´ê¸°í˜ì´ì§€ë¡œ 
+	      //ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•œë‹¤.
 	      forward.setPath("BoardDetailAction.bd?num="+boarddata.getBOARD_NUM());
 	      return forward;
 	

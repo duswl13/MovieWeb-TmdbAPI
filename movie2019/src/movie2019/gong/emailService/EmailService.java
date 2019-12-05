@@ -47,12 +47,7 @@ public class EmailService {
 		mimeMessage.setSubject(subject);
 		mimeMessage.setText(body);
 		Transport.send(mimeMessage);
-		
-		
-				
-				
-		
-		
+
 	}
 
 }

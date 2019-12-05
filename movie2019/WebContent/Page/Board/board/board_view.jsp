@@ -7,6 +7,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
 <style>
 * {color:white; background:#141414;}
   th, .center {text-align:center;}
@@ -22,6 +23,13 @@
   background:orange;
   color:white;
   border-radius:30%;}
+  
+ #mail_send {
+    
+ }
+ #comment {
+ 
+ }
 </style>
 </head>
 <body>
@@ -80,7 +88,7 @@ if(request.getParameter("open") != null){
         <div>첨부파일</div>
      </td>
      <td>
-       <img src="image/jisung.jpg" alt="첨부파일">
+       <img src="png/file.png" alt="첨부파일">
     <a href="BoardFileDown.bd?filename=${boarddata.BOARD_FILE }">
         ${boarddata.BOARD_FILE}</a></td> 
  </tr>
@@ -107,6 +115,11 @@ if(request.getParameter("open") != null){
    <a href="./BoardList.bd">
     <button type="button" class="btn btn-primary">목록</button>
    </a>
+   <!-- 신고 메일 보내기 -->
+   <a href="#">
+    <button type="button" id="mail_send" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">보내기</button>
+   </a>
+    
    </td>
  </tr>
  </table> 
@@ -136,8 +149,7 @@ if(request.getParameter("open") != null){
          </div>
       </div>
    </div>
-   </div>
-   </div>
+    </div>
    <div id="comment">
       <button class="btn btn-info float-left">총 50자까지 작성 가능</button>
       <button id="write" class="btn btn-info float-right">등록</button>
@@ -153,6 +165,7 @@ if(request.getParameter("open") != null){
        </table>
         <div id="message"></div>
         </div>
+       </div>
 </body>
 <script>
 if(<%=open%>)
@@ -161,24 +174,10 @@ if(<%=open%>)
 
 </script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-$(document).ready(function(){
-	  $("form").submit(function(){
-		
-	  if($.trim($("textarea").val())==""){
-		  alert("내용을 입력하세요");
-		  $("textarea").focus();
-		  return false;
-	  }
-	 });
-	  
-	  $("#upfile").change(function(){
-		 $("#filevalue").val('');
-		 console.log($(this).val());
-		 var inputfile=$(this).val().split('\\');
-		 $("#filevalue").text(inputfile[inputfile.length-1]);
-	  });
-	  
-	}); //ready() end
+
+<script type="text/javascript">
+function send_mail(){
+    window.open("Page/Board/board/Smail.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+}
 </script>
 </html>

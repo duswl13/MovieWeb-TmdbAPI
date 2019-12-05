@@ -3,37 +3,37 @@ package movie2019.board.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardReplyView implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, 
+	    HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("UTF-8");
 		ActionForward forward = new ActionForward();
 		BoardDAO boarddao = new BoardDAO();
 		BoardVO boarddata = new BoardVO();
 		
-		//ÆÄ¶ó¹ÌÅÍ·Î Àü´Ş¹ŞÀº ´äº¯ÇÒ ±Û ¹øÈ£¸¦ numº¯¼ö¿¡ ÀúÀåÇÑ´Ù.
+		//íŒŒë¼ë¯¸í„°ë¡œ ì „ë‹¬ë°›ì€ ë‹µë³€í•  ê¸€ ë²ˆí˜¸ë¥¼ numë³€ìˆ˜ì— ì €ì¥í•œë‹¤.
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		//±Û ¹øÈ£ num¿¡ ÇØ´çÇÏ´Â ³»¿ëÀ» °¡Á®¿Í¼­ boarddata °´Ã¼¿¡ ÀúÀåÇÑ´Ù.
+		//ê¸€ ë²ˆí˜¸ numì— í•´ë‹¹í•˜ëŠ” ë‚´ìš©ì„ ê°€ì ¸ì™€ì„œ boarddata ê°ì²´ì— ì €ì¥í•œë‹¤.
 		boarddata = boarddao.getDetail(num);
 		
-		//±Û ³»¿ëÀÌ ¾ø´Â °æ¿ì
+		//ê¸€ ë‚´ìš©ì´ ì—†ëŠ” ê²½ìš°
 		if(boarddata==null) {
-			System.out.println("´äÀå ÆäÀÌÁö ÀÌµ¿ ½ÇÆĞ");
+			System.out.println("ë‹µì¥ í˜ì´ì§€ ì´ë™ ì‹¤íŒ¨");
 			forward.setRedirect(false);
-			request.setAttribute("message","´äÀå ÆäÀÌÁö »ó¼¼º¸±â ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message","ë‹µì¥ í˜ì´ì§€ ìƒì„¸ë³´ê¸° ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
-		System.out.println("´äÀå ÆäÀÌÁö ÀÌµ¿ ¿Ï·á");
-		//´äº¯ Æû ÆäÀÌÁö·Î ÀÌµ¿ÇÒ ¶§ ¿øº» ±Û ³»¿ëÀ» º¸¿©ÁÖ±â À§ÇØ
-		//boarddata°´Ã¼¸¦ Request°´Ã¼¿¡ ÀúÀåÇÑ´Ù.
+		System.out.println("ë‹µì¥ í˜ì´ì§€ ì´ë™ ì™„ë£Œ");
+		//ë‹µë³€ í¼ í˜ì´ì§€ë¡œ ì´ë™í•  ë•Œ ì›ë³¸ ê¸€ ë‚´ìš©ì„ ë³´ì—¬ì£¼ê¸° ìœ„í•´
+		//boarddataê°ì²´ë¥¼ Requestê°ì²´ì— ì €ì¥í•œë‹¤.
 		request.setAttribute("boarddata", boarddata);
 		forward.setRedirect(false);
-		//±Û ´äº¯ ÆäÀÌÁö °æ·Î ÁöÁ¤ÇÑ´Ù.
+		//ê¸€ ë‹µë³€ í˜ì´ì§€ ê²½ë¡œ ì§€ì •í•œë‹¤.
 		forward.setPath("Page/Board/board/board_reply.jsp");
 		return forward;
 		

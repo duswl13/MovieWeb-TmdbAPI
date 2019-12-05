@@ -35,6 +35,18 @@ body {
 	font-size: 11px;
 }
 	
+
+#MAIL_CHECK {
+    padding: 15px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 49%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+}
 /*form styles*/
 #msform {
 	width: 400px;
@@ -235,7 +247,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     <h3 class="fs-subtitle">step 2</h3>
     <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" required/>
     <div class="mail-form">
-    <button type="button" class="btn btn-primary btn-lg btn-block" onClick="send_mail()">인증</button>
+    <button type="button" id="MAIL_CHECK" class="btn btn-primary btn-lg btn-block" onClick="send_mail()">인증</button>
     <input type="text" name="MAIL_CHECK" id="MAIL_CHECK" required />
     </div>
     <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" required/>
@@ -306,8 +318,8 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 //유효성 검사
 $(document).ready(function(){
 
-var checkid;
-var checkpass;
+var checkid = false;
+var checkpass = false;
 
  $("#USER_ID").keyup(function(){
 	 $("#message").empty();
@@ -319,35 +331,38 @@ var checkpass;
 		   checkid = false;
 		   return;
 	   }   
-  	   
+	   
+ }); // keyup end
+ 
+ $("#USER_ID").keyup(function(){
 	   $.ajax({
 		   type: "post",
 			  url: "idcheck.su", 
-			  data: {"id": id},  
+			  data: {"USER_ID": $('#USER_ID').val()},  
 			  success: function(resp){
 				 if(resp==-1){
 					 $("#message").css('color','green')
-					              .html("사용 가능한 아이디입니다.");
+					              .html("사용 가능한 아이디");
 				    checkid = true;
 				 }else{
 					 $("#message").css('color','blue')
-					              .html("사용 중인 아이디입니다.");
+					              .html("사용 중인 아이디");
 				    checkid = false;
 				 }
 		     } //success end
 	   }); // ajax end
-    }); // keyup end
-    
+ }); // keyup end
    
     $("#USER_PASS").keyup(function(){
    	 $("#pass_message").empty();
    	   var pass = $("#USER_PASS").val();
   
-   	   var pattern = /^\w{5,12}$/;
+   	   var pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
    	   if(!pattern.test(pass)){
    		   $("#pass_message").css('color','red')
    		               .html("영문자,숫자,특수문자 포함 8자 이상")
    		   checkpass = false;
+   		   
    		   return;
    	   }
    	   
@@ -451,4 +466,10 @@ $(".previous").click(function(){
 });
 
 </script>
+<script type="text/javascript">
+function send_mail(){
+    window.open("Page/Board/Sign/Smail.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+}
+</script>
+
 </html>

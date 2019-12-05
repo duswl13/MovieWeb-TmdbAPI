@@ -3,48 +3,50 @@ package movie2019.board.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardDetailAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, 
-		HttpServletResponse response) throws Exception {
-		
-		ActionForward forward = new ActionForward();
+			HttpServletResponse response) throws Exception {
+
 		BoardDAO boarddao = new BoardDAO();
 		BoardVO boarddata = new BoardVO();
 		
-		//±Û¹øÈ£ ÆÄ¶ó¹ÌÅÍ °ªÀ» numº¯¼ö¿¡ ÀúÀåÇÑ´Ù.
+		//ê¸€ë²ˆí˜¸ íŒŒë¼ë¯¸í„° ê°’ì„ numë³€ìˆ˜ì— ì €ì¥í•œë‹¤.
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		//³»¿ëÀ» È®ÀÎÇÒ ±ÛÀÇ Á¶È¸¼ö¸¦ Áõ°¡½ÃÅ²´Ù.
+		//ë‚´ìš©ì„ í™•ì¸í•  ê¸€ì˜ ì¡°íšŒìˆ˜ë¥¼ ì¦ê°€ì‹œí‚¨ë‹¤.
 		boarddao.setReadCountUpdate(num);
 		
-		//±ÛÀÇ ³»¿ëÀ» DAO¿¡¼­ ÀĞÀº ÈÄ ¾òÀº °á°ú¸¦ boarddata °´Ã¼¿¡ ÀúÀåÇÑ´Ù.
+		//ê¸€ì˜ ë‚´ìš©ì„ DAOì—ì„œ ì½ì€ í›„ ì–»ì€ ê²°ê³¼ë¥¼ boarddata ê°ì²´ì— ì €ì¥í•œë‹¤.
 		boarddata = boarddao.getDetail(num);
 		
+		ActionForward forward = new ActionForward();
+		
 		//boarddata = null;
-		//DAO¿¡¼­ ±ÛÀÇ ³»¿ëÀ» ÀĞÁö ¸øÇßÀ» °æ¿ì nullÀ» ¹İÈ¯ÇÑ´Ù.
+		//DAOì—ì„œ ê¸€ì˜ ë‚´ìš©ì„ ì½ì§€ ëª»í–ˆì„ ê²½ìš° nullì„ ë°˜í™˜í•œë‹¤.
 		if(boarddata==null) {
-			System.out.println("»ó¼¼º¸±â ½ÇÆĞ");
-		 //error/error.jspÀÌµ¿ÇÏ±â
+			System.out.println("ìƒì„¸ë³´ê¸° ì‹¤íŒ¨");
+		 //error/error.jspì´ë™í•˜ê¸°
 			forward.setRedirect(false);
-			request.setAttribute("message","°Ô½ÃÆÇ »ó¼¼º¸±â ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message","ê²Œì‹œíŒ ìƒì„¸ë³´ê¸° ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
-		System.out.println("»ó¼¼º¸±â ¼º°ø");
+		System.out.println("ìƒì„¸ë³´ê¸° ì„±ê³µ");
 		
-		//boarddata °´Ã¼¸¦ Request°´Ã¼¿¡ ÀúÀåÇÑ´Ù.
+		movie2019.board.comment.CommentDAO cdao
+		  = new movie2019.board.comment.CommentDAO();
+		int count = cdao.getListCount(num);
+		request.setAttribute("count", count);
+		
+		//boarddata ê°ì²´ë¥¼ Requestê°ì²´ì— ì €ì¥í•œë‹¤.
 		request.setAttribute("boarddata", boarddata);
         forward.setRedirect(false);
         
-        //±Û ³»¿ë º¸±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÑ´Ù.
-        forward.setPath("/Page/Board/board/board_view.jsp");
+        //ê¸€ ë‚´ìš© ë³´ê¸° í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•œë‹¤.
+        forward.setPath("Page/Board/board/board_view.jsp");
         return forward;
 	}
-
 
 }

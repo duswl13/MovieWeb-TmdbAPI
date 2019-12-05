@@ -18,15 +18,6 @@
  #id {text-align:center;}
  h1 {text-align:center; color:#27AE60;}
 </style>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
- $(function(){
-	 $("button").click(function(){
-		 location.href="BoardWrite.bd";
-	 })
- })
-</script>
-<script src="list.js"></script>
 <title>영화 토론 게시판</title>
 </head>
 <body>
@@ -180,4 +171,12 @@ if(<%=open%>)
 
 </script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+ $(function(){
+	 $("button").click(function(){
+		 location.href="BoardWrite.bd";
+	 })
+ })
+</script>
+<script src="list.js"></script>
 </html>
