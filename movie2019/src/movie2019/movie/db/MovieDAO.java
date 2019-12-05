@@ -477,6 +477,7 @@ public class MovieDAO {
 				
 				for(int j = 0; j < list.size(); j++)
 					if(list.get(j).getId() == movieId) {
+						System.out.println(list.get(j).getTitle()+"별점 : "+star);
 						list.get(j).setStar(star);
 						break;
 					}

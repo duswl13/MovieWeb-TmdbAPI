@@ -75,7 +75,8 @@ boolean open = Boolean.parseBoolean(request.getParameter("open"));
 		
 		<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	
-		<div class="movieList"></div>
+		<div class="movieList">
+		</div>
 
 		<div class="row">
 		<div class="col-xs-6 col-centered text-center">
@@ -99,21 +100,42 @@ if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 		
 
-	var page = 0;
+	var page = 1;
+	var more = ${more};
+	var listsize = 0; //필터링으로 인한 영화 빈거 채우려고
 	
+	var list = new Array();
+
+	<c:forEach items="${list}" var="item2">
+	var i = 0;
+
+	<c:if test="${empty item2.star}">
+	i = "${item2.star}";
+	alert(i);
 	
-	searchList();
+	</c:if>
 	
 	
 
+	list.push({
+		poster_path : "${item2.poster_path}",
+		id : "${item2.id}",
+		original_title : "${item2.original_title}",
+		title : "${item2.title}",
+		Star : i
+	});
+	</c:forEach>
+	
+	printMore(more);				
+	printMovie(list);
 	
 	
 	
 	function searchList(){
-		page++;
-	var link = 'https://api.themoviedb.org/3/search/movie?api_key=<%=apikey%>&language=ko-KO&query=<%=request.getParameter("key")%>&page='+page+'&include_adult=false&region=KR';
-
+		
+	page++;
 	
+	var link = "<%=request.getContextPath()%>/Search.ml?key=${key}&re=true&page="+page;
 	
 	console.log('이동할 페이지 :'+ page+","+link);
 
@@ -126,7 +148,7 @@ if(<%=open%>)
 					var list = data.results;
 					allpages = data.total_pages;
 					console.log('list.length:'+list.length);
-					printMore(list.length);				
+					printMore(data.more);				
 					printMovie(list);
 					
 
@@ -146,11 +168,11 @@ if(<%=open%>)
 	}
 	
 	
-	var listsize = 0; //필터링으로 인한 영화 빈거 채우려고
-	
+
 	//api 결과가 20개가 아닌 경우 결과의 끝이라고 보고 더보기 숨김
 	function printMore(size){
-		if(size < 20)
+		
+		if(!size)
 			$('.more').css('visibility','hidden');
 		else
 			$('.more').css('visibility','visible');
@@ -172,40 +194,29 @@ if(<%=open%>)
 			
 			for(var j=0; j < 4; j++){
 				
-				if(check < list.length){
-				if(list[check].poster_path == null || list[check].overview == null || list[check].genre_ids == null || list[check].overview == ""
-						|| list[check].genre_ids == "" || list[check].overview.includes('섹스')){
-					j--;
-					check++;
-					console.log('이상한 거니까 넘김'+check);
-					
-					continue ;
-				}
+			if(check < list.length){
 			
-				
 			
-			list[check].overview = list[check].overview.substring(0,100)+'...';
 			text += '<div class="col-xs-3">';
 		
 			text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 			
-			list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-			list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+			list[check].title = list[check].title.replace(/\"/gi, "");
+			list[check].title = list[check].title.replace(/\'/gi, "");
 			
 			
 			
-			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'">';
-			text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'\'">';
+			text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 			
 			text += ' <div>';
+			
+			for(var k =0; k < list[check].star; k++)
 			text += '<span class="fa fa-star"></span>';
-			text += '<span class="fa fa-star"></span>';
-			text += '<span class="fa fa-star"></span>';
-			text += '<span class="fa fa-star"></span>';
-			text += '<span class="fa fa-star"></span>';
+		
 			text += ' </div>';
 			text +='</div>\n';
-			text += '<h5>' + list[check].original_title + '</h5>';
+			text += '<h5>' + list[check].title + '</h5>';
 		
 			text += '</div>';
 			listsize ++;
@@ -222,7 +233,7 @@ if(<%=open%>)
 			//listsize 가 4로 나누어 떨어지지 않았을 경우 빈 영화아이템이 있다는 뜻임
 			//4 - (listsize % 4) 로 몇개의 공간이 비어있는지 체크
 			var add = 4 - (listsize % 4);
-			//alert(add+"개의 공간이 비어있습니다.");
+		
 
 			
 			
@@ -230,43 +241,26 @@ if(<%=open%>)
 			for (var j = 0; j < add; j++) {
 
 				if (check < list.length) {
-					if (list[check].poster_path == null
-							|| list[check].overview == null
-							|| list[check].genre_ids == null
-							|| list[check].overview == ""
-							|| list[check].genre_ids == ""
-							|| list[check].overview.includes('섹스')) {
-						j--;
-						check++;
-						console.log('이상한 거니까 넘김' + check);
-
-						continue;
-					}
-
-					list[check].overview = list[check].overview.substring(0,
-							50)
-							+ '...';
+					
 					text += '<div class="col-xs-3">';
 					
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 					
-					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					list[check].title = list[check].title.replace(/\"/gi, "");
+					list[check].title = list[check].title.replace(/\'/gi, "");
 					
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'">';
-					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'\'">';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 		
 					text += ' <div>';
+					for(var k =0; k < list[check].star; k++)
 					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
+					
 					text += ' </div>';
 					text +='</div>\n';
-					text += '<h5>' + list[check].original_title + '</h5>';
+					text += '<h5>' + list[check].title + '</h5>';
 				
 					text += '</div>';
 					listsize ++;
@@ -275,9 +269,12 @@ if(<%=open%>)
 				
 			}
 			
-		
-			//빈 공간만큼 추가하기
-			$('.movieList > .row:last').html($('.movieList > .row:last').html()+text);
+			if(page == 1)
+				$('.movieList').html(text);
+				else
+					$('.movieList > .row:last').html($('.movieList > .row:last').html()+text);
+				
+			
 			
 			//채운만큼 리스트삭제하기
 			 list.splice(0, check);
