@@ -52,19 +52,14 @@ public class MovieListController extends HttpServlet {
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI = " + RequestURI);
 
-		// getContextPath() : ÄÁÅØ½ºÆ® °æ·Î°¡ ¹ÝÈ¯µË´Ï´Ù.
-		// contextPath´Â "/JspProject" °¡ ¹ÝÈ¯ÇÕ´Ï´Ù.
+		
 		String contextPath = request.getContextPath();
 		System.out.println("contextPath = " + contextPath);
-
-		// RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ °ªÀÇ ÀÎµ¦½º À§Ä¡ÀÇ ¹®ÀÚºÎÅÍ
-		// ¸¶Áö¸· À§Ä¡ ¹®ÀÚ±îÁö ÃßÃâÇÕ´Ï´Ù.
-		// command´Â 'login.net'À» ¹ÝÈ¯ÇÕ´Ï´Ù.
 
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command = " + command);
 
-		// ÃÊ±âÈ­
+		// ï¿½Ê±ï¿½È­
 		ActionForward forward = null;
 		Action action = null;
 
@@ -82,7 +77,7 @@ public class MovieListController extends HttpServlet {
 			}
 
 		} else if (command.equals("/MovieList.ml")) {
-			action = new MovieListAction(); // parameter ÀÖÀ½
+			action = new MovieListAction(); // parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
 				forward = action.execute(request, response, null);
@@ -92,10 +87,10 @@ public class MovieListController extends HttpServlet {
 			}
 
 		} else if (command.equals("/Search.ml")) {
-			action = new SearchMovieAction(); // parameter ÀÖÀ½
+			action = new SearchMovieAction(); // parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
-				forward = action.execute(request, response, null);
+				forward = action.execute(request, response,sc);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -112,11 +107,11 @@ public class MovieListController extends HttpServlet {
 			}
 
 		} else if (command.equals("/PersonDetail.ml")) {
-			forward = new ActionForward();// parameter ÀÖÀ½
+			forward = new ActionForward();// parameter ï¿½ï¿½ï¿½ï¿½
 			forward.setRedirect(false);
 			forward.setPath("Page/MovieDetail/PersonDetail.jsp");
 		} else if (command.equals("/InsertFaceRating.ml")) {
-			action = new InsertFaceRatingAction();// parameter ÀÖÀ½
+			action = new InsertFaceRatingAction();// parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
 				forward = action.execute(request, response, null);
@@ -125,7 +120,7 @@ public class MovieListController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/InsertStarRating.ml")) {
-			action = new InsertStarRatingAction();// parameter ÀÖÀ½
+			action = new InsertStarRatingAction();// parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
 				forward = action.execute(request, response, null);
@@ -134,7 +129,7 @@ public class MovieListController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/UpdateStarRating.ml")) {
-			action = new UpdateStarRatingAction();// parameter ÀÖÀ½
+			action = new UpdateStarRatingAction();// parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
 				forward = action.execute(request, response, null);
@@ -143,7 +138,7 @@ public class MovieListController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else if (command.equals("/UpdateFaceRating.ml")) {
-			action = new UpdateFaceRatingAction();// parameter ÀÖÀ½
+			action = new UpdateFaceRatingAction();// parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
 				forward = action.execute(request, response, null);
@@ -152,7 +147,7 @@ public class MovieListController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if (command.equals("/InsertHidden.ml")) {
-			action = new InsertHiddenAction();// parameter ÀÖÀ½
+			action = new InsertHiddenAction();// parameter ï¿½ï¿½ï¿½ï¿½
 
 			try {
 				forward = action.execute(request, response, null);
@@ -164,10 +159,10 @@ public class MovieListController extends HttpServlet {
 
 		if (forward != null) {
 			if (forward.isRedirect()) {
-				System.out.println("sendRedirect ÀÌµ¿ :" + forward.getPath());
+				System.out.println("sendRedirect ï¿½Ìµï¿½ :" + forward.getPath());
 				response.sendRedirect(forward.getPath());
-			} else { // Æ÷¿öµùµË´Ï´Ù.
-				System.out.println("dispather ÀÌµ¿ :" + forward.getPath());
+			} else { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë´Ï´ï¿½.
+				System.out.println("dispather ï¿½Ìµï¿½ :" + forward.getPath());
 				RequestDispatcher dispather = request.getRequestDispatcher(forward.getPath());
 				dispather.forward(request, response);
 

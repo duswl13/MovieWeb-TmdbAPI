@@ -123,4 +123,23 @@ public class MovieAPIDAO {
 		}
 	}
 
+	public MoviePageAPIVO getSearchMovie(String apikey, String key, int page) {
+		String json = null;
+
+		try {
+			json = readUrl("https://api.themoviedb.org/3/search/movie?"
+					+ "api_key="+apikey+"&language=ko-KO&query="
+					+ key+"&page="+page+"&include_adult=false&region=KR");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Gson gson = new Gson();
+		MoviePageAPIVO vo = gson.fromJson(json, MoviePageAPIVO.class);
+		vo.setResults(filter(vo.getResults()));
+
+		return vo;
+	}
+
 }

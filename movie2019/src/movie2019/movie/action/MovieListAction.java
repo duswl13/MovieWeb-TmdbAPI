@@ -12,7 +12,7 @@ public class MovieListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, ServletContext sc) throws Exception {
 		
 		
-		//hidden ½Ì±ÛÅæ
+		//hidden ï¿½Ì±ï¿½ï¿½ï¿½
 		hiddenSingleton hidden = hiddenSingleton.getInstance();
 		
 	

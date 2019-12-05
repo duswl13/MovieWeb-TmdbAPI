@@ -16,8 +16,8 @@ public class MovieItemAPIVO {
 	public int getStar() {
 		return Star;
 	}
-	public void setStar(int star) {
-		Star = star;
+	public void setStar(int Star) {
+		this.Star = Star;
 	}
 	public String getPoster_path() {
 		return poster_path;
