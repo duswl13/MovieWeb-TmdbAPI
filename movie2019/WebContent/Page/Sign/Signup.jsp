@@ -25,6 +25,16 @@ html {
 body {
 	font-family: montserrat, arial, verdana;
 }
+
+#message, #pass_message {
+    padding: 7px;
+	margin: 5px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: montserrat;
+	font-size: 11px;
+}
+	
 /*form styles*/
 #msform {
 	width: 400px;
@@ -215,15 +225,19 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     <h2 class="fs-title">기본 정보 입력</h2>
     <h3 class="fs-subtitle">step 1</h3>
     <input type="text" name="USER_ID" id="USER_ID" placeholder="아이디" required/>
-    <div></div>
+    <span id="message"></span>
     <input type="password" name="USER_PASS" id="USER_PASS" placeholder="비밀번호" required/>
-   
+    <span id="pass_message"></span>
     <input type="button" name="next" class="next action-button" value="다음" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">상세 정보 입력</h2>
     <h3 class="fs-subtitle">step 2</h3>
     <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" required/>
+    <div class="mail-form">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onClick="send_mail()">인증</button>
+    <input type="text" name="MAIL_CHECK" id="MAIL_CHECK" required />
+    </div>
     <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" required/>
     <!-- <input type="text" name="gplus" id="USER_ID" placeholder="Google Plus" /> -->
     <input type="button" name="previous" class="previous action-button" value="이전" />
@@ -287,7 +301,76 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
 </script>
+<script src="checkcheck.js"></script>
 <script>
+//유효성 검사
+$(document).ready(function(){
+
+var checkid;
+var checkpass;
+
+ $("#USER_ID").keyup(function(){
+	 $("#message").empty();
+	   var id = $("#USER_ID").val();
+	   var pattern = /^\w{5,12}$/;
+	   if(!pattern.test(id)){
+		   $("#message").css('color','red')
+		                .html("영문자, 숫자 포함 5~12자 가능")
+		   checkid = false;
+		   return;
+	   }   
+  	   
+	   $.ajax({
+		   type: "post",
+			  url: "idcheck.su", 
+			  data: {"id": id},  
+			  success: function(resp){
+				 if(resp==-1){
+					 $("#message").css('color','green')
+					              .html("사용 가능한 아이디입니다.");
+				    checkid = true;
+				 }else{
+					 $("#message").css('color','blue')
+					              .html("사용 중인 아이디입니다.");
+				    checkid = false;
+				 }
+		     } //success end
+	   }); // ajax end
+    }); // keyup end
+    
+   
+    $("#USER_PASS").keyup(function(){
+   	 $("#pass_message").empty();
+   	   var pass = $("#USER_PASS").val();
+  
+   	   var pattern = /^\w{5,12}$/;
+   	   if(!pattern.test(pass)){
+   		   $("#pass_message").css('color','red')
+   		               .html("영문자,숫자,특수문자 포함 8자 이상")
+   		   checkpass = false;
+   		   return;
+   	   }
+   	   
+    });
+    
+    $("#USER_EMAIL").keyup(function(){
+   	 $("#email_message").empty();
+   	   var email = $("#USER_EMAIL").val();
+   	   var pattern = /^\w+@\w+[.]\w{3}$/; 
+   	   
+   	   if(!pattern.test(email)){
+   		   $("#email_message").css('color','red')
+   		                      .html("이메일 형식이 맞지 않습니다.");
+   		   return false;
+   	   }else{
+   		   $("#email_message").css('color','green')
+   		                      .html("이메일 형식에 맞습니다.");
+   		   return true;
+   	   }
+    }); // keyup end
+ 
+}); //ready end
+
 //jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
@@ -349,7 +432,8 @@ $(".previous").click(function(){
 			//as the opacity of current_fs reduces to 0 - stored in "now"
 			//1. scale previous_fs from 80% to 100%
 			scale = 0.8 + (1 - now) * 0.2;
-			//2. take current_fs to the right(50%) - from 0%
+
+		//2. take current_fs to the right(50%) - from 0%
 			left = ((1-now) * 50)+"%";
 			//3. increase opacity of previous_fs to 1 as it moves in
 			opacity = 1 - now;
@@ -366,77 +450,5 @@ $(".previous").click(function(){
 	});
 });
 
-
-$(document).ready(function(){
- $("input:eq(0)").on('keyup',function(){
-	 $("#message").empty();
-	   var id = $('input:eq(0)').val();
-	   // \w는 [A-Za-z0-9]의 의미
-	   var pattern = /^\w{5,12}$/;
-	   if(!pattern.test(id)){
-		   $("#message").css('color','red')
-		               .html("영문자 숫자 _로 5~12자 가능합니다.")
-		   checkid=false; 
-		   return;
-	   }
-	   
-	   $.ajax({
-		   type: "post",
-			  url: "idcheck.net", 
-			  data: {"id": id},  
-			  success: function(resp){
-				 if(resp==-1){
-					 $("#message").css('color','green')
-					              .html("사용 가능한 아이디입니다.");
-				    checkid=true;
-				 }else{
-					 $("#message").css('color','blue')
-					              .html("사용 중인 아이디입니다.");
-				    checkid=false;
-				 }
-		     } //success end
-	   }); // ajax end
-    }); // keyup end
-    
-    var checkid=false;
-	 var checkmail=false;
-	 $('form').submit(function(){
-		 if(!checkid){
-			 alert("사용 가능한  id로 입력하세요.");
-			 $("input:eq(0)").val('').focus();
-			 $("#message").text('');
-			 return false;
-		 }
-		 
-		 if(!$.isNumeric($("input[name='age']").val())){
-			 alert("나이는 숫자를 입력하세요.");
-			 $("input[name='age']").val('');
-			 $("input[name='age']").focus();
-			 return false;
-		 }
-		 
-		 if(!checkemail){
-			 alert("email 형식을 확인하세요.");
-			 $("input:eq(6)").focus();
-			 return false;
-		 }
-	 }); //submit end
-	 
-	 
-    $("input:eq(6)").on('keyup',function(){
-   	 $("#email_message").empty();
-   	   var email = $('input:eq(6)').val();
-   	   //정규식: \w:대소문자,뭐어쩌구 그런거 +:플러스 [.]:점
-   	   var pattern = /^\w+@\w+[.]\w{3}$/; //@랑 .들어가게 꼭 적어야함!
-   	   
-   	   if(!pattern.test(email)){
-   		   $("#email_message").css('color','red')
-   		                      .html("이메일 형식이 맞지 않습니다.");
-   	   }else{
-   		   $("#email_message").css('color','green')
-   		                      .html("이메일 형식에 맞습니다.");
-   	   }
-    }); // keyup end
-   }); //ready end
 </script>
 </html>

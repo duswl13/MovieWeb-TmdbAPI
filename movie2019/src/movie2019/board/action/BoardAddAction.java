@@ -22,12 +22,12 @@ public class BoardAddAction implements Action {
 		
 		String realFolder="";
 		
-		//WebContent¾Æ·¡¿¡ Æú´õ »ý¼º
-		String saveFolder="/boardupload";
+		//WebContentï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		String saveFolder="/boardupload1";
 		
-		int fileSize=10*1024*1024; //¾÷·ÎµåÇÒ ÆÄÀÏÀÇ ÃÖ´ë »çÀÌÁî. 10MB
+		int fileSize=10*1024*1024; //ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. 10MB
 		
-		//½ÇÁ¦ ÀúÀå °æ·Î¸¦ ÁöÁ¤ÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	    ServletContext sc = request.getServletContext();
 	    realFolder = sc.getRealPath(saveFolder);
 	    
@@ -40,7 +40,7 @@ public class BoardAddAction implements Action {
 	    			          realFolder, fileSize,
 	    			          "utf-8", new DefaultFileRenamePolicy());
 	    	
-	    	//BoardBean °´Ã¼¿¡ ±Û µî·Ï Æû¿¡¼­ ÀÔ·Â ¹ÞÀº Á¤º¸µéÀ» ÀúÀåÇÑ´Ù.
+	    	//BoardBean ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	    	boarddata.setBOARD_NAME(
 	    			multi.getParameter("BOARD_NAME"));
 	    	boarddata.setBOARD_PASS(
@@ -50,26 +50,26 @@ public class BoardAddAction implements Action {
 	    	boarddata.setBOARD_CONTENT(
 	    			replaceParameter(multi.getParameter("BOARD_CONTENT")));
 	    	
-	    	//¾÷·ÎµåÀÇ ÆÄÀÏ¸íÀº ¾÷·ÎµåÇÑ ÆÄÀÏÀÇ ÀüÃ¼ °æ·Î¿¡¼­ ÆÄÀÏ ÀÌ¸§¸¸ ÀúÀåÇÑ´Ù.
+	    	//ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	    	boarddata.setBOARD_FILE(
 	    			multi.getFilesystemName("BOARD_FILE"));
 	    	
-	    	//±Û µî·Ï Æû¿¡¼­ ÀÔ·ÂÇÑ Á¤º¸°¡ ÀúÀåµÇ¾î ÀÖ´Â boarddata °´Ã¼¸¦ Àü´ÞÇÑ´Ù.
+	    	//ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ ï¿½Ö´ï¿½ boarddata ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	    	result = boarddao.boardInsert(boarddata);
 	    	
-	    	//±Û µî·Ï¿¡ ½ÇÆÐÇÒ °æ¿ì false¸¦ ¹ÝÈ¯ÇÑ´Ù.
+	    	//ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ falseï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ñ´ï¿½.
 	    	if(result==false) {
-	    		System.out.println("°Ô½ÃÆÇ µî·Ï ½ÇÆÐ");
+	    		System.out.println("ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 	    		forward.setRedirect(false);
-	            request.setAttribute("message", "°Ô½ÃÆÇ µî·Ï ½ÇÆÐÀÔ´Ï´Ù.");
+	            request.setAttribute("message", "ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.");
 	            forward.setPath("error/error.jsp");
 	    		return forward;
 	    	}
-	    	System.out.println("°Ô½ÃÆÇ µî·Ï ¿Ï·á");
-	    	//±Û µî·ÏÀÌ ¿Ï·áµÇ¸é ±Û ¸ñ·ÏÀ» ´Ü¼øÈ÷ º¸¿©ÁÖ±â¸¸ ÇÒ °ÍÀÌ¹Ç·Î
-	    	//Redirect¿©ºÎ¸¦ true·Î ¼³Á¤ÇÑ´Ù.
+	    	System.out.println("ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
+	    	//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±â¸¸ ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½
+	    	//Redirectï¿½ï¿½ï¿½Î¸ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	    	forward.setRedirect(true);
-	    	//ÀÌµ¿ÇÒ °æ·Î¸¦ ÁöÁ¤ÇÑ´Ù.
+	    	//ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 	    	forward.setPath("BoardList.bd");
 	    	return forward;
 	    }catch(Exception ex) {
