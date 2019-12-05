@@ -968,6 +968,8 @@ document.getElementById("main").style.marginLeft = "250px";
 				tag += '<p>' + list[check].name + '</p>';
 				tag += '</div>';
 				check++;
+				
+				console.log("TEst>>>>"+list[check].profile_path);
 			
 		}
 

@@ -17,7 +17,6 @@ public class USERGenresAction implements Action {
 
 		GenresDAO gdao = new GenresDAO();
 		String USER_ID=request.getParameter("USER_ID");
-		System.out.println("USER_ID>>>"+USER_ID);
 		JsonArray json=gdao.getGenres(USER_ID);
 		response.setContentType("text/html;charset=utf-8");
 		response.setHeader("cache-control","no-cache,no-store");
