@@ -167,11 +167,12 @@ $(function(){
 				</div>
 			</div>
 		</div>
+		</c:if>
+	
 	<!--게시글이 없는 경우 -->
 	<c:if test="${listcount==0 }">
 		<font size=5>등록된 글이 없습니다.</font>
 	</c:if><br>
-	</c:if>
 	</div>
 </div>
 </body>

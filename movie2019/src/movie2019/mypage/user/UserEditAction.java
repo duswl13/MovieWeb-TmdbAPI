@@ -14,19 +14,25 @@ public class UserEditAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward = new ActionForward();
-		response.setContentType("text/html;charset=euc-kr");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		out.println("<script>");
 		
 		request.setCharacterEncoding("utf-8");
 		String id=request.getParameter("INFO_ID");
 		String pass=request.getParameter("INFO_PASS");
+		String pass_check=request.getParameter("INFO_PASS_CHECK");
 		String email=request.getParameter("INFO_EMAIL");
 		String phone=request.getParameter("INFO_PHONE");
-		System.out.println("test>>>"+email);
 		String[] genres=request.getParameterValues("INFO_GENRES");
-
+		
+		if(!pass.equals(pass_check)) {
+			out.println("alert('비밀번호가 일치하지 않습니다.');");
+			out.println("history.back()");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
 		try {
 		System.out.println("test>>>"+genres.length);
 		if (genres.length < 3||genres.length==0||genres==null) {
@@ -37,12 +43,13 @@ public class UserEditAction implements Action {
 			return null;
 		}
 		}catch(Exception e) {
-			e.printStackTrace();
+			if(genres==null) {
 			out.println("alert('장르를 3개 이상 선택하세요');");
 			out.println("history.back()");
 			out.println("</script>");
 			out.close();
 			return null;
+			}
 		}
 		Users user=new Users();
 		user.setUSER_ID(id);
