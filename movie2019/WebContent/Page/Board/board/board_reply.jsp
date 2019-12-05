@@ -47,8 +47,8 @@ if(request.getParameter("open") != null){
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input name="BOARD_NAME" id="board_name" value="${id }"
-            type="text" size="10" maxlength="30" required
-            class="form-control" placeholder="Enter board_name">
+            type="text" size="10" maxlength="30" required 
+            class="form-control" readOnly>
   </div>
   <div class="form-group">
     <label for="board_subject">제목</label>

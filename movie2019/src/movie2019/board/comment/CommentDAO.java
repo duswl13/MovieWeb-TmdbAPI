@@ -131,7 +131,7 @@ public class CommentDAO {
         	
         	String sql = "insert into bcomments "
         			   + "(num, id, content, reg_date, BOARD_RE_REF) "
-        			   + "values(com_seq.nextval,?,?,sysdate,?)";
+        			   + "values(comm_seq.nextval,?,?,sysdate,?)";
         	
         	//새로운 글을 등록하는 부분
         	pstmt = con.prepareStatement(sql);

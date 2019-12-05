@@ -8,9 +8,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardFileDownAction implements Action {
 
 	@Override
@@ -20,19 +17,19 @@ public class BoardFileDownAction implements Action {
 		String fileName = request.getParameter("filename");
 		System.out.println("fileName="+fileName);
 		
-		String savePath = "boardupload";
+		String savePath = "/boardupload1";
 		
 		ServletContext context = request.getServletContext();
 		String sDownloadPath = context.getRealPath(savePath);
 		
 		//String sFilePath = sDownloadPath + "\\" + fileName;
-		// "\" Ãß°¡ÇÏ±â À§ÇØ "\\" »ç¿ëÇÑ´Ù.
+		// "\" ì¶”ê°€í•˜ê¸° ìœ„í•´ "\\" ì‚¬ìš©í•œë‹¤.
 		String sFilePath = sDownloadPath + "/" + fileName;
 		System.out.println(sFilePath);
 		
 		byte b[] = new byte[4096];
 		
-		//sFilePath¿¡ ÀÖ´Â ÆÄÀÏÀÇ MimeTypeÀ» ±¸ÇØ¿Â´Ù.
+		//sFilePathì— ìˆëŠ” íŒŒì¼ì˜ MimeTypeì„ êµ¬í•´ì˜¨ë‹¤.
 		String sMimeType = context.getMimeType(sFilePath);
 		System.out.println("sMimeType>>>"+sMimeType);
 		
@@ -41,31 +38,31 @@ public class BoardFileDownAction implements Action {
 		
 		response.setContentType(sMimeType);
 		
-		//ÀÌ ºÎºĞÀÌ ÇÑ±Û ÆÄÀÏ¸íÀÌ ±úÁö´Â °ÍÀ» ¹æÁöÇØ ÁØ´Ù.
+		//ì´ ë¶€ë¶„ì´ í•œê¸€ íŒŒì¼ëª…ì´ ê¹¨ì§€ëŠ” ê²ƒì„ ë°©ì§€í•´ ì¤€ë‹¤.
 		String sEncoding = 
 				new String(fileName.getBytes("utf-8"), "ISO-8859-1");
 		System.out.println(sEncoding);
 		
 		/*
-		 * Content-Disposition: attatchment: ºê¶ó¿ìÀú´Â ÇØ´ç Content¸¦
-		 *Ã³¸®ÇÏÁö ¾Ê°í ´Ù¿î·Îµå ÇÏ°Ô µÈ´Ù.
+		 * Content-Disposition: attatchment: ë¸Œë¼ìš°ì €ëŠ” í•´ë‹¹ Contentë¥¼
+		 *ì²˜ë¦¬í•˜ì§€ ì•Šê³  ë‹¤ìš´ë¡œë“œ í•˜ê²Œ ëœë‹¤.
 		 */
 		response.setHeader("Content-Disposition",
 				"attatchment; filename="+sEncoding);
 		
 		try (
-			//À¥ ºê¶ó¿ìÀú·ÎÀÇ Ãâ·Â ½ºÆ®¸²À» »ı¼ºÇÑ´Ù. //¹öÆÛ¸¦ ½á¼­ ºü¸£°Ô Ãâ·Â
+			//ì›¹ ë¸Œë¼ìš°ì €ë¡œì˜ ì¶œë ¥ ìŠ¤íŠ¸ë¦¼ì„ ìƒì„±í•œë‹¤. //ë²„í¼ë¥¼ ì¨ì„œ ë¹ ë¥´ê²Œ ì¶œë ¥
 			BufferedOutputStream out2 = 
 					new BufferedOutputStream(response.getOutputStream());
-			//sFilePath·Î ÁöÁ¤ÇÑ ÆÄÀÏ¿¡ ´ëÇÑ ÀÔ·Â ½ºÆ®¸²À» »ı¼ºÇÑ´Ù.
+			//sFilePathë¡œ ì§€ì •í•œ íŒŒì¼ì— ëŒ€í•œ ì…ë ¥ ìŠ¤íŠ¸ë¦¼ì„ ìƒì„±í•œë‹¤.
 			BufferedInputStream in =
 					new BufferedInputStream(new FileInputStream(sFilePath));)
 	    {
 				int numRead;
-				//read(b,0,b.length):¹ÙÀÌÆ® ¹è¿­ bÀÇ 0¹ø ºÎÅÍ b,length
-				//Å©±â¸¸Å­ ÀĞ¾î¿Â´Ù.
+				//read(b,0,b.length):ë°”ì´íŠ¸ ë°°ì—´ bì˜ 0ë²ˆ ë¶€í„° b,length
+				//í¬ê¸°ë§Œí¼ ì½ì–´ì˜¨ë‹¤.
 				while((numRead = in.read(b, 0, b.length)) != -1) {
-					// ¹ÙÀÌÆ® ¹è¿­ bÀÇ 0¹øºÎÅÍ numReadÅ©±â¸¸Å­ ºê¶ó¿ìÀú·Î Ãâ·Â
+					// ë°”ì´íŠ¸ ë°°ì—´ bì˜ 0ë²ˆë¶€í„° numReadí¬ê¸°ë§Œí¼ ë¸Œë¼ìš°ì €ë¡œ ì¶œë ¥
 					out2.write(b,0,numRead);
 				}
 		}catch(Exception e) {
@@ -73,4 +70,5 @@ public class BoardFileDownAction implements Action {
 		}
 		return null;
 	}
+
 }

@@ -1,34 +1,34 @@
 package movie2019.board.action;
 
-//ActionForward Å¬·¡½º´Â ACtion ÀÎÅÍÆäÀÌ½º¿¡¼­ ¸í·ÉÀ» ¼öÇàÇÏ°í °á°ú °ªÀ»
-//°¡Áö°í Æ÷¿öµù ÇÒ ¶§ »ç¿ëµÇ´Â Å¬·¡½ºÀÌ´Ù.
-//ÀÌ Å¬·¡½º´Â Redirect ¿©ºÎ °ª°ú Æ÷¿öµùÇÒ ÆäÀÌÁöÀÇ À§Ä¡¸¦ °¡Áö°í ÀÖ´Ù.
-//ÀÌ °ªµéÀº FrontController¿¡¼­ ActionForward Å¬·¡½º Å¸ÀÔÀ¸·Î ¹İÈ¯°ªÀ»
-//°¡Á®¿À¸é ±× °ªÀ» È®ÀÎÇÏ¿© ÇØ´çÇÏ´Â ¿äÃ» ÆäÀÌÁö·Î Æ÷¿öµù Ã³¸®¸¦ ÇÑ´Ù.
+//ActionForward í´ë˜ìŠ¤ëŠ” ACtion ì¸í„°í˜ì´ìŠ¤ì—ì„œ ëª…ë ¹ì„ ìˆ˜í–‰í•˜ê³  ê²°ê³¼ ê°’ì„
+//ê°€ì§€ê³  í¬ì›Œë”© í•  ë•Œ ì‚¬ìš©ë˜ëŠ” í´ë˜ìŠ¤ì´ë‹¤.
+//ì´ í´ë˜ìŠ¤ëŠ” Redirect ì—¬ë¶€ ê°’ê³¼ í¬ì›Œë”©í•  í˜ì´ì§€ì˜ ìœ„ì¹˜ë¥¼ ê°€ì§€ê³  ìˆë‹¤.
+//ì´ ê°’ë“¤ì€ FrontControllerì—ì„œ ActionForward í´ë˜ìŠ¤ íƒ€ì…ìœ¼ë¡œ ë°˜í™˜ê°’ì„
+//ê°€ì ¸ì˜¤ë©´ ê·¸ ê°’ì„ í™•ì¸í•˜ì—¬ í•´ë‹¹í•˜ëŠ” ìš”ì²­ í˜ì´ì§€ë¡œ í¬ì›Œë”© ì²˜ë¦¬ë¥¼ í•œë‹¤.
 public class ActionForward {
-    private boolean redirect=false;
-    private String path=null;
-    
-    //property redirectÀÇ is ¸Ş¼Òµå
-    public boolean isRedirect() {
-    	//ÇÁ·ÎÆÛÆ¼ Å¸ÀÔÀÌ booleanÀÎ °æ¿ì get´ë½Å is¸¦ ¾Õ¿¡ ºÙÀÏ ¼ö ÀÖ´Ù.
-    	return redirect;
-    }
-    
-    //property redirectÀÇ set¸Ş¼Òµå
-    public void setRedirect(boolean b) {
+private boolean redirect=false;
+private String path=null;
+
+//property redirectì˜ is ë©”ì†Œë“œ
+public boolean isRedirect() {
+	//í”„ë¡œí¼í‹° íƒ€ì…ì´ booleanì¸ ê²½ìš° getëŒ€ì‹  isë¥¼ ì•ì— ë¶™ì¼ ìˆ˜ ìˆë‹¤.
+	return redirect;
+}
+
+//property redirectì˜ setë©”ì†Œë“œ
+public void setRedirect(boolean b) {
 		redirect = b;
 	}
-    
-    //property pathÀÇ get¸Ş¼Òµå
+
+//property pathì˜ getë©”ì†Œë“œ
 	public String getPath() {
 		return path;
 	}
 
-	//property pathÀÇ set¸Ş¼Òµå
+	//property pathì˜ setë©”ì†Œë“œ
 	public void setPath(String string) {
 		path = string;
 	}
 
-    
+
 }

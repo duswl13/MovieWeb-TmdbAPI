@@ -10,79 +10,77 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardListAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request,
-	  HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+	
 		BoardDAO boarddao = new BoardDAO();
 		List<BoardVO> boardlist = 
 				new ArrayList<BoardVO>();
 		
-		//±âº» °ª ÆäÀÌÁö
+		//ê¸°ë³¸ ê°’ í˜ì´ì§€
 		int page = 1;
 		int limit = 10;
 		
 		if(request.getParameter("page")!=null) {
 			page=Integer.parseInt(request.getParameter("page"));
 		}
-		System.out.println("³Ñ¾î¿Â ÆäÀÌÁö="+ page);
+		System.out.println("ë„˜ì–´ì˜¨ í˜ì´ì§€="+ page);
 		
-		//°Ë»öµÈ ¸®½ºÆ®ÀÇ limit°ªÀÌ ³Ñ¾î¿À¸é...?
+		//ê²€ìƒ‰ëœ ë¦¬ìŠ¤íŠ¸ì˜ limitê°’ì´ ë„˜ì–´ì˜¤ë©´...?
 		if(request.getParameter("limit")!=null) {
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
-		System.out.println("³Ñ¾î¿Â limit="+limit);
+		System.out.println("ë„˜ì–´ì˜¨ limit="+limit);
 		
-		//ÃÑ ¸®½ºÆ® ¹Ş¾Æ¿Â´Ù.
+		//ì´ ë¦¬ìŠ¤íŠ¸ ë°›ì•„ì˜¨ë‹¤.
 		int listcount = boarddao.getListCount();
 		
-		//¸®½ºÆ® ¹Ş¾Æ¿Â´Ù.
+		//ë¦¬ìŠ¤íŠ¸ ë°›ì•„ì˜¨ë‹¤.
 		boardlist = boarddao.getBoardList(page,limit);
 		
 		/*
-		 * ÃÑ ÆäÀÌÁö ¼ö =
-		 * (DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö + ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö - 1)/ ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö
+		 * ì´ í˜ì´ì§€ ìˆ˜ =
+		 * (DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ + í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ - 1)/ í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜
 		 * 
-		 * ¿¹¸¦ µé¾î ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö°¡ 10°³ÀÎ °æ¿ì
-		 * ¿¹1) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ 0ÀÌ¸é ÃÑ ÆäÀÌÁö ¼ö´Â 0ÆäÀÌÁö
-		 * ¿¹2) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡(1~10)ÀÌ¸é ÃÑ ÆäÀÌÁö¼ö´Â 1ÆäÀÌÁö
-		 * ¿¹3) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡(11~20)ÀÌ¸é ÃÑ ÆäÀÌÁö¼ö´Â 2ÆäÀÌÁö
-		 * ¿¹4) DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡(21~30)ÀÌ¸é ÃÑ ÆäÀÌÁö¼ö´Â 3ÆäÀÌÁö
+		 * ì˜ˆë¥¼ ë“¤ì–´ í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ 10ê°œì¸ ê²½ìš°
+		 * ì˜ˆ1) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ 0ì´ë©´ ì´ í˜ì´ì§€ ìˆ˜ëŠ” 0í˜ì´ì§€
+		 * ì˜ˆ2) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€(1~10)ì´ë©´ ì´ í˜ì´ì§€ìˆ˜ëŠ” 1í˜ì´ì§€
+		 * ì˜ˆ3) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€(11~20)ì´ë©´ ì´ í˜ì´ì§€ìˆ˜ëŠ” 2í˜ì´ì§€
+		 * ì˜ˆ4) DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€(21~30)ì´ë©´ ì´ í˜ì´ì§€ìˆ˜ëŠ” 3í˜ì´ì§€
 		 */
 		int maxpage = (listcount+limit-1)/limit;
-		System.out.println("ÃÑ ÆäÀÌÁö ¼ö="+maxpage);
+		System.out.println("ì´ í˜ì´ì§€ ìˆ˜="+maxpage);
 		
 		/*
-		 * startpage: ÇöÀç ÆäÀÌÁö ±×·ì¿¡¼­ ¸Ç Ã³À½¿¡ Ç¥½ÃµÉ ÆäÀÌÁö ¼ö¸¦ ÀÇ¹ÌÇÑ´Ù.
-		 *           ([1], [11], [21] µî ...)
-		 * º¸¿©ÁÙ ÆäÀÌÁö°¡ 30°³ÀÏ °æ¿ì [1][2][3]...[30]±îÁö ´Ù Ç¥½ÃÇÏ±â¿¡´Â ³Ê¹« 
-		 * ¸¹±â ¶§¹®¿¡ º¸Åë ÇÑ ÆäÀÌÁö¿¡´Â 10ÆäÀÌÁö Á¤µµ±îÁö ÀÌµ¿ÇÒ ¼ö ÀÖ°Ô Ç¥½ÃÇÑ´Ù.
-		 * ¿¹) ÆäÀÌÁö ±×·ìÀÌ ¾Æ·¡¿Í °°Àº °æ¿ì
+		 * startpage: í˜„ì¬ í˜ì´ì§€ ê·¸ë£¹ì—ì„œ ë§¨ ì²˜ìŒì— í‘œì‹œë  í˜ì´ì§€ ìˆ˜ë¥¼ ì˜ë¯¸í•œë‹¤.
+		 *           ([1], [11], [21] ë“± ...)
+		 * ë³´ì—¬ì¤„ í˜ì´ì§€ê°€ 30ê°œì¼ ê²½ìš° [1][2][3]...[30]ê¹Œì§€ ë‹¤ í‘œì‹œí•˜ê¸°ì—ëŠ” ë„ˆë¬´ 
+		 * ë§ê¸° ë•Œë¬¸ì— ë³´í†µ í•œ í˜ì´ì§€ì—ëŠ” 10í˜ì´ì§€ ì •ë„ê¹Œì§€ ì´ë™í•  ìˆ˜ ìˆê²Œ í‘œì‹œí•œë‹¤.
+		 * ì˜ˆ) í˜ì´ì§€ ê·¸ë£¹ì´ ì•„ë˜ì™€ ê°™ì€ ê²½ìš°
 		 *   [1][2][3][4][5][6][7][8][9][10]
-		 *   ÆäÀÌÁö ±×·ìÀÇ ½ÃÀÛ ÆäÀÌÁö´Â startpage¿¡ 
-		 *   ¸¶Áö¸· ÆäÀÌÁö´Â endpage¿¡ ±¸ÇÑ´Ù.
+		 *   í˜ì´ì§€ ê·¸ë£¹ì˜ ì‹œì‘ í˜ì´ì§€ëŠ” startpageì— 
+		 *   ë§ˆì§€ë§‰ í˜ì´ì§€ëŠ” endpageì— êµ¬í•œë‹¤.
 		 *   
-		 *   ¿¹·Î 1~10ÆäÀÌÁöÀÇ ³»¿ëÀ» ³ªÅ¸³¾ ¶§´Â ÆäÀÌÁö ±×·ìÀº
-		 *   [1][2][3]...[10]·Î Ç¥½ÃµÇ°í
-		 *   11~20ÆäÀÌÁöÀÇ ³»¿ëÀ» ³ªÅ¸³¾ ¶§´Â ÆäÀÌÁö ±×·ìÀº
-		 *   [11][12][13]...[20]±îÁö Ç¥½ÃµÈ´Ù.
+		 *   ì˜ˆë¡œ 1~10í˜ì´ì§€ì˜ ë‚´ìš©ì„ ë‚˜íƒ€ë‚¼ ë•ŒëŠ” í˜ì´ì§€ ê·¸ë£¹ì€
+		 *   [1][2][3]...[10]ë¡œ í‘œì‹œë˜ê³ 
+		 *   11~20í˜ì´ì§€ì˜ ë‚´ìš©ì„ ë‚˜íƒ€ë‚¼ ë•ŒëŠ” í˜ì´ì§€ ê·¸ë£¹ì€
+		 *   [11][12][13]...[20]ê¹Œì§€ í‘œì‹œëœë‹¤.
 		 */   
 		int startpage = ((page-1)/10)*10+1;
-		System.out.println("ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ½ÃÀÛ ÆäÀÌÁö ¼ö="+startpage);
+		System.out.println("í˜„ì¬ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ì‹œì‘ í˜ì´ì§€ ìˆ˜="+startpage);
 		
-		//endpage: ÇöÀç ÆäÀÌÁö ±×·ì¿¡¼­ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö ¼ö([10],[20],[30] µî)
+		//endpage: í˜„ì¬ í˜ì´ì§€ ê·¸ë£¹ì—ì„œ ë³´ì—¬ì¤„ ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜([10],[20],[30] ë“±)
 		int endpage = startpage + 10 -1;
-		System.out.println("ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö ¼ö="+endpage);
+		System.out.println("í˜„ì¬ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜="+endpage);
 		
 		/*
-		 * ¸¶Áö¸· ±×·ìÀÇ ¸¶Áö¸· ÆäÀÌÁö °ªÀº ÃÖ´ë ÆäÀÌÁö °ªÀÌ´Ù.
-		 * ¿¹·Î ¸¶Áö¸· ÆäÀÌÁö ±×·ìÀÌ [21]~[30]ÀÎ °æ¿ì
-		 * ½ÃÀÛÆäÀÌÁö(startpage=21)¿Í ¸¶Áö¸· ÆäÀÌÁö(endpage=30)ÀÌÁö¸¸
-		 * ÃÖ´ë ÆäÀÌÁö(maxpage)°¡ 25¶ó¸é [21]~[25]±îÁö¸¸ Ç¥½ÃµÇµµ·Ï ÇÑ´Ù.
+		 * ë§ˆì§€ë§‰ ê·¸ë£¹ì˜ ë§ˆì§€ë§‰ í˜ì´ì§€ ê°’ì€ ìµœëŒ€ í˜ì´ì§€ ê°’ì´ë‹¤.
+		 * ì˜ˆë¡œ ë§ˆì§€ë§‰ í˜ì´ì§€ ê·¸ë£¹ì´ [21]~[30]ì¸ ê²½ìš°
+		 * ì‹œì‘í˜ì´ì§€(startpage=21)ì™€ ë§ˆì§€ë§‰ í˜ì´ì§€(endpage=30)ì´ì§€ë§Œ
+		 * ìµœëŒ€ í˜ì´ì§€(maxpage)ê°€ 25ë¼ë©´ [21]~[25]ê¹Œì§€ë§Œ í‘œì‹œë˜ë„ë¡ í•œë‹¤.
 		 */
 		if(endpage>maxpage) endpage = maxpage;
 		
@@ -91,25 +89,25 @@ public class BoardListAction implements Action {
 		if(state==null) {
 			System.out.println("state=null");
 		
-		request.setAttribute("page", page); //ÇöÀç ÆäÀÌÁö ¼ö
-        request.setAttribute("maxpage", maxpage); //ÃÖ´ë ÆäÀÌÁö ¼ö
+		request.setAttribute("page", page); //í˜„ì¬ í˜ì´ì§€ ìˆ˜
+        request.setAttribute("maxpage", maxpage); //ìµœëŒ€ í˜ì´ì§€ ìˆ˜
         
-        //ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ Ã¹ ÆäÀÌÁö ¼ö
+        //í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ì²« í˜ì´ì§€ ìˆ˜
         request.setAttribute("startpage", startpage);
         
-        //ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ ³¡ ÆäÀÌÁö ¼ö
+        //í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ë í˜ì´ì§€ ìˆ˜
         request.setAttribute("endpage", endpage);
-        request.setAttribute("listcount", listcount); //ÃÑ ±ÛÀÇ ¼ö
+        request.setAttribute("listcount", listcount); //ì´ ê¸€ì˜ ìˆ˜
         
-        //ÇØ´ç ÆäÀÌÁöÀÇ ±Û ¸ñ·ÏÀ» °®°í ÀÖ´Â ¸®½ºÆ®
+        //í•´ë‹¹ í˜ì´ì§€ì˜ ê¸€ ëª©ë¡ì„ ê°–ê³  ìˆëŠ” ë¦¬ìŠ¤íŠ¸
         request.setAttribute("boardlist", boardlist);
         
         ActionForward forward = new ActionForward();
         forward.setRedirect(false);
         
-        //±Û ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÑ´Ù.
+        //ê¸€ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•œë‹¤.
         forward.setPath("Page/Board/board/board_list.jsp");
-        return forward; //BoardFrontController.java·Î ¸®ÅÏµÈ´Ù.
+        return forward; //BoardFrontController.javaë¡œ ë¦¬í„´ëœë‹¤.
 	
 	}else {
         System.out.println("state=ajax");
@@ -140,5 +138,4 @@ public class BoardListAction implements Action {
 	}
 	
 	}
-
 }

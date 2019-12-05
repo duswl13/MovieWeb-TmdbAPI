@@ -3,38 +3,39 @@ package movie2019.board.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
 public class BoardModifyView implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, 
+		HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        
 		ActionForward forward = new ActionForward();
 		BoardDAO boarddao = new BoardDAO();
 		BoardVO boarddata = new BoardVO();
 		
-		//ÆÄ¶ó¹ÌÅÍ·Î Àü´Ş¹ŞÀº ¼öÁ¤ÇÒ ±Û ¹øÈ£¸¦ numº¯¼ö¿¡ ÀúÀåÇÑ´Ù.
+		//íŒŒë¼ë¯¸í„°ë¡œ ì „ë‹¬ë°›ì€ ìˆ˜ì •í•  ê¸€ ë²ˆí˜¸ë¥¼ numë³€ìˆ˜ì— ì €ì¥í•œë‹¤.
 		int num = Integer.parseInt(request.getParameter("num"));
-		//±Û ³»¿ëÀ» ºÒ·¯¿Í¼­ boarddata°´Ã¼¿¡ ÀúÀåÇÑ´Ù.
+		//ê¸€ ë‚´ìš©ì„ ë¶ˆëŸ¬ì™€ì„œ boarddataê°ì²´ì— ì €ì¥í•œë‹¤.
 		boarddata = boarddao.getDetail(num);
 		
-		//±Û ³»¿ë ºÒ·¯¿À±â ½ÇÆĞÇÑ °æ¿ìÀÌ´Ù.
+		//ê¸€ ë‚´ìš© ë¶ˆëŸ¬ì˜¤ê¸° ì‹¤íŒ¨í•œ ê²½ìš°ì´ë‹¤.
 		if(boarddata==null) {
-			System.out.println("(¼öÁ¤)»ó¼¼º¸±â ½ÇÆĞ");
+			System.out.println("(ìˆ˜ì •)ìƒì„¸ë³´ê¸° ì‹¤íŒ¨");
 			forward.setRedirect(false);
-			request.setAttribute("message", "°Ô½ÃÆÇ »ó¼¼º¸±â ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "ê²Œì‹œíŒ ìƒì„¸ë³´ê¸° ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
-		System.out.println("(¼öÁ¤)»ó¼¼º¸±â ¼º°ø");
-		//¼öÁ¤ Æû ÆäÀÌÁö·Î ÀÌµ¿ÇÒ ¶§ ¿øº» ±Û ³»¿ëÀ» º¸³»ÁÖ±â ¶§¹®¿¡ boarddata°´Ã¼¸¦
-		//request°´Ã¼·Î ÁöÁ¤ÇÑ´Ù.
+		System.out.println("(ìˆ˜ì •)ìƒì„¸ë³´ê¸° ì„±ê³µ");
+		//ìˆ˜ì • í¼ í˜ì´ì§€ë¡œ ì´ë™í•  ë•Œ ì›ë³¸ ê¸€ ë‚´ìš©ì„ ë³´ë‚´ì£¼ê¸° ë•Œë¬¸ì— boarddataê°ì²´ë¥¼
+		//requestê°ì²´ë¡œ ì§€ì •í•œë‹¤.
 		request.setAttribute("boarddata", boarddata);
 		forward.setRedirect(false);
-		//±Û ¼öÁ¤ Æû ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÑ´Ù.
+		//ê¸€ ìˆ˜ì • í¼ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•œë‹¤.
 		forward.setPath("Page/Board/board/board_modify.jsp");
 		return forward;
 
 	}
+
 }

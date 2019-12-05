@@ -1,16 +1,30 @@
 
 DROP TABLE MBOARD;
 CREATE TABLE MBOARD(
-	BOARD_NUM NUMBER(5), --±Û ¹øÈ£
-	BOARD_NAME VARCHAR2(30), --ÀÛ¼ºÀÚ
-	BOARD_PASS VARCHAR2(30), --ºñ¹Ð¹øÈ£
-	BOARD_SUBJECT VARCHAR2(300), --Á¦¸ñ
-	BOARD_CONTENT VARCHAR2(4000), --³»¿ë
-	BOARD_FILE VARCHAR2(50),--Ã·ºÎÆÄÀÏ
-	BOARD_RE_REF NUMBER(5), --´äº¯ ±Û ÀÛ¼º ½Ã ÂüÁ¶µÇ´Â ±Û ¹øÈ£
-	BOARD_RE_LEV NUMBER(5), --´äº¯ ±ÛÀÇ ±íÀÌ
-	BOARD_RE_SEQ NUMBER(5), --´äº¯ ±ÛÀÇ ¼ø¼­
-	BOARD_READCOUNT NUMBER(5), --±ÛÀÇ Á¶È¸¼ö
-	BOARD_DATE DATE, --±ÛÀÇ ÀÛ¼º ³¯Â¥
+	BOARD_NUM NUMBER(5), --ï¿½ï¿½ ï¿½ï¿½È£
+	BOARD_NAME VARCHAR2(30), --ï¿½Û¼ï¿½ï¿½ï¿½
+	BOARD_PASS VARCHAR2(30), --ï¿½ï¿½Ð¹ï¿½È£
+	BOARD_SUBJECT VARCHAR2(300), --ï¿½ï¿½ï¿½ï¿½
+	BOARD_CONTENT VARCHAR2(4000), --ï¿½ï¿½ï¿½ï¿½
+	BOARD_FILE VARCHAR2(50),--Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	BOARD_RE_REF NUMBER(5), --ï¿½äº¯ ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ ï¿½ï¿½È£
+	BOARD_RE_LEV NUMBER(5), --ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	BOARD_RE_SEQ NUMBER(5), --ï¿½äº¯ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	BOARD_READCOUNT NUMBER(5), --ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ï¿½ï¿½
+	BOARD_DATE DATE, --ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ ï¿½ï¿½Â¥
 	PRIMARY KEY(BOARD_NUM)
 );
+
+SELECT * FROM MBOARD;
+
+INSERT INTO MBOARD (BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, 
+    BOARD_FILE, BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, BOARD_DATE) 
+ VALUES((select nvl(max(BOARD_NUM),0)+1 from mboard), 'jiyeon', '1234', 'ê¸€ì„ ì¨ë³¼ê¹Œ', 'ì œë°œ', NULL,
+        (select nvl(max(BOARD_NUM),0)+1 from mboard), 0, 0, 0, sysdate);
+        
+        
+INSERT INTO MBOARD (BOARD_NUM, BOARD_NAME, BOARD_PASS, BOARD_SUBJECT, BOARD_CONTENT, 
+    BOARD_FILE, BOARD_RE_REF, BOARD_RE_LEV, BOARD_RE_SEQ, BOARD_READCOUNT, BOARD_DATE) 
+ VALUES((select nvl(max(BOARD_NUM),0)+1 from mboard), 'jiyeon', '1234', 'íŒŒì¼ë„ ì˜¬ë ¤ë³¼ê¹Œ', 'ê³¼ì—°', 
+         NULL,
+        (select nvl(max(BOARD_NUM),0)+1 from mboard), 0, 0, 0, sysdate);

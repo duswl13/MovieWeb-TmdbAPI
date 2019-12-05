@@ -5,16 +5,12 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.BoardDAO;
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
 
 public class BoardDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, 
 		HttpServletResponse response) throws Exception {
-
 
 		request.setCharacterEncoding("UTF-8");
 		boolean result = false;
@@ -23,41 +19,41 @@ public class BoardDeleteAction implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		BoardDAO boarddao = new BoardDAO();
-		//±Û »èÁ¦ ¸í·ÉÀ» ¿äÃ»ÇÑ »ç¿ëÀÚ°¡ ±ÛÀ» ÀÛ¼ºÇÑ »ç¿ëÀÚÀÎÁö ÆÇ´ÜÇÏ±â À§ÇØ
-		//ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£¿Í ÀúÀåµÈ ºñ¹Ğ¹øÈ£¸¦ ºñ±³ÇÏ¿© ÀÏÄ¡ÇÏ¸é »èÁ¦ÇÑ´Ù.
+		//ê¸€ ì‚­ì œ ëª…ë ¹ì„ ìš”ì²­í•œ ì‚¬ìš©ìê°€ ê¸€ì„ ì‘ì„±í•œ ì‚¬ìš©ìì¸ì§€ íŒë‹¨í•˜ê¸° ìœ„í•´
+		//ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ì™€ ì €ì¥ëœ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¹„êµí•˜ì—¬ ì¼ì¹˜í•˜ë©´ ì‚­ì œí•œë‹¤.
 		usercheck = boarddao.isBoardWriter(num, 
 				            request.getParameter("BOARD_PASS"));
 		
-		//ºñ¹Ğ¹øÈ£ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
+		//ë¹„ë°€ë²ˆí˜¸ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” ê²½ìš°
 		if(usercheck==false) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù.');");
+			out.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤.');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 			return null;
 		}
 		
-		//ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏ´Â °æ¿ì »èÁ¦ Ã³¸® ÇÑ´Ù.
+		//ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ëŠ” ê²½ìš° ì‚­ì œ ì²˜ë¦¬ í•œë‹¤.
 		result = boarddao.boardDelete(num);
 		
 		ActionForward forward = new ActionForward();
-		//»èÁ¦ Ã³¸® ½ÇÆĞÇÑ °æ¿ì
+		//ì‚­ì œ ì²˜ë¦¬ ì‹¤íŒ¨í•œ ê²½ìš°
 		if(result==false) {
-			System.out.println("°Ô½ÃÆÇ »èÁ¦ ½ÇÆĞ");
+			System.out.println("ê²Œì‹œíŒ ì‚­ì œ ì‹¤íŒ¨");
 			forward.setRedirect(false);
-			request.setAttribute("message","°Ô½ÃÆÇ »èÁ¦ ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message","ê²Œì‹œíŒ ì‚­ì œ ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
             return forward;
 		}
-		//»èÁ¦ Ã³¸® ¼º°øÇÑ °æ¿ì - ±Û ¸ñ·Ï º¸±â ¿äÃ»À» Àü¼ÛÇÏ´Â ºÎºĞÀÌ´Ù.
-		System.out.println("°Ô½ÃÆÇ »èÁ¦ ¼º°ø");
+		//ì‚­ì œ ì²˜ë¦¬ ì„±ê³µí•œ ê²½ìš° - ê¸€ ëª©ë¡ ë³´ê¸° ìš”ì²­ì„ ì „ì†¡í•˜ëŠ” ë¶€ë¶„ì´ë‹¤.
+		System.out.println("ê²Œì‹œíŒ ì‚­ì œ ì„±ê³µ");
         response.setContentType("text/html;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.println("<script>");
-        out.println("alert('»èÁ¦µÇ¾ú½À´Ï´Ù.');");
+        out.println("alert('ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤.');");
         out.println("location.href='BoardList.bd';");
         out.println("</script>");
         out.close();

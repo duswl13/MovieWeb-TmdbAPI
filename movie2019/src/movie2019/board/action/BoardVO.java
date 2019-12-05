@@ -9,9 +9,9 @@ public class BoardVO {
     private String BOARD_SUBJECT;
     private String BOARD_CONTENT;
     private String BOARD_FILE;
-    private int    BOARD_RE_REF;  
-    private int    BOARD_RE_LEV;  
-    private int    BOARD_RE_SEQ;  
+    private int    BOARD_RE_REF;  //답변 글 작성시 참조되는 글의 번호
+    private int    BOARD_RE_LEV;  //답변 글의 깊이
+    private int    BOARD_RE_SEQ;  //답변 글의 순서
     private int    BOARD_READCOUNT;
     private Date   BOARD_DATE;
     

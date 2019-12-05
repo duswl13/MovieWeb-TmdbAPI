@@ -5,10 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
-public class CommentAdd implements Action {
+public class CommentAdd implements movie2019.board.action.Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public movie2019.board.action.ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		CommentDAO dao = new CommentDAO();
 		CommentVO co = new CommentVO();
@@ -26,7 +26,8 @@ public class CommentAdd implements Action {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("댓글 등록 실패");
-			ActionForward forward = new ActionForward();
+			movie2019.board.action.ActionForward forward =
+					new movie2019.board.action.ActionForward();
 			 request.setAttribute("message", "댓글 등록 실패입니다.");
 	            forward.setPath("error/error.jsp");
 	            forward.setRedirect(false);

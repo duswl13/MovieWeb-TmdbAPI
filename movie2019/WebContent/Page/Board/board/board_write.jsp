@@ -38,7 +38,7 @@ if(request.getParameter("open") != null){
   <h1>글 작성 페이지</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
-    <input name="BOARD_NAME" id="board_name" value="${id }"
+    <input name="BOARD_NAME" id="board_name" value="${id }" readOnly
             type="text" size="10" maxlength="30" required
             class="form-control" placeholder="Enter board_name">
   </div>

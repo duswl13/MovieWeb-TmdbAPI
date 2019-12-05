@@ -1,9 +1,10 @@
+DROP TABLE BCOMMENTS;
 CREATE TABLE BCOMMENTS (
 num number primary key,
-id varchar2(30) references member(id),
+id varchar2(30) references USERS(USER_ID),
 content varchar2(200),
 reg_date date,
-BOARD_RE_REF number references board(BOARD_NUM)
+BOARD_RE_REF number references mboard(BOARD_NUM)
 on delete cascade
 );
 

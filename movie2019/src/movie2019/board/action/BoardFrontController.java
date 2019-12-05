@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import movie2019.board.action.Action;
-import movie2019.board.action.ActionForward;
-
-
+import movie2019.board.comment.CommentList;
 
 @WebServlet("*.bd")
 public class BoardFrontController extends HttpServlet {
@@ -21,39 +18,40 @@ public class BoardFrontController extends HttpServlet {
 		       HttpServletResponse response) 
 		   throws ServletException, IOException {
 		/*
-		 * ¿äÃ»µÈ ÀüÃ¼ URLÁß¿¡¼­ Æ÷Æ® ¹øÈ£ ´ÙÀ½ºÎÅÍ ¸¶Áö¸· ¹®ÀÚ¿­±îÁö ¹İÈ¯µÈ´Ù.
-		 * ¿¹)http://localhost:8088/JspProject/login.netÀÎ °æ¿ì
-		 * "/JspProject/login.jsp" ¹İÈ¯µÈ´Ù.
+		 * ìš”ì²­ëœ ì „ì²´ URLì¤‘ì—ì„œ í¬íŠ¸ ë²ˆí˜¸ ë‹¤ìŒë¶€í„° ë§ˆì§€ë§‰ ë¬¸ìì—´ê¹Œì§€ ë°˜í™˜ëœë‹¤.
+		 * ì˜ˆ)http://localhost:8088/JspProject/login.netì¸ ê²½ìš°
+		 * "/JspProject/login.jsp" ë°˜í™˜ëœë‹¤.
 		 */
 		String RequestURI= request.getRequestURI();
 		System.out.println("RequestURI"+ RequestURI);
 	
-		//getContextPath(): ÄÁÅØ½ºÆ® °æ·Î°¡ ¹İÈ¯µÈ´Ù.
-		//contextPath´Â "/JspProject"°¡ ¹İÈ¯µÈ´Ù.
+		//getContextPath(): ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œê°€ ë°˜í™˜ëœë‹¤.
+		//contextPathëŠ” "/JspProject"ê°€ ë°˜í™˜ëœë‹¤.
 		String contextPath=request.getContextPath();
 		System.out.println("contextPath="+contextPath);
 	
-		//RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ °ªÀÇ ÀÎµ¦½º À§Ä¡ÀÇ ¹®ÀÚºÎÅÍ
-		//¸¶Áö¸· À§Ä¡ ¹®ÀÚ±îÁö ÃßÃâÇÑ´Ù.
-		//command´Â "/login.net" ¹İÈ¯µÈ´Ù.
+		//RequestURIì—ì„œ ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ê¸¸ì´ ê°’ì˜ ì¸ë±ìŠ¤ ìœ„ì¹˜ì˜ ë¬¸ìë¶€í„°
+		//ë§ˆì§€ë§‰ ìœ„ì¹˜ ë¬¸ìê¹Œì§€ ì¶”ì¶œí•œë‹¤.
+		//commandëŠ” "/login.net" ë°˜í™˜ëœë‹¤.
 		String command=RequestURI.substring(contextPath.length());
 	    System.out.println("command="+command);
 		
-	    //ÃÊ±âÈ­
+	    //ì´ˆê¸°í™”
 	    ActionForward forward=null;
 	    Action action=null;
 	    
+	    
 	    if(command.equals("/BoardList.bd")) { 
-	    	action=new BoardListAction(); //´ÙÇü¼º¿¡ ÀÇÇÑ ¾÷Ä³½ºÆÃ
+	    	action=new BoardListAction(); //ë‹¤í˜•ì„±ì— ì˜í•œ ì—…ìºìŠ¤íŒ…
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	 
+	    
 	    }else if(command.equals("/BoardWrite.bd")) { 
 	         forward = new ActionForward();
-	         forward.setRedirect(false); //Æ÷¿öµù ¹æ½ÄÀ¸·Î ÁÖ¼Ò°¡ ¹Ù²îÁö ¾Ê´Â´Ù
+	         forward.setRedirect(false); //í¬ì›Œë”© ë°©ì‹ìœ¼ë¡œ ì£¼ì†Œê°€ ë°”ë€Œì§€ ì•ŠëŠ”ë‹¤
 	         forward.setPath("Page/Board/board/board_write.jsp");
 	  
 	    }else if(command.equals("/BoardAddAction.bd")) { 
@@ -63,7 +61,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	   
+	          
 	    }else if(command.equals("/BoardDetailAction.bd")) { 
 	    	action=new BoardDetailAction();
 	          try {
@@ -71,7 +69,15 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	  
+	          
+	    }else if(command.equals("/BoardFileDown.bd")) { 
+	    	action=new BoardFileDownAction();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	    
 	    }else if(command.equals("/BoardReplyView.bd")) { 
 	    	action=new BoardReplyView();
 	          try {
@@ -87,7 +93,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	   
+	     
 	    }else if(command.equals("/BoardModifyView.bd")) { 
 	    	action=new BoardModifyView();
 	          try {
@@ -95,7 +101,7 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	  
+	          
 	    }else if(command.equals("/BoardModifyAction.bd")) { 
 	    	action=new BoardModifyAction();
 	          try {
@@ -103,16 +109,10 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	    }else if(command.equals("/BoardFileDown.bd")) { 
-	    	action=new BoardFileDownAction();
-	          try {
-	        	  forward=action.execute(request, response);
-	          }catch(Exception e) {
-	        	  e.printStackTrace();
-	          }
+	    
 	    }else if(command.equals("/BoardDelete.bd")) { 
 	    	forward = new ActionForward();
-	    	forward.setRedirect(false);//Æ÷¿öµù ¹æ½ÄÀ¸·Î ÁÖ¼Ò°¡ ¹Ù²îÁö ¾ÊÀ½
+	    	forward.setRedirect(false);//í¬ì›Œë”© ë°©ì‹ìœ¼ë¡œ ì£¼ì†Œê°€ ë°”ë€Œì§€ ì•ŠìŒ
 	    	forward.setPath("Page/Board/board/board_delete.jsp");
 	    
 	    }else if(command.equals("/BoardDeleteAction.bd")) { 
@@ -122,13 +122,56 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
+	          
+	    }else if(command.equals("/CommentList.bd")) { 
+	    	action=new CommentList();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	          
+	    }else if(command.equals("/CommentAdd.bd")) { 
+	    	//importì•ˆí• ê±°ë©´ ì´ë ‡ê²Œ íŒ¨í‚¤ì§€ì£¼ì†Œë‘  ê°™ì´ ì”€ net.comment.action.CommentAdd
+	    	action=new movie2019.board.comment.CommentAdd();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	          
+	    }else if(command.equals("/CommentDelete.bd")) { 
+	    	action=new movie2019.board.comment.CommentDelete();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	          
+	    }else if(command.equals("/CommentUpdate.bd")) { 
+	    	action=new movie2019.board.comment.CommentUpdate();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
+	          
+	    //ì‹ ê³  ë©”ì¼ ë³´ë‚´ê¸°
+	    }else if(command.equals("/Mail.bd")) { 
+	    	action=new movie2019.board.comment.CommentUpdate();
+	          try {
+	        	  forward=action.execute(request, response);
+	          }catch(Exception e) {
+	        	  e.printStackTrace();
+	          }
 	    }
 	    
-	    //¿©±â´Â °Çµé¸é ¾ÈµÅ~
+	    
+	    //ì—¬ê¸°ëŠ” ê±´ë“¤ë©´ ì•ˆë¼~
 	    if(forward!=null) {
-	    	if(forward.isRedirect()) { //¸®´ÙÀÌ·ºÆ® µÈ´Ù.
+	    	if(forward.isRedirect()) { //ë¦¬ë‹¤ì´ë ‰íŠ¸ ëœë‹¤.
 	    		response.sendRedirect(forward.getPath());
-	    	}else { //Æ÷¿öµù µÈ´Ù.
+	    	}else { //í¬ì›Œë”© ëœë‹¤.
 	    		RequestDispatcher dispatcher
 	    		= request.getRequestDispatcher(forward.getPath());
 	    		dispatcher.forward(request, response);
@@ -140,8 +183,8 @@ public class BoardFrontController extends HttpServlet {
         super();
     }
 
-   //doProcess(request,response)¸Ş¼­µå¸¦ ±¸ÇöÇÏ¿© ¿äÃ»ÀÌ GET¹æ½ÄÀÌµç
-    //POST¹æ½ÄÀ¸·Î Àü¼ÛµÇ¾î ¿Àµç °°Àº ¸Ş¼­µå¿¡¼­ ¿äÃ»À» Ã³¸®ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
+   //doProcess(request,response)ë©”ì„œë“œë¥¼ êµ¬í˜„í•˜ì—¬ ìš”ì²­ì´ GETë°©ì‹ì´ë“ 
+    //POSTë°©ì‹ìœ¼ë¡œ ì „ì†¡ë˜ì–´ ì˜¤ë“  ê°™ì€ ë©”ì„œë“œì—ì„œ ìš”ì²­ì„ ì²˜ë¦¬í•  ìˆ˜ ìˆë„ë¡ í•œë‹¤.
 	protected void doGet(HttpServletRequest request, 
 			       HttpServletResponse response) 
 			   throws ServletException, IOException {
