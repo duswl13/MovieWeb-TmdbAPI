@@ -122,44 +122,14 @@ textarea {
 	margin: 0;
 	padding: 0;
 }
+
+.title {color:#27AE60}
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-	$(function() {
-		var movies = [ {
-			value : "겨울왕국1",
-			icon : "jquery_32x32.png"
-		}, {
-			value : "겨울왕국2",
-			icon : "jqueryui_32x32.png"
-		}, {
-			value : "그냥 겨울 운명이조",
-			icon : "sizzlejs_32x32.png"
-		} ];
-
-		$("#movie").autocomplete({
-			minLength : 0,
-			source : movies,
-			focus : function(event, ui) {
-				$("#movie").val(ui.item.label);
-				return false;
-			},
-			select : function(event, ui) {
-				$("#movie").val(ui.item.label);
-				$("#movie-id").val(ui.item.value);
-				$("#movie-desc").html(ui.item.value);
-				$("#movie-icon").attr("src", "images/" + ui.item.icon);
-
-				return false;
-			}
-		}).autocomplete("instance")._renderItem = function(ul, item) {
-			return $("<span>").append(
-					"<div>" + item.value + "</div>")
-					.appendTo(ul);
-		};
-	});
+	
 </script>
 
 </head>
@@ -167,28 +137,22 @@ textarea {
 	<br>
 	<br>
 	<div class=container>
-		<form action="" method=post name=review_write_form>
+		<form action="ReviewAddAction.rv" method=post name=review_write_form>
 
-
-			<div class=search>
-				
-				리뷰할 영화 고르기<div id="movie-label"></div>
-				<div>
-				<img id="movie-icon" src="images/transparent_1x1.png" class="ui-state-default" alt=""> 
-				<input type=text id="movie">
-				<div id="movie-id"></div>
-</div>
-
-			</div>
-
+	
 			<table>
 				<tr>
-					<td>영화이미지<br>
-						<p id="movie-desc"></p>
-						<br>
-					<span>표정 점수 </span><br> <span>★★★☆☆</span>
-					</td>
+					<td>
+					영화 <b class=title>겨울왕국</b>에 대한 리뷰 남기기
 					
+					</td>
+				</tr>
+				<tr>	
+					<td>
+					
+					제목<input type=text> <br>
+					</td>
+				</tr><tr>	
 					<td>
 						<div class=write_form>
 							<textarea name=write_form id=write_form cols=50 rows=15
@@ -199,7 +163,7 @@ textarea {
 			</table>
 
 			<div class=save>
-				운명이조님이 작성한 리뷰를<button type=submit>저장</button>
+				${id}님이 작성한 리뷰를<button type=submit>저장</button>
 			</div>
 
 		</form>
