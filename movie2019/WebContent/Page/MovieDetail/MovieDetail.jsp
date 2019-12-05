@@ -985,6 +985,8 @@ function hiddenremove(list){
 				tag += '<p>' + list[check].name + '</p>';
 				tag += '</div>';
 				check++;
+				
+				console.log("TEst>>>>"+list[check].profile_path);
 			
 		}
 
