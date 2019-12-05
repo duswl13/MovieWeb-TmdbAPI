@@ -1,4 +1,4 @@
-package movie2019.movie.action;
+package movie2019.movie.db;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -6,13 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import movie2019.movie.db.UserHiddenMovieVO;
 import movie2019.review.db.AllReviewVO;
 import movie2019.review.db.ReviewVO;
 
@@ -102,7 +103,7 @@ public class MovieDAO {
 				result = true;
 			} else {
 
-				// ¿µÈ­ ID°¡ ¾øÀ» °æ¿ì Ãß°¡±îÁö
+				// ï¿½ï¿½È­ IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
 				String sql2 = "INSERT INTO MOVIE VALUES(?,?)";
 
 				pstmt = con.prepareStatement(sql2);
@@ -150,7 +151,7 @@ public class MovieDAO {
 
 	public int SelectFaceRating(int movieId, String userId) {
 		String sql = "select * from rating_face where MOVIE_ID= ? and USER_ID=?";
-		int result = -2; // Á¡¼öÇ¥½Ã¸¦ ¾Æ¿¹ ¾ÈÇßÀ» °æ¿ì -2
+		int result = -2; // ï¿½ï¿½ï¿½ï¿½Ç¥ï¿½Ã¸ï¿½ ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ -2
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -173,7 +174,7 @@ public class MovieDAO {
 
 	public int SelectStarRating(int movieId, String userId) {
 		String sql = "select * from rating_star where MOVIE_ID= ? and USER_ID=?";
-		int result = -2; // Á¡¼ö Ç¥½Ã¸¦ ¾Æ¿¹ ¾ÈÇßÀ» °æ¿ì -2 Ç¥½Ã
+		int result = -2; // ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½Ã¸ï¿½ ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ -2 Ç¥ï¿½ï¿½
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
@@ -341,7 +342,7 @@ public class MovieDAO {
 		return result;
 	}
 
-	// ÇØ´ç ¿µÈ­¿¡ ´ëÇÑ º°Á¡ ºÐÆ÷¸¦ °¡Á®¿Â´Ù.
+	// ï¿½Ø´ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 	public int[] MovieAllStar(int movieId) {
 		String sql = "select RATING_STAR_value,count(*) from RATING_STAR where MOVIE_ID=? group by RATING_STAR_value order by RATING_STAR_value	";
 		int[] result = new int[5];
@@ -356,9 +357,9 @@ public class MovieDAO {
 
 			while (rs.next()) {
 
-				// º°Á¡ Á¡¼ö //ÇØ´ç º°Á¡ °¹¼ö
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ //ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				result[(rs.getInt(1)) - 1] = rs.getInt(2);
-				// System.out.println((rs.getInt(1)-1)+"Á¡ °¹¼ö : "+rs.getInt(2));
+				// System.out.println((rs.getInt(1)-1)+"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : "+rs.getInt(2));
 
 			}
 
@@ -383,14 +384,11 @@ public class MovieDAO {
 
 			rs = pstmt.executeQuery();
 
-			
 			while (rs.next()) {
 
-				
-
-				// º°Á¡ Á¡¼ö //ÇØ´ç º°Á¡ °¹¼ö
+				// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ //ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				result[(rs.getInt(1)) - 1] = rs.getInt(2);
-				System.out.println((rs.getInt(1) - 1) + "Á¡ °¹¼ö : " + rs.getInt(2));
+				System.out.println((rs.getInt(1) - 1) + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + rs.getInt(2));
 
 			}
 
@@ -404,53 +402,95 @@ public class MovieDAO {
 	}
 
 	public ArrayList<Integer> getHiddenList(String user_id) {
-		
+
 		String sql = "select * from USER_HIDDEN_MOVIE where USER_ID = ?";
 		ArrayList<Integer> result = new ArrayList<Integer>();
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,user_id);
-			
+			pstmt.setString(1, user_id);
+
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				result.add(rs.getInt(2)); //¿µÈ­ ID
+
+			while (rs.next()) {
+				result.add(rs.getInt(2)); // ï¿½ï¿½È­ ID
 			}
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
-		
+
 		return result;
-		
+
 	}
 
+	public int InsertHidden(int movie_id, String user_id) {
 
-	public int InsertHidden(int movie_id,String user_id) {
-		
 		String sql = "insert into USER_HIDDEN_MOVIE values(?,?)";
 		int result1 = -1;
-		
+
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1,user_id);
-			pstmt.setInt(2,movie_id);
-		
-			
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, movie_id);
+
 			result1 = pstmt.executeUpdate();
-			
-			
-		}catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close();
 		}
-		
+
 		return result1;
-		
+
 	}
 
+	public List<MovieItemAPIVO> addStar(ArrayList<MovieItemAPIVO> list) {
+
+		String Id = "";
+
+		for (int i = 0; i < list.size(); i++) {
+
+			Id += list.get(i).getId();
+
+			if (i < list.size() - 1)
+				Id += ",";
+
+		}
+
+		// í•´ë‹¹ ì˜í™”ë“¤ì— ëŒ€í•œ ë³„ì  í‰ê·  ê°€ì ¸ì˜¤ê¸°
+		String sql = "select MOVIE_ID,avg(RATING_STAR_value) " + "from RATING_STAR where MOVIE_ID" + " in (" + Id
+				+ ") group by MOVIE_ID";
+
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int movieId = rs.getInt(1);
+				int star = rs.getInt(2);
+				
+				for(int j = 0; j < list.size(); j++)
+					if(list.get(j).getId() == movieId) {
+						list.get(j).setStar(star);
+						break;
+					}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		
+		return list;
+	}
+	
+	
+	
 }

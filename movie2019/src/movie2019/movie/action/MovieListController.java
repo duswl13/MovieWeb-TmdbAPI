@@ -3,6 +3,7 @@ package movie2019.movie.action;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -45,6 +46,9 @@ public class MovieListController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI = " + RequestURI);
 
@@ -64,12 +68,14 @@ public class MovieListController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 
+		ServletContext sc = this.getServletContext();
+		
 		if (command.equals("/main.ml")) {
 
-			action = new HiddenMovieAction();
+			action = new MainMovieAction();
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response,sc);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -79,7 +85,7 @@ public class MovieListController extends HttpServlet {
 			action = new MovieListAction(); // parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -89,7 +95,7 @@ public class MovieListController extends HttpServlet {
 			action = new SearchMovieAction(); // parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -99,7 +105,7 @@ public class MovieListController extends HttpServlet {
 		} else if (command.equals("/moviedetail.ml")) {
 			action = new SelectRatingAction();
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -113,7 +119,7 @@ public class MovieListController extends HttpServlet {
 			action = new InsertFaceRatingAction();// parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -122,7 +128,7 @@ public class MovieListController extends HttpServlet {
 			action = new InsertStarRatingAction();// parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -131,7 +137,7 @@ public class MovieListController extends HttpServlet {
 			action = new UpdateStarRatingAction();// parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -140,7 +146,7 @@ public class MovieListController extends HttpServlet {
 			action = new UpdateFaceRatingAction();// parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -149,7 +155,7 @@ public class MovieListController extends HttpServlet {
 			action = new InsertHiddenAction();// parameter 있음
 
 			try {
-				forward = action.execute(request, response);
+				forward = action.execute(request, response, null);
 
 			} catch (Exception e) {
 				e.printStackTrace();

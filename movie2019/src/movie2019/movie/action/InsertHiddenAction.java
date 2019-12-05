@@ -3,53 +3,60 @@ package movie2019.movie.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.reflect.TypeToken;
 
+import movie2019.movie.db.MovieDAO;
 import movie2019.movie.singleton.hiddenSingleton;
 
 public class InsertHiddenAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, ServletContext sc)
+			throws Exception {
 
-		// hidden ΩÃ±€≈Ê
 		hiddenSingleton hidden = hiddenSingleton.getInstance();
 
 		MovieDAO movieDAO = new MovieDAO();
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		String movieTitle = request.getParameter("movieTitle");
+		HttpSession session = request.getSession();
+		String userId;
 
-		int result = 0;
-		if (movieDAO.isMovieId(movieId, movieTitle)) {
-			result = movieDAO.InsertHidden(movieId, "duswl13");
-			if (result == 1) {
-				hidden.addHiddenValue(movieId);
+		if (session.getAttribute("id") != null) {
+			userId = (String) session.getAttribute("id");
+
+			int result = 0;
+			if (movieDAO.isMovieId(movieId, movieTitle)) {
+				result = movieDAO.InsertHidden(movieId, userId);
+				if (result == 1) {
+					hidden.addHiddenValue(movieId);
+				}
 			}
+
+			ArrayList<Integer> list = hidden.getHiddenList();
+
+			Gson gson = new Gson();
+			JsonElement element = gson.toJsonTree(list, new TypeToken<List<Integer>>() {
+			}.getType());
+
+			if (element.isJsonArray()) {
+
+				String json = gson.toJson(element);
+
+				response.getWriter().append(json);
+				System.out.println(json);
+			}
+		} else {
+
+			response.getWriter().append(Integer.toString(0));
 		}
-
-		ArrayList<Integer> list = hidden.getHiddenList();
-
-		Gson gson = new Gson();
-		JsonElement element = gson.toJsonTree(list, new TypeToken<List<Integer>>() {
-		}.getType());
-
-		if (!element.isJsonArray()) {
-			System.out.println("aaaa");
-			throw new Exception();
-		}
-
-		System.out.println("bbbb");
-		String json = gson.toJson(element);
-
-		// response.getWriter().append(Integer.toString(result));
-		response.setContentType("text/html;charset=utf-8");
-		response.getWriter().append(json);
-		System.out.println(json);
 		return null;
 
 	}
