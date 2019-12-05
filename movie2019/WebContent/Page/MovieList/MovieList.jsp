@@ -49,6 +49,10 @@
 }
 </style>
 
+<!-- 
+첫 로딩떄는 option 파라미터만 있으면 됨
+option이 뭔지에 따라 인기/최신/예정이 다름
+장르도 뒤에 붙음 -->
 <%
 	boolean open = Boolean.parseBoolean(request.getParameter("open"));
 	String apikey = application.getInitParameter("APIKEY");

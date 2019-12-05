@@ -36,7 +36,7 @@ public class SearchMovieAction implements Action {
 		if (request.getParameter("re") != null)
 			re = Boolean.parseBoolean(request.getParameter("re"));
 
-		System.out.println(this.getClass().getName() + ":re - " + re);
+		System.out.println(this.getClass().getName() + ":rs - " + re);
 		System.out.println(this.getClass().getName() + ":key - " + key);
 		
 		MoviePageAPIVO p_vo = movieAPIDAO.getSearchMovie(apikey, key, page);
@@ -49,9 +49,8 @@ public class SearchMovieAction implements Action {
 
 			System.out.println(this.getClass().getName() + ":p_vo.getResults() - " + p_vo.getResults().size());
 			
-			request.setAttribute("llist", p_vo.getResults());
-			for(int k = 0; k < p_vo.getResults().size(); k++)
-				System.out.println(p_vo.getResults().get(k).getTitle()+" : "+p_vo.getResults().get(k).getStar());
+			request.setAttribute("list", p_vo.getResults());
+			
 			request.setAttribute("more", p_vo.getPage() < p_vo.getTotal_pages());
 			request.setAttribute("key",key);
 			ActionForward forward = new ActionForward();

@@ -56,7 +56,9 @@
 		<div class="main_box">
 
 			<div class="main_box2">
-				<h1 id="m_head">${movieitem.title }</h1>
+				<h1 id="m_head">
+				{movieitem.title }
+				</h1>
 
 				<div class="starRev">
 					<c:forEach var="test" begin="1" end="${movieitem.star }">
