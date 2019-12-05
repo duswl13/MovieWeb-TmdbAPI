@@ -195,7 +195,7 @@ ul {
 					<ul>
 						<li><a href="<%=request.getContextPath()%>/user_info.mu">내 정보 수정</a></li>
 						<li><a href="<%=request.getContextPath()%>/Page/MyPage/MyReview/MyReview.jsp">내 리뷰 관리</a></li>
-						<li><a href="<%=request.getContextPath()%>/Page/MyPage/Hidden/Hidden.jsp">숨긴 콘텐츠 관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/hidden_list.mh">숨긴 콘텐츠 관리</a></li>
 					</ul>
 				</li>
 				<li>

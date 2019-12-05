@@ -1,15 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지:숨김 컨텐츠 관리</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+<title>마이페이지:숨긴 컨텐츠</title>
 <style>
 b {
-	color: yellow;
+	color: black;
 	padding-right:50px;
-	font-size: 20px;
+	font-size: 15px;
 }
 tr{
 	width:100%;
@@ -23,45 +34,110 @@ button{
 #replace{
 	padding-bottom:50px;
 }
-#btn1,#btn2{
-	width:100px;
-	height:20px;
-	margin-right:10px;
-}
 #btn3{
 	width:50px;
 }
+
+table, td {
+	border-bottom: 1px solid black;
+	border-collapse: collapse;
+}
+.container-fluid{
+	color:green;
+    text-shadow:
+    -1px -1px 0 grey,
+    1px -1px 0 grey,
+    -1px 1px 0 grey,
+    1px 1px 0 grey;
+}
+.center-block{
+	display:flex;
+	justify-content:center;	/* 가운데 정렬 */
+}
+
+.table-striped tbody tr:nth-of-type(odd){
+	background : black;
+	color : white;
+}
+div, td, a, th, .page-link{
+	color:white;
+}
+table, td {
+	border-bottom : none;
+}
+.btn-info {
+	background-color:#27AE60;
+	margin-bottom : 50px;
+	boder-color:#27AE60;
+}
+
+font{
+	color:white;
+}
+#detail{
+	background : #27AE60;
+	border : 1px solid green;
+	border-radius:10px;
+	font-size: 9px;
+    margin-left: 10px;
+}
 </style>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+
+$(function(){
+	if(<%=open%>)
+		document.getElementById("main").style.marginLeft = "250px";
+
+});
+
+</script>
 </head>
 <body>
-	<div class="container">
+<body style="background-color:black;">
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
 
-		<form name="joinform">
-			<div id="hidden">
-			<table>
-				<tr>
-					<td><b>숨긴 영화</b></td>
-					<td><b>숨김 해제</b></td>
-				</tr>
-				<tr>
-					<td><b>test</b></td>
-					<td><button id="btn3" class="btn btn-primary">해제</button></td>
-				</tr>
-			</table>
-			</div>
-			<div>
-			<table>
-				<tr>
-					<td id="btn1">
-						<button type="submit" class="btn btn-primary">수정</button>
-					</td>
-					<td id="btn2">
-						<button type="reset" class="btn btn-secondary">취소</button>
-					</td>
-				</tr>
-			</table>
-			</div>
-		</form>
+<div id="main">
+      <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
+         onclick="openNav()">&#9776;</span>
+         
+<c:if test="${empty id}">       
+	<script>
+		location.href = "<%=request.getContextPath()%>/Page/Login/login.jsp";
+	</script>
+</c:if>
+
+<div class="container">
+<c:if test="${listcount>0 }">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+			<th>숨긴영화 LIST</th>
+			<th><font size=3>숨긴 영화 수 :${listcount }</font></th>	
+			</tr>
+		</thead>	
+		<tr>
+				<td>숨긴 영화 목록</td>
+				<td>다시 보이기</td>
+		</tr>	
+		<c:forEach var="m" items="${totallist }">
+			<tr>
+				<td>${m.MOVIE_NAME }<span id="detail"><a href="moviedetail.ml?open=false&id=${m.MOVIE_ID}">상세보기</a></span></td>
+				<td><a href="hidden_delete.mh?user_id=${m.USER_ID }&movie_id=${m.MOVIE_ID}">해제</a></td>
+			</tr>
+		</c:forEach>
+	</table>
+	</c:if>
+		
+	<!--게시글이 없는 경우 -->
+	<c:if test="${listcount==0 }">
+		<font size=5>숨긴 영화가 없습니다.</font>
+	</c:if><br>
 	</div>
+</div>
 </body>
 </html>
