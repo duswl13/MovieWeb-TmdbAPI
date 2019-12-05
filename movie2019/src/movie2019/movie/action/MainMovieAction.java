@@ -79,6 +79,8 @@ public class MainMovieAction implements Action {
 		 */
 
 		MovieItemAPIVO movieItem = p_vo.getResults().get((new Random().nextInt(5)));
+		String title = movieItem.getTitle();
+		
 		String videoUrl = movieAPIDAO.getVideo(apikey, movieItem.getId());
 		System.out.println("videoUrl:" + videoUrl);
 

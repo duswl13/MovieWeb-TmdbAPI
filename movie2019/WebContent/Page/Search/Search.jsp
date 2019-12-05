@@ -107,21 +107,15 @@ if(<%=open%>)
 	var list = new Array();
 
 	<c:forEach items="${list}" var="item2">
-	var i = 0;
-	<c:if test="${empty item2.star}">
-	i = "${item2.star}";
-	alert(i);
-	
-	</c:if>
-	
 	
 
+	
 	list.push({
 		poster_path : "${item2.poster_path}",
 		id : "${item2.id}",
 		original_title : "${item2.original_title}",
 		title : "${item2.title}",
-		Star : i
+		Star : "${item2.star}"
 	});
 	</c:forEach>
 	
@@ -210,7 +204,7 @@ if(<%=open%>)
 			
 			text += ' <div>';
 			
-			for(var k =0; k < list[check].star; k++)
+			for(var k =0; k < list[check].Star; k++)
 			text += '<span class="fa fa-star"></span>';
 		
 			text += ' </div>';
@@ -254,7 +248,7 @@ if(<%=open%>)
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 		
 					text += ' <div>';
-					for(var k =0; k < list[check].star; k++)
+					for(var k =0; k < list[check].Star; k++)
 					text += '<span class="fa fa-star"></span>';
 					
 					text += ' </div>';
