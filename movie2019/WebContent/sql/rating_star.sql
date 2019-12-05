@@ -17,9 +17,16 @@ INSERT INTO RATING_STAR VALUES(330457,'sonyeonsoo',5,sysdate);
 INSERT INTO RATING_STAR VALUES(330457,'admin1',5,sysdate);
 INSERT INTO RATING_STAR VALUES(330457,'jiyeon',2,sysdate);
 
+INSERT INTO RATING_STAR VALUES(429617,'admin1',5,sysdate);
+INSERT INTO RATING_STAR VALUES(429617,'jiyeon',2,sysdate);
 select * from RATING_STAR where user_id='duswl13';
+select * from RATING_STAR;
 
-/*ÇØ´ç ¿µÈ­¿¡ ´ëÇÑ º°Á¡ ºÐÆ÷*/
+<!--í•´ë‹¹ ì˜í™”ì— ëŒ€í•œ ë³„ì  ì ìˆ˜-->
 select RATING_STAR_value,count(*) from RATING_STAR where MOVIE_ID=330457 group by RATING_STAR_value;
+
+
+
+select MOVIE_ID,avg(RATING_STAR_value) from RATING_STAR where MOVIE_ID =330457 group by MOVIE_ID;
 
  

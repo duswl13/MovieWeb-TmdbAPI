@@ -7,12 +7,12 @@ body{
 	padding-right: 5em;
 }
 
-/*¸®½ºÆ®µé »çÀÌ °£°İ*/
+/*ë¦¬ìŠ¤íŠ¸ë“¤ ì‚¬ì´ ê°„ê²©*/
 .main-list-padding {
 	margin-bottom: 10em;
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 .video-background {
 	background: #000;
 	position: absolute;
@@ -23,7 +23,7 @@ body{
 	z-index: -99;
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 .video-foreground, .video-background iframe {
 	position: absolute;
 	top: 0;
@@ -33,13 +33,13 @@ body{
 	pointer-events: none;
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 @media ( min-aspect-ratio : 16/9) {
 	.video-foreground {
 		height: 100vh;
 		top: -10vh;
 		/*height: 300%;
-		top: -100%; /*»ó´Ü À¯Åõºê Á¦¸ñ ¾Èº¸ÀÌ°ÔÇÏ·Á°í*/
+		top: -100%; /*ìƒë‹¨ ìœ íˆ¬ë¸Œ ì œëª© ì•ˆë³´ì´ê²Œí•˜ë ¤ê³ */
 	}
 }
 
@@ -50,13 +50,13 @@ body{
 	}
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ*/
 @media ( min-aspect-ratio : 1/1) {
 	.video-foreground {
 		height: 100vh;
 		top: -10vh;
 		/*height: 300%;
-		top: -100%; /*»ó´Ü À¯Åõºê Á¦¸ñ ¾Èº¸ÀÌ°ÔÇÏ·Á°í*/
+		top: -100%; /*ìƒë‹¨ ìœ íˆ¬ë¸Œ ì œëª© ì•ˆë³´ì´ê²Œí•˜ë ¤ê³ */
 	}
 }
 
@@ -67,7 +67,7 @@ body{
 	}
 }
 
-/*À¯Åõºê ¹é±×¶ó¿îµå ºÒÅõ¸íµµ*/
+/*ìœ íˆ¬ë¸Œ ë°±ê·¸ë¼ìš´ë“œ ë¶ˆíˆ¬ëª…ë„*/
 iframe {
 	opacity: 0.65;
 }
@@ -75,14 +75,14 @@ iframe {
 h1{
 	text-align: right;
 }
-/*¸ŞÀÎ ¿µÈ­¼Ò°³*/
+/*ë©”ì¸ ì˜í™”ì†Œê°œ*/
 #m_head {
 	color: white;
 	font-size: 8em;
 	text-align: right;
 }
 
-/*¸ŞÀÎ ¿µÈ­¼Ò°³*/
+/*ë©”ì¸ ì˜í™”ì†Œê°œ*/
 #m_reviews, #m_content {
 	clear: right;
 	color: white;
@@ -90,21 +90,21 @@ h1{
 	text-align: right;
 }
 
-/*¸ŞÀÎ ¿µÈ­¼Ò°³*/
+/*ë©”ì¸ ì˜í™”ì†Œê°œ*/
 .main_box {
 	float: right;
-	width: 50%;
+	width: 70%;
 	height: 80vh;
 	display: table;
 }
 
-/*¸ŞÀÎ ¿µÈ­¼Ò°³ vert ¸ÂÃß·Á°í*/
+/*ë©”ì¸ ì˜í™”ì†Œê°œ vert ë§ì¶”ë ¤ê³ */
 .main_box2 {
 	display: table-cell;
 	vertical-align: middle;
 }
 
-/*¸ŞÀÎ ¿µÈ­¼Ò°³ º°Á¡*/
+/*ë©”ì¸ ì˜í™”ì†Œê°œ ë³„ì */
 .starR {
 	float: right;
 	background:
@@ -131,7 +131,7 @@ h1{
 }
 
 
-/*¿µÈ­ ¸®½ºÆ®*/
+/*ì˜í™” ë¦¬ìŠ¤íŠ¸*/
 @keyframes tutsFade {
   to {
     opacity: 0.4;
@@ -181,7 +181,7 @@ height:3em;}
 }
 
 .img-responsive {
-	width: 80%; /*Å©±â*/
+	width: 80%; /*í¬ê¸°*/
 	height: auto;
 }
 
@@ -226,7 +226,7 @@ height:3em;}
 	opacity: 0.6;
 }
 
-/*»çÀÌµå ¿ŞÂÊ ±×¶óµ¥ÀÌ¼Ç*/
+/*ì‚¬ì´ë“œ ì™¼ìª½ ê·¸ë¼ë°ì´ì…˜*/
 .carousel-control.left {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+65,7db9e8+100&1+27,0+100 */
 	background: -moz-linear-gradient(left, rgba(0, 0, 0, 1) 27%,
@@ -241,7 +241,7 @@ height:3em;}
 		endColorstr='#007db9e8', GradientType=1); /* IE6-9 */
 }
 
-/*»çÀÌµå ¿À¸¥ÂÊ ±×¶óµ¥ÀÌ¼Ç*/
+/*ì‚¬ì´ë“œ ì˜¤ë¥¸ìª½ ê·¸ë¼ë°ì´ì…˜*/
 .carousel-control.right {
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,000000+33&0+0,1+100 */
 	background: -moz-linear-gradient(left, rgba(125, 185, 232, 0) 0%,

@@ -528,23 +528,6 @@ font-size:15px;
 if(<%=open%>)
 document.getElementById("main").style.marginLeft = "250px";
 	
-var hiddenlist = new Array();
-<c:forEach items="${hidden}" var="item">
-hiddenlist.push("${item}");
-</c:forEach>
-
-for(var j = 0;j < hiddenlist.length; j++)
-	hiddenlist[j] = hiddenlist[j]*1;
-
-function hiddenremove(list){
-	for(var i = 0; i < list.length; i++){
-		if(hiddenlist.includes(list[i].id)){
-			list.splice(i,1);
-		}
-	}
-	return list;
-}
-
 
 	
 	
@@ -639,7 +622,7 @@ function hiddenremove(list){
 			
 			var list = data.results;
 			console.log('비슷한 영화 성공 , 갯수 :' + list.length);
-			printSimilar(hiddenremove(list));
+			printSimilar(list);
 			
 
 		}, //HTTP 요청이 성공한 경우 실행
@@ -1033,7 +1016,7 @@ function hiddenremove(list){
 				
 				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
 						+ list[check].id +'&title='+list[check].original_title
-						+ '\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+						+ '\'">';
 				text += '<h3 style="clear:right;" class="centeredText"><b>'
 						+ list[check].original_title + '</b></h3>\n';
 

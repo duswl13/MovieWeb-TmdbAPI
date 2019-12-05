@@ -2,9 +2,11 @@ package movie2019.movie.action;
 
 import java.util.ArrayList;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie2019.movie.db.MovieDAO;
 import movie2019.movie.singleton.hiddenSingleton;
 import movie2019.review.db.AllReviewVO;
 import movie2019.review.db.ReviewVO;
@@ -12,7 +14,7 @@ import movie2019.review.db.ReviewVO;
 public class SelectRatingAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, ServletContext sc) throws Exception {
 
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");

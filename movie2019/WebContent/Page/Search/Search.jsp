@@ -107,23 +107,6 @@ if(<%=open%>)
 	
 
 	
-	var hiddenlist = new Array();
-	<c:forEach items="${hidden}" var="item">
-	hiddenlist.push("${item}");
-	</c:forEach>
-	
-	for(var j = 0;j < hiddenlist.length; j++)
-		hiddenlist[j] = hiddenlist[j]*1;
-	
-	function hiddenremove(list){
-		for(var i = 0; i < list.length; i++){
-			if(hiddenlist.includes(list[i].id)){
-				list.splice(i,1);
-			}
-		}
-		return list;
-	}
-	
 	
 	
 	function searchList(){
@@ -144,7 +127,7 @@ if(<%=open%>)
 					allpages = data.total_pages;
 					console.log('list.length:'+list.length);
 					printMore(list.length);				
-					printMovie(hiddenremove(list));
+					printMovie(list);
 					
 
 				}, //HTTP 요청이 성공한 경우 실행
@@ -211,7 +194,7 @@ if(<%=open%>)
 			
 			
 			
-			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'">';
 			text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 			
 			text += ' <div>';
@@ -272,7 +255,7 @@ if(<%=open%>)
 					
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'">';
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
 		
 					text += ' <div>';
