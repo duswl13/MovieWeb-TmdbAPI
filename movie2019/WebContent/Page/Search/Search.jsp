@@ -108,7 +108,6 @@ if(<%=open%>)
 
 	<c:forEach items="${list}" var="item2">
 	var i = 0;
-
 	<c:if test="${empty item2.star}">
 	i = "${item2.star}";
 	alert(i);
