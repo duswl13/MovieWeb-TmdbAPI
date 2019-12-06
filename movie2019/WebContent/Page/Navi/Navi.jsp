@@ -163,6 +163,18 @@ ul {
 	display: flex;
 	justify-content: center; /*가운데정렬*/
 }
+
+.voshu-gradiant {
+    color: #2cdd9b;
+    color: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    color: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    color: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    color: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+span .hello {margin-left:30px;
+}
 </style>
 </head>
 <body>
@@ -171,7 +183,7 @@ ul {
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
 
-		<a href="<%=request.getContextPath()%>/main.ml"><span class=logo>VOSHU</span></a>
+		<a href="<%=request.getContextPath()%>/main.ml"><span class="logo voshu-gradiant">VOSHU</span></a>
 
 		<div id="accordian">
 
@@ -249,13 +261,13 @@ ul {
 							onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.jsp'">로그인</button>
 					</c:if> <c:if test="${!empty id}">
 						<c:if test="${id=='admin'}">
-							<span>관리자 ${id}님 보슈~</span>
+							<span class=hello>관리자 ${id}님 보슈~</span>
 							<button type="button" id="login"
 								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
 						</c:if>
 
 						<c:if test="${id!='admin'}">
-							<span>${id}님 보슈~</span>
+							<span class=hello>${id}님 보슈~</span>
 							<button type="button" id="login"
 								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
 						</c:if>
