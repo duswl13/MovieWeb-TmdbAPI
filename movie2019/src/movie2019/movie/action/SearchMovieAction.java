@@ -38,7 +38,7 @@ public class SearchMovieAction implements Action {
 
 		System.out.println(this.getClass().getName() + ":rs - " + re);
 		System.out.println(this.getClass().getName() + ":key - " + key);
-		
+
 		MoviePageAPIVO p_vo = movieAPIDAO.getSearchMovie(apikey, key, page);
 
 		p_vo.setResults((addStar((ArrayList<MovieItemAPIVO>) p_vo.getResults())));
@@ -48,11 +48,11 @@ public class SearchMovieAction implements Action {
 		if (!re) {
 
 			System.out.println(this.getClass().getName() + ":p_vo.getResults() - " + p_vo.getResults().size());
-			
+
 			request.setAttribute("list", p_vo.getResults());
-			
+
 			request.setAttribute("more", p_vo.getPage() < p_vo.getTotal_pages());
-			request.setAttribute("key",key);
+			request.setAttribute("key", key);
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 			forward.setPath("Page/Search/Search.jsp");
@@ -70,7 +70,7 @@ public class SearchMovieAction implements Action {
 
 			JSONArray jArray = new JSONArray();
 			for (MovieItemAPIVO m : p_vo.getResults()) {
-				
+
 				JSONObject item = new JSONObject();
 				item.put("poster_path", m.getPoster_path());
 				item.put("id", m.getId());

@@ -8,13 +8,12 @@
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<!-- Our Custom CSS -->
+
 
 
 <!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<!--    <script type="text/javascript"
-      src="http://code.jquery.com/jquery-2.1.4.js"></script>-->
+
 <!-- Bootstrap Js CDN -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -55,10 +54,8 @@ option이 뭔지에 따라 인기/최신/예정이 다름
 장르도 뒤에 붙음 -->
 <%
 	boolean open = Boolean.parseBoolean(request.getParameter("open"));
-	String apikey = application.getInitParameter("APIKEY");
-	int option = Integer.parseInt(request.getParameter("option"));
 %>
-<title>Insert title here</title>
+<title>VOSHU</title>
 </head>
 <body>
 
@@ -142,78 +139,61 @@ if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 	
 
-	var sort1 = <%=option%>;
+	var sort1 = ${option};
 	
 	$('#sel1').val(sort1).prop("selected", true); 
 	var sort2 = 0;
+	var page = 1;
+	var listsize = 0; //필터링으로 인한 영화 빈거 채우려고
+	var more = ${more};
 	
-	var page = 0;
+
+	var list = new Array();
+
+	<c:forEach items="${list}" var="item2">
 	
-	readyList();
+
+	
+	list.push({
+		poster_path : "${item2.poster_path}",
+		id : "${item2.id}",
+		original_title : "${item2.original_title}",
+		title : "${item2.title}",
+		Star : "${item2.star}"
+	});
+	</c:forEach>
 	
 	
-	function getDt3(month){
-		
-		var today = new Date();
-		today.setMonth( today.getMonth() + month );
-		
-		var year = today.getFullYear();
-		var mon = today.getMonth()+1;
-	
-		if(mon<10){
-			mon = "0"+mon;
-		};
-		
-		var day = today.getDate();
-		if(day<10){
-			day = "0"+day;
-		}
-		
-		return year+"-"+mon+"-"+day;		
-		}
+	printMore(more);				
+	printMovie(list);
 	
 	
 	function readyList(){
 	//api 접근해서 목록 만들기
 	
 	page ++;
-	var link ='';
-	//인기, 최신, 개봉예정 필터
-	//alert('sort1 :' + sort1);
-	switch(parseInt(sort1)){
-	case 1:
-		link = 'https://api.themoviedb.org/3/movie/popular?api_key=<%=apikey%>&language=ko-KO&page='+page+'&region=KR';
-		break;
-	case 2:
-		
-		link = 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&page='+page+'&region=KR&sort_by=release_date.desc&release_date.lte='+getDt3(0);
-		break;
-	case 3:
-		link = 'https://api.themoviedb.org/3/discover/movie?api_key=<%=apikey%>&language=ko-KO&page='
-				+ page
-				+ '&region=KR&sort_by=release_date.asc&include_adult=false&release_date.gte='
-				+ getDt3(0) + '&release_date.lte=' + getDt3(5);
-			break;
-		}
+	var link ='<%=request.getContextPath()%>/MovieList.ml?re=true&option='+sort1;
+		link += '&page='+page;
+
+	
 
 		//장르 필터
-		var option = '';
 		if (sort2 != 0) {
-			option = '&with_genres=' + sort2;
+			link += '&genre=' + sort2;
 		}
 
-		console.log('이동할 페이지 :' + page + "," + link+option);
+		console.log('이동할 페이지 :' + page + "," + link+",sort2 확인"+sort2);
 
 		$.ajax({
-			url : link + option, //요청 전송 url
+			url : link, 
 			dataType : 'json',
 			cache : false,
 			success : function(data) {
 
 				var list = data.results;
 				allpages = data.total_pages;
-				
-				printMore(list.length);	
+				console.log('list.length:'+list.length);
+				printMore(data.more);				
 				printMovie(list);
 
 			}, //HTTP 요청이 성공한 경우 실행
@@ -255,11 +235,10 @@ if(<%=open%>)
 	
 
 
-	var listsize = 0; //필터링으로 인한 영화 빈거 채우려고
 	
 	//api 결과가 20개가 아닌 경우 결과의 끝이라고 보고 더보기 숨김
 	function printMore(size){
-		if(size != 20)
+		if(!size)
 			$('.more').css('visibility','hidden');
 		else
 			$('.more').css('visibility','visible');
@@ -279,42 +258,26 @@ if(<%=open%>)
 			for (var j = 0; j < 4; j++) {
 
 				if (check < list.length) {
-					if (list[check].poster_path == null
-							|| list[check].overview == null
-							|| list[check].genre_ids == null
-							|| list[check].overview == ""
-							|| list[check].genre_ids == ""
-							|| list[check].overview.includes('섹스')) {
-						j--;
-						check++;
-						console.log('이상한 거니까 넘김' + check);
-
-						continue;
-					}
-
-					list[check].overview = list[check].overview.substring(0,
-							50)
-							+ '...';
+					
 					text += '<div class="col-xs-3">';
 					
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 					
-					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					list[check].title = list[check].title.replace(/\"/gi, "");
+					list[check].title = list[check].title.replace(/\'/gi, "");
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'">';
-					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id 
+							+'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\'">';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 		
 					text += ' <div>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
+					for(var k =0; k < list[check].Star; k++)
+						text += '<span class="fa fa-star"></span>';
+					
 					text += ' </div>';
 					text +='</div>\n';
-					text += '<h5>' + list[check].original_title + '</h5>';
+					text += '<h5>' + list[check].title + '</h5>';
 				
 					text += '</div>';
 					listsize ++;
@@ -340,42 +303,27 @@ if(<%=open%>)
 			for (var j = 0; j < add; j++) {
 
 				if (check < list.length) {
-					if (list[check].poster_path == null
-							|| list[check].overview == null
-							|| list[check].genre_ids == null
-							|| list[check].overview == ""
-							|| list[check].genre_ids == ""
-							|| list[check].overview.includes('섹스')) {
-						j--;
-						check++;
-						console.log('이상한 거니까 넘김' + check);
+				
 
-						continue;
-					}
-
-					list[check].overview = list[check].overview.substring(0,
-							50)
-							+ '...';
 					text += '<div class="col-xs-3">';
 					
 					
-					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					list[check].title = list[check].title.replace(/\"/gi, "");
+					list[check].title = list[check].title.replace(/\'/gi, "");
 					
 					
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'">';
-					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
+							+list[check].id +'&title='+list[check].title+"&poster_path="+list[check].poster_path+'\'">';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 		
 					text += ' <div>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += ' </div>';
+					for(var k =0; k < list[check].Star; k++)
+						text += '<span class="fa fa-star"></span>';
+					
+					text += ' </div>';	
 					text +='</div>\n';
-					text += '<h5>' + list[check].original_title + '</h5>';
+					text += '<h5>' + list[check].title + '</h5>';
 				
 					text += '</div>';
 					listsize ++;
@@ -386,7 +334,9 @@ if(<%=open%>)
 			
 			
 			
-			//빈 공간만큼 추가하기
+			if(page == 1)
+				$('.movieList').html(text);
+			else
 			$('.movieList > .row:last').html($('.movieList > .row:last').html()+text);
 			
 			//채운만큼 리스트삭제하기

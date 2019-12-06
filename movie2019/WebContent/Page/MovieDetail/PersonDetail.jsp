@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/MovieList.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -18,7 +19,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<title>Insert title here</title>
+<title>VOSHU</title>
 <style>
 body{
 background: #141414;
@@ -57,9 +58,6 @@ margin-bottom: 3em;
 </head>
 <%
 
-String id = request.getParameter("id");
-String name = request.getParameter("name");
-String apikey = application.getInitParameter("APIKEY");
 boolean open = false;
 if(request.getParameter("open") != null){
 	open = Boolean.parseBoolean(request.getParameter("open"));
@@ -84,7 +82,7 @@ if(request.getParameter("open") != null){
 <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 	
 
-<h1 id="persionId"><%=name %></h1>
+<h1 id="persionId">${name}</h1>
 
 <hr>
 
@@ -106,42 +104,31 @@ document.getElementById("main").style.marginLeft = "250px";
 
 
 //search 검색 결과는 한 페이지에 모든 결과가 다 나옴.
-var list = null;
 
-readyList();
+var list = new Array();
+var page = false; //search 결과는 한 페이지에 전부 다 나옴
+var listsize = 0; //필터링으로 인한 영화 빈칸 체크
+<c:forEach items="${list}" var="item2">
 
-
-
-
-function readyList(){
-	
-
-	
-	console.log('https://api.themoviedb.org/3/person/<%=id%>/movie_credits?api_key=<%=apikey%>&language=ko-KO&page='+page);
-$.ajax({
-
-	url : 'https://api.themoviedb.org/3/person/<%=id%>/movie_credits?api_key=<%=apikey%>&language=ko-KO&page='+page,
-	dataType : 'json',
-	cache : false,
-	success : function(data) {
-
-	
-		list = data.cast;
-		console.log('사람 정보 성공 :'+list.length);
-		printMore(list.length);	
-		printPerson();
-		
-	},
-	error : function(request, status, error) {
-		console.log('사람 정보 error');
-	},
-	complete : function() {
-		console.log('사람 정보 ');
-
-	}
+list.push({
+	poster_path : "${item2.poster_path}",
+	id : "${item2.id}",
+	original_title : "${item2.original_title}",
+	title : "${item2.title}",
+	Star : "${item2.star}"
 });
 
-}
+</c:forEach>
+
+printMore(list.length);		
+printPerson();
+
+
+console.log('사람 정보 성공 :'+list.length);
+
+
+		
+
 
 
 $('.more').click(function(){
@@ -159,8 +146,7 @@ function printMore(size){
 
 
 
-var page = false; //search 결과는 한 페이지에 전부 다 나옴
-var listsize = 0; //필터링으로 인한 영화 빈칸 체크
+
 
 function printPerson(){
 	
@@ -176,42 +162,28 @@ function printPerson(){
 			for (var j = 0; j < 4; j++) {
 
 				if (check < list.length) {
-					if (list[check].poster_path == null
-							|| list[check].overview == null
-							|| list[check].genre_ids == null
-							|| list[check].overview == ""
-							|| list[check].genre_ids == ""
-							|| list[check].overview.includes('섹스')) {
-						j--;
-						check++;
-						console.log('이상한 거니까 넘김' + check);
+				
 
-						continue;
-					}
-
-					list[check].overview = list[check].overview.substring(0,
-							100)
-							+ '...';
+				
 					text += '<div class="col-xs-3">';
 				
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 
-					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					list[check].title = list[check].title.replace(/\"/gi, "");
+					list[check].title = list[check].title.replace(/\'/gi, "");
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
-					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
+							+list[check].id +'&title='+list[check].title+
+							'&poster_path='+list[check].poster_path+'\'">';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 					
 					text += ' <div>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
+					for(var k =0; k < list[check].Star; k++)
+						text += '<span class="fa fa-star"></span>';
 					text += ' </div>';
 					text +='</div>\n';
-					text += '<h5>' + list[check].original_title + '</h5>';
+					text += '<h5>' + list[check].title + '</h5>';
 				
 					text += '</div>';
 					listsize ++;
@@ -234,43 +206,28 @@ function printPerson(){
 			for (var j = 0; j < add; j++) {
 
 				if (check < list.length) {
-					if (list[check].poster_path == null
-							|| list[check].overview == null
-							|| list[check].genre_ids == null
-							|| list[check].overview == ""
-							|| list[check].genre_ids == ""
-							|| list[check].overview.includes('섹스')) {
-						j--;
-						check++;
-						console.log('이상한 거니까 넘김' + check);
+				
 
-						continue;
-					}
-
-					list[check].overview = list[check].overview.substring(0,
-							100)
-							+ '...';
+				
 					text += '<div class="col-xs-3">';
 				
 					text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 					
 					
-					list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-					list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+					list[check].title = list[check].title.replace(/\"/gi, "");
+					list[check].title = list[check].title.replace(/\'/gi, "");
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].original_title+'\'"><a href="#" class="btn btn-danger" id="hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
-					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].original_title + '</b></h3>\n';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
+							+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\'">';
+					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 					
 					text += ' <div>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
-					text += '<span class="fa fa-star"></span>';
+					for(var k =0; k < list[check].Star; k++)
+						text += '<span class="fa fa-star"></span>';
 					text += ' </div>';
 					text +='</div>\n';
-					text += '<h5>' + list[check].original_title + '</h5>';
+					text += '<h5>' + list[check].title + '</h5>';
 				
 					text += '</div>';
 					listsize ++;

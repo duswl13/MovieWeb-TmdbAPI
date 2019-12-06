@@ -51,7 +51,7 @@
 boolean open = Boolean.parseBoolean(request.getParameter("open"));
 	String apikey = application.getInitParameter("APIKEY");
 %>
-<title>Insert title here</title>
+<title>VOSHU</title>
 
 </head>
 <body>
@@ -199,7 +199,7 @@ if(<%=open%>)
 			
 			
 			
-			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'\'">';
+			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\'">';
 			text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 			
 			text += ' <div>';
@@ -244,7 +244,7 @@ if(<%=open%>)
 					
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'\'">';
+					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\'">';
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 		
 					text += ' <div>';

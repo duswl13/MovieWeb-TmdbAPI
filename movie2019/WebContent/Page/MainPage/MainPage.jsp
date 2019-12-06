@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Insert title here</title>
+<title>VOSHU</title>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Bootstrap CSS CDN -->
@@ -57,7 +57,7 @@
 
 			<div class="main_box2">
 				<h1 id="m_head">
-				{movieitem.title }
+				${movieitem.title }
 				</h1>
 
 				<div class="starRev">
@@ -79,7 +79,7 @@
 				<div class="col-md-12">
 					<h3>인기 영화</h3>
 					<span class="more"
-						onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=1'">더보기</span>
+						onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=1&re=false'">더보기</span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel1">
 						<div class="carousel-inner">
 
@@ -92,13 +92,13 @@
 
 											<div class="col-xs-4">
 												<a
-													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}">
+													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}&poster_path=${item.poster_path}">
 													<img
 													src="https://image.tmdb.org/t/p/w500${item.poster_path}"
 													class="img-responsive">
 
 													<div class="centered">
-														<a href="javascript:hidden(${item.id},'${item.title}',0)"
+														<a href="javascript:hidden(${item.id},'${item.title}','${item.poster_path }',0)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>
@@ -117,13 +117,13 @@
 										<div class="item">
 											<div class="col-xs-4">
 												<a
-													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}">
+													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}&poster_path=${item.poster_path}">
 													<img
 													src="https://image.tmdb.org/t/p/w500${item.poster_path}"
 													class="img-responsive">
 
 													<div class="centered">
-														<a href="javascript:hidden(${item.id},'${item.title}',0)"
+														<a href="javascript:hidden(${item.id},'${item.title}','${item.poster_path }',0)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>
@@ -174,7 +174,7 @@
 				<div class="col-md-12">
 					<h3>최신 영화</h3>
 					<span class="more"
-						onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=2'">더보기</span>
+						onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=2&re=false'">더보기</span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel2">
 						<div class="carousel-inner">
 
@@ -187,13 +187,13 @@
 
 											<div class="col-xs-4">
 												<a
-													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}">
+													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}&poster_path=${item.poster_path}">
 													<img
 													src="https://image.tmdb.org/t/p/w500${item.poster_path}"
 													class="img-responsive">
 
 													<div class="centered">
-														<a href="javascript:hidden(${item.id},'${item.title}',1)"
+														<a href="javascript:hidden(${item.id},'${item.title}','${item.poster_path }',1)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>
@@ -212,13 +212,13 @@
 										<div class="item">
 											<div class="col-xs-4">
 												<a
-													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}">
+													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}&poster_path=${item.poster_path}">
 													<img
 													src="https://image.tmdb.org/t/p/w500${item.poster_path}"
 													class="img-responsive">
 
 													<div class="centered">
-														<a href="javascript:hidden(${item.id},'${item.title}',1)"
+														<a href="javascript:hidden(${item.id},'${item.title}','${item.poster_path}',1)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>
@@ -266,7 +266,7 @@
 				<div class="col-md-12">
 					<h3>개봉 예정 영화</h3>
 					<span class="more"
-						onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=3'">더보기</span>
+						onclick="location.href='<%=request.getContextPath()%>/MovieList.ml?option=3&re=false'">더보기</span>
 					<div class="carousel slide multi-item-carousel" id="theCarousel3">
 						<div class="carousel-inner">
 
@@ -279,13 +279,13 @@
 
 											<div class="col-xs-4">
 												<a
-													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}">
+													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}&poster_path=${item.poster_path}">
 													<img
 													src="https://image.tmdb.org/t/p/w500${item.poster_path}"
 													class="img-responsive">
 
 													<div class="centered">
-														<a href="javascript:hidden(${item.id},'${item.title}',2)"
+														<a href="javascript:hidden(${item.id},'${item.title}','${item.poster_path}',2)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>
@@ -304,14 +304,14 @@
 										<div class="item">
 											<div class="col-xs-4">
 												<a
-													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}">
+													href="moviedetail.ml?open=false&id=${item.id}&title=${item.title}&poster_path=${item.poster_path}">
 													<img
 													src="https://image.tmdb.org/t/p/w500${item.poster_path}"
 													class="img-responsive">
 
 													<div class="centered">
 														<a
-															href="javascript:hidden(${item.id},'${item.original_title}',2)"
+															href="javascript:hidden(${item.id},'${item.original_title}','${item.poster_path}',2)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>
@@ -432,12 +432,13 @@
 		</c:forEach>
 
 		//몇번쨰 캐러셀의 몇번쨰 div인지
-		function hidden(movieId, movieTitle, ca) {
+		function hidden(movieId, movieTitle,poster, ca) {
 			//숨김 버튼 눌렀을 경우 서블릿으로 숨김 영화 insert
 
 			var restData = {
 				"movieId" : movieId,
-				"movieTitle" : movieTitle
+				"movieTitle" : movieTitle,
+				"poster_path":poster,
 			};
 
 			$.ajax({
@@ -489,11 +490,12 @@
 				return;
 			}
 			var print = '';
-			var i = 0;
+		
 
-			for (var check = 0; check < 5; check++) {
+			for (var i = 0; i < list.length; i++) {
+			
 
-				if (check == 0)
+				if (i == 0)
 					print += '<div class="item active">\n';
 				else
 					print += '<div class="item">\n';
@@ -501,20 +503,20 @@
 				print += '<div class="col-xs-4">\n';
 
 				list[i].title = list[i].title.replace(/\"/gi, "");
-				list[i].title = list[i].title.replace(/\'/gi, "");
 
 				print += '<a href="moviedetail.ml?open=false&id=' + list[i].id
-						+ '&title=' + list[i].title + '">\n';
+						+ '&title=' + list[i].title + '&poster_path=\''+list[i].poster_path+'\'">\n';
 				print += '<img src="https://image.tmdb.org/t/p/w500'+list[i].poster_path+'" class="img-responsive">\n';
 				print += '\n<div class="centered">\n';
 				print += '<a href="javascript:hidden('
 						+ list[i].id
 						+ ',\''
 						+ list[i].title
+						+ '\',\''
+						+ list[i].poster_path
 						+ '\','
 						+ count
-						+ ','
-						+ check
+						
 						+ ')" class="btn btn-danger hiddenMovie" style="float:right; margin-bottom:8px;">숨김</a>';
 				print += '<h1 style="clear:right; float:right;">'
 						+ list[i].title + '</h1>\n';
@@ -528,7 +530,7 @@
 				print += ' </div>';
 
 				print += '\n</div></a></div></div>\n';
-				i++;
+			
 			}
 
 			//console.log(print);
