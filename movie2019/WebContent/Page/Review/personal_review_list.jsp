@@ -66,21 +66,23 @@ body {
 }
 
 /*가운데 동글 아이콘*/
-.icon-round {
-    width: 35px;
-    height: 35px;
-    line-height: 28px;
+.rvlist .icon-round {
+    width: 40;
+    height: 40;
+    line-height: 30px;
     text-align: center;
     border-radius: 100%;
     display: inline-block;
+}
+
+.icon-round {
     position: absolute;
     right: -18px;
-    top: 13px;
+    top: 12px;
     max-height: 300px;
 }
 
-
-.bg-gradiant {
+.rvlist .bg-gradiant {
     background: #2cdd9b;
     background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
     background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
@@ -99,8 +101,20 @@ a {
 }
 
 a:hover {
-	color:#2cdd9b;
+	color:white;
     text-decoration: none;
+}
+
+.rvlist .linking {
+    color: #3e4555;
+}
+
+.rvlist .linking:hover {
+    color: #316ce8;
+}
+
+.rvlist .card-body {
+    padding: 20px;
 }
 
 @media (max-width: 300px) {
@@ -136,9 +150,6 @@ a:hover {
     background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);	
 }
 
-.bg-white {
-	background:white;
-}
 .writebutton {
     position:absolute;
 	right:150px;
@@ -207,7 +218,6 @@ if(request.getParameter("open") != null){
 		</span>
 
         <br>
-        
 <div class="py-5 rvlist">
     <div class="container">
         <!-- row  -->
@@ -219,7 +229,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://ww.namu.la/s/a72cdf98b9e910668043d6a133cde88ad1208267475f3e3d9567b162603ac916f3ac729791c407322247af759da8288800e47368143694c3b5b95c7c90a8be5b76527f02bf679064cdfbe54246473261f655f781ed94ac6396b2c27862cfa2cdf82359498c0aa67689578922afe34f8e)">
-                             <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">+</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -227,7 +237,7 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~</p>
                                 <br>
                                  <p class=star >★★★★☆</p> 
-                                <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                                <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
                            		
                             </div>
                         </div>
@@ -241,7 +251,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://ww.namu.la/s/5570fd1083d5a897953712d1d6e7c64f737908c13d969e68045cb0600069716ec699991085e6eaf3f5baf716313284825f3662498528bf06b29996c1fe3f8b3d0c275248cad215fbf600e5c188cc4403d68d945c6fe9b87242634d5c35b95c6a4fa20ec166b4982598eeb2434307007f)">
-                            <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">-</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -249,7 +259,7 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>무서워요.</p>
                                  <br>
                                   <p class=star >★☆☆☆☆</p> 
-                              <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                              <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
                            		
                             </div>
                         </div>
@@ -263,7 +273,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://newsimg.sedaily.com/2019/10/01/1VPCOEOZBK_1.jpg)">
-                            <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">-</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -271,7 +281,8 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>ㅎ....</p>
                                   <br>
                                  <p class=star >★☆☆☆☆</p> 
-                               <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                               <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
@@ -284,7 +295,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://t1.daumcdn.net/movie/676b7dbf7a2cf721d01efc61708493080d2a9d8e)">
-                            <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">+</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -292,7 +303,8 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>역시... 명작... 아름다운...</p>
                                 <br>
                                 <p class=star >★★★☆☆</p> 
-                               <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                                <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
@@ -300,13 +312,13 @@ if(request.getParameter("open") != null){
             </div>
             <!-- Column  -->
             
-            <!-- Column  -->
+             <!-- Column  -->
             <div class="1column">
                 <!-- card  -->
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://ww.namu.la/s/a72cdf98b9e910668043d6a133cde88ad1208267475f3e3d9567b162603ac916f3ac729791c407322247af759da8288800e47368143694c3b5b95c7c90a8be5b76527f02bf679064cdfbe54246473261f655f781ed94ac6396b2c27862cfa2cdf82359498c0aa67689578922afe34f8e)">
-                             <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">+</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -314,8 +326,8 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~</p>
                                 <br>
                                  <p class=star >★★★★☆</p> 
-                                <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
-                           		
+                                <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
@@ -328,7 +340,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://ww.namu.la/s/5570fd1083d5a897953712d1d6e7c64f737908c13d969e68045cb0600069716ec699991085e6eaf3f5baf716313284825f3662498528bf06b29996c1fe3f8b3d0c275248cad215fbf600e5c188cc4403d68d945c6fe9b87242634d5c35b95c6a4fa20ec166b4982598eeb2434307007f)">
-                            <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">-</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -336,8 +348,8 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>무서워요.</p>
                                  <br>
                                   <p class=star >★☆☆☆☆</p> 
-                              <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
-                           		
+                              <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
@@ -350,7 +362,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://newsimg.sedaily.com/2019/10/01/1VPCOEOZBK_1.jpg)">
-                            <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">-</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -358,7 +370,8 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>ㅎ....</p>
                                   <br>
                                  <p class=star >★☆☆☆☆</p> 
-                               <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                               <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
@@ -371,7 +384,7 @@ if(request.getParameter("open") != null){
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://t1.daumcdn.net/movie/676b7dbf7a2cf721d01efc61708493080d2a9d8e)">
-                            <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">+</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -379,20 +392,21 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>역시... 명작... 아름다운...</p>
                                 <br>
                                 <p class=star >★★★☆☆</p> 
-                               <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                                <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- Column  -->
-             <!-- Column  -->
             <div class="1column">
                 <!-- card  -->
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
                         <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://ww.namu.la/s/a72cdf98b9e910668043d6a133cde88ad1208267475f3e3d9567b162603ac916f3ac729791c407322247af759da8288800e47368143694c3b5b95c7c90a8be5b76527f02bf679064cdfbe54246473261f655f781ed94ac6396b2c27862cfa2cdf82359498c0aa67689578922afe34f8e)">
-                             <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+                            <div class="icon-round bg-gradiant text-white display-5">+</div>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
@@ -400,14 +414,15 @@ if(request.getParameter("open") != null){
                                 <p class=rvcontent>렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~</p>
                                 <br>
                                  <p class=star >★★★★☆</p> 
-                                <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
-                           		
+                                <p class=rvbottom1><a href="#" title="${id}님이 남긴 리뷰 더보기">${id}</a></p>
+                           		<p class=rvbottom2><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">다른 회원들과 대화해보슈</a></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- Column  -->
+            
             
             
             

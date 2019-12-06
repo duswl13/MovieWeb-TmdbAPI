@@ -24,7 +24,7 @@ public class ReviewDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ¿¬°á ½ÇÆÐ : " + ex);
+			System.out.println("DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + ex);
 		}
 	}
 
@@ -35,21 +35,21 @@ public class ReviewDAO {
 			con = ds.getConnection();
 			sql = "insert into review " + "(REVIEW_NUMBER, "
 					+ " MOVIE_ID, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE) "
-					+ " values((select nvl(max(review_NUM),0)+1 from review)," + " ?,?,?,?, "
+					+ " values((select nvl(max(REVIEW_NUMBER),0)+1 from review)," + " ?,?,?,?, "
 					+ " sysdate)";
 
-			// »õ·Î¿î ±ÛÀ» µî·ÏÇÏ´Â ºÎºÐ
+			// ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Îºï¿½
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, reviewdata.getREVIEW_NUMBER());
-			pstmt.setInt(2, reviewdata.getMOVIE_ID());
+		
+			pstmt.setInt(1, reviewdata.getMOVIE_ID());
 			pstmt.setString(3, reviewdata.getREVIEW_TITLE());
 			pstmt.setString(4, reviewdata.getREVIEW_CONTENT());
-			pstmt.setDate(5, reviewdata.getREVIEW_DATE());
+		
 
 			int result2 = pstmt.executeUpdate();
 
 			if (result2 == 1) {
-				System.out.println("µ¥ÀÌÅÍ »ðÀÔ ¿Ï·á");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
 				result = true;
 			}
 
@@ -93,7 +93,7 @@ public class ReviewDAO {
 				x = rs.getInt(1);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			System.out.println("getListCount ¿¡·¯ : " + ex);
+			System.out.println("getListCount ï¿½ï¿½ï¿½ï¿½ : " + ex);
 		} finally {
 
 			if (rs != null)
@@ -118,21 +118,21 @@ public class ReviewDAO {
 		}
 		return x;
 	}
-//¼öÁ¤ÇÏ±â
+//ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public List<ReviewVO> getreviewList(int page, int limit) {
 
-		// page ÆäÀÌÁö
-		// limit ÆäÀÌÁö´ç ¸ñ·Ï ¼ö
-		// review_RE_REF desc, review_RE_SEQ asc¿¡ ÀÇÇØ Á¤·ÄÇÑ °ÍÀ» Á¶°ÇÀý¿¡ ¸Â´Â rnum
+		// page ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// limit ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
+		// review_RE_REF desc, review_RE_SEQ ascï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ rnum
 		String review_list_sql = "select * " + "from (select rownum rnum, b.* " + " from (select* from review "
 				+ " order by review_RE_REF desc," + " review_RE_SEQ asc) b" + ") " + "where rnum>=? and rnum<=?";
 
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
-		// ÇÑ ÆäÀÌÁö´ç 10°³¾¿ ¸ñ·ÏÀÎ °æ¿ì 1ÆäÀÌÁö, 2ÆäÀÌÁö, 3ÆäÀÌÁö...
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, 3ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½...
 		int startrow = (page - 1) * limit + 1;
-		// ÀÐ±â ½ÃÀÛÇÒ row¹øÈ£ (1 11 21 31...)
+		// ï¿½Ð±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ rowï¿½ï¿½È£ (1 11 21 31...)
 		int endrow = startrow + limit - 1;
-		// ÀÐÀ» ¸¶Áö¸· row¹øÈ£ (10 20 30 40...)
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ rowï¿½ï¿½È£ (10 20 30 40...)
 
 		try {
 			con = ds.getConnection();
@@ -141,7 +141,7 @@ public class ReviewDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			// DB¿¡¼­ °¡Á®¿Â µ¥ÀÌÅÍ¸¦ VO°´Ã¼¿¡ ´ã±â
+			// DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ VOï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½
 			while (rs.next()) {
 				ReviewVO review = new ReviewVO();
 				review.setREVIEW_NUMBER(rs.getInt("review_number"));
@@ -150,11 +150,11 @@ public class ReviewDAO {
 				review.setREVIEW_TITLE(rs.getString("review_title"));
 				review.setREVIEW_CONTENT(rs.getString("review_content"));
 				review.setREVIEW_DATE(rs.getDate("review_date"));
-				list.add(review); // °ªÀ» ´ãÀº °´Ã¼¸¦ ¸®½ºÆ®¿¡ ÀúÀå.
+				list.add(review); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			}
-			return list; // °ªÀ» ´ãÀº °´Ã¼¸¦ ÀúÀåÇÑ ¸®½ºÆ®¸¦ È£ÃâÇÑ °÷À¸·Î °¡Á®°¨.
+			return list; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 		} catch (Exception e) {
-			System.out.println("getreviewList() ¿¡·¯ : " + e);
+			System.out.println("getreviewList() ï¿½ï¿½ï¿½ï¿½ : " + e);
 			e.printStackTrace();
 
 		} finally {
@@ -185,7 +185,7 @@ public class ReviewDAO {
 
 	
 
-	// ±Û ³»¿ë º¸±â
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public ReviewVO getDetail(int num) {
 		ReviewVO review = null;
 		try {
@@ -207,7 +207,7 @@ public class ReviewDAO {
 			}
 			return review;
 		} catch (Exception e) {
-			System.out.println("getreviewList() ¿¡·¯ : " + e);
+			System.out.println("getreviewList() ï¿½ï¿½ï¿½ï¿½ : " + e);
 			e.printStackTrace();
 
 		} finally {
@@ -250,7 +250,7 @@ public class ReviewDAO {
 				}
 
 		} catch (Exception e) {
-			System.out.println("isreviewWriter()¿¡·¯:" + e);
+			System.out.println("isreviewWriter()ï¿½ï¿½ï¿½ï¿½:" + e);
 		} finally {
 			if (rs != null)
 				try {
@@ -293,7 +293,7 @@ public class ReviewDAO {
 			if (result == 1)
 				return true;
 		} catch (SQLException ex) {
-			System.out.println("reviewModify()¿¡·¯:" + ex);
+			System.out.println("reviewModify()ï¿½ï¿½ï¿½ï¿½:" + ex);
 			ex.printStackTrace();			
 		}finally {
 					if (rs != null) {
@@ -321,7 +321,7 @@ public class ReviewDAO {
 	
 		return false;
 	}
-	//ÀÌ ºÎºÐ?? ¼öÁ¤ÇÏ±â
+	//ï¿½ï¿½ ï¿½Îºï¿½?? ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	public boolean reviewDelete(int num) {
 		String select_sql = "select REVIEW_NUMBER, MOVIE_ID, USER_ID, "
 						+ "REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE "
@@ -359,13 +359,13 @@ public class ReviewDAO {
 				pstmt.setInt(7, review_RE_REF);
 
 				int result = pstmt.executeUpdate();
-				System.out.println(result + "°³ »èÁ¦µÇ¾ú´Ù!");
+				System.out.println(result + "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½!");
 				if (result >= 1)
 					return true;
 			}
 			
 		} catch (SQLException ex) {
-			System.out.println("reviewDelete()¿¡·¯:" + ex);
+			System.out.println("reviewDelete()ï¿½ï¿½ï¿½ï¿½:" + ex);
 			ex.printStackTrace();			
 		}finally {
 					if (rs != null) {
