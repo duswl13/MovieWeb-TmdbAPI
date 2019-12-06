@@ -16,9 +16,9 @@ public class HDeleteAction implements Action {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		int result=hdao.delete(user_id, movie_id);
-		String message = user_id+"´Ô ¼±ÅÃÇÑ ¿µÈ­°¡ ¼û±è Ç×¸ñ¿¡¼­ »èÁ¦ µÇ¾ú½À´Ï´Ù.";
+		String message = user_id+"ë‹˜ ì„ íƒí•œ ì˜í™”ê°€ ìˆ¨ê¹€ í•­ëª©ì—ì„œ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		if(result!=1) {
-			message="»èÁ¦°¡ µÇÁö ¾Ê¾Ò½À´Ï´Ù.";
+			message="ì‚­ì œê°€ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.";
 		}
 		out.println("<script>");
 		out.println("alert('"+message+"');");

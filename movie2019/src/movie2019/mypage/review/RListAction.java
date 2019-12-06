@@ -17,18 +17,16 @@ public class RListAction implements Action {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		int listcount = hdao.getListCount(id);
-		System.out.println("¸®½ºÆ® ¼ö" + listcount);
+		System.out.println("ë¦¬ìŠ¤íŠ¸ ìˆ˜" + listcount);
 
-		// ¸®½ºÆ®¸¦ ¹Þ¾Æ¿É´Ï´Ù.
 		list = hdao.getList(id);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 
 		request.setAttribute("listcount", listcount);
-		// ±Û ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÕ´Ï´Ù.
 		forward.setPath("Page/MyPage/MyReview/MyReview.jsp");
 		request.setAttribute("totallist", list);
-		return forward; // BoardFrontController.java·Î ¸®ÅÏµË´Ï´Ù.
+		return forward; 
 	}
 
 }

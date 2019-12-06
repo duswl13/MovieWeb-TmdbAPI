@@ -20,46 +20,46 @@ public class ListAction implements Action {
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		System.out.println("³Ñ¾î¿Â ÆäÀÌÁö = " + page);
+		System.out.println("ë„˜ì–´ì˜¨ í˜ì´ì§€ = " + page);
 
-		// ÃÑ ¸®½ºÆ® ¼ö¸¦ ¹Ş¾Æ¿É´Ï´Ù.
+		// ì´ ë¦¬ìŠ¤íŠ¸ ìˆ˜ë¥¼ ë°›ì•„ì˜µë‹ˆë‹¤.
 		int listcount = userdao.getListCount();
-		System.out.println("¸®½ºÆ® ¼ö" + listcount);
+		System.out.println("ë¦¬ìŠ¤íŠ¸ ìˆ˜" + listcount);
 
-		// ¸®½ºÆ®¸¦ ¹Ş¾Æ¿É´Ï´Ù.
+		// ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ì•„ì˜µë‹ˆë‹¤.
 		list = userdao.getList(page, limit);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 
 		int maxpage = (listcount+limit-1)/limit;
-		System.out.println("ÃÑ ÆäÀÌÁö¼ö="+maxpage);
+		System.out.println("ì´ í˜ì´ì§€ìˆ˜="+maxpage);
 		
 		int startpage=((page-1)/10)*10+1;
-		System.out.println("ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ½ÃÀÛ ÆäÀÌÁö ¼ö ="+startpage);
+		System.out.println("í˜„ì¬ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ì‹œì‘ í˜ì´ì§€ ìˆ˜ ="+startpage);
 		
-		//endpage:ÇöÀç ÆäÀÌÁö ±×·ì¿¡¼­ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö ¼ö([10],[20],[30] µî..)
+		//endpage:í˜„ì¬ í˜ì´ì§€ ê·¸ë£¹ì—ì„œ ë³´ì—¬ì¤„ ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜([10],[20],[30] ë“±..)
 		int endpage=startpage+10-1;
-		System.out.println("ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö ¼ö"+endpage);
+		System.out.println("í˜„ì¬ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜"+endpage);
 		
 		if(endpage>maxpage) endpage=maxpage;
-		request.setAttribute("page", page);//ÇöÀç ÆäÀÌÁö ¼ö
-		request.setAttribute("maxpage", maxpage);//ÃÖ´ë ÆäÀÌÁö ¼ö
+		request.setAttribute("page", page);//í˜„ì¬ í˜ì´ì§€ ìˆ˜
+		request.setAttribute("maxpage", maxpage);//ìµœëŒ€ í˜ì´ì§€ ìˆ˜
 		
-		//ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ Ã¹ ÆäÀÌÁö ¼ö
+		//í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ì²« í˜ì´ì§€ ìˆ˜
 		request.setAttribute("startpage", startpage);
 
-		//ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ ³¡ ÆäÀÌÁö ¼ö
+		//í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ë í˜ì´ì§€ ìˆ˜
 		request.setAttribute("endpage", endpage);
 		request.setAttribute("listcount", listcount);
 	
-		//ÇØ´ç ÆäÀÌÁöÀÇ ±Û ¸ñ·ÏÀ» °®°í ÀÖ´Â ¸®½ºÆ®
+		//í•´ë‹¹ í˜ì´ì§€ì˜ ê¸€ ëª©ë¡ì„ ê°–ê³  ìˆëŠ” ë¦¬ìŠ¤íŠ¸
 	//	request.setAttribute("memberlist", list);
 		
 		
-		// ±Û ¸ñ·Ï ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+		// ê¸€ ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
 		forward.setPath("Page/AdminPage/UserList/UserList.jsp");
 		request.setAttribute("totallist", list);
-		return forward; // BoardFrontController.java·Î ¸®ÅÏµË´Ï´Ù.
+		return forward; // BoardFrontController.javaë¡œ ë¦¬í„´ë©ë‹ˆë‹¤.
 	}
 
 }

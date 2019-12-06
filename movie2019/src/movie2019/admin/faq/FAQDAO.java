@@ -25,7 +25,7 @@ public class FAQDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ø¨∞· Ω«∆– : " + ex);
+			System.out.println("DB Ïó∞Í≤∞ Ïã§Ìå® : " + ex);
 		}
 	}
 	public boolean FAQInsert(FAQVO nv) {
@@ -86,7 +86,7 @@ public class FAQDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ø°∑Ø: " + e);
+			System.out.println("getListCount() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -114,10 +114,10 @@ public class FAQDAO {
 	}
 
 	public List<FAQVO> getFAQList(int page, int limit) {
-		// page : ∆‰¿Ã¡ˆ
-		// limit : ∆‰¿Ã¡ˆ ¥Á ∏Ò∑œ¿« ºˆ
-		// FAQ_RE_REF desc, FAQ_RE_SEQ ascø° ¿««ÿ ¡§∑ƒ«— ∞Õ¿ª
-		// ¡∂∞«¿˝ø° ∏¬¥¬ rnum¿« π¸¿ß ∏∏≈≠ ∞°¡Æø¿¥¬ ƒı∏ÆπÆ¿‘¥œ¥Ÿ.
+		// page : ÌéòÏù¥ÏßÄ
+		// limit : ÌéòÏù¥ÏßÄ Îãπ Î™©Î°ùÏùò Ïàò
+		// FAQ_RE_REF desc, FAQ_RE_SEQ ascÏóê ÏùòÌï¥ Ï†ïÎ†¨Ìïú Í≤ÉÏùÑ
+		// Ï°∞Í±¥Ï†àÏóê ÎßûÎäî rnumÏùò Î≤îÏúÑ ÎßåÌÅº Í∞ÄÏ†∏Ïò§Îäî ÏøºÎ¶¨Î¨∏ÏûÖÎãàÎã§.
 
 		String sql = "select * from ("
 				+ "select rownum rnum, b.* from ("
@@ -125,11 +125,11 @@ public class FAQDAO {
 				+ "where rnum>=? and rnum<=? order by FAQ_DATE DESC";
 
 		List<FAQVO> list = new ArrayList<FAQVO>();
-		// «— ∆‰¿Ã¡ˆ¥Á 10∞≥æø ∏Ò∑œ¿Œ ∞ÊøÏ 1∆‰¿Ã¡ˆ, 2∆‰¿Ã¡ˆ, 3∆‰¿Ã¡ˆ, 4∆‰¿Ã¡ˆ...
+		// Ìïú ÌéòÏù¥ÏßÄÎãπ 10Í∞úÏî© Î™©Î°ùÏù∏ Í≤ΩÏö∞ 1ÌéòÏù¥ÏßÄ, 2ÌéòÏù¥ÏßÄ, 3ÌéòÏù¥ÏßÄ, 4ÌéòÏù¥ÏßÄ...
 		int startrow = (page - 1) * limit + 1;
-		// ¿–±‚ Ω√¿€«“ row π¯»£( 1 11 21 31 ...
+		// ÏùΩÍ∏∞ ÏãúÏûëÌï† row Î≤àÌò∏( 1 11 21 31 ...
 		int endrow = startrow + limit - 1;
-		// ¿–¿ª ∏∂¡ˆ∏∑ row π¯»£(10 20 30 40 ...
+		// ÏùΩÏùÑ ÎßàÏßÄÎßâ row Î≤àÌò∏(10 20 30 40 ...
 
 		try {
 			con = ds.getConnection();
@@ -138,7 +138,7 @@ public class FAQDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			// DBø°º≠ ∞°¡Æø¬ µ•¿Ã≈Õ∏¶ VO∞¥√ºø° ¥„Ω¿¥œ¥Ÿ.
+			// DBÏóêÏÑú Í∞ÄÏ†∏Ïò® Îç∞Ïù¥ÌÑ∞Î•º VOÍ∞ùÏ≤¥Ïóê Îã¥ÏäµÎãàÎã§.
 			while (rs.next()) {
 				FAQVO faq = new FAQVO();
 				faq.setFAQ_NUMBER(rs.getInt("FAQ_NUMBER"));
@@ -148,10 +148,10 @@ public class FAQDAO {
 				faq.setFAQ_DATE(rs.getDate("FAQ_DATE"));
 				list.add(faq);
 			}
-			return list; // ∞™¿ª ¥„¿ª ∞¥√º∏¶ ¿˙¿Â«— ∏ÆΩ∫∆Æ∏¶ »£√‚«— ∞˜¿∏∑Œ ∞°¡Æ∞©¥œ¥Ÿ.
+			return list; // Í∞íÏùÑ Îã¥ÏùÑ Í∞ùÏ≤¥Î•º Ï†ÄÏû•Ìïú Î¶¨Ïä§Ìä∏Î•º Ìò∏Ï∂úÌïú Í≥≥ÏúºÎ°ú Í∞ÄÏ†∏Í∞ëÎãàÎã§.
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ø°∑Ø: " + e);
+			System.out.println("getListCount() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -198,7 +198,7 @@ public class FAQDAO {
 			return faq;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getDetail() ø°∑Ø: " + e);
+			System.out.println("getDetail() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -239,7 +239,7 @@ public class FAQDAO {
 			if(result==1)
 				return true;
 		}catch(SQLException ex) {
-			System.out.println("FAQModify() ø°∑Ø"+ex);
+			System.out.println("FAQModify() ÏóêÎü¨"+ex);
 		}
 			finally {
 				if (rs != null) {
@@ -275,12 +275,12 @@ public class FAQDAO {
 			pstmt.setInt(1, num);
 			int result=pstmt.executeUpdate();
 
-			System.out.println(result+"∞≥ ªË¡¶ µ«æ˙Ω¿¥œ¥Ÿ.");
+			System.out.println(result+"Í∞ú ÏÇ≠Ï†ú ÎêòÏóàÏäµÎãàÎã§.");
 			if(result>=1)
 				return true;
 			
 		}catch(SQLException ex) {
-			System.out.println("boardDelete() ø°∑Ø"+ex);
+			System.out.println("boardDelete() ÏóêÎü¨"+ex);
 		}
 			finally {
 				if (rs != null) {

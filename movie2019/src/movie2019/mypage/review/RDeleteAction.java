@@ -15,9 +15,9 @@ public class RDeleteAction implements Action {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		int result=rdao.delete(review_number);
-		String message = "¼±ÅÃÇÑ ¸®ºä°¡ ¼û±è Ç×¸ñ¿¡¼­ »èÁ¦ µÇ¾ú½À´Ï´Ù.";
+		String message = "ì„ íƒí•œ ë¦¬ë·°ê°€ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		if(result!=1) {
-			message="»èÁ¦°¡ µÇÁö ¾Ê¾Ò½À´Ï´Ù.";
+			message="ì‚­ì œê°€ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.";
 		}
 		out.println("<script>");
 		out.println("alert('"+message+"');");

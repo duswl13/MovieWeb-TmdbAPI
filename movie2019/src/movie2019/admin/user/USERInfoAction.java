@@ -16,19 +16,16 @@ public class USERInfoAction implements Action {
 		ActionForward forward = new ActionForward();
 		
 		if(user==null) {
-			System.out.println("¡§∫∏∞°¡Æø¿±‚ Ω«∆–");
 			forward.setRedirect(false);
-			request.setAttribute("message", "¡§∫∏∞°¡Æø¿±‚ Ω«∆–¿‘¥œ¥Ÿ.");
+			request.setAttribute("message", "ÏÇ¨Ïö©Ïûê Ï†ïÎ≥¥Î≥¥Í∏∞ Ïã§Ìå®.");
 			forward.setPath("error/error.jsp");
 			return null;
 		}
-		System.out.println("ªÛºº∫∏±‚ º∫∞¯");
 		
 		request.setAttribute("userinfo",user);
 		forward = new ActionForward();
 		forward.setRedirect(false);
 		
-		//±€ ≥ªøÎ ∫∏±‚ ∆‰¿Ã¡ˆ∑Œ ¿Ãµø«œ±‚ ¿ß«ÿ ∞Ê∑Œ∏¶ º≥¡§«’¥œ¥Ÿ.
 		forward.setPath("Page/AdminPage/UserList/UserInfo.jsp");
 		return forward;
 	}

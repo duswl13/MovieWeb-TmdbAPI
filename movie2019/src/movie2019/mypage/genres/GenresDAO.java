@@ -30,7 +30,7 @@ public class GenresDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ø¨∞· Ω«∆– : " + ex);
+			System.out.println("DB Ï†ëÍ∑º Ïã§Ìå® : " + ex);
 		}
 	}
 
@@ -47,7 +47,6 @@ public class GenresDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
-			// DBø°º≠ ∞°¡Æø¬ µ•¿Ã≈Õ∏¶ VO∞¥√ºø° ¥„Ω¿¥œ¥Ÿ.
 			while (rs.next()) {
 				JsonObject object=new JsonObject();				
 				object.addProperty("GENRES_ID", rs.getInt(1));
@@ -57,7 +56,7 @@ public class GenresDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getGenres() ø°∑Ø: " + e);
+			System.out.println("getGenres() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {

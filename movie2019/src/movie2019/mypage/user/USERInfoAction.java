@@ -19,14 +19,11 @@ public class USERInfoAction implements Action {
 	
 		user=userdao.user_info(id);
 		ActionForward forward = new ActionForward();
-		
-		System.out.println("상세보기 성공");
-		
+				
 		request.setAttribute("userinfo",user);
 		forward = new ActionForward();
 		forward.setRedirect(false);
 		
-		//글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
 		forward.setPath("Page/MyPage/MyInfo/MyInfo.jsp");
 		return forward;
 	}

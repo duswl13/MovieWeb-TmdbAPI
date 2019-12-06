@@ -27,7 +27,7 @@ public class UserEditAction implements Action {
 		String[] genres=request.getParameterValues("INFO_GENRES");
 		
 		if(!pass.equals(pass_check)) {
-			out.println("alert('ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');");
+			out.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');");
 			out.println("history.back()");
 			out.println("</script>");
 			out.close();
@@ -36,7 +36,7 @@ public class UserEditAction implements Action {
 		try {
 		System.out.println("test>>>"+genres.length);
 		if (genres.length < 3||genres.length==0||genres==null) {
-			out.println("alert('Àå¸£¸¦ 3°³ ÀÌ»ó ¼±ÅÃÇÏ¼¼¿ä');");
+			out.println("alert('ì¥ë¥´ë¥¼ 3ê°œ ì´ìƒ ì„ íƒí•˜ì„¸ìš”');");
 			out.println("history.back()");
 			out.println("</script>");
 			out.close();
@@ -44,7 +44,7 @@ public class UserEditAction implements Action {
 		}
 		}catch(Exception e) {
 			if(genres==null) {
-			out.println("alert('Àå¸£¸¦ 3°³ ÀÌ»ó ¼±ÅÃÇÏ¼¼¿ä');");
+				out.println("alert('ì¥ë¥´ë¥¼ 3ê°œ ì´ìƒ ì„ íƒí•˜ì„¸ìš”');");
 			out.println("history.back()");
 			out.println("</script>");
 			out.close();
@@ -64,13 +64,13 @@ public class UserEditAction implements Action {
 		
 		int result =udao.user_update(user);
 		
-		//»ğÀÔÀÌ µÈ °æ¿ì 
+		//ì‚½ì…ì´ ëœ ê²½ìš° 
 		if(result==1) {
-			out.println("alert('È¸¿øÁ¤º¸°¡ ¼öÁ¤µÇ¾ú½À´Ï´Ù.');");
+			out.println("alert('íšŒì›ì •ë³´ê°€ ìˆ˜ì •ë˜ì—ˆìŠµë‹ˆë‹¤.');");
 			out.println("location.href='user_info.mu';");
 		}else{
-			out.println("alert('È¸¿ø Á¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù.');");
-			out.println("history.back()");//ºñ¹Ğ¹øÈ£¸¦ Á¦¿ÜÇÑ ´Ù¸¥ µ¥ÀÌÅÍ´Â À¯ÁöµÇ¾î ÀÖ½À´Ï´Ù.	
+			out.println("alert('íšŒì› ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');");
+			out.println("history.back()");//ë¹„ë°€ë²ˆí˜¸ë¥¼ ì œì™¸í•œ ë‹¤ë¥¸ ë°ì´í„°ëŠ” ìœ ì§€ë˜ì–´ ìˆìŠµë‹ˆë‹¤.	
 		}
 		out.println("</script>");
 		out.close();

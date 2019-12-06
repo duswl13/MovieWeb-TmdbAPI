@@ -15,9 +15,9 @@ public class UserDeleteAction implements Action {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		int result=mdao.delete(id);
-		String message = id+"´Ô È¸¿ø Á¤º¸°¡ »èÁ¦ µÇ¾ú½À´Ï´Ù.";
+		String message = id+"ë‹˜ íšŒì› ì •ë³´ê°€ ì‚­ì œ ë˜ì—ˆìŠµë‹ˆë‹¤.";
 		if(result!=1) {
-			message="»èÁ¦°¡ µÇÁö ¾Ê¾Ò½À´Ï´Ù.";
+			message="ì‚­ì œê°€ ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.";
 		}
 		out.println("<script>");
 		out.println("alert('"+message+"');");

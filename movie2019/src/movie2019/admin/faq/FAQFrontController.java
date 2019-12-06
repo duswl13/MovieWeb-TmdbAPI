@@ -17,8 +17,8 @@ public class FAQFrontController extends HttpServlet {
         super();
     }
 
-	//doProcess(request,response)¸Ş¼­µå¸¦ ±¸ÇöÇÏ¿© ¿äÃ»ÀÌ GET¹æ½ÄÀÌµç
-    //POST¹æ½ÄÀ¸·Î Àü¼ÛµÇ¾î ¿Àµç °°Àº ¸Ş¼­µå¿¡¼­ ¿äÃ»À» Ã³¸®ÇÒ ¼ö ÀÖµµ·Ï ÇÏ¿´½À´Ï´Ù.
+	//doProcess(request,response)ë©”ì„œë“œë¥¼ êµ¬í˜„í•˜ì—¬ ìš”ì²­ì´ GETë°©ì‹ì´ë“ 
+    //POSTë°©ì‹ìœ¼ë¡œ ì „ì†¡ë˜ì–´ ì˜¤ë“  ê°™ì€ ë©”ì„œë“œì—ì„œ ìš”ì²­ì„ ì²˜ë¦¬í•  ìˆ˜ ìˆë„ë¡ í•˜ì˜€ìŠµë‹ˆë‹¤.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request,response);
 	}
@@ -32,21 +32,21 @@ public class FAQFrontController extends HttpServlet {
 		String RequestURI=request.getRequestURI();
 		System.out.println("RequestURI="+RequestURI);
 		
-		//getContextPath():ÄÁÅØ½ºÆ® °æ·Î°¡ ¹İÈ¯µË´Ï´Ù.
-		//contextPath´Â "/JspProject"°¡ ¹İÈ¯µË´Ï´Ù.
+		//getContextPath():ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
+		//contextPathëŠ” "/JspProject"ê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
 		String contextPath=request.getContextPath();
 		System.out.println("contexPath="+contextPath);
 		
-		//RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ °ªÀÇ ÀÎµ¦½º À§Ä¡ÀÇ ¹®ÀÚºÎÅÍ ¸¶Áö¸· À§Ä¡ ¹®ÀÚ±îÁö ÃßÃâÇÕ´Ï´Ù.
+		//RequestURIì—ì„œ ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ê¸¸ì´ ê°’ì˜ ì¸ë±ìŠ¤ ìœ„ì¹˜ì˜ ë¬¸ìë¶€í„° ë§ˆì§€ë§‰ ìœ„ì¹˜ ë¬¸ìê¹Œì§€ ì¶”ì¶œí•©ë‹ˆë‹¤.
 		String command=RequestURI.substring(contextPath.length());
 		System.out.println("command="+command);
 		
-		//ÃÊ±âÈ­
+		//ì´ˆê¸°í™”
 		ActionForward forward=null;
 		Action action=null;
 		
 		if(command.equals("/FAQList.fa")) {
-			action=new FAQListAction();	//´ÙÇü¼º¿¡ ÀÇÇÑ ¾÷Ä³½ºÆÃ
+			action=new FAQListAction();	//ë‹¤í˜•ì„±ì— ì˜í•œ ì—…ìºìŠ¤íŒ…
 			try {
 				forward=action.execute(request, response);
 			}catch(Exception e) {
@@ -54,7 +54,7 @@ public class FAQFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/FAQWrite.fa")) {
 			forward=new ActionForward();
-			forward.setRedirect(false);	//Æ÷¿öµù ¹æ½ÄÀ¸·Î ÁÖ¼Ò°¡ ¹Ù²îÁö ¾Ê¾Æ¿ä
+			forward.setRedirect(false);	//í¬ì›Œë”© ë°©ì‹ìœ¼ë¡œ ì£¼ì†Œê°€ ë°”ë€Œì§€ ì•Šì•„ìš”
 			forward.setPath("Page/AdminPage/FAQ/FAQWrite.jsp");
 		}else if(command.equals("/FAQAddAction.fa")) {
 			action = new FAQAddAction();
@@ -102,9 +102,9 @@ public class FAQFrontController extends HttpServlet {
 	}
 		
 		if(forward!=null) {
-			if(forward.isRedirect()) {//¸®´ÙÀÌ·ºÆ® µË´Ï´Ù.
+			if(forward.isRedirect()) {//ë¦¬ë‹¤ì´ë ‰íŠ¸ ë©ë‹ˆë‹¤.
 				response.sendRedirect(forward.getPath());
-			}else {//Æ÷¿öµùµË´Ï´Ù.
+			}else {//í¬ì›Œë”©ë©ë‹ˆë‹¤.
 				RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}

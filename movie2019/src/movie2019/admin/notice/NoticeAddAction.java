@@ -19,7 +19,6 @@ public class NoticeAddAction implements Action {
        
        try {
          
-          //NOTICEBean °´Ã¼¿¡ ±Û µî·Ï Æû¿¡¼­ ÀÔ·Â ¹ŞÀº Á¤º¸µéÀ» ÀúÀåÇÑ´Ù.
     	   noticevo.setNOTICE_NAME(
                 request.getParameter("NOTICE_NAME"));
     	   noticevo.setNOTICE_SUBJECT(
@@ -30,22 +29,15 @@ public class NoticeAddAction implements Action {
                 replaceParameter(request.getParameter("NOTICE_CONTENT")));
           
           
-          //±Û µî·Ï Æû¿¡¼­ ÀÔ·ÂÇÑ Á¤º¸°¡ ÀúÀåµÇ¾î ÀÖ´Â NOTICEdata °´Ã¼¸¦ Àü´ŞÇÑ´Ù.
           result = noticedao.NoticeInsert(noticevo);
           
-          //±Û µî·Ï¿¡ ½ÇÆĞÇÒ °æ¿ì false¸¦ ¹İÈ¯ÇÑ´Ù.
           if(result==false) {
-             System.out.println("°Ô½ÃÆÇ µî·Ï ½ÇÆĞ");
              forward.setRedirect(false);
-               request.setAttribute("message", "°Ô½ÃÆÇ µî·Ï ½ÇÆĞÀÔ´Ï´Ù.");
+               request.setAttribute("message", "ê²Œì‹œíŒ ë“±ë¡ ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
                forward.setPath("error/error.jsp");
              return forward;
           }
-          System.out.println("°Ô½ÃÆÇ µî·Ï ¿Ï·á");
-          //±Û µî·ÏÀÌ ¿Ï·áµÇ¸é ±Û ¸ñ·ÏÀ» ´Ü¼øÈ÷ º¸¿©ÁÖ±â¸¸ ÇÒ °ÍÀÌ¹Ç·Î
-          //Redirect¿©ºÎ¸¦ true·Î ¼³Á¤ÇÑ´Ù.
           forward.setRedirect(true);
-          //ÀÌµ¿ÇÒ °æ·Î¸¦ ÁöÁ¤ÇÑ´Ù.
           forward.setPath("NoticeList.bo");
           return forward;
        }catch(Exception ex) {

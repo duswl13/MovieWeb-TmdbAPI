@@ -12,30 +12,23 @@ public class NoticeDetailAction implements Action {
 		NoticeDAO noticedao = new NoticeDAO();
 		NoticeVO noticevo = new NoticeVO();
 
-		//±Û¹øÈ£ ÆÄ¶ó¹ÌÅÍ °ªÀ» numº¯¼ö¿¡ ÀúÀåÇÕ´Ï´Ù.
 		int num=Integer.parseInt(request.getParameter("num"));
 		
-		//±ÛÀÇ ³»¿ëÀ» DAO¿¡¼­ ÀĞÀº ÈÄ ¾òÀ» °á°ú¸¦ boarddata °´Ã¼¿¡ ÀúÀåÇÕ´Ï´Ù.
 		noticevo=noticedao.getDetail(num);
 		
 		ActionForward forward = new ActionForward();
 				
-		//DAO¿¡¼­ ±ÛÀÇ ³»¿ëÀ» ÀĞÁö ¸øÇßÀ» °æ¿ì nullÀ» ¹İÈ¯ÇÕ´Ï´Ù.
 		if(noticevo==null) {
-			System.out.println("»ó¼¼º¸±â ½ÇÆĞ");
 			forward.setRedirect(false);
-			request.setAttribute("message", "°Ô½ÃÆÇ »ó¼¼º¸±â ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "ìƒì„¸ë³´ê¸° ì‹¤íŒ¨.");
 			forward.setPath("error/error.jsp");
 			return null;
 		}
-		System.out.println("»ó¼¼º¸±â ¼º°ø");
 		
-		//boarddata °´Ã¼¸¦ Request °´Ã¼¿¡ ÀúÀåÇÕ´Ï´Ù.
 		request.setAttribute("noticedata",noticevo);
 		forward = new ActionForward();
 		forward.setRedirect(false);
 		
-		//±Û ³»¿ë º¸±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤ÇÕ´Ï´Ù.
 		forward.setPath("Page/AdminPage/Notice/NoticeView.jsp");
 		return forward;
 	}

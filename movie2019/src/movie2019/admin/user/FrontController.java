@@ -17,8 +17,8 @@ public class FrontController extends HttpServlet {
         super();
     }
 
-	//doProcess(request,response)¸Ş¼­µå¸¦ ±¸ÇöÇÏ¿© ¿äÃ»ÀÌ GET¹æ½ÄÀÌµç
-    //POST¹æ½ÄÀ¸·Î Àü¼ÛµÇ¾î ¿Àµç °°Àº ¸Ş¼­µå¿¡¼­ ¿äÃ»À» Ã³¸®ÇÒ ¼ö ÀÖµµ·Ï ÇÏ¿´½À´Ï´Ù.
+	//doProcess(request,response)ë©”ì„œë“œë¥¼ êµ¬í˜„í•˜ì—¬ ìš”ì²­ì´ GETë°©ì‹ì´ë“ 
+    //POSTë°©ì‹ìœ¼ë¡œ ì „ì†¡ë˜ì–´ ì˜¤ë“  ê°™ì€ ë©”ì„œë“œì—ì„œ ìš”ì²­ì„ ì²˜ë¦¬í•  ìˆ˜ ìˆë„ë¡ í•˜ì˜€ìŠµë‹ˆë‹¤.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request,response);
 	}
@@ -29,24 +29,24 @@ public class FrontController extends HttpServlet {
 
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/*
-		 ¿äÃ»µÈ ÀüÃ¼ URLÁß¿¡¼­ Æ÷Æ® ¹øÈ£ ´ÙÀ½ ºÎÅÍ ¸¶Áö¸· ¹®ÀÚ¿­±îÁö ¹İÈ¯µË´Ï´Ù.
-		 ¿¹) http://localhost:8088/JspProject/login.ulÀÎ °æ¿ì
-		 "/JspProject/login.ul"¹İÈ¯µË´Ï´Ù. 
+		 ìš”ì²­ëœ ì „ì²´ URLì¤‘ì—ì„œ í¬íŠ¸ ë²ˆí˜¸ ë‹¤ìŒ ë¶€í„° ë§ˆì§€ë§‰ ë¬¸ìì—´ê¹Œì§€ ë°˜í™˜ë©ë‹ˆë‹¤.
+		 ì˜ˆ) http://localhost:8088/JspProject/login.ulì¸ ê²½ìš°
+		 "/JspProject/login.ul"ë°˜í™˜ë©ë‹ˆë‹¤. 
 		 */
 		String RequestURI=request.getRequestURI();
 		System.out.println("RequestURI="+RequestURI);
 		
-		//getContextPath():ÄÁÅØ½ºÆ® °æ·Î°¡ ¹İÈ¯µË´Ï´Ù.
-		//contextPath´Â "/JspProject"°¡ ¹İÈ¯µË´Ï´Ù.
+		//getContextPath():ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
+		//contextPathëŠ” "/JspProject"ê°€ ë°˜í™˜ë©ë‹ˆë‹¤.
 		String contextPath=request.getContextPath();
 		System.out.println("contexPath="+contextPath);
 		
-		//RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ °ªÀÇ ÀÎµ¦½º À§Ä¡ÀÇ ¹®ÀÚºÎÅÍ ¸¶Áö¸· À§Ä¡ ¹®ÀÚ±îÁö ÃßÃâÇÕ´Ï´Ù.
-		//command´Â "/login.ul" ¹İÈ¯µË´Ï´Ù.
+		//RequestURIì—ì„œ ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ê¸¸ì´ ê°’ì˜ ì¸ë±ìŠ¤ ìœ„ì¹˜ì˜ ë¬¸ìë¶€í„° ë§ˆì§€ë§‰ ìœ„ì¹˜ ë¬¸ìê¹Œì§€ ì¶”ì¶œí•©ë‹ˆë‹¤.
+		//commandëŠ” "/login.ul" ë°˜í™˜ë©ë‹ˆë‹¤.
 		String command=RequestURI.substring(contextPath.length());
 		System.out.println("command="+command);
 		
-		//ÃÊ±âÈ­
+		//ì´ˆê¸°í™”
 		ActionForward forward=null;
 		Action action=null;
 		if(command.equals("/user_list.ul")) {
@@ -74,9 +74,9 @@ public class FrontController extends HttpServlet {
 			}
 		}
 		if(forward!=null) {
-			if(forward.isRedirect()) {//¸®´ÙÀÌ·ºÆ® µË´Ï´Ù.
+			if(forward.isRedirect()) {//ë¦¬ë‹¤ì´ë ‰íŠ¸ ë©ë‹ˆë‹¤.
 				response.sendRedirect(forward.getPath());
-			}else {//Æ÷¿öµùµË´Ï´Ù.
+			}else {//í¬ì›Œë”©ë©ë‹ˆë‹¤.
 				RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
