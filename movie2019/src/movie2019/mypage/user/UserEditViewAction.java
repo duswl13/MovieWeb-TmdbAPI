@@ -16,23 +16,17 @@ public class UserEditViewAction implements Action {
 		Users users = new Users();
 			String id = request.getParameter("user_id");
 			
-			//±Û ¹øÈ£ num¿¡ ÇØ´çÇÏ´Â ³»¿ëÀ» °¡Á®¿Í¼­ boarddata °´Ã¼¿¡ ÀúÀåÇÕ´Ï´Ù.
 			users=udao.user_info(id);
 			
-			//±Û ³»¿ëÀÌ ¾ø´Â °æ¿ì
 			if(users==null) {
-				System.out.println("¼öÁ¤ ÆäÀÌÁö ÀÌµ¿ ½ÇÆĞ");
 				forward.setRedirect(false);
-				request.setAttribute("message", "¼öÁ¤ ÆäÀÌÁö ½ÇÆĞÀÔ´Ï´Ù.");
+				request.setAttribute("message", "ì •ë³´ ìˆ˜ì • ì‹¤íŒ¨.");
 				forward.setPath("error/error.jsp");
 				return forward;
 			}
-			System.out.println("¼öÁ¤ ÆäÀÌÁö ÀÌµ¿ ¿Ï·á");
-			//¼öÁ¤ ÆäÀÌÁö·Î ÀÌµ¿ÇÒ ¶§ ¿øº» ±Û ³»¿ëÀ» º¸¿©ÁÖ±â À§ÇØ
-			//boarddata°´Ã¼¸¦ Request °´Ã¼¿¡ ÀúÀåÇÕ´Ï´Ù.
+
 			request.setAttribute("userinfo", users);
 			forward.setRedirect(false);
-			//¼öÁ¤ ÆäÀÌÁö °æ·Î ÁöÁ¤ÇÕ´Ï´Ù.
 			forward.setPath("Page/MyPage/MyInfo/MyInfoModify.jsp");
 			
 			return forward;

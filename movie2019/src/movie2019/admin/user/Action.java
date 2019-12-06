@@ -3,9 +3,9 @@ package movie2019.admin.user;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//Æ¯Á¤ ºñÁî´Ï½º ¿äÃ»À¸·Î ¼öÇàÇÏ°í °á°ú °ªÀ» ActionForward Å¸ÀÔÀ¸·Î º¯È¯ÇÏ´Â ¸Ş¼­µå°¡ Á¤ÀÇµÇ¾î ÀÖ½À´Ï´Ù.
-//Action:ÀÎÅÍÆäÀÌ½º ¸í
-//ActionForward:¹İÈ¯Çü
+//íŠ¹ì • ë¹„ì¦ˆë‹ˆìŠ¤ ìš”ì²­ìœ¼ë¡œ ìˆ˜í–‰í•˜ê³  ê²°ê³¼ ê°’ì„ ActionForward íƒ€ì…ìœ¼ë¡œ ë³€í™˜í•˜ëŠ” ë©”ì„œë“œê°€ ì •ì˜ë˜ì–´ ìˆìŠµë‹ˆë‹¤.
+//Action:ì¸í„°í˜ì´ìŠ¤ ëª…
+//ActionForward:ë°˜í™˜í˜•
 public interface Action {
 	public ActionForward execute(HttpServletRequest request,HttpServletResponse response) throws Exception;
 }

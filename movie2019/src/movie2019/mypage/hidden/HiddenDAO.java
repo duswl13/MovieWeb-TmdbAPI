@@ -24,7 +24,7 @@ public class HiddenDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ¿¬°á ½ÇÆĞ : " + ex);
+			System.out.println("DB ì ‘ê·¼ ì‹¤íŒ¨ : " + ex);
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class HiddenDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ¿¡·¯: " + e);
+			System.out.println("getListCount() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -88,7 +88,6 @@ public class HiddenDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
-			// DB¿¡¼­ °¡Á®¿Â µ¥ÀÌÅÍ¸¦ VO°´Ã¼¿¡ ´ã½À´Ï´Ù.
 			while (rs.next()) {
 				Hidden user = new Hidden();
 				user.setUSER_ID(rs.getString("USER_ID"));
@@ -96,10 +95,10 @@ public class HiddenDAO {
 				user.setMOVIE_NAME(rs.getString("MOVIE_NAME"));
 				list.add(user);
 			}
-			return list; // °ªÀ» ´ãÀ» °´Ã¼¸¦ ÀúÀåÇÑ ¸®½ºÆ®¸¦ È£ÃâÇÑ °÷À¸·Î °¡Á®°©´Ï´Ù.
+			return list; 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getList() ¿¡·¯: " + e);
+			System.out.println("getList() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -138,7 +137,7 @@ public class HiddenDAO {
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("delete() ¿¡·¯: " + e);
+			System.out.println("delete() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {

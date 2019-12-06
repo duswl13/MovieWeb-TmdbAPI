@@ -24,7 +24,7 @@ public class ReviewDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ø¨∞· Ω«∆– : " + ex);
+			System.out.println("DB Ï†ëÍ∑º Ïã§Ìå® : " + ex);
 		}
 	}
 	
@@ -44,7 +44,7 @@ public class ReviewDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ø°∑Ø: " + e);
+			System.out.println("getListCount() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -82,7 +82,6 @@ public class ReviewDAO {
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 
-			// DBø°º≠ ∞°¡Æø¬ µ•¿Ã≈Õ∏¶ VO∞¥√ºø° ¥„Ω¿¥œ¥Ÿ.
 			while (rs.next()) {
 				Review reiew = new Review();
 				reiew.setREVIEW_NUMBER(rs.getInt("REVIEW_NUMBER"));
@@ -93,10 +92,10 @@ public class ReviewDAO {
 				reiew.setREVIEW_DATE(rs.getDate("REVIEW_DATE"));
 				list.add(reiew);
 			}
-			return list; // ∞™¿ª ¥„¿ª ∞¥√º∏¶ ¿˙¿Â«— ∏ÆΩ∫∆Æ∏¶ »£√‚«— ∞˜¿∏∑Œ ∞°¡Æ∞©¥œ¥Ÿ.
+			return list; 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getList() ø°∑Ø: " + e);
+			System.out.println("getList() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -134,7 +133,7 @@ public class ReviewDAO {
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("delete() ø°∑Ø: " + e);
+			System.out.println("delete() ÏóêÎü¨: " + e);
 		} finally {
 			if (rs != null) {
 				try {

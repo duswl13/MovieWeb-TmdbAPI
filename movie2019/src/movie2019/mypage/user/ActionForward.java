@@ -1,22 +1,22 @@
 package movie2019.mypage.user;
 
-//ActionForward Å¬·¡½º´Â Action ÀÎÅÍÆäÀÌ½º¿¡¼­ ¸í·ÉÀ» ¼öÇàÇÏ°í °á°ú °ªÀ» °¡Áö°í Æ÷¿öµù ÇÒ ¶§ »ç¿ëµÇ´Â Å¬·¡½º ÀÔ´Ï´Ù.
-//ÀÌ Å¬·¡½º´Â Redirect ¿©ºÎ °ª°ú Æ÷¿öµùÇÒ ÆäÀÌÁöÀÇ À§Ä¡¸¦ °¡Áö°í ÀÖ½À´Ï´Ù.
-//ÀÌ °ªµéÀ» FrontController¿¡¼­ ActionForward Å¬·¡½º Å¸ÀÔÀ¸·Î ¹İÈ¯°ªÀ»
-//°¡Á®¿À¸é ±× °ªÀ» È®ÀÎÇÏ¿© ÇØ´çÇÏ´Â ¿äÃ» ÆäÀÌÁö·Î Æ÷¿öµù Ã³¸®¸¦ ÇÕ´Ï´Ù.
+//ActionForward í´ë˜ìŠ¤ëŠ” Action ì¸í„°í˜ì´ìŠ¤ì—ì„œ ëª…ë ¹ì„ ìˆ˜í–‰í•˜ê³  ê²°ê³¼ ê°’ì„ ê°€ì§€ê³  í¬ì›Œë”© í•  ë•Œ ì‚¬ìš©ë˜ëŠ” í´ë˜ìŠ¤ ì…ë‹ˆë‹¤.
+//ì´ í´ë˜ìŠ¤ëŠ” Redirect ì—¬ë¶€ ê°’ê³¼ í¬ì›Œë”©í•  í˜ì´ì§€ì˜ ìœ„ì¹˜ë¥¼ ê°€ì§€ê³  ìˆìŠµë‹ˆë‹¤.
+//ì´ ê°’ë“¤ì„ FrontControllerì—ì„œ ActionForward í´ë˜ìŠ¤ íƒ€ì…ìœ¼ë¡œ ë°˜í™˜ê°’ì„
+//ê°€ì ¸ì˜¤ë©´ ê·¸ ê°’ì„ í™•ì¸í•˜ì—¬ í•´ë‹¹í•˜ëŠ” ìš”ì²­ í˜ì´ì§€ë¡œ í¬ì›Œë”© ì²˜ë¦¬ë¥¼ í•©ë‹ˆë‹¤.
 public class ActionForward {
 	private boolean redirect=false;
 	private String path=null;
 	
-	//property redirectÀÇ is ¸Ş¼Òµå
+	//property redirectì˜ is ë©”ì†Œë“œ
 	public boolean isRedirect() {
-		//ÇÁ·ÎÆÛÆ¼ Å¸ÀÔÀÌ booleanÀÏ °æ¿ì get ´ë½Å is¸¦ ¾Õ¿¡ ºÙÀÏ ¼ö ÀÖ½À´Ï´Ù.
+		//í”„ë¡œí¼í‹° íƒ€ì…ì´ booleanì¼ ê²½ìš° get ëŒ€ì‹  isë¥¼ ì•ì— ë¶™ì¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
 		return redirect;
 	}
 	public String getPath() {
 		return path;
 	}
-	//property redirectÀÇ set ¸Ş¼Òµå
+	//property redirectì˜ set ë©”ì†Œë“œ
 	public void setRedirect(boolean b) {
 		this.redirect = b;
 	}

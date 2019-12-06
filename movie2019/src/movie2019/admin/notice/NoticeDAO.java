@@ -25,7 +25,7 @@ public class NoticeDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ¿¬°á ½ÇÆĞ : " + ex);
+			System.out.println("DB ì—°ê²° ì‹¤íŒ¨ : " + ex);
 		}
 	}
 	public boolean NoticeInsert(NoticeVO nv) {
@@ -86,7 +86,7 @@ public class NoticeDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ¿¡·¯: " + e);
+			System.out.println("getListCount() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -114,11 +114,7 @@ public class NoticeDAO {
 	}
 
 	public List<NoticeVO> getNoticeList(int page, int limit) {
-		// page : ÆäÀÌÁö
-		// limit : ÆäÀÌÁö ´ç ¸ñ·ÏÀÇ ¼ö
-		// NOTICE_RE_REF desc, NOTICE_RE_SEQ asc¿¡ ÀÇÇØ Á¤·ÄÇÑ °ÍÀ»
-		// Á¶°ÇÀı¿¡ ¸Â´Â rnumÀÇ ¹üÀ§ ¸¸Å­ °¡Á®¿À´Â Äõ¸®¹®ÀÔ´Ï´Ù.
-
+	
 		String sql = "select * from ("
 				+ "select rownum rnum, b.* from ("
 				+ "select * from NOTICE order by NOTICE_NUMBER DESC) b) "
@@ -126,11 +122,8 @@ public class NoticeDAO {
 		
 
 		List<NoticeVO> list = new ArrayList<NoticeVO>();
-		// ÇÑ ÆäÀÌÁö´ç 10°³¾¿ ¸ñ·ÏÀÎ °æ¿ì 1ÆäÀÌÁö, 2ÆäÀÌÁö, 3ÆäÀÌÁö, 4ÆäÀÌÁö...
 		int startrow = (page - 1) * limit + 1;
-		// ÀĞ±â ½ÃÀÛÇÒ row ¹øÈ£( 1 11 21 31 ...
 		int endrow = startrow + limit - 1;
-		// ÀĞÀ» ¸¶Áö¸· row ¹øÈ£(10 20 30 40 ...
 
 		try {
 			con = ds.getConnection();
@@ -139,7 +132,6 @@ public class NoticeDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			// DB¿¡¼­ °¡Á®¿Â µ¥ÀÌÅÍ¸¦ VO°´Ã¼¿¡ ´ã½À´Ï´Ù.
 			while (rs.next()) {
 				NoticeVO notice = new NoticeVO();
 				notice.setNOTICE_NUMBER(rs.getInt("NOTICE_NUMBER"));
@@ -149,10 +141,10 @@ public class NoticeDAO {
 				notice.setNOTICE_DATE(rs.getDate("NOTICE_DATE"));
 				list.add(notice);
 			}
-			return list; // °ªÀ» ´ãÀ» °´Ã¼¸¦ ÀúÀåÇÑ ¸®½ºÆ®¸¦ È£ÃâÇÑ °÷À¸·Î °¡Á®°©´Ï´Ù.
+			return list; 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ¿¡·¯: " + e);
+			System.out.println("getListCount() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -199,7 +191,7 @@ public class NoticeDAO {
 			return notice;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getDetail() ¿¡·¯: " + e);
+			System.out.println("getDetail() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -240,7 +232,7 @@ public class NoticeDAO {
 			if(result==1)
 				return true;
 		}catch(SQLException ex) {
-			System.out.println("NOTICEModify() ¿¡·¯"+ex);
+			System.out.println("NOTICEModify() ì—ëŸ¬"+ex);
 		}
 			finally {
 				if (rs != null) {
@@ -276,12 +268,11 @@ public class NoticeDAO {
 			pstmt.setInt(1, num);
 			int result=pstmt.executeUpdate();
 
-			System.out.println(result+"°³ »èÁ¦ µÇ¾ú½À´Ï´Ù.");
 			if(result>=1)
 				return true;
 			
 		}catch(SQLException ex) {
-			System.out.println("boardDelete() ¿¡·¯"+ex);
+			System.out.println("boardDelete() ì—ëŸ¬"+ex);
 		}
 			finally {
 				if (rs != null) {

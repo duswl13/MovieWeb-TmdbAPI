@@ -19,20 +19,20 @@ public class FAQDeleteAction implements Action {
 		result=boarddao.faqDelete(num);
 		
 		ActionForward forward=new ActionForward();
-		//»èÁ¦ Ã³¸® ½ÇÆĞÇÑ °æ¿ì
+		//ì‚­ì œ ì²˜ë¦¬ ì‹¤íŒ¨í•œ ê²½ìš°
 		if(result==false) {
-			System.out.println("°Ô½ÃÆÇ »èÁ¦ ½ÇÆĞ");
+			System.out.println("ê²Œì‹œíŒ ì‚­ì œ ì‹¤íŒ¨");
 			forward.setRedirect(false);
-			request.setAttribute("message", "°Ô½ÃÆÇ »èÁ¦ ½ÇÆĞÀÔ´Ï´Ù.");
+			request.setAttribute("message", "ê²Œì‹œíŒ ì‚­ì œ ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
-		//»èÁ¦ Ã³¸® ¼º°øÇÑ °æ¿ì - ±Û ¸ñ·Ï º¸±â ¿äÃ»À» Àü¼ÛÇÏ´Â ºÎºĞÀÔ´Ï´Ù.
-		System.out.println("°Ô½ÃÆÇ »èÁ¦ ¼º°ø");
+		//ì‚­ì œ ì²˜ë¦¬ ì„±ê³µí•œ ê²½ìš° - ê¸€ ëª©ë¡ ë³´ê¸° ìš”ì²­ì„ ì „ì†¡í•˜ëŠ” ë¶€ë¶„ì…ë‹ˆë‹¤.
+		System.out.println("ê²Œì‹œíŒ ì‚­ì œ ì„±ê³µ");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.println("<script>");
-		out.println("alert('»èÁ¦ µÇ¾ù½À´Ï´Ù..');");
+		out.println("alert('ì‚­ì œ ë˜ì—‡ìŠµë‹ˆë‹¤..');");
 		out.println("location.href='FAQList.fa';");
 		out.println("</script>");		
 		out.close();

@@ -19,7 +19,7 @@ public class FAQAddAction implements Action {
        
        try {
          
-          //FAQBean °´Ã¼¿¡ ±Û µî·Ï Æû¿¡¼­ ÀÔ·Â ¹ŞÀº Á¤º¸µéÀ» ÀúÀåÇÑ´Ù.
+          //FAQBean ê°ì²´ì— ê¸€ ë“±ë¡ í¼ì—ì„œ ì…ë ¥ ë°›ì€ ì •ë³´ë“¤ì„ ì €ì¥í•œë‹¤.
     	   faqvo.setFAQ_NAME(
                 request.getParameter("FAQ_NAME"));
     	   faqvo.setFAQ_SUBJECT(
@@ -28,22 +28,22 @@ public class FAQAddAction implements Action {
                 replaceParameter(request.getParameter("FAQ_CONTENT")));
           
           
-          //±Û µî·Ï Æû¿¡¼­ ÀÔ·ÂÇÑ Á¤º¸°¡ ÀúÀåµÇ¾î ÀÖ´Â FAQdata °´Ã¼¸¦ Àü´ŞÇÑ´Ù.
+          //ê¸€ ë“±ë¡ í¼ì—ì„œ ì…ë ¥í•œ ì •ë³´ê°€ ì €ì¥ë˜ì–´ ìˆëŠ” FAQdata ê°ì²´ë¥¼ ì „ë‹¬í•œë‹¤.
           result = faqdao.FAQInsert(faqvo);
           
-          //±Û µî·Ï¿¡ ½ÇÆĞÇÒ °æ¿ì false¸¦ ¹İÈ¯ÇÑ´Ù.
+          //ê¸€ ë“±ë¡ì— ì‹¤íŒ¨í•  ê²½ìš° falseë¥¼ ë°˜í™˜í•œë‹¤.
           if(result==false) {
-             System.out.println("°Ô½ÃÆÇ µî·Ï ½ÇÆĞ");
+             System.out.println("ê²Œì‹œíŒ ë“±ë¡ ì‹¤íŒ¨");
              forward.setRedirect(false);
-               request.setAttribute("message", "°Ô½ÃÆÇ µî·Ï ½ÇÆĞÀÔ´Ï´Ù.");
+               request.setAttribute("message", "ê²Œì‹œíŒ ë“±ë¡ ì‹¤íŒ¨ì…ë‹ˆë‹¤.");
                forward.setPath("error/error.jsp");
              return forward;
           }
-          System.out.println("°Ô½ÃÆÇ µî·Ï ¿Ï·á");
-          //±Û µî·ÏÀÌ ¿Ï·áµÇ¸é ±Û ¸ñ·ÏÀ» ´Ü¼øÈ÷ º¸¿©ÁÖ±â¸¸ ÇÒ °ÍÀÌ¹Ç·Î
-          //Redirect¿©ºÎ¸¦ true·Î ¼³Á¤ÇÑ´Ù.
+          System.out.println("ê²Œì‹œíŒ ë“±ë¡ ì™„ë£Œ");
+          //ê¸€ ë“±ë¡ì´ ì™„ë£Œë˜ë©´ ê¸€ ëª©ë¡ì„ ë‹¨ìˆœíˆ ë³´ì—¬ì£¼ê¸°ë§Œ í•  ê²ƒì´ë¯€ë¡œ
+          //Redirectì—¬ë¶€ë¥¼ trueë¡œ ì„¤ì •í•œë‹¤.
           forward.setRedirect(true);
-          //ÀÌµ¿ÇÒ °æ·Î¸¦ ÁöÁ¤ÇÑ´Ù.
+          //ì´ë™í•  ê²½ë¡œë¥¼ ì§€ì •í•œë‹¤.
           forward.setPath("FAQList.fa");
           return forward;
        }catch(Exception ex) {

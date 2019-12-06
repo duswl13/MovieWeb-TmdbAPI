@@ -24,7 +24,7 @@ public class UserDAO {
 			ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
 
 		} catch (Exception ex) {
-			System.out.println("DB ¿¬°á ½ÇÆĞ : " + ex);
+			System.out.println("DB ì ‘ê·¼ ì—ëŸ¬ : " + ex);
 		}
 	}
 	
@@ -38,9 +38,9 @@ public class UserDAO {
 			pstmt.setString(1, id);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				result=0;		//DB¿¡ ÇØ´ç ID°¡ ÀÖ½À´Ï´Ù.
+				result=0;		
 			}else {
-				result=-1;		//DB¿¡ ÇØ´ç ID°¡ ¾ø½À´Ï´Ù.
+				result=-1;		
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -131,8 +131,6 @@ public class UserDAO {
 				list.add(m);
 			}
 
-
-		//primary key Á¦¾àÁ¶°ÇÀ» À§¹İÇßÀ» °æ¿ì ¹ß»ıÇÏ´Â ¿¡·¯
 		} catch(java.sql.SQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -169,7 +167,7 @@ public class UserDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getListCount() ¿¡·¯: " + e);
+			System.out.println("getListCount() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -220,7 +218,6 @@ public class UserDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			// DB¿¡¼­ °¡Á®¿Â µ¥ÀÌÅÍ¸¦ VO°´Ã¼¿¡ ´ã½À´Ï´Ù.
 			while (rs.next()) {
 				Users user = new Users();
 				user.setUSER_ID(rs.getString("USER_ID"));
@@ -232,10 +229,10 @@ public class UserDAO {
 
 				list.add(user);
 			}
-			return list; // °ªÀ» ´ãÀ» °´Ã¼¸¦ ÀúÀåÇÑ ¸®½ºÆ®¸¦ È£ÃâÇÑ °÷À¸·Î °¡Á®°©´Ï´Ù.
+			return list; 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getList() ¿¡·¯: " + e);
+			System.out.println("getList() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -273,7 +270,7 @@ public class UserDAO {
 			result=pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("delete() ¿¡·¯: " + e);
+			System.out.println("delete() ì—ëŸ¬: " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -315,7 +312,6 @@ public class UserDAO {
 			result = pstmt.executeUpdate();
 			System.out.println("updatetest"+result);
 
-		//primary key Á¦¾àÁ¶°ÇÀ» À§¹İÇßÀ» °æ¿ì ¹ß»ıÇÏ´Â ¿¡·¯
 		} catch(java.sql.SQLIntegrityConstraintViolationException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
