@@ -119,7 +119,7 @@ public class MovieDAO {
 	}
 
 	private static String readUrl(String urlString) throws Exception {
-		System.out.println(urlString);
+		
 		BufferedReader reader = null;
 		try {
 			URL url = new URL(urlString);
