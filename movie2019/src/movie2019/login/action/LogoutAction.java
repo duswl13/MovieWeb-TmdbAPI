@@ -21,7 +21,7 @@ public class LogoutAction implements Action {
 		PrintWriter out = response.getWriter();
 		
 		out.println("<script>");
-		out.println("alert('¾È³à¾û. ´ÙÀ½¿¡ ¶Ç º¸½´~')");
+		out.println("alert('ì•ˆë…€ì—‰ ë‹¤ìŒì— ë˜ ë³´ìŠˆ~')");
 		out.println("location.href='main.ml'"); 
 		out.println("</script>");
 		return null;

@@ -27,9 +27,9 @@ public class LoginProcessAction implements Action {
 
 		int result = mdao.isId(id, pass);
 
-		System.out.println("°á°ú = " + result);
-		System.out.println("¾ÆÀÌµğ = " +id);
-		if (result == 1) { //¼º°ø
+		System.out.println("ï¿½ï¿½ï¿½ = " + result);
+		System.out.println("ï¿½ï¿½ï¿½Ìµï¿½ = " +id);
+		if (result == 1) { //ï¿½ï¿½ï¿½ï¿½
 				
 			
 	//		HttpSession session = request.getSession(); //session
@@ -42,14 +42,14 @@ public class LoginProcessAction implements Action {
 			session.setAttribute("id", id);		
 
 			out.println("<script>");
-			out.println("alert('" + id + "´Ô º¸½´¿¡ ¿À½Å °ÍÀ» È¯¿µÇÕ´Ï´Ù!')");
+			out.println("alert('" + id + "ë‹˜ ë³´ìŠˆì— ì˜¤ì‹  ê²ƒì„ í™˜ì˜í•©ë‹ˆë‹¤!')");
 			out.println("location.href='main.ml'"); 
 			out.println("</script>");
 
 		} else {
-			String message = "ºñ¹Ğ¹øÈ£¸¦ ´Ù½Ã È®ÀÎÇØÁÖ¼¼¿ä.";  //0
+			String message = "ë³´ìŠˆì— ê°€ì…ëœ ì•„ì´ë””ê°€ ì•„ë‹™ë‹ˆë‹¤. ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.";  //0
 			if (result == -1)
-				message = "º¸½´¿¡ °¡ÀÔµÇÁö ¾ÊÀº ¾ÆÀÌµğÀÔ´Ï´Ù.";  //-1
+				message = "ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.";  //-1
 
 			out.println("<script>");
 			out.println("alert('" + message + "');");
