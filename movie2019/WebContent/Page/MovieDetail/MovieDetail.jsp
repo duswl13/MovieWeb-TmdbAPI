@@ -496,16 +496,16 @@ div .rvsubmit {text-align:center;}
 									</td>
 									<td><c:choose>
 											<c:when test="${face == 1 }">
-												<img src="Png/happy1.svg">
-												<img src="Png/neutral1.svg">
+												<img src="Png/happy1.svg" title="좋아요">
+												<img src="Png/neutral1.svg" title="싫어요">
 											</c:when>
 											<c:when test="${face == 2 }">
-												<img src="Png/happy.svg">
-												<img src="Png/neutral.svg">
+												<img src="Png/happy.svg" title="좋아요">
+												<img src="Png/neutral.svg" title="싫어요">
 											</c:when>
 											<c:otherwise>
-												<img src="Png/happy.svg">
-												<img src="Png/neutral1.svg">
+												<img src="Png/happy.svg" title="좋아요">
+												<img src="Png/neutral1.svg" title="싫어요">
 											</c:otherwise>
 										</c:choose></td>
 								</tr>
@@ -623,11 +623,11 @@ div .rvsubmit {text-align:center;}
 										<c:choose>
 										<c:when test="${ p_review.REVIEW_FACE == 1}">
 										<!-- 좋아요 -->
-										<img src="Png/happy1.svg" style="width:20px; margin-right:5px">
+										<img src="Png/happy1.svg" style="width:20px; margin-right:5px" title="좋아요">
 										</c:when>
 										<c:otherwise>
 										<!-- 싫어요 -->
-										<img src="Png/neutral.svg" style="width:20px; margin-right:5px">
+										<img src="Png/neutral.svg" style="width:20px; margin-right:5px" title="싫어요">
 										</c:otherwise>
 										</c:choose>
 										
@@ -777,6 +777,7 @@ document.getElementById("main").style.marginLeft = "250px";
 	if(rating_value != -2)
 		Change_star(rating_value);
 	
+	alert(rating_value);
 	//표정 점수이미지를 클릭할경우 변화
 	$('.user_mv img').click(function(){
 		
@@ -810,6 +811,7 @@ document.getElementById("main").style.marginLeft = "250px";
 				else	//표정점수 등록
 				InsertFaceRating(++check);
 
+				rating_face = check;
 			});
 
 	//별점 클릭 시 해당 점수 고정시키기
@@ -848,6 +850,7 @@ document.getElementById("main").style.marginLeft = "250px";
 			}
 		
 			rating_value = check;
+			
 			return false;
 
 		}
@@ -905,7 +908,7 @@ document.getElementById("main").style.marginLeft = "250px";
 		
 		//별점 변화
 		for (var i = 0; i < 5; i++) {
-			if (i <= check) {
+			if (i < check) {
 				$('.rating span:eq(' + i + ')').text('★');
 				$('.rating span:eq(' + i + ')').css('color', 'orange');
 
