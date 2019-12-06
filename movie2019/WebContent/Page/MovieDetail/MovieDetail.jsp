@@ -259,12 +259,147 @@ font-size:15px;
 
 }
 
-
 .user_mv td {
 	width: 50%;
 }
 
 
+
+/*연수모달*/
+
+#rvModal {
+	display: none} /*처음에 모달 안 보이게*/ 
+
+.modal-content {padding:30px;}
+
+tr .rvtr {
+	text-align: center
+}
+
+td .rvtd {
+	padding: 10px;
+}
+
+button {
+	width:150px;
+	height: 40px;
+	line-height: 40px;
+	padding:0px;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 10px 5px;
+}
+
+.btn-gradiant {
+	
+		background: #2cdd9b;
+    background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+.btn-gradiant:hover {
+		background: #1dc8cc;
+    background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+    background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);	
+}
+
+span {
+	font-size: 8pt;
+}
+
+input {
+	background: #edf1f2;
+	border: 0px solid SteelBlue;
+	border-radius: 0px;
+	color: #141414;
+	font-size: 9pt;
+	padding: 5px;
+	margin: 5px;
+}
+
+textarea {
+	width: 90%;
+	background: #edf1f2;
+	border: 0px solid SteelBlue;
+	border-radius: 0px;
+	color: #141414;
+	font-size: 10pt;
+	padding: 5px;
+	margin: 5px;
+}
+
+.title {color:#27AE60} /**/
+
+.bg-gradiant {
+	
+		background: #1dc8cc;
+    background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+    background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+    
+}
+
+.bg-gradiant:hover {
+		background: #2cdd9b;
+    background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+.font-gradiant {
+    color: #2cdd9b;
+    color: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    color: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    color: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    color: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+.submtbutton {
+	width:40px;
+	font-size:12pt;
+	background:none;
+}
+
+.modalclose{color:#2cdd9b; font-size:13pt;}
+
+.floatright {float:right; padding:0px; margin-top:-20px;}
+.reviewarea {right:clear;}
+
+div .rvsubmit {text-align:center;}
+
+       /* modal position(center)*/
+        .modal {
+          text-align: center;
+        }
+        @@media screen and (min-width: 768px) {
+          .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 100%;
+          }
+        }
+        .modal-dialog {
+          display: inline-block;
+          text-align: left;
+          vertical-align: middle;
+        }
+        
+        
 </style>
 </head>
 <body>
@@ -354,7 +489,11 @@ font-size:15px;
 												<b>이미 이 영화에 대해 평가하셨습니다.</b>
 											</c:otherwise>
 										</c:choose>
-									</h4></td>
+									</h4>
+<!-- 연수 -->									
+		<button data-toggle="modal" data-target="#rvModal" class=bg-gradiant>리뷰 쓰기</button>	
+		
+									</td>
 									<td><c:choose>
 											<c:when test="${face == 1 }">
 												<img src="Png/happy1.svg">
@@ -418,6 +557,7 @@ font-size:15px;
 													<span>☆</span>
 												</c:otherwise>
 											</c:choose>
+							
 										</div>
 
 									</td>
@@ -546,6 +686,47 @@ font-size:15px;
 
 		</div>
 	</div>
+	
+	
+	
+	
+	
+<!-- 연수  modal 시작-->
+		<div class="modal" id="rvModal">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+
+
+		<!-- Modal body -->
+					<div class="modal-body">
+		<form name=review_write_form action="<%=request.getContextPath() %>/ReviewAddAction.rv" method=post>
+
+		<div class="outermodal">
+					<a href="#" class="floatright modalclose">X</a>
+				<div class="achtungfloat">	
+					<h4 class="mvtitle font-gradiant">겨울왕국2</h4>
+					
+				</div>
+				<div class="reviewarea">
+				
+						<div class="rvtitle">제목<input type=text></div>
+						<div class="rvcontent">
+							<textarea placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
+								class="rvcontentarea" cols=50 rows=12></textarea>
+						</div>		
+						<div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant" disabled="">저장</button>
+						</div>
+				</div>
+				
+			</div>
+		</form>
+		
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<!-- 연수여기까지 -->
 </body>
 
 <script>

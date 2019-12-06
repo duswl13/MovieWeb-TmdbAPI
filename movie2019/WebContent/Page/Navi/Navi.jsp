@@ -173,7 +173,7 @@ ul {
     color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
 
-span .hello {margin-left:30px;
+span .hello {margin-left:100px;
 }
 </style>
 </head>

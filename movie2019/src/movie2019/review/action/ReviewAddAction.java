@@ -3,6 +3,7 @@ package movie2019.review.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie2019.review.action.ActionForward;
 import movie2019.review.db.ReviewDAO;
@@ -22,28 +23,37 @@ public class ReviewAddAction implements Action {
 		ActionForward forward = new ActionForward();
 
 		
+		HttpSession session = request.getSession();
+		String userId = null;
+		
+		if(session.getAttribute("id") != null)
+		userId = (String) session.getAttribute("id");
+		
+		
+		if(userId != null) {
 		boolean result = false;
-
 		try {
 			
-			// ±Û µî·Ï Æû¿¡¼­ ÀÔ·Â¹ÞÀº Á¤º¸µéÀ» BoardBean°´Ã¼¿¡ ÀúÀå.
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·Â¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ BoardBeanï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+			reviewvo.setUSER_ID(userId);
+			//reviewvo.setMOVIE_ID(userId);
 			reviewvo.setREVIEW_TITLE(request.getParameter("REVIEW_TITLE"));
 			reviewvo.setREVIEW_CONTENT(request.getParameter("REVIEW_CONTENT"));
 	
-			// ±Û µî·Ï Ã³¸®¸¦ À§ÇØ DAOÀÇ boardInsert()¸Þ¼Òµå¸¦ È£ÃâÇÑ´Ù.
-			// ±Û µî·Ï Æû¿¡¼­ ÀÔ·ÂÇÑ Á¤º¸°¡ ÀúÀåµÅ ÀÖ´Â reviewdata°´Ã¼¸¦ Àü´Þ.
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DAOï¿½ï¿½ boardInsert()ï¿½Þ¼Òµå¸¦ È£ï¿½ï¿½ï¿½Ñ´ï¿½.
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ reviewdataï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 			result = reviewdao.reviewInsert(reviewvo);
 
-			// ±Û µî·Ï¿¡ ½ÇÆÐÇÑ °æ¿ì nullÀ» ¹ÝÈ¯.
+			// ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ nullï¿½ï¿½ ï¿½ï¿½È¯.
 			if (result == false) {
-				System.out.println("°Ô½ÃÆÇ µî·Ï ½ÇÆÐ");
+				System.out.println("ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				forward.setRedirect(false);
-				request.setAttribute("message", "°Ô½ÃÆÇ µî·Ï ½ÇÆÐ´Ù.");
+				request.setAttribute("message", "ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ð´ï¿½.");
 				forward.setPath("error/error.jsp");
 				return forward;
 			}
-			System.out.println("°Ô½ÃÆÇ µî·Ï ¿Ï·á.");
-			// ±Û µî·Ï ¿Ï·áµÇ¸é ±Û ¸ñ·ÏÀ» º¸¿©ÁÖ±â À§ÇØ Redirect¿©ºÎ¸¦ true·Î ¼³Á¤
+			System.out.println("ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½.");
+			// ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½Ç¸ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ Redirectï¿½ï¿½ï¿½Î¸ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			forward.setRedirect(true);
 			forward.setPath("ReviewList.rv");
 			return forward;
@@ -51,6 +61,9 @@ public class ReviewAddAction implements Action {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
+		
+		}
+		
 		return null;
 
 	}

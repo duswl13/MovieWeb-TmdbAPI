@@ -137,7 +137,7 @@ textarea {
 	<br>
 	<br>
 	<div class=container>
-		<form action="ReviewAddAction.rv" method=post name=review_write_form>
+		<form action="<%=request.getContextPath() %>/ReviewAddAction.rv" method=post name=review_write_form>
 
 	
 			<table>
