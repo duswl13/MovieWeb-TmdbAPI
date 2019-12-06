@@ -6,7 +6,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<!-- typeAlias type="전체경로" alias="별칭" -->
 		 <typeAlias type="movie2019.gong.model.GongVO" alias="g" />
-		 <typeAlias type="movie2019.gong.model.FAQVO" alias="f" />  
+		 <typeAlias type="movie2019.gong.model.FAQVO" alias="f" />
+		   <typeAlias type="movie2019.chu.model.GenresVO" alias="c" />		   
 	</typeAliases>
 	<environments default="">
 		<environment id="">
@@ -19,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<mappers>
 		<!-- 공지 -->
 		 <mapper resource="movie2019/gong/mapper/gong.xml" />
-		
+		 <mapper resource="movie2019/chu/mapper/chu.xml" />
 	</mappers>
 </configuration>
 

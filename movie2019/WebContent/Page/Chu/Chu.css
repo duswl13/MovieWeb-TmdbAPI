@@ -1,0 +1,355 @@
+@charset "UTF-8";
+
+#slidemenu {
+	background: black;
+	position: absolute;
+	width: 250px;
+	top: 50px;
+	right: 10px;
+	height: 20%;
+}
+
+.title1{
+ text-shadow: 2px 2px 2px black;
+ color: white;
+ 
+}
+/* * {
+	margin: 0;
+	padding: 0;
+}
+ */
+/* body {
+	text-align: center;
+	background: linear-gradient(#dec8f0, #90b7bd);
+} */
+.youtube {
+	width: 50%;
+	height: 360px;
+	border: 1px solid gray;
+	margin: 20px 10px;
+}
+ 
+.boxOfficeList {
+	width: 100%;
+	padding: 8px;
+	list-style-position: inside;
+	text-align: left;
+	list-style-type: none;
+}
+
+.boxOfficeList li {
+	width: 92%;
+	margin: 5px 0px;
+	background: rgb(189, 235, 212, 0.2);
+	padding: 5px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position-x: right;
+	background-position-y: 30%;
+	background-size: cover;
+	border: 1px solid rgb(161, 161, 161);
+	height: 60px;
+	
+}
+
+.boxOfficeList li:hover {
+	background: rgb(240, 232, 128, .5);
+	background-repeat: no-repeat;
+	background-position-x: right;
+	background-position-y: 30%;
+	background-size: cover;
+	border: 1px solid rgb(241, 159, 5);
+} 
+.rank {
+	width: 85px;
+	height: 50px;
+	font-size: 23px;
+	font-weight: bold;
+	color: rgb(240, 232, 128);
+	float: left;
+	text-align: center;
+	line-height: 23px;
+	background: seagreen;
+	margin-right: 7px;
+	padding-top: 25px;
+	border-radius: 50%;
+}
+
+/* * {
+	margin: 0;
+	padding: 0;
+} */
+
+
+/* 오버레이 실행시 뒷 배경 스크롤 방지 */
+.stop-scrolling {
+	/* height: 100%; */
+	overflow: hidden;
+}
+
+h1 {
+	width: 360px;
+	margin: 0 auto;
+	text-align: center;
+	color: blueviolet;
+	padding-top: 20px;
+}
+
+.subsubject {
+	text-align: center;
+}
+
+
+.buttonWrapper {
+	width: 100vs;
+	text-align: center;
+}
+
+.more {
+	width: 120px;
+	padding: 8px 15px;
+	margin: 10px auto;
+}
+
+
+/* 오버레이 설정 */
+#overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 999;
+	/* 시작시 보이지 않게 처리 */
+	visibility: hidden;
+	opacity: 0;
+	transition: all 0.5s;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* 오버레이를 보여 줄때 사용 */
+#overlay.show {
+	visibility: visible;
+	opacity: 1;
+}
+
+.close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 36px;
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	margin: 8px auto;
+}
+
+/* 이건 테스크탑 기준 - 모바일은 따로 설정할 필요가 있다. */
+.youtube {
+	width: 60%;
+	height: 60%;
+}
+
+iframe {
+	display: block;
+	width: 100%;
+}
+
+.noVideo {
+	color: white;
+}
+
+/* 모바일 전용 */
+@media ( max-width : 768px) {
+	.youtube {
+		width: 100%;
+		height: 100%;
+	}
+	
+
+}
+/* 슬라이더 */
+.accordian{
+  width: 80%;
+  height: 333px;
+  overflow:hidden;
+  
+  margin: 100px auto;
+  -webkit-box-shadow: 0 8px 6px -6px black;
+  -moz-box-shadow: 0 8px 6px -6px black;
+  box-shadow: 0px 8px 6px -6px black;
+}
+
+
+.accordian li{
+  position: relative;
+  display:block;
+  width:140px;
+  float: left;
+  
+  border-left: 1px solid #888;
+  -webkit-box-shadow: 0 0 25px 10px rgba(0,0,0,0.5);
+  -moz-box-shadow: 0 0 25px 10px rgba(0,0,0,0.5);
+  
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+
+.accordian ul:hover li{
+  width: 50px;
+}
+
+.accordian ul li:hover{
+  width:500px;
+}
+
+.accordian li img{
+  display: block;
+}
+
+.image_title{
+  background: rgba(0,0,0,0.5);
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:500px;
+}
+
+.image_title a{
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding:20px;
+  font-size:16px;
+}
+/* 자동슬라이더 */
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+.slick-slider
+{
+    position: relative;
+    display: block;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+            user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+        touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list
+{
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.slick-list:focus
+{
+    outline: none;
+}
+.slick-list.dragging
+{
+    cursor: pointer;
+    cursor: hand;
+}
+
+.slick-slider .slick-track,
+.slick-slider .slick-list
+{
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+         -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+.slick-track
+{
+
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    
+}
+.slick-track:before,
+.slick-track:after
+{
+    display: table;
+    content: '';
+}
+.slick-track:after
+{
+    clear: both;
+}
+.slick-loading .slick-track
+{
+    visibility: hidden;
+}
+
+.slick-slide
+{
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+[dir='rtl'] .slick-slide
+{
+    float: right;
+}
+.slick-slide img
+{
+    display: block;
+}
+.slick-slide.slick-loading img
+{
+    display: none;
+}
+.slick-slide.dragging img
+{
+    pointer-events: none;
+}
+.slick-initialized .slick-slide
+{
+    display: block;
+}
+.slick-loading .slick-slide
+{
+    visibility: hidden;
+}
+.slick-vertical .slick-slide
+{
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+.slick-arrow.slick-hidden {
+    display: none;
+}
+
+.uc{
+	padding-left: 250px;
+	margin-right: 10px;
+}
+

@@ -1,22 +1,22 @@
 package movie2019.chu;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import movie2019.chu.command.BCommand;
+import movie2019.chu.command.Ch_Main;
+import movie2019.chu.command.Command;
 
 @WebServlet("*.ch")
 public class ChController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ChController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -32,19 +32,24 @@ public class ChController extends HttpServlet {
 
 	private void actionDo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("actionDo");
-		request.setCharacterEncoding("UTF-8");
+		
 		String page = null;
-		BCommand command = null;
+		Command command = null;
 		String uri = request.getRequestURI();
 		String conPath = request.getContextPath();
 		String com = uri.substring(conPath.length());
 
 		if (com.equals("/list.ch")) {
+			command = new Ch_Main();
+			command.execute(request, response);
 			page = "Page/Chu/list.jsp";
 		}
-
-		request.getRequestDispatcher(page).forward(request, response);
-
+		
+		try {
+		if(page!=null) {
+		request.getRequestDispatcher(page).forward(request, response);}
+		}catch (Exception e) {
+			
+		}
 	}
 }

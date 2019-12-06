@@ -22,37 +22,36 @@ $(function() {
 			alert("내용입력");
 			return;
 		}
+		mailsender();
 		
-		$.ajax({
-			type : "post",
-			url : "mailsend.gong",
-			data : {
-				"senderName" : $("#senderName").val(),
-				"senderMail" : $("#senderMail").val(),
-				"receiveMail" : $("#receiveMail").val(),
-				"subject" :$("#subject").val(),
-				"message":$("#message").val()
-			},
-			success : function(result) {
-				alert("메일보내기성공!");
-				/*  $("#senderName").val("");
-				$("#senderMail").val("");
-				$("#subject").val("");
-				$("#message").val("");  */
-				location.href="list.gong"; //혹시 세션유지안되는지 확인해바야댐
-			},
-			
-			error : function(err) {
-				alert("실패:받으실이메일주소를 확인해주세요");
-			}
-
-		});
-			
-		
-	
-	});
+	});	
 });
- 
+function mailsender() {
+	$.ajax({
+		type : "post",
+		url : "mailsend.gong",
+		data : {
+			"senderName" : $("#senderName").val(),
+			"senderMail" : $("#senderMail").val(),
+			"receiveMail" : $("#receiveMail").val(),
+			"subject" :$("#subject").val(),
+			"message":$("#message").val()
+		},
+		success : function(result) {
+			alert("메일보내기성공!");
+			 $("#senderName").val("");
+			$("#senderMail").val("");
+			$("#subject").val("");
+			$("#message").val("");  
+			//location.href="list.gong"; //혹시 세션유지안되는지 확인해바야댐
+		},
+		
+		error : function(err) {
+			alert("실패:받으실이메일주소를 확인해주세요");
+		}
+
+	});
+}
 
 
 </script>
@@ -84,7 +83,7 @@ $(function() {
                             
                         </div>
 
-                        <form>
+                     
                            
                                         <input type="email" class="form-control"  id="senderName" placeholder="Your e-mail" name="senderName" >
                                  
@@ -96,7 +95,7 @@ $(function() {
                             <input type="hidden" name="senderMail" id="senderMail" value="rjstn19339@gmail.com">
 <input type="hidden" name="receiveMail" id="receiveMail" value="rjstn19339@gmail.com">    
 
-                        </form>
+                      
                     </div>
                 </div>
 
