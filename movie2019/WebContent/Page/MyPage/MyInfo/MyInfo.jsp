@@ -82,8 +82,8 @@ $(function(){
                       <div class="panel-heading" style="background-color : white; ">  <h4>나의 정보</h4></div>
                        <div class="panel-body" style="background-color : white; ">
                       <div class="col-xs-6 col-sm-3">
-                       <img alt="User Pic" src="Page/images/winter.jpg" 
-                       			id="profile-image1" class="img-thumbnail img-responsive" style="width:80%;"> 
+                       <img alt="poster" src="" 
+                       			id="poster" class="img-thumbnail img-responsive" style="width:80%;"> 
                      
                  
                       </div>
@@ -103,6 +103,8 @@ $(function(){
                           <ul class="container details" >
                              <c:set var="g" value="${genresinfo }"/>                       				
                              <li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>관심 장르: <span id="genres">ㅎㅎ</span></p></li>
+                             <input type="hidden" name="MOVIE_ID" value="" id="genres2">
+                             
                           </ul>
 						</div>
                         <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >
