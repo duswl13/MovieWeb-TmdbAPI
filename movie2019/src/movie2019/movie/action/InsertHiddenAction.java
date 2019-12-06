@@ -26,6 +26,7 @@ public class InsertHiddenAction implements Action {
 		MovieDAO movieDAO = new MovieDAO();
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		String movieTitle = request.getParameter("movieTitle");
+		String poster_path = request.getParameter("poster_path");
 		HttpSession session = request.getSession();
 		String userId;
 
@@ -33,7 +34,7 @@ public class InsertHiddenAction implements Action {
 			userId = (String) session.getAttribute("id");
 
 			int result = 0;
-			if (movieDAO.isMovieId(movieId, movieTitle)) {
+			if (movieDAO.isMovieId(movieId, movieTitle,poster_path)) {
 				result = movieDAO.InsertHidden(movieId, userId);
 				if (result == 1) {
 					hidden.addHiddenValue(movieId);

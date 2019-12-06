@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,9 +35,7 @@ public class MainMovieAction implements Action {
 		MovieAPIDAO movieAPIDAO = new MovieAPIDAO();
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
 		String today = format.format(new Date());
-
 		Calendar c = Calendar.getInstance();
 
 		c.add(c.MONTH, -1);
@@ -79,8 +76,7 @@ public class MainMovieAction implements Action {
 		 */
 
 		MovieItemAPIVO movieItem = p_vo.getResults().get((new Random().nextInt(5)));
-		String title = movieItem.getTitle();
-		
+
 		String videoUrl = movieAPIDAO.getVideo(apikey, movieItem.getId());
 		System.out.println("videoUrl:" + videoUrl);
 

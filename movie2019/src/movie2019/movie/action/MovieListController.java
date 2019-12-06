@@ -48,11 +48,10 @@ public class MovieListController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
-		
+
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI = " + RequestURI);
 
-		
 		String contextPath = request.getContextPath();
 		System.out.println("contextPath = " + contextPath);
 
@@ -64,13 +63,13 @@ public class MovieListController extends HttpServlet {
 		Action action = null;
 
 		ServletContext sc = this.getServletContext();
-		
+
 		if (command.equals("/main.ml")) {
 
 			action = new MainMovieAction();
 
 			try {
-				forward = action.execute(request, response,sc);
+				forward = action.execute(request, response, sc);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -80,7 +79,7 @@ public class MovieListController extends HttpServlet {
 			action = new MovieListAction(); // parameter ����
 
 			try {
-				forward = action.execute(request, response, null);
+				forward = action.execute(request, response, sc);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -90,28 +89,33 @@ public class MovieListController extends HttpServlet {
 			action = new SearchMovieAction(); // parameter ����
 
 			try {
-				forward = action.execute(request, response,sc);
+				forward = action.execute(request, response, sc);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
-			
 		} else if (command.equals("/moviedetail.ml")) {
-			action = new SelectRatingAction();
+			action = new MovieDetailAction();
 			try {
-				forward = action.execute(request, response, null);
+				forward = action.execute(request, response, sc);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 		} else if (command.equals("/PersonDetail.ml")) {
-			forward = new ActionForward();// parameter ����
-			forward.setRedirect(false);
-			forward.setPath("Page/MovieDetail/PersonDetail.jsp");
+			action = new PersonDetailAction();
+
+			try {
+				forward = action.execute(request, response, sc);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if (command.equals("/InsertFaceRating.ml")) {
-			action = new InsertFaceRatingAction();// parameter ����
+			action = new InsertFaceRatingAction();
 
 			try {
 				forward = action.execute(request, response, null);
@@ -146,7 +150,7 @@ public class MovieListController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/InsertHidden.ml")) {
+		} else if (command.equals("/InsertHidden.ml")) {
 			action = new InsertHiddenAction();// parameter ����
 
 			try {

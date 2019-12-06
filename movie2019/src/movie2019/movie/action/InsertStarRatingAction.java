@@ -3,13 +3,15 @@ package movie2019.movie.action;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie2019.movie.db.MovieDAO;
 
 public class InsertStarRatingAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, ServletContext sc) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response, ServletContext sc)
+			throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 
@@ -17,14 +19,18 @@ public class InsertStarRatingAction implements Action {
 
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		int movieFace = Integer.parseInt(request.getParameter("movieStar"));
-		String userId = "duswl13"; // 추후 session 수정
 
-		// movieID 있는지 확인, 없으면 추가까지
+		HttpSession session = request.getSession();
+		String userId = null;
 
-		// 별점점수 등록
-		int result = movieDAO.InsertStarRating(movieId, movieFace, userId);
-		response.getWriter().append(Integer.toString(result));
+		if (session.getAttribute("id") != null)
+			userId = (String) session.getAttribute("id");
 
+		if (userId != null) {
+			int result = movieDAO.InsertStarRating(movieId, movieFace, userId);
+			response.getWriter().append(Integer.toString(result));
+		} else
+			response.getWriter().append(Integer.toString(-5));
 		return null;
 	}
 

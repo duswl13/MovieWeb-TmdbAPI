@@ -14,6 +14,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import movie2019.movie.action.MovieDetailAction;
 import movie2019.review.db.AllReviewVO;
 import movie2019.review.db.ReviewVO;
 
@@ -89,7 +90,7 @@ public class MovieDAO {
 		return result;
 	}
 
-	public boolean isMovieId(int movieId, String movieTitle) {
+	public boolean isMovieId(int movieId, String movieTitle, String poster) {
 		String sql = "select * from movie where MOVIE_ID= ?";
 		boolean result = false;
 		try {
@@ -103,14 +104,15 @@ public class MovieDAO {
 				result = true;
 			} else {
 
-				// ��ȭ ID�� ���� ��� �߰�����
-				String sql2 = "INSERT INTO MOVIE VALUES(?,?)";
+				String sql2 = "INSERT INTO MOVIE VALUES(?,?,?)";
 
 				pstmt = con.prepareStatement(sql2);
 				pstmt.setInt(1, movieId);
 				pstmt.setString(2, movieTitle);
-				// System.out.println(movieId);
-				// System.out.println(movieTitle);
+				pstmt.setString(3, poster);
+				System.out.println(movieId);
+				System.out.println(movieTitle);
+				System.out.println(poster);
 				int result2 = pstmt.executeUpdate();
 
 				if (result2 == 1)
@@ -448,7 +450,7 @@ public class MovieDAO {
 
 	}
 
-	public List<MovieItemAPIVO> addStar(ArrayList<MovieItemAPIVO> list) {
+	public List<MovieItemAPIVO> addStar(List<MovieItemAPIVO> list) {
 
 		String Id = "";
 
@@ -464,6 +466,7 @@ public class MovieDAO {
 		// 해당 영화들에 대한 별점 평균 가져오기
 		String sql = "select MOVIE_ID,avg(RATING_STAR_value) " + "from RATING_STAR where MOVIE_ID" + " in (" + Id
 				+ ") group by MOVIE_ID";
+		System.out.println("쿼리확인 :" + sql);
 
 		try {
 			con = ds.getConnection();
@@ -474,10 +477,9 @@ public class MovieDAO {
 			while (rs.next()) {
 				int movieId = rs.getInt(1);
 				int star = rs.getInt(2);
-				
-				for(int j = 0; j < list.size(); j++)
-					if(list.get(j).getId() == movieId) {
-						System.out.println(list.get(j).getTitle()+"별점 : "+star);
+
+				for (int j = 0; j < list.size(); j++)
+					if (list.get(j).getId() == movieId) {
 						list.get(j).setStar(star);
 						break;
 					}
@@ -488,10 +490,33 @@ public class MovieDAO {
 			close();
 		}
 
-		
 		return list;
 	}
-	
-	
-	
+
+	public int addStar(MovieItemDetailAPIVO list) {
+
+		// 해당 영화에 대한 별점 평균 가져오기
+		String sql = "select avg(RATING_STAR_value) " + "from RATING_STAR where MOVIE_ID=? group by MOVIE_ID";
+		int star = 0;
+		try {
+			con = ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, String.valueOf(list.getId()));
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+
+				star = rs.getInt(1);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+		return star;
+	}
+
 }

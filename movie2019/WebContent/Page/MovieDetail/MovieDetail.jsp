@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<title>VOSHU</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
@@ -24,14 +24,15 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+
 <%
-	String id = request.getParameter("id");
+
 	
 	boolean open = false;
 	if (request.getParameter("open") != null) {
 		open = Boolean.parseBoolean(request.getParameter("open"));
 	}
-	String apikey = application.getInitParameter("APIKEY");
+	
 %>
 <style>
 .all {
@@ -287,9 +288,22 @@ font-size:15px;
 
 		<div class="video-background">
 			<div class="video-foreground">
+			<c:choose>
+			<c:when test="${empty movieurl}">
 				<iframe id="detailVideo" src="video/aurora.mp4" frameborder="0"
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen> </iframe>
+			</c:when>
+			<c:otherwise>
+			<iframe id="detailVideo" src="https://www.youtube.com/embed/${movieurl }?version=3&mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0&playlist=${movieurl }" frameborder="0"
+					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen> </iframe>
+	
+			</c:otherwise>
+			</c:choose>
+			
+		
+			
 			</div>
 
 
@@ -303,25 +317,37 @@ font-size:15px;
 			<div class="row movie_info">
 				<div class="container">
 					<div class="col-xs-2">
-						<img class="img-responsive" id="detail_poster">
+						<img class="img-responsive" id="detail_poster" src="https://image.tmdb.org/t/p/w500${list.poster_path }">
 					</div>
 					<div class="col-xs-10">
 						<h2>
-							<b id="detail_title"></b>
+							<b id="detail_title">${list.title}</b>
+							<b style="text-align: right; float: right;">
+							
+							<c:forEach var="test" begin="1" end="${list.star }">
+																<span class="fa fa-star"></span>
+															</c:forEach>
+							
+							</b>
 						</h2>
 						
-						<h5 id="detail_genre_and_date"></h5>
-						<h5 id="homepage"></h5>
-						<h5><b id="tag_line"></b></h5>
+						<h5 id="detail_genre_and_date">
+						<c:forEach items="${list.genre_ids}" var="item">
+						${item}&nbps;
+						</c:forEach>
+						${list.release_date}
+						</h5>
+						<h5 id="homepage"><a href="${list.homepage}">${list.homepage}</a></h5>
+						<h5><b id="tag_line">${list.tagline}</b></h5>
 						
-						<p id="detail_content"></p>
+						<p id="detail_content">${list.overview}</p>
 
 						<div class="user_mv">
 							<table>
 								<tr>
 									<td><h4>
 										<c:choose>
-											<c:when test="${star == -2 }">
+											<c:when test="${star == -2}">
 												<b>이 영화 에 대해 평가해주세요.</b>
 											</c:when>
 											<c:otherwise>
@@ -404,7 +430,8 @@ font-size:15px;
 						<h4 class="top_margin">
 							<b>출연진</b>
 						</h4>
-						<div class="mv_guest row"></div>
+						<div class="mv_guest row">
+						</div>
 
 
 
@@ -530,112 +557,37 @@ document.getElementById("main").style.marginLeft = "250px";
 	
 
 	
+	var creditlist = new Array();
 	
-	console.log('http://api.themoviedb.org/3/movie/'
-			+<%=id%>+'/videos?api_key=<%=apikey%>');
+	<c:forEach items="${credit}" var="item2">
 	
-	$.ajax({
-	
-		url : 'http://api.themoviedb.org/3/movie/'
-		+<%=id%>+'/videos?api_key=<%=apikey%>',
-		dataType : 'json',
-		cache : false,
-		success : function(data) {
-
-			console.log('비디오 셋팅 성공');
-			var list = data.results;
-
-			
-			if(list != null && list.length != 0)
-			if(list[0].key != null)
-			printVideo(list[0].key);
-			
-		},
-		error : function(request, status, error) {
-			console.log('비디오 error');
-		},
-		complete : function() {
-			console.log('비디오 완료');
-
-		}
+	creditlist.push({
+		id : "${item2.id}",
+		name : "${item2.name}",
+		profile_path : "${item2.profile_path}"
 	});
 	
+	</c:forEach>
 	
+
+	var similarlist = new Array();
 	
-	console.log('세부 정보 : ' + 'https://api.themoviedb.org/3/movie/<%=id%>?api_key=<%=apikey%>&language=ko-KO');
+	<c:forEach items="${similar}" var="item2">
 	
-	$.ajax({
-				url : 'https://api.themoviedb.org/3/movie/<%=id%>?api_key=<%=apikey%>&language=ko-KO', //요청 전송 url
-				dataType : 'json',
-				cache : false,
-				success : function(data) {
-					console.log('세부정보 성공');
-					var list = data;
-
-					printDetail(list);
-					
-
-				}, //HTTP 요청이 성공한 경우 실행
-				error : function(request, status, error) {
-					console.log('세부정보 error');
-
-				},
-				complete : function() {
-					console.log('세부정보 완료');
-
-				} 
-			});
-	
-	
-	
-	
-	console.log("크레딧 : "+'https://api.themoviedb.org/3/movie/<%=id%>/credits?api_key=<%=apikey%>');
-	$.ajax({
-		url : 'https://api.themoviedb.org/3/movie/<%=id%>/credits?api_key=<%=apikey%>', //요청 전송 url
-		dataType : 'json',
-		cache : false,
-		success : function(data) {
-			console.log('크레딧 성공');
-			var list = data;
-
-			printCredits(list.cast);
-			
-
-		}, //HTTP 요청이 성공한 경우 실행
-		error : function(request, status, error) {
-			console.log('크레딧 error');
-
-		},
-		complete : function() {
-			console.log('크레딧 완료');
-
-		} 
+	similarlist.push({
+		poster_path : "${item2.poster_path}",
+		id : "${item2.id}",
+		original_title : "${item2.original_title}",
+		title : "${item2.title}",
+		Star : "${item2.star}"
 	});
+	
+	</c:forEach>
+	
+	printCredits(creditlist);
+	printSimilar(similarlist);
 
 	
-	
-	$.ajax({
-		url : 'https://api.themoviedb.org/3/movie/<%=id%>/similar?api_key=<%=apikey%>&language=ko-KO&page=1', //요청 전송 url
-		dataType : 'json',
-		cache : false,
-		success : function(data) {
-			
-			var list = data.results;
-			console.log('비슷한 영화 성공 , 갯수 :' + list.length);
-			printSimilar(list);
-			
-
-		}, //HTTP 요청이 성공한 경우 실행
-		error : function(request, status, error) {
-			console.log('크레딧 error');
-
-		},
-		complete : function() {
-			console.log('크레딧 완료');
-
-		} 
-	});
-
 	
 	var rating = false;
 	var rating_value = ${star};
@@ -647,7 +599,19 @@ document.getElementById("main").style.marginLeft = "250px";
 	//표정 점수이미지를 클릭할경우 변화
 	$('.user_mv img').click(function(){
 		
+		
+		var id = "${id}";
+		
+		if(id == null || id==""){
+			alert(id+'로그인 먼저 해주세요.');
+			location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
+			return;
+		}
+		
 		var check = $(".user_mv img").index(this); 
+		
+		
+		
 		if(check == 0){
 			//좋아요
 			$('.user_mv img:eq(0)').prop('src',"<%=request.getContextPath()%>/Png/happy1.svg");
@@ -669,6 +633,15 @@ document.getElementById("main").style.marginLeft = "250px";
 
 	//별점 클릭 시 해당 점수 고정시키기
 	$(".rating span").click(function() {
+		
+		
+		var id = "${id}";
+		
+		if(id == null || id==""){
+			alert(id+'로그인 먼저 해주세요.');
+			location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
+			return;
+		}
 		
 		if(rating_value > -2){
 			rating_value = -3; //별점 바꾸겠다.
@@ -769,9 +742,7 @@ document.getElementById("main").style.marginLeft = "250px";
 
 			url : 'InsertStarRating.ml',
 			data : {
-				"movieId" :
-<%=id%>
-	,
+				"movieId" :"${movieId}",
 				"movieStar" : value
 			},
 			dataType : 'json',
@@ -779,6 +750,8 @@ document.getElementById("main").style.marginLeft = "250px";
 
 				if (rdata != 1) {
 					alert('별점 등록에 실패했습니다.');
+				}else if(rdata == 5){
+					alert("로그인 먼저 해주세요.");
 				}
 
 			}
@@ -796,9 +769,7 @@ document.getElementById("main").style.marginLeft = "250px";
 
 			url : 'UpdateStarRating.ml',
 			data : {
-				"movieId" :
-<%=id%>
-	,
+				"movieId" : "${movieId}",
 				"movieStar" : value
 			},
 			dataType : 'json',
@@ -821,7 +792,7 @@ document.getElementById("main").style.marginLeft = "250px";
 
 			url : 'UpdateFaceRating.ml',
 			data : {
-				"movieId" :<%=id%>,
+				"movieId" :"${movieId}",
 				"movieFace" : value
 			},
 			dataType : 'json',
@@ -844,7 +815,7 @@ document.getElementById("main").style.marginLeft = "250px";
 
 			url : 'InsertFaceRating.ml',
 			data : {
-				"movieId" :<%=id%>,
+				"movieId" :"${movieId}",
 				"movieFace" : value
 			},
 			dataType : 'json',
@@ -860,45 +831,7 @@ document.getElementById("main").style.marginLeft = "250px";
 
 	}
 
-	function printVideo(videokey) {
-
-		$('#detailVideo')
-				.prop(
-						'src',
-						'https://www.youtube.com/embed/'
-								+ videokey
-								+ '?version=3&mute=1&loop=1&autoplay=1&rel=0&controls=0&showinfo=0&playlist='
-								+ videokey);
-	}
-
-	function printDetail(list) {
-
-		if (list.original_language == "ko")
-			console.log(list.title);
-
-		$('#detail_title').text(list.title);
-
-		$("#detail_content").text(list.overview);
-
-		var genre = list.genres;
-		var genre_text = '';
-		for (var i = 0; i < genre.length; i++)
-			genre_text += genre[i].name + " ";
-
-		$('#detail_genre_and_date').text(genre_text + " " + list.release_date);
-		if(list.homepage != null)
-		$('#homepage').html("<a href='"+list.homepage+"' target='_blank'>"+list.homepage+"</a>");
-		if(list.tagline != null)
-		$('#tag_line').text(list.tagline);
 	
-		
-		$("#detail_poster").prop('src',
-				'https://image.tmdb.org/t/p/w500' + list.poster_path);
-
-		//별점과 표정점수 가져오기
-
-	}
-
 	function SelectFaceRating(value) {
 
 		//alert($('#detail_title').text());
@@ -906,9 +839,7 @@ document.getElementById("main").style.marginLeft = "250px";
 
 			url : 'SelectFaceRating.ml',
 			data : {
-				"movieId" :
-<%=id%>
-	,
+				"movieId" :"${movieId}",
 				"movieTitle" : $('#detail_title').text(),
 			},
 			dataType : 'json',
@@ -969,7 +900,7 @@ document.getElementById("main").style.marginLeft = "250px";
 				tag += '</div>';
 				check++;
 				
-				console.log("TEst>>>>"+list[check].profile_path);
+				//console.log("TEst>>>>"+list[check].profile_path);
 			
 		}
 
@@ -993,20 +924,6 @@ document.getElementById("main").style.marginLeft = "250px";
 		for (var i = 0; i < 4; i++) {
 			if (check < list.length) {
 
-				if (list[check].poster_path == null
-						|| list[check].overview == null
-						|| list[check].genre_ids == null
-						|| list[check].overview == ""
-						|| list[check].genre_ids == ""
-						|| list[check].overview.includes('섹스')) {
-
-					i--;
-					check++;
-					console.log('이상한 거니까 넘김' + check);
-
-					continue;
-
-				}
 
 				text += '<div class="col-xs-3">';
 				
@@ -1018,16 +935,14 @@ document.getElementById("main").style.marginLeft = "250px";
 				
 				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
 						+ list[check].id +'&title='+list[check].original_title
-						+ '\'">';
+						+ '&poster_path='+list[check].poster_path+'\'">';
 				text += '<h3 style="clear:right;" class="centeredText"><b>'
 						+ list[check].original_title + '</b></h3>\n';
 
 				text += ' <div>';
-				text += '<span class="fa fa-star"></span>';
-				text += '<span class="fa fa-star"></span>';
-				text += '<span class="fa fa-star"></span>';
-				text += '<span class="fa fa-star"></span>';
-				text += '<span class="fa fa-star"></span>';
+				for(var k =0; k < list[check].Star; k++)
+					text += '<span class="fa fa-star"></span>';
+				
 				text += ' </div>';
 				text += '</div>\n';
 				text += '<h5>' + list[check].original_title + '</h5>';
@@ -1079,7 +994,7 @@ document.getElementById("main").style.marginLeft = "250px";
 				type : 'doughnut',
 
 				data : {
-
+				
 					labels : [ "1점", "2점", "3점", "4점", "5점" ],
 					datasets : [ {
 						label : '# of Votes',
@@ -1098,6 +1013,7 @@ document.getElementById("main").style.marginLeft = "250px";
 					} ]
 				},
 				options : {
+				     cutoutPercentage: 50,
 					maintainAspectRatio : true, // default value. false일 경우 포함된 div의 크기에 맞춰서 그려짐.
 					scales : {
 						yAxes : [ {
