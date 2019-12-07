@@ -38,7 +38,7 @@ public class FrontController
 
 	    //가입가입
 	    }else if(command.equals("/signProcess.su")) { 
-	          action = new JoinProcessAction();
+	          action = new SignProcessAction();
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {

@@ -64,9 +64,9 @@ public class BoardModifyAction implements Action {
 	      //수정 내용을 설정한다.
 	      boarddata.setBOARD_NUM(num);
 	      boarddata.setBOARD_SUBJECT(
-	    		  request.getParameter("BOARD_SUBJECT"));
+	    		  multi.getParameter("BOARD_SUBJECT"));
 	      boarddata.setBOARD_CONTENT(
-	    		  request.getParameter("BOARD_CONTENT"));
+	    		  multi.getParameter("BOARD_CONTENT"));
 	     
 	      String check = multi.getParameter("check");
 	      System.out.println("check="+check);
@@ -84,8 +84,6 @@ public class BoardModifyAction implements Action {
 	      if(result==false) {
 	    	  System.out.println("게시판 수정 실패");
 	    	  forward.setRedirect(false);
-	    	  request.setAttribute("message","게시판 수정 실패입니다.");
-	    	  forward.setPath("error/error.jsp");
 	    	  return forward;
 	      }
 	      //수정 성공의 경우

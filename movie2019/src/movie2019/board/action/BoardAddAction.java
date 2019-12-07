@@ -58,8 +58,7 @@ public class BoardAddAction implements Action {
 	    	if(result==false) {
 	    		System.out.println("게시판 등록 실패");
 	    		forward.setRedirect(false);
-	            request.setAttribute("message", "게시판 등록 실패입니다.");
-	            forward.setPath("error/error.jsp");
+	          
 	    		return forward;
 	    	}
 	    	System.out.println("게시판 등록 완료");

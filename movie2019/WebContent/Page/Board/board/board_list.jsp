@@ -5,16 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/popper.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <style>
- * {color:white; background:#141414;}
+ body {color:white; background:#141414;}
  .container {background:silver;}
  select {justify-content:center;}
  .center-block {display:flex;
                 justify-content:center; /* 가운데 정렬 */}
- .rows {padding:5px;width:80px;text-align:center;float:right;}
+  #searchForm {width:300px; display:flex; justify-content:center;}
  #id {text-align:center;}
  h1 {text-align:center; color:#27AE60;}
 </style>
@@ -39,20 +42,11 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 
-<h1>영화 토론 게시판</h1>
+<h1>무비 토크</h1>
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount>0 }">
-  <div class="rows">
-   <span>줄보기</span>
-   <select class="form-control" id="viewcount">
-    <option value="1">1</option>
-    <option value="3">3</option>
-    <option value="5">5</option>
-    <option value="7">7</option>
-    <option value="10" selected>10</option>
-   </select>
-  </div>
+ <!-- 줄보기 삭제함  -->
    <table class="table table-striped">
    <thead>
      <tr>
@@ -159,8 +153,24 @@ if(request.getParameter("open") != null){
  <c:if test="${listcount==0 }">
      <font size=5>등록된 글이 없습니다.</font>
  </c:if><br>
- <button type="button"
-         class="btn btn-info float-right">글쓰기</button>
+ <button type="button" id="writebtn"
+         class="btn btn-success float-right">글쓰기</button>
+  
+  <!-- 게시물 검색  -->       
+  <form action="board_search.bd" id="searchForm">
+   <div class="input-group">
+   <select id="viewcount" name="search_field">
+      <option value="0" selected>아이디</option>
+      <option value="1" >제목</option>
+      <option value="2" >내용</option>
+ 
+   </select>
+   <input name="search_word" type="text" class="form-control"
+   placeholder="Search" value="${search_word }" id="search">
+   <button class="btn btn-info" type="submit" id="searchbtn">검색</button>
+   
+   </div>
+   </form>
 </div>
 </div>
 </body>
@@ -172,11 +182,33 @@ if(<%=open%>)
 </script>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
- $(function(){
-	 $("button").click(function(){
-		 location.href="BoardWrite.bd";
+//로그인한 회원만 글 쓰기
+$(function(){
+	 $("#writebtn").click(function(){
+		 var id = "${id}";
+		 if (id != null && id !="" ) {
+			 location.href="BoardWrite.bd";
+		 }
+		 else {
+			 alert("로그인 하고 글 작성하세요.");
+			 
+		 }
 	 })
- })
+})
+
+//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
+var selectedValue = '${search_field}'
+if(selectedValue != '-1')
+    $("#viewcount").val(selectedValue);
+
+//검색어 공백 유효성 검사합니다.
+$("#searchbtn").click(function(){		
+   if($("input").val()==''){
+	 alert("검색어를 입력하세요");
+	 return false;
+   }
+});
+
 </script>
 <script src="list.js"></script>
 </html>

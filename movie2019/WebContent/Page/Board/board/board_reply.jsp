@@ -2,10 +2,12 @@
     pageEncoding="utf-8"%>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/writeform.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
-* {color:white; background:#141414;}
+body {color:white; background:#141414;}
   tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%;height:100%;}
@@ -43,7 +45,7 @@ if(request.getParameter("open") != null){
           value="${boarddata.BOARD_RE_LEV }">
    <input type="hidden" name="BOARD_RE_SEQ"
           value="${boarddata.BOARD_RE_SEQ }">              
-  <h1>reply 페이지</h1>
+  <h1>답변 작성</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input name="BOARD_NAME" id="board_name" value="${id }"
@@ -81,8 +83,6 @@ if(<%=open%>)
 
 
 </script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="js/writeform.js" charset="utf-8"></script>
 <script>
 $(document).ready(function() {
 	$(document).submit(function() {

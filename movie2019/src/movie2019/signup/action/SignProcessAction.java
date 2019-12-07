@@ -5,14 +5,14 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class JoinProcessAction implements Action {
+public class SignProcessAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, 
 		HttpServletResponse response) throws Exception {
 
 		ActionForward forward = new ActionForward();
-		//ÇÑ±Û±úÁü ¹æÁö
+		//ï¿½Ñ±Û±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		request.setCharacterEncoding("utf-8");
 		
 		String USER_ID = request.getParameter("USER_ID");
@@ -32,13 +32,11 @@ public class JoinProcessAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.insert(m);
 		
-		//»ğÀÔ µÈ °æ¿ì
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
 		if(result==1) { 
-			
+			//ì„ íƒí•œ ì¥ë¥´ë¥¼ ë°°ì—´ë¡œ
 			String[] genres = request.getParameterValues("genre");
-			System.out.println("µÇ±äÇÏ´Ï");
-		    System.out.println(genres.length);
-		    System.out.println(genres);
+			
 						
 			mdao.choice(genres, USER_ID);
 			
@@ -47,11 +45,11 @@ public class JoinProcessAction implements Action {
 			forward.setPath("Page/Login/login.jsp");
 			
 			
-		}else if(result==-1) { //°¡ÀÔµÈ ¾ÆÀÌµğ
+		}else if(result==-1) { //ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½Ìµï¿½
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('ÀÌ¹Ì °¡ÀÔµÈ È¸¿øÀÔ´Ï´Ù.')");
+			out.println("alert('ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ È¸ï¿½ï¿½ï¿½Ô´Ï´ï¿½.')");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
