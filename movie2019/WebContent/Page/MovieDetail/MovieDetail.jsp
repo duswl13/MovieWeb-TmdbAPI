@@ -515,39 +515,39 @@ div .rvsubmit {text-align:center;}
 										<div class="rating">
 											<c:choose>
 												<c:when test="${star == 1 }">
-													<span>★</span>
+													<span style="color:orange;">★</span>
 													<span>☆</span>
 													<span>☆</span>
 													<span>☆</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 2 }">
-													<span>★</span>
-													<span>★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
 													<span>☆</span>
 													<span>☆</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 3 }">
-													<span>★</span>
-													<span>★</span>
-													<span>★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
 													<span>☆</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 4 }">
-													<span>★</span>
-													<span>★</span>
-													<span>★</span>
-													<span>★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 5 }">
-													<span>★</span>
-													<span>★</span>
-													<span>★</span>
-													<span>★</span>
-													<span>★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
+													<span style="color:orange;">★</span>
 												</c:when>
 												<c:otherwise>
 													<span>☆</span>
@@ -774,10 +774,9 @@ document.getElementById("main").style.marginLeft = "250px";
 	var rating_value = ${star};
 	var rating_face = ${face};
 	
-	if(rating_value != -2)
-		Change_star(rating_value);
+
 	
-	alert(rating_value);
+	
 	//표정 점수이미지를 클릭할경우 변화
 	$('.user_mv img').click(function(){
 		
@@ -908,7 +907,7 @@ document.getElementById("main").style.marginLeft = "250px";
 		
 		//별점 변화
 		for (var i = 0; i < 5; i++) {
-			if (i < check) {
+			if (i <= check) {
 				$('.rating span:eq(' + i + ')').text('★');
 				$('.rating span:eq(' + i + ')').css('color', 'orange');
 

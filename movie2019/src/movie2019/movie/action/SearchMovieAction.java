@@ -41,52 +41,60 @@ public class SearchMovieAction implements Action {
 
 		MoviePageAPIVO p_vo = movieAPIDAO.getSearchMovie(apikey, key, page);
 
-		p_vo.setResults((addStar((ArrayList<MovieItemAPIVO>) p_vo.getResults())));
-
-		System.out.println(this.getClass().getName() + ":page? - " + (p_vo.getPage() < p_vo.getTotal_pages()));
-
-		if (!re) {
-
-			System.out.println(this.getClass().getName() + ":p_vo.getResults() - " + p_vo.getResults().size());
-
-			request.setAttribute("list", p_vo.getResults());
-
-			request.setAttribute("more", p_vo.getPage() < p_vo.getTotal_pages());
-			request.setAttribute("key", key);
-			ActionForward forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("Page/Search/Search.jsp");
-
-			return forward;
+		if (p_vo.getTotal_pages() == 0 || p_vo.getResults() == null || p_vo.getResults().size() == 0) {
+			// 결과값 없음
+			response.getWriter().print("<script>alert('검색된 결과가 없습니다.');" + "history.back();</script>");
+			return null;
 
 		} else {
+			// 결과값 있음
+			p_vo.setResults((addStar((ArrayList<MovieItemAPIVO>) p_vo.getResults())));
 
-			JSONObject jObject = new JSONObject();
-			jObject.put("page", p_vo.getPage());
-			jObject.put("more", p_vo.getPage() < p_vo.getTotal_pages());
+			System.out.println(this.getClass().getName() + ":page? - " + (p_vo.getPage() < p_vo.getTotal_pages()));
 
-			jObject.put("total_results", p_vo.getTotal_results());
-			jObject.put("total_pages", p_vo.getTotal_pages());
+			if (!re) {
 
-			JSONArray jArray = new JSONArray();
-			for (MovieItemAPIVO m : p_vo.getResults()) {
+				System.out.println(this.getClass().getName() + ":p_vo.getResults() - " + p_vo.getResults().size());
 
-				JSONObject item = new JSONObject();
-				item.put("poster_path", m.getPoster_path());
-				item.put("id", m.getId());
-				item.put("original_title", m.getOriginal_title());
-				item.put("title", m.getTitle());
-				item.put("Star", m.getStar());
-				jArray.add(item);
+				request.setAttribute("list", p_vo.getResults());
+
+				request.setAttribute("more", p_vo.getPage() < p_vo.getTotal_pages());
+				request.setAttribute("key", key);
+				ActionForward forward = new ActionForward();
+				forward.setRedirect(false);
+				forward.setPath("Page/Search/Search.jsp");
+
+				return forward;
+
+			} else {
+
+				JSONObject jObject = new JSONObject();
+				jObject.put("page", p_vo.getPage());
+				jObject.put("more", p_vo.getPage() < p_vo.getTotal_pages());
+
+				jObject.put("total_results", p_vo.getTotal_results());
+				jObject.put("total_pages", p_vo.getTotal_pages());
+
+				JSONArray jArray = new JSONArray();
+				for (MovieItemAPIVO m : p_vo.getResults()) {
+
+					JSONObject item = new JSONObject();
+					item.put("poster_path", m.getPoster_path());
+					item.put("id", m.getId());
+					item.put("original_title", m.getOriginal_title());
+					item.put("title", m.getTitle());
+					item.put("Star", m.getStar());
+					jArray.add(item);
+				}
+
+				jObject.put("results", jArray);
+				Gson gson = new Gson();
+				String json = gson.toJson(jObject);
+				response.getWriter().append(json);
+				System.out.println("searchList 가져옴 : " + json);
+
+				return null;
 			}
-
-			jObject.put("results", jArray);
-			Gson gson = new Gson();
-			String json = gson.toJson(jObject);
-			response.getWriter().append(json);
-			System.out.println("searchList 가져옴 : " + json);
-
-			return null;
 		}
 	}
 
