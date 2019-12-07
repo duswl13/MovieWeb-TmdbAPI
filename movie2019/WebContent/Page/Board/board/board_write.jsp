@@ -2,11 +2,12 @@
     pageEncoding="utf-8"%>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <style>
-* {color:white; background:#141414;}
+body {color:white; background:#141414;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%; height:100%;}
   label {font-weight:bold;}
@@ -35,7 +36,7 @@ if(request.getParameter("open") != null){
 <!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
  <form action="BoardAddAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
-  <h1>글 작성 페이지</h1>
+  <h1>글 작성</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
     <input name="BOARD_NAME" id="board_name" value="${id }" readOnly
@@ -67,7 +68,7 @@ if(request.getParameter("open") != null){
     <span id="filevalue"></span>
   </div>  
    <div class="form-group">
-    <button type="submit" class="btn btn-primary">등록</button>
+    <button type="submit" class="btn btn-success">등록</button>
     <button type="reset" class="btn btn-danger" onClick="history.back()">취소</button>
   </div>  
  </form>
@@ -80,7 +81,6 @@ if(<%=open%>)
 
 
 </script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function() {
 	$(document).submit(function() {

@@ -16,19 +16,19 @@ public class MemberDAO {
 	ResultSet rs;
 	int result;
 	
-	//context.xml ÀÚ¿ø Ã£¾Æ¾²´Â ¸Þ¼Òµå
+	//context.xml ï¿½Ú¿ï¿½ Ã£ï¿½Æ¾ï¿½ï¿½ï¿½ ï¿½Þ¼Òµï¿½
 	 public MemberDAO() {
 	      try {
 	         Context init = new InitialContext();
 	         ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
-                 //¹ÝÈ¯ÇüÀÌ DataSource
+                 //ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ DataSource
 	      } catch (Exception ex) {
-	         System.out.println("DB ¿¬°á ½ÇÆÐ : " + ex);
+	         System.out.println("DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + ex);
 	      }
 	   }
 	 
-		//°¡ÀÔµÈ È¸¿øÀÎÁö È®ÀÎ idÁßº¹Ã¼Å©
-		public int isId(String USER_ID) {
+		//ï¿½ï¿½ï¿½Ôµï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ idï¿½ßºï¿½Ã¼Å©
+		public int isId(String uSER_ID) {
 			try{
 				con = ds.getConnection();
 				System.out.println("getConnection");
@@ -36,12 +36,12 @@ public class MemberDAO {
 				String sql =
 						"SELECT USER_ID FROM USERS WHERE USER_ID = ?";
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, USER_ID);
+				pstmt.setString(1, uSER_ID);
 				rs=pstmt.executeQuery();
 				if(rs.next()) {
-		            result=0;      //DB¿¡ ÇØ´ç ID°¡ ÀÖ´Ù.
+		            result=0;      //DBï¿½ï¿½ ï¿½Ø´ï¿½ IDï¿½ï¿½ ï¿½Ö´ï¿½.
 		         }else {
-		            result=-1;      //DB¿¡ ÇØ´ç ID°¡ ¾ø´Ù.
+		            result=-1;      //DBï¿½ï¿½ ï¿½Ø´ï¿½ IDï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
 		         }
 		      }catch(Exception e) {
 		         e.printStackTrace();
@@ -72,7 +72,7 @@ public class MemberDAO {
 		   
 		}
 
-		//°¡ÀÔÇÏ´Â È¸¿ø Á¤º¸ ÀúÀå
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		public int insert(Member m) {
 			try{
 				con = ds.getConnection();
@@ -121,7 +121,7 @@ public class MemberDAO {
 		   
 		}
 		
-      //È¸¿øÀÌ ¼±È£ÇÏ´Â ¿µÈ­ Àå¸£ 
+      //È¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½Ï´ï¿½ ï¿½ï¿½È­ ï¿½å¸£ 
 	  public int choice(String[] genres, String uSER_ID) {
 		try{
 			con = ds.getConnection();

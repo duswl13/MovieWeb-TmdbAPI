@@ -10,7 +10,7 @@ public class IdCheckAction implements Action {
 	   HttpServletResponse response) throws Exception {
 		 
 		MemberDAO dao = new MemberDAO();
-		  int result = dao.isId(request.getParameter("USER_ID"));
+		  int result = dao.isId(request.getParameter("id"));
 		  response.getWriter().append(Integer.toString(result));
 		  return null;
   }

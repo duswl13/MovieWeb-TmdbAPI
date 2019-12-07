@@ -23,8 +23,6 @@ public class BoardModifyView implements Action {
 		if(boarddata==null) {
 			System.out.println("(수정)상세보기 실패");
 			forward.setRedirect(false);
-			request.setAttribute("message", "게시판 상세보기 실패입니다.");
-			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		System.out.println("(수정)상세보기 성공");

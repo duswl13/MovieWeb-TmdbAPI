@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
-* {color:white; background:#141414;}
+body {color:white; background:#141414;}
   tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%;height:100%;}
@@ -37,7 +37,7 @@ if(request.getParameter("open") != null){
  <form action="BoardModifyAction.bd" method="post" 
        enctype="multipart/form-data" name="modifyform">
  <input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM }">
-  <h1>MVC 게시판 - modify 페이지</h1>
+  <h1>글 수정</h1>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input readOnly type="text" class="form-control" 
@@ -59,11 +59,11 @@ if(request.getParameter("open") != null){
    <div class="form-group read">
     <label for="board_file">파일 첨부</label>
     <label for="upfile">
-      <img src="image/attach.png" alt="파일첨부" width="20px">
+      <img src="Png/attach.png" alt="파일첨부" width="20px">
     </label>
     <input type="file" id="upfile" name="BOARD_FILE">
     <span id="filevalue">${boarddata.BOARD_FILE}</span>
-     <img src="image/remove.png" alt="파일삭제"
+     <img src="Png/remove.png" alt="파일삭제"
            width="10px" class="remove">
     </div>  
   </c:if>

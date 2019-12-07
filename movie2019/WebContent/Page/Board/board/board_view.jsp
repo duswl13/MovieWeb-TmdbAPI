@@ -4,12 +4,12 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-
+<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <style>
-* {color:white; background:#141414;}
+ body {color:white; background:#141414;}
   th, .center {text-align:center;}
   .container {width:60%; height:100%;}
   label {font-weight:bold;}
@@ -55,7 +55,7 @@ if(request.getParameter("open") != null){
 <div class="container">
  <table class="table table-striped">
  <tr>
-  <th colspan="2"> view 페이지</th>
+  <th colspan="2"> view</th>
  </tr>
  <tr>
   <td>
@@ -88,7 +88,7 @@ if(request.getParameter("open") != null){
         <div>첨부파일</div>
      </td>
      <td>
-       <img src="png/file.png" alt="첨부파일">
+       <img src="Png/file.png" alt="첨부파일">
     <a href="BoardFileDown.bd?filename=${boarddata.BOARD_FILE }">
         ${boarddata.BOARD_FILE}</a></td> 
  </tr>
@@ -117,8 +117,9 @@ if(request.getParameter("open") != null){
    </a>
    <!-- 신고 메일 보내기 -->
    <a href="#">
-    <button type="button" id="mail_send" class="btn btn-primary btn-lg btn-block" onclick="send_mail()">보내기</button>
+    <button type="button" id="mail_send" class="btn btn-warning" onclick="send_mail()">신고</button>
    </a>
+    
     
    </td>
  </tr>
@@ -173,11 +174,10 @@ if(<%=open%>)
 
 
 </script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
 function send_mail(){
-    window.open("Page/Board/board/Smail.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+    window.open("Page/Board/board/mailSender.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
 }
 </script>
 </html>

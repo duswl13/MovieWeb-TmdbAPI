@@ -26,7 +26,7 @@ body {
 	font-family: montserrat, arial, verdana;
 }
 
-#message, #pass_message {
+#message, #pass_message, #email_message {
     padding: 7px;
 	margin: 5px;
 	width: 100%;
@@ -240,20 +240,23 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     <span id="message"></span>
     <input type="password" name="USER_PASS" id="USER_PASS" placeholder="비밀번호" required/>
     <span id="pass_message"></span>
-    <input type="button" name="next" class="next action-button" value="다음" />
+    <input type="button" name="next" class="next action-button" id="next1" value="다음" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">상세 정보 입력</h2>
     <h3 class="fs-subtitle">step 2</h3>
     <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" required/>
+    <span id="email_message"></span>
+    <!-- 
     <div class="mail-form">
     <button type="button" id="MAIL_CHECK" class="btn btn-primary btn-lg btn-block" onClick="send_mail()">인증</button>
     <input type="text" name="MAIL_CHECK" id="MAIL_CHECK" required />
     </div>
+    -->
     <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" required/>
-    <!-- <input type="text" name="gplus" id="USER_ID" placeholder="Google Plus" /> -->
+    <span id="phone_message"></span>
     <input type="button" name="previous" class="previous action-button" value="이전" />
-    <input type="button" name="next" class="next action-button" value="다음" />
+    <input type="button" name="next" class="next action-button" id="next2" value="다음" />
   </fieldset>
   <fieldset>
     <h2 class="fs-title">선호 장르 선택</h2>
@@ -313,85 +316,52 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
 <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'>
 </script>
-<script src="checkcheck.js"></script>
+
 <script>
 //유효성 검사
 $(document).ready(function(){
 
-var checkid = false;
-var checkpass = false;
-
- $("#USER_ID").keyup(function(){
-	 $("#message").empty();
-	   var id = $("#USER_ID").val();
-	   var pattern = /^\w{5,12}$/;
-	   if(!pattern.test(id)){
-		   $("#message").css('color','red')
-		                .html("영문자, 숫자 포함 5~12자 가능")
-		   checkid = false;
-		   return;
-	   }   
-	   
- }); // keyup end
- 
- $("#USER_ID").keyup(function(){
-	   $.ajax({
-		   type: "post",
-			  url: "idcheck.su", 
-			  data: {"USER_ID": $('#USER_ID').val()},  
-			  success: function(resp){
-				 if(resp==-1){
-					 $("#message").css('color','green')
-					              .html("사용 가능한 아이디");
-				    checkid = true;
-				 }else{
-					 $("#message").css('color','blue')
-					              .html("사용 중인 아이디");
-				    checkid = false;
-				 }
-		     } //success end
-	   }); // ajax end
- }); // keyup end
-   
-    $("#USER_PASS").keyup(function(){
-   	 $("#pass_message").empty();
-   	   var pass = $("#USER_PASS").val();
-  
-   	   var pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-   	   if(!pattern.test(pass)){
-   		   $("#pass_message").css('color','red')
-   		               .html("영문자,숫자,특수문자 포함 8자 이상")
-   		   checkpass = false;
-   		   
-   		   return;
-   	   }
-   	   
-    });
-    
-    $("#USER_EMAIL").keyup(function(){
-   	 $("#email_message").empty();
-   	   var email = $("#USER_EMAIL").val();
-   	   var pattern = /^\w+@\w+[.]\w{3}$/; 
-   	   
-   	   if(!pattern.test(email)){
-   		   $("#email_message").css('color','red')
-   		                      .html("이메일 형식이 맞지 않습니다.");
-   		   return false;
-   	   }else{
-   		   $("#email_message").css('color','green')
-   		                      .html("이메일 형식에 맞습니다.");
-   		   return true;
-   	   }
-    }); // keyup end
- 
-}); //ready end
-
-//jQuery time
 var current_fs, next_fs, previous_fs; //fieldsets
 var left, opacity, scale; //fieldset properties which we will animate
 var animating; //flag to prevent quick multi-click glitches
 
+var checkId, checkPass, checkEmail, checkPhone;
+
+//다음 버튼 클릭할 때
 $(".next").click(function(){
+	
+	//클릭한 버튼이 몇번쨰 next인지 확인
+	var check = $(".next").index(this);
+	
+	//버튼 id=next1 인 경우
+	if(check == 0){
+		  var id = $("#USER_ID").val();
+    	  var pass = $("#USER_PASS").val();
+    	  if(id=="" || !checkId){
+    		  alert("아이디를 확인하세요");
+    		  return false;
+    	  }
+    	  if(pass=="" || !checkPass){
+    		  alert("비밀번호를 확인하세요");
+    		  return false;
+    	  }
+    	  
+	}
+	//next2인 경우
+	else{
+      var email = $("#USER_EMAIL").val();
+   	  var phone = $("#USER_PHONE").val();
+   	  if(email=="" || !checkEmail){
+   		  alert("이메일을 확인하세요");
+   		  return false;
+   	  }
+   	  if(phone=="" || !checkPhone){
+   		  alert("핸드폰 번호를 확인하세요");
+   		  return false;
+   	  }
+   	  
+		
+	}
 	if(animating) return false;
 	animating = true;
 	
@@ -429,6 +399,7 @@ $(".next").click(function(){
 	});
 });
 
+//이전 버튼 클릭할 때
 $(".previous").click(function(){
 	if(animating) return false;
 	animating = true;
@@ -465,10 +436,113 @@ $(".previous").click(function(){
 	});
 });
 
+//아이디 형식 확인
+ $("#USER_ID").keyup(function(){
+	 $("#message").empty();
+	   var id = $("#USER_ID").val();
+	   var pattern = /^\w{5,12}$/;
+	   if(!pattern.test(id)){
+		   $("#message").css('color','red')
+		                .html("영문자, 숫자 포함 5~12자 가능")
+		   checkId = false;
+		  return;
+	   }   
+ 
+	   //아이디 중복되는지 확인
+	   $.ajax({
+		   type: "post",
+		      //idcheck하는 곳으로 경로 설정
+			  url: "<%=request.getContextPath()%>/idcheck.su", 
+			  data: {"id": $("#USER_ID").val()},  
+			  success: function(resp){
+				 if(resp==-1){
+					 $("#message").css('color','green')
+					              .html("사용 가능한 아이디");
+				    checkId = true;
+				   
+				 }else{
+					 $("#message").css('color','blue')
+					              .html("사용 중인 아이디");
+				    checkId = false;
+				   
+				 }
+		     } //success end
+	   }); // ajax end
+	
+ }); // id keyup end
+
+ //비밀번호 형식 확인
+    $("#USER_PASS").keyup(function(){
+   	 $("#pass_message").empty();
+   	   var pass = $("#USER_PASS").val();
+  
+   	   var pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+   	   if(!pattern.test(pass)){
+   		   $("#pass_message").css('color','red')
+   		               .html("영문자,숫자,특수문자 포함 8자 이상")
+   		   checkPass = false;
+   		   return;
+   	   }
+      	checkPass = true;
+   	   
+    }); // password keyup end
+    
+
+    //이메일 형식 확인
+    $("#USER_EMAIL").keyup(function(){
+      	 $("#email_message").empty();
+      	   var email = $('#USER_EMAIL').val();
+      	   var pattern = /^\w+@\w+[.]\w{3}$/; 
+      	   
+      	   if(!pattern.test(email)){
+      		   $("#email_message").css('color','red')
+      		                      .html("이메일 형식이 맞지 않습니다.");
+      		   checkEmail = false;
+      		   return;
+      	   }
+      	   
+      	  checkEmail = true;
+      	   
+       }); // email keyup end
+       
+   //핸드폰 번호 형식 확인
+       $("#USER_PHONE").keyup(function(){
+        	 $("#phone_message").empty();
+        	   var phone = $('#USER_PHONE').val();
+        	   var pattern = /^[0-9]{11}$/; 
+        	   
+        	   if(!pattern.test(phone)){
+        		   $("phone_message").css('color','red')
+        		                      .html("핸드폰 번호 숫자만 입력하세요.");
+        		   checkPhone = false;
+        		   return;
+        	   }
+        	   
+        	  checkPhone = true;
+        	   
+         }); // phone keyup end
+      
+     //선호장르 개수 체크   
+      $(".submit").click(function(){
+    	  var genres 
+    	   = $("input[type=checkbox]:checked").length;
+    	  if(genres<3){
+    		  alert("선호 장르를 3개 이상 선택하세요");
+    		  return false;
+    	  }
+    	  
+      })  //submit end
+      
+  
+  
+}); //ready end
+
+
+
 </script>
 <script type="text/javascript">
 function send_mail(){
-    window.open("Page/Board/Sign/Smail.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+    window.open("Page/Board/Sign/mailSender.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
 }
 </script>
 
