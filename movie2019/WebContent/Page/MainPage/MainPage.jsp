@@ -311,7 +311,7 @@
 
 													<div class="centered">
 														<a
-															href="javascript:hidden(${item.id},'${item.original_title}','${item.poster_path}',2)"
+															href="javascript:hidden(${item.id},'${item.title}','${item.poster_path}',2)"
 															class="btn btn-danger hiddenMovie"
 															style="float: right; margin-bottom: 8px;">숨김</a>
 														<h1 style="clear: right; float: right;">${item.title}</h1>

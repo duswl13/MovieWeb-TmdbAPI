@@ -1112,15 +1112,15 @@ document.getElementById("main").style.marginLeft = "250px";
 				
 				text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 
-				list[check].original_title = list[check].original_title.replace(/\"/gi, "");
-				list[check].original_title = list[check].original_title.replace(/\'/gi, "");
+				list[check].title = list[check].title.replace(/\"/gi, "");
+				list[check].title = list[check].title.replace(/\'/gi, "");
 				
 				
 				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
-						+ list[check].id +'&title='+list[check].original_title
+						+ list[check].id +'&title='+list[check].title
 						+ '&poster_path='+list[check].poster_path+'\'">';
 				text += '<h3 style="clear:right;" class="centeredText"><b>'
-						+ list[check].original_title + '</b></h3>\n';
+						+ list[check].title + '</b></h3>\n';
 
 				text += ' <div>';
 				for(var k =0; k < list[check].Star; k++)
@@ -1128,7 +1128,7 @@ document.getElementById("main").style.marginLeft = "250px";
 				
 				text += ' </div>';
 				text += '</div>\n';
-				text += '<h5>' + list[check].original_title + '</h5>';
+				text += '<h5>' + list[check].title + '</h5>';
 
 				text += '</div>';
 
