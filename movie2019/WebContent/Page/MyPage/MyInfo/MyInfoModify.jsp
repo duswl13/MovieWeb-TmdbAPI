@@ -44,7 +44,7 @@ h4{
 	float:right;
 }
 
-input{
+p>input{
 	width:50%;
 	float : right;
 }
@@ -106,6 +106,11 @@ ul.ks-cboxtags li input[type="checkbox"] {
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid #a1c0d6;
 }
+
+
+
+
+
 </style>
 
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -133,22 +138,25 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
        
- <div class="container">    
- 	<form action="user_editaction.mu"  method="post" name="user_edit">
-                  <div class="row">
-                      <div class="panel panel-default" style="margin:0 auto;">
-                      <div class="panel-heading" style="background-color : white; ">  <h4>나의 정보 수정</h4></div>
-                       <div class="panel-body" style="background-color : white; ">
-                      <div class="col-xs-6 col-sm-3">
-                       <img alt="User Pic" src="Page/images/winter.jpg" 
-                       			id="profile-image1" class="img-thumbnail img-responsive" style="width:80%;"> 
-                     
-                 
-                      </div>
-                      <div class="col-xs-6 col-sm-6" >
-                          <div class="container" >
-                       		<c:set var="u" value="${userinfo }"/>                       				
-                         	</div>
+<div class="container">    
+<c:set var="u" value="${userinfo }"/>                       				
+<c:set var="p" value="${posterinfo }"/>   
+	<form action="user_editaction.mu"  method="post" name="user_edit">
+		<div class="row">
+			<div class="panel panel-default" style="margin:0 auto;">
+				<div class="panel-heading" style="background-color : white; ">  <h4>나의 정보 수정</h4></div>
+					<div class="panel-body" style="background-color : white; ">
+						<div class="col-xs-6 col-sm-3">
+                        	<img alt="poster" src="https://image.tmdb.org/t/p/w300/${p.USER_POSTER}" 
+                       			id="poster" class="img-thumbnail img-responsive" style="width:80%;"><br><br>
+                     		<p>포스터 검색</p>
+							<input name="HIDDEN_POSTER" id="hidden_postser"  type="hidden" >
+							<input name="SEACH_MOVIE" id="movie_name"  type="text" placeholder="영화제목을  입력하세요">
+		                 	<button type="button" style="background:none;border:none;" name="SEARCH_BAR" id="search_bar">
+		                 	<span class="glyphicon glyphicon-search one"></span></button>
+                    
+                      	</div>
+                      	<div class="col-xs-6 col-sm-6" >
                            	<hr>
                           	<ul class="container details" >
                             <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>
@@ -219,6 +227,7 @@ $(function(){
             </div>
             </div>
 	</form>         
+</div>
 </div>
 </body>
 </html>
