@@ -43,7 +43,6 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
-<%session.setAttribute("id","admin1"); %>
 	<form action="FAQAddAction.fa" method="post" name="faqform">
 		<h1>FAQ</h1>
 		<div class="form-group">

@@ -242,6 +242,8 @@ span .hello {margin-left:100px;
 					</h2>
 
 				</li>
+<c:if test="${id == 'admin1' || id == 'admin2' || id == 'admin3' || id == 'admin4'}">     				
+				
 				<li>
 					<h2>관리자 페이지</h2>
 					<ul>
@@ -253,6 +255,8 @@ span .hello {margin-left:100px;
 								관리</a></li>
 					</ul>
 				</li>
+</c:if>				
+
 			</ul>
 <br><br>
 			<ul>
