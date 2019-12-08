@@ -199,7 +199,7 @@ if(<%=open%>)
 			
 			
 			
-			text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\'">';
+			text += '<div class="centered" Onclick="window.open(\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\',\'_blank\')">';
 			text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 			
 			text += ' <div>';
@@ -244,7 +244,7 @@ if(<%=open%>)
 					
 					
 					
-					text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\'">';
+					text += '<div class="centered" Onclick="window.open(\'moviedetail.ml?open=false&id='+list[check].id +'&title='+list[check].title+'&poster_path='+list[check].poster_path+'\',\'_blank\')">';
 					text += '<h3 style="clear:right;" class="centeredText"><b>' + list[check].title + '</b></h3>\n';
 		
 					text += ' <div>';

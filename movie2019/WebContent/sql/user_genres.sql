@@ -47,5 +47,5 @@ SELECT * FROM DUAL;
 
 
 select * from USER_GENRES;
-/*À¯ÀúÀÇ °ü½É ¸ñ·Ï °¡Á®¿À±â*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 /*select * from USER_GENRES where USER_ID = 'duswl13';*/
