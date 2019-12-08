@@ -4,6 +4,7 @@
            uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<title>VOSHU</title>
 <head>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -13,15 +14,18 @@
 
 <style>
  body {color:white; background:#141414;}
- .container {background:silver;}
+ .container {background:silver; height:70%;}
  select {justify-content:center;}
  .center-block {display:flex;
                 justify-content:center; /* 가운데 정렬 */}
   #searchForm {width:300px; display:flex; justify-content:center;}
  #id {text-align:center;}
  h1 {text-align:center; color:#27AE60;}
+ a {text-decoration:none;}
+ #searchForm, #writebtn {
+   margin-bottom:20px;
+ }
 </style>
-<title>영화 토론 게시판</title>
 </head>
 <body>
 <% 
@@ -41,8 +45,11 @@ if(request.getParameter("open") != null){
 
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
-
+         
+<a href="BoardList.bd">
 <h1>무비 토크</h1>
+</a>
+
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount>0 }">
@@ -163,12 +170,10 @@ if(request.getParameter("open") != null){
       <option value="0" selected>아이디</option>
       <option value="1" >제목</option>
       <option value="2" >내용</option>
- 
    </select>
    <input name="search_word" type="text" class="form-control"
    placeholder="Search" value="${search_word }" id="search">
    <button class="btn btn-info" type="submit" id="searchbtn">검색</button>
-   
    </div>
    </form>
 </div>
@@ -203,7 +208,7 @@ if(selectedValue != '-1')
 
 //검색어 공백 유효성 검사합니다.
 $("#searchbtn").click(function(){		
-   if($("input").val()==''){
+   if($("#search").val()==''){
 	 alert("검색어를 입력하세요");
 	 return false;
    }

@@ -35,7 +35,7 @@ public class BoardSearchAction implements Action {
 			index 
 			=Integer.parseInt(request.getParameter("search_field"));
 			String[] search_field
-			   = new String[] {"id","subject","content"};
+			   = new String[] {"BOARD_NAME","BOARD_SUBJECT","BOARD_CONTENT"};
 			
 			search_word = request.getParameter("search_word");
 			listcount =

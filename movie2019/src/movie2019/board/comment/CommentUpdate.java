@@ -26,7 +26,6 @@ public class CommentUpdate implements movie2019.board.action.Action {
 			movie2019.board.action.ActionForward forward = 
 					new movie2019.board.action.ActionForward();
 			 request.setAttribute("message", "댓글 수정 실패입니다.");
-	            forward.setPath("error/error.jsp");
 	            forward.setRedirect(false);
 	    		return forward;
 		}
