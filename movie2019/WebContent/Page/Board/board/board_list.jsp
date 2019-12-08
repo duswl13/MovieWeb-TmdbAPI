@@ -48,7 +48,7 @@ if(request.getParameter("open") != null){
          
 <a href="BoardList.bd">
 <h1>무비 토크</h1>
-</a>
+</a><br>
 
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
@@ -201,12 +201,12 @@ $(function(){
 	 })
 })
 
-//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
+//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되게 한다
 var selectedValue = '${search_field}'
 if(selectedValue != '-1')
     $("#viewcount").val(selectedValue);
 
-//검색어 공백 유효성 검사합니다.
+//검색어 공백 유효성 검사
 $("#searchbtn").click(function(){		
    if($("#search").val()==''){
 	 alert("검색어를 입력하세요");

@@ -15,6 +15,7 @@ body {color:white; background:#141414;}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
+   h1 {text-align:center; color:#27AE60;}
 </style>
 </head>
 <body>
@@ -46,7 +47,7 @@ if(request.getParameter("open") != null){
           value="${boarddata.BOARD_RE_LEV }">
    <input type="hidden" name="BOARD_RE_SEQ"
           value="${boarddata.BOARD_RE_SEQ }">              
-  <h1>답변 작성</h1>
+  <h1>무비 토크</h1><br>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input name="BOARD_NAME" id="board_name" value="${id }"

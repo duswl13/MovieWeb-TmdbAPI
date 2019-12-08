@@ -14,6 +14,7 @@ body {color:white; background:#141414;}
   .container {width:60%;height:100%;}
   label {font-weight:bold;}
   #upfile {display:none;}
+   h1 {text-align:center; color:#27AE60;}
 </style>
 </head>
 <body>
@@ -38,7 +39,7 @@ if(request.getParameter("open") != null){
  <form action="BoardModifyAction.bd" method="post" 
        enctype="multipart/form-data" name="modifyform">
  <input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM }">
-  <h1>글 수정</h1>
+  <h1>무비 토크</h1><br>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input readOnly type="text" class="form-control" 

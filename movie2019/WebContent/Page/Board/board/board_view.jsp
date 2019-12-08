@@ -27,14 +27,15 @@
   background:orange;
   color:white;
   border-radius:30%;}
-  
+   h1 {text-align:center; color:#27AE60;}
  #mail_send {
     
  }
  #content {
-    width:80%;
+ 
     justify-content:center;
  }
+ #writer {color:silver; font-size:11pt;}
 </style>
 </head>
 <body>
@@ -56,34 +57,29 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
          
-<input type="hidden" id="loginid" value="${id}" name="loginid">         
+<input type="hidden" id="loginid" value="${id}" name="loginid">   
+<h1>무비 토크</h1><br>
 <div class="container">
  <table class="table table-striped">
+
  <tr>
-  <th colspan="2"> view</th>
- </tr>
- <tr>
-  <td>
-     <div>글쓴이</div>
-  </td>
-  <td>
-     <div >${boarddata.BOARD_NAME } </div>
-  </td>
- </tr>
- <tr>
-  <td>
-     <div>제목</div>
-  </td>
-  <td>
+ <!-- 글제목 -->
+  <th colspan="2">
      <div>${boarddata.BOARD_SUBJECT}</div>
-  </td> 
+  </th> 
  </tr>
  <tr>
-  <td>
-     <div>내용</div>
+ <!-- 글쓴이 -->
+  <td colspan="2">
+     <div id="writer">${boarddata.BOARD_NAME } </div>
   </td>
-    <td><textarea name="BOARD_CONTENT" id="board_content" readOnly
-             rows="10" class="form-control" >${boarddata.BOARD_CONTENT}</textarea>
+ </tr>
+ <!-- 본문 -->
+ <tr>
+    <td colspan="2"><textarea name="BOARD_CONTENT" id="board_content" readOnly
+             rows="10" class="form-control" >${boarddata.BOARD_CONTENT}
+             <!-- 이미지... -->
+             </textarea>
   </td>  
  </tr>
  <tr> 
@@ -168,7 +164,7 @@ if(request.getParameter("open") != null){
                  id="content" maxLength="50"></textarea>
       <button id="writebtn" class="btn btn-info float-right">등록</button>
         <div id="message"></div>
-        </div>
+        </div> <!-- div id="comment end -->
     </div>
        </div>
 </body>
