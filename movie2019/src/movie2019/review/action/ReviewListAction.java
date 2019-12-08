@@ -23,57 +23,57 @@ public class ReviewListAction implements Action {
 		List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
 
 		int page = 1;
-		int limit = 10;
+		int limit = 9;
 
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		System.out.println("³Ñ¾î¿Â ÆäÀÌÁö = " + page);
+		System.out.println("ë„˜ì–´ì˜¨ í˜ì´ì§€ = " + page);
 
-		if (request.getParameter("limit") != null) { // ¿ä ºÎºĞ Ãß°¡
+		if (request.getParameter("limit") != null) { // ìš” ë¶€ë¶„ ì¶”ê°€
 			limit = Integer.parseInt(request.getParameter("limit"));
 		}
-		System.out.println("³Ñ¾î¿Â limit = " + limit);
+		System.out.println("ë„˜ì–´ì˜¨ limit = " + limit);
 
-		// ÃÑ ¸®½ºÆ® ¼ö ¹Ş¾Æ¿À±â.
+		// ì´ listcount ë°›ì•„ì˜¤ê¸°.
 		int listcount = reviewdao.getListCount();
 
-		// ¸®½ºÆ® ¹Ş¾Æ¿À±â
+		// ë¦¬ìŠ¤íŠ¸ ë°›ì•„ì˜¤ê¸°
 		reviewlist = reviewdao.getreviewList(page, limit);
 
 		/*
-		 * ÃÑ ÆäÀÌÁö ¼ö = (DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ® + ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ® - 1) / ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®
+		 * ì´ í˜ì´ì§€ ìˆ˜ = (DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ + í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ - 1) / í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸
 		 * 
-		 * ¿¹¸¦ µé¾î ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©ÁÖ´Â ¸®½ºÆ®ÀÇ ¼ö°¡ 10°³ÀÎ °æ¿ì DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ 0ÀÌ¸é ÃÑ ÆäÀÌÁö ¼ö´Â 0ÆäÀÌÁö DB¿¡
-		 * ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ (1~10)ÀÌ¸é ÃÑ ÆäÀÌÁö ¼ö´Â 1ÆäÀÌÁö DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ (11~20)ÀÌ¸é ÃÑ ÆäÀÌÁö ¼ö´Â
-		 * 2ÆäÀÌÁö DB¿¡ ÀúÀåµÈ ÃÑ ¸®½ºÆ®ÀÇ ¼ö°¡ (21~30)ÀÌ¸é ÃÑ ÆäÀÌÁö ¼ö´Â 3ÆäÀÌÁö
+		 * ì˜ˆë¥¼ ë“¤ì–´ í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì£¼ëŠ” ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ 10ê°œì¸ ê²½ìš° DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ 0ì´ë©´ ì´ í˜ì´ì§€ ìˆ˜ëŠ” 0í˜ì´ì§€ DBì—
+		 * ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ (1~10)ì´ë©´ ì´ í˜ì´ì§€ ìˆ˜ëŠ” 1í˜ì´ì§€ DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ (11~20)ì´ë©´ ì´ í˜ì´ì§€ ìˆ˜ëŠ”
+		 * 2í˜ì´ì§€ DBì— ì €ì¥ëœ ì´ ë¦¬ìŠ¤íŠ¸ì˜ ìˆ˜ê°€ (21~30)ì´ë©´ ì´ í˜ì´ì§€ ìˆ˜ëŠ” 3í˜ì´ì§€
 		 * 
 		 */
 
 		int maxpage = (listcount + limit - 1) / limit;
-		System.out.println("ÃÑ ÆäÀÌÁö ¼ö = " + maxpage);
+		System.out.println("ì´ í˜ì´ì§€ ìˆ˜ = " + maxpage);
 
 		/*
-		 * startpage : ÇöÀç ÆäÀÌÁö ±×·ì¿¡¼­ ¸Ç Ã³À½¿¡ Ç¥½ÃµÉ ÆäÀÌÁö ¼ö ([1], [11], [21] µî...)
+		 * startpage : í˜„ì¬ í˜ì´ì§€ ê·¸ë£¹ì—ì„œ ë§¨ ì²˜ìŒì— í‘œì‹œë  í˜ì´ì§€ ìˆ˜ ([1], [11], [21] ë“±...)
 		 * 
-		 * º¸¿©ÁÙ ÆäÀÌÁö°¡ 30°³ÀÏ °æ¿ì [1][2][3]...[30]±îÁö ´Ù Ç¥½ÃÇÏ±â¿£ ³Ê¹« ¸¹À¸´Ï±î º¸Åë ÇÑ ÆäÀÌÁö¿¡ 10ÆäÀÌÁö Á¤µµ¸¸ Ç¥½ÃÇÑ´Ù.
+		 * ë³´ì—¬ì¤„ í˜ì´ì§€ê°€ 30ê°œì¼ ê²½ìš° [1][2][3]...[30]ê¹Œì§€ ë‹¤ í‘œì‹œí•˜ê¸°ì—” ë„ˆë¬´ ë§ìœ¼ë‹ˆê¹Œ ë³´í†µ í•œ í˜ì´ì§€ì— 10í˜ì´ì§€ ì •ë„ë§Œ í‘œì‹œí•œë‹¤.
 		 * 
-		 * ¿¹¸¦ µé¾î ÆäÀÌÁö ±×·ìÀÌ ¾Æ·¡¿Í °°Àº °æ¿ì, [1][2][3][4][5][6][7][8][9][10] ÆäÀÌÁö ±×·ìÀÇ ½ÃÀÛ ÆäÀÌÁö´Â
-		 * startpage¿¡, ¸¶Áö¸· ÆäÀÌÁö´Â endpage¿¡ ±¸ÇÔ.
+		 * ì˜ˆë¥¼ ë“¤ì–´ í˜ì´ì§€ ê·¸ë£¹ì´ ì•„ë˜ì™€ ê°™ì€ ê²½ìš°, [1][2][3][4][5][6][7][8][9][10] í˜ì´ì§€ ê·¸ë£¹ì˜ ì‹œì‘ í˜ì´ì§€ëŠ”
+		 * startpageì—, ë§ˆì§€ë§‰ í˜ì´ì§€ëŠ” endpageì— êµ¬í•¨.
 		 * 
-		 * ¿¹·Î 1~10ÆäÀÌÁöÀÇ ³»¿ëÀ» ³ªÅ¸³¾ ¶§ ÆäÀÌÁö ±×·ìÀº [1][2][3]...[10]·Î Ç¥½Ã, 11~10ÆäÀÌÁöÀÇ ³»¿ëÀ» ³ªÅ¸³¾ ‹š ÆäÀÌÁö
-		 * ±×·ìÀº [11][12][13]...[20]±îÁö Ç¥½ÃµÈ´Ù.
+		 * ì˜ˆë¡œ 1~10í˜ì´ì§€ì˜ ë‚´ìš©ì„ ë‚˜íƒ€ë‚¼ ë•Œ í˜ì´ì§€ ê·¸ë£¹ì€ [1][2][3]...[10]ë¡œ í‘œì‹œ, 11~10í˜ì´ì§€ì˜ ë‚´ìš©ì„ ë‚˜íƒ€ë‚¼ ë–„ í˜ì´ì§€
+		 * ê·¸ë£¹ì€ [11][12][13]...[20]ê¹Œì§€ í‘œì‹œëœë‹¤.
 		 */
 
-		int startpage = ((page - 1) / 10) * 10 + 1;
-		System.out.println("ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ½ÃÀÛ ÆäÀÌÁö ¼ö = " + startpage);
+		int startpage = ((page - 1) / 7) * 7 + 1;
+		System.out.println("í˜„ì¬ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ì‹œì‘ í˜ì´ì§€ ìˆ˜ = " + startpage);
 
-		int endpage = startpage + 10 - 1;
-		System.out.println("ÇöÀç ÆäÀÌÁö¿¡ º¸¿©ÁÙ ¸¶Áö¸· ÆäÀÌÁö ¼ö = " + endpage);
+		int endpage = startpage + 7 - 1;
+		System.out.println("í˜„ì¬ í˜ì´ì§€ì— ë³´ì—¬ì¤„ ë§ˆì§€ë§‰ í˜ì´ì§€ ìˆ˜ = " + endpage);
 
 		/*
-		 * ¸¶Áö¸· ±×·ìÀÇ ¸¶Áö¹Ú ÆäÀÌÁö °ªÀº ÃÖ´ë ÆäÀÌÁö °ª. ¸¶Áö¸· ÆäÀÌÁö ±×·ìÀÌ [21]~[30]ÀÎ °æ¿ì ½ÃÀÛÆäÀÌÁö (startpage=21)¿Í
-		 * ¸¶Áö¸·ÆäÀÌÁö(endpage=30)ÀÌÁö¸¸ ÃÖ´ëÆäÀÌÁö(maxpage=25)°¡ 25¶ó¸é [21]~[25]±îÁö¸¸ Ç¥½ÃµÇ°Ô ÇÑ´Ù.
+		 * ë§ˆì§€ë§‰ ê·¸ë£¹ì˜ ë§ˆì§€ë°• í˜ì´ì§€ ê°’ì€ ìµœëŒ€ í˜ì´ì§€ ê°’. ë§ˆì§€ë§‰ í˜ì´ì§€ ê·¸ë£¹ì´ [21]~[30]ì¸ ê²½ìš° ì‹œì‘í˜ì´ì§€ (startpage=21)ì™€
+		 * ë§ˆì§€ë§‰í˜ì´ì§€(endpage=30)ì´ì§€ë§Œ ìµœëŒ€í˜ì´ì§€(maxpage=25)ê°€ 25ë¼ë©´ [21]~[25]ê¹Œì§€ë§Œ í‘œì‹œë˜ê²Œ í•œë‹¤.
 		 */
 
 		if (endpage > maxpage)
@@ -81,25 +81,25 @@ public class ReviewListAction implements Action {
 
 		String state = request.getParameter("state");
 
-		if (state == null) { // ÀÌ ºÎºĞ Ãß°¡
+		if (state == null) { // ì´ ë¶€ë¶„ ì¶”ê°€
 			System.out.println("state=null");
-			request.setAttribute("page", page); // ÇöÀç ÆäÀÌÁö ¼ö
-			request.setAttribute("mexpage", maxpage); // ÃÖ´ë ÆäÀÌÁö ¼ö
+			request.setAttribute("page", page); // í˜„ì¬ í˜ì´ì§€ ìˆ˜
+			request.setAttribute("mexpage", maxpage); // ìµœëŒ€ í˜ì´ì§€ ìˆ˜
 
-			request.setAttribute("startpage", startpage); // ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ Ã¹ ÆäÀÌÁö
-			request.setAttribute("endpage", endpage); // ÇöÀç ÆäÀÌÁö¿¡ Ç¥½ÃÇÒ ³¡ ÆäÀÌÁö
+			request.setAttribute("startpage", startpage); // í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ì²« í˜ì´ì§€
+			request.setAttribute("endpage", endpage); // í˜„ì¬ í˜ì´ì§€ì— í‘œì‹œí•  ë í˜ì´ì§€
 
-			request.setAttribute("listcount", listcount); // ÃÑ ±ÛÀÇ ¼ö
+			request.setAttribute("listcount", listcount); // ì´ ê¸€ì˜ ìˆ˜
 
-			request.setAttribute("reviewlist", reviewlist); // ÇØ´ç ÆäÀÌÁöÀÇ ±Û ¸ñ·ÏÀ» °®°í ÀÖ´Â ¸®½ºÆ®
+			request.setAttribute("reviewlist", reviewlist); // í•´ë‹¹ í˜ì´ì§€ì˜ ê¸€ ëª©ë¡ì„ ê°–ê³  ìˆëŠ” ë¦¬ìŠ¤íŠ¸
 
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 
-			forward.setPath("review/review_list.jsp");
-			return forward; // reviewFrontController.java·Î ¸®ÅÏ.
+			forward.setPath("Page/Review/review_list.jsp");
+			return forward; // reviewFrontController.javaë¡œ ë¦¬í„´.
 
-		} else { // ÀÌ ºÎºĞ Ãß°¡
+		} else { // ì´ ë¶€ë¶„ ì¶”ê°€
 			System.out.println("state=ajax");
 			JsonObject object = new JsonObject();
 			object.addProperty("page", page);
@@ -124,8 +124,8 @@ public class ReviewListAction implements Action {
 			System.out.println(json);
 			return null;
 
-			// http://localhost:8088/review_Ajax_bootstrap/reviewList.bo?page=1&state=ajax&limit=3
-			// //µé¾î°¡¼­ È®ÀÎ
+			// http://localhost:8088/review_Ajax_bootstrap/reviewList.rv?page=1&state=ajax&limit=3
+			// //ë“¤ì–´ê°€ì„œ í™•ì¸
 		}
 	}
 }

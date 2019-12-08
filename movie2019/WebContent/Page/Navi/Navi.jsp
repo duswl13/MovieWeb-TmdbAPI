@@ -173,6 +173,15 @@ ul {
     color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
 
+.voshu-gradiant:hover {
+		color: #1dc8cc;
+    color: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+    color: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+    color: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    color: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    colorsss: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);	
+}
+
 span .hello {margin-left:100px;
 }
 </style>
@@ -208,10 +217,16 @@ span .hello {margin-left:100px;
 					</h2>
 				</li>
 				<li>
-					<h2>
-						<a
-							href='<%=request.getContextPath()%>/Page/Review/review_list.jsp'>리뷰</a>
-					</h2>
+					<h2>리뷰</h2>  <!-- 연수수정 -->
+					
+						<ul>
+
+						<li><a
+							href='<%=request.getContextPath()%>/ReviewList.rv'>실시간 리뷰</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/Page/Review/review_list_personal.jsp">내 리뷰 모아 보기</a></li>
+
+					</ul>
 				</li>
 				<li>
 					<h2>
