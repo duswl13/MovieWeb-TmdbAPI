@@ -472,7 +472,7 @@ div .rvsubmit {text-align:center;}
 						</c:forEach>
 						${list.release_date}
 						</h5>
-						<h5 id="homepage"><a href="${list.homepage}">${list.homepage}</a></h5>
+						<h5 id="homepage"><a href="${list.homepage}" target="_blank">${list.homepage}</a></h5>
 						<h5><b id="tag_line">${list.tagline}</b></h5>
 						
 						<p id="detail_content">${list.overview}</p>
