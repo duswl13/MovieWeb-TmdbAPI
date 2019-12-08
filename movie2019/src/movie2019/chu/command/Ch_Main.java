@@ -42,7 +42,6 @@ public class Ch_Main implements Command {
 				MovieDAO mdao = new MovieDAO();
 				String p = "1";
 				MoviePageVO result = mdao.getChu(gen, p);
-				System.out.println(result.getResults().size());
 				matching = dao.matching(id);
 				List<Rating_faceVO> matchings = dao.matchings(matching);
 				List<MovieInfoVO> re_match = mdao.getinfo(matchings);

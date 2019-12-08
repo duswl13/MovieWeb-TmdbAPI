@@ -16,7 +16,7 @@ import movie2019.chu.parse.MovieInfoVO;
 import movie2019.chu.parse.MoviePageVO;
 
 public class Ch_Add implements Command{
-
+ 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
@@ -25,11 +25,10 @@ public class Ch_Add implements Command{
 		List<GenresVO> gen = dao.GenChu(id);
 		MovieDAO mdao = new MovieDAO();
 		String p = request.getParameter("p");
-		System.out.println(p);
 		MoviePageVO result = mdao.getChu(gen, p);
 		request.setAttribute("gen", result.getResults());
 		request.setAttribute("image", "https://image.tmdb.org/t/p/w300/");
-		System.out.println(result.getResults());
+		
 		
 		
 	}
