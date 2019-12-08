@@ -34,7 +34,6 @@ body {
 
 .rvlist {
   font-family: "Montserrat", sans-serif;
-
   font-weight: 300;
 }
 
@@ -43,7 +42,7 @@ body {
 }
 
 .rvlist h6 {
-		line-height: 26px;
+	line-height: 26px;
     font-size: 21px;
 }
 
@@ -149,7 +148,7 @@ a:hover {
     font-size: 16px;
 }
 
-h2, h3 {
+.rvintro {
 	color: #edf1f2;
 	margin-left: 150px;
 }
@@ -199,12 +198,11 @@ if(request.getParameter("open") != null){
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-		<h2>지금 이 순간,</h2>
-		<h3>보슈의 다른 회원들은 어떤 영화를 보고 있을까요?</h3>
+		<h3 class=rvintro>지금 이 순간,</h3>
+		<h3 class=rvintro>VOSHU의 다른 회원들은 어떤 영화를 보고 있을까요?</h3>
 		<br>
-		<span class=readit>리뷰를 남기시려면, 왼쪽 메뉴에서 영화를 검색해 보슈.<br></span>
-		<span class=readit><a href="<%=request.getContextPath()%>/Board/board/BoardList.bd" title="보슈 자유게시판으로 이동하기">이곳</a>에서 VOSHU의 회원들과 자유로운 대화를 나누어 보슈.
-		</span>
+		<span class=readit>리뷰를 남기시려면, 왼쪽 메뉴에서 영화를 검색해 보슈.</span>
+		
 
         <br>
         

@@ -472,7 +472,7 @@ div .rvsubmit {text-align:center;}
 						</c:forEach>
 						${list.release_date}
 						</h5>
-						<h5 id="homepage"><a href="${list.homepage}" target="_blank">${list.homepage}</a></h5>
+						<h5 id="homepage"><a href="${list.homepage}">${list.homepage}</a></h5>
 						<h5><b id="tag_line">${list.tagline}</b></h5>
 						
 						<p id="detail_content">${list.overview}</p>
@@ -496,16 +496,16 @@ div .rvsubmit {text-align:center;}
 									</td>
 									<td><c:choose>
 											<c:when test="${face == 1 }">
-												<img src="Png/happy1.svg" title="좋아요">
-												<img src="Png/neutral1.svg" title="싫어요">
+												<img src="Png/happy1.svg">
+												<img src="Png/neutral1.svg">
 											</c:when>
 											<c:when test="${face == 2 }">
-												<img src="Png/happy.svg" title="좋아요">
-												<img src="Png/neutral.svg" title="싫어요">
+												<img src="Png/happy.svg">
+												<img src="Png/neutral.svg">
 											</c:when>
 											<c:otherwise>
-												<img src="Png/happy.svg" title="좋아요">
-												<img src="Png/neutral1.svg" title="싫어요">
+												<img src="Png/happy.svg">
+												<img src="Png/neutral1.svg">
 											</c:otherwise>
 										</c:choose></td>
 								</tr>
@@ -515,39 +515,39 @@ div .rvsubmit {text-align:center;}
 										<div class="rating">
 											<c:choose>
 												<c:when test="${star == 1 }">
-													<span style="color:orange;">★</span>
+													<span>★</span>
 													<span>☆</span>
 													<span>☆</span>
 													<span>☆</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 2 }">
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
+													<span>★</span>
+													<span>★</span>
 													<span>☆</span>
 													<span>☆</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 3 }">
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
 													<span>☆</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 4 }">
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
 													<span>☆</span>
 												</c:when>
 												<c:when test="${star == 5 }">
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
-													<span style="color:orange;">★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
+													<span>★</span>
 												</c:when>
 												<c:otherwise>
 													<span>☆</span>
@@ -623,11 +623,11 @@ div .rvsubmit {text-align:center;}
 										<c:choose>
 										<c:when test="${ p_review.REVIEW_FACE == 1}">
 										<!-- 좋아요 -->
-										<img src="Png/happy1.svg" style="width:20px; margin-right:5px" title="좋아요">
+										<img src="Png/happy1.svg" style="width:20px; margin-right:5px">
 										</c:when>
 										<c:otherwise>
 										<!-- 싫어요 -->
-										<img src="Png/neutral.svg" style="width:20px; margin-right:5px" title="싫어요">
+										<img src="Png/neutral.svg" style="width:20px; margin-right:5px">
 										</c:otherwise>
 										</c:choose>
 										
@@ -704,22 +704,23 @@ div .rvsubmit {text-align:center;}
 		<div class="outermodal">
 					<a href="#" class="floatright modalclose">X</a>
 				<div class="achtungfloat">	
-					<h4 class="mvtitle font-gradiant">겨울왕국2</h4>
+					<h4 class="mvtitle font-gradiant">${list.title}</h4>
 					
 				</div>
 				<div class="reviewarea">
-				
-						<div class="rvtitle">제목<input type=text></div>
+				<input name=movieid type=text hidden value=${movieId}>
+						<div class="rvtitle">제목<input type=text required="required" name=rvtitle></div>
 						<div class="rvcontent">
 							<textarea placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
-								class="rvcontentarea" cols=50 rows=12></textarea>
+								class="rvcontentarea" cols=50 rows=12 required="required" name=rvcontent></textarea>
 						</div>		
-						<div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant" disabled="">저장</button>
+						<div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant" >저장</button>
 						</div>
 				</div>
 				
 			</div>
 		</form>
+		
 		
 					</div>
 				</div>
@@ -774,8 +775,8 @@ document.getElementById("main").style.marginLeft = "250px";
 	var rating_value = ${star};
 	var rating_face = ${face};
 	
-
-	
+	if(rating_value != -2)
+		Change_star(rating_value);
 	
 	//표정 점수이미지를 클릭할경우 변화
 	$('.user_mv img').click(function(){
@@ -810,7 +811,6 @@ document.getElementById("main").style.marginLeft = "250px";
 				else	//표정점수 등록
 				InsertFaceRating(++check);
 
-				rating_face = check;
 			});
 
 	//별점 클릭 시 해당 점수 고정시키기
@@ -849,7 +849,6 @@ document.getElementById("main").style.marginLeft = "250px";
 			}
 		
 			rating_value = check;
-			
 			return false;
 
 		}
@@ -1112,15 +1111,15 @@ document.getElementById("main").style.marginLeft = "250px";
 				
 				text += '<img class="img-responsive" src="https://image.tmdb.org/t/p/w500'+list[check].poster_path+'">';
 
-				list[check].title = list[check].title.replace(/\"/gi, "");
-				list[check].title = list[check].title.replace(/\'/gi, "");
+				list[check].original_title = list[check].original_title.replace(/\"/gi, "");
+				list[check].original_title = list[check].original_title.replace(/\'/gi, "");
 				
 				
 				text += '<div class="centered" Onclick="location.href=\'moviedetail.ml?open=false&id='
-						+ list[check].id +'&title='+list[check].title
+						+ list[check].id +'&title='+list[check].original_title
 						+ '&poster_path='+list[check].poster_path+'\'">';
 				text += '<h3 style="clear:right;" class="centeredText"><b>'
-						+ list[check].title + '</b></h3>\n';
+						+ list[check].original_title + '</b></h3>\n';
 
 				text += ' <div>';
 				for(var k =0; k < list[check].Star; k++)
@@ -1128,7 +1127,7 @@ document.getElementById("main").style.marginLeft = "250px";
 				
 				text += ' </div>';
 				text += '</div>\n';
-				text += '<h5>' + list[check].title + '</h5>';
+				text += '<h5>' + list[check].original_title + '</h5>';
 
 				text += '</div>';
 

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ReviewFrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// doProcess(request, response) ¸Ş¼Òµå¸¦ ±¸ÇöÇØ
-	// µé¾î¿Â ¿äÃ»ÀÌ get/post ¸ğµÎ °°Àº ¸Ş¼Òµå¿¡¼­ Ã³¸®ÇÒ ¼ö ÀÖ°Ô Çß´Ù.
+	// doProcess(request, response) ë©”ì†Œë“œë¥¼ êµ¬í˜„í•´
+	// ë“¤ì–´ì˜¨ ìš”ì²­ì´ get/post ëª¨ë‘ ê°™ì€ ë©”ì†Œë“œì—ì„œ ì²˜ë¦¬í•  ìˆ˜ ìˆê²Œ í–ˆë‹¤.
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doProcess(request, response);
@@ -33,33 +33,39 @@ public class ReviewFrontController extends HttpServlet {
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI = " + RequestURI);
 
-		// getContextPath() : ÄÁÅØ½ºÆ® °æ·Î ¹İÈ¯
-		// ContextPath´Â "JspProject" ¹İÈ¯.
+		// getContextPath() : ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ë°˜í™˜
+		// ContextPathëŠ” "JspProject" ë°˜í™˜.
 		String contextPath = request.getContextPath();
 		System.out.println("contextPath = " + contextPath);
 
-		// RequestURI¿¡¼­ ÄÁÅØ½ºÆ® °æ·Î ±æÀÌ°ªÀÇ ÀÎµ¦½º ¹®ÀÚºÎÅÍ ¸¶Áö¸· ¹®ÀÚ±îÁö ÃßÃâ.
-		// command´Â "/login.net" ¹İÈ¯.
+		// RequestURIì—ì„œ ì»¨í…ìŠ¤íŠ¸ ê²½ë¡œ ê¸¸ì´ê°’ì˜ ì¸ë±ìŠ¤ ë¬¸ìë¶€í„° ë§ˆì§€ë§‰ ë¬¸ìê¹Œì§€ ì¶”ì¶œ.
+		// commandëŠ” "/login.net" ë°˜í™˜.
 		String command = RequestURI.substring(contextPath.length());
 		System.out.println("command = " + command);
 
-		// ÃÊ±âÈ­
+		// ì´ˆê¸°í™”
 		ActionForward forward = null;
 		Action action = null;
 
+		
+		
 		if (command.equals("/ReviewList.rv")) {
-			action = new ReviewListAction(); // ´ÙÇü¼º¿¡ ÀÇÇÑ ¾÷Ä³½ºÆÃ
+			action = new ReviewListAction(); // ë‹¤í˜•ì„±ì— ì˜í•œ ì—…ìºìŠ¤íŒ…
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
+			
+			
 		} else if (command.equals("/ReviewWrite.rv")) {
 			forward = new ActionForward();
-			forward.setRedirect(false); // Æ÷¿öµù ¹æ½ÄÀ¸·Î ÁÖ¼Ò°¡ ¹Ù²îÁö ¾ÊÀ½.
+			forward.setRedirect(false); // í¬ì›Œë”© ë°©ì‹ìœ¼ë¡œ ì£¼ì†Œê°€ ë°”ë€Œì§€ ì•ŠìŒ.
 			forward.setPath("review/review_write.jsp");
 
+			
+			
 		} else if (command.equals("/ReviewAddAction.rv")) {
 			action = new ReviewAddAction();
 			try {
@@ -68,11 +74,15 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			
+			
 		} else if (command.equals("/ReviewDelete.rv")) {
 			forward = new ActionForward();
-			forward.setRedirect(false); // Æ÷¿öµå ¹æ½ÄÀ¸·Î ÁÖ¼Ò ¹Ù²îÁö ¾ÊÀ½
+			forward.setRedirect(false); // í¬ì›Œë”© ë°©ì‹ìœ¼ë¡œ ì£¼ì†Œê°€ ë°”ë€Œì§€ ì•ŠìŒ.
 			forward.setPath("review/review_delete.jsp");
 
+			
+			
 		} else if (command.equals("/ReviewDeleteAction.rv")) {
 			action = new ReviewDeleteAction();
 			try {
@@ -82,6 +92,8 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			
+			
 		} else if (command.equals("/ReviewModifyAction.rv")) {
 			action = new ReviewModifyAction();
 			try {
@@ -91,6 +103,8 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			
+			
 		} else if (command.equals("/ReviewModifyView.rv")) {
 			action = new ReviewModifyView();
 			try {
@@ -100,6 +114,8 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+			
+			
 		} else if (command.equals("/ReviewDetailAction.rv")) {
 			action = new ReviewDetailAction();
 			try {
@@ -107,13 +123,14 @@ public class ReviewFrontController extends HttpServlet {
 
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}		
 		}
-
+		
+		
 		if (forward != null) {
-			if (forward.isRedirect()) { // ¸®´ÙÀÌ·ºÆ® µÊ
+			if (forward.isRedirect()) { // ë¦¬ë‹¤ì´ë ‰íŠ¸ ë¨
 				response.sendRedirect(forward.getPath());
-			} else { // Æ÷¿öµù µÊ
+			} else { // í¬ì›Œë”© ë¨
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
