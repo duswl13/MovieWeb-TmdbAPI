@@ -177,9 +177,8 @@ iframe {
 /* 슬라이더 */
 .accordian{
   width: 80%;
-  height: 333px;
+	
   overflow:hidden;
-  
   margin: 100px auto;
   -webkit-box-shadow: 0 8px 6px -6px black;
   -moz-box-shadow: 0 8px 6px -6px black;
@@ -212,6 +211,7 @@ iframe {
 }
 
 .accordian li img{
+	
   display: block;
 }
 
@@ -352,4 +352,6 @@ iframe {
 	padding-left: 250px;
 	margin-right: 10px;
 }
+
+
 

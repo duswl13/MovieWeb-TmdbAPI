@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import movie2019.chu.command.Ch_Add;
 import movie2019.chu.command.Ch_Main;
 import movie2019.chu.command.Command;
 
@@ -43,6 +44,11 @@ public class ChController extends HttpServlet {
 			command = new Ch_Main();
 			command.execute(request, response);
 			page = "Page/Chu/list.jsp";
+		}else if(com.equals("/listAdd.ch")) {
+			System.out.println("들어옴에이젝스");
+			command = new Ch_Add();
+			command.execute(request, response);
+			page = "Page/Chu/addList.jsp";
 		}
 		
 		try {

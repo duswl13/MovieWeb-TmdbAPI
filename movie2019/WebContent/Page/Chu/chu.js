@@ -37,7 +37,7 @@ const youtube = document.querySelector(".youtube");
                 const jsonObj = JSON.parse(xhr.response);        
                 const boxOfficeResult = jsonObj['boxOfficeResult'];                       
                 const movieList = boxOfficeResult['dailyBoxOfficeList'];
-                var i =0;
+             
                 movieList.forEach(element => {               	 
                 	
                            
@@ -54,13 +54,7 @@ const youtube = document.querySelector(".youtube");
                    // console.log(res.results[0].id);
                     //myLi.setAttribute("onClick","viewTrailer("+res.results[0].id+','+base_url+""+res.results[0].poster_path+")");
                     myLi.setAttribute("onClick","viewTrailer("+"'"+res.results[0].id+"'"+","+"'"+base_url+""+res.results[0].poster_path+"'"+")");
-                    myLi.style.backgroundImage = "url("+"'"+base_url+""+res.results[0].poster_path+"'"+")";
-                                 	
-                	   if(i<5){
-                		   
-                           sr[i].src=base_url+""+res.results[0].poster_path;
-                           }
-                	   i=i+1;  
+                    myLi.style.backgroundImage = "url("+"'"+base_url+""+res.results[0].poster_path+"'"+")";                    	                	   
                     myUl.appendChild(myLi);
         
                 }).catch(e=>console.log(e));
@@ -96,7 +90,7 @@ const youtube = document.querySelector(".youtube");
     	}).catch(e=>console.log(e));
     	
     	  overlay.classList.add("show");
-         console.log(poster);
+         
          overlay.setAttribute("style", "background-image: url('"+poster+"'); background-size: auto; background-repeat: no-repeat;");
          //배경 body 스크롤 중지
          document.body.classList.add("stop-scrolling"); 

@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import movie2019.chu.model.GenDAO;
 import movie2019.chu.model.GenresVO;
+import movie2019.chu.model.Rating_faceVO;
 import movie2019.chu.parse.MovieDAO;
+import movie2019.chu.parse.MovieInfoVO;
 import movie2019.chu.parse.MoviePageVO;
 import movie2019.mypage.genres.GenresDAO;
 
@@ -23,31 +25,36 @@ public class Ch_Main implements Command {
 		HttpSession session = request.getSession();
 		String id = (String) session.getAttribute("id");
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();	
+		PrintWriter out = response.getWriter();
 		GenDAO dao = new GenDAO();
+		String matching = null;
 		if (id == null) {
 			out.println("<script>");
 			out.println("alert('로그인해주세요');");
 			out.println("location.href='Page/Login/login.jsp';");
 			out.println("</script>");
-			out.close();		
+			out.close();
 		}
 
-		if(id != null) {
-		try{
-			List<GenresVO> gen = dao.GenChu(id);
-		
-		MovieDAO mdao = new MovieDAO();
-		MoviePageVO result = mdao.getChu(gen);
-		request.setAttribute("id", id);
-		request.setAttribute("gen", result.getResults());
-		request.setAttribute("image", "https://image.tmdb.org/t/p/w300/");
-		}catch (Exception e) {
-			
-		}
-		
+		if (id != null) {
+			try {
+				List<GenresVO> gen = dao.GenChu(id);
+				MovieDAO mdao = new MovieDAO();
+				String p = "1";
+				MoviePageVO result = mdao.getChu(gen, p);
+				System.out.println(result.getResults().size());
+				matching = dao.matching(id);
+				List<Rating_faceVO> matchings = dao.matchings(matching);
+				List<MovieInfoVO> re_match = mdao.getinfo(matchings);
+				request.setAttribute("matching", re_match);
+				request.setAttribute("id", id);
+				request.setAttribute("gen", result.getResults());
+				request.setAttribute("image", "https://image.tmdb.org/t/p/w300/");
+			} catch (Exception e) {
+				System.out.println("건수오류");
+			}
 
-	}
+		}
 	}
 
 }

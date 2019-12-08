@@ -11,9 +11,9 @@ import org.json.simple.parser.JSONParser;
 
 public class Movie {
 
-	public static ArrayList<id> Movies() throws Exception {
+	public static ArrayList<id> Movies(String id) throws Exception {
 		JSONParser jsonparser = new JSONParser();
-		JSONObject jsonobject = (JSONObject) jsonparser.parse(readUrl());
+		JSONObject jsonobject = (JSONObject) jsonparser.parse(readUrl(id));
 		JSONArray array = (JSONArray) jsonobject.get("results");
 		ArrayList<id> list = new ArrayList<id>();
 		for (int i = 0; i < array.size(); i++) {
@@ -21,22 +21,22 @@ public class Movie {
 			String movieNm = (String) entity.get("poster_path");
 			String movietitle = (String) entity.get("title");
 			int num = ((Long) entity.get("id")).intValue();
-			id id = new id();
-			id.setId(num);
-			id.setTitle(movietitle);
-			list.add(id);
+			System.out.println(num);
+			System.out.println(movieNm);
+			System.out.println(movietitle);
 
 		}
 
 		return list;
 	}
 
-	private static String readUrl() throws Exception {
+	private static String readUrl(String id) throws Exception {
 
 		BufferedInputStream reader = null;
 		try {
 			URL url = new URL(
-					"https://api.themoviedb.org/3/movie/upcoming?api_key=4b3aa211760fe451c0edcb032c99f6b2&language=ko-KR&page=1");
+					"https://api.themoviedb.org/3/movie/"+id+"?api_key=4b3aa211760fe451c0edcb032c99f6b2&language=ko-KO&region=KR&page=1&include_adult=false");
+			System.out.println(url.toString());
 			reader = new BufferedInputStream(url.openStream());
 
 			StringBuffer buffer = new StringBuffer();
@@ -57,6 +57,10 @@ public class Movie {
 			}
 		}
 
+	}
+	public static void main(String[] args) throws Exception {
+		Movie m = new Movie();
+		m.Movies("330457");
 	}
 
 }

@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		<!-- typeAlias type="전체경로" alias="별칭" -->
 		 <typeAlias type="movie2019.gong.model.GongVO" alias="g" />
 		 <typeAlias type="movie2019.gong.model.FAQVO" alias="f" />
-		   <typeAlias type="movie2019.chu.model.GenresVO" alias="c" />		   
+		   <typeAlias type="movie2019.chu.model.GenresVO" alias="c" />
+		   <typeAlias type="movie2019.chu.model.Rating_faceVO" alias="d" />				   
 	</typeAliases>
 	<environments default="">
 		<environment id="">
