@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -206,6 +208,8 @@ ul {
 								<h2><a href="<%=request.getContextPath()%>/list.gong">공지사항</a></h2>
 							
 						</li>
+<c:if test="${id == 'admin1' || id == 'admin2' || id == 'admin3' || id == 'admin4'}">     				
+						
 				<li>
 					<h2>관리자 페이지</h2>
 					<ul>
@@ -214,6 +218,8 @@ ul {
 						<li><a href="<%=request.getContextPath()%>/user_list.ul">회원 관리</a></li>
 					</ul>
 				</li>
+</c:if>				
+				
 			</ul>
 
 			<ul>

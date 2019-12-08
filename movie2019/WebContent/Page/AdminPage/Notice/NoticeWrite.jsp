@@ -42,7 +42,6 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
-<%session.setAttribute("id","admin1"); %>
 	<form action="NoticeAddAction.bo" method="post" name="noticeform">
 		<h1>공지사항</h1>
 		<div class="form-group">
