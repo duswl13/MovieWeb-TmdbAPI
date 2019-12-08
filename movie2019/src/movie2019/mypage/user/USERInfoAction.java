@@ -13,14 +13,19 @@ public class USERInfoAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		UserDAO userdao = new UserDAO();
 		Users user = new Users();
+		PosterDAO pdao = new PosterDAO();
+		Poster poster = new Poster();
 		
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 	
 		user=userdao.user_info(id);
+		poster=pdao.poster_info(id);
+		
 		ActionForward forward = new ActionForward();
 				
 		request.setAttribute("userinfo",user);
+		request.setAttribute("posterinfo",poster);
 		forward = new ActionForward();
 		forward.setRedirect(false);
 		

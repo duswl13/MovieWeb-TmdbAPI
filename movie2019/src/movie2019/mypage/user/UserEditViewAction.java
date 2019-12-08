@@ -14,22 +14,26 @@ public class UserEditViewAction implements Action {
 		
 		UserDAO udao=new UserDAO();
 		Users users = new Users();
-			String id = request.getParameter("user_id");
-			
-			users=udao.user_info(id);
-			
-			if(users==null) {
-				forward.setRedirect(false);
-				request.setAttribute("message", "정보 수정 실패.");
-				forward.setPath("error/error.jsp");
-				return forward;
-			}
+		PosterDAO pdao = new PosterDAO();
+		Poster poster = new Poster();
+		String id = request.getParameter("user_id");
+		
+		users=udao.user_info(id);
+		poster=pdao.poster_info(id);
 
-			request.setAttribute("userinfo", users);
+		if(users==null) {
 			forward.setRedirect(false);
-			forward.setPath("Page/MyPage/MyInfo/MyInfoModify.jsp");
-			
+			request.setAttribute("message", "정보 수정 실패.");
+			forward.setPath("error/error.jsp");
 			return forward;
+		}
+
+		request.setAttribute("userinfo", users);
+		request.setAttribute("posterinfo",poster);
+		forward.setRedirect(false);
+		forward.setPath("Page/MyPage/MyInfo/MyInfoModify.jsp");
+		
+		return forward;
 	}
 
 }

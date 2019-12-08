@@ -25,6 +25,7 @@ public class UserEditAction implements Action {
 		String email=request.getParameter("INFO_EMAIL");
 		String phone=request.getParameter("INFO_PHONE");
 		String[] genres=request.getParameterValues("INFO_GENRES");
+		String poster=request.getParameter("HIDDEN_POSTER");
 		
 		if(!pass.equals(pass_check)) {
 			out.println("alert('비밀번호가 일치하지 않습니다.');");
@@ -60,9 +61,13 @@ public class UserEditAction implements Action {
 		gdao.update_genres(genres, id);
 
 		
-		UserDAO udao= new UserDAO();
-		
+		UserDAO udao= new UserDAO();		
 		int result =udao.user_update(user);
+		
+		if(poster!="") {
+			PosterDAO pdao = new PosterDAO();
+			int result2=pdao.update_poster(poster, id);
+		}
 		
 		//삽입이 된 경우 
 		if(result==1) {
