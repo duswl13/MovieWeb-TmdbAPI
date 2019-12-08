@@ -49,8 +49,6 @@ public class MovieDAO {
 			         if (i < gen.size() - 1)
 		            Id2 += "|";
 			      }
-			
-			System.out.println(Id2);
 			json = readUrl("https://api.themoviedb.org/3/discover/movie?api_key=139dd374c866d879d4ac74f2f897ac19&language=ko-KO&region=KR&"
 					+ "sort_by=popularity.desc&include_adult=false&i"
 					+ "nclude_video=false&page="+p+"&with_genres="+Id2);
