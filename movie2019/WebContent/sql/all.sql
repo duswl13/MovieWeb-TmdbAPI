@@ -97,6 +97,19 @@ FAQ_SUBJECT VARCHAR2(100),
 FAQ_CONTENT VARCHAR2(300),
 FAQ_DATE DATE
 );	
+INSERT INTO FAQ VALUES((select nvl(max(FAQ_NUMBER),0) FROM FAQ)+1, 'admin1','추천, 마이페이지가 보이지 않아요','로그인 상태인지 확인해 주세요.
+해당 페이지는 로그인 상태에서만 확인이 가능합니다.',sysdate);
+INSERT INTO FAQ VALUES((select nvl(max(FAQ_NUMBER),0) FROM FAQ)+1, 'admin1','페이지가 보이지 않아요','해당 페이지 주소를 공지사항 페이지 안에 있는 고객문의 탭에서 관리자에게 문의메일로 보내주세요.',sysdate);
+INSERT INTO FAQ VALUES((select nvl(max(FAQ_NUMBER),0) FROM FAQ)+1, 'admin1','로그인이 되지 않아요','해당 계정 정보를 공지사항 페이지 안에 있는 고객문의 탭에서 관리자에게 문의메일로 보내주세요.',sysdate);
+INSERT INTO FAQ VALUES((select nvl(max(FAQ_NUMBER),0) FROM FAQ)+1, 'admin1','추천 페이지의 유저매칭란이 보이지 않아요','유저매칭 추천 정보는 영화에 대한 호불호 정보가 있어야지만 표출될 수 있습니다.
+하나 이상의 리뷰를 작성하여 호불호 정보를 만들어 주세요.',sysdate);
+INSERT INTO FAQ VALUES((select nvl(max(FAQ_NUMBER),0) FROM FAQ)+1, 'admin1','리뷰는 어떻게 쓰나요?',
+'1) 상세보기 페이지 실행
+2) 리뷰쓰기 버튼 클릭
+3) 얼굴 점수(호/불호) 선택 및 영화 점수 별점 표시
+4) 영화에 대한 리뷰 작성
+',sysdate);
+
 
 CREATE TABLE BCOMMENTS (
 num number primary key,
