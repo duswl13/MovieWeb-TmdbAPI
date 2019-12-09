@@ -23,7 +23,7 @@
 	margin: 0px auto;
 	padding: 0px;
 }
- 
+
 body {
 	background: #141414;
 	font-family: montserrat, arial, verdana;

@@ -22,7 +22,7 @@ public class ReviewDetailAction implements Action {
 		reviewvo = reviewdao.getDetail(num);
 
 		ActionForward forward = new ActionForward();
- 
+
 		//DAO에서 글의 내용을 읽지 못했을 경우 null 반환
 		if (reviewvo == null) {
 			System.out.println("리뷰 상세보기 실패");
