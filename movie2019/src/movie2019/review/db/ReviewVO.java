@@ -10,7 +10,36 @@ public class ReviewVO {
 	private String REVIEW_TITLE;
 	private String REVIEW_CONTENT;
 	private Date REVIEW_DATE;
+	private int STAR;
+	private int FACE;
+	private String MOVIE_NAME;
+	private String MOVIE_POSTER;
+	
 	 
+	public int getSTAR() {
+		return STAR;
+	}
+	public void setSTAR(int sTAR) {
+		STAR = sTAR;
+	}
+	public int getFACE() {
+		return FACE;
+	}
+	public void setFACE(int fACE) {
+		FACE = fACE;
+	}
+	public String getMOVIE_NAME() {
+		return MOVIE_NAME;
+	}
+	public void setMOVIE_NAME(String mOVIE_NAME) {
+		MOVIE_NAME = mOVIE_NAME;
+	}
+	public String getMOVIE_POSTER() {
+		return MOVIE_POSTER;
+	}
+	public void setMOVIE_POSTER(String mOVIE_POSTER) {
+		MOVIE_POSTER = mOVIE_POSTER;
+	}
 	public int getREVIEW_NUMBER() {
 		return REVIEW_NUMBER;
 	}

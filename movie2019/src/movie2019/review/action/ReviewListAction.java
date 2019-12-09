@@ -40,7 +40,8 @@ public class ReviewListAction implements Action {
 
 		// 리스트 받아오기
 		reviewlist = reviewdao.getreviewList(page, limit);
-
+		for(ReviewVO i : reviewlist)
+		System.out.print("등록된 리뷰 :"+i.getREVIEW_TITLE());
 		/*
 		 * 총 페이지 수 = (DB에 저장된 총 리스트 + 한 페이지에서 보여주는 리스트 - 1) / 한 페이지에서 보여주는 리스트
 		 * 

@@ -1,3 +1,4 @@
+
 <!-- 리뷰 클릭 시 첫 화면 -->
 <!-- 이미지 들어가는 템플릿-->
 
@@ -225,18 +226,45 @@ if(request.getParameter("open") != null){
                 <!-- card  -->
                 <div class="card border-0 mb-4">
                     <div class="row no-gutters">
-                        <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://ww.namu.la/s/a72cdf98b9e910668043d6a133cde88ad1208267475f3e3d9567b162603ac916f3ac729791c407322247af759da8288800e47368143694c3b5b95c7c90a8be5b76527f02bf679064cdfbe54246473261f655f781ed94ac6396b2c27862cfa2cdf82359498c0aa67689578922afe34f8e)">
+                        <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://image.tmdb.org/t/p/w500${r.MOVIE_POSTER })">
+                             <c:choose>
+                             <c:when test="${r.FACE == 1}">
                              <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+                       		</c:when>	
+                       		<c:otherwise>
+                       		  <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
+                       		</c:otherwise>
+                        </c:choose>
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
-								<p><c:out value="${num}"/> <%--num출력 --%>
-									<c:set var="num" value="${num-1}"/> <%-- num=num-1; 의미 --%></p>                            
-                                <p class="rvtitle">${r.REVIEW_NUMBER} ${r.REVIEW_TITLE}</p>
-                                <p class=rvcontent>${r.REVIEW_CONTENT}</p>
+                                <p class="rvtitle">${r.MOVIE_NAME}</p>
+                                <p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
                                 <br>
-                                 <p class=star >★★★★☆</p> 
-                                <p class=rvbottom1><a href="#" title="보슈 회원 ${id}님의 리뷰 더보기">${id}</a>님이 남긴 리뷰</p>
+                                
+                             <c:choose>
+                             <c:when test="${r.STAR == 1}">
+                             <p class=star >★☆☆☆☆</p> 
+                       		</c:when>
+                       		
+                       		 <c:when test="${r.STAR == 2}">
+                             <p class=star >★★☆☆☆</p> 
+                       		</c:when>	
+                       		
+                       		 <c:when test="${r.STAR == 3}">
+                             <p class=star >★★★☆☆</p> 
+                       		</c:when>	
+                       		
+                       		 <c:when test="${r.STAR == 4}">
+                             <p class=star >★★★★☆</p> 
+                       		</c:when>	
+                       		
+                       		 <c:when test="${r.STAR == 5}">
+                             <p class=star >★★★★★</p> 
+                       		</c:when>
+                                </c:choose>
+                                
+                                <p class=rvbottom1><a href="#" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
                            		
                             </div>
                         </div>
