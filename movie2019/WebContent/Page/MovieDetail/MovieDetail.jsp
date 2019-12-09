@@ -401,6 +401,16 @@ div .rvsubmit {text-align:center;}
         
         
 </style>
+
+<script>
+$(function(){
+	 
+	  $(".modalclose").last().click(function(){
+		  history.back();
+	  });
+})
+</script>
+
 </head>
 <body>
 
@@ -490,9 +500,17 @@ div .rvsubmit {text-align:center;}
 											</c:otherwise>
 										</c:choose>
 									</h4>
-<!-- 연수 -->									
-		<button data-toggle="modal" data-target="#rvModal" class=bg-gradiant>리뷰 쓰기</button>	
-		
+<!-- 연수 모르겠음-->		
+
+
+<button data-toggle="modal" data-target="#rvModal" class=bg-gradiant>리뷰 쓰기</button>
+
+
+<!-- 
+<c:if test="${!empty id}">
+<button data-toggle="modal" data-target="#rvModal2" class=bg-gradiant>리뷰 수정하기</button>
+</c:if>
+-->													
 									</td>
 									<td><c:choose>
 											<c:when test="${face == 1 }">
@@ -511,7 +529,6 @@ div .rvsubmit {text-align:center;}
 								</tr>
 								<tr>
 									<td>
-
 										<div class="rating">
 											<c:choose>
 												<c:when test="${star == 1 }">
@@ -663,19 +680,11 @@ div .rvsubmit {text-align:center;}
 							</c:choose>
 						</div>
 
-
-
 						<h4 class="top_margin" id="div_similar">
 							<b>비슷한 영화</b>
 						</h4>
 
 						<div class="detail_similar row"></div>
-
-
-
-
-
-
 
 						<div></div>
 
@@ -690,7 +699,7 @@ div .rvsubmit {text-align:center;}
 	
 	
 	
-	
+ 	
 <!-- 연수  modal 시작-->
 		<div class="modal" id="rvModal">
 			<div class="modal-dialog ">
@@ -702,7 +711,7 @@ div .rvsubmit {text-align:center;}
 		<form name=review_write_form action="<%=request.getContextPath() %>/ReviewAddAction.rv" method=post>
 
 		<div class="outermodal">
-					<a href="#" class="floatright modalclose">X</a>
+					<span class="modalclose">Xj</span>
 				<div class="achtungfloat">	
 					<h4 class="mvtitle font-gradiant">${list.title}</h4>
 					
@@ -714,7 +723,7 @@ div .rvsubmit {text-align:center;}
 							<textarea placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
 								class="rvcontentarea" cols=50 rows=12 required="required" name=rvcontent></textarea>
 						</div>		
-						<div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant" >저장</button>
+						<div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant">저장</button>
 						</div>
 				</div>
 				
@@ -728,6 +737,45 @@ div .rvsubmit {text-align:center;}
 		</div>
 		
 <!-- 연수여기까지 -->
+
+
+<!-- 연수  modal2 시작-->
+		<div class="modal" id="rvModal2">
+			<div class="modal-dialog ">
+				<div class="modal-content">
+
+
+		<!-- Modal body -->
+					<div class="modal-body">
+		<form name=review_write_form action="<%=request.getContextPath() %>/ReviewModifyAction.rv" method=post>
+
+		<div class="outermodal">
+					<span class="modalclose">X</span>
+				<div class="achtungfloat">	
+					<h4 class="mvtitle font-gradiant">${list.title}</h4>
+					
+				</div>
+				<div class="reviewarea">
+				<input name=movieid type=text hidden value=${movieId}>
+						<div class="rvtitle">제목<input type=text required="required" name=rvtitle value=${r.REVIEW_TITLE}></div>
+						<div class="rvcontent">
+							<textarea 
+								class="rvcontentarea" cols=50 rows=12 required="required" name=rvcontent value=${r.REVIEW_CONTENT}></textarea>
+						</div>		
+						<div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant" >수정</button>
+						</div>
+				</div>
+				
+			</div>
+		</form>
+		
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<!-- 연수여기까지 -->
+
 </body>
 
 <script>
