@@ -41,7 +41,7 @@ public class ReviewAddAction implements Action {
             
             // 글 등록 폼에서 입력받은 정보들을 reviewvo객체에 저장.
             reviewvo.setUSER_ID(userId);
-             reviewvo.setMOVIE_ID(movieid);
+            reviewvo.setMOVIE_ID(movieid);
             reviewvo.setREVIEW_TITLE(rvTitle);
             reviewvo.setREVIEW_CONTENT(rvContent);
 
@@ -60,7 +60,7 @@ public class ReviewAddAction implements Action {
             System.out.println("게시판 등록 완료.");
             // 글 등록 완료되면 글 목록을 보여주기 위해 Redirect여부를 true로 설정
             forward.setRedirect(true);
-            forward.setPath("ReviewList.rv");
+            forward.setPath("moviedetail.ml?id="+ movieid);
             return forward;
 
          } catch (Exception ex) {
