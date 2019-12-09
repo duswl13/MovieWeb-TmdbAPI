@@ -43,7 +43,7 @@ $(function(){
 	<form action="FAQModifyAction.fa" method="post" 
 	name="modifyform">
 	<input type="hidden" name="FAQ_NUMBER" value="${faq.FAQ_NUMBER }">
-		<h1>FAQ 수정</h1>
+		<h1>FAQ 게시글 수정</h1>
 		<div class="form-group">
 			<label for="faq_name">글쓴이</label>
 			<input name="FAQ_NAME" id="faq_name" value="${faq.FAQ_NAME }" readOnly type="text"

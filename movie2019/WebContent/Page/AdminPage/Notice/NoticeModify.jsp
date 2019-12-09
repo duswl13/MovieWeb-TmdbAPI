@@ -42,7 +42,7 @@ $(function(){
 	<form action="NoticeModifyAction.bo" method="post" 
 	name="modifyform">
 	<input type="hidden" name="NOTICE_NUMBER" value="${notice.NOTICE_NUMBER }">
-		<h1>공지사항 수정</h1>
+		<h1>공지사항 게시글 수정</h1>
 		<div class="form-group">
 			<label for="notice_name">글쓴이</label>
 			<input name="NOTICE_NAME" id="notice_name" value="${notice.NOTICE_NAME }" readOnly type="text"

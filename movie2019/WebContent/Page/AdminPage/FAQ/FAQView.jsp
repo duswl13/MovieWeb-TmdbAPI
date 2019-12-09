@@ -85,8 +85,8 @@ $(function(){
 			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">${faqdata.FAQ_CONTENT }</textarea></td></tr>	
 		<tr>
 			<td colspan="2" class="center">
-				<a href="FAQModifyView.fa?num=${faqdata.FAQ_NUMBER}">
-					<button class="btn btn-info" style="background:#27AE60; text-decoration:none;">수정</button>
+				<a href="FAQModifyView.fa?num=${faqdata.FAQ_NUMBER}" style="text-decoration:none;">
+					<button class="btn btn-info" style="background:#27AE60;">수정</button>
 				</a>
 				<a href="FAQDeleteAction.fa?num=${faqdata.FAQ_NUMBER}" style="text-decoration:none;">
 					<button class="btn btn-danger">삭제</button>

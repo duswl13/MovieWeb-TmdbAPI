@@ -76,7 +76,7 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<table class="table table-striped">
-		<tr><th colspan="2"><strong>공지사항 게시판-view페이지</strong></th></tr>
+		<tr><th colspan="2"><strong>공지사항 게시글 상세보기</strong></th></tr>
 		<tr><td>글쓴이</td>
 			<td>${noticedata.NOTICE_NAME }</td></tr>
 		<tr><td>제목</td>
