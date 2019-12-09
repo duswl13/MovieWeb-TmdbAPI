@@ -143,8 +143,12 @@ public class BoardDAO {
 		// BOARD_RE_REF desc, BOARD_RE_SEQ asc에 의해 정렬한 것을
 		// 조건절에 맞는 rnum의 범위만큼 가져오는 쿼리문
 		
-		String board_list_sql = "select * " + "from (select rownum rnum, b.* " + " from (select * from mboard "
-				+ " order by BOARD_RE_REF desc," + " BOARD_RE_SEQ asc) b) " + "where rnum>=? and rnum<=?";
+		String board_list_sql = "select * " 
+		                      + "from (select rownum rnum, b.* " 
+				              + " from (select * from mboard "
+				              + " order by BOARD_RE_REF desc," 
+				              + " BOARD_RE_SEQ asc) b) " 
+				              + "where rnum>=? and rnum<=?";
 
 		List<BoardVO> list = new ArrayList<BoardVO>();
 		// 한 페이지당 10개씩 목록인 경우 1페이지,2페이지, 3페이지 ...
@@ -209,7 +213,9 @@ public class BoardDAO {
 
 	// 조회수 업데이트 : 글번호에 해당하는 조회수를 1 증가시킨다.
 	public void setReadCountUpdate(int num) {
-		String sql = "update MBOARD set " + "BOARD_READCOUNT = (BOARD_READCOUNT)+1 " + "where BOARD_NUM = ?";
+		String sql = "update MBOARD set " 
+	               + "BOARD_READCOUNT = (BOARD_READCOUNT)+1 " 
+				   + "where BOARD_NUM = ?";
 
 		try {
 			con = ds.getConnection();
@@ -639,10 +645,11 @@ public class BoardDAO {
 	public List<BoardVO> getList(String field, String value, int page, int limit) {
 		String sql = "select * "
 			      +" from (select b.*, rownum rnum " 
-			      + " from (select * from mboard "
+			      +" from (select * from mboard "
+			      +" where "+field+" like ? "
 			      +" order by BOARD_NUM) b"
 			      +" )"
-			      +" where rnum >=? and rnum <= ?";
+			      +" where rnum >= ? and rnum <= ?";
 			      List<BoardVO> list = new ArrayList<BoardVO>();
 			   
 			      // 한 페이지 당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지 ...
@@ -654,8 +661,9 @@ public class BoardDAO {
 			      try {
 			         con = ds.getConnection();
 			         pstmt = con.prepareStatement(sql);
-			         pstmt.setInt(1, startrow);
-			         pstmt.setInt(2, endrow);
+			         pstmt.setString(1, "%"+value+"%");
+			         pstmt.setInt(2, startrow);
+			         pstmt.setInt(3, endrow);
 			         rs = pstmt.executeQuery();
 
 			         // DB에서 가져온 데이터를 VO 객체에 담는다
@@ -670,6 +678,7 @@ public class BoardDAO {
 			            b.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF"));
 			            b.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV"));
 			            b.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
+			            b.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
 			            b.setBOARD_DATE(rs.getDate("BOARD_DATE"));
 			            list.add(b); // 값을 담은 객체를 리스트에 저장합니다.
 			         }
@@ -701,5 +710,75 @@ public class BoardDAO {
 			      return list; // 값을 담은 객체를 리스트를 호출한 곳으로 가져갑니다.
 
 			   }//getList end
+
+	
+	public List<BoardVO> getList(int page, int limit) {
+		
+		
+				
+		String sql = "select * from (select rownum rnum, b.*  from " + 
+				"				(select * from mboard  order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) b) " + 
+				"				where rnum>=? and rnum<=?";
+			      List<BoardVO> list = new ArrayList<BoardVO>();
+			   
+			      // 한 페이지 당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지 ...
+			      int startrow = (page - 1) * limit + 1;
+			      // 읽기 시작할 row 번호(1 11 21 31 ...)
+			      int endrow = startrow + limit - 1;
+			      // 읽을 마지막 row 번호 (10 20 30 40 ...)
+			      
+			      try {
+			         con = ds.getConnection();
+			         pstmt = con.prepareStatement(sql);
+			         pstmt.setInt(1, startrow);
+			         pstmt.setInt(2, endrow);
+			         rs = pstmt.executeQuery();
+
+			         // DB에서 가져온 데이터를 VO 객체에 담는다
+			         while (rs.next()) {
+			            BoardVO b = new BoardVO();
+			           
+			            b.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+			            b.setBOARD_NAME(rs.getString("BOARD_NAME"));
+			            b.setBOARD_PASS(rs.getString("BOARD_PASS"));
+			            b.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+			            b.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));
+			            b.setBOARD_FILE(rs.getString("BOARD_FILE"));
+			            b.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF"));
+			            b.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV"));
+			            b.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
+			            b.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
+			            b.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+			            System.out.println(b.getBOARD_NUM() + ":"+b.getBOARD_SUBJECT());
+			            list.add(b); // 값을 담은 객체를 리스트에 저장합니다.
+			         }
+			    
+			      } catch (SQLException e) {
+			         e.printStackTrace();
+			      } finally {
+
+			         if (rs != null)
+			            try {
+			               rs.close();
+			            } catch (SQLException e1) {
+			               // TODO Auto-generated catch block
+			               e1.printStackTrace();
+			            }
+			         if (pstmt != null)
+			            try {
+			               pstmt.close();
+			            } catch (SQLException e) {
+			               e.printStackTrace();
+			            }
+			         if (con != null)
+			            try {
+			               con.close();
+			            } catch (SQLException e) {
+			               e.printStackTrace();
+			            }
+			      }
+			      return list; // 값을 담은 객체를 리스트를 호출한 곳으로 가져갑니다.
+
+	}
 	
 }//class

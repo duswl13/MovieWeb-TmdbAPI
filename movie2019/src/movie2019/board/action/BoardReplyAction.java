@@ -35,7 +35,6 @@ public class BoardReplyAction implements Action {
          System.out.println("답변 실패");
          forward.setRedirect(false);
          request.setAttribute("message", "답변 작성 실패");
-         forward.setPath("error/error.jsp");
          return forward;
       }
       //답변 저장이 제대로 된 경우

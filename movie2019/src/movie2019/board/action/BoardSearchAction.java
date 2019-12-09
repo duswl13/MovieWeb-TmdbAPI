@@ -14,7 +14,7 @@ public class BoardSearchAction implements Action {
 		
 		//기본 값 페이지
 	    int page = 1;
-		int limit = 3;
+		int limit = 10;
 				
 		if(request.getParameter("page")!=null) {
 		page=Integer.parseInt(request.getParameter("page"));
@@ -29,7 +29,10 @@ public class BoardSearchAction implements Action {
 
 		if(request.getParameter("search_word")==null
 				|| request.getParameter("search_word").equals("")) {
+			listcount = bdao.getListCount();
+			list = bdao.getList(page, limit);
 			
+			System.out.println("listcount"+listcount);
 			
 		}else { //검색어 클릭한 경우
 			index 
@@ -38,10 +41,8 @@ public class BoardSearchAction implements Action {
 			   = new String[] {"BOARD_NAME","BOARD_SUBJECT","BOARD_CONTENT"};
 			
 			search_word = request.getParameter("search_word");
-			listcount =
-					bdao.getListCount(search_field[index],search_word);
-			list 
-			= bdao.getList(search_field[index], search_word, page, limit);
+			listcount =bdao.getListCount(search_field[index],search_word);
+			list = bdao.getList(search_field[index], search_word, page, limit);
 			
 			
 		}
@@ -65,12 +66,11 @@ public class BoardSearchAction implements Action {
         //현재 페이지에 표시할 끝 페이지 수
         request.setAttribute("endpage", endpage);
         request.setAttribute("listcount", listcount); //총 글의 수
-        
         request.setAttribute("search_word", search_word);
         request.setAttribute("search_field", index);
 		//글목록 보여주는 페이지로 경로 설정
 	    forward.setPath("Page/Board/board/board_list.jsp");
-	    request.setAttribute("totallist", list);
+	    request.setAttribute("boardlist", list);
 	    forward.setRedirect(false);
 		return forward;
 	}

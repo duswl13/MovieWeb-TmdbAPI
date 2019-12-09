@@ -14,6 +14,7 @@ body {color:white; background:#141414;}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
+   h1 {text-align:center; color:#2cdd9b;}
 </style>
 </head>
 <body>
@@ -37,19 +38,14 @@ if(request.getParameter("open") != null){
 <!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
  <form action="BoardAddAction.bd" method="post"
        enctype="multipart/form-data" name="boardform">
-  <h1>글 작성</h1>
+  <h1>무비 토크</h1><br>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
     <input name="BOARD_NAME" id="board_name" value="${id }" readOnly
             type="text" size="10" maxlength="30" required
             class="form-control" placeholder="Enter board_name">
   </div>
-  <div class="form-group">
-    <label for="board_pass">비밀번호</label>
-    <input name="BOARD_PASS" id="board_pass" value=""
-            type="password" size="10" maxlength="20" required
-            class="form-control" placeholder="Enter board_pass">
-  </div> 
+<!-- 비밀번호 확인 삭제 -->
   <div class="form-group">
     <label for="board_subject">제목</label>
     <input name="BOARD_SUBJECT" id="board_subject" value=""

@@ -3,11 +3,14 @@ package movie2019.board.comment;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie2019.board.action.Action;
+import movie2019.board.action.ActionForward;
 
-public class CommentUpdate implements movie2019.board.action.Action {
+
+public class CommentUpdate implements Action {
 
 	@Override
-	public movie2019.board.action.ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		CommentDAO dao = new CommentDAO();
 		CommentVO co = new CommentVO();
@@ -23,8 +26,8 @@ public class CommentUpdate implements movie2019.board.action.Action {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("댓글 수정 실패");
-			movie2019.board.action.ActionForward forward = 
-					new movie2019.board.action.ActionForward();
+			ActionForward forward = 
+					new ActionForward();
 			 request.setAttribute("message", "댓글 수정 실패입니다.");
 	            forward.setRedirect(false);
 	    		return forward;

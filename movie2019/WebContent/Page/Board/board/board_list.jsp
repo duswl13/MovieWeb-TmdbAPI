@@ -20,11 +20,13 @@
                 justify-content:center; /* 가운데 정렬 */}
   #searchForm {width:300px; display:flex; justify-content:center;}
  #id {text-align:center;}
- h1 {text-align:center; color:#27AE60;}
+ h1 {text-align:center; color:#2cdd9b;}
  a {text-decoration:none;}
  #searchForm, #writebtn {
    margin-bottom:20px;
  }
+ #writebtn {background:#2cdd9b;}
+
 </style>
 </head>
 <body>
@@ -48,13 +50,13 @@ if(request.getParameter("open") != null){
          
 <a href="BoardList.bd">
 <h1>무비 토크</h1>
-</a>
+</a><br>
 
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
  <c:if test="${listcount>0 }">
  <!-- 줄보기 삭제함  -->
-   <table class="table table-striped">
+   <table class="table table-hover">
    <thead>
      <tr>
        <th colspan="3">list</th>
@@ -62,7 +64,7 @@ if(request.getParameter("open") != null){
           <font size=3>글 개수: ${listcount }</font>
        </th>
      </tr>
-     <tr>
+     <tr class="table-active">
        <th width="8%"><div>번호</div></th> <!-- 글번호 아님 -->
        <th width="50%"><div>제목</div></th>
        <th width="14%"><div>글쓴이</div></th>
@@ -95,12 +97,12 @@ if(request.getParameter("open") != null){
              </c:if>
              
              <a href="BoardDetailAction.bd?num=${b.BOARD_NUM }">
-                ${b.BOARD_SUBJECT}
+                ${b.BOARD_SUBJECT} 
              </a>
            </div>
         </td>
         <td>
-          <div>${b.BOARD_NAME }</div>
+          <div>${b.BOARD_NAME } </div>
         </td>
         <td>
           <div>${b.BOARD_DATE }</div>
@@ -161,10 +163,10 @@ if(request.getParameter("open") != null){
      <font size=5>등록된 글이 없습니다.</font>
  </c:if><br>
  <button type="button" id="writebtn"
-         class="btn btn-success float-right">글쓰기</button>
+         class="btn btn-gradiant btn-md border-0 text-white float-right">글쓰기</button>
   
   <!-- 게시물 검색  -->       
-  <form action="board_search.bd" id="searchForm">
+  <form action="BoardList.bd" id="searchForm">
    <div class="input-group">
    <select id="viewcount" name="search_field">
       <option value="0" selected>아이디</option>
@@ -195,24 +197,25 @@ $(function(){
 			 location.href="BoardWrite.bd";
 		 }
 		 else {
-			 alert("로그인 하고 글 작성하세요.");
+			 alert("로그인한 회원만 작성 가능합니다.");
 			 
 		 }
 	 })
 })
 
-//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되도록 합니다.
+//검색 클릭 후 응답화면에는 검색시 선택한 필드가 선택되게 한다
 var selectedValue = '${search_field}'
 if(selectedValue != '-1')
     $("#viewcount").val(selectedValue);
 
-//검색어 공백 유효성 검사합니다.
+//검색어 공백 유효성 검사
 $("#searchbtn").click(function(){		
    if($("#search").val()==''){
 	 alert("검색어를 입력하세요");
 	 return false;
    }
 });
+
 
 </script>
 <script src="list.js"></script>

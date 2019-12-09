@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import movie2019.board.comment.CommentAdd;
 import movie2019.board.comment.CommentList;
 
 @WebServlet("*.bd")
@@ -33,7 +34,8 @@ public class BoardFrontController extends HttpServlet {
 	    
 	    
 	    if(command.equals("/BoardList.bd")) { 
-	    	action=new BoardListAction(); //다형성에 의한 업캐스팅
+	   // 	action=new BoardListAction(); //다형성에 의한 업캐스팅
+   	 	action=new BoardSearchAction(); //다형성에 의한 업캐스팅
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
@@ -121,10 +123,10 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	          
+	       
 	    }else if(command.equals("/CommentAdd.bd")) { 
 	    	//import안할거면 이렇게 패키지주소랑  같이 씀 net.comment.action.CommentAdd
-	    	action=new movie2019.board.comment.CommentAdd();
+	    	action=new CommentAdd();
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
@@ -146,16 +148,16 @@ public class BoardFrontController extends HttpServlet {
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	          
+	    
 	    //신고 메일 보내기
 	    }else if(command.equals("/Mail.bd")) { 
-	    	action=new movie2019.board.comment.CommentUpdate();
+	    	action=new MailSend2();
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	          
+	  /*        
 	   //게시물 검색
 	    }else if(command.equals("/board_search.bd")) { 
 	    	action=new BoardSearchAction();
@@ -166,8 +168,8 @@ public class BoardFrontController extends HttpServlet {
 	          }
 	    }
 	    
-	    
-	    //여기는 건들면 안돼~
+	    */
+	    } //여기는 건들면 안돼~
 	    if(forward!=null) {
 	    	if(forward.isRedirect()) { //리다이렉트 된다.
 	    		response.sendRedirect(forward.getPath());

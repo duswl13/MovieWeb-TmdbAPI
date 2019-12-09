@@ -6,17 +6,21 @@ import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import com.google.gson.JsonArray;
 
+import movie2019.board.action.Action;
+import movie2019.board.action.ActionForward;
 
-public class CommentList implements movie2019.board.action.Action {
+
+public class CommentList implements Action {
 
 	@Override
-	public movie2019.board.action.ActionForward execute(HttpServletRequest request, 
+	public ActionForward execute(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception {
 	
-		movie2019.board.comment.CommentDAO dao
-		  = new movie2019.board.comment.CommentDAO();
+		CommentDAO dao
+		  = new CommentDAO();
 		
 		int BOARD_RE_REF =
 				Integer.parseInt(request.getParameter("BOARD_RE_REF"));
