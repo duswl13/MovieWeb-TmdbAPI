@@ -36,7 +36,9 @@ GENRES_ID NUMBER PRIMARY KEY, /*장르 ID*/
 GENRES_NAME VARCHAR2(30) /*장르 이름*/
 );
 
-
+select * from (select rownum rnum, b.*  from 
+(select * from mboard  order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) b) 
+where rnum>=1 and rnum<=10;
 
 CREATE TABLE MOVIE(
 MOVIE_ID NUMBER PRIMARY KEY,
@@ -106,7 +108,7 @@ BOARD_RE_REF number references mboard(BOARD_NUM)
 on delete cascade
 );
 
-
+create sequence comm_seq;
 
 
 

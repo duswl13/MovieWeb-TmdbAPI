@@ -11,7 +11,7 @@ body {text-align:center;}
 </style>
 </head>
 <body>
-<form name="contact-form" class="form" action="<c:url value='/sendMail'/>" method="POST">
+<form name="contact-form" class="form" action="MailSend.bd" method="POST">
      
     <div class="col-xs-12">
         <label>

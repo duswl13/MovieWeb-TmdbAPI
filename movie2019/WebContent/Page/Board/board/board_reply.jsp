@@ -15,7 +15,7 @@ body {color:white; background:#141414;}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
-   h1 {text-align:center; color:#27AE60;}
+   h1 {text-align:center; color:#2cdd9b;}
 </style>
 </head>
 <body>

@@ -1,5 +1,6 @@
 package movie2019.board.action;
 
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
@@ -13,15 +14,18 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import movie2019.login.db.MemberDAO;
 
 public class MailSend implements Action {
 
   public void Send() {
 	
-    String user = "jiyeon@voshu.com";
-    String password = "1234";
+	String user = null;
+	String password = null;
     
 	//SMTP 서버 정보 설정  
 	Properties prop = new Properties();

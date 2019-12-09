@@ -14,7 +14,7 @@ body {color:white; background:#141414;}
   .container {width:60%;height:100%;}
   label {font-weight:bold;}
   #upfile {display:none;}
-   h1 {text-align:center; color:#27AE60;}
+   h1 {text-align:center; color:#2cdd9b;}
 </style>
 </head>
 <body>
