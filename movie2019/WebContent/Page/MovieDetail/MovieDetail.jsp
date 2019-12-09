@@ -609,7 +609,7 @@ $(function(){
 
 
                   <h4 class="top_margin">
-                     <b>리뷰</b><span class="more">더보기</span>
+                     <b>리뷰</b><a href="ReviewMovieAction.rv?movieId=${movieId}">더보기</span>
                   </h4>
 
                   <div class="row">
