@@ -16,6 +16,7 @@ import movie2019.review.db.ReviewVO;
 
 public class ReviewListAction implements Action {
 
+
    @Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -129,3 +130,4 @@ public class ReviewListAction implements Action {
       }
    }
 }
+

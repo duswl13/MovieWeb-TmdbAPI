@@ -82,8 +82,14 @@ $(function(){
 			<div class="panel-heading" style="background-color : white; ">  <h4>나의 정보</h4></div>
 				<div class="panel-body" style="background-color : white; ">
 					<div class="col-xs-6 col-sm-3">
+					<c:if test="${empty p.USER_POSTER}">
+						<img alt="poster" src="Page/MyPage/MyInfo/defualt_poster.png" 
+						id="poster" class="img-thumbnail img-responsive" style="width:80%;"> 
+					</c:if>
+					<c:if test="${not empty p.USER_POSTER}">
 						<img alt="poster" src="https://image.tmdb.org/t/p/w300/${p.USER_POSTER}" 
 						id="poster" class="img-thumbnail img-responsive" style="width:80%;"> 
+					</c:if>
                     </div>
                     <div class="col-xs-6 col-sm-6" ><hr>
                     	<ul class="container details" >

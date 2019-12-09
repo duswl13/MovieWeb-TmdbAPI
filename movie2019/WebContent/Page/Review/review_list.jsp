@@ -230,10 +230,13 @@ if(request.getParameter("open") != null){
                              <c:choose>
                              <c:when test="${r.FACE == 1}">
                              <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+
                              </c:when>   
                              <c:otherwise>
                                <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
                              </c:otherwise>
+
+                       	
                         </c:choose>
                         </div>
                         <div class="col-md-7">
@@ -245,6 +248,7 @@ if(request.getParameter("open") != null){
                              <c:choose>
                              <c:when test="${r.STAR == 1}">
                              <p class=star >★☆☆☆☆</p> 
+
                              </c:when>
                              
                               <c:when test="${r.STAR == 2}">
@@ -265,7 +269,7 @@ if(request.getParameter("open") != null){
                                 </c:choose>
                                 
                                 <p class=rvbottom1><a href="#" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
-                                 
+                   
                             </div>
                         </div>
                     </div>

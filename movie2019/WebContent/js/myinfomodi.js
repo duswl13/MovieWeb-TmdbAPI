@@ -55,4 +55,56 @@ $(function(){
 	$('#search_bar').click(function(){
 		getPoster();
 	});
+	
+	//비밀번호 형식 확인
+    $("#info_pass").keyup(function(){
+       $("#pass_message").empty();
+         var pass = $("#info_pass").val();
+         var pattern =  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+         if(!pattern.test(pass)){
+            $("#pass_message").css('color','red')
+                        .html("영문자,숫자,특수문자 포함 8자 이상")
+            checkPass = false;
+            return;
+         }
+         checkPass = true;
+         
+    }); // password keyup end
+    
+
+    //이메일 형식 확인
+    $("#info_email").keyup(function(){
+          $("#email_message").empty();
+            var email = $('#info_email').val();
+            var pattern = /^\w+@\w+[.]\w{3}$/; 
+            
+            if(!pattern.test(email)){
+               $("#email_message").css('color','red')
+                                  .html("이메일 형식이 맞지 않습니다.");
+               checkEmail = false;
+               return;
+            }
+            
+           checkEmail = true;
+            
+       }); // email keyup end
+       
+   //핸드폰 번호 형식 확인
+       $("#info_phone").keyup(function(){
+            $("#phone_message").empty();
+              var phone = $('#info_phone').val();
+              var pattern = /^[0-9]{11}$/; 
+              
+              if(!pattern.test(phone)){
+                 $("#phone_message").css('color','red')
+                                    .html("숫자만 입력하세요.");
+                 checkPhone = false;
+                 return;
+              }
+              
+             checkPhone = true;
+              
+         }); // phone keyup end
+
+
 })

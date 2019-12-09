@@ -141,8 +141,8 @@ public class BoardDAO {
 		// page:페이지
 		// limit: 페이지 당 목록의 수
 		// BOARD_RE_REF desc, BOARD_RE_SEQ asc에 의해 정렬한 것을
-		// 조건절에 맞는 rnum의 범위만큼 가져오는 쿼리문이다.
-
+		// 조건절에 맞는 rnum의 범위만큼 가져오는 쿼리문
+		
 		String board_list_sql = "select * " + "from (select rownum rnum, b.* " + " from (select * from mboard "
 				+ " order by BOARD_RE_REF desc," + " BOARD_RE_SEQ asc) b) " + "where rnum>=? and rnum<=?";
 
@@ -464,7 +464,7 @@ public class BoardDAO {
 
 	   
 	
-	//글쓴이인지 확인 - 비밀번호로 확인한다.
+	//글쓴이인지 확인 - 글 작성할 때 쓴 비밀번호로 확인
 	public boolean isBoardWriter(int num, String pass) {
 
 		String board_sql = "select * from mboard "
@@ -474,7 +474,7 @@ public class BoardDAO {
 			pstmt = con.prepareStatement(board_sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {
+			if(rs.next()) {             //글작성 비번이라 회원 가입 비번이랑은 다름
 				if(pass.equals(rs.getString("BOARD_PASS"))) {
 				return true;				
 			   }
@@ -586,13 +586,15 @@ public class BoardDAO {
 		return false;
 	}//boardDelete end
 
+	
+	//검색한 글 목록 개수
 	public int getListCount(String field, String value) {
 		int x = 0;
 
 		try {
 			con = ds.getConnection();
 			String sql = "select count(*) from mboard "
-                       + "where" + field + " like ? ";
+                       + "where " + field + " like ? ";
 			System.out.println(sql);
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, "%"+value+"%");
@@ -633,12 +635,12 @@ public class BoardDAO {
 
 	}
 	
-	
-	public List<BoardVO> getList(String field, String search_word, int page, int limit) {
+	//검색한 글 목록 가져오는거
+	public List<BoardVO> getList(String field, String value, int page, int limit) {
 		String sql = "select * "
 			      +" from (select b.*, rownum rnum " 
 			      + " from (select * from mboard "
-			      +" order by board_num) b"
+			      +" order by BOARD_NUM) b"
 			      +" )"
 			      +" where rnum >=? and rnum <= ?";
 			      List<BoardVO> list = new ArrayList<BoardVO>();
@@ -656,18 +658,22 @@ public class BoardDAO {
 			         pstmt.setInt(2, endrow);
 			         rs = pstmt.executeQuery();
 
-			         // DB에서 가져온 데이터를 VO 객체에 담습니다.
+			         // DB에서 가져온 데이터를 VO 객체에 담는다
 			         while (rs.next()) {
 			            BoardVO b = new BoardVO();
-			            b.setBOARD_NAME(rs.getString(1));
-			            b.setBOARD_SUBJECT(rs.getString(2));
-			            b.setBOARD_CONTENT(rs.getString(3));
-			            b.setBOARD_FILE(rs.getString(4));
-			            b.setBOARD_DATE(rs.getDate(5));
+			            b.setBOARD_NUM(rs.getInt("BOARD_NUM"));
+			            b.setBOARD_NAME(rs.getString("BOARD_NAME"));
+			            b.setBOARD_PASS(rs.getString("BOARD_PASS"));
+			            b.setBOARD_SUBJECT(rs.getString("BOARD_SUBJECT"));
+			            b.setBOARD_CONTENT(rs.getString("BOARD_CONTENT"));
+			            b.setBOARD_FILE(rs.getString("BOARD_FILE"));
+			            b.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF"));
+			            b.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV"));
+			            b.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
+			            b.setBOARD_DATE(rs.getDate("BOARD_DATE"));
 			            list.add(b); // 값을 담은 객체를 리스트에 저장합니다.
 			         }
-			         
-
+			    
 			      } catch (SQLException e) {
 			         e.printStackTrace();
 			      } finally {

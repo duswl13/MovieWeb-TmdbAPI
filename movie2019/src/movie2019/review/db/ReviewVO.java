@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class ReviewVO {
 
+
    private int REVIEW_NUMBER;
    private int MOVIE_ID;
    private String USER_ID;
@@ -78,5 +79,4 @@ public class ReviewVO {
    }
    
    
-
 }

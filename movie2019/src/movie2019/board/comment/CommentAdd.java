@@ -28,8 +28,8 @@ public class CommentAdd implements movie2019.board.action.Action {
 			System.out.println("댓글 등록 실패");
 			movie2019.board.action.ActionForward forward =
 					new movie2019.board.action.ActionForward();
-			 request.setAttribute("message", "댓글 등록 실패입니다.");
-	            forward.setPath("error/error.jsp");
+			    request.setAttribute("message", "댓글 등록 실패입니다.");
+	          
 	            forward.setRedirect(false);
 	    		return forward;
 		}

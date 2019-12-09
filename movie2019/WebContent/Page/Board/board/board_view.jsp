@@ -3,8 +3,12 @@
 <%@ taglib prefix="c"
            uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
+<title>VOSHU</title>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
@@ -27,8 +31,9 @@
  #mail_send {
     
  }
- #comment {
- 
+ #content {
+    width:80%;
+    justify-content:center;
  }
 </style>
 </head>
@@ -95,9 +100,6 @@ if(request.getParameter("open") != null){
  </c:if>
  <tr> 
   <td colspan="2" class="center">
-  
-   <button type="button" class="btn btn-primary start">댓글</button>
-   <span id="count">${count }</span>
    
    <a href="BoardReplyView.bd?num=${boarddata.BOARD_NUM }">
    <button type="button" class="btn btn-primary">답변</button>
@@ -144,28 +146,30 @@ if(request.getParameter("open") != null){
                         name="BOARD_PASS" id="board_pass">
                   </div>
                   <button type="submit" class="btn btn-primary" >Submit</button>
-                   <button type="button" class="btn btn-danger">Close</button>
+                   <button type="button" class="btn btn-danger" onClick="history.back();">Close</button>
                </form>
             </div>
          </div>
       </div>
    </div>
-    </div>
    <div id="comment">
-      <button class="btn btn-info float-left">총 50자까지 작성 가능</button>
-      <button id="write" class="btn btn-info float-right">등록</button>
-       <textarea rows=3 class="form-control"
-                 id="content" maxLength="50"></textarea>
-       <table class="table table-striped">
+   <button type="button" id="combtn" class="btn btn-primary start">댓글</button>
+   <span id="count">${count }</span>
+   <table class="table table-striped table-sm">
         <thead>
-         <tr><td>아이디</td><td>내용</td><td>날짜</td></tr>
+        <!--  <tr><td>아이디</td><td>내용</td><td>날짜</td></tr> -->
         </thead>
         <tbody>
         
         </tbody>
        </table>
+    <!--   <button class="btn btn-info float-left">총 50자까지 작성 가능</button>  -->
+      <textarea rows=3 class="form-control"
+                 id="content" maxLength="50"></textarea>
+      <button id="writebtn" class="btn btn-info float-right">등록</button>
         <div id="message"></div>
         </div>
+    </div>
        </div>
 </body>
 <script>
@@ -174,10 +178,14 @@ if(<%=open%>)
 
 
 </script>
-
+<script>
+$("#combtn").click(function(){
+	//댓글 버튼 클릭하면 댓글 리스트 뜨게 하고 싶은데 ....
+})
+</script>
 <script type="text/javascript">
 function send_mail(){
-    window.open("Page/Board/board/mailSender.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
+    window.open("Page/Board/board/mailSender.jsp", "", "width=300, height=200, resizable=no, scrollbars=no, status=no");
 }
 </script>
 </html>

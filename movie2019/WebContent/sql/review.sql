@@ -13,15 +13,46 @@ CONSTRAINT review_primarykey PRIMARY KEY (MOVIE_ID, USER_ID)
 
 SELECT * FROM review;
 INSERT INTO review VALUES ((select nvl(max(REVIEW_NUMBER),0) from review)+1,
-330457,'duswl13','»ý°¢º¸´Ü º°·Î','³Ê¹« ±â´ëÇÏ°í º»°Í°°¾Æ¿ä¤Ð¤Ð ÀüÀÛº¸´Ù º°·ÎÀÓ¤Ð¤Ð¤Ð',sysdate);
+330457,'duswl13','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½','ï¿½Ê¹ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½Í°ï¿½ï¿½Æ¿ï¿½Ð¤ï¿½ ï¿½ï¿½ï¿½Ûºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¤Ð¤Ð¤ï¿½',sysdate);
 
 
 INSERT INTO review VALUES ((select nvl(max(REVIEW_NUMBER),0) from review)+1,
-330457,'sonyeonsoo','Àç¹Õ¾ú¾îŸG¤¾¤¾¤¾¤¾¤¾','³Ê¹«Àç¹Õ¾î¿µ ¤¾¤¾¤¾¤¾',sysdate);
+330457,'sonyeonsoo','ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½Ê¹ï¿½ï¿½ï¿½Õ¾î¿µ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',sysdate);
 
 
 INSERT INTO review VALUES ((select nvl(max(REVIEW_NUMBER),0) from review)+1,
-330457,'jiyeon','À½...','À½....',sysdate);
+330457,'jiyeon','ï¿½ï¿½...','ï¿½ï¿½....',sysdate);
 
-/* º°Á¡ ¶Ç´Â ¾ó±¼ Æò°¡Á¤º¸°¡ ÀÖ´Â °æ¿ì¿¡¸¸ ¸®ºä ³²±æ¼öÀÖ°Ô ÇÏ±â*/
-SELECT * FROM review;
+/* ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ ï¿½Ï±ï¿½*/
+SELECT * FROM
+(SELECT REVIEW_NUMBER, review.MOVIE_ID,movie.MOVIE_NAME, movie.movie_poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value 
+					FROM RATING_STAR 
+					WHERE USER_ID = review.user_id 
+					and MOVIE_ID = review.movie_id) star,
+					(SELECT rating_face_value 
+					FROM RATING_FACE 
+					WHERE USER_ID = review.user_id 
+					and MOVIE_ID = review.movie_id) face
+	FROM review,movie 
+	where review.movie_id = movie.movie_id  
+	order by REVIEW_DATE DESC) ;
+	
+	
+	
+	
+	SELECT * FROM(
+	SELECT ROWNUM, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,
+	star, face FROM
+(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value 
+					FROM RATING_STAR 
+					WHERE USER_ID = review.user_id 
+					and MOVIE_ID = review.movie_id) star,
+					(SELECT rating_face_value 
+					FROM RATING_FACE 
+					WHERE USER_ID = review.user_id 
+					and MOVIE_ID = review.movie_id) face
+	FROM review,movie 
+	where review.movie_id = movie.movie_id  
+	order by REVIEW_DATE DESC));
+	
+	
