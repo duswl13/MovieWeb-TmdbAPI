@@ -26,7 +26,7 @@ body {
 	font-family: montserrat, arial, verdana;
 }
 
-#message, #pass_message, #email_message {
+#message, #pass_message, #email_message, #phone_message{
     padding: 7px;
 	margin: 5px;
 	width: 100%;
@@ -221,6 +221,9 @@ ul.ks-cboxtags li input[type="checkbox"] {
 ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   border: 2px solid #e9a1ff;
 }
+
+#exit {float:right; text-decoration:none;
+       font-size:9pt; font-weight:bold;}
 </style>
 <body>
 
@@ -234,15 +237,20 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
   </ul>
   <!-- fieldsets -->
   <fieldset>
+  <a href="../Login/login.jsp" id="exit" >X</a>
+  <br>
     <h2 class="fs-title">기본 정보 입력</h2>
     <h3 class="fs-subtitle">step 1</h3>
     <input type="text" name="USER_ID" id="USER_ID" placeholder="아이디" required/>
     <span id="message"></span>
     <input type="password" name="USER_PASS" id="USER_PASS" placeholder="비밀번호" required/>
     <span id="pass_message"></span>
+ 
     <input type="button" name="next" class="next action-button" id="next1" value="다음" />
   </fieldset>
   <fieldset>
+  <a href="../Login/login.jsp" id="exit" >X</a>
+  <br>
     <h2 class="fs-title">상세 정보 입력</h2>
     <h3 class="fs-subtitle">step 2</h3>
     <input type="text" name="USER_EMAIL" id="USER_EMAIL" placeholder="이메일" required/>
@@ -254,11 +262,13 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     </div>
     -->
     <input type="text" name="USER_PHONE" id="USER_PHONE" placeholder="전화번호" required/>
-    <span id="phone_message"></span>
+    <span id="phone_message"></span><br>
     <input type="button" name="previous" class="previous action-button" value="이전" />
     <input type="button" name="next" class="next action-button" id="next2" value="다음" />
   </fieldset>
   <fieldset>
+  <a href="../Login/login.jsp" id="exit" >X</a>
+  <br>
     <h2 class="fs-title">선호 장르 선택</h2>
     <h3 class="fs-subtitle">3개 이상 선택하세요</h3>
     <div class="container">
@@ -512,8 +522,8 @@ $(".previous").click(function(){
         	   var pattern = /^[0-9]{11}$/; 
         	   
         	   if(!pattern.test(phone)){
-        		   $("phone_message").css('color','red')
-        		                      .html("핸드폰 번호 숫자만 입력하세요.");
+        		   $("#phone_message").css('color','red')
+        		                      .html("숫자만 입력하세요.");
         		   checkPhone = false;
         		   return;
         	   }

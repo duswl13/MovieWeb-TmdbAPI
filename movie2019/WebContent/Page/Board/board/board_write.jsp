@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <html>
+<title>VOSHU</title>
 <head>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -63,7 +64,7 @@ if(request.getParameter("open") != null){
    <div class="form-group">
     <label for="board_file">파일 첨부</label>
     <label for="upfile">    <!-- alt: 이미지 안나오면 대체로 나오게 하는 거 -->
-       <img src="image/jisung.jpg" alt="파일"></label>
+       <img src="Png/file.png" alt="파일"></label>
     <input type="file" id="upfile" name="BOARD_FILE">
     <span id="filevalue"></span>
   </div>  

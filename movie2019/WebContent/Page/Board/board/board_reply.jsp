@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <html>
+<title>VOSHU</title>
 <head>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="js/writeform.js" charset="utf-8"></script>
