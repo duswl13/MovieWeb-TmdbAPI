@@ -40,7 +40,7 @@ public class ReviewDAO {
 					+ " MOVIE_ID, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE) "
 					+ " values((select nvl(max(REVIEW_NUMBER),0)+1 from review)," + " ?,?,?,?, "
 					+ " sysdate)";
-
+ 
 			pstmt = con.prepareStatement(sql);
 		
 			

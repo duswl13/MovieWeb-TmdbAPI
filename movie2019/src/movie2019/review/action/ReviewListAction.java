@@ -92,7 +92,7 @@ public class ReviewListAction implements Action {
 			request.setAttribute("listcount", listcount); // 총 글의 수
 
 			request.setAttribute("reviewlist", reviewlist); // 해당 페이지의 글 목록을 갖고 있는 리스트
-
+ 
 			ActionForward forward = new ActionForward();
 			forward.setRedirect(false);
 
