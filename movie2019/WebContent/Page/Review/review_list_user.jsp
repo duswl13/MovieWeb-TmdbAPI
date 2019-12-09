@@ -1,4 +1,5 @@
 <!-- 리뷰 클릭 시 첫 화면 -->
+<!-- 이미지 들어가는 템플릿-->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -30,14 +31,17 @@ body {
 	color:#141414;
 }
 
+
 .prvlist {
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
 }
 
+
 .prvlist h1, .prvlist h2, .prvlist h3, .prvlist h4, .prvlist h5, .prvlist h6 {
   color: #3e4555;
 }
+
 
 .prvlist .bg-white {
     background-color: white !important;
@@ -167,58 +171,61 @@ if(request.getParameter("open") != null){
         <!-- Row  -->
         <div class="row">
         
-            <!-- Column -->
+          
+            <c:forEach items="${reviewlist }" var="item">
+              <!-- Column -->
             <div class="col-md-4 col">
                 <div class="card card-shadow border-0 mb-4">
                     <div class="p-4">
                         <div class="icon-space">
-                            <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">
+                        <c:choose>
+                        <c:when test="${item.FACE == 1}">
+                          <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">
+                        </c:when>
+                        <c:otherwise>
+                          <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">
+                        </c:otherwise>
+                        </c:choose>
+                          
                         </div>
                         <div class=content>
-                        <h6 class="mvtitle">겨울왕국2</h6>
-                             <p class="prvtitle">심금을 울리는 영화</p>
-                             <p class=prvcontent>렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~ 렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~ 렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~ 렛잇고~ 아~아아아~ 두유워너빌더스노우맨~ 인투디언노운~~~ 렛잇고~ 두유워너빌더스노우맨~ 인투디언노운~~~ </p>
-						</div> <!-- content end -->                 
+                        <h6 class="mvtitle">${item.MOVIE_NAME}</h6>
+                             <p class="prvtitle">${item.REVIEW_TITLE}</p>
+                             <p class=prvcontent>${item.REVIEW_CONTENT}</p>
+                                <p class=prvdate>${item.REVIEW_DATE}</p>
+                        
+                        <c:choose>
+                        <c:when test="${item.STAR == 1}">
+                         <p>★☆☆☆☆</p>
+                        </c:when>
+                         <c:when test="${item.STAR == 2}">
+                         <p>★★☆☆☆</p>
+                        </c:when>
+                         <c:when test="${item.STAR == 3}">
+                         <p>★★★☆☆</p>
+                        </c:when>
+                         <c:when test="${item.STAR == 4}">
+                         <p>★★★★☆</p>
+                        </c:when>
+                         <c:when test="${item.STAR == 5}">
+                         <p>★★★★★</p>
+                        </c:when>
+                      
+                        </c:choose>
+                  </div> <!-- content end -->                 
                     </div>
                 </div>
             </div>
             <br><br><br>
+            </c:forEach>
             
-            <!-- Column -->
-            <div class="col-md-4 col">
-                <div class="card card-shadow border-0 mb-4">
-                    <div class="p-4">
-                        <div class="icon-space">
-                             <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">
-                        </div>
-                        <div class=content>
-                         <h6 class="mvtitle">타이타닉</h6>
-                             <p class="prvtitle">명작</p>
-                             <p class=prvcontent>역시... 명작... 아름다운...</p>
-                   		</div> <!-- content end -->  
-                    </div>
-                </div>
-            </div>
-             <br><br><br>
-             
-            <!-- Column -->
-            <div class="col-md-4 col">
-                <div class="card card-shadow border-0 mb-4">
-                    <div class="p-4">
-                        <div class="icon-space">
-                            <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">
-                        </div>
-                         <div class=content>
-                        <h6 class="mvtitle">ㄴ무너무 무서운 영화</h6>
-                        <p class="mt-3">너무 무서워서 제대로 보지도 못했다. 최악의 영화...</p>
-                        </div> <!-- content end --> 
-                    </div>
-                </div>
-            </div>
-						<div class="col-md-12 mt-3 text-center">
+            
+            
+                  <div class="col-md-12 mt-3 text-center">
                 <a class="btn btn-success-gradiant text-white border-0 btn-md" href="#"><span>더보기</span></a>
             </div>
         </div>
+    
     </div>
     
 </div>

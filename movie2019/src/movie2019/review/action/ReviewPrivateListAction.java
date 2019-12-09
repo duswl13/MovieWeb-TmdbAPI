@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
 
-public class ReviewMyListAction implements Action {
+public class ReviewPrivateListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -45,7 +45,7 @@ public class ReviewMyListAction implements Action {
 	      int listcount = reviewdao.getListCount();
 
 	      // 리스트 받아오기
-	      reviewlist = reviewdao.getreviewMyList(userId,page, limit);
+	      reviewlist = reviewdao.getreviewPrivateList(userId,page, limit);
 	      for(ReviewVO i : reviewlist)
 	      System.out.print("등록된 리뷰 :"+i.getREVIEW_TITLE());
 	      /*
@@ -103,7 +103,7 @@ public class ReviewMyListAction implements Action {
 	         ActionForward forward = new ActionForward();
 	         forward.setRedirect(false);
 
-	         forward.setPath("Page/Review/review_list_personal.jsp");
+	         forward.setPath("Page/Review/review_list_private.jsp");
 	         return forward; // reviewFrontController.java로 리턴.
 
 	      } else { // 이 부분 추가

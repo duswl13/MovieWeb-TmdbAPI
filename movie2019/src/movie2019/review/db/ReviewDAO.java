@@ -386,7 +386,7 @@ public class ReviewDAO {
 
    }
 
-public List<ReviewVO> getreviewMyList(String userId, int page, int limit) {
+   public List<ReviewVO> getreviewPrivateList(String userId, int page, int limit) {
       String sql = "SELECT * FROM(\r\n"
             + "   SELECT ROWNUM, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
             + "   star, face FROM\r\n"
@@ -461,4 +461,77 @@ public List<ReviewVO> getreviewMyList(String userId, int page, int limit) {
    }
 
 
+   public List<ReviewVO> getreviewUserList(String userId, int page, int limit) {
+	      String sql = "SELECT * FROM(\r\n"
+	            + "   SELECT ROWNUM, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
+	            + "   star, face FROM\r\n"
+	            + "(SELECT REVIEW_NUMBER, review.MOVIE_ID id, movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
+	            + "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
+	            + "               and MOVIE_ID = review.movie_id) star,\r\n"
+	            + "               (SELECT rating_face_value \r\n" + "               FROM RATING_FACE \r\n"
+	            + "               WHERE USER_ID = review.user_id \r\n"
+	            + "               and MOVIE_ID = review.movie_id) face\r\n" + "   FROM review,movie \r\n"
+	            + "   where review.movie_id = movie.movie_id  \r\n"
+	            + "   order by REVIEW_DATE DESC)) where USER_ID=? and rownum >=? and rownum <=?";
+
+	      List<ReviewVO> list = new ArrayList<ReviewVO>();
+
+	      int startrow = (page - 1) * limit + 1;
+	      // 읽기 시작할 row 번호(1 11 21 31 ...)
+	      int endrow = startrow + limit - 1;
+	      // 읽을 마지막 row 번호 (10 20 30 40 ...)
+
+	      try {
+	         con = ds.getConnection();
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, userId);
+	         pstmt.setInt(2, startrow);
+	         pstmt.setInt(3, endrow);
+
+	         rs = pstmt.executeQuery();
+
+	         while (rs.next()) {
+
+	            ReviewVO reiew = new ReviewVO();
+	            reiew.setREVIEW_NUMBER(rs.getInt(2));
+	            reiew.setMOVIE_ID(rs.getInt(3));
+	            reiew.setMOVIE_NAME(rs.getString(4));
+	            reiew.setMOVIE_POSTER(rs.getString(5));
+	            reiew.setUSER_ID(rs.getString(6));
+	            reiew.setREVIEW_TITLE(rs.getString(7));
+	            reiew.setREVIEW_CONTENT(rs.getString(8));
+	            reiew.setREVIEW_DATE(rs.getDate(9));
+	            reiew.setSTAR(rs.getInt(10));
+	            reiew.setFACE(rs.getInt(11));
+	            list.add(reiew);
+	         }
+	         return list;
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	         System.out.println("getreviewList() 에러: " + e);
+	      } finally {
+	         if (rs != null) {
+	            try {
+	               rs.close();
+	            } catch (SQLException ex) {
+	               ex.printStackTrace();
+	            }
+	         }
+	         if (pstmt != null) {
+	            try {
+	               pstmt.close();
+	            } catch (SQLException ex) {
+	               ex.printStackTrace();
+	            }
+	         }
+	         if (con != null) {
+	            try {
+	               con.close();
+	            } catch (SQLException ex) {
+	               ex.printStackTrace();
+	            }
+	         }
+	      }
+	      return null;
+	   }
 }

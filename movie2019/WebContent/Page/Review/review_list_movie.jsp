@@ -203,7 +203,8 @@ if(request.getParameter("open") != null){
       <br>
       <span class=readit>리뷰를 남기시려면, 왼쪽 메뉴에서 영화를 검색해 보슈.</span>
       
-      <br>
+
+        <br>
         
 <!-- 글이 있는 경우 -->        
 <c:if test="${listcount > 0 }">        

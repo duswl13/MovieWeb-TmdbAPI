@@ -58,8 +58,8 @@ public class ReviewFrontController extends HttpServlet {
 			}
 
 			
-		}else if (command.equals("/ReviewMyList.rv")) {
-			action = new ReviewMyListAction(); // 다형성에 의한 업캐스팅
+		}else if (command.equals("/ReviewPrivateList.rv")) {
+			action = new ReviewPrivateListAction(); // 다형성에 의한 업캐스팅
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -77,8 +77,8 @@ public class ReviewFrontController extends HttpServlet {
 			}
 
 			
-		} else if (command.equals("/ReviewListPersonal.rv")) {
-			action = new ReviewUserAction();
+		} else if (command.equals("/ReviewMovieList.rv")) {
+			action = new ReviewMovieAction();
 			try {
 				forward = action.execute(request, response);
 

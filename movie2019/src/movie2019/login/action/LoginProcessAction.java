@@ -47,9 +47,9 @@ public class LoginProcessAction implements Action {
 			out.println("</script>");
 
 		} else {
-			String message = "보슈에 가입된 아이디가 아닙니다. 다시 확인해주세요.";  //0
+			String message = "비밀번호를 다시 확인해주세요.";  //0
 			if (result == -1)
-				message = "비밀번호를 다시 확인해주세요.";  //-1
+				message = "보슈에 가입된 아이디가 아닙니다. 다시 확인해주세요.";  //-1
 
 			out.println("<script>");
 			out.println("alert('" + message + "');");
