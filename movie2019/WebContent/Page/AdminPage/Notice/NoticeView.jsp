@@ -43,6 +43,7 @@ table, td {
 	border-bottom : none;
 }
 
+
 </style>
 <title>공지사항 게시판</title>
 <!-- Bootstrap CSS -->
@@ -81,14 +82,13 @@ $(function(){
 		<tr><td>제목</td>
 			<td>${noticedata.NOTICE_SUBJECT }</td></tr>
 		<tr><td>내용</td>
-			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">
-			${noticedata.NOTICE_CONTENT }</textarea></td></tr>	
+			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">${noticedata.NOTICE_CONTENT }</textarea></td></tr>	
 		<tr>
 			<td colspan="2" class="center">
-				<a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUMBER}">
-					<button class="btn btn-info">수정</button>
+				<a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUMBER}" style="text-decoration:none;">
+					<button class="btn btn-info" style="background:#27AE60;">수정</button>
 				</a>
-				<a href="NoticeDeleteAction.bo?num=${noticedata.NOTICE_NUMBER}">
+				<a href="NoticeDeleteAction.bo?num=${noticedata.NOTICE_NUMBER}" style="text-decoration:none;">
 					<button class="btn btn-danger">삭제</button>
 				</a>
 				<a href="NoticeList.bo?">

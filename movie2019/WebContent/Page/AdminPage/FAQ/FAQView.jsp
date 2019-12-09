@@ -76,20 +76,19 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<table class="table table-striped">
-		<tr><th colspan="2"><strong>FAQ 게시판-view페이지</strong></th></tr>
+		<tr><th colspan="2"><strong>FAQ 게시글 상세보기</strong></th></tr>
 		<tr><td>글쓴이</td>
 			<td>${faqdata.FAQ_NAME }</td></tr>
 		<tr><td>제목</td>
 			<td>${faqdata.FAQ_SUBJECT }</td></tr>
 		<tr><td>내용</td>
-			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">
-			${faqdata.FAQ_CONTENT }</textarea></td></tr>	
+			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">${faqdata.FAQ_CONTENT }</textarea></td></tr>	
 		<tr>
 			<td colspan="2" class="center">
 				<a href="FAQModifyView.fa?num=${faqdata.FAQ_NUMBER}">
-					<button class="btn btn-info">수정</button>
+					<button class="btn btn-info" style="background:#27AE60; text-decoration:none;">수정</button>
 				</a>
-				<a href="FAQDeleteAction.fa?num=${faqdata.FAQ_NUMBER}">
+				<a href="FAQDeleteAction.fa?num=${faqdata.FAQ_NUMBER}" style="text-decoration:none;">
 					<button class="btn btn-danger">삭제</button>
 				</a>
 				<a href="FAQList.fa?">

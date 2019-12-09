@@ -196,7 +196,6 @@ ul {
 					<h2>마이페이지</h2>
 					<ul>
 						<li><a href="<%=request.getContextPath()%>/user_info.mu">내 정보 수정</a></li>
-						<li><a href="<%=request.getContextPath()%>/review_list.mr">내 리뷰 관리</a></li>
 						<li><a href="<%=request.getContextPath()%>/hidden_list.mh">숨긴 콘텐츠 관리</a></li>
 					</ul>
 				</li>
