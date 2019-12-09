@@ -105,7 +105,7 @@ $(function(){
 	<c:if test="${listcount>0 }">
 		<table class="table table-striped">
 			<tr>
-				<th colspan="3">공지사항 게시판 -LIST</th>
+				<th colspan="3">공지사항 게시판 목록</th>
 				<th colspan="2"><font size=3>글 개수:${listcount }</font>
 				</th>
 			</tr>
