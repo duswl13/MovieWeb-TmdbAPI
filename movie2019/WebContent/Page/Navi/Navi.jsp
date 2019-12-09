@@ -182,7 +182,9 @@ ul {
     colorsss: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);	
 }
 
-span .hello {margin-left:100px;
+.hello {font-size: 9pt;
+    margin-left: 30px;
+    color: #2cdd9b;;
 }
 </style>
 </head>
@@ -223,9 +225,11 @@ span .hello {margin-left:100px;
 
 						<li><a
 							href='<%=request.getContextPath()%>/ReviewList.rv'>실시간 리뷰</a></li>
-						<li><a
+							
+						<c:if test="${!empty id}">
+							<li><a
 							href="<%=request.getContextPath()%>/Page/Review/review_list_personal.jsp">내 리뷰 모아 보기</a></li>
-
+						</c:if>
 					</ul>
 				</li>
 				<li>
@@ -279,14 +283,14 @@ span .hello {margin-left:100px;
 						<button type="button" id="login"
 							onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.jsp'">로그인</button>
 					</c:if> <c:if test="${!empty id}">
-						<c:if test="${id=='admin'}">
-							<span class=hello>관리자 ${id}님 보슈~</span>
+						<c:if test="${id == 'admin1' || id == 'admin2' || id == 'admin3' || id == 'admin4'}">
+							<span class=hello>관리자 ${id}님 보슈</span>
 							<button type="button" id="login"
 								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
 						</c:if>
 
 						<c:if test="${id!='admin'}">
-							<span class=hello>${id}님 보슈~</span>
+							<span class=hello>일반회원 ${id}님 보슈</span>
 							<button type="button" id="login"
 								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
 						</c:if>
