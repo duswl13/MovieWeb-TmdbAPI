@@ -12,8 +12,7 @@ import movie2019.review.db.ReviewVO;
 public class ReviewModifyAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
-			throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -24,44 +23,32 @@ public class ReviewModifyAction implements Action {
 		boolean result = false;
 
 		HttpSession session = request.getSession();
-		String userId = null;
+		String userId = (String)session.getAttribute("id");
+		int movieId = Integer.parseInt(request.getParameter("movieId"));
+		reviewvo.setUSER_ID(userId);
+		reviewvo.setMOVIE_ID(movieId);
+		reviewvo.setREVIEW_TITLE(request.getParameter("rvtitle"));
+		reviewvo.setREVIEW_CONTENT(request.getParameter("rvcontent"));
 
-		
-		// 로그인아이디 != 글쓴이아이디
-		if (session.getAttribute("id") != request.getParameter(userId)) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('글쓴이만 수정 가능합니다.')");
-			out.println("history.back();");
-			out.println("</script>");
-			out.close();
-			return null;
-		}
-		
-		// 로그인아이디 == 글쓴이아이디
-		if (session.getAttribute("id") == request.getParameter(userId)) {
-			reviewvo.setUSER_ID(userId);
-			reviewvo.setREVIEW_TITLE(request.getParameter("REVIEW_TITLE"));
-			reviewvo.setREVIEW_CONTENT(request.getParameter("REVIEW_CONTENT"));
-
-			result = reviewdao.reviewModify(reviewvo);
-		}
+		result = reviewdao.reviewModify(reviewvo);
 
 		// 실패
 		if (result == false) {
 			System.out.println("리뷰 수정 실패");
 			forward.setRedirect(false);
-			request.setAttribute("message", "리뷰 수정을 실패하였습니다.");
+			request.setAttribute("message", "리뷰 수정 실패");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		// 수정 성공
-		System.out.println("리뷰를 정상적으로 수정했습니다.");
+		System.out.println("리뷰 수정 성공");
 
+		
 		forward.setRedirect(true);
 		// 수정 내용 확인
-		forward.setPath("ReviewDetailAction.rv?num=" + reviewvo.getREVIEW_NUMBER());
+		
+		
+		forward.setPath("moviedetail.ml?open=false&id="+movieId);
 
 		return forward;
 

@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
 
-public class ReviewPersonalAction implements Action {
+public class ReviewUserAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

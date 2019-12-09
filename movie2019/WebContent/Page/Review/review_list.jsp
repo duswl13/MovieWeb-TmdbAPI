@@ -1,4 +1,3 @@
-
 <!-- 리뷰 클릭 시 첫 화면 -->
 <!-- 이미지 들어가는 템플릿-->
 
@@ -118,7 +117,6 @@ a:hover {
    padding:0px;}
    
 .btn-gradiant {
-   
       background: #2cdd9b;
     background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
     background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
@@ -268,7 +266,7 @@ if(request.getParameter("open") != null){
                              </c:when>
                                 </c:choose>
                                 
-                                <p class=rvbottom1><a href="#" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
+                                <p class=rvbottom1><a href="ReviewUserList.rv?userId=${r.USER_ID}" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
                    
                             </div>
                         </div>

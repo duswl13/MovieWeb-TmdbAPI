@@ -348,13 +348,14 @@ public class ReviewDAO {
    }
 
    public boolean reviewModify(ReviewVO modifyreview) {
-      String sql = "update review " + "set REVIEW_SUBJECT= ?,REVIEW_CONTENT=? " + " where REVIEW_NUM=? ";
+      String sql = "update review " + "set REVIEW_TITLE= ?,REVIEW_CONTENT=? " + " where USER_ID=? AND MOVIE_ID = ?";
       try {
          con = ds.getConnection();
          pstmt = con.prepareStatement(sql);
          pstmt.setString(1, modifyreview.getREVIEW_TITLE());
          pstmt.setString(2, modifyreview.getREVIEW_CONTENT());
-         pstmt.setInt(3, modifyreview.getREVIEW_NUMBER());
+         pstmt.setString(3, modifyreview.getUSER_ID());
+         pstmt.setInt(4, modifyreview.getMOVIE_ID());
          int result = pstmt.executeUpdate();
 
          if (result == 1)

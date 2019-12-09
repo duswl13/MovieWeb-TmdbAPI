@@ -49,6 +49,7 @@ color:white;
 a:hover{
 color:#27AE60;}
 .col-xs-4 {
+
    text-align: center;
    background: #ccc;
    height: 500px;
@@ -151,6 +152,7 @@ transform:scale(1.05);
 opacity:0.4;  }
 }
 .col-xs-3:hover img {
+
    animation: leaves 0.5s;
    animation-fill-mode: forwards;
 }
@@ -496,13 +498,14 @@ $(function(){
                               <c:choose>
                                  <c:when test="${star == -2}">
                                     <b>이 영화 에 대해 평가해주세요.</b>
-                                    <button data-toggle="modal" data-target="#rvModal" class=bg-gradiant>리뷰 쓰기</button>
+                                   
                                  </c:when>
                                  <c:otherwise>
                                     <b>이미 이 영화에 대해 평가하셨습니다.</b>
-                                    <button data-toggle="modal" data-target="#rvModal2" class=bg-gradiant>리뷰 수정</button>
                                  </c:otherwise>
                               </c:choose>
+                              <button data-toggle="modal" data-target="#rvModal" class=bg-gradiant id="v1" >리뷰 쓰기</button>
+                              <button data-toggle="modal" data-target="#rvModal2" class=bg-gradiant id="v2" >리뷰 수정</button>
                            </h4>
                                  
                            </td>
@@ -741,7 +744,7 @@ $(function(){
 
       <!-- Modal body -->
                <div class="modal-body">
-      <form name=review_modify_form action="<%=request.getContextPath() %>/ReviewModifyAction.rv" method=post>
+      <form name=review_modify_form action="<%=request.getContextPath() %>/ReviewModifyAction.rv?movieId=${movieId}" method=post>
 
       <div class="outermodal">
                <button type="button" class="close modalclose" data-dismiss="modal" aria-label="Close">X</button>
@@ -810,13 +813,46 @@ document.getElementById("main").style.marginLeft = "250px";
    printSimilar(similarlist);
 
    
+   //연수모달...
    
    var rating = false;
    var rating_value = ${star};
    var rating_face = ${face};
+   var review = null;
    
+   <c:if test="${!empty review}">
+    review = "${review.REVIEW_TITLE}";
+   </c:if>
+   
+  
+
    if(rating_value != -2)
       Change_star(rating_value);
+   
+   addReviewBtn();
+   
+   
+   function addReviewBtn(){
+	
+	   if(review == null && rating_value > -2 && rating_face > -2){
+	
+		 //글쓰기
+		   $('#v1').css('display','block');
+		   $('#v2').css('display','none');
+		
+	   } else if(review != null){
+		  
+		   //수정
+	   $('#v1').css('display','none');
+	   $('#v2').css('display','block');
+	   
+	   } else{
+		
+		   $('#v1').css('display','none');
+		   $('#v2').css('display','none');
+	   }
+   }
+   
    
    //표정 점수이미지를 클릭할경우 변화
    $('.user_mv img').click(function(){
@@ -889,6 +925,9 @@ document.getElementById("main").style.marginLeft = "250px";
          }
       
          rating_value = check;
+         
+   
+         
          return false;
 
       }
@@ -974,6 +1013,8 @@ document.getElementById("main").style.marginLeft = "250px";
                alert('별점 등록에 실패했습니다.');
             }else if(rdata == 5){
                alert("로그인 먼저 해주세요.");
+            }else{
+            	addReviewBtn();
             }
 
          }
@@ -999,6 +1040,8 @@ document.getElementById("main").style.marginLeft = "250px";
 
             if (rdata != 1) {
                alert('별점 점수 갱신 실패!');
+            }else{
+            	addReviewBtn();
             }
 
          }
@@ -1022,6 +1065,9 @@ document.getElementById("main").style.marginLeft = "250px";
 
             if (rdata != 1) {
                alert('표정 점수 갱신 실패!');
+            }else{
+            	rating_face = value;
+            	addReviewBtn();
             }
 
          }
@@ -1045,6 +1091,9 @@ document.getElementById("main").style.marginLeft = "250px";
 
             if (rdata != 1) {
                alert('표정 점수 등록 실패!');
+            }else{
+            	rating_face = value;
+            	addReviewBtn();
             }
 
          }
@@ -1069,7 +1118,8 @@ document.getElementById("main").style.marginLeft = "250px";
 
             if (rdata == 1) {
                alert('표정 점수 등록 성공!');
-
+               rating_face = value;
+               addReviewBtn();
             } else {
                alert('표정 점수 등록 실패!');
             }
