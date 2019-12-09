@@ -103,7 +103,7 @@ public class ReviewMyListAction implements Action {
 	         ActionForward forward = new ActionForward();
 	         forward.setRedirect(false);
 
-	         forward.setPath("Page/Review/review_list.jsp");
+	         forward.setPath("Page/Review/review_list_personal.jsp");
 	         return forward; // reviewFrontController.java로 리턴.
 
 	      } else { // 이 부분 추가
