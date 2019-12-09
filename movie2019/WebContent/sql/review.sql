@@ -37,11 +37,14 @@ SELECT * FROM
 	where review.movie_id = movie.movie_id  
 	order by REVIEW_DATE DESC) ;
 	
+
+	SELECT * FROM REVIEW WHERE USER_ID='duswl13';
+	
 	
 	
 	
 	SELECT * FROM(
-	SELECT ROWNUM, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,
+	SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,
 	star, face FROM
 (SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value 
 					FROM RATING_STAR 
@@ -52,7 +55,7 @@ SELECT * FROM
 					WHERE USER_ID = review.user_id 
 					and MOVIE_ID = review.movie_id) face
 	FROM review,movie 
-	where review.movie_id = movie.movie_id  
+	where review.movie_id = movie.movie_id  and review.user_id='duswl13'
 	order by REVIEW_DATE DESC));
 	
 	
