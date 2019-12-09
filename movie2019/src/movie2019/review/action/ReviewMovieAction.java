@@ -22,10 +22,12 @@ public class ReviewMovieAction implements Action {
 
       ReviewDAO reviewdao = new ReviewDAO();
       List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
-
+      
       int page = 1;
       int limit = 9;
 
+      String movieId = request.getParameter("movieId");
+      
       if (request.getParameter("page") != null) {
          page = Integer.parseInt(request.getParameter("page"));
       }
@@ -40,7 +42,7 @@ public class ReviewMovieAction implements Action {
       int listcount = reviewdao.getListCount();
 
       // 리스트 받아오기
-      reviewlist = reviewdao.getreviewList(page, limit);
+      reviewlist = reviewdao.getreviewMovieList(movieId, page, limit);
       for(ReviewVO i : reviewlist)
       System.out.print("등록된 리뷰 :"+i.getREVIEW_TITLE());
       /*
@@ -129,5 +131,10 @@ public class ReviewMovieAction implements Action {
 
       }
    }
+
+private String String(String parameter) {
+	// TODO Auto-generated method stub
+	return null;
+}
 }
 
