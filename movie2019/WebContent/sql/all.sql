@@ -88,7 +88,21 @@ NOTICE_SUBJECT VARCHAR2(100),
 NOTICE_CONTENT VARCHAR2(300),
 NOTICE_DATE DATE
 );	
-
+INSERT INTO NOTICE VALUES((select nvl(max(NOTICE_NUMBER),0) FROM NOTICE)+1, 'admin1','긴급 서버 점검','서버 안정화를 위해 금일 저녁 6시부터 서버 점검이 있을 예정입니다.
+작업 예상 시간은 12월 8일 오후 6시 부터 12월 8일 오후 10시까지 입니다.
+이용에 불편을 드려 죄송합니다.
+더 좋은 서비스를 위해 노력하겠습니다.
+',sysdate);
+INSERT INTO NOTICE VALUES((select nvl(max(NOTICE_NUMBER),0) FROM NOTICE)+1, 'admin1','긴급 서버 점검','서버 안정화를 위해 금일 저녁 6시부터 서버 점검이 있을 예정입니다.
+작업 예상 시간은 12월 9일 오후 6시 부터 12월 9일 오후 10시까지 입니다.
+이용에 불편을 드려 죄송합니다.
+더 좋은 서비스를 위해 노력하겠습니다.
+',sysdate);
+INSERT INTO NOTICE VALUES((select nvl(max(NOTICE_NUMBER),0) FROM NOTICE)+1, 'admin1','긴급 서버 점검','서버 안정화를 위해 금일 저녁 6시부터 서버 점검이 있을 예정입니다.
+작업 예상 시간은 12월 10일 오후 6시 부터 12월 10일 오후 10시까지 입니다.
+이용에 불편을 드려 죄송합니다.
+더 좋은 서비스를 위해 노력하겠습니다.
+',sysdate);
 
 CREATE TABLE FAQ(
 FAQ_NUMBER NUMBER PRIMARY KEY,
