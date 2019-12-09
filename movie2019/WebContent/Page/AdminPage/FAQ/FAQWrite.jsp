@@ -16,7 +16,7 @@ if(request.getParameter("open") != null){
 
 <style>
 tr.center-block{text-align:center}
-h1{font-size:1.5rem;text-align:center;color:#1a92b9}
+h1{font-size:1.5rem;text-align:center;color:#27AE60}
 .container{width:60%}
 label{font-weight:bold}
 img{width:20px}
@@ -44,7 +44,7 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<form action="FAQAddAction.fa" method="post" name="faqform">
-		<h1>FAQ</h1>
+		<h1>FAQ 게시글 작성</h1>
 		<div class="form-group">
 			<label for="faq_name">글쓴이</label>
 			<input name="FAQ_NAME" id="faq_name" value="${id }" readOnly type="text" size="10" maxlength="30"
