@@ -242,7 +242,7 @@ if(request.getParameter("open") != null){
                                 <p class="rvtitle"><a href="moviedetail.ml?open=false&id=${r.MOVIE_ID}">${r.MOVIE_NAME}</a></p>
                                 <p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
                                 <br>
-                                
+                                 
                              <c:choose>
                              <c:when test="${r.STAR == 1}">
                              <p class=star >★☆☆☆☆</p> 
