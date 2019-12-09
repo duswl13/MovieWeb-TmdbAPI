@@ -239,13 +239,19 @@ if(<%=open%>)
 var page = ${page};
 var maxpage = ${maxpage};
 
+more();
+
+function more(){
 if(page == maxpage){
 	$('.btn-success-gradiant').css('display','none');
 }else{
 	$('.btn-success-gradiant').css('display','block');
 }
+}
+
 
 $('.btn-success-gradiant').click(function(){
+	console.log('aa');
 	$.ajax({
 		url : "ReviewPrivateList.rv",
 		type : "get",
@@ -254,17 +260,62 @@ $('.btn-success-gradiant').click(function(){
 			"state" : "ajax"
 		},
 		success : function(data) {
-			print(data);
+			alert(data);
+		
 		},
 		error : function(err) {
-			alert("페이지가 더이상없습니다");
+			console.log("페이지가 더이상없습니다");
 		}
 
 	});//ajax
 });
 
-function print(data){
+function print(list){
 	
+	var text = "";
+	
+	for(var i = 0; i < list.length; i++){
+		text += '<div class="col-md-4 col">';
+		text += '<div class="card card-shadow border-0 mb-4">';
+		text += '<div class="p-4">';
+		text +=  '<div class="icon-space">';
+		
+		if(list.face == 1)
+        text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
+        else
+        text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
+              
+                  
+        text += '</div>';
+        text += ' <div class=content>';
+        text += ' <h6 class="mvtitle">'+list.MOVIE_NAME+'</h6>';
+        text += ' <p class="prvtitle">'+list.REVIEW_TITLE+'</p>';
+        text += ' <p class=prvcontent>'+list.REVIEW_CONTENT+'</p>';
+        text += ' <p class=prvdate>'+list.REVIEW_DATE+'</p>';
+                
+        switch(list.STAR){
+        case 1:
+        	text += '  <p>★☆☆☆☆</p>';
+        	break;
+        case 2:
+        	text += '  <p>★★☆☆☆</p>';
+        	break;
+        case 3:
+        	text += '  <p>★★★☆☆</p>';
+        	break;
+        case 4:
+        	text += '  <p>★★★★☆</p>';
+        	break;
+        case 5:
+        	text += '  <p>★★★★★</p>';
+        	break;
+        	
+        }
+                
+        text +='</div></div></div></div><br><br><br>';
+	}
+	
+	$('.row').append( text);
 	
 }
 </script>

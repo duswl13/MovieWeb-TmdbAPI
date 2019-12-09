@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -16,6 +18,7 @@ import movie2019.review.db.ReviewVO;
 
 public class ReviewPrivateListAction implements Action {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -107,30 +110,34 @@ public class ReviewPrivateListAction implements Action {
 	         return forward; // reviewFrontController.java로 리턴.
 
 	      } else { // 이 부분 추가
+	    	  
+	    	  /**
 	         System.out.println("state=ajax");
-	         JsonObject object = new JsonObject();
-	         object.addProperty("page", page);
-	         object.addProperty("maxpage", maxpage);
-	         object.addProperty("startpage", startpage);
-	         object.addProperty("endpage", endpage);
-	         object.addProperty("listcount", listcount);
-	         object.addProperty("limit", limit);
+	         JSONObject object = new JSONObject();
+	         object.put("page", page);
+	         object.put("maxpage", maxpage);
+	         object.put("startpage", startpage);
+	         object.put("endpage", endpage);
+	         object.put("listcount", listcount);
+	         object.put("limit", limit);
 	         // List => JsonArray
-	         JsonArray je = new Gson().toJsonTree(reviewlist).getAsJsonArray();
+	         //JsonArray je = new Gson().toJsonTree(reviewlist).getAsJsonArray();
 
 	         // List => JsonElement
 	         // JsonElement je = new Gson().toJsonTree(reviewlist);
-	         System.out.println("je = " + je);
-	         object.add("reviewlist", je);
+	        // System.out.println("je = " + je);
+	        // object.add("reviewlist", je);
 
-	         Gson gson = new Gson();
-	         String json = gson.toJson(object);
 
-	         response.setContentType("text/html; charset=UTF-8");
-	         response.getWriter().append(json);
-	         System.out.println(json);
-	         return null;
-
+				//jObject.put("results", jArray);
+				Gson gson = new Gson();
+				String json = gson.toJson(object);
+				response.getWriter().append(json);
+				System.out.println("movieList 가져옴 : " + json);
+				return null;**/
+	    	  
+	    	  response.getWriter().append(Integer.toString(1));
+	    	  	return null;
 
 	      }
 	   }
