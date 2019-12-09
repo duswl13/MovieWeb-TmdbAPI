@@ -228,7 +228,7 @@ ul {
 							
 						<c:if test="${!empty id}">
 							<li><a
-							href="<%=request.getContextPath()%>/ReviewMyList.rv">내 리뷰 모아 보기</a></li>
+							href="<%=request.getContextPath()%>/ReviewPrivateList.rv">내 리뷰 모아 보기</a></li>
 						</c:if>
 					</ul>
 				</li>
