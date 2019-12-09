@@ -43,6 +43,7 @@ public class ReviewDAO {
 
 			pstmt = con.prepareStatement(sql);
 		
+			
 			pstmt.setInt(1, reviewdata.getMOVIE_ID());
 			pstmt.setString(2, reviewdata.getUSER_ID());
 			pstmt.setString(3, reviewdata.getREVIEW_TITLE());
@@ -186,7 +187,7 @@ public class ReviewDAO {
 		ReviewVO review = null;
 		try {
 			con = ds.getConnection();
-			pstmt = con.prepareStatement("select* from review where REVIEW_NUMBER = ?");
+			pstmt = con.prepareStatement("select * from review where REVIEW_NUMBER = ?");
 
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();

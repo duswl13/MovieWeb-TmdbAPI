@@ -36,7 +36,7 @@ public class ReviewAddAction implements Action {
 				
 				// 글 등록 폼에서 입력받은 정보들을 reviewvo객체에 저장.
 				reviewvo.setUSER_ID(userId);
-				// reviewvo.setMOVIE_ID(userId);
+				 reviewvo.setMOVIE_ID(movieid);
 				reviewvo.setREVIEW_TITLE(request.getParameter("REVIEW_TITLE"));
 				reviewvo.setREVIEW_CONTENT(request.getParameter("REVIEW_CONTENT"));
 
@@ -46,9 +46,9 @@ public class ReviewAddAction implements Action {
 
 				// 글 등록에 실패한 경우 null을 반환.
 				if (result == false) {
-					System.out.println("게시판 등록 실패");
+					System.out.println("리뷰 등록 실패");
 					forward.setRedirect(false);
-					request.setAttribute("message", "게시판 등록 실패다.");
+					request.setAttribute("message", "리뷰 등록 실패다.");
 					forward.setPath("error/error.jsp");
 					return forward;
 				}
