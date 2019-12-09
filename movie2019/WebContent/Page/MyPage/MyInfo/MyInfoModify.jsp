@@ -147,28 +147,37 @@ $(function(){
 				<div class="panel-heading" style="background-color : white; ">  <h4>나의 정보 수정</h4></div>
 					<div class="panel-body" style="background-color : white; ">
 						<div class="col-xs-6 col-sm-3">
+						<c:if test="${empty p.USER_POSTER}">
+							<img alt="poster" src="Page/MyPage/MyInfo/defualt_poster.png" 
+							id="poster" class="img-thumbnail img-responsive" style="width:80%;"> 
+						</c:if>
+						<c:if test="${not empty p.USER_POSTER}">
                         	<img alt="poster" src="https://image.tmdb.org/t/p/w300/${p.USER_POSTER}" 
-                       			id="poster" class="img-thumbnail img-responsive" style="width:80%;"><br><br>
-                     		<p>포스터 검색</p>
+                       			id="poster" class="img-thumbnail img-responsive" style="width:80%;"><br>
+						</c:if>
 							<input name="HIDDEN_POSTER" id="hidden_postser"  type="hidden" >
 							<input name="SEACH_MOVIE" id="movie_name"  type="text" placeholder="영화제목을  입력하세요">
 		                 	<button type="button" style="background:none;border:none;" name="SEARCH_BAR" id="search_bar">
-		                 	<span class="glyphicon glyphicon-search one"></span></button>
-                    
+		                 	<span class="glyphicon glyphicon-search one"></span></button><br>
+                    		<p style="font-size: 13px;">[대표 포스터 변경 방법]</p>
+                    		<p style="font-size: 12px;">상단 검색 바에 영화 제목을 입력하고 돋보기 버튼을 클릭하세요</p>
                       	</div>
                       	<div class="col-xs-6 col-sm-6" >
                            	<hr>
                           	<ul class="container details" >
                             <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span>
-                            	ID : <input style="padding-left: 5px; background-color:lightgrey;" name="INFO_ID" id="info_id" value="${u.USER_ID }" readOnly type="text"></p></li>
+                            	ID : <input style="padding-left: 5px; background-color:#f5f5f5;" name="INFO_ID" id="info_id" value="${u.USER_ID }" readOnly type="text"></p></li>
                             <li><p><span class="glyphicon glyphicon-star one" style="width:50px;"></span>
-                            	비밀번호 : <input style="padding-left: 5px;" name="INFO_PASS" id="info_email" type="password" required></p></li>
+                            	비밀번호 : <input style="padding-left: 5px;" name="INFO_PASS" id="info_pass" type="password" required></p></li>
                             <li><p><span class="glyphicon glyphicon-star-empty one" style="width:50px;"></span>
-                            	비밀번호 확인 : <input style="padding-left: 5px;" name="INFO_PASS_CHECK" id="info_email_check" type="password" required></p></li>
+                            	비밀번호 확인 : <input style="padding-left: 5px;" name="INFO_PASS_CHECK" id="info_pass_check" type="password" required></p></li>
+                            <div style="width:100%;">&nbsp;<span style="width:50%; float : right;" id="pass_message"></span></div>
                             <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>
                             	이메일 : <input style="padding-left: 5px;" name="INFO_EMAIL" id="info_email" value="${u.USER_EMAIL }" type="text" required></p></li>
+                            <div style="width:100%;">&nbsp;<span style="width:50%; float : right;" id="email_message"></span></div>
                             <li><p><span class="glyphicon glyphicon glyphicon-phone one" style="width:50px;"></span>
                             	핸드폰 번호 : <input style="padding-left: 5px;" name="INFO_PHONE" id="info_phone" value="${u.USER_PHONE }" type="text" required></p></li>
+                          	<div style="width:100%;">&nbsp;<span style="width:50%; float : right;" id="phone_message"></span></div>
                           </ul>
                           <hr>
                           <ul class="container details" >
