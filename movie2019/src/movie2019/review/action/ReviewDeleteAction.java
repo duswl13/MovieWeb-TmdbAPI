@@ -1,65 +1,42 @@
+//deleteëŠ” ë‚´ ë¦¬ë·° ëª¨ì•„ë³´ê¸°ì—ì„œë§Œ ê°€ëŠ¥í•œ ê¸°ëŠ¥
+//ì•„ì´ë”” ê²€ì¦ í•„ìš” X
 package movie2019.review.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import movie2019.review.db.ReviewDAO;
+import javax.servlet.http.HttpSession;
 
 public class ReviewDeleteAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
 
 		request.setCharacterEncoding("UTF-8");
-		boolean result = false;
-		boolean usercheck = false;
+		ActionForward forward = new ActionForward();
+		HttpSession session = request.getSession();
+		String userId = null;
 
-		int num = Integer.parseInt(request.getParameter("num"));
-
-		ReviewDAO reviewdao = new ReviewDAO();
-
-		// ±ÛÀ» »èÁ¦ÇÏ·Á´Â »ç¿ëÀÚ°¡ ±Û¾´ÀÌ°¡ ¸Â´ÂÁö ÆÇ´ÜÇÏ±â À§ÇØ
-		// ÀÔ·ÂÇÑ ¾ÆÀÌµğ¿Í ±Û¾´ÀÌ ¾ÆÀÌµğ¸¦ ºñ±³ÇØ ÀÏÄ¡ÇÏ¸é »èÁ¦.
-		usercheck = reviewdao.isReviewWriter(num, request.getParameter("USER_ID"));
-
-		// ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì
-
-		if (usercheck == false) {
+		if (session.getAttribute("id")==request.getParameter(userId)) {
+			userId = (String) session.getAttribute("id");
+			System.out.println("ë¦¬ë·° ì‚­ì œ ì„±ê³µ");
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('´Ù¸¥ È¸¿øÀÇ ¸®ºä´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.');");
-			out.println("history.back();");
+			out.println("alert('ë¦¬ë·°ë¥¼ ì‚­ì œí–ˆìŠµë‹ˆë‹¤.");
+			out.println("location.href='ReviewList.rv';");
 			out.println("</script>");
 			out.close();
-			return null;
+			return null;		
 		}
 
-		// ºñ¹Ğ¹øÈ£ ÀÏÄ¡ÇÏ´Â °æ¿ì »èÁ¦ ÁøÇà¤¡¤¡
-		result = reviewdao.reviewDelete(num);
-		ActionForward forward = new ActionForward();
-
-		// »èÁ¦ Ã³¸® ½ÇÆĞÇÑ °æ¿ì
-		if (result == false) {
-			System.out.println("¸®ºä »èÁ¦ ½ÇÆĞ");
-			forward.setRedirect(false);
-			request.setAttribute("message", "¸®ºä »èÁ¦ ½ÇÆĞ!");
-			forward.setPath("error/error.jsp");
-			return forward;
-		}
-
-		// »èÁ¦ ¼º°øÇÑ °æ¿ì - ±Û ¸ñ·Ïº¸±â ¿äÃ» Àü¼Û
-		System.out.println("¸®ºä »èÁ¦ ¼º°ø");
-		response.setContentType("text/html;charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.println("<script>");
-		out.println("alert('»èÁ¦ ¿Ï·á~ ¾È³à¾û');");
-		out.println("location.href='ReviewList.rv';");
-		out.println("</script>");
-		out.close();
-		return null;
+		System.out.println("ë¦¬ë·° ì‚­ì œ ì‹¤íŒ¨");
+		forward.setRedirect(false);
+		request.setAttribute("message", "ë¦¬ë·° ì‚­ì œë¥¼ ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+		forward.setPath("error/error.jsp");
+		return forward;
 
 	}
 

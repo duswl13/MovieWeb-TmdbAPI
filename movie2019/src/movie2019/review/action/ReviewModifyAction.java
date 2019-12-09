@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
@@ -11,68 +12,57 @@ import movie2019.review.db.ReviewVO;
 public class ReviewModifyAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
 
 		request.setCharacterEncoding("UTF-8");
-
-		ActionForward forward = new ActionForward();
-
-		Boolean result = false;
 
 		ReviewDAO reviewdao = new ReviewDAO();
 		ReviewVO reviewvo = new ReviewVO();
 
+		ActionForward forward = new ActionForward();
+		boolean result = false;
 
+		HttpSession session = request.getSession();
+		String userId = null;
 
-		try {
-			
-			int num = Integer.parseInt(request.getParameter("BOARD_NUM"));
-			String id = request.getParameter("USER_ID");
-
-			// ±Û¾´ÀÌ°¡ ¸Â´ÂÁö È®ÀÎÇÏ±â À§ÇØ ÀúÀåµÈ ºñ¹ø & ÀÔ·Â ºñ¹ø ºñ±³
-			boolean usercheck = reviewdao.isReviewWriter(num, id);
-
-			// ´Ù¸¥ °æ¿ì
-			if (usercheck == false) {
-				response.setContentType("text/html;charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('º»ÀÎÀÌ ÀÛ¼ºÇÑ ¸®ºä¸¸ ¼öÁ¤/»èÁ¦ °¡´ÉÇÕ´Ï´Ù.')");
-				out.println("history.back();");
-				out.println("</script>");
-				out.close();
-				return null;
-			}
-
-			// ÀÏÄ¡ÇÏ´Â °æ¿ì ¼öÁ¤ ³»¿ë ¼³Á¤ÇÑ´Ù.
-			// BoardBean°´Ã¼¿¡ ±Û µî·Ï Æû¿¡¼­ ÀÔ·Â¹ŞÀº Á¤º¸µéÀ» ÀúÀå.
-			reviewvo.setUSER_ID(id);
+		// ì•„ì´ë”” ë¹„êµ
+		if (session.getAttribute("id") == request.getParameter(userId)) {
+			reviewvo.setUSER_ID(userId);
 			reviewvo.setREVIEW_TITLE(request.getParameter("REVIEW_TITLE"));
 			reviewvo.setREVIEW_CONTENT(request.getParameter("REVIEW_CONTENT"));
 
-			
-			// DAO¿¡¼­ ¼öÁ¤ ¸Ş¼Òµå È£ÃâÇØ ¼öÁ¤ÇÏ±â
 			result = reviewdao.reviewModify(reviewvo);
-
-			// ¼öÁ¤ ½ÇÆĞÇÑ °æ¿ì
-			if (result == false) {
-				System.out.println("¸®ºä ¼öÁ¤ ½ÇÆĞ");
-				forward.setRedirect(false);
-				request.setAttribute("message", "¸®ºä ¼öÁ¤ ½ÇÆĞ");
-				forward.setPath("error/error.jsp");
-				return forward;
-			}
-			// °Ô½Ã±Û ¼öÁ¤ÀÌ Á¦´ë·Î µÈ °æ¿ì
-			System.out.println("¸®ºä ¼öÁ¤ ¿Ï·á!");
-
-			forward.setRedirect(true);
-			// ¼öÁ¤ÇÑ ±Û ³»¿ë È®ÀÎÀ» À§ÇØ ±Û ³»¿ëº¸±â ÆäÀÌÁö¸¦ °æ·Î·Î ¼³Á¤
-			forward.setPath("ReviewDetailAction.rv?num=" + reviewvo.getREVIEW_NUMBER());
-
-			return forward;
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return null;
+
+		// ë¡œê·¸ì¸ì•„ì´ë”” != ê¸€ì“´ì´ì•„ì´ë””
+		if (session.getAttribute("id") != userId) {
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('ê¸€ì“´ì´ë§Œ ìˆ˜ì • ê°€ëŠ¥í•©ë‹ˆë‹¤.')");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+			return null;
+		}
+
+		// ì‹¤íŒ¨
+		if (result == false) {
+			System.out.println("ë¦¬ë·° ìˆ˜ì • ì‹¤íŒ¨");
+			forward.setRedirect(false);
+			request.setAttribute("message", "ë¦¬ë·° ìˆ˜ì • ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.");
+			forward.setPath("error/error.jsp");
+			return forward;
+		}
+		// ìˆ˜ì • ì„±ê³µ
+		System.out.println("ë¦¬ë·°ë¥¼ ìˆ˜ì •í–ˆìŠµë‹ˆë‹¤.");
+
+		forward.setRedirect(true);
+		// ìˆ˜ì • ë‚´ìš© í™•ì¸
+		forward.setPath("ReviewDetailAction.rv?num=" + reviewvo.getREVIEW_NUMBER());
+
+		return forward;
+
 	}
 }
