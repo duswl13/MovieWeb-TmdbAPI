@@ -15,30 +15,30 @@ public class ReviewDetailAction implements Action {
 		ReviewDAO reviewdao = new ReviewDAO();
 		ReviewVO reviewvo = new ReviewVO();
 
-		// ±Û¹øÈ£ ÆÄ¶ó¹ÌÅÍ°ªÀ» numº¯¼ö¿¡ ÀúÀå
+		//ê¸€ë²ˆí˜¸ íŒŒë¼ë¯¸í„°ê°’ì„ numë³€ìˆ˜ì— ì €ì¥
 		int num = Integer.parseInt(request.getParameter("num"));
 
-		// ±ÛÀÇ ³»¿ëÀ» DAO¿¡¼­ ÀĞÀº ÈÄ ¾òÀº °á°ú¸¦ boarddata °´Ã¼¿¡ ÀúÀå
+		//ê¸€ì˜ ë‚´ìš©ì„ DAOì—ì„œ ì½ì€ í›„ ì–»ì€ ê²°ê³¼ë¥¼ reviewvo ê°ì²´ì— ì €ì¥
 		reviewvo = reviewdao.getDetail(num);
 
 		ActionForward forward = new ActionForward();
-
-		// DAO¿¡¼­ ±ÛÀÇ ³»¿ëÀ» ÀĞÁö ¸øÇßÀ» °æ¿ì null ¹İÈ¯
+ 
+		//DAOì—ì„œ ê¸€ì˜ ë‚´ìš©ì„ ì½ì§€ ëª»í–ˆì„ ê²½ìš° null ë°˜í™˜
 		if (reviewvo == null) {
-			System.out.println("»ó¼¼º¸±â ½ÇÆĞ");
+			System.out.println("ë¦¬ë·° ìƒì„¸ë³´ê¸° ì‹¤íŒ¨");
 			forward.setRedirect(false);
-			request.setAttribute("message", "°Ô½ÃÆÇ »ó¼¼º¸±â ½ÇÆĞ´Ù.");
+			request.setAttribute("message", "ë¦¬ë·° ìƒì„¸ë³´ê¸° ì‹¤íŒ¨ë‹¤.");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
-		System.out.println("»ó¼¼º¸±â ¼º°ø");
+		System.out.println("ìƒì„¸ë³´ê¸° ì„±ê³µ");
 
-		// boarddata°´Ã¼¸¦ Request°´Ã¼¿¡ ÀúÀå
+		//reviewvoê°ì²´ë¥¼ Requestê°ì²´ì— ì €ì¥
 		request.setAttribute("reviewvo", reviewvo);
 		forward.setRedirect(false);
 
-		// ±Û ³»¿ë º¸±â ÆäÀÌÁö·Î ÀÌµ¿ÇÏ±â À§ÇØ °æ·Î¸¦ ¼³Á¤reviewÇÕ´Ï´Ù.
-		forward.setPath("review/review_view.jsp");
+		//ê¸€ ë‚´ìš© ë³´ê¸° í˜ì´ì§€ë¡œ ì´ë™í•˜ê¸° ìœ„í•´ ê²½ë¡œë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
+		forward.setPath("Review/review_view.jsp");
 		return forward;
 	}
 
