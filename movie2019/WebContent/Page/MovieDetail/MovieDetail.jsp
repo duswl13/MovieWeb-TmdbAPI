@@ -529,39 +529,39 @@ $(function(){
                               <div class="rating">
                                  <c:choose>
                                     <c:when test="${star == 1 }">
-                                       <span>★</span>
-                                       <span>☆</span>
-                                       <span>☆</span>
-                                       <span>☆</span>
-                                       <span>☆</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">☆</span>
+                                       <span style="color:orange;">☆</span>
+                                       <span style="color:orange;">☆</span>
+                                       <span style="color:orange;">☆</span>
                                     </c:when>
                                     <c:when test="${star == 2 }">
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>☆</span>
-                                       <span>☆</span>
-                                       <span>☆</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">☆</span>
+                                       <span style="color:orange;">☆</span>
+                                       <span style="color:orange;">☆</span>
                                     </c:when>
                                     <c:when test="${star == 3 }">
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>☆</span>
-                                       <span>☆</span>
+                                      <span style="color:orange;">★</span>
+                                      <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">☆</span>
+                                       <span style="color:orange;">☆</span>
                                     </c:when>
                                     <c:when test="${star == 4 }">
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>☆</span>
+                                      <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">☆</span>
                                     </c:when>
                                     <c:when test="${star == 5 }">
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>★</span>
-                                       <span>★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
+                                       <span style="color:orange;">★</span>
                                     </c:when>
                                     <c:otherwise>
                                        <span>☆</span>
@@ -824,10 +824,7 @@ document.getElementById("main").style.marginLeft = "250px";
     review = "${review.REVIEW_TITLE}";
    </c:if>
    
-  
-
-   if(rating_value != -2)
-      Change_star(rating_value);
+ 
    
    addReviewBtn();
    
