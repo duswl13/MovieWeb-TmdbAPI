@@ -24,7 +24,8 @@ public class ReviewAddAction implements Action {
 
 		if (session.getAttribute("id") != null)
 			userId = (String) session.getAttribute("id");
- 
+
+		
 		String rvTitle = request.getParameter("rvtitle");
 		String rvContent = request.getParameter("rvcontent");
 		int movieid = Integer.parseInt(request.getParameter("movieid"));
