@@ -289,7 +289,7 @@ ul {
 								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
 						</c:if>
 
-						<c:if test="${id != 'admin1' || id != 'admin2' || id != 'admin3' || id != 'admin4'}">
+						<c:if test="${id != 'admin1' && id != 'admin2' && id != 'admin3' && id != 'admin4'}">
 							<span class=hello>일반회원 ${id}님 보슈</span>
 							<button type="button" id="login"
 								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>

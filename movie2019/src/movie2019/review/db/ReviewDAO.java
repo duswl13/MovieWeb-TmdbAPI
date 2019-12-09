@@ -255,56 +255,6 @@ public class ReviewDAO {
    }
    
    
-   // 글 내용 보기
-   public ReviewVO getDetail(int num) {
-      ReviewVO review = null;
-      try {
-         con = ds.getConnection();
-         pstmt = con.prepareStatement("select * from review where REVIEW_NUMBER = ?");
-
-         pstmt.setInt(1, num);
-         rs = pstmt.executeQuery();
-         if (rs.next()) {
-            review = new ReviewVO();
-
-            review.setREVIEW_NUMBER(rs.getInt("review_number"));
-            review.setMOVIE_ID(rs.getInt("movie_id"));
-            review.setUSER_ID(rs.getString("user_id"));
-            review.setREVIEW_TITLE(rs.getString("review_title"));
-            review.setREVIEW_CONTENT(rs.getString("review_content"));
-            review.setREVIEW_DATE(rs.getDate("review_date"));
-
-         }
-         return review;
-      } catch (Exception e) {
-         System.out.println("getreviewList() 에러 : " + e);
-         e.printStackTrace();
-
-      } finally {
-         if (rs != null) {
-            try {
-               pstmt.close();
-            } catch (SQLException ex) {
-               ex.printStackTrace();
-            }
-         }
-         if (con != null) {
-            try {
-               con.close();
-            } catch (SQLException ex) {
-               ex.printStackTrace();
-            }
-         }
-         if (pstmt != null) {
-            try {
-               pstmt.close();
-            } catch (SQLException ex) {
-               ex.printStackTrace();
-            }
-         }
-      }
-      return null;
-   }
 
    public boolean isReviewWriter(int num, String pass) {
       String review_sql = "select* from review where REVIEW_NUM=?";
