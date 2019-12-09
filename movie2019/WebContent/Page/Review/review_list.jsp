@@ -239,7 +239,7 @@ if(request.getParameter("open") != null){
                         </div>
                         <div class="col-md-7">
                             <div class="card-body ml-0 ml-md-3">
-                                <p class="rvtitle">${r.MOVIE_NAME}</p>
+                                <p class="rvtitle"><a href="moviedetail.ml?open=false&id=${r.MOVIE_ID}">${r.MOVIE_NAME}</a></p>
                                 <p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
                                 <br>
                                 
