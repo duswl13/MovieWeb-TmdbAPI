@@ -313,6 +313,7 @@ if(request.getParameter("open") != null){
          </li>
       </c:if>
       <c:if test="${page < maxpage }">
+    
          <li class=page-item>
             <a class=page-link href="ReviewList.rv?page=${page+1 }">&nbsp;다음</a>   
          </li>

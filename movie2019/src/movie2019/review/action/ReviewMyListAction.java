@@ -91,7 +91,7 @@ public class ReviewMyListAction implements Action {
 	      if (state == null) { // 이 부분 추가
 	         System.out.println("state=null");
 	         request.setAttribute("page", page); // 현재 페이지 수
-	         request.setAttribute("mexpage", maxpage); // 최대 페이지 수
+	         request.setAttribute("maxpage", maxpage); // 최대 페이지 수
 
 	         request.setAttribute("startpage", startpage); // 현재 페이지에 표시할 첫 페이지
 	         request.setAttribute("endpage", endpage); // 현재 페이지에 표시할 끝 페이지

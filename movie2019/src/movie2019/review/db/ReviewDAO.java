@@ -179,7 +179,7 @@ public class ReviewDAO {
    
    public List<ReviewVO> getreviewList(int page, int limit) {
       String sql = "SELECT * FROM(\r\n" + 
-            "   SELECT ROWNUM, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n" + 
+            "   SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n" + 
             "   star, face FROM\r\n" + 
             "(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n" + 
             "               FROM RATING_STAR \r\n" + 
@@ -191,7 +191,7 @@ public class ReviewDAO {
             "               and MOVIE_ID = review.movie_id) face\r\n" + 
             "   FROM review,movie \r\n" + 
             "   where review.movie_id = movie.movie_id  \r\n" + 
-            "   order by REVIEW_DATE DESC)) where rownum >=? and rownum <=?";
+            "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
       List<ReviewVO> list = new ArrayList<ReviewVO>();
 
@@ -207,6 +207,7 @@ public class ReviewDAO {
          pstmt.setInt(2, endrow);
          
       
+         System.out.println(startrow + ","+ endrow);
          rs = pstmt.executeQuery();
 
          while (rs.next()) {
@@ -388,7 +389,7 @@ public class ReviewDAO {
 
 public List<ReviewVO> getreviewMyList(String userId, int page, int limit) {
       String sql = "SELECT * FROM(\r\n"
-            + "   SELECT ROWNUM, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
+            + "   SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
             + "   star, face FROM\r\n"
             + "(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
             + "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
@@ -396,8 +397,8 @@ public List<ReviewVO> getreviewMyList(String userId, int page, int limit) {
             + "               (SELECT rating_face_value \r\n" + "               FROM RATING_FACE \r\n"
             + "               WHERE USER_ID = review.user_id \r\n"
             + "               and MOVIE_ID = review.movie_id) face\r\n" + "   FROM review,movie \r\n"
-            + "   where review.movie_id = movie.movie_id  \r\n"
-            + "   order by REVIEW_DATE DESC)) where USER_ID=? and rownum >=? and rownum <=?";
+            + "   where review.movie_id = movie.movie_id  and USER_ID=?\r\n"
+            + "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
       List<ReviewVO> list = new ArrayList<ReviewVO>();
 
