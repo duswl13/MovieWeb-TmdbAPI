@@ -684,4 +684,44 @@ public class ReviewDAO {
 	      }
 	      return null;
 	   }
+
+public int getPrivateListCount(String userId) {
+    int x = 0;
+    try {
+       con = ds.getConnection();
+       pstmt = con.prepareStatement("select count(*) from review where user_id=?");
+       pstmt.setString(1, userId);
+       rs = pstmt.executeQuery();
+    
+       
+       if (rs.next())
+          x = rs.getInt(1);
+       
+    } catch (Exception ex) {
+       ex.printStackTrace();
+       System.out.println("getListCount 에러 : " + ex);
+    } finally {
+
+       if (rs != null)
+          try {
+             rs.close();
+          } catch (SQLException e1) {
+             // TODO Auto-generated catch block
+             e1.printStackTrace();
+          }
+       if (pstmt != null)
+          try {
+             pstmt.close();
+          } catch (SQLException e) {
+             e.printStackTrace();
+          }
+       if (con != null)
+          try {
+             con.close();
+          } catch (SQLException e) {
+             e.printStackTrace();
+          }
+    }
+    return x;
+ }
 }

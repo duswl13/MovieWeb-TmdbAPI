@@ -236,7 +236,37 @@ if(request.getParameter("open") != null){
 if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 
+var page = ${page};
+var maxpage = ${maxpage};
 
+if(page == maxpage){
+	$('.btn-success-gradiant').css('display','none');
+}else{
+	$('.btn-success-gradiant').css('display','block');
+}
+
+$('.btn-success-gradiant').click(function(){
+	$.ajax({
+		url : "ReviewPrivateList.rv",
+		type : "get",
+		data : {
+			"page" :++page,
+			"state" : "ajax"
+		},
+		success : function(data) {
+			print(data);
+		},
+		error : function(err) {
+			alert("페이지가 더이상없습니다");
+		}
+
+	});//ajax
+});
+
+function print(data){
+	
+	
+}
 </script>
 </body>
 </html>
