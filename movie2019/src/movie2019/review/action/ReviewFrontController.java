@@ -58,7 +58,16 @@ public class ReviewFrontController extends HttpServlet {
 			}
 
 			
-		} else if (command.equals("/ReviewUserList.rv")) {
+		}else if (command.equals("/ReviewMyList.rv")) {
+			action = new ReviewMyListAction(); // 다형성에 의한 업캐스팅
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			
+		}  else if (command.equals("/ReviewUserList.rv")) {
 			action = new ReviewUserAction();
 			try {
 				forward = action.execute(request, response);
