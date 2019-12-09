@@ -25,12 +25,8 @@ public class ReviewUserAction implements Action {
 	      int page = 1;
 	      int limit = 9;
 
-	      HttpSession session = request.getSession();
-	      String userId = null;
-	      
-	      if(session.getAttribute("id") != null)
-	    	  userId = (String) session.getAttribute("id");
-	      
+	      String userId = request.getParameter("userId");
+	 
 	      if (request.getParameter("page") != null) {
 	         page = Integer.parseInt(request.getParameter("page"));
 	      }
