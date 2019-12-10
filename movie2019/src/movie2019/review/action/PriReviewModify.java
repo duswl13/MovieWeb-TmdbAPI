@@ -21,7 +21,7 @@ public class PriReviewModify implements Action {
 		boolean result = false;
 //movieId로 고르는거..
 		HttpSession session = request.getSession();
-		String userId = (String)session.getAttribute("id");
+		String userId = (String) session.getAttribute("id");
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
 		reviewvo.setUSER_ID(userId);
 		reviewvo.setMOVIE_ID(movieId);
@@ -41,8 +41,7 @@ public class PriReviewModify implements Action {
 		// 수정 성공
 		System.out.println("리뷰 수정 성공");
 
-		
-		forward.setRedirect(true);		
+		forward.setRedirect(true);
 		forward.setPath("ReviewPrivateList.rv");
 
 		return forward;
