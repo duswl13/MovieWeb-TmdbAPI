@@ -30,6 +30,11 @@ body {
    color:#141414;
 }
 
+.center-block {
+	display: flex;
+	justify-content: center; /*가운데정렬*/
+}
+
 .col {width:400px; height:300px;}
 
 .rvlist {
@@ -168,8 +173,15 @@ a:hover {
     height: 250px;
 }
 
-
-
+.page-item {
+	margin:5px;
+}
+.page-item .page-link {
+    margin: 0px;
+    background-color: #141414;
+    border: 0px;
+    color: white;
+}
 
 </style>
 
@@ -281,12 +293,12 @@ if(request.getParameter("open") != null){
          
       <c:if test="${page <= 1 }">
          <li class=page-item>
-         <a class=page-link href=#>이전&nbsp;</a>
+         <a class=page-link href=#><&nbsp;</a>
          </li>
       </c:if>
       <c:if test="${page > 1 }">
          <li class=page-item>
-         <a class=page-link href="ReviewList.rv?page=${page-1}">이전&nbsp;</a>
+         <a class=page-link href="ReviewList.rv?page=${page-1}"><&nbsp;</a>
          </li>
       </c:if>      
       
@@ -305,13 +317,13 @@ if(request.getParameter("open") != null){
       
       <c:if test="${page >= maxpage }">
          <li class=page-item>
-            <a class=page-link href=#>&nbsp;다음</a>
+            <a class=page-link href=#>&nbsp;></a>
          </li>
       </c:if>
       <c:if test="${page < maxpage }">
     
          <li class=page-item>
-            <a class=page-link href="ReviewList.rv?page=${page+1 }">&nbsp;다음</a>   
+            <a class=page-link href="ReviewList.rv?page=${page+1 }">&nbsp;></a>   
          </li>
          </c:if>      
          </ul>   
