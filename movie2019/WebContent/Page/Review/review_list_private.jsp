@@ -387,12 +387,14 @@ if(request.getParameter("open") != null){
 
 
 										<a href="#"> <!-- 이 부분 #으로 해야 모달 뒤에 깔리는 배경이 나옴 -->
-
-										<button type="submit" class="button-gradiant" value="modify" data-toggle="modal" data-target="#rvModal"
+										 
+							<button class="button-gradiant" data-toggle="modal" data-target="#rvModal">수정 / 삭제</button>
+					
+									<%-- 	<button type="submit" class="button-gradiant" value="modify" data-toggle="modal" data-target="#rvModal"
                    						 onclick="javascript: action='<%=request.getContextPath() %>/Reviewdetail.rv?movieId=${vo.movie_id}';">	
                     
-												수정 · 삭제</button>
-												
+												수정 · 삭제</button> --%>
+																		
 										</a>
 										<!-- 여기까지 모달 뜨는 버튼 -->
 
@@ -536,5 +538,6 @@ function print(list){
 		}
 	</script>
 
+<div class="modal" id="rvModal"></div>
 </body>
 </html>
