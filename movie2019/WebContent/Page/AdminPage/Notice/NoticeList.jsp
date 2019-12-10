@@ -74,7 +74,11 @@ table, td {
 	margin-bottom : 50px;
 	boder-color:#27AE60;
 }
-
+h1{
+	font-size: 1.5rem;
+	text-align: center;
+	color: #27AE60;
+}
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
@@ -101,14 +105,11 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<h1><strong>공지사항 게시글 목록</strong></h1><br><br>
+
 	<%--게시글이 있는 경우 --%>
 	<c:if test="${listcount>0 }">
 		<table class="table table-striped">
-			<tr>
-				<th colspan="3">공지사항 게시글 목록</th>
-				<th colspan="2"><font size=3>글 개수:${listcount }</font>
-				</th>
-			</tr>
 			<tr>
 				<th width="8%"><div>번호</div></th>
 				<th width="50%"><div>제목</div></th>

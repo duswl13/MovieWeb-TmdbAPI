@@ -78,6 +78,20 @@ table, td {
 	font-size:14pt;font-weight:bold;margin:0.5em;
 	text-align:center;
 }
+h1{
+	font-size: 1.5rem;
+	text-align: center;
+	color: #27AE60;
+}
+#left{
+	width:50%;
+	text-align: center;
+}
+
+#right{
+	width:50%;
+	padding-left:100px;
+}
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
@@ -99,15 +113,16 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<h1><strong>회원 정보 상세보기</strong></h1><br><br>
 
 	<table id=tbl class="table table-striped">
 		<c:set var="u" value="${userinfo }"/>		
-			<tr><td>아이디</td><td>${u.USER_ID }</td></tr>
-			<tr><td>비밀번호</td><td>${u.USER_PASS }</td></tr>
-			<tr><td>이메일주소</td><td>${u.USER_EMAIL }</td></tr>
-			<tr><td>가입일자</td><td>${u.USER_JOIN_DATE }</td></tr>
-			<tr><td>핸드폰번호</td><td>${u.USER_PHONE }</td></tr>
-			<tr><td>관리자유무</td><td>${u.USER_TYPE }</td></tr>
+			<tr><td id="left">아이디</td><td id="right">${u.USER_ID }</td></tr>
+			<tr><td id="left">비밀번호</td><td id="right">${u.USER_PASS }</td></tr>
+			<tr><td id="left">이메일주소</td><td id="right">${u.USER_EMAIL }</td></tr>
+			<tr><td id="left">가입일자</td><td id="right">${u.USER_JOIN_DATE }</td></tr>
+			<tr><td id="left">핸드폰번호</td><td id="right">${u.USER_PHONE }</td></tr>
+			<tr><td id="left">관리자유무</td><td id="right">${u.USER_TYPE }</td></tr>
 			<tr style="text-align: center;"><td colspan=2><a href="user_list.ul">리스트로 돌아가기</a></td></tr>
 		</table>
 </div>

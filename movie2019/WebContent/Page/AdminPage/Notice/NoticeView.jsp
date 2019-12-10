@@ -43,7 +43,11 @@ table, td {
 	border-bottom : none;
 }
 
-
+h1{
+	font-size: 1.5rem;
+	text-align: center;
+	color: #27AE60;
+}
 </style>
 <title>공지사항 게시판</title>
 <!-- Bootstrap CSS -->
@@ -75,8 +79,8 @@ $(function(){
       <span style="font-size: 30px; cursor: pointer; color: #27AE60;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<h1 style="font-size: 1.5rem;"><strong>공지사항 게시글 상세보기</strong></h1><br><br>
 	<table class="table table-striped">
-		<tr><th colspan="2"><strong>공지사항 게시글 상세보기</strong></th></tr>
 		<tr><td>글쓴이</td>
 			<td>${noticedata.NOTICE_NAME }</td></tr>
 		<tr><td>제목</td>
@@ -84,7 +88,7 @@ $(function(){
 		<tr><td>내용</td>
 			<td><textarea  class="form-control" rows="5" readOnly style="width:102%">${noticedata.NOTICE_CONTENT }</textarea></td></tr>	
 		<tr>
-			<td colspan="2" class="center">
+			<td colspan="2" class="center"  style="text-align: center;">
 				<a href="NoticeModifyView.bo?num=${noticedata.NOTICE_NUMBER}" style="text-decoration:none;">
 					<button class="btn btn-info" style="background:#27AE60;">수정</button>
 				</a>

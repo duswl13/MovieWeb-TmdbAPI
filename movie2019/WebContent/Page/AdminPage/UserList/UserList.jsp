@@ -73,7 +73,20 @@ table, td {
 	margin-bottom : 50px;
 	boder-color:#27AE60;
 }
+h1{
+	font-size: 1.5rem;
+	text-align: center;
+	color: #27AE60;
+}
+#left{
+	width:55%;
+	padding-left:50px;
+}
 
+#right{
+	width:40%;
+	text-align: center;
+}
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
@@ -106,68 +119,63 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 <c:if test="${listcount>0 }">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-			<th>회원정보 LIST</th>
-			<th><font size=3>회원 수 :${listcount }</font></th>	
-			</tr>
-		</thead>	
+<table class="table table-striped">	
+<h1><strong>회원 목록</strong></h1><br><br>
+	<tr>
+			<td id="left">아이디</td>
+			<td id="right">삭제</td>
+	</tr>	
+	<c:forEach var="m" items="${totallist }">
 		<tr>
-				<td>아이디</td>
-				<td>삭제</td>
-		</tr>	
-		<c:forEach var="m" items="${totallist }">
-			<tr>
-				<td><a href="user_info.ul?user_id=${m.USER_ID }">${m.USER_ID }</a></td>
-				<td><a href="user_delete.ul?user_id=${m.USER_ID }">삭제</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-	<div class="center-block">
-			<div class="row">
-				<div class="col">
-					<ul class="pagination">
-						<c:if test="${page<=1 }">
+			<td id="left"><a href="user_info.ul?user_id=${m.USER_ID }">${m.USER_ID }</a></td>
+			<td id="right"><a href="user_delete.ul?user_id=${m.USER_ID }">삭제</a></td>
+		</tr>
+	</c:forEach>
+</table>
+<div class="center-block">
+		<div class="row">
+			<div class="col">
+				<ul class="pagination">
+					<c:if test="${page<=1 }">
+						<li class="page-item">
+							<a class="page-link" href="#">이전&nbsp;</a>
+						</li>
+					</c:if>
+					<c:if test="${page>1 }">
+						<li class="page-item">
+							<a href="user_list.ul?page=${page-1 }"
+								class="page-link">이전</a>&nbsp;
+						</li>
+					</c:if>
+					<c:forEach var="a" begin="${startpage }" end="${endpage }">
+						<c:if test="${a==page }">
 							<li class="page-item">
-								<a class="page-link" href="#">이전&nbsp;</a>
+								<a class="page-link current" href="#">${a }</a>
 							</li>
 						</c:if>
-						<c:if test="${page>1 }">
+						<c:if test="${a!=page }">
 							<li class="page-item">
-								<a href="user_list.ul?page=${page-1 }"
-									class="page-link">이전</a>&nbsp;
+								<a href="user_list.ul?page=${a }"
+								class="page-link">${a }</a>
 							</li>
 						</c:if>
-						<c:forEach var="a" begin="${startpage }" end="${endpage }">
-							<c:if test="${a==page }">
-								<li class="page-item">
-									<a class="page-link current" href="#">${a }</a>
-								</li>
-							</c:if>
-							<c:if test="${a!=page }">
-								<li class="page-item">
-									<a href="user_list.ul?page=${a }"
-									class="page-link">${a }</a>
-								</li>
-							</c:if>
-						</c:forEach>
-						<c:if test="${page>=maxpage }">
-							<li class="page-item">
-								<a class="page-link" href="#">&nbsp;다음</a>
-							</li>
-						</c:if>
-						<c:if test="${page<maxpage }">
-							<li class="page-item">
-								<a href="user_list.ul?page=${page+1 }"
-								class="page-link">&nbsp;다음</a>
-							</li>
-						</c:if>
-					</ul>
-				</div>
+					</c:forEach>
+					<c:if test="${page>=maxpage }">
+						<li class="page-item">
+							<a class="page-link" href="#">&nbsp;다음</a>
+						</li>
+					</c:if>
+					<c:if test="${page<maxpage }">
+						<li class="page-item">
+							<a href="user_list.ul?page=${page+1 }"
+							class="page-link">&nbsp;다음</a>
+						</li>
+					</c:if>
+				</ul>
 			</div>
 		</div>
-		</c:if>
+	</div>
+	</c:if>
 	
 	<!--게시글이 없는 경우 -->
 	<c:if test="${listcount==0 }">

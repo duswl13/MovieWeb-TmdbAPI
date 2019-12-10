@@ -144,7 +144,7 @@ $(function(){
 	<form action="user_editaction.mu"  method="post" name="user_edit">
 		<div class="row">
 			<div class="panel panel-default" style="margin:0 auto;">
-				<div class="panel-heading" style="background-color : white; ">  <h4>나의 정보 수정</h4></div>
+				<div class="panel-heading" style="background-color : white; ">  <h4><strong>나의 정보 수정</strong></h4></div>
 					<div class="panel-body" style="background-color : white; ">
 						<div class="col-xs-6 col-sm-3">
 						<c:if test="${empty p.USER_POSTER}">

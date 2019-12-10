@@ -25,31 +25,12 @@ b {
 tr{
 	width:100%;
 }
-td{
-	padding:4px;
-}
-button{
-	width:100%;
-}
-#replace{
-	padding-bottom:50px;
-}
-#btn3{
-	width:50px;
-}
 
 table, td {
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #dee2e6;
 	border-collapse: collapse;
 }
-.container-fluid{
-	color:green;
-    text-shadow:
-    -1px -1px 0 grey,
-    1px -1px 0 grey,
-    -1px 1px 0 grey,
-    1px 1px 0 grey;
-}
+
 .center-block{
 	display:flex;
 	justify-content:center;	/* 가운데 정렬 */
@@ -59,7 +40,7 @@ table, td {
 	background : black;
 	color : white;
 }
-div, td, a, th, .page-link{
+div, td, a, .page-link{
 	color:white;
 }
 table, td {
@@ -80,6 +61,20 @@ font{
 	border-radius:10px;
 	font-size: 9px;
     margin-left: 10px;
+}
+h1{
+	font-size: 1.5rem;
+	text-align: center;
+	color: #27AE60;
+}
+#left{
+	width:55%;
+	padding-left:50px;
+}
+
+#right{
+	width:40%;
+	text-align: center;
 }
 </style>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -112,22 +107,17 @@ $(function(){
 </c:if>
 
 <div class="container">
+<h1><strong>숨긴 영화 목록</strong></h1><br><br>
 <c:if test="${listcount>0 }">
-	<table class="table table-striped">
-		<thead>
-			<tr>
-			<th>숨긴영화 LIST</th>
-			<th><font size=3>숨긴 영화 수 :${listcount }</font></th>	
-			</tr>
-		</thead>	
+	<table class="table table-striped">	
 		<tr>
-				<td>숨긴 영화 목록</td>
-				<td>다시 보이기</td>
+				<td id="left"><strong>숨긴 영화 목록</strong></td>
+				<td id="right"><strong>다시 보이기</strong></td>
 		</tr>	
 		<c:forEach var="m" items="${totallist }">
 			<tr>
-				<td>${m.MOVIE_NAME }<span id="detail"><a href="moviedetail.ml?open=false&id=${m.MOVIE_ID}">상세보기</a></span></td>
-				<td><a href="hidden_delete.mh?user_id=${m.USER_ID }&movie_id=${m.MOVIE_ID}">해제</a></td>
+				<td id="left">${m.MOVIE_NAME }<span id="detail"><a href="moviedetail.ml?open=false&id=${m.MOVIE_ID}">상세보기</a></span></td>
+				<td id="right"><a href="hidden_delete.mh?user_id=${m.USER_ID }&movie_id=${m.MOVIE_ID}">해제</a></td>
 			</tr>
 		</c:forEach>
 	</table>

@@ -43,7 +43,7 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<form action="NoticeAddAction.bo" method="post" name="noticeform">
-		<h1>공지사항 게시글 작성</h1>
+		<h1><strong>공지사항 게시글 작성</strong></h1>
 		<div class="form-group">
 			<label for="notice_name">글쓴이</label>
 			<input name="NOTICE_NAME" id="notice_name" value="${id }" readOnly type="text" size="10" maxlength="30"
@@ -57,7 +57,7 @@ $(function(){
 			<label for="notice_content">내용</label>
 			<textarea name="NOTICE_CONTENT" id="notice_content" cols="67" rows="10" class="form-control"></textarea>
 		</div>
-		<div class="form-group">
+		<div class="form-group" style="text-align: center;">
 			<button type=submit class="btn btn-primary">등록</button>
 			<button type=reset class="btn btn-danger">취소</button>
 		</div>
