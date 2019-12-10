@@ -64,8 +64,8 @@ if(request.getParameter("open") != null){
 <!-- 로그인한 사람 아이디 -->         
 <input type="hidden" id="loginid" value="${id}" name="loginid">   
 <!-- 로그인한 사람 이메일 -->
-
-<input type="hidden" id="loginemail" value="${email}" name="loginemail">
+<c:set var="usermail" value="${mem}" />
+<input type="hidden" id="loginemail" value="${usermail.email} " name="loginemail">
 <h1>무비 토크</h1><br>
 <div class="container">
  <table class="table table-striped">
@@ -241,7 +241,7 @@ function mail_send(){
 		url: "Mail.bd",
 		data:{
 			"senderId" : "${id}", //신고하는 사람 아이디 (로그인 하고 있는 사람)
-			"senderMail" : "${email}", //신고하는 사람 메일
+			"senderMail" : $("#loginmail").val(), //신고하는 사람 메일
 			"receiveMail" : $("#receiveMail").val(), //관리자 메일
 			"subject" : "[신고접수] 작성자:"+ $("#writer").text()+" 제목:"+$("#b_subject").text(), //메일 제목
 			"content": "신고 사유:"+$("#singo").val() //메일 내용

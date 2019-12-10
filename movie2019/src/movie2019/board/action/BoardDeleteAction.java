@@ -19,8 +19,7 @@ public class BoardDeleteAction implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		BoardDAO boarddao = new BoardDAO();
-		//글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해
-		//입력한 비밀번호와 저장된 비밀번호를 비교하여 일치하면 삭제한다.
+		
 		usercheck = boarddao.isBoardWriter(num, 
 				            request.getParameter("BOARD_PASS"));
 		
@@ -44,8 +43,6 @@ public class BoardDeleteAction implements Action {
 		if(result==false) {
 			System.out.println("게시판 삭제 실패");
 			forward.setRedirect(false);
-			request.setAttribute("message","게시판 삭제 실패입니다.");
-			forward.setPath("error/error.jsp");
             return forward;
 		}
 		//삭제 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분이다.

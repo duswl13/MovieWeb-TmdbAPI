@@ -43,24 +43,7 @@ public class BoardModifyAction implements Action {
 	      
 	      //전달받은 파라미터 num 변수에 저장한다.
 	      int num = Integer.parseInt(multi.getParameter("BOARD_NUM"));
-	      String pass = multi.getParameter("BOARD_PASS");
-	      //글쓴이인지 확인하기 위해 저장된 비밀번호와 입력한 비밀번호를 비교한다.
-	      boolean usercheck = 
-	    		  boarddao.isBoardWriter(num,pass);
-	      
-	      System.out.println("비밀번호체크"+usercheck);
-	      //비밀번호가 다른 경우
-	      if(usercheck==false) {
-	    	  response.setContentType("text/html;charset=utf-8");
-	    	  PrintWriter out = response.getWriter();
-	    	  out.println("<script>");
-	    	  out.println("alert('비밀번호가 다릅니다.');");
-	    	  out.println("history.back();");
-	    	  out.println("</script>");
-	    	  out.close();
-	    	  return null;
-	      }
-          //비밀번호가 일치하는 경우
+	     
 	      //수정 내용을 설정한다.
 	      boarddata.setBOARD_NUM(num);
 	      boarddata.setBOARD_SUBJECT(

@@ -70,13 +70,6 @@ if(request.getParameter("open") != null){
     </div>  
   </c:if>
   
-  <div class="form-group">
-    <label for="board_pass">비밀번호</label>
-    <input name="BOARD_PASS" id="board_pass" value=""
-            type="password" maxlength="30" required
-            class="form-control" placeholder="Enter board_pass">
-  </div> 
-  
    <div class="form-group">
     <button type="submit" class="btn btn-primary">수정</button>
     <button type="reset" class="btn btn-danger"
