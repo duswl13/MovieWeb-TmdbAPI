@@ -29,6 +29,17 @@ public class GenDAO {
 		
 	}
 	
+	public List<GenresVO> getAdmin(String id){
+		SqlSession session = MybatisManager.getInstance().openSession();		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		List<GenresVO> items =session.selectList("Chu.adminChu",map);
+		
+		session.close();	
+		return items;
+		
+	}
+	
 	public List<Rating_faceVO> matchings(String id){
 		SqlSession session = MybatisManager.getInstance().openSession();		
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -45,7 +45,7 @@ public class ChController extends HttpServlet {
 			command.execute(request, response);
 			page = "Page/Chu/list.jsp";
 		}else if(com.equals("/listAdd.ch")) {
-			System.out.println("들어옴에이젝스");
+		
 			command = new Ch_Add();
 			command.execute(request, response);
 			page = "Page/Chu/addList.jsp";

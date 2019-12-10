@@ -1,13 +1,13 @@
 package movie2019.chu.model;
 
 public class GenresVO {
-	private String GENRES_ID;
+	private int GENRES_ID;
 
-	public String getGENRES_ID() {
+	public int getGENRES_ID() {
 		return GENRES_ID;
 	}
 
-	public void setGENRES_ID(String gENRES_ID) {
+	public void setGENRES_ID(int gENRES_ID) {
 		GENRES_ID = gENRES_ID;
 	}
 
@@ -15,6 +15,11 @@ public class GenresVO {
 	public String toString() {
 		return "GenresVO [GENRES_ID=" + GENRES_ID + "]";
 	}
+	
+	
+	
+
+	
 	
 	
 	
