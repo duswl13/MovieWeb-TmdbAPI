@@ -19,7 +19,7 @@ public class PriReviewModify implements Action {
 
 		ActionForward forward = new ActionForward();
 		boolean result = false;
-
+//movieId로 고르는거..
 		HttpSession session = request.getSession();
 		String userId = (String)session.getAttribute("id");
 		int movieId = Integer.parseInt(request.getParameter("movieId"));
@@ -43,7 +43,7 @@ public class PriReviewModify implements Action {
 
 		
 		forward.setRedirect(true);		
-		forward.setPath("ReviewPravateAction.rv?open=false&id="+movieId);
+		forward.setPath("ReviewPrivateList.rv");
 
 		return forward;
 

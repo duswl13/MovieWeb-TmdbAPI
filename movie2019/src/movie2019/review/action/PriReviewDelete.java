@@ -8,21 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import movie2019.review.db.ReviewDAO;
+import movie2019.review.db.ReviewVO;
+
 public class PriReviewDelete implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 
+		ReviewDAO reviewdao = new ReviewDAO();
+		ReviewVO reviewvo = new ReviewVO();
+		
 		request.setCharacterEncoding("UTF-8");
-		ActionForward forward = new ActionForward();
-		HttpSession session = request.getSession();
-		String userId = null;
+		boolean result = false;
+		int num = Integer.parseInt(request.getParameter("REVIEW_NUMBER"));
 
-		if (session.getAttribute("id")==request.getParameter(userId)) {
-			userId = (String) session.getAttribute("id");
-			System.out.println("리뷰 삭제 성공");
-			response.setContentType("text/html;charset=UTF-8");
+		result = reviewdao.PriReviewDelete(num);
+		ActionForward forward = new ActionForward();
+		
+		if (result != false) {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('리뷰를 삭제했습니다.");
