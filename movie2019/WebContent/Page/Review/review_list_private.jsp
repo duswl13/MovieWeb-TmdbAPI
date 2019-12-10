@@ -337,6 +337,7 @@ if(request.getParameter("open") != null){
                           
                         </div>
                         <div class=content>
+                        <input id="Movie_h" type="hidden" value="${item.MOVIE_ID }">
                         <h6 class="mvtitle">${item.MOVIE_NAME}</h6>
                              <p class="prvtitle">${item.REVIEW_TITLE}</p>
                              <p class=prvcontent>${item.REVIEW_CONTENT}</p>
@@ -432,6 +433,28 @@ $('.btn-success-gradiant').click(function(){
 	});//ajax
 });
 
+$(".button-gradiant").click(function () {
+	console.log($("#Movie_h").val());
+	$.ajax({
+		url : "Reviewdetail.rv",
+		type: 'POST',
+		data : {
+			"Movie_h" :$("#Movie_h").val(),		
+		},
+		success : function(data) {
+			$("#rvModal").html("");
+			$("#rvModal").html(data);
+		
+		},
+		error : function(err) {
+			console.log("오류");
+		}
+
+	});
+	
+})
+
+
 function print(list){
 	
 	var text = "";
@@ -482,10 +505,10 @@ function print(list){
 }
 </script>
 
-
 <!-- 연수  modal2 시작-->
-<c:forEach items="${reviewlist }" var="item">
-      <div class="modal" id="rvModal">
+ <div class="modal" id="rvModal"></div>
+   <%--    <div class="modal" id="rvModal">
+      
          <div class="modal-dialog ">
             <div class="modal-content">
 
@@ -496,14 +519,14 @@ function print(list){
       <div class="outermodal">
                <button type="button" class="close modalclose" data-dismiss="modal" aria-label="Close">X</button>
             <div class="achtungfloat">   
-               <h4 class="mvtitle button-gradiant">${list.title}</h4>
+             
                
             </div>
             <div class="reviewarea">
-            <input name=movieid type=text hidden value=${movieId}>
-                  <div class="rvtitle">제목<input type=text required="required" name=rvtitle value=${item.REVIEW_TITLE }></div>
+         <!--    <input name=movieid type=text hidden value=${movieId}> -->
+                  <div class="rvtitle">제목<input type=text required="required" name=rvtitle value=${si.REVIEW_TITLE }></div>
                   <div class="rvcontent">
-                     <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${item.REVIEW_CONTENT}</textarea>
+                     <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${si.REVIEW_CONTENT}</textarea>
                   </div>   
                   
                      <div class=rvsubmit>
@@ -521,8 +544,8 @@ function print(list){
                </div>       
             </div>
          </div>
-      </div>
-</c:forEach>   
+      </div> --%>
+
 <!-- 연수 모달2 여기까지 -->
 
 </body>

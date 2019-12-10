@@ -115,4 +115,5 @@ public class ReviewVO {
 		REVIEW_DATE = review_date;
 	}
 
+
 }
