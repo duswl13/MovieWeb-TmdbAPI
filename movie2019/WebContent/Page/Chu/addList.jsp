@@ -27,7 +27,7 @@
 														</div>
 														<!--Text-->
 														<div class="item-box-blog-text">
-															<textarea rows="5" cols="35">${result.overview }</textarea>
+															<textarea rows="5" cols="32">${result.overview }</textarea>
 														</div>
 
 														<div class="mt">

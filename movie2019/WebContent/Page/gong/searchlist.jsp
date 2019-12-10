@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="header.jsp" %>
+<%
+pageContext.setAttribute("br", "<br/>");
+pageContext.setAttribute("cn", "\n");
+%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -19,6 +23,7 @@ border: none;
 }
 .pagination{
 justify-content:center;
+
 }
 td, th{
 text-align: center;
@@ -29,7 +34,7 @@ text-align: center;
 	$(function() {
 		for(let a =1; a<11;a++){
 		$("#oclick"+a).click(function(){
-			$("#divresult"+a).slideToggle('midle');}); 		
+			$("#divresult" + a).toggle('midle');}); 		
 		}
 		
 	});
@@ -53,7 +58,8 @@ text-align: center;
 				<td>${row.NOTICE_DATE }</td>
 			</tr>
 			<tr>
-			<td style="border-bottom: none;" colspan="2"><div id="divresult${status.count }" style="display: none; text-align: center;">${row.NOTICE_CONTENT }</div></td>
+			<td style="border-bottom: none;" colspan="2">
+			<div id="divresult${status.count }" style="display: none; text-align: left;">${fn:replace(row.NOTICE_CONTENT,cn,br) } </div></td>
 			</tr>
 			
 		</c:forEach>

@@ -29,8 +29,7 @@ public class Ch_Main implements Command {
 		GenDAO dao = new GenDAO();
 		String matching = null;
 		if (id == null) {
-			out.println("<script>");
-			out.println("alert('로그인해주세요');");
+			out.println("<script>");			
 			out.println("location.href='Page/Login/login.jsp';");
 			out.println("</script>");
 			out.close();
@@ -45,11 +44,20 @@ public class Ch_Main implements Command {
 				matching = dao.matching(id);
 				List<Rating_faceVO> matchings = dao.matchings(matching);
 				List<MovieInfoVO> re_match = mdao.getinfo(matchings);
+				
+				
+				List<GenresVO> aChu = dao.getAdmin(id);
+		
+				MoviePageVO aChu_result = mdao.getChu(aChu, p);
+				
+				
+				
+				request.setAttribute("aChu", aChu_result.getResults());
 				request.setAttribute("matching", re_match);
-				request.setAttribute("id", id);
 				request.setAttribute("gen", result.getResults());
 				request.setAttribute("image", "https://image.tmdb.org/t/p/w300/");
 			} catch (Exception e) {
+				e.printStackTrace();
 				System.out.println("건수오류");
 			}
 
