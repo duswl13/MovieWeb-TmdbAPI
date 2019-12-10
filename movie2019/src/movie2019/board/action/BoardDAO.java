@@ -272,8 +272,8 @@ public class BoardDAO {
 				board.setBOARD_RE_REF(rs.getInt("BOARD_RE_REF")); //답변 달 때 필요
 				board.setBOARD_RE_LEV(rs.getInt("BOARD_RE_LEV")); //답변 달 때 필요
 				board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ")); //답변 달 때 필요
-				//board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
-				//board.setBOARD_DATE(rs.getDate("BOARD_DATE"));
+				//board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT")); //조회수는 안보여줌
+				board.setBOARD_DATE(rs.getDate("BOARD_DATE"));
 			}
 			return board;
 		} catch (Exception e) {
@@ -470,7 +470,7 @@ public class BoardDAO {
 
 	   
 	
-	//글쓴이인지 확인 - 글 작성할 때 쓴 비밀번호로 확인
+	//글쓴이인지 확인 - 로그인 한 비밀번호로 확인
 	public boolean isBoardWriter(int num, String pass) {
 
 		String board_sql = "select * from mboard "

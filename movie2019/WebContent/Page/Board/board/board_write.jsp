@@ -45,7 +45,7 @@ if(request.getParameter("open") != null){
             type="text" size="10" maxlength="30" required
             class="form-control" placeholder="Enter board_name">
   </div>
-<!-- 비밀번호 확인 삭제 -->
+
   <div class="form-group">
     <label for="board_subject">제목</label>
     <input name="BOARD_SUBJECT" id="board_subject" value=""
@@ -64,6 +64,14 @@ if(request.getParameter("open") != null){
     <input type="file" id="upfile" name="BOARD_FILE">
     <span id="filevalue"></span>
   </div>  
+  
+  <div class="form-group">
+    <label for="board_pass">비밀번호</label>
+    <input name="BOARD_PASS" id="board_pass" value=""
+            type="password" maxlength="30" required
+            class="form-control" placeholder="Enter board_pass">
+  </div> 
+
    <div class="form-group">
     <button type="submit" class="btn btn-success">등록</button>
     <button type="reset" class="btn btn-danger" onClick="history.back()">취소</button>

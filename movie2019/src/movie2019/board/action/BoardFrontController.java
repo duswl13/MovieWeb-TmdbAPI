@@ -32,10 +32,8 @@ public class BoardFrontController extends HttpServlet {
 	    ActionForward forward=null;
 	    Action action=null;
 	    
-	    
 	    if(command.equals("/BoardList.bd")) { 
-	   // 	action=new BoardListAction(); //다형성에 의한 업캐스팅
-   	 	action=new BoardSearchAction(); //다형성에 의한 업캐스팅
+   	 	  action=new BoardSearchAction(); 
 	          try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
@@ -151,24 +149,13 @@ public class BoardFrontController extends HttpServlet {
 	    
 	    //신고 메일 보내기
 	    }else if(command.equals("/Mail.bd")) { 
-	    	action=new MailSend2();
-	          try {
+	    	action = new MailAction();
+	    	try {
 	        	  forward=action.execute(request, response);
 	          }catch(Exception e) {
 	        	  e.printStackTrace();
 	          }
-	  /*        
-	   //게시물 검색
-	    }else if(command.equals("/board_search.bd")) { 
-	    	action=new BoardSearchAction();
-	          try {
-	        	  forward=action.execute(request, response);
-	          }catch(Exception e) {
-	        	  e.printStackTrace();
-	          }
-	    }
-	    
-	    */
+
 	    } //여기는 건들면 안돼~
 	    if(forward!=null) {
 	    	if(forward.isRedirect()) { //리다이렉트 된다.
