@@ -30,6 +30,7 @@ body {
    color:#141414;
 }
 
+.
 .center-block {
 	display: flex;
 	justify-content: center; /*가운데정렬*/
@@ -279,9 +280,15 @@ if(request.getParameter("open") != null){
                              <p class=star >★★★★★</p> 
                              </c:when>
                                 </c:choose>
-                               
+                          
                                 <p class=rvbottom1><a href="ReviewUserList.rv?userId=${r.USER_ID}" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
-                  
+                  				
+                  				     <span class="btn_like">
+           
+                  				   <img src="<%=request.getContextPath()%>/Png/like_default.svg" style="width:15px; height:15px;">
+                  				
+                  				${r.LIKE }
+                  				</span>
                             </div>
                              
                         </div>
@@ -358,6 +365,11 @@ if(<%=open%>)
    document.getElementById("main").style.marginLeft = "250px";
 
 
+$(".btn_like").click(function(){
+	
+	alert('ajax 실행');
+	
+});
 </script>
 </body>
 </html>
