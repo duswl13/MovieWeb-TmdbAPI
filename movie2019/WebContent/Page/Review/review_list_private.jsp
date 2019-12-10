@@ -1,5 +1,4 @@
-<!-- 리뷰 클릭 시 첫 화면 -->
-<!-- 이미지 들어가는 템플릿-->
+<!-- 내 리뷰 모아 보기 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -152,7 +151,7 @@ body {
    padding: 10px;
 }
 
-#rvModal button {
+ button {
    width:150px;
    height: 40px;
    line-height: 40px;
@@ -231,22 +230,30 @@ body {
     background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
 }
 
-#rvModal .font-gradiant {
-    color: #2cdd9b;
-    color: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
-    color: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
-    color: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-    color: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
-    color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+.button-gradiant {
+   color:white;
+         background: #1dc8cc;
+    background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+    background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
 }
 
-#rvModal .submtbutton {
-   width:40px;
+.button-gradiant:hover {
+      background: #2cdd9b;
+    background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+button {
+   width:100px;
    font-size:12pt;
-   background:none;
 }
 
-#rvModal button .modalclose{color:#2cdd9b; font-size:13pt;}
 
 #rvModal .floatright {float:right; padding:0px; margin-top:-20px;}
 #rvModal .reviewarea {right:clear;}
@@ -350,13 +357,13 @@ if(request.getParameter("open") != null){
                         </c:when>
                          <c:when test="${item.STAR == 5}">
                          <p>★★★★★</p>
-                        </c:when>
+                        </c:when> 
                       
                         </c:choose>
                         
                         
                         <a href="#"> <!-- 이 부분 #으로 해야 뒷배경 나옴 -->
-							<button data-toggle="modal" data-target="#rvModal">수정/삭제</button></a>
+							<button class="button-gradiant" data-toggle="modal" data-target="#rvModal">수정 / 삭제</button></a>
 						<!-- 이 부분 추가 -->
 
                         
@@ -484,12 +491,12 @@ function print(list){
 
       <!-- Modal body -->
                <div class="modal-body">
-      <form name=review_modify_form action="<%=request.getContextPath() %>/PriReviewModifyAction.rv?movieId=${item.MOVIE_ID}" method=post>
+      <form name=review_modify_form method=post>
 
       <div class="outermodal">
                <button type="button" class="close modalclose" data-dismiss="modal" aria-label="Close">X</button>
             <div class="achtungfloat">   
-               <h4 class="mvtitle font-gradiant">${list.title}</h4>
+               <h4 class="mvtitle button-gradiant">${list.title}</h4>
                
             </div>
             <div class="reviewarea">
@@ -497,8 +504,15 @@ function print(list){
                   <div class="rvtitle">제목<input type=text required="required" name=rvtitle value=${item.REVIEW_TITLE }></div>
                   <div class="rvcontent">
                      <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${item.REVIEW_CONTENT}</textarea>
-                  </div>      
-                  <div class=rvsubmit>${item.USER_ID}님이 작성한 리뷰 <button type=submit class="submtbutton font-gradiant">수정</button>
+                  </div>   
+                  
+                     <div class=rvsubmit>
+                    <button type="submit" class="submitbutton button-gradiant" value="modify" 
+                    onclick="javascript: form.action='<%=request.getContextPath() %>/PriReviewModify.rv?movieId=${item.MOVIE_ID}';">수정</button>
+                    	 
+    				<button type="submit" class="submitbutton button-gradiant" value="delete" 
+    				onclick="javascript: form.action='<%=request.getContextPath() %>/PriReviewDelete.rv?movieId=${item.MOVIE_ID}';">삭제</button>   
+             			
                   </div>
             </div>
             

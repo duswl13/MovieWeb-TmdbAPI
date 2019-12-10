@@ -157,13 +157,10 @@ a:hover {
    margin-left: 150px;
 }
 
-.readit {
-   font-size: 10pt;
+.readme {
    color: #edf1f2;
    margin-left: 150px;
-
 }
-
 
 .star {color:gold; font-size:12pt; font-weight:bold;}
 
@@ -183,6 +180,14 @@ a:hover {
     color: white;
 }
 
+.row .wrap-rvlist {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -100px;
+    margin-left: -15px;
+}
+
+li .current {font-weight:bold;} 
 </style>
 
 
@@ -210,7 +215,8 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 
-
+<h3 class=readme>VOSHU 회원들은 지금 어떤 영화를 보고 있을까요?</h3>
+<p class=readme>리뷰를 남기시려면 왼쪽 메뉴에서 원하는 영화를 검색 / 선택해보세요.</p>
       
       <br>
         
@@ -273,10 +279,11 @@ if(request.getParameter("open") != null){
                              <p class=star >★★★★★</p> 
                              </c:when>
                                 </c:choose>
-                                
+                               
                                 <p class=rvbottom1><a href="ReviewUserList.rv?userId=${r.USER_ID}" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
-                   
+                  
                             </div>
+                             
                         </div>
                     </div>
                 </div>
@@ -301,11 +308,11 @@ if(request.getParameter("open") != null){
          <a class=page-link href="ReviewList.rv?page=${page-1}"><&nbsp;</a>
          </li>
       </c:if>      
-      
+       
       <c:forEach var="a" begin="${startpage }" end="${endpage }">
          <c:if test="${a == page }">
             <li class=page-item>
-            <a class=page-link href=#>${a }</a>
+            <a class="page-link current" href=#>${a }</a>
             </li>
          </c:if>
          <c:if test="${a != page }">
@@ -354,3 +361,7 @@ if(<%=open%>)
 </script>
 </body>
 </html>
+
+
+
+
