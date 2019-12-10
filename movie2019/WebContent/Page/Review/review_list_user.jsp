@@ -221,10 +221,12 @@ if(request.getParameter("open") != null){
             
             
             
-                  <div class="col-md-12 mt-3 text-center">
+               
+        </div>
+        
+           <div class="col-md-12 mt-3 text-center">
                 <a class="btn btn-success-gradiant text-white border-0 btn-md"><span>더보기</span></a>
             </div>
-        </div>
     
     </div>
     

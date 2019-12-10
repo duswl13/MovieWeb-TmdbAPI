@@ -408,10 +408,12 @@ if(request.getParameter("open") != null){
 
 
 
+				</div>
+				
+				
 					<div class="col-md-12 mt-3 text-center">
 						<a class="btn btn-success-gradiant text-white border-0 btn-md"><span>더보기</span></a>
 					</div>
-				</div>
 
 			</div>
 
@@ -449,6 +451,7 @@ $('.btn-success-gradiant').click(function(){
 			
 			page = obj.page;
 			maxpage = obj.maxpage;
+		
 			var list = obj.reviewlist;
 			
 			print(list);
@@ -526,6 +529,12 @@ function print(list){
 					break;
 
 				}
+				
+				text += '<a href="#">';
+
+				text += 	'<button class="button-gradiant" data-toggle="modal"';
+					text += 	'data-target="#rvModal">수정 / 삭제</button></a>';
+
 
 				text += '</div></div></div></div><br><br><br>';
 			}
