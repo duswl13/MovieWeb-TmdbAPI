@@ -77,6 +77,13 @@ public class ReviewVO {
    public void setREVIEW_DATE(Date review_date) {
       REVIEW_DATE = review_date;
    }
+@Override
+public String toString() {
+	return "ReviewVO [REVIEW_NUMBER=" + REVIEW_NUMBER + ", MOVIE_ID=" + MOVIE_ID + ", USER_ID=" + USER_ID
+			+ ", REVIEW_TITLE=" + REVIEW_TITLE + ", REVIEW_CONTENT=" + REVIEW_CONTENT + ", REVIEW_DATE=" + REVIEW_DATE
+			+ ", STAR=" + STAR + ", FACE=" + FACE + ", MOVIE_NAME=" + MOVIE_NAME + ", MOVIE_POSTER=" + MOVIE_POSTER
+			+ "]";
+}
    
    
 }

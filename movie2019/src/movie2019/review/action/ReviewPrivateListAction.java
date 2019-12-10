@@ -49,6 +49,9 @@ public class ReviewPrivateListAction implements Action {
 	      System.out.println("listcount : " + listcount);
 	      // 리스트 받아오기
 	      reviewlist = reviewdao.getreviewPrivateList(userId,page, limit);
+	     
+	      
+	      
 	      for(ReviewVO i : reviewlist)
 	      System.out.print("등록된 리뷰 :"+i.getREVIEW_TITLE());
 	      /*
@@ -95,17 +98,13 @@ public class ReviewPrivateListAction implements Action {
 	         System.out.println("state=null");
 	         request.setAttribute("page", page); // 현재 페이지 수
 	         request.setAttribute("maxpage", maxpage); // 최대 페이지 수
-
 	         request.setAttribute("startpage", startpage); // 현재 페이지에 표시할 첫 페이지
 	         request.setAttribute("endpage", endpage); // 현재 페이지에 표시할 끝 페이지
-
 	         request.setAttribute("listcount", listcount); // 총 글의 수
-
 	         request.setAttribute("reviewlist", reviewlist); // 해당 페이지의 글 목록을 갖고 있는 리스트
 
 	         ActionForward forward = new ActionForward();
 	         forward.setRedirect(false);
-
 	         forward.setPath("Page/Review/review_list_private.jsp");
 	         return forward; // reviewFrontController.java로 리턴.
 

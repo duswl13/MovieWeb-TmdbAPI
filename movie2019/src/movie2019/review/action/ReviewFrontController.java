@@ -160,6 +160,17 @@ public class ReviewFrontController extends HttpServlet {
 
 			
 			
+		}else if(command.equals("/Reviewdetail.rv")) {
+			System.out.println("버튼클릭");
+			action = new ReviewDetail();
+			try {
+				forward = action.execute(request, response);
+				forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
+				forward.setPath("Page/Review/review_detail.jsp");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 		
 		

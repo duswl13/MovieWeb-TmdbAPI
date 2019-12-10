@@ -28,6 +28,57 @@ public class ReviewDAO {
       }
    }
    
+   public ReviewDetailVO detail(String id, String Movie_h) {
+	   ReviewDetailVO vo = new ReviewDetailVO();
+	   String sql = "select * " 
+	   		+ "	from REVIEW " 
+	   		+ "	where USER_ID=? and MOVIE_ID=?";
+	   
+	   try {
+	         con = ds.getConnection();
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, id);
+	         pstmt.setString(2, Movie_h);
+	         rs = pstmt.executeQuery(); 
+
+	         if(rs.next()) {
+	            vo.setMovie_id(rs.getInt("movie_id"));
+	            vo.setReview_title(rs.getString("review_title"));
+	            vo.setReview_content(rs.getString("review_content"));
+	            
+	         }
+	         return vo;
+	   } catch (Exception e) {
+	         e.printStackTrace();
+	         System.out.println("getreviewList() 에러: " + e);
+	      } finally {
+	         if (rs != null) {
+	            try {
+	               rs.close();
+	            } catch (SQLException ex) {
+	               ex.printStackTrace();
+	            }
+	         }
+	         if (pstmt != null) {
+	            try {
+	               pstmt.close();
+	            } catch (SQLException ex) {
+	               ex.printStackTrace();
+	            }
+	         }
+	         if (con != null) {
+	            try {
+	               con.close();
+	            } catch (SQLException ex) {
+	               ex.printStackTrace();
+	            }
+	         }
+	      }
+	      return vo;
+	   }
+
+   
+   
    public List<ReviewVO> getreviewMyList(String userId, int page, int limit) {
 	      String sql = "SELECT * FROM(\r\n"
 	            + "   SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
