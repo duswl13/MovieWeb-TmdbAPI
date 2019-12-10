@@ -493,14 +493,17 @@ public class ReviewDAO {
 	}
 
 	// 내리뷰모아보기 삭제 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
-	public boolean PriReviewDelete(int num)  {
+	//?movieId=${vo.movie_id}&user_id=${vo.user_id}'
+	public boolean PriReviewDelete(int movieId, String user_id)  {
 
-		String review_delete_sql = "delete from review where REVIEW_NUMBER = ?";
-
+		String review_delete_sql = "delete from review where USER_ID=? and MOVIE_ID=?";
+		
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(review_delete_sql);
-			pstmt.setInt(1, num);
+			pstmt.setString(1, user_id);
+			pstmt.setInt(2, movieId);
+			
 
 			int result = pstmt.executeUpdate();
 			System.out.println(result + "리뷰 삭제 완료"); //여기까지 왔는데 java로 안가는듯
