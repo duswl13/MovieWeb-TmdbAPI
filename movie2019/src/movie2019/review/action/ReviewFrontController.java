@@ -134,7 +134,19 @@ public class ReviewFrontController extends HttpServlet {
 
 			
 			
+		} else if (command.equals("/ReviewMovieAction.rv")) {
+			action = new ReviewMovieAction();
+			try {
+				forward = action.execute(request, response);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			
+			
 		}
+		
 		
 		
 		if (forward != null) {
