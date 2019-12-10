@@ -362,7 +362,7 @@ if(request.getParameter("open") != null){
                       
                         </c:choose>
                         
-                        
+                         
                         <a href="#"> <!-- 이 부분 #으로 해야 뒷배경 나옴 -->
 							<button class="button-gradiant" data-toggle="modal" data-target="#rvModal">수정 / 삭제</button></a>
 						<!-- 이 부분 추가 -->

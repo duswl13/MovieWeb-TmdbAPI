@@ -1,3 +1,5 @@
+<!-- 모달! 여기가 모달임 내리뷰모아보기 모달 -->
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>     
          <div class="modal-dialog ">
@@ -16,7 +18,7 @@
                   <div class="rvcontent">
                      <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${vo.review_content}</textarea>
                   </div>   
-                  
+                   
                      <div class=rvsubmit>
                     <button type="submit" class="submitbutton button-gradiant" value="modify" 
                     onclick="javascript: form.action='<%=request.getContextPath() %>/PriReviewModify.rv?movieId=${vo.movie_id}';">수정</button>
