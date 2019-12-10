@@ -56,7 +56,8 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			
+		//내리뷰모아보기
 		} else if (command.equals("/ReviewPrivateList.rv")) {
 			action = new ReviewPrivateListAction(); // 다형성에 의한 업캐스팅
 			try {
@@ -65,8 +66,9 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		//모달 뜨게 하는 부분
 		} else if (command.equals("/Reviewdetail.rv")) {
-			System.out.println("버튼클릭");
+			System.out.println("모달 뜨는 버튼 클릭");
 			action = new ReviewDetail();
 			try {
 				forward = action.execute(request, response);
@@ -76,6 +78,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		//리뷰수정
 		} else if (command.equals("/PriReviewModify.rv")) {
 			action = new PriReviewModify(); // 다형성에 의한 업캐스팅
 			try {
@@ -84,6 +87,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		//리뷰삭제
 		} else if (command.equals("/PriReviewDelete.rv")) {
 			action = new PriReviewDelete(); // 다형성에 의한 업캐스팅
 			try {
@@ -92,6 +96,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		//이용자별 리뷰리스트
 		} else if (command.equals("/ReviewUserList.rv")) {
 			action = new ReviewUserAction();
 			try {
@@ -101,6 +106,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		//영화상세보기에서리뷰더보기클릭
 		} else if (command.equals("/ReviewMovieList.rv")) {
 			action = new ReviewMovieAction();
 			try {
@@ -110,11 +116,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/ReviewWrite.rv")) {
-			forward = new ActionForward();
-			forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
-			forward.setPath("review/review_write.jsp");
-
+		//리뷰쓰기
 		} else if (command.equals("/ReviewAddAction.rv")) {
 			action = new ReviewAddAction();
 			try {
@@ -123,6 +125,7 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		//영화상세보기에서리뷰수정
 		} else if (command.equals("/ReviewModifyAction.rv")) {
 			action = new ReviewModifyAction();
 			try {
@@ -131,7 +134,8 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+		
+		//? 뭐지
 		} else if (command.equals("/ReviewMovieAction.rv")) {
 			action = new ReviewMovieAction();
 			try {
@@ -140,7 +144,8 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
+			
+		//좋아요
 		} else if (command.equals("/LikeAction.rv")) {
 			action = new LikeAction();
 			try {

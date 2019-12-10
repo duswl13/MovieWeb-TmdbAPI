@@ -903,4 +903,9 @@ public class ReviewDAO {
 		}
 		return null;
 	}
+
+	public boolean PriReviewDelete(ReviewVO reviewvo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
