@@ -42,7 +42,7 @@ public class ReviewMyListAction implements Action {
 	      System.out.println("넘어온 limit = " + limit);
 
 	      // 총 listcount 받아오기.
-	      int listcount = reviewdao.getListCount();
+	      int listcount = reviewdao.getPrivateListCount(userId);
 
 	      // 리스트 받아오기
 	      reviewlist = reviewdao.getreviewMyList(userId,page, limit);

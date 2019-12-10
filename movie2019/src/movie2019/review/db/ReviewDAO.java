@@ -538,7 +538,7 @@ public class ReviewDAO {
 
    public List<ReviewVO> getreviewUserList(String userId, int page, int limit) {
 	      String sql = "SELECT * FROM(\r\n"
-	            + "   SELECT ROWNUM, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
+	            + "   SELECT ROWNUM R, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
 	            + "   star, face FROM\r\n"
 	            + "(SELECT REVIEW_NUMBER, review.MOVIE_ID id, movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
 	            + "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
@@ -546,8 +546,8 @@ public class ReviewDAO {
 	            + "               (SELECT rating_face_value \r\n" + "               FROM RATING_FACE \r\n"
 	            + "               WHERE USER_ID = review.user_id \r\n"
 	            + "               and MOVIE_ID = review.movie_id) face\r\n" + "   FROM review,movie \r\n"
-	            + "   where review.movie_id = movie.movie_id  \r\n"
-	            + "   order by REVIEW_DATE DESC)) where USER_ID=? and rownum >=? and rownum <=?";
+	            + "   where review.movie_id = movie.movie_id and USER_ID=?  \r\n"
+	            + "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
 	      List<ReviewVO> list = new ArrayList<ReviewVO>();
 
@@ -613,7 +613,7 @@ public class ReviewDAO {
    
    public List<ReviewVO> getreviewMovieList(String movieId, int page, int limit) {
 	      String sql = "SELECT * FROM(\r\n"
-	            + "   SELECT ROWNUM, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
+	            + "   SELECT ROWNUM R, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
 	            + "   star, face FROM\r\n"
 	            + "(SELECT REVIEW_NUMBER, review.MOVIE_ID id, movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
 	            + "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
@@ -621,8 +621,8 @@ public class ReviewDAO {
 	            + "               (SELECT rating_face_value \r\n" + "               FROM RATING_FACE \r\n"
 	            + "               WHERE USER_ID = review.user_id \r\n"
 	            + "               and MOVIE_ID = review.movie_id) face\r\n" + "   FROM review,movie \r\n"
-	            + "   where review.movie_id = movie.movie_id  \r\n"
-	            + "   order by REVIEW_DATE DESC)) where MOVIE_ID=? and rownum >=? and rownum <=?";
+	            + "   where review.movie_id = movie.movie_id  and review.MOVIE_ID=? \r\n"
+	            + "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
 	      List<ReviewVO> list = new ArrayList<ReviewVO>();
 
@@ -700,6 +700,46 @@ public int getPrivateListCount(String userId) {
     } catch (Exception ex) {
        ex.printStackTrace();
        System.out.println("getListCount 에러 : " + ex);
+    } finally {
+
+       if (rs != null)
+          try {
+             rs.close();
+          } catch (SQLException e1) {
+             // TODO Auto-generated catch block
+             e1.printStackTrace();
+          }
+       if (pstmt != null)
+          try {
+             pstmt.close();
+          } catch (SQLException e) {
+             e.printStackTrace();
+          }
+       if (con != null)
+          try {
+             con.close();
+          } catch (SQLException e) {
+             e.printStackTrace();
+          }
+    }
+    return x;
+ }
+
+public int getMovieListCount(int movieId) {
+    int x = 0;
+    try {
+       con = ds.getConnection();
+       pstmt = con.prepareStatement("select count(*) from review where movie_id=?");
+       pstmt.setInt(1, movieId);
+       rs = pstmt.executeQuery();
+    
+       
+       if (rs.next())
+          x = rs.getInt(1);
+       
+    } catch (Exception ex) {
+       ex.printStackTrace();
+       System.out.println("getMovieListCount 에러 : " + ex);
     } finally {
 
        if (rs != null)

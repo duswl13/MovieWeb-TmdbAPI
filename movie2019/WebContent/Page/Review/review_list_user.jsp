@@ -222,7 +222,7 @@ if(request.getParameter("open") != null){
             
             
                   <div class="col-md-12 mt-3 text-center">
-                <a class="btn btn-success-gradiant text-white border-0 btn-md" href="#"><span>더보기</span></a>
+                <a class="btn btn-success-gradiant text-white border-0 btn-md"><span>더보기</span></a>
             </div>
         </div>
     
@@ -236,7 +236,97 @@ if(request.getParameter("open") != null){
 if(<%=open%>)
 	document.getElementById("main").style.marginLeft = "250px";
 
+var userId= "${userId}";
 
+var page = ${page};
+var maxpage = ${maxpage};
+
+more();
+
+function more(){
+if(page == maxpage){
+	$('.btn-success-gradiant').css('display','none');
+}else{
+	$('.btn-success-gradiant').css('display','block');
+}
+}
+
+
+$('.btn-success-gradiant').click(function(){
+	console.log('aa');
+	$.ajax({
+		url : "ReviewUserList.rv",
+		data : {
+			"userId" : userId,
+			"page" :++page,
+			"state" : "ajax"
+		},
+		success : function(data) {
+			var obj = JSON.parse(data);
+			
+			page = obj.page;
+			maxpage = obj.maxpage;
+			var list = obj.reviewlist;
+			
+			print(list);
+			more();
+		
+		},
+		error : function(err) {
+			console.log("페이지가 더이상없습니다");
+		}
+
+	});//ajax
+});
+
+function print(list){
+	
+	var text = "";
+	
+	for(var i = 0; i < list.length; i++){
+		text += '<div class="col-md-4 col">';
+		text += '<div class="card card-shadow border-0 mb-4">';
+		text += '<div class="p-4">';
+		text +=  '<div class="icon-space">';
+		
+		if(list[i].face == 1)
+        text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
+        else
+        text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
+              
+                  
+        text += '</div>';
+        text += ' <div class=content>';
+        text += ' <h6 class="mvtitle">'+list[i].MOVIE_NAME+'</h6>';
+        text += ' <p class="prvtitle">'+list[i].REVIEW_TITLE+'</p>';
+        text += ' <p class=prvcontent>'+list[i].REVIEW_CONTENT+'</p>';
+        text += ' <p class=prvdate>'+list[i].REVIEW_DATE+'</p>';
+                
+        switch(list[i].STAR){
+        case 1:
+        	text += '  <p>★☆☆☆☆</p>';
+        	break;
+        case 2:
+        	text += '  <p>★★☆☆☆</p>';
+        	break;
+        case 3:
+        	text += '  <p>★★★☆☆</p>';
+        	break;
+        case 4:
+        	text += '  <p>★★★★☆</p>';
+        	break;
+        case 5:
+        	text += '  <p>★★★★★</p>';
+        	break;
+        	
+        }
+                
+        text +='</div></div></div></div><br><br><br>';
+	}
+	
+	$('.row').append( text);
+	
+}
 </script>
 </body>
 </html>
