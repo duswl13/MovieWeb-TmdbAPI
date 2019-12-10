@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -41,8 +42,14 @@ public class ReviewMovieAction implements Action {
       // 총 listcount 받아오기.
       int listcount = reviewdao.getMovieListCount(Integer.parseInt(movieId));
 
+      HttpSession session = request.getSession();
+		String userId = null;
+
+		if (session.getAttribute("id") != null) 
+			userId = (String) session.getAttribute("id");
+		
       // 리스트 받아오기
-      reviewlist = reviewdao.getreviewMovieList(movieId, page, limit);
+      reviewlist = reviewdao.getreviewMovieList(movieId, page, limit,userId);
       for(ReviewVO i : reviewlist)
       System.out.print("등록된 리뷰 :"+i.getREVIEW_TITLE());
       /*

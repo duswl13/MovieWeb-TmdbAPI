@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -16,8 +17,7 @@ import movie2019.review.db.ReviewVO;
 
 public class ReviewListAction implements Action {
 
-
-   @Override
+	@Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
       ReviewDAO reviewdao = new ReviewDAO();
@@ -39,8 +39,15 @@ public class ReviewListAction implements Action {
       // 총 listcount 받아오기.
       int listcount = reviewdao.getListCount();
 
+      
+      HttpSession session = request.getSession();
+		String userId = null;
+
+		if (session.getAttribute("id") != null) 
+			userId = (String) session.getAttribute("id");
+		
       // 리스트 받아오기
-      reviewlist = reviewdao.getreviewList(page, limit);
+      reviewlist = reviewdao.getreviewList(userId,page, limit);
       for(ReviewVO i : reviewlist)
       System.out.println("등록된 리뷰 :"+i.getREVIEW_TITLE());
       /*
@@ -129,5 +136,5 @@ public class ReviewListAction implements Action {
 
       }
    }
-}
+	}
 

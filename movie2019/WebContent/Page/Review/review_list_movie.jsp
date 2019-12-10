@@ -222,177 +222,215 @@ li .current {
 </head>
 <body>
 
-	<!-- 메뉴 부분  <script>는 body 아래에-->
-	<%
-		boolean open = false;
-		if (request.getParameter("open") != null) {
-			open = Boolean.parseBoolean(request.getParameter("open"));
+   <!-- 메뉴 부분  <script>는 body 아래에-->
+   <% 
+boolean open = false;
+if(request.getParameter("open") != null){
+   open = Boolean.parseBoolean(request.getParameter("open"));
+}
+%>
+
+<% if(!open) {%>
+<jsp:include page="/Page/Navi/Navi.jsp" />
+<%} else{ %>
+<jsp:include page="/Page/Navi/Navi3.jsp" />
+<%} %>
+
+
+<div id="main">
+   
+
+      <span style="font-size: 30px; cursor: pointer; color: white;"
+         onclick="openNav()">&#9776;</span>
+
+      <h3 class=rvintro>이 영화에 있는 리뷰 보기..</h3>
+      
+
+        <br>
+        
+<!-- 글이 있는 경우 -->        
+<c:if test="${listcount > 0 }">        
+    
+
+        
+<div class="py-5 rvlist">
+    <div class="container">
+        <!-- row  -->
+        <div class="row wrap-rvlist">
+        
+<c:set var="num" value="${listcount-(page-1)*10}"/>
+<c:forEach var="r" items="${reviewlist}">   
+        
+            <!-- Column  -->
+            <div class="1column">
+                <!-- card  -->
+                <div class="card border-0 mb-4">
+                    <div class="row no-gutters">
+                        <div class="col-md-5 icon-position rounded-left" style="background-image:url(https://image.tmdb.org/t/p/w500${r.MOVIE_POSTER })">
+                             <c:choose>
+                             <c:when test="${r.FACE == 1}">
+                             <img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5">
+
+                             </c:when>   
+                             <c:otherwise>
+                               <img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5">
+                             </c:otherwise>
+
+                       	
+                        </c:choose>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-body ml-0 ml-md-3">
+                                <p class="rvtitle"><a href="moviedetail.ml?open=false&id=${r.MOVIE_ID}">${r.MOVIE_NAME}</a></p>
+                                <p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
+                                <br>
+                                 
+                             <c:choose>
+                             <c:when test="${r.STAR == 1}">
+                             <p class=star >★☆☆☆☆</p> 
+
+                             </c:when>
+                             
+                              <c:when test="${r.STAR == 2}">
+                             <p class=star >★★☆☆☆</p> 
+                             </c:when>   
+                             
+                              <c:when test="${r.STAR == 3}">
+                             <p class=star >★★★☆☆</p> 
+                             </c:when>   
+                             
+                              <c:when test="${r.STAR == 4}">
+                             <p class=star >★★★★☆</p> 
+                             </c:when>   
+                             
+                              <c:when test="${r.STAR == 5}">
+                             <p class=star >★★★★★</p> 
+                             </c:when>
+                                </c:choose>
+                                
+                                <p class=rvbottom1><a href="ReviewUserList.rv?userId=${r.USER_ID}" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
+                   
+                   
+                  				     <span class="like" Onclick='addLike("${r.USER_ID}","${r.MOVIE_ID}")'>
+           							<c:choose>
+           							<c:when test="${r.LIKECHECK == 1 }">
+           							  <img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width:15px; height:15px;">
+           							</c:when>
+           							<c:otherwise>
+           							  <img class="like_img" src="<%=request.getContextPath()%>/Png/like_default.svg" style="width:15px; height:15px;">
+           							</c:otherwise>
+           							</c:choose>
+                  				 
+                  				
+                  				<span class="like_count">${r.LIKE }</span>
+                  				
+                  				</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column end -->
+            
+ </c:forEach>
+            
+        </div>
+<div class="center-block">
+   <div class=row>
+      <div class=col>
+         <ul class=pagination>
+         
+      <c:if test="${page <= 1 }">
+         <li class=page-item>
+         <a class=page-link href=#>이전&nbsp;</a>
+         </li>
+      </c:if>
+      <c:if test="${page > 1 }">
+         <li class=page-item>
+         <a class=page-link href="ReviewList.rv?page=${page-1}">이전&nbsp;</a>
+         </li>
+      </c:if>      
+      
+      <c:forEach var="a" begin="${startpage }" end="${endpage }">
+         <c:if test="${a == page }">
+            <li class=page-item>
+            <a class=page-link href=#>${a }</a>
+            </li>
+         </c:if>
+         <c:if test="${a != page }">
+            <li class=page-item>
+               <a class=page-link href="ReviewList.rv?page=${a }">${a }</a>   
+            </li>   
+         </c:if>
+      </c:forEach>
+      
+      <c:if test="${page >= maxpage }">
+         <li class=page-item>
+            <a class=page-link href=#>&nbsp;다음</a>
+         </li>
+      </c:if>
+      <c:if test="${page < maxpage }">
+         <li class=page-item>
+            <a class=page-link href="ReviewList.rv?page=${page+1 }">&nbsp;다음</a>   
+         </li>
+         </c:if>      
+         </ul>   
+      </div>
+   </div>
+
+</div>
+    </div>
+</div>
+
+   
+</c:if>
+
+<!-- 게시글이 없는 경우 -->
+<c:if test="${listcount == 0 }">
+      <font size=5>등록된 리뷰가 없습니다.</font>
+</c:if>
+
+
+</div>
+   <!-- 추가... -->
+
+<script>
+if(<%=open%>)
+   document.getElementById("main").style.marginLeft = "250px";
+
+var click = 0;
+$('.like').click(function(){
+	click = $('.like').index(this);
+});
+
+function addLike(userID,movieID){
+	
+	$.ajax({
+		url : "LikeAction.rv",
+		data : {"likeId": userID,
+				"movieId": movieID},
+		success : function(data){
+
+				if(data == 0){
+				alert("좋아요 실패");
+				}else if(data == 1){
+
+				$('.like_img:eq('+click+')').prop('src',"<%=request.getContextPath()%>/Png/like_up.svg");
+			
+				$('.like_count:eq('+click+')').text(Number($('.like_count:eq('+click+')').text())+1);
+				}else if(data == -1){
+				alert("좋아요 이미 했음");
+				}else{
+				alert("로그인하세요.");
+				location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
+				}
+					
+		},error : function(){
+			alert("error");
 		}
-	%>
-
-	<%
-		if (!open) {
-	%>
-	<jsp:include page="/Page/Navi/Navi.jsp" />
-	<%
-		} else {
-	%>
-	<jsp:include page="/Page/Navi/Navi3.jsp" />
-	<%
-		}
-	%>
-
-
-	<div id="main">
-
-
-		<span style="font-size: 30px; cursor: pointer; color: white;"
-			onclick="openNav()">&#9776;</span>
-
-		<h3 class=rvintro>이 영화에 있는 리뷰 보기..</h3>
-
-
-		<br>
-
-		<!-- 글이 있는 경우 -->
-		<c:if test="${listcount > 0 }">
-
-
-
-			<div class="py-5 rvlist">
-				<div class="container">
-					<!-- row  -->
-					<div class="row wrap-rvlist">
-
-						<c:set var="num" value="${listcount-(page-1)*10}" />
-						<c:forEach var="r" items="${reviewlist}">
-
-							<!-- Column  -->
-							<div class="1column">
-								<!-- card  -->
-								<div class="card border-0 mb-4">
-									<div class="row no-gutters">
-										<div class="col-md-5 icon-position rounded-left"
-											style="background-image:url(https://image.tmdb.org/t/p/w500${r.MOVIE_POSTER })">
-											<c:choose>
-												<c:when test="${r.FACE == 1}">
-													<img src="<%=request.getContextPath()%>/Png/happy1.svg"
-														class="icon-round bg-white display-5">
-
-												</c:when>
-												<c:otherwise>
-													<img src="<%=request.getContextPath()%>/Png/neutral.svg"
-														class="icon-round bg-white display-5">
-												</c:otherwise>
-
-
-											</c:choose>
-										</div>
-										<div class="col-md-7">
-											<div class="card-body ml-0 ml-md-3">
-												<p class="rvtitle">
-													<a href="moviedetail.ml?open=false&id=${r.MOVIE_ID}">${r.MOVIE_NAME}</a>
-												</p>
-												<p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
-												<br>
-
-												<c:choose>
-													<c:when test="${r.STAR == 1}">
-														<p class=star>★☆☆☆☆</p>
-
-													</c:when>
-
-													<c:when test="${r.STAR == 2}">
-														<p class=star>★★☆☆☆</p>
-													</c:when>
-
-													<c:when test="${r.STAR == 3}">
-														<p class=star>★★★☆☆</p>
-													</c:when>
-
-													<c:when test="${r.STAR == 4}">
-														<p class=star>★★★★☆</p>
-													</c:when>
-
-													<c:when test="${r.STAR == 5}">
-														<p class=star>★★★★★</p>
-													</c:when>
-												</c:choose>
-
-												<p class=rvbottom1>
-													<a href="ReviewUserList.rv?userId=${r.USER_ID}"
-														title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴
-													리뷰
-												</p>
-
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- Column end -->
-
-						</c:forEach>
-
-					</div>
-					<div class="center-block">
-						<div class=row>
-							<div class=col>
-								<ul class=pagination>
-
-									<c:if test="${page <= 1 }">
-										<li class=page-item><a class=page-link href=#>이전&nbsp;</a>
-										</li>
-									</c:if>
-									<c:if test="${page > 1 }">
-										<li class=page-item><a class=page-link
-											href="ReviewList.rv?page=${page-1}">이전&nbsp;</a></li>
-									</c:if>
-
-									<c:forEach var="a" begin="${startpage }" end="${endpage }">
-										<c:if test="${a == page }">
-											<li class=page-item><a class=page-link href=#>${a }</a>
-											</li>
-										</c:if>
-										<c:if test="${a != page }">
-											<li class=page-item><a class=page-link
-												href="ReviewList.rv?page=${a }">${a }</a></li>
-										</c:if>
-									</c:forEach>
-
-									<c:if test="${page >= maxpage }">
-										<li class=page-item><a class=page-link href=#>&nbsp;다음</a>
-										</li>
-									</c:if>
-									<c:if test="${page < maxpage }">
-										<li class=page-item><a class=page-link
-											href="ReviewList.rv?page=${page+1 }">&nbsp;다음</a></li>
-									</c:if>
-								</ul>
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
-
-		</c:if>
-
-		<!-- 게시글이 없는 경우 -->
-		<c:if test="${listcount == 0 }">
-			<font size=5>등록된 리뷰가 없습니다.</font>
-		</c:if>
-
-
-	</div>
-	<!-- 추가... -->
-
-	<script>
-		if (
-	<%=open%>
-		)
-			document.getElementById("main").style.marginLeft = "250px";
-	</script>
+		
+	});
+}
+</script>
 </body>
 </html>
