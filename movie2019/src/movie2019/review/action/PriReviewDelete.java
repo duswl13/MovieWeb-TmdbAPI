@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
@@ -24,9 +25,14 @@ public class PriReviewDelete implements Action {
 		ActionForward forward = new ActionForward();
 		
 		boolean result = false;
+		String userId = null;
 		
-		int num = 0;
-		result = reviewdao.PriReviewDelete(num);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("id") != null) 
+			userId = (String) session.getAttribute("id");
+		
+		int num = Integer.parseInt(request.getParameter("movieId"));
+		result = reviewdao.PriReviewDelete(num,userId);
 	
 		//삭제 처리 실패한 경우
 		if (result == false) {
