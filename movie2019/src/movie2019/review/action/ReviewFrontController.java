@@ -160,7 +160,18 @@ public class ReviewFrontController extends HttpServlet {
 
 			
 			
+		}else if (command.equals("/LikeAction.rv")) {
+		action = new LikeAction();
+		try {
+			forward = action.execute(request, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		
+		
+	}
 		
 		
 		
