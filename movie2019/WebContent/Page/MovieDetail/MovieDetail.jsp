@@ -402,16 +402,20 @@ div .rvsubmit {text-align:center;}
           vertical-align: middle;
         }
         
-        
+.modal-content {
+    margin-top: 160px;
+    margin-left: auto;
+}
+
 </style>
 
 <script>
-$(function(){
-    
-     $("button").last().click(function(){
-        history.back();
-     });
-})
+  $(function(){
+	 
+	  $(".submitbutton").click(function(){
+		  history.back();
+	  });
+  })
 </script>
 
 </head>
@@ -758,7 +762,7 @@ $(function(){
                   <div class="rvcontent">
                      <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${review.REVIEW_CONTENT }</textarea>
                   </div>      
-                  <div class=rvsubmit>${review.USER_ID}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant">수정</button>
+                  <div class=rvsubmit>${review.USER_ID}님이 작성한 리뷰를 <button type=submit class="submitbutton font-gradiant">수정</button>
                   </div>
             </div>
             

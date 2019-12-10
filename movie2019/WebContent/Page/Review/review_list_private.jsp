@@ -136,6 +136,147 @@ body {
 
 .prvcontent {font-size:9pt;}
 
+
+/*연수모달*/
+
+#rvModal {
+   display: none} /*처음에 모달 안 보이게*/ 
+
+.modal-content {padding:30px;}
+
+#rvModal tr .rvtr {
+   text-align: center
+}
+
+#rvModal td .rvtd {
+   padding: 10px;
+}
+
+#rvModal button {
+   width:150px;
+   height: 40px;
+   line-height: 40px;
+   padding:0px;
+   font-weight: bold;
+   color: white;
+   border: 0 none;
+   border-radius: 3px;
+   cursor: pointer;
+   margin: 10px 5px;
+}
+
+#rvModal .btn-gradiant {
+   
+      background: #2cdd9b;
+    background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+#rvModal .btn-gradiant:hover {
+      background: #1dc8cc;
+    background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+    background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);   
+}
+
+#rvModal span {
+   font-size: 8pt;
+}
+
+#rvModal input {
+   background: #edf1f2;
+   border: 0px solid SteelBlue;
+   border-radius: 0px;
+   color: #141414;
+   font-size: 9pt;
+   padding: 5px;
+   margin: 5px;
+}
+
+#rvModal textarea {
+   width: 90%;
+   background: #edf1f2;
+   border: 0px solid SteelBlue;
+   border-radius: 0px;
+   color: #141414;
+   font-size: 10pt;
+   padding: 5px;
+   margin: 5px;
+}
+
+#rvModal .title {color:#27AE60} /**/
+
+#rvModal .bg-gradiant {
+   
+      background: #1dc8cc;
+    background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc 0%, #2cdd9b 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#1dc8cc), to(#2cdd9b));
+    background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+    background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+    
+}
+
+#rvModal .bg-gradiant:hover {
+      background: #2cdd9b;
+    background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    background: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+#rvModal .font-gradiant {
+    color: #2cdd9b;
+    color: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%, #1dc8cc 100%);
+    color: -webkit-gradient(linear, left top, right top, from(#2cdd9b), to(#1dc8cc));
+    color: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    color: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+    color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+#rvModal .submtbutton {
+   width:40px;
+   font-size:12pt;
+   background:none;
+}
+
+#rvModal button .modalclose{color:#2cdd9b; font-size:13pt;}
+
+#rvModal .floatright {float:right; padding:0px; margin-top:-20px;}
+#rvModal .reviewarea {right:clear;}
+
+div .rvsubmit {text-align:center;}
+
+       /* modal position(center)*/
+        .modal {
+          text-align: center;
+        }
+        @@media screen and (min-width: 768px) {
+          .modal:before {
+            display: inline-block;
+            vertical-align: middle;
+            content: " ";
+            height: 100%;
+          }
+        }
+        .modal-dialog {
+          display: inline-block;
+          text-align: left;
+          vertical-align: middle;
+        }
+        
+#rvModal .modal-content {
+    margin-top: 160px;
+    margin-left: auto;
+}
+
+
 </style>
 
 
@@ -212,7 +353,15 @@ if(request.getParameter("open") != null){
                         </c:when>
                       
                         </c:choose>
-                  </div> <!-- content end -->                 
+                        
+                        
+                        <a href="#"> <!-- 이 부분 #으로 해야 뒷배경 나옴 -->
+							<button data-toggle="modal" data-target="#rvModal">수정/삭제</button></a>
+						<!-- 이 부분 추가 -->
+
+                        
+                        
+                  		</div> <!-- content end -->                 
                     </div>
                 </div>
             </div>
@@ -325,5 +474,42 @@ function print(list){
 	
 }
 </script>
+
+
+<!-- 연수  modal2 시작-->
+<c:forEach items="${reviewlist }" var="item">
+      <div class="modal" id="rvModal">
+         <div class="modal-dialog ">
+            <div class="modal-content">
+
+      <!-- Modal body -->
+               <div class="modal-body">
+      <form name=review_modify_form action="<%=request.getContextPath() %>/PriReviewModifyAction.rv?movieId=${item.MOVIE_ID}" method=post>
+
+      <div class="outermodal">
+               <button type="button" class="close modalclose" data-dismiss="modal" aria-label="Close">X</button>
+            <div class="achtungfloat">   
+               <h4 class="mvtitle font-gradiant">${list.title}</h4>
+               
+            </div>
+            <div class="reviewarea">
+            <input name=movieid type=text hidden value=${movieId}>
+                  <div class="rvtitle">제목<input type=text required="required" name=rvtitle value=${item.REVIEW_TITLE }></div>
+                  <div class="rvcontent">
+                     <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${item.REVIEW_CONTENT}</textarea>
+                  </div>      
+                  <div class=rvsubmit>${item.USER_ID}님이 작성한 리뷰 <button type=submit class="submtbutton font-gradiant">수정</button>
+                  </div>
+            </div>
+            
+         </div>
+      </form>
+               </div>       
+            </div>
+         </div>
+      </div>
+</c:forEach>   
+<!-- 연수 모달2 여기까지 -->
+
 </body>
 </html>
