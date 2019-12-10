@@ -43,7 +43,7 @@ $(function(){
 	<form action="FAQModifyAction.fa" method="post" 
 	name="modifyform">
 	<input type="hidden" name="FAQ_NUMBER" value="${faq.FAQ_NUMBER }">
-		<h1>FAQ 게시글 수정</h1>
+		<h1 style="font-size: 1.5rem;"><strong>FAQ 게시글 수정</strong></h1>
 		<div class="form-group">
 			<label for="faq_name">글쓴이</label>
 			<input name="FAQ_NAME" id="faq_name" value="${faq.FAQ_NAME }" readOnly type="text"
@@ -59,7 +59,7 @@ $(function(){
 			<textarea name="FAQ_CONTENT" id="faq_content" rows="10" class="form-control">${faq.FAQ_CONTENT }</textarea>
 		</div>
 		
-		<div class="form-group">
+		<div class="form-group" style="text-align: center;">
 			<button type=submit class="btn btn-primary">수정</button>
 			<button type=reset class="btn btn-danger"onClick="history.go(-1)">취소</button>
 		</div>

@@ -43,6 +43,7 @@ h4{
 #ed{
 	float:right;
 }
+
 </style>
 
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -79,16 +80,16 @@ $(function(){
 <c:set var="p" value="${posterinfo }"/>   
 	<div class="row">
 		<div class="panel panel-default" style="margin:0 auto;">
-			<div class="panel-heading" style="background-color : white; ">  <h4>나의 정보</h4></div>
+			<div class="panel-heading" style="background-color : white; ">  <h4><strong>나의 정보</strong></h4></div>
 				<div class="panel-body" style="background-color : white; ">
 					<div class="col-xs-6 col-sm-3">
 					<c:if test="${empty p.USER_POSTER}">
 						<img alt="poster" src="Page/MyPage/MyInfo/defualt_poster.png" 
-						id="poster" class="img-thumbnail img-responsive" style="width:80%;"> 
+						id="poster" class="img-thumbnail img-responsive" style="width:100%; margin-top:10px;"> 
 					</c:if>
 					<c:if test="${not empty p.USER_POSTER}">
 						<img alt="poster" src="https://image.tmdb.org/t/p/w300/${p.USER_POSTER}" 
-						id="poster" class="img-thumbnail img-responsive" style="width:80%;"> 
+						id="poster" class="img-thumbnail img-responsive" style="width:100%; margin-top:10px;"> 
 					</c:if>
                     </div>
                     <div class="col-xs-6 col-sm-6" ><hr>
@@ -103,13 +104,13 @@ $(function(){
                         	<c:set var="g" value="${genresinfo }"/>                       				
                         	<li><p><span class="glyphicon glyphicon-heart-empty one" style="width:50px;"></span>관심 장르: <span id="genres">ㅎㅎ</span></p></li>
                         	<input type="hidden" name="MOVIE_ID" value="" id="genres2">
-                             
                         </ul>
+                        <hr>
 						</div>
                         <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >
                         <div id="ed">
-	                        <label><a href="user_editview.mu?user_id=${u.USER_ID } ">정보 수정    <span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label><br><br>
-	                        <label><a href="user_delete.mu">회원 탈퇴    <span class="glyphicon glyphicon-minus-sign one" style="width:50px;"></span></a></label>
+	                        <label><a href="user_editview.mu?user_id=${u.USER_ID }" style="color:black;" >정보 수정    <span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label><br><br>
+	                        <label><a href="user_delete.mu" style="color:black;" >회원 탈퇴    <span class="glyphicon glyphicon-minus-sign one" style="width:50px;"></span></a></label>
                         </div>
                      </div>
       

@@ -44,7 +44,7 @@ $(function(){
          onclick="openNav()">&#9776;</span>
 <div class="container">
 	<form action="FAQAddAction.fa" method="post" name="faqform">
-		<h1>FAQ 게시글 작성</h1>
+		<h1><strong>FAQ 게시글 작성</strong></h1>
 		<div class="form-group">
 			<label for="faq_name">글쓴이</label>
 			<input name="FAQ_NAME" id="faq_name" value="${id }" readOnly type="text" size="10" maxlength="30"
@@ -58,7 +58,7 @@ $(function(){
 			<label for="faq_content">내용</label>
 			<textarea name="FAQ_CONTENT" id="faq_content" cols="67" rows="10" class="form-control"></textarea>
 		</div>
-		<div class="form-group">
+		<div class="form-group" style="text-align: center;">
 			<button type=submit class="btn btn-primary">등록</button>
 			<button type=reset class="btn btn-danger">취소</button>
 		</div>
