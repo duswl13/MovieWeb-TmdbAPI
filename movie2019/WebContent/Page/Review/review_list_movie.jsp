@@ -168,7 +168,27 @@ a:hover {
     height: 250px;
 }
 
+.page-item {
+	margin: 5px;
+}
 
+.page-item .page-link {
+	margin: 0px;
+	background-color: #141414;
+	border: 0px;
+	color: white;
+}
+
+.row .wrap-rvlist {
+	display: flex;
+	flex-wrap: wrap;
+	margin-right: -100px;
+	margin-left: -15px;
+}
+
+li .current {
+	font-weight: bold;
+}
 
 
 </style>
