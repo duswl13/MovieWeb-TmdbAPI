@@ -13,6 +13,11 @@ import javax.sql.DataSource;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import movie2019.login.db.Member;
+
+
+
+
 public class BoardDAO {
 	DataSource ds;
 	Connection con;
@@ -52,10 +57,10 @@ public class BoardDAO {
 			pstmt.setString(4, boarddata.getBOARD_CONTENT());
 			pstmt.setString(5, boarddata.getBOARD_FILE());
 
-			// 원문의 경우 BOARD_RE_LEV, BOARD_RE_SEQ 필드 값은 0이다.
-			pstmt.setInt(6, 0); // BOARD_RE_LEV 필드
-			pstmt.setInt(7, 0); // BOARD_RE_SEQ 필드
-			pstmt.setInt(8, 0); // BOARD_READCOUNT 필드
+			// 원문의 경우 BOARD_RE_LEV, BOARD_RE_SEQ 필드 값은 0
+			pstmt.setInt(6, 0); 
+			pstmt.setInt(7, 0); 
+			pstmt.setInt(8, 0); 
 
 			int result2 = pstmt.executeUpdate();
 
@@ -138,11 +143,7 @@ public class BoardDAO {
 
 	// 글 목록 보기
 	public List<BoardVO> getBoardList(int page, int limit) {
-		// page:페이지
-		// limit: 페이지 당 목록의 수
-		// BOARD_RE_REF desc, BOARD_RE_SEQ asc에 의해 정렬한 것을
-		// 조건절에 맞는 rnum의 범위만큼 가져오는 쿼리문
-		
+	
 		String board_list_sql = "select * " 
 		                      + "from (select rownum rnum, b.* " 
 				              + " from (select * from mboard "
@@ -164,7 +165,7 @@ public class BoardDAO {
 			pstmt.setInt(2, endrow);
 			rs = pstmt.executeQuery();
 
-			// DB에사 가져온 VO객체에 담는다.
+			
 			while (rs.next()) {
 				BoardVO board = new BoardVO();
 				board.setBOARD_NUM(rs.getInt("BOARD_NUM"));
@@ -178,9 +179,9 @@ public class BoardDAO {
 				// board.setBOARD_RE_SEQ(rs.getInt("BOARD_RE_SEQ"));
 				board.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
 				board.setBOARD_DATE(rs.getDate("BOARD_DATE"));
-				list.add(board); // 값을 담은 객체를 리스트에 저장한다.
+				list.add(board); 
 			}
-			return list; // 값을 담은 객체를 저장한 리스트를 호출한 곳으로 가져간다.
+			return list;
 
 		} catch (Exception e) {
 			System.out.println("getBoardList()에러:" + e);
@@ -306,42 +307,27 @@ public class BoardDAO {
 	
 	//글 답변
 	   public int boardReply(BoardVO board) {
-		      //board 테이블의 board_num 필드의 최대값을 구해와서 글을 등록할 떄
-		      //글 번호를 순차적으로 지정하기 위함입니다.
-		      //또한 DB에 저장한 후 다시 보여주기 위해 board_num 필드의 값을 리턴합니다.
+		   
 		      String board_max_sql="select max(board_num) from mboard";
 		    
 		      int num=0;
-		      /*
-		       * 답변을 할 원문 글 그룹 번호입니다.
-		       * 답변을 달게 되면 답변 글은 이 번호와 같은 관련 글 번호를 갖게 처리되면서 같은 그룹에 속하게 됩니다.
-		       * 글 목록에서 보여줄 때 하나의 그룹으로 묶여서 출력됩니다.
-		       */
+		     
 		      int re_ref=board.getBOARD_RE_REF();
 		      System.out.println("re_Ref="+re_ref);
-		      /*
-		       * 답글의 깊이를 의미합니다.
-		       * 원문에 대한 답글이 출력될 때 한번 들여쓰기 처리가 되고 답글에 대한 답글은 들여쓰기가 두번 처리되게 합니다.
-		       * 월문인 경우 이 값이 0이고 원문의 답글은 1, 답글의 답글은 2가 됩니다.
-		       */
+		     
 		      int re_lev=board.getBOARD_RE_LEV();
-		      
-		      //값은 관련 글 중에서 해당 글이 출력되는 순서입니다.
+		    
 		      int re_seq=board.getBOARD_RE_SEQ();
 		      
 		      try {
 		         con=ds.getConnection();
-		         //트랜잭션을 이용하귀 위해서 setAutoCommit을 false로 설정합니다.
+		         //트랜잭션을 이용하귀 위해서 setAutoCommit을 false로 설정
 		         con.setAutoCommit(false);
 		         
 		         pstmt=con.prepareStatement(board_max_sql);
 		         rs=pstmt.executeQuery();
 		         if(rs.next())
 		            num=rs.getInt(1)+1;   //답변 삽입할 글번호
-		         
-		         //BOARD_RE_REF, BOARD_RE_SEQ 값을 확인하여 원문 글에 다른 답글이 있으면
-		         //다른 답글들의 BOARD_RE_SEQ값을 1씩 증가시킵니다.
-		         //현재 글을 다른 답글보다 앞에 출력되게 하기 위해서입니다.
 		         
 		         String update_sql="update mboard" 
 		               + "         set BOARD_RE_SEQ = BOARD_RE_SEQ + 1" 
@@ -352,7 +338,7 @@ public class BoardDAO {
 		         pstmt.setInt(1, re_ref);
 		         pstmt.setInt(2, re_seq);
 		         int result1=pstmt.executeUpdate();
-		         //등록할 답변 글의 BOARD_RE_LEV, BOARD_RE_SEQ 값을 원문 글보다 1씩 증가시킵니다.
+		         //등록할 답변 글의 BOARD_RE_LEV, BOARD_RE_SEQ 값을 원문 글보다 1씩 증가
 		         re_seq=re_seq+1;
 		         re_lev=re_lev+1;
 		         
@@ -377,7 +363,7 @@ public class BoardDAO {
 		         pstmt.setInt(9, re_seq);   
 		         pstmt.setInt(10, 0);      //BOARD_READCOUNT(조회수)는 0
 		         int result2=pstmt.executeUpdate();
-		         if(result1>=0&& result2==1) {
+		         if(result1>=0 && result2==1) {
 		            con.commit();
 		            con.setAutoCommit(true);   //다시 true로 설정
 		         }else {
@@ -473,15 +459,20 @@ public class BoardDAO {
 	//글쓴이인지 확인 - 로그인 한 비밀번호로 확인
 	public boolean isBoardWriter(int num, String pass) {
 
-		String board_sql = "select * from mboard "
-				          +"where BOARD_NUM = ?";
+		String board_sql = "select * from USERS "
+				         +"where USER_ID IN(SELECT BOARD_NAME FROM MBOARD "
+				         +"where BOARD_NUM = ?)";
+
+		
 		try {
 			con =ds.getConnection();
 			pstmt = con.prepareStatement(board_sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-			if(rs.next()) {             //글작성 비번이라 회원 가입 비번이랑은 다름
-				if(pass.equals(rs.getString("BOARD_PASS"))) {
+			if(rs.next()) {    
+				 
+				//입력받은 보드패스가 유저패스와 같다면 삭제
+				if(pass.equals(rs.getString("USER_PASS"))) {
 				return true;				
 			   }
 			}
@@ -721,11 +712,10 @@ public class BoardDAO {
 				"				where rnum>=? and rnum<=?";
 			      List<BoardVO> list = new ArrayList<BoardVO>();
 			   
-			      // 한 페이지 당 10개씩 목록인 경우 1페이지, 2페이지, 3페이지, 4페이지 ...
 			      int startrow = (page - 1) * limit + 1;
-			      // 읽기 시작할 row 번호(1 11 21 31 ...)
+			    
 			      int endrow = startrow + limit - 1;
-			      // 읽을 마지막 row 번호 (10 20 30 40 ...)
+			     
 			      
 			      try {
 			         con = ds.getConnection();
@@ -734,7 +724,6 @@ public class BoardDAO {
 			         pstmt.setInt(2, endrow);
 			         rs = pstmt.executeQuery();
 
-			         // DB에서 가져온 데이터를 VO 객체에 담는다
 			         while (rs.next()) {
 			            BoardVO b = new BoardVO();
 			           
@@ -750,7 +739,7 @@ public class BoardDAO {
 			            b.setBOARD_READCOUNT(rs.getInt("BOARD_READCOUNT"));
 			            b.setBOARD_DATE(rs.getDate("BOARD_DATE"));
 			            System.out.println(b.getBOARD_NUM() + ":"+b.getBOARD_SUBJECT());
-			            list.add(b); // 값을 담은 객체를 리스트에 저장합니다.
+			            list.add(b); 
 			         }
 			    
 			      } catch (SQLException e) {
@@ -777,8 +766,57 @@ public class BoardDAO {
 			               e.printStackTrace();
 			            }
 			      }
-			      return list; // 값을 담은 객체를 리스트를 호출한 곳으로 가져갑니다.
+			      return list; 
 
+	}
+
+	public Member usermail(String id) {
+         
+		//유저 이멜 갖고왕
+		String sql = "select USER_EMAIL from USERS "
+				   + "where USER_ID = ? ";
+		Member user = null;
+		try {
+			con =ds.getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {  
+				user = new Member();
+			
+				user.setEmail(rs.getString("USER_EMAIL"));
+				
+			}
+		}catch (SQLException se) {
+			System.out.println("usermail()에러"+se);
+			se.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+		}
+		
+		return user;
+		
 	}
 	
 }//class

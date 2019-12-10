@@ -2,6 +2,15 @@ package movie2019.board.action;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import movie2019.login.db.Member;
+
+
+
+
+
+
 
 public class BoardDetailAction implements Action {
 
@@ -18,6 +27,19 @@ public class BoardDetailAction implements Action {
 		
 		boarddata = boarddao.getDetail(num);
 		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("id");
+		
+		
+		
+		//로그인한 회원 메일 가져와야하는디...
+		Member mem = new Member();
+		mem = boarddao.usermail(id);
+		
+	      System.out.println(mem.getEmail());
+	      
+	      request.setAttribute("mem", mem);
+	      
 		ActionForward forward = new ActionForward();
 
 		if(boarddata==null) {
@@ -32,7 +54,6 @@ public class BoardDetailAction implements Action {
 		  = new movie2019.board.comment.CommentDAO();
 		int count = cdao.getListCount(num);
 		request.setAttribute("count", count);
-		
 		request.setAttribute("boarddata", boarddata);
         forward.setRedirect(false);
    

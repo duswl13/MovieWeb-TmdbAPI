@@ -164,7 +164,7 @@ if(request.getParameter("open") != null){
    </select>
    <input name="search_word" type="text" class="form-control"
    placeholder="Search" value="${search_word }" id="search">
-   <button class="btn btn-info" type="submit" id="searchbtn">검색</button>
+   <button class="btn btn-default" type="submit" id="searchbtn">검색</button>
    </div>
    </form>
 </div>

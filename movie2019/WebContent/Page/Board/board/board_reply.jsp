@@ -65,11 +65,7 @@ if(request.getParameter("open") != null){
     <textarea name="BOARD_CONTENT" id="board_content" required
             cols="67" rows="10" class="form-control" ></textarea>
   </div>   
-  <div class="form-group">
-    <label for="board_pass">비밀번호</label>
-    <input name="BOARD_PASS" id="board_pass" required
-            type="password" class="form-control" placeholder="Enter board_pass">
-  </div> 
+
    <div class="form-group">
     <input type="submit" class="btn btn-primary" value="등록">
     <input type="button" class="btn btn-danger" 
