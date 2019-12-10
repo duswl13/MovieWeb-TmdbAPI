@@ -28,6 +28,7 @@ public class ReviewDAO {
 		}
 	}
 
+	//내리뷰모아보기 모달 띄우는 부분
 	public ReviewDetailVO detail(String id, String Movie_h) {
 		ReviewDetailVO vo = new ReviewDetailVO();
 		String sql = "select * " + "	from REVIEW " + "	where USER_ID=? and MOVIE_ID=?";
@@ -43,12 +44,11 @@ public class ReviewDAO {
 				vo.setMovie_id(rs.getInt("movie_id"));
 				vo.setReview_title(rs.getString("review_title"));
 				vo.setReview_content(rs.getString("review_content"));
-
 			}
 			return vo;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getreviewList() �뿉�윭: " + e);
+			System.out.println("getreviewList() 에러 : " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -75,6 +75,7 @@ public class ReviewDAO {
 		return vo;
 	}
 
+	//내리뷰 모아보기
 	public List<ReviewVO> getreviewMyList(String userId, int page, int limit) {
 		String sql = "SELECT * FROM(\r\n"
 				+ "   SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
@@ -119,7 +120,7 @@ public class ReviewDAO {
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getreviewList() �뿉�윭: " + e);
+			System.out.println("getreviewList() 에러 : " + e);
 		} finally {
 			if (rs != null) {
 				try {
@@ -404,6 +405,8 @@ public class ReviewDAO {
 		return false;
 	}
 
+	
+	//MovieDetail에 있는 리뷰 수정
 	public boolean reviewModify(ReviewVO modifyreview) {
 		String sql = "update review " + "set REVIEW_TITLE= ?,REVIEW_CONTENT=? " + " where USER_ID=? AND MOVIE_ID = ?";
 		try {
@@ -520,6 +523,7 @@ public class ReviewDAO {
 		return null;
 	}
 
+	//내리뷰모아보기 수정
 	public boolean PriReviewModify(ReviewVO modifyprireview) {
 		String sql = "update review " + "set REVIEW_TITLE= ?,REVIEW_CONTENT=? " + " where USER_ID=? AND MOVIE_ID = ?";
 		try {
@@ -563,7 +567,7 @@ public class ReviewDAO {
 		return false;
 	}
 
-	//
+	//내리뷰모아보기 삭제
 	public boolean PriReviewDelete(int num) {
 
 		String review_delete_sql = "delete from review where REVIEW_NUMBER = ?";
@@ -574,7 +578,7 @@ public class ReviewDAO {
 			pstmt.setInt(1, num);
 
 			int result = pstmt.executeUpdate();
-			System.out.println(result + "媛� �궘�젣�릺�뿀�떎!");
+			System.out.println(result + "리뷰 삭제 완료");
 			if (result >= 1)
 				return true;
 
@@ -609,6 +613,7 @@ public class ReviewDAO {
 
 	}
 
+	//회원이름 클릭했을 때 나오는 거
 	public List<ReviewVO> getreviewUserList(String userId, int page, int limit) {
 		String sql = "SELECT * FROM(\r\n"
 				+ "   SELECT ROWNUM R, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
@@ -753,6 +758,7 @@ public class ReviewDAO {
 		return null;
 	}
 
+	//내리뷰
 	public int getPrivateListCount(String userId) {
 		int x = 0;
 		try {
@@ -831,6 +837,7 @@ public class ReviewDAO {
 		return x;
 	}
 
+	//좋아요
 	public int addLike(int movieid, String userId, String likeId) {
 		String sql = "select * from review_like where movie_id = ? and user_id = ? and like_id=?";
 

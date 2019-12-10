@@ -198,10 +198,7 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 
-      <h3 class=rvintro>지금 이 순간,</h3>
-      <h3 class=rvintro>VOSHU의 다른 회원들은 어떤 영화를 보고 있을까요?</h3>
-      <br>
-      <span class=readit>리뷰를 남기시려면, 왼쪽 메뉴에서 영화를 검색해 보슈.</span>
+      <h3 class=rvintro>지금 이 순간~</h3>
       
 
         <br>

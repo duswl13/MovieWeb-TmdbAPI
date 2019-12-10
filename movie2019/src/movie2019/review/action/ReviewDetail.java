@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewDetailVO;
-import movie2019.review.db.ReviewVO;
 
 public class ReviewDetail implements Action{
 
@@ -26,10 +25,6 @@ public class ReviewDetail implements Action{
 		System.out.println("--------------------------------");
 		request.setAttribute("vo", vo);
 		return forward;
-		
-		
-
 	}
-	
 
 }
