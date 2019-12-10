@@ -283,11 +283,11 @@ if(request.getParameter("open") != null){
                           
                                 <p class=rvbottom1><a href="ReviewUserList.rv?userId=${r.USER_ID}" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
                   				
-                  				     <span class="btn_like">
+                  				     <span class="like" Onclick='addLike("${r.USER_ID}","${r.MOVIE_ID}")'>
            
-                  				   <img src="<%=request.getContextPath()%>/Png/like_default.svg" style="width:15px; height:15px;">
+                  				   <img class="like_img" src="<%=request.getContextPath()%>/Png/like_default.svg" style="width:15px; height:15px;">
                   				
-                  				${r.LIKE }
+                  				<span class="like_count">${r.LIKE }</span>
                   				</span>
                             </div>
                              
@@ -364,12 +364,39 @@ if(request.getParameter("open") != null){
 if(<%=open%>)
    document.getElementById("main").style.marginLeft = "250px";
 
-
-$(".btn_like").click(function(){
-	
-	alert('ajax 실행');
-	
+var click = 0;
+$('.like').click(function(){
+	click = $('.like').index(this);
 });
+
+function addLike(userID,movieID){
+	
+	$.ajax({
+		url : "LikeAction.rv",
+		data : {"likeId": userID,
+				"movieId": movieID},
+		success : function(data){
+
+				if(data == 0){
+				alert("좋아요 실패");
+				}else if(data == 1){
+
+				$('.like_img:eq('+click+')').prop('src',"<%=request.getContextPath()%>/Png/like_up.svg");
+			
+				$('.like_count:eq('+click+')').text(Number($('.like_count:eq('+click+')').text())+1);
+				}else if(data == -1){
+				alert("좋아요 이미 했음");
+				}else{
+				alert("로그인하세요.");
+				location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
+				}
+					
+		},error : function(){
+			alert("error");
+		}
+		
+	});
+}
 </script>
 </body>
 </html>
