@@ -498,8 +498,7 @@ function print(list){
 		if(list[i].face == 1)
         text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
         else
-        text += '<img src="<%=request.getContextPath()%>
-		/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
+        text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
 
 				text += '</div>';
 				text += ' <div class=content>';
