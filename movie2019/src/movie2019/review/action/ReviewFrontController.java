@@ -123,20 +123,6 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/ReviewDelete.rv")) {
-			forward = new ActionForward();
-			forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
-			forward.setPath("review/review_delete.jsp");
-
-		} else if (command.equals("/ReviewDeleteAction.rv")) {
-			action = new ReviewDeleteAction();
-			try {
-				forward = action.execute(request, response);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
 		} else if (command.equals("/ReviewModifyAction.rv")) {
 			action = new ReviewModifyAction();
 			try {

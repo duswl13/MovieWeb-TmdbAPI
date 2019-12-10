@@ -1,15 +1,13 @@
-//delete는 내 리뷰 모아보기에서만 가능한 기능
-//아이디 검증 필요 X
 package movie2019.review.action;
 
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import movie2019.review.db.ReviewDAO;
 import movie2019.review.db.ReviewVO;
+
 
 public class PriReviewDelete implements Action {
 
@@ -17,32 +15,39 @@ public class PriReviewDelete implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 
+		request.setCharacterEncoding("UTF-8");
+		
+
 		ReviewDAO reviewdao = new ReviewDAO();
 		ReviewVO reviewvo = new ReviewVO();
-		
-		request.setCharacterEncoding("UTF-8");
-		boolean result = false;
-		int num = Integer.parseInt(request.getParameter("REVIEW_NUMBER"));
 
-		result = reviewdao.PriReviewDelete(num);
 		ActionForward forward = new ActionForward();
 		
-		if (result != false) {
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('리뷰를 삭제했습니다.");
-			out.println("location.href='ReviewPrivateList.rv';");
-			out.println("</script>");
-			out.close();
-			return null;		
+		boolean result = false;
+
+		result = reviewdao.PriReviewDelete(reviewvo);
+	
+		//삭제 처리 실패한 경우
+		if (result == false) {
+			System.out.println("게시판 삭제 실패");
+			forward.setRedirect(false);
+			request.setAttribute("message", "게시판 ㅅ각제 실패!");
+			forward.setPath("error/error.jsp");
+			return forward;
 		}
-
-		System.out.println("리뷰 삭제 실패");
-		forward.setRedirect(false);
-		request.setAttribute("message", "리뷰 삭제를 실패했습니다.");
-		forward.setPath("error/error.jsp");
-		return forward;
-
+		
+		//삭제 성공한 경우 - 글 목록보기 요청 전송
+		System.out.println("게시판 삭제 성공");
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('삭제 완료~ 안녀엉');");
+		out.println("location.href='ReviewPrivateList.rv';");
+		out.println("</script>");
+		out.close();
+		return null;
+		
+		
 	}
 
 }

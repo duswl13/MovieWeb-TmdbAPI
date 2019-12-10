@@ -30,6 +30,12 @@ body {
    color:#141414;
 }
 
+
+.center-block {
+	display: flex;
+	justify-content: center; /*가운데정렬*/
+}
+
 .col {width:400px; height:300px;}
 
 .rvlist {
@@ -218,7 +224,7 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 
-      <h3 class=rvintro>지금 이 순간~</h3>
+      <h3 class=rvintro>이 영화에 있는 리뷰 보기..</h3>
       
 
         <br>
