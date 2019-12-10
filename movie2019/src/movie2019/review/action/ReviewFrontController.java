@@ -49,8 +49,6 @@ public class ReviewFrontController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 
-		
-		
 		if (command.equals("/ReviewList.rv")) {
 			action = new ReviewListAction(); // 다형성에 의한 업캐스팅
 			try {
@@ -59,11 +57,21 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
 		} else if (command.equals("/ReviewPrivateList.rv")) {
 			action = new ReviewPrivateListAction(); // 다형성에 의한 업캐스팅
 			try {
 				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		} else if (command.equals("/Reviewdetail.rv")) {
+			System.out.println("버튼클릭");
+			action = new ReviewDetail();
+			try {
+				forward = action.execute(request, response);
+				forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
+				forward.setPath("Page/Review/review_detail.jsp");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -75,7 +83,7 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (command.equals("/PriReviewDelete.rv")) {
 			action = new PriReviewDelete(); // 다형성에 의한 업캐스팅
 			try {
@@ -83,8 +91,8 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-		}  else if (command.equals("/ReviewUserList.rv")) {
+
+		} else if (command.equals("/ReviewUserList.rv")) {
 			action = new ReviewUserAction();
 			try {
 				forward = action.execute(request, response);
@@ -93,7 +101,6 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
 		} else if (command.equals("/ReviewMovieList.rv")) {
 			action = new ReviewMovieAction();
 			try {
@@ -102,14 +109,12 @@ public class ReviewFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 		} else if (command.equals("/ReviewWrite.rv")) {
 			forward = new ActionForward();
 			forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
 			forward.setPath("review/review_write.jsp");
 
-			
-			
 		} else if (command.equals("/ReviewAddAction.rv")) {
 			action = new ReviewAddAction();
 			try {
@@ -118,15 +123,11 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
-			
 		} else if (command.equals("/ReviewDelete.rv")) {
 			forward = new ActionForward();
 			forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
 			forward.setPath("review/review_delete.jsp");
 
-			
-			
 		} else if (command.equals("/ReviewDeleteAction.rv")) {
 			action = new ReviewDeleteAction();
 			try {
@@ -136,8 +137,6 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
-			
 		} else if (command.equals("/ReviewModifyAction.rv")) {
 			action = new ReviewModifyAction();
 			try {
@@ -147,8 +146,6 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
-			
 		} else if (command.equals("/ReviewMovieAction.rv")) {
 			action = new ReviewMovieAction();
 			try {
@@ -158,37 +155,17 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			
-			
-
-		}else if(command.equals("/Reviewdetail.rv")) {
-			System.out.println("버튼클릭");
-			action = new ReviewDetail();
+		} else if (command.equals("/LikeAction.rv")) {
+			action = new LikeAction();
 			try {
 				forward = action.execute(request, response);
-				forward.setRedirect(false); // 포워딩 방식으로 주소가 바뀌지 않음.
-				forward.setPath("Page/Review/review_detail.jsp");
+
 			} catch (Exception e) {
 				e.printStackTrace();
+
 			}
-
-
-		}else if (command.equals("/LikeAction.rv")) {
-		action = new LikeAction();
-		try {
-			forward = action.execute(request, response);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-
 		}
-		
-		
-		
-	}
-		
-		
-		
+
 		if (forward != null) {
 			if (forward.isRedirect()) { // 리다이렉트 됨
 				response.sendRedirect(forward.getPath());
