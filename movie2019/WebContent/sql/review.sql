@@ -48,7 +48,7 @@ SELECT * FROM
 
 	SELECT * FROM(
 	SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,
-	star, face, likes,mylike FROM
+	star, face, likes, mylike FROM
 (SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, 
 					(SELECT rating_star_value 
 					FROM RATING_STAR 

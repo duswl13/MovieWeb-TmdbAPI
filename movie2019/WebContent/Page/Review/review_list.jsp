@@ -284,11 +284,20 @@ if(request.getParameter("open") != null){
                           
                                 <p class=rvbottom1><a href="ReviewUserList.rv?userId=${r.USER_ID}" title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰</p>
                   				
+                  				
                   				     <span class="like" Onclick='addLike("${r.USER_ID}","${r.MOVIE_ID}")'>
-           
-                  				   <img class="like_img" src="<%=request.getContextPath()%>/Png/like_default.svg" style="width:15px; height:15px;">
+           							<c:choose>
+           							<c:when test="${r.LIKECHECK == 1 }">
+           							  <img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width:15px; height:15px;">
+           							</c:when>
+           							<c:otherwise>
+           							  <img class="like_img" src="<%=request.getContextPath()%>/Png/like_default.svg" style="width:15px; height:15px;">
+           							</c:otherwise>
+           							</c:choose>
+                  				 
                   				
                   				<span class="like_count">${r.LIKE }</span>
+                  				
                   				</span>
                             </div>
                              

@@ -291,8 +291,6 @@ public class ReviewDAO {
 		return null;
 	}
 
-	
-
 	public boolean isReviewWriter(int num, String pass) {
 		String review_sql = "select* from review where REVIEW_NUM=?";
 		try {
@@ -613,8 +611,6 @@ public class ReviewDAO {
 		return null;
 	}
 
-	
-
 	// 내리뷰
 	public int getPrivateListCount(String userId) {
 		int x = 0;
@@ -750,10 +746,10 @@ public class ReviewDAO {
 
 	}
 
-	public List<ReviewVO> getreviewMovieList(String movieId, int page, int limit) {
+	public List<ReviewVO> getreviewMovieList(String movieId, int page, int limit, String user_id) {
 		String sql = "SELECT * FROM(\r\n"
 				+ "   SELECT ROWNUM R, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
-				+ "   star, face,likes FROM\r\n"
+				+ "   star, face,likes, mylike FROM\r\n"
 				+ "(SELECT REVIEW_NUMBER, review.MOVIE_ID id, movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
 				+ "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
 				+ "               and MOVIE_ID = review.movie_id) star,\r\n"
@@ -761,7 +757,9 @@ public class ReviewDAO {
 				+ "               WHERE USER_ID = review.user_id \r\n"
 				+ "               and MOVIE_ID = review.movie_id) face,\r\n" + "            (SELECT count(*) \r\n"
 				+ "               FROM review_like \r\n" + "               WHERE USER_ID = review.user_id \r\n"
-				+ "               and MOVIE_ID = review.movie_id) likes" + "   FROM review,movie \r\n"
+				+ "               and MOVIE_ID = review.movie_id) likes," + "(SELECT count(*) \r\n"
+				+ "					FROM review_like \r\n" + "					WHERE USER_ID = review.user_id \r\n"
+				+ "					and MOVIE_ID = review.movie_id and like_id=?) mylike" + "   FROM review,movie \r\n"
 				+ "   where review.movie_id = movie.movie_id  and review.MOVIE_ID=? \r\n"
 				+ "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
@@ -775,9 +773,10 @@ public class ReviewDAO {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, movieId);
-			pstmt.setInt(2, startrow);
-			pstmt.setInt(3, endrow);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, movieId);
+			pstmt.setInt(3, startrow);
+			pstmt.setInt(4, endrow);
 
 			rs = pstmt.executeQuery();
 
@@ -795,6 +794,7 @@ public class ReviewDAO {
 				reiew.setSTAR(rs.getInt(10));
 				reiew.setFACE(rs.getInt(11));
 				reiew.setLIKE(rs.getInt(12));
+				reiew.setLIKECHECK(rs.getInt(13));
 				list.add(reiew);
 			}
 			return list;
@@ -827,10 +827,10 @@ public class ReviewDAO {
 		return null;
 	}
 
-	public List<ReviewVO> getreviewList(int page, int limit) {
+	public List<ReviewVO> getreviewList(String userId, int page, int limit) {
 		String sql = "SELECT * FROM(\r\n"
 				+ "   SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
-				+ "   star, face, likes FROM\r\n"
+				+ "   star, face, likes, mylike FROM\r\n"
 				+ "(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
 				+ "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
 				+ "               and MOVIE_ID = review.movie_id) star,\r\n"
@@ -838,8 +838,11 @@ public class ReviewDAO {
 				+ "               WHERE USER_ID = review.user_id \r\n"
 				+ "               and MOVIE_ID = review.movie_id) face,\r\n" + "            (SELECT count(*) \r\n"
 				+ "               FROM review_like \r\n" + "               WHERE USER_ID = review.user_id \r\n"
-				+ "               and MOVIE_ID = review.movie_id) likes" + "   FROM review,movie \r\n"
-				+ "   where review.movie_id = movie.movie_id  \r\n"
+				+ "               and MOVIE_ID = review.movie_id) likes," + "(SELECT count(*) \r\n"
+				+ "					FROM review_like \r\n" + "					WHERE USER_ID = review.user_id \r\n"
+				+ "					and MOVIE_ID = review.movie_id and like_id=?) mylike"
+
+				+ "   FROM review,movie \r\n" + "   where review.movie_id = movie.movie_id  \r\n"
 				+ "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
 		List<ReviewVO> list = new ArrayList<ReviewVO>();
@@ -852,8 +855,9 @@ public class ReviewDAO {
 		try {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, startrow);
-			pstmt.setInt(2, endrow);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, startrow);
+			pstmt.setInt(3, endrow);
 
 			System.out.println(startrow + "," + endrow);
 			rs = pstmt.executeQuery();
@@ -872,6 +876,7 @@ public class ReviewDAO {
 				reiew.setSTAR(rs.getInt(10));
 				reiew.setFACE(rs.getInt(11));
 				reiew.setLIKE(rs.getInt(12));
+				reiew.setLIKECHECK(rs.getInt(13));
 				list.add(reiew);
 			}
 			return list;

@@ -13,15 +13,14 @@ public class ReviewVO {
 	private int STAR;
 	private int FACE;
 	private int LIKE;
-	private int MYLIKE; 
+	private int LIKECHECK; 
 
-	
-	public int isMYLIKE() {
-		return MYLIKE;
+	public int getLIKECHECK() {
+		return LIKECHECK;
 	}
 
-	public void setMYLIKE(int MYLIKE) {
-		this.MYLIKE = MYLIKE;
+	public void setLIKECHECK(int lIKECHECK) {
+		LIKECHECK = lIKECHECK;
 	}
 
 	public int getLIKE() {
