@@ -29,6 +29,8 @@ public class ReviewFrontController extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
 
 		String RequestURI = request.getRequestURI();
 		System.out.println("RequestURI = " + RequestURI);

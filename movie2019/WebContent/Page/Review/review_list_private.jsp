@@ -222,7 +222,7 @@ if(request.getParameter("open") != null){
             
             
                   <div class="col-md-12 mt-3 text-center">
-                <a class="btn btn-success-gradiant text-white border-0 btn-md" href="#"><span>더보기</span></a>
+                <a class="btn btn-success-gradiant text-white border-0 btn-md"><span>더보기</span></a>
             </div>
         </div>
     
@@ -254,13 +254,19 @@ $('.btn-success-gradiant').click(function(){
 	console.log('aa');
 	$.ajax({
 		url : "ReviewPrivateList.rv",
-		type : "get",
 		data : {
 			"page" :++page,
 			"state" : "ajax"
 		},
 		success : function(data) {
-			alert(data);
+			var obj = JSON.parse(data);
+			
+			page = obj.page;
+			maxpage = obj.maxpage;
+			var list = obj.reviewlist;
+			
+			print(list);
+			more();
 		
 		},
 		error : function(err) {
@@ -280,7 +286,7 @@ function print(list){
 		text += '<div class="p-4">';
 		text +=  '<div class="icon-space">';
 		
-		if(list.face == 1)
+		if(list[i].face == 1)
         text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
         else
         text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
@@ -288,12 +294,12 @@ function print(list){
                   
         text += '</div>';
         text += ' <div class=content>';
-        text += ' <h6 class="mvtitle">'+list.MOVIE_NAME+'</h6>';
-        text += ' <p class="prvtitle">'+list.REVIEW_TITLE+'</p>';
-        text += ' <p class=prvcontent>'+list.REVIEW_CONTENT+'</p>';
-        text += ' <p class=prvdate>'+list.REVIEW_DATE+'</p>';
+        text += ' <h6 class="mvtitle">'+list[i].MOVIE_NAME+'</h6>';
+        text += ' <p class="prvtitle">'+list[i].REVIEW_TITLE+'</p>';
+        text += ' <p class=prvcontent>'+list[i].REVIEW_CONTENT+'</p>';
+        text += ' <p class=prvdate>'+list[i].REVIEW_DATE+'</p>';
                 
-        switch(list.STAR){
+        switch(list[i].STAR){
         case 1:
         	text += '  <p>★☆☆☆☆</p>';
         	break;

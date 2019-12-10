@@ -111,7 +111,7 @@ public class ReviewPrivateListAction implements Action {
 
 	      } else { // 이 부분 추가
 	    	  
-	    	  /**
+	    	
 	         System.out.println("state=ajax");
 	         JSONObject object = new JSONObject();
 	         object.put("page", page);
@@ -121,22 +121,21 @@ public class ReviewPrivateListAction implements Action {
 	         object.put("listcount", listcount);
 	         object.put("limit", limit);
 	         // List => JsonArray
-	         //JsonArray je = new Gson().toJsonTree(reviewlist).getAsJsonArray();
+	         JsonArray je = new Gson().toJsonTree(reviewlist).getAsJsonArray();
 
 	         // List => JsonElement
-	         // JsonElement je = new Gson().toJsonTree(reviewlist);
-	        // System.out.println("je = " + je);
-	        // object.add("reviewlist", je);
+	       
+	      System.out.println("je = " + je);
+	        object.put("reviewlist", je);
 
 
 				//jObject.put("results", jArray);
 				Gson gson = new Gson();
 				String json = gson.toJson(object);
 				response.getWriter().append(json);
-				System.out.println("movieList 가져옴 : " + json);
-				return null;**/
+				System.out.println("json : " + json);
+				
 	    	  
-	    	  response.getWriter().append(Integer.toString(1));
 	    	  	return null;
 
 	      }
