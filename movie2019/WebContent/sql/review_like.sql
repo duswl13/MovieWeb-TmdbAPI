@@ -7,7 +7,7 @@ LIKE_ID VARCHAR2(40) REFERENCES USERS (USER_ID),
 CONSTRAINT REVIEW_LIKE_primarykey PRIMARY KEY (MOVIE_ID, USER_ID,LIKE_ID)
 );
 
-/*Å×ÀÌºí ±¸Á¶¿¡ on delete cascade ºÙ¿©¾ßÇÔ*/
+/*ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ on delete cascade ï¿½Ù¿ï¿½ï¿½ï¿½ï¿½ï¿½*/
 
 INSERT INTO REVIEW_LIKE VALUES(330457,'duswl13','sonyeonsoo');
 INSERT INTO REVIEW_LIKE VALUES(330457,'duswl13','jiyeon');
@@ -23,7 +23,7 @@ INSERT INTO REVIEW_LIKE VALUES(330457,'sonyeonsoo','jiyeon');
 INSERT INTO REVIEW_LIKE VALUES(330457,'jiyeon','jiyeon');
 
 
-/*ÇØ´ç ¿µÈ­ ¸®ºäÀÇ ÁÁ¾Æ¿ä ¼ø »óÀ§ 3°³ Á¦¹ß ´©°¡ ½±°ÔÁ» °íÃÄ¤ÌÀú¤Ì¤Ì¤Ì*/
+/*ï¿½Ø´ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä¤ï¿½ï¿½ï¿½ï¿½Ì¤Ì¤ï¿½*/
 SELECT ROWNUM, USER_ID, MOVIE_ID, count FROM
 (SELECT USER_ID,MOVIE_ID, (SELECT COUNT(*) FROM
 				REVIEW_LIKE 
@@ -31,7 +31,7 @@ SELECT ROWNUM, USER_ID, MOVIE_ID, count FROM
 				REVIEW_LIKE.MOVIE_ID = REVIEW.MOVIE_ID) count
 FROM REVIEW WHERE MOVIE_ID= 330457 ORDER BY count DESC) where rownum <= 3;
 
-
+SELECT * FROM REVIEW_LIKE WHERE MOVIE_ID = 429617 and USER_ID='duswl13';
 
 /*
 SELECT * FROM 
@@ -43,7 +43,7 @@ SELECT * FROM
 
 			*/	
 				
-/*³» ±Û¿¡ ³»°¡ ÁÁ¾Æ¿ä ´­·¶´ÂÁö ¸®ºä¶û °°ÀÌ °¡Á®¿À´Â°Å*/
+
 SELECT REVIEW_TITLE, REVIEW_CONTENT, (SELECT count(*) FROM REVIEW_LIKE WHERE REVIEW_LIKE.MOVIE_ID =REVIEW.MOVIE_ID AND REVIEW_LIKE.USER_ID=REVIEW.USER_ID AND LIKE_ID=REVIEW.USER_ID)
 FROM REVIEW WHERE MOVIE_ID =330457 AND USER_ID='duswl13';
 
@@ -57,23 +57,23 @@ FROM REVIEW WHERE MOVIE_ID= 330457 ORDER BY count DESC);
 
 
 
-/*ÇØ´ç ¿µÈ­¿¡ ´ëÇÑ ¸®ºä ÁÁ¾Æ¿ä, Ç¥Á¤Á¡¼ö, º°Á¡Á¡¼ö  ÀüºÎ ´Ù ³ª¿À°Ô*/
+
 SELECT * FROM 
 				(SELECT 
 				
 						(SELECT COUNT(*) FROM 
 								REVIEW_LIKE 
 								WHERE REVIEW_LIKE.USER_ID = REVIEW.USER_ID AND 
-								REVIEW_LIKE.MOVIE_ID = REVIEW.MOVIE_ID) count, /*ÁÁ¾Æ¿ä*/
+								REVIEW_LIKE.MOVIE_ID = REVIEW.MOVIE_ID) count, /*ï¿½ï¿½ï¿½Æ¿ï¿½*/
 				
 						(SELECT RATING_FACE_value FROM 
 								RATING_FACE 
 								WHERE RATING_FACE.USER_ID = REVIEW.USER_ID AND 
-								RATING_FACE.MOVIE_ID = REVIEW.MOVIE_ID) face, /*Ç¥Á¤Á¡¼ö*/
+								RATING_FACE.MOVIE_ID = REVIEW.MOVIE_ID) face, /*Ç¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 						(SELECT RATING_STAR_value FROM 
 								RATING_STAR 
 								WHERE RATING_STAR.USER_ID = REVIEW.USER_ID AND 
-								RATING_STAR.MOVIE_ID = REVIEW.MOVIE_ID) star, /*º°Á¡Á¡¼ö*/
+								RATING_STAR.MOVIE_ID = REVIEW.MOVIE_ID) star, /*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 						USER_ID,MOVIE_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE
 						
 				FROM REVIEW WHERE MOVIE_ID= 330457 ORDER BY count DESC) where rownum <= 3;

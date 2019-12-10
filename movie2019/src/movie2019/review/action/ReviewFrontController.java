@@ -160,6 +160,7 @@ public class ReviewFrontController extends HttpServlet {
 
 			
 			
+
 		}else if(command.equals("/Reviewdetail.rv")) {
 			System.out.println("버튼클릭");
 			action = new ReviewDetail();
@@ -171,7 +172,20 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+
+		}else if (command.equals("/LikeAction.rv")) {
+		action = new LikeAction();
+		try {
+			forward = action.execute(request, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+
 		}
+		
+		
+		
+	}
 		
 		
 		

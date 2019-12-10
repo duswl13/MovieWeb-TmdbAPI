@@ -26,7 +26,6 @@
    margin-bottom:20px;
  }
  #writebtn {background:#2cdd9b;}
-
 </style>
 </head>
 <body>
@@ -44,28 +43,20 @@ if(request.getParameter("open") != null){
 <%} %>
 
 <div id="main">
-
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
-         
+<div>      
 <a href="BoardList.bd">
 <h1>무비 토크</h1>
 </a><br>
-
+</div>
 <div class="container">
  <%-- 게시글이 있는 경우 --%>
- <c:if test="${listcount>0 }">
- <!-- 줄보기 삭제함  -->
+ 
    <table class="table table-hover">
    <thead>
-     <tr>
-       <th colspan="3">list</th>
-       <th colspan="2">
-          <font size=3>글 개수: ${listcount }</font>
-       </th>
-     </tr>
      <tr class="table-active">
-       <th width="8%"><div>번호</div></th> <!-- 글번호 아님 -->
+       <th width="8%"><div>번호</div></th> 
        <th width="50%"><div>제목</div></th>
        <th width="14%"><div>글쓴이</div></th>
        <th width="17%"><div>날짜</div></th>
@@ -82,11 +73,8 @@ if(request.getParameter("open") != null){
         </td>
         <td>
            <div>
-             <%-- 답변글 제목 앞에 여백 처리 부분
-                  BOARD_RE_LEV, BOARD_RE_LEV, BOARD_NUM,
-                  BOARD_SUBJECT, BOARD_NAME, BOARD_DATE,
-                  BOARD_READCOUNT : property 이름 --%>
-             <c:if test="${b.BOARD_RE_LEV != 0 }"> <!-- 답글인 경우 -->
+             
+             <c:if test="${b.BOARD_RE_LEV != 0 }"> <!-- 답글인 경우 앞에 공백주고 처리 -->
                <c:forEach var="a" begin="0"
                           end="${b.BOARD_RE_LEV*2 }" step="1">
                &nbsp;
@@ -97,7 +85,7 @@ if(request.getParameter("open") != null){
              </c:if>
              
              <a href="BoardDetailAction.bd?num=${b.BOARD_NUM }">
-                ${b.BOARD_SUBJECT} 
+                ${b.BOARD_SUBJECT}  
              </a>
            </div>
         </td>
@@ -114,6 +102,7 @@ if(request.getParameter("open") != null){
     </c:forEach>
    </table>
    </tbody>
+   <!-- 페이징 처리 -->
    <div class="center-block">
      <div class="row">
        <div class="col">
@@ -157,7 +146,7 @@ if(request.getParameter("open") != null){
        </div>
      </div>
    </div>
- </c:if>
+
  <%-- 게시글이 없는 경우 --%>
  <c:if test="${listcount==0 }">
      <font size=5>등록된 글이 없습니다.</font>
@@ -187,7 +176,6 @@ if(<%=open%>)
 
 
 </script>
-<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script>
 //로그인한 회원만 글 쓰기
 $(function(){

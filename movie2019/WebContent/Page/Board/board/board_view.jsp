@@ -29,13 +29,16 @@
   }
   a {text-decoration:none;}
    h1 {text-align:center; color:#2cdd9b;}
- #mail_send {
-    
+ #mailModal {
+    display:none;
  }
  #content {
      width:89%;
     justify-content:center;
  }
+ .modal-body {text-align:center;}
+#title {font-weight:bold; font-size:15pt; color:black;}
+#text {font-size:11px; color:darkgray; margin-bottom: 3px;}
  #writer {color:silver; font-size:11pt;}
  #date {color:silver; font-size:11pt; text-align:right;}
  #writebtn {width:10%; position:relative; top:-83px; height:80px;}
@@ -58,16 +61,18 @@ if(request.getParameter("open") != null){
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
-         
+<!-- 로그인한 사람 아이디 -->         
 <input type="hidden" id="loginid" value="${id}" name="loginid">   
+<!-- 로그인한 사람 이메일 -->
 
+<input type="hidden" id="loginemail" value="${email}" name="loginemail">
 <h1>무비 토크</h1><br>
 <div class="container">
  <table class="table table-striped">
  <tr>
  <!-- 글제목 -->
   <th colspan="2">
-     <div id="title">${boarddata.BOARD_SUBJECT}</div>
+     <div id="b_subject">${boarddata.BOARD_SUBJECT}</div>
   </th> 
  </tr>
  <tr>
@@ -90,6 +95,7 @@ if(request.getParameter("open") != null){
   </td>  
  </tr>
  <tr> 
+ <!-- 첨부파일 있다면 -->
    <c:if test="${!empty boarddata.BOARD_FILE }">
     <tr>
      <td>
@@ -104,8 +110,8 @@ if(request.getParameter("open") != null){
  <tr> 
   <td colspan="2" class="center">
  
- <!-- 로그인한 회원만 답변 쓸 수 있게 (not empty : not null) -->
-   <c:if test="${not empty id }">
+ <!-- 로그인한 회원만 답변 쓸 수 있게 -->
+   <c:if test="${!empty id }">
    <a href="BoardReplyView.bd?num=${boarddata.BOARD_NUM }">
    <button type="button" class="btn btn-primary">답변</button>
    </a>
@@ -127,34 +133,14 @@ if(request.getParameter("open") != null){
     <button type="button" class="btn btn-primary">목록</button>
    </a>
    <!-- 신고 메일 보내기 -->
-   <div class="btn btn-warning" id="mail_send" data-toggle="modal"
-        data-target="#policeModal">
-    <div class="modal-header">    
-     <h5 class="modal-title" id="modal">신고하기</h5>
-     </div>
-     <div class="modal-body">
-      <form name="contact-form" class="form" action="Mail.bd" method="POST">
-       <div class="col-xs-12">
-        <label>
-            <br>
-            <span id="title">신고 사유를 작성하세요</span>
-            <br><br>
-            <textarea name="message" cols="30"rows="4" placeholder="욕설/비방/음란물/기타 등" required></textarea>
-        </label>
-        <br><div id="text">관리자에게 신고 메일이 전송됩니다</div>
-        <button type="submit" class="btn btn-warning">
-        <span class="default">신고 <i class="icon fa fa-paper-plane"></i></span>
-        </button>
-    </div>
-</form>
-     </div>
-   
-   </div>
-   <a href="#">
-    <button type="button" id="mail_send" class="btn btn-warning" onclick="send_mail()">신고</button>
+   <!-- 로그인한 회원만 신고할 수 있게 -->
+   <c:if test="${!empty id }">
+   <a herf="#">
+   <button class="btn btn-warning" data-toggle="modal"
+        data-target="#mailModal">신고</button>
    </a>
-    
-    
+   </c:if>
+
    </td>
  </tr>
  </table> 
@@ -184,8 +170,35 @@ if(request.getParameter("open") != null){
             </div>
          </div>
       </div>
-   </div>
-   
+   </div> <!-- 삭제 모달 끝 -->
+  
+  
+   <!-- 신고 모달 시작 -->
+    <div class="modal" id="mailModal">
+    <div class="modal-dialog">
+     <div class="modal-content">
+     <div class="modal-body">
+      
+        <label>
+            <br>
+            <span id="title">신고 사유를 작성하세요</span>
+            <br><br>
+            <textarea id="singo" cols="30"rows="4" placeholder="욕설/비방/음란물/기타 등" required></textarea>
+        </label>
+        <br><div id="text">관리자에게 신고 메일이 전송됩니다</div>
+        
+        <input type="hidden" name="senderMail" id="senderMail" value="dlwldus0922@gmail.com">
+        <!-- 관리자 메일 (현재는 지연 메일) -->
+        <input type="hidden" name="receiveMail" id="receiveMail" value="dlwldus0922@gmail.com">    
+        <button type="button" class="btn btn-danger" id="police" >신고</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
+    
+    </div>
+    </div> 
+    </div>
+    </div>
+     <!-- 신고 모달 끝 -->
+    
    <button type="button" id="combtn" class="btn btn-primary comm">댓글
    <span id="count">[${count }]</span></button><br>
 
@@ -214,7 +227,34 @@ if(<%=open%>)
 
 
 </script>
+
 <script>
+$(function() {
+	$("#police").click(function(){
+		mail_send();
+	});//신고 메일
+});
+
+function mail_send(){
+	$.ajax({
+		type: "post",
+		url: "Mail.bd",
+		data:{
+			"senderId" : "${id}", //신고하는 사람 아이디 (로그인 하고 있는 사람)
+			"senderMail" : "${email}", //신고하는 사람 메일
+			"receiveMail" : $("#receiveMail").val(), //관리자 메일
+			"subject" : "[신고접수] 작성자:"+ $("#writer").text()+" 제목:"+$("#b_subject").text(), //메일 제목
+			"content": "신고 사유:"+$("#singo").val() //메일 내용
+		},
+		success: function(mail){
+		
+			alert("신고가 접수되었습니다.");
+		}
+		
+	});
+	
+}
+
 
 //댓글창 일단 숨겨
 $("#comment table").hide(); //1
@@ -236,8 +276,8 @@ function getList(){
 	    	       $(rdata).each(function(){
 	    	    	   img='';
 	    	    	   if($("#loginid").val()==this.id){ //작성자에게만 보임
-	    	    		   img = "<img src='Png/write.png' width='11px' class='update'>수정"
-	    	    			   + "<img src='Png/del.png' width='11px' class='remove'>삭제"
+	    	    		   img = "<img src='Png/write.png' width='10px' class='update'>"
+	    	    			   + "<img src='Png/del.png' width='10px' class='remove'>"
 	    	    			   + "<input type='hidden' value='"+this.num+"'>";
 	    	    	   }
 	    	    	   output += "<tr><td>"+this.id+"</td>";
@@ -260,6 +300,8 @@ function getList(){
 
 //댓글 누르면 댓글리스트 펼쳐짐
 $(".comm").click(function(){
+	
+	
 	 getList();
 }); //click end
 
@@ -305,10 +347,39 @@ $("#writebtn").click(function(){
 	
  }) //$("#writebtn") end
  
+ 
+ //수정
+ $("#comment").on('click', '.update', function(){
+	 before = $(this).parent().prev().prev().text(); //선택한 내용 가져오기
+	 $("#content").focus().val(before); //댓글창에 전에 쓴 내용 불러오기
+	 num = $(this).next().next().val(); //수정할 댓글 번호
+	 $("#writebtn").text("수정"); //등록버튼 이름 수정으로 변경
+	
+	 
+ }) //수정 끝
+ 
+ //삭제
+ $("#comment").on('click', '.remove', function(){
+	 var num = $(this).next().val(); //댓글 번호
+	 
+	var re = confirm("정말 삭제하시겠어요?");
+	 if(re){
+	 $.ajax({
+		 type: "post",
+		 url:"CommentDelete.bd",
+		 data: {"num": num},
+		 success: function(result){
+			 if(result==1){
+				 getList();
+			 }
+		 }
+	 }) //ajax end
+	 }else{
+		 
+	 } 
+	 
+ }) // 삭제 끝
+ 
 </script>
-<script type="text/javascript">
-function send_mail(){
-    window.open("Page/Board/board/mailSender.jsp", "width=300, height=200, resizable=no, scrollbars=no, status=no");
-}
-</script>
+
 </html>

@@ -43,17 +43,33 @@ SELECT * FROM
 	
 	
 	
+	
+
+
 	SELECT * FROM(
 	SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,
-	star, face FROM
-(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value 
+	star, face, likes,mylike FROM
+(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, 
+					(SELECT rating_star_value 
 					FROM RATING_STAR 
 					WHERE USER_ID = review.user_id 
 					and MOVIE_ID = review.movie_id) star,
+					
 					(SELECT rating_face_value 
 					FROM RATING_FACE 
 					WHERE USER_ID = review.user_id 
-					and MOVIE_ID = review.movie_id) face
+					and MOVIE_ID = review.movie_id) face,
+					
+					(SELECT count(*) 
+					FROM review_like 
+					WHERE USER_ID = review.user_id 
+					and MOVIE_ID = review.movie_id) likes,
+					
+						
+					(SELECT count(*) 
+					FROM review_like 
+					WHERE USER_ID = review.user_id 
+					and MOVIE_ID = review.movie_id and like_id='duswl13') mylike
 	FROM review,movie 
 	where review.movie_id = movie.movie_id  and review.user_id='duswl13'
 	order by REVIEW_DATE DESC));
