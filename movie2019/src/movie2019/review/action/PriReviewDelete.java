@@ -24,20 +24,21 @@ public class PriReviewDelete implements Action {
 		ActionForward forward = new ActionForward();
 		
 		boolean result = false;
-
-		result = reviewdao.PriReviewDelete(reviewvo);
+		
+		int num = 0;
+		result = reviewdao.PriReviewDelete(num);
 	
 		//삭제 처리 실패한 경우
 		if (result == false) {
-			System.out.println("게시판 삭제 실패");
+			System.out.println("리뷰 삭제 실패");
 			forward.setRedirect(false);
-			request.setAttribute("message", "게시판 ㅅ각제 실패!");
+			request.setAttribute("message", "리뷰 ㅅ각제 실패!");
 			forward.setPath("error/error.jsp");
 			return forward;
 		}
 		
 		//삭제 성공한 경우 - 글 목록보기 요청 전송
-		System.out.println("게시판 삭제 성공");
+		System.out.println("리뷰 삭제 성공");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -45,9 +46,6 @@ public class PriReviewDelete implements Action {
 		out.println("location.href='ReviewPrivateList.rv';");
 		out.println("</script>");
 		out.close();
-		return null;
-		
-		
+		return null;		
 	}
-
 }

@@ -494,8 +494,8 @@ public class ReviewDAO {
 		return false;
 	}
 
-	// 내리뷰모아보기 삭제
-	public boolean PriReviewDelete(int num) {
+	// 내리뷰모아보기 삭제 ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+	public boolean PriReviewDelete(int num)  {
 
 		String review_delete_sql = "delete from review where REVIEW_NUMBER = ?";
 
@@ -505,7 +505,7 @@ public class ReviewDAO {
 			pstmt.setInt(1, num);
 
 			int result = pstmt.executeUpdate();
-			System.out.println(result + "리뷰 삭제 완료");
+			System.out.println(result + "리뷰 삭제 완료"); //여기까지 왔는데 java로 안가는듯
 			if (result >= 1)
 				return true;
 
@@ -535,9 +535,7 @@ public class ReviewDAO {
 				}
 			}
 		}
-
 		return false;
-
 	}
 
 	// 회원이름 클릭했을 때 나오는 거
@@ -904,8 +902,7 @@ public class ReviewDAO {
 		return null;
 	}
 
-	public boolean PriReviewDelete(ReviewVO reviewvo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
+
+	
 }
