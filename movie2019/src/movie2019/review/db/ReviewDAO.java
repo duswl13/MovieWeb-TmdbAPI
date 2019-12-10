@@ -415,51 +415,7 @@ public class ReviewDAO {
       return false;
    }
 
-   // 이 부분 잘 모르겠다 ㅠ
-   public boolean reviewDelete(int num) {
-
-      String review_delete_sql = "delete from review where REVIEW_NUMBER = ?";
-
-      try {
-         con = ds.getConnection();
-         pstmt = con.prepareStatement(review_delete_sql);
-         pstmt.setInt(1, num);
-
-         int result = pstmt.executeUpdate();
-         System.out.println(result + "개 삭제되었다!");
-         if (result >= 1)
-            return true;
-
-      } catch (SQLException ex) {
-         System.out.println("reviewDelete()에러:" + ex);
-         ex.printStackTrace();
-      } finally {
-         if (rs != null) {
-            try {
-               rs.close();
-            } catch (SQLException e) {
-               e.printStackTrace();
-            }
-         }
-         if (pstmt != null) {
-            try {
-               pstmt.close();
-            } catch (SQLException e) {
-               e.printStackTrace();
-            }
-         }
-         if (con != null) {
-            try {
-               con.close();
-            } catch (SQLException e) {
-               e.printStackTrace();
-            }
-         }
-      }
-
-      return false;
-
-   }
+ 
 
    public List<ReviewVO> getreviewPrivateList(String userId, int page, int limit) {
       String sql = "SELECT * FROM(\r\n"
@@ -536,6 +492,98 @@ public class ReviewDAO {
    }
 
 
+   public boolean PriReviewModify(ReviewVO modifyprireview) {
+	      String sql = "update review " + "set REVIEW_TITLE= ?,REVIEW_CONTENT=? " + " where USER_ID=? AND MOVIE_ID = ?";
+	      try {
+	         con = ds.getConnection();
+	         pstmt = con.prepareStatement(sql);
+	         pstmt.setString(1, modifyprireview.getREVIEW_TITLE());
+	         pstmt.setString(2, modifyprireview.getREVIEW_CONTENT());
+	         pstmt.setString(3, modifyprireview.getUSER_ID());
+	         pstmt.setInt(4, modifyprireview.getMOVIE_ID());
+	         int result = pstmt.executeUpdate();
+
+	         if (result == 1)
+	            return true;
+	      } catch (SQLException ex) {
+	         System.out.println("reviewModify()에러:" + ex);
+	         ex.printStackTrace();
+	      } finally {
+	         if (rs != null) {
+	            try {
+	               rs.close();
+	            } catch (SQLException e) {
+	               e.printStackTrace();
+	            }
+	         }
+	         if (pstmt != null) {
+	            try {
+	               pstmt.close();
+	            } catch (SQLException e) {
+	               e.printStackTrace();
+	            }
+	         }
+	         if (con != null) {
+	            try {
+	               con.close();
+	            } catch (SQLException e) {
+	               e.printStackTrace();
+	            }
+	         }
+	      }
+
+	      return false;
+	   }
+   
+   
+   
+   // 이 부분 잘 모르겠다 ㅠ
+   public boolean PriReviewDelete(int num) {
+
+      String review_delete_sql = "delete from review where REVIEW_NUMBER = ?";
+
+      try {
+         con = ds.getConnection();
+         pstmt = con.prepareStatement(review_delete_sql);
+         pstmt.setInt(1, num);
+
+         int result = pstmt.executeUpdate();
+         System.out.println(result + "개 삭제되었다!");
+         if (result >= 1)
+            return true;
+
+      } catch (SQLException ex) {
+         System.out.println("reviewDelete()에러:" + ex);
+         ex.printStackTrace();
+      } finally {
+         if (rs != null) {
+            try {
+               rs.close();
+            } catch (SQLException e) {
+               e.printStackTrace();
+            }
+         }
+         if (pstmt != null) {
+            try {
+               pstmt.close();
+            } catch (SQLException e) {
+               e.printStackTrace();
+            }
+         }
+         if (con != null) {
+            try {
+               con.close();
+            } catch (SQLException e) {
+               e.printStackTrace();
+            }
+         }
+      }
+
+      return false;
+
+   }
+   
+   
    public List<ReviewVO> getreviewUserList(String userId, int page, int limit) {
 	      String sql = "SELECT * FROM(\r\n"
 	            + "   SELECT ROWNUM R, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"

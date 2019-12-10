@@ -26,7 +26,7 @@ public class ReviewDeleteAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('리뷰를 삭제했습니다.");
-			out.println("location.href='ReviewList.rv';");
+			out.println("location.href='ReviewPrivateListAction.rv';");
 			out.println("</script>");
 			out.close();
 			return null;		

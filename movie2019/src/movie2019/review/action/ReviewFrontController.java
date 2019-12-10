@@ -60,7 +60,7 @@ public class ReviewFrontController extends HttpServlet {
 			}
 
 			
-		}else if (command.equals("/ReviewPrivateList.rv")) {
+		} else if (command.equals("/ReviewPrivateList.rv")) {
 			action = new ReviewPrivateListAction(); // 다형성에 의한 업캐스팅
 			try {
 				forward = action.execute(request, response);
@@ -68,6 +68,21 @@ public class ReviewFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else if (command.equals("/PriReviewModify.rv")) {
+			action = new PriReviewModify(); // 다형성에 의한 업캐스팅
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		} else if (command.equals("/PriReviewDelete.rv")) {
+			action = new PriReviewDelete(); // 다형성에 의한 업캐스팅
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 		}  else if (command.equals("/ReviewUserList.rv")) {
 			action = new ReviewUserAction();
