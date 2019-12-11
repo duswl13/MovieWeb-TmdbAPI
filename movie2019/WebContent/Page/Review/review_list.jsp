@@ -217,8 +217,8 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 
-<h3 class=readme>VOSHU 회원들은 지금 어떤 영화를 보고 있을까요?</h3>
-<p class=readme>리뷰를 남기시려면 왼쪽 메뉴에서 원하는 영화를 검색 / 선택해보세요.</p>
+<h2 class=readme>VOSHU 회원들은 지금 어떤 영화를 보고 있을까요?</h2>
+<p class=readme>리뷰를 남기시려면 왼쪽 메뉴에서 원하는 영화를 검색해보세요.</p>
       
       <br>
         

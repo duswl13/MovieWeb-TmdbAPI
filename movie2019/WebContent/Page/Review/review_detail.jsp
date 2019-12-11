@@ -15,7 +15,7 @@
 					<div class="reviewarea">
 
 						<div class="rvtitle">
-							제목<input type=text required="required" name=rvtitle value=${vo.review_title }>
+							한 줄 감상<input type=text required="required" name=rvtitle value=${vo.review_title }>
 						</div>
 						<div class="rvcontent">
 							<textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${vo.review_content}</textarea>
@@ -29,10 +29,8 @@
 							<button type="submit" class="submitbutton button-gradiant"
 								value="delete"
 								onclick="javascript: form.action='<%=request.getContextPath() %>/PriReviewDelete.rv?movieId=${vo.movie_id}';">삭제</button>
-
 						</div>
 					</div>
-
 				</div>
 			</form>
 		</div>
