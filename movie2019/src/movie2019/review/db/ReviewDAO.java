@@ -379,13 +379,18 @@ public class ReviewDAO {
 	public List<ReviewVO> getreviewPrivateList(String userId, int page, int limit) {
 		String sql = "SELECT * FROM(\r\n"
 				+ "   SELECT ROWNUM R, REVIEW_NUMBER, id,name, poster ,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE,\r\n"
-				+ "   star, face FROM\r\n"
+				+ "   star, face, likes FROM\r\n"
 				+ "(SELECT REVIEW_NUMBER, review.MOVIE_ID id ,movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
 				+ "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
 				+ "               and MOVIE_ID = review.movie_id) star,\r\n"
 				+ "               (SELECT rating_face_value \r\n" + "               FROM RATING_FACE \r\n"
 				+ "               WHERE USER_ID = review.user_id \r\n"
-				+ "               and MOVIE_ID = review.movie_id) face\r\n" + "   FROM review,movie \r\n"
+				+ "               and MOVIE_ID = review.movie_id) face,\r\n" 
+				+ "            (SELECT count(*) \r\n"
+				+ "               FROM review_like \r\n" + "               WHERE USER_ID = review.user_id \r\n"
+				+ "               and MOVIE_ID = review.movie_id) likes"
+				
+				+ "   FROM review,movie \r\n"
 				+ "   where review.movie_id = movie.movie_id  and USER_ID=?\r\n"
 				+ "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
@@ -416,6 +421,7 @@ public class ReviewDAO {
 				reiew.setREVIEW_DATE(rs.getDate(9));
 				reiew.setSTAR(rs.getInt(10));
 				reiew.setFACE(rs.getInt(11));
+				reiew.setLIKE(rs.getInt(12));
 				list.add(reiew);
 			}
 			return list;
@@ -543,13 +549,17 @@ public class ReviewDAO {
 	public List<ReviewVO> getreviewUserList(String userId, int page, int limit) {
 		String sql = "SELECT * FROM(\r\n"
 				+ "   SELECT ROWNUM R, REVIEW_NUMBER, id, name, poster, USER_ID, REVIEW_TITLE, REVIEW_CONTENT, REVIEW_DATE, \r\n"
-				+ "   star, face FROM\r\n"
+				+ "   star, face, likes FROM\r\n"
 				+ "(SELECT REVIEW_NUMBER, review.MOVIE_ID id, movie.MOVIE_NAME name, movie.movie_poster poster,USER_ID,REVIEW_TITLE,REVIEW_CONTENT,REVIEW_DATE, (SELECT rating_star_value \r\n"
 				+ "               FROM RATING_STAR \r\n" + "               WHERE USER_ID = review.user_id \r\n"
 				+ "               and MOVIE_ID = review.movie_id) star,\r\n"
 				+ "               (SELECT rating_face_value \r\n" + "               FROM RATING_FACE \r\n"
 				+ "               WHERE USER_ID = review.user_id \r\n"
-				+ "               and MOVIE_ID = review.movie_id) face\r\n" + "   FROM review,movie \r\n"
+				+ "               and MOVIE_ID = review.movie_id) face,\r\n" 
+				+ "            (SELECT count(*) \r\n"
+				+ "               FROM review_like \r\n" + "               WHERE USER_ID = review.user_id \r\n"
+				+ "               and MOVIE_ID = review.movie_id) likes"
+				+ "   FROM review,movie \r\n"
 				+ "   where review.movie_id = movie.movie_id and USER_ID=?  \r\n"
 				+ "   order by REVIEW_DATE DESC)) where R >=? and R <=?";
 
@@ -580,6 +590,7 @@ public class ReviewDAO {
 				reiew.setREVIEW_DATE(rs.getDate(9));
 				reiew.setSTAR(rs.getInt(10));
 				reiew.setFACE(rs.getInt(11));
+				reiew.setLIKE(rs.getInt(12));
 				list.add(reiew);
 			}
 			return list;

@@ -414,7 +414,7 @@ if(request.getParameter("open") != null){
 											</c:when>
 
 										</c:choose>
-
+										<h5>like : ${item.LIKE}</h5>
 
 										<button class="button-gradiant rvdetailbtn" data-toggle="modal"
 											data-target="#rvModal">수정  /  삭제</button>
@@ -539,6 +539,7 @@ function print(list){
 					break;
 
 				}
+				text += '<h5>'+list[i].LIKE+'</h5>';
 
 				text += ' <button class="button-gradiant" data-toggle="modal" data-target="#rvModal" >수정 / 삭제</button>';
 

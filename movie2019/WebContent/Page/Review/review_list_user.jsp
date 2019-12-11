@@ -212,6 +212,8 @@ if(request.getParameter("open") != null){
                         </c:when>
                       
                         </c:choose>
+                        	<h5>like : ${item.LIKE}</h5>
+                        
                   </div> <!-- content end -->                 
                     </div>
                 </div>
@@ -322,7 +324,7 @@ function print(list){
         	break;
         	
         }
-                
+        text += '<h5>'+list[i].LIKE+'</h5>';
         text +='</div></div></div></div><br><br><br>';
 	}
 	
