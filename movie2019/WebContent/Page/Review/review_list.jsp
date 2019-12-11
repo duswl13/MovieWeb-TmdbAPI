@@ -67,8 +67,8 @@ body {
 /*리뷰내용부분*/
 .rvcontent {
     font-size: 9pt;
-    width: 150px;
-    height: 130px;
+    width: 160px;
+    height: 140px;
     overflow-y: auto;
 }
 
@@ -83,9 +83,8 @@ body {
 	position: relative;
 	background-size: cover;
 	background-position: center center;
-	max-height: 250px;
-	min-height: 250px;
-}
+	max-height: 270px;
+	min-height: 270px;	}
 
 /*가운데 동글 아이콘*/
 .icon-round {
@@ -96,8 +95,8 @@ body {
 	border-radius: 100%;
 	display: inline-block;
 	position: absolute;
-	right: -18px;
-	top: 13px;
+    right: -245px;
+    top: 15px;
 	max-height: 300px;
 }
 
@@ -196,9 +195,11 @@ a:hover {
 }
 
 .mb-4, .my-4 {
-	margin-bottom: 4rem !important;
-	width: 350px;
-	height: 250px;
+	margin-bottom: 6.5rem !important;
+	margin-left:50px;
+	margin-right: 40px;
+	width: 390px;
+	height: 270px;
 }
 
 .page-item {
@@ -267,9 +268,9 @@ li .current {
 			onclick="openNav()">&#9776;</span>
 
 		<h2 class=readme>VOSHU 회원들은 지금 어떤 영화를 보고 있을까요?</h2>
-		<p class=readme>리뷰를 남기시려면 왼쪽 메뉴에서 원하는 영화를 검색해보세요.</p>
+		<p class=readme style="font-size:11pt;">리뷰를 남기시려면, 왼쪽 메뉴에서 원하는 영화를 검색해보세요.</p>
 
-		<br>
+		<br><br>
 
 		<!-- 글이 있는 경우 -->
 		<c:if test="${listcount > 0 }">
@@ -352,9 +353,9 @@ li .current {
 
 												</p>
 												
-												<p class="rvbottom1 floatright">
+												<p class="rvbottom1 floatright" style="margin-right:10px;">
 													<a href="ReviewUserList.rv?userId=${r.USER_ID}"
-														title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>
+														title="${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>
 												</p>
 											</div>
 
@@ -443,7 +444,7 @@ function addLike(userID,movieID){
 				$('.like_img:eq('+click+')').prop('src',"<%=request.getContextPath()%>/Png/like_up.svg");
 				$('.like_count:eq('+click+')').text(Number($('.like_count:eq('+click+')').text())+1);
 				}else if(data == -1){
-				alert("이미 좋아요 한 리뷰입니다.");
+				alert("좋아요는 한 번만 누를 수 있습니다.");
 				}else{
 				alert("로그인한 회원만 좋아요 할 수 있습니다.");
 				location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
