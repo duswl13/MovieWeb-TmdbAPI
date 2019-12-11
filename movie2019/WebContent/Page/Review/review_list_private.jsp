@@ -115,9 +115,9 @@ body {
 
 /*칼럼크기*/
 .mb-4, .my-4 {
-width: 700px;
-    height: 320;
-    padding: 10px;
+	width: 700px;
+	height: 320;
+	padding: 10px;
 }
 
 .content {
@@ -149,7 +149,6 @@ width: 700px;
 #rvModal td .rvtd {
 	padding: 10px;
 }
-
 
 #rvModal .btn-gradiant {
 	background: #2cdd9b;
@@ -285,7 +284,6 @@ div .rvsubmit {
 	margin-left: auto;
 }
 
-
 button {
 	width: 120px;
 	height: 40px;
@@ -300,13 +298,27 @@ button {
 	margin: 10px 5px;
 }
 
-
 /*더보기버튼*/
 .morebtn {
-    width: 300px;
-    padding: 15px 45px;
-    font-size: 16px;
-    font-weight:bold;
+	width: 300px;
+	padding: 15px 45px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.starcol {
+	color: gold;
+}
+
+.p-4 {
+	width: 700px
+}
+
+.prvcontent {
+	width: 300px;
+	height: 150px;
+	padding: 10px;
+
 }
 </style>
 
@@ -315,7 +327,7 @@ button {
 <script type="text/javascript">
 
 $(function(){
-   
+	
    $(document).on("click",".button-gradiant",function(){ 
       $.ajax({
             url : "Reviewdetail.rv",
@@ -327,12 +339,10 @@ $(function(){
                console.log(data);
                $("#rvModal").html("");
                $("#rvModal").html(data);
-            
             },
             error : function(err) {
                console.log("오류");
             }
-
          });
    });
 });
@@ -398,28 +408,24 @@ if(request.getParameter("open") != null){
 
 										<c:choose>
 											<c:when test="${item.STAR == 1}">
-												<p>★☆☆☆☆</p>
+												<p class=starcol>★☆☆☆☆</p>
 											</c:when>
 											<c:when test="${item.STAR == 2}">
-												<p>★★☆☆☆</p>
+												<p class=starcol>★★☆☆☆</p>
 											</c:when>
 											<c:when test="${item.STAR == 3}">
-												<p>★★★☆☆</p>
+												<p class=starcol>★★★☆☆</p>
 											</c:when>
 											<c:when test="${item.STAR == 4}">
-												<p>★★★★☆</p>
+												<p class=starcol>★★★★☆</p>
 											</c:when>
 											<c:when test="${item.STAR == 5}">
-												<p>★★★★★</p>
+												<p class=starcol>★★★★★</p>
 											</c:when>
-
 										</c:choose>
 
-
-										<button class="button-gradiant rvdetailbtn" data-toggle="modal"
-											data-target="#rvModal">수정  /  삭제</button>
-
-
+										<button class="button-gradiant rvdetailbtn"
+											data-toggle="modal" data-target="#rvModal">수정 / 삭제</button>
 
 									</div>
 									<!-- content end -->
@@ -431,15 +437,13 @@ if(request.getParameter("open") != null){
 						<br>
 					</c:forEach>
 
-
-
 				</div>
-
-<br><br>
+				<br> <br>
 				<div class="col-md-12 mt-3 text-center">
-					<a class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
+					<a
+						class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
 				</div>
-<br><br><br>
+				<br> <br> <br>
 			</div>
 
 		</div>
@@ -490,9 +494,6 @@ $('.btn-success-gradiant').click(function(){
 
    });//ajax
 });
-
-
-
 
 
  

@@ -1,5 +1,4 @@
-<!-- 리뷰 클릭 시 첫 화면 -->
-<!-- 이미지 들어가는 템플릿-->
+<!-- 영화상세에서 리뷰더보기클릭 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -173,13 +172,14 @@ a:hover {
 }
 
 .rvintro {
-   color: #edf1f2;
-   margin-left: 150px;
+	color: #edf1f2;
+	margin-left: 150px;
 }
 
 .readme {
-   color: #edf1f2;
-   margin-left: 150px;
+	color: #edf1f2;
+	margin-left: 150px;
+	font-size:10pt;
 }
 
 .star {
@@ -245,10 +245,16 @@ li .current {
 
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
-<c:forEach var="r" items="${reviewlist}">
-		<h2 class=rvintro>VOSHU 회원들이 <b class=titlebold>${r.MOVIE_NAME}</b>에 남긴 리뷰</h2>
-		<p class=readme>아이디를 클릭하면 그 회원이 작성한 리뷰 리스트를 볼 수 있어요.</p>
-</c:forEach>
+
+
+		<c:forEach var="r" items="${reviewlist}" varStatus="status">
+			<c:if test="${status.count == 1}">
+				<h5 class=rvintro>
+					VOSHU 회원들이 <b class=titlebold>${r.MOVIE_NAME}</b> 에 남긴 리뷰
+				</h5>
+				<p class=readme>아이디를 클릭하면 각 회원이 작성한 리뷰 리스트를 볼 수 있어요.</p>
+			</c:if>
+		</c:forEach>
 
 		<br>
 
@@ -424,10 +430,11 @@ function addLike(userID,movieID){
 				$('.like_img:eq('+click+')').prop('src',"<%=request.getContextPath()%>/Png/like_up.svg");
 				$('.like_count:eq('+click+')').text(Number($('.like_count:eq('+click+')').text())+1);
 				} else if(data == -1) {
-				alert("좋아요 이미 했음");
+				alert("이미 좋아요 한 리뷰입니다.");
 				} else {
 				alert("로그인하세요.");
-				location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
+				location.href='<%=request.getContextPath()%>
+		/Page/Login/login.jsp';
 							}
 						},
 						error : function() {
