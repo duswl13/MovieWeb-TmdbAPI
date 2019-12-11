@@ -407,6 +407,13 @@ div .rvsubmit {text-align:center;}
     margin-left: auto;
 }
 
+::-webkit-scrollbar{width: 10px;}
+::-webkit-scrollbar-track {background-color:#141414;}
+::-webkit-scrollbar-thumb {background-color:#gray; border-radius: 10px;}
+::-webkit-scrollbar-thumb:hover {background: #gray;}
+::-webkit-scrollbar-button:start:decrement,::-webkit-scrollbar-button:end:increment {
+width:10px;height:10px;background:#gray;}
+
 </style>
 
 <script>
@@ -613,7 +620,7 @@ div .rvsubmit {text-align:center;}
 
 
                   <h4 class="top_margin">
-                     <b>리뷰</b><a href="ReviewMovieAction.rv?movieId=${movieId}">더보기</a></span>
+                     <b>리뷰</b><a href="ReviewMovieAction.rv?movieId=${movieId}">더보기</a>
                   </h4>
 
                   <div class="row">
@@ -654,7 +661,7 @@ div .rvsubmit {text-align:center;}
                               </div>
                            
                            
-                           <div style="height:80%;justify-content: center; display: flex;align-items: center;">
+                           <div class=scroll style="height:80%;justify-content: center; display: flex;align-items: center; overflow: scroll;">
                            
                            <p><font size=3><b>${p_review.REVIEW_TITLE } </b></font><br> ${p_review.REVIEW_CONTENT }</p>
                            </div>
