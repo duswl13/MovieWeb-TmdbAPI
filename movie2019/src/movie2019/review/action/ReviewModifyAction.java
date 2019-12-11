@@ -41,14 +41,8 @@ public class ReviewModifyAction implements Action {
 		// 수정 성공
 		System.out.println("리뷰 수정 성공");
 
-		
-		forward.setRedirect(true);
-		// 수정 내용 확인
-		
-		
-		forward.setPath("moviedetail.ml?open=false&id="+movieId);
-
-		return forward;
+		response.getWriter().print("<script>alert('리뷰가 정상적으로 수정되었습니다.'); location.href='moviedetail.ml?open=false&id="+movieId+"';</script>");
+		return null;
 
 	}
 }

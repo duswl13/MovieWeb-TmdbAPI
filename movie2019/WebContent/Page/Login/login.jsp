@@ -47,7 +47,7 @@ a:hover {
 /*form styles*/
 #loginform {
 	width: 450px;
-	margin: 50px auto;
+	margin: 100px auto;
 	text-align: center;
 	position: relative;
 }
@@ -375,7 +375,7 @@ $(function() {
 			<span></span>
 
 			<div class="loginCheck">
-				<input type="checkbox" id="saveidcheck" name="saveidcheck" checked> 
+				<input type="checkbox" id="saveidcheck" name="saveidcheck"> 
 				<label for="saveid" id=saveid class=saveid>아이디 기억하기</label> 
 		<!-- 	<input type="checkbox" id="savepasscheck" name="savepasscheck">
 				<label for="savepass" id=savepass class=savepass>비밀번호저장</label>  -->
@@ -462,8 +462,5 @@ $(function() {
 				});
 			});
 
-	
-
-	
 </script>
 </html>

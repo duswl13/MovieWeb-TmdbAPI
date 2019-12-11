@@ -49,7 +49,7 @@ public class PriReviewDelete implements Action {
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("alert('삭제 완료~ 안녀엉');");
-		out.println("location.href='ReviewPrivateList.rv';");
+		out.println("history.back();");
 		out.println("</script>");
 		out.close();
 		return null;		
