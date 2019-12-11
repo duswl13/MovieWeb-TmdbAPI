@@ -417,7 +417,7 @@ li .current {
 
 		<!-- 게시글이 없는 경우 -->
 		<c:if test="${listcount == 0 }">
-			<font size=5>등록된 리뷰가 없습니다.</font>
+			<h3 class=readme>등록된 리뷰가 없습니다.</h3>
 		</c:if>
 
 
