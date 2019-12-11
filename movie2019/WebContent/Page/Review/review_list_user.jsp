@@ -304,6 +304,7 @@ function print(list){
         text += ' <h6 class="mvtitle">'+list[i].MOVIE_NAME+'</h6>';
         text += ' <p class="prvtitle">'+list[i].REVIEW_TITLE+'</p>';
         text += ' <p class=prvcontent>'+list[i].REVIEW_CONTENT+'</p>';
+      
         text += ' <p class=prvdate>'+list[i].REVIEW_DATE+'</p>';
                 
         switch(list[i].STAR){
