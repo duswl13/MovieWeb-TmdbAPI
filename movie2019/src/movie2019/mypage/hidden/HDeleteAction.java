@@ -17,6 +17,11 @@ public class HDeleteAction implements Action {
 		if(result!=1) {
 			System.out.println("숨김 항목 삭제 실패");
 		}
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("location.href='hidden_list.mh'");
+		out.println("</script>");
 		return null;
 	}
 
