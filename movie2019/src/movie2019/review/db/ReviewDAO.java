@@ -29,7 +29,7 @@ public class ReviewDAO {
 	}
 
 	// 내리뷰모아보기 모달 띄우는 부분
-	public ReviewDetailVO detail(String id, String Movie_h) {
+	public ReviewDetailVO detail(String id, String PriRvContent) {
 		ReviewDetailVO vo = new ReviewDetailVO();
 		String sql = "select * " + "	from REVIEW " + "	where USER_ID=? and MOVIE_ID=?";
 
@@ -37,7 +37,7 @@ public class ReviewDAO {
 			con = ds.getConnection();
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
-			pstmt.setString(2, Movie_h);
+			pstmt.setString(2, PriRvContent);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {

@@ -502,7 +502,6 @@ div .rvsubmit {text-align:center;}
                               <c:choose>
                                  <c:when test="${star == -2}">
                                     <b>이 영화 에 대해 평가해주세요.</b>
-                                   
                                  </c:when>
                                  <c:otherwise>
                                     <b>이미 이 영화에 대해 평가하셨습니다.</b>
@@ -511,7 +510,6 @@ div .rvsubmit {text-align:center;}
                               <button data-toggle="modal" data-target="#rvModal" class=bg-gradiant id="v1" >리뷰 쓰기</button>
                               <button data-toggle="modal" data-target="#rvModal2" class=bg-gradiant id="v2" >리뷰 수정</button>
                            </h4>
-                                 
                            </td>
                            <td><c:choose>
                                  <c:when test="${face == 1 }">
@@ -824,33 +822,25 @@ document.getElementById("main").style.marginLeft = "250px";
    var rating_face = ${face};
    var review = null;
    
-   <c:if test="${!empty review}">
+    <c:if test="${!empty review}">
     review = "${review.REVIEW_TITLE}";
-   </c:if>
-   
- 
-   
+	</c:if>
+
    addReviewBtn();
    
-   
    function addReviewBtn(){
-	
-	   if(review == null && rating_value > -2 && rating_face > -2){
-	
-		 //글쓰기
-		   $('#v1').css('display','block');
-		   $('#v2').css('display','none');
-		
-	   } else if(review != null){
-		  
-		   //수정
-	   $('#v1').css('display','none');
-	   $('#v2').css('display','block');
 	   
-	   } else{
-		
-		   $('#v1').css('display','none');
-		   $('#v2').css('display','none');
+	   if (review == null && rating_value > -2 && rating_face > -2) {
+		 	// 리뷰 쓰기 버튼 보이게
+			$('#v1').css('display','block');
+		   	$('#v2').css('display','none');
+	   } else if (review != null) {		  
+			//리뷰 수정 버튼 보이게
+	   		$('#v1').css('display','none');
+	   		$('#v2').css('display','block');	   
+	   } else {
+		   	$('#v1').css('display','none');
+		   	$('#v2').css('display','none');
 	   }
    }
    

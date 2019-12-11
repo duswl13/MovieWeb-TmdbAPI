@@ -14,13 +14,13 @@ public class ReviewDetail implements Action{
 		HttpSession session = request.getSession();
 		request.setCharacterEncoding("UTF-8");
 		ActionForward forward = new ActionForward();
-		String Movie_h =request.getParameter("Movie_h");
+		String PriRvContent =request.getParameter("PriRvContent");
 		String id = (String)session.getAttribute("id");
 		ReviewDAO dao = new ReviewDAO();
 		System.out.println("--------------------------------");
 		System.out.println(id);
-		System.out.println(Movie_h);
-		ReviewDetailVO vo= dao.detail(id, Movie_h);
+		System.out.println(PriRvContent);
+		ReviewDetailVO vo= dao.detail(id, PriRvContent);
 		System.out.println(vo);
 		System.out.println("--------------------------------");
 		request.setAttribute("vo", vo);

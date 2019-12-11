@@ -115,9 +115,9 @@ body {
 
 /*칼럼크기*/
 .mb-4, .my-4 {
-width: 700px;
-    height: 320;
-    padding: 10px;
+	width: 700px;
+	height: 320;
+	padding: 10px;
 }
 
 .content {
@@ -149,7 +149,6 @@ width: 700px;
 #rvModal td .rvtd {
 	padding: 10px;
 }
-
 
 #rvModal .btn-gradiant {
 	background: #2cdd9b;
@@ -285,7 +284,6 @@ div .rvsubmit {
 	margin-left: auto;
 }
 
-
 button {
 	width: 120px;
 	height: 40px;
@@ -300,13 +298,12 @@ button {
 	margin: 10px 5px;
 }
 
-
 /*더보기버튼*/
 .morebtn {
-    width: 300px;
-    padding: 15px 45px;
-    font-size: 16px;
-    font-weight:bold;
+	width: 300px;
+	padding: 15px 45px;
+	font-size: 16px;
+	font-weight: bold;
 }
 </style>
 
@@ -321,7 +318,7 @@ $(function(){
             url : "Reviewdetail.rv",
             type: 'POST',
             data : {
-               "Movie_h" :$(this).parent().children(".Movie_h").val(),      
+               "PriRvContent" :$(this).parent().children(".PriRvContent").val(),      
             },
             success : function(data) {
                console.log(data);
@@ -330,7 +327,7 @@ $(function(){
             
             },
             error : function(err) {
-               console.log("오류");
+               console.log("오류 발생");
             }
 
          });
@@ -347,7 +344,6 @@ if(request.getParameter("open") != null){
    open = Boolean.parseBoolean(request.getParameter("open"));
 }
 %>
-
 	<% if(!open) {%>
 	<jsp:include page="/Page/Navi/Navi.jsp" />
 	<%} else{ %>
@@ -355,7 +351,6 @@ if(request.getParameter("open") != null){
 	<%} %>
 
 	<div id="main">
-
 
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
@@ -368,7 +363,6 @@ if(request.getParameter("open") != null){
 				<div class="modal" id="rvModal"></div>
 				<!-- Row  -->
 				<div class="row">
-
 
 					<c:forEach items="${reviewlist }" var="item">
 						<!-- Column -->
@@ -389,7 +383,7 @@ if(request.getParameter("open") != null){
 
 									</div>
 									<div class=content>
-										<input id="Movie_h" class="Movie_h" name="Movie_h"
+										<input id="PriRvContent" class="PriRvContent" name="PriRvContent"
 											type="hidden" value="${item.MOVIE_ID }">
 										<h6 class="mvtitle">${item.MOVIE_NAME}</h6>
 										<p class="prvtitle">${item.REVIEW_TITLE}</p>
@@ -414,12 +408,14 @@ if(request.getParameter("open") != null){
 											</c:when>
 
 										</c:choose>
-										<h5><img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width:15px; height:15px;"> ${item.LIKE}</h5>
+										<h5>
+											<img class="like_img"
+												src="<%=request.getContextPath()%>/Png/like_up.svg"
+												style="width: 15px; height: 15px;"> ${item.LIKE}
+										</h5>
 
-										<button class="button-gradiant rvdetailbtn" data-toggle="modal"
-											data-target="#rvModal">수정  /  삭제</button>
-
-
+										<button class="button-gradiant rvdetailbtn"
+											data-toggle="modal" data-target="#rvModal">수정 / 삭제</button>
 
 									</div>
 									<!-- content end -->
@@ -431,15 +427,16 @@ if(request.getParameter("open") != null){
 						<br>
 					</c:forEach>
 
-
-
 				</div>
 
-<br><br>
+				<br>
+				<br>
 				<div class="col-md-12 mt-3 text-center">
 					<a class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
 				</div>
-<br><br><br>
+				<br>
+				<br>
+				<br>
 			</div>
 
 		</div>
@@ -493,10 +490,6 @@ $('.btn-success-gradiant').click(function(){
 
 
 
-
-
- 
-
 function print(list){
    
    var text = "";
@@ -514,7 +507,7 @@ function print(list){
 
 				text += '</div>';
 				text += ' <div class=content>';
-				text += ' <input id="Movie_h" class="Movie_h" name="Movie_h" type="hidden" value='+list[i].MOVIE_ID+'>';
+				text += ' <input id="PriRvContent" class="PriRvContent" name="PriRvContent" type="hidden" value='+list[i].MOVIE_ID+'>';
 				text += ' <h6 class="mvtitle">' + list[i].MOVIE_NAME + '</h6>';
 				text += ' <p class="prvtitle">' + list[i].REVIEW_TITLE + '</p>';
 				text += ' <p class=prvcontent>' + list[i].REVIEW_CONTENT
@@ -539,7 +532,7 @@ function print(list){
 					break;
 
 				}
-				text += '<h5>'+list[i].LIKE+'</h5>';
+				text += '<h5><img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width: 15px; height: 15px;"> ' + list[i].LIKE + '</h5>';
 
 				text += ' <button class="button-gradiant" data-toggle="modal" data-target="#rvModal" >수정 / 삭제</button>';
 
@@ -550,7 +543,6 @@ function print(list){
 
 		}
 	</script>
-
 
 </body>
 </html>
