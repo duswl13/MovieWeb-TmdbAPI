@@ -414,7 +414,7 @@ if(request.getParameter("open") != null){
 											</c:when>
 
 										</c:choose>
-										<h5>like : ${item.LIKE}</h5>
+										<h5><img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width:15px; height:15px;"> ${item.LIKE}</h5>
 
 										<button class="button-gradiant rvdetailbtn" data-toggle="modal"
 											data-target="#rvModal">수정  /  삭제</button>
