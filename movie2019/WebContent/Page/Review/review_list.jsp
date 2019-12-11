@@ -37,6 +37,7 @@ body {
 .center-block {
 	display: flex;
 	justify-content: center; /*가운데정렬*/
+	padding:0px;
 }
 
 .col {
@@ -67,7 +68,7 @@ body {
 /*리뷰내용부분*/
 .rvcontent {
     font-size: 9pt;
-    width: 160px;
+    width: 170px;
     height: 140px;
     overflow-y: auto;
 }
@@ -96,7 +97,7 @@ body {
 	display: inline-block;
 	position: absolute;
     right: -245px;
-    top: 15px;
+    top: 13px;
 	max-height: 300px;
 }
 
@@ -368,6 +369,7 @@ li .current {
 						</c:forEach>
 
 					</div>
+					<br>
 					<div class="center-block">
 						<div class=row>
 							<div class=col>

@@ -34,6 +34,20 @@ body {
 	color: #141414;
 }
 
+a {
+	color: #1dc8cc;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #2cdd9b;
+	text-decoration: none;
+}
+
+.readme {
+	color: #edf1f2;
+	margin-left: 150px;
+}
 .prvlist {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 300;
@@ -394,9 +408,11 @@ if(request.getParameter("open") != null){
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-		<h2></h2>
+		<h2 class=readme>내가 VOSHU에 남긴 리뷰들</h2>
+		<p class=readme style="font-size:11pt;">영화가 잘 기억나지 않는다면 영화 제목을 클릭해 상세정보를 확인해 보슈.</p>
 
 		<br>
+
 		<div class="prvlist">
 			<div class="container">
 				<div class="modal" id="rvModal"></div>
@@ -424,7 +440,8 @@ if(request.getParameter("open") != null){
 									<div class=content>
 										<input id="PriRvContent" class="PriRvContent"
 											name="PriRvContent" type="hidden" value="${item.MOVIE_ID }">
-										<h6 class="mvtitle">${item.MOVIE_NAME}</h6>
+										<h6 class="mvtitle">
+										<a href="moviedetail.ml?open=false&id=${item.MOVIE_ID}">${item.MOVIE_NAME}</a></h6>
 										<c:choose>
 											<c:when test="${item.STAR == 1}">
 												<p class="star floatright">★☆☆☆☆</p>
