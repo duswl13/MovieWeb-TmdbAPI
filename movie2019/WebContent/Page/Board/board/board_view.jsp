@@ -13,9 +13,9 @@
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <script src="js/writeform.js"></script>
 <style>
- body {color:white; background:#141414;}
+ body {color:black; background:#141414;}
   th, .center {text-align:center;}
-  .container {width:60%; height:100%;}
+  .container {width:60%;  height:100%; background:white; color:"black"; border-radius:"1%";}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
@@ -39,9 +39,13 @@
  .modal-body {text-align:center;}
 #title {font-weight:bold; font-size:15pt; color:black;}
 #text {font-size:11px; color:darkgray; margin-bottom: 3px;}
- #writer {color:silver; font-size:11pt;}
- #date {color:silver; font-size:11pt; text-align:right;}
- #writebtn {width:10%; position:relative; top:-83px; height:80px;}
+ #writer {color:black; font-size:11pt;}
+ #date {color:black; font-size:11pt; text-align:right;}
+ #writebtn {width:10%; position:relative; height:80px;}
+ #writebtn {background:#2cdd9b;}
+ #writebtn:hover {background:#1dc8cc;}
+ #combtn {color:black;}
+ #combtn:hover {background:white;}
 </style>
 </head>
 <body>
@@ -66,7 +70,7 @@ if(request.getParameter("open") != null){
 <!-- 로그인한 사람 이메일 -->
 <c:set var="usermail" value="${mem}" />
 <input type="hidden" id="loginemail" value="${usermail.email} " name="loginemail">
-<h1>무비 토크</h1><br>
+
 <div class="container">
  <table class="table table-striped">
  <tr>
@@ -186,11 +190,10 @@ if(request.getParameter("open") != null){
             <textarea id="singo" cols="30"rows="4" placeholder="욕설/비방/음란물/기타 등" required></textarea>
         </label>
         <br><div id="text">관리자에게 신고 메일이 전송됩니다</div>
-        
-        <input type="hidden" name="senderMail" id="senderMail" value="dlwldus0922@gmail.com">
+
         <!-- 관리자 메일 (현재는 지연 메일) -->
         <input type="hidden" name="receiveMail" id="receiveMail" value="dlwldus0922@gmail.com">    
-        <button type="button" class="btn btn-danger" id="police" >신고</button>
+        <button type="button" class="btn btn-danger" id="police" >신고<i class="fa fa-sign-out"></i></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
     
     </div>
@@ -199,7 +202,7 @@ if(request.getParameter("open") != null){
     </div>
      <!-- 신고 모달 끝 -->
     
-   <button type="button" id="combtn" class="btn btn-primary comm">댓글
+   <button type="button" id="combtn" class="btn btn-outline-success comm">댓글
    <span id="count">[${count }]</span></button><br>
 
    <div id="comment">
@@ -215,11 +218,12 @@ if(request.getParameter("open") != null){
        
        <textarea rows=3 class="form-control" 
                  id="content" maxLength="50"></textarea>
-        <button id="writebtn" class="btn btn-info float-right">등록</button>
+        <button id="writebtn" class="btn float-right">등록</button>
         
         </div>
         </div>
         </div>
+       
 </body>
 <script>
 if(<%=open%>)
@@ -341,7 +345,7 @@ $("#writebtn").click(function(){
 		
 	}else{
 		
-		alert("로그인한 회원만 댓글을 쓸 수 있습니다.");
+		alert("로그인이 필요합니다.");
 	}
 	
 	

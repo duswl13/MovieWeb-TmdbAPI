@@ -7,25 +7,30 @@
 <title>VOSHU</title>
 <head>
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/popper.js"></script>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <style>
  body {color:white; background:#141414;}
- .container {background:silver; height:70%;}
+ .container {height:70%; background:white; color:black; border-radius:1%;}
  select {justify-content:center;}
- .center-block {display:flex;
+ .center-block {display:flex; clear:both;
                 justify-content:center; /* 가운데 정렬 */}
-  #searchForm {width:300px; display:flex; justify-content:center;}
+  #searchForm {width:300px; display:flex; justify-content:center; }
  #id {text-align:center;}
- h1 {text-align:center; color:#2cdd9b;}
+ #b-ti {color:black; margin:10px;}
  a {text-decoration:none;}
  #searchForm, #writebtn {
    margin-bottom:20px;
  }
- #writebtn {background:#2cdd9b;}
+ #writebtn {background:#2cdd9b; float:right;}
+ #searchbtn {background:#2cdd9b;}
+ .table-active {background:#9febed;}
+ tr:hover {background:#bef7e2; }
+ #writebtn:hover {background:#1dc8cc;}
+ #searchbtn:hover {background:#1dc8cc;}
+ h2 {font-weight:bold; font-size:26pt;}
 </style>
 </head>
 <body>
@@ -45,15 +50,28 @@ if(request.getParameter("open") != null){
 <div id="main">
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
-<div>      
-<a href="BoardList.bd">
-<h1>무비 토크</h1>
-</a><br>
-</div>
-<div class="container">
+
+<div class="container" >
+<br><br>
+<h2 id="b-ti">&nbsp;&nbsp;&nbsp;씨네필 라운지</h2>
+
  <%-- 게시글이 있는 경우 --%>
- 
-   <table class="table table-hover">
+
+   <!-- 게시물 검색  -->       
+  <form action="BoardList.bd" class="form-inline float-right" id="searchForm">
+   <div class="input-group">
+   <select id="viewcount" name="search_field">
+      <option value="0" selected>아이디</option>
+      <option value="1" >제목</option>
+      <option value="2" >내용</option>
+   </select>
+   <input name="search_word" type="text" class="form-control"
+   placeholder="Search" value="${search_word }" id="search">
+   <button class="btn border-0" type="submit" id="searchbtn">검색</button>
+   </div>
+   </form>
+   
+   <table class="table">
    <thead>
      <tr class="table-active">
        <th width="8%"><div>번호</div></th> 
@@ -102,6 +120,13 @@ if(request.getParameter("open") != null){
     </c:forEach>
    </table>
    </tbody>
+   
+   <button type="button" id="writebtn"
+         class="btn btn-gradiant btn-md border-0 text-white pull-right">글쓰기</button>
+   
+   
+   
+   
    <!-- 페이징 처리 -->
    <div class="center-block">
      <div class="row">
@@ -151,24 +176,11 @@ if(request.getParameter("open") != null){
  <c:if test="${listcount==0 }">
      <font size=5>등록된 글이 없습니다.</font>
  </c:if><br>
- <button type="button" id="writebtn"
-         class="btn btn-gradiant btn-md border-0 text-white float-right">글쓰기</button>
   
-  <!-- 게시물 검색  -->       
-  <form action="BoardList.bd" id="searchForm">
-   <div class="input-group">
-   <select id="viewcount" name="search_field">
-      <option value="0" selected>아이디</option>
-      <option value="1" >제목</option>
-      <option value="2" >내용</option>
-   </select>
-   <input name="search_word" type="text" class="form-control"
-   placeholder="Search" value="${search_word }" id="search">
-   <button class="btn btn-default" type="submit" id="searchbtn">검색</button>
-   </div>
-   </form>
 </div>
 </div>
+<br>
+<br>
 </body>
 <script>
 if(<%=open%>)
@@ -185,7 +197,7 @@ $(function(){
 			 location.href="BoardWrite.bd";
 		 }
 		 else {
-			 alert("로그인한 회원만 작성 가능합니다.");
+			 alert("로그인이 필요합니다.");
 			 
 		 }
 	 })

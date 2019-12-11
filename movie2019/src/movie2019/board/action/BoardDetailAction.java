@@ -35,8 +35,6 @@ public class BoardDetailAction implements Action {
 		//로그인한 회원 메일 가져와야하는디...
 		Member mem = new Member();
 		mem = boarddao.usermail(id);
-		
-	      System.out.println(mem.getEmail());
 	      
 	      request.setAttribute("mem", mem);
 	      
