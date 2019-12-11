@@ -61,15 +61,21 @@ body {
 .rvlist .rvtitle {
 	font-size: 10pt;
 	font-weight: bold;
+	margin-bottom:0px;
 }
 
+/*리뷰내용부분*/
 .rvcontent {
-	font-size: 9pt;
+    font-size: 9pt;
+    width: 150px;
+    height: 130px;
+    overflow-y: auto;
 }
 
 .rvbottom1, .rvbottom2 {
 	color: #141414;
-	font-size: 8pt;
+	font-size: 9pt;
+	font-weight:bold;
 }
 
 /*왼쪽 이미지*/
@@ -184,8 +190,9 @@ a:hover {
 
 .star {
 	color: gold;
-	font-size: 12pt;
+	font-size: 10pt;
 	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 .mb-4, .my-4 {
@@ -215,6 +222,17 @@ a:hover {
 li .current {
 	font-weight: bold;
 }
+
+.like {clear:both}
+
+.floatleft {float:left}
+.floatright {float:right}
+
+::-webkit-scrollbar {width: 7px; height: 7px; border: 0px; }
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 7px; background: none;}
+::-webkit-scrollbar-track {background: none; border:0px; -webkit-border-radius: 0px; border-radius:0px; -webkit-box-shadow: 0}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background:#e8e8e8; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0}
+
 </style>
 
 
@@ -292,10 +310,7 @@ li .current {
 												<p class="rvtitle">
 													<a href="moviedetail.ml?open=false&id=${r.MOVIE_ID}">${r.MOVIE_NAME}</a>
 												</p>
-												<p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
-												<br>
-
-												<c:choose>
+													<c:choose>
 													<c:when test="${r.STAR == 1}">
 														<p class=star>★☆☆☆☆</p>
 
@@ -317,17 +332,14 @@ li .current {
 														<p class=star>★★★★★</p>
 													</c:when>
 												</c:choose>
+												<p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}</p>
 
-												<p class=rvbottom1>
-													<a href="ReviewUserList.rv?userId=${r.USER_ID}"
-														title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰
-												</p>
+												
 
-
-												<span class="like"
+												<p class="like floatleft"
 													Onclick='addLike("${r.USER_ID}","${r.MOVIE_ID}")'> <c:choose>
 														<c:when test="${r.LIKECHECK == 1 }">
-															<img class="like_img"
+															<img class="like_img" 
 																src="<%=request.getContextPath()%>/Png/like_up.svg"
 																style="width: 15px; height: 15px;">
 														</c:when>
@@ -336,9 +348,14 @@ li .current {
 																src="<%=request.getContextPath()%>/Png/like_default.svg"
 																style="width: 15px; height: 15px;">
 														</c:otherwise>
-													</c:choose> <span class="like_count">${r.LIKE }</span>
+													</c:choose><span class="like_count" style="font-size:8pt">${r.LIKE }</span>
 
-												</span>
+												</p>
+												
+												<p class="rvbottom1 floatright">
+													<a href="ReviewUserList.rv?userId=${r.USER_ID}"
+														title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>
+												</p>
 											</div>
 
 										</div>

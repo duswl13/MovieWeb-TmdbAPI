@@ -447,9 +447,9 @@ div .rvsubmit {
 }
 
 ::-webkit-scrollbar {width: 7px; height: 7px; border: 0px; }
-::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 7px; background: #141414}
-::-webkit-scrollbar-track {background: #141414; border:0px; -webkit-border-radius: 0px; border-radius:0px; -webkit-box-shadow: 0}
-::-webkit-scrollbar-thumb {height: 50px; width: 50px; background:#707070; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 7px; background: none;}
+::-webkit-scrollbar-track {background: none; border:0px; -webkit-border-radius: 0px; border-radius:0px; -webkit-box-shadow: 0}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background:#3b3b3b; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0}
 
 </style>
 
