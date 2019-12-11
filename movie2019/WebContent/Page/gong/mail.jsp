@@ -69,9 +69,8 @@ function mailsender() {
                         <div class="col-md-12 row" style="padding:0px;margin-bottom:10px;">
                             
                             <div class="col-md-2">
-                                <img src="http://dinus.org/img/fakultas/FIK/cs/cs.svg">
                                 <div style="margin-left:30px;">
-                                    <img src="http://dinus.org/img/fakultas/FIK/cs/cs.png" width="70px" height="70px" class="img-circle" style="border:3px solid #052C52;">
+                                    <img src="Page/gong/img.PNG" width="70px" height="70px" class="img-circle" style="background:#27AE60;border:3px solid #052C52;">
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -91,7 +90,7 @@ function mailsender() {
                                  
                                         <textarea class="form-control" rows="4" placeholder="Message text . . ." name="message" id="message"></textarea>
                                   
-                   <button class="btn btn-danger btn-sm" style="width: 100%;" id="email">Send</button>
+                   <button class="btn btn-sm" style="background:#27AE60 ;width: 100%; color:white" id="email">Send</button>
                             <input type="hidden" name="senderMail" id="senderMail" value="rjstn19339@gmail.com">
 <input type="hidden" name="receiveMail" id="receiveMail" value="rjstn19339@gmail.com">    
 

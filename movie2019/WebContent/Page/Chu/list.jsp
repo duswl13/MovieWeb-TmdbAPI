@@ -316,7 +316,7 @@ textarea {
 </div>
 	<div class="container">
 		<h3 style="color: white;">유저매칭</h3>
-		<div class="accordian" style="height: 100%">
+		<div class="accordian" style="height: 100%; margin-top: 50px;">
 		
 			<ul class="uc">
 			<c:choose>
@@ -356,11 +356,12 @@ textarea {
 			</section>
 
 		</div>
+		<br><br>
 		<!-- 장르분석부분 -->
-		<div class="container cta-100 ">
+		<div class="container ">
 			
 			<div class="container">
-			<h3 style="color: white; text-align: center;">장르분석</h3>
+			<h3 style="color: white;">장르분석</h3>
 				<div class="blog">
 					<div class="col-md-12">
 						<div id="blogCarousel" class="carousel slide container-blog"
@@ -421,7 +422,7 @@ textarea {
 					
  
                     <div style="width: 30%; float:none; margin:0 auto" >
-                            <button class="btn btn btn-danger btn-round" id="genAdd" style="width: 100%">더보기</button>
+                            <button class="btn btn btn-round" id="genAdd" style="background:#27AE60; color:white; width: 100%">더보기</button>
  
                             <div>
                             </div>

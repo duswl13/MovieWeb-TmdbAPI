@@ -212,6 +212,8 @@ if(request.getParameter("open") != null){
                         </c:when>
                       
                         </c:choose>
+                        	<h5>like : ${item.LIKE}</h5>
+                        
                   </div> <!-- content end -->                 
                     </div>
                 </div>
@@ -291,7 +293,7 @@ function print(list){
 		text += '<div class="p-4">';
 		text +=  '<div class="icon-space">';
 		
-		if(list[i].face == 1)
+		if(list[i].FACE == 1)
         text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
         else
         text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
@@ -302,6 +304,7 @@ function print(list){
         text += ' <h6 class="mvtitle">'+list[i].MOVIE_NAME+'</h6>';
         text += ' <p class="prvtitle">'+list[i].REVIEW_TITLE+'</p>';
         text += ' <p class=prvcontent>'+list[i].REVIEW_CONTENT+'</p>';
+      
         text += ' <p class=prvdate>'+list[i].REVIEW_DATE+'</p>';
                 
         switch(list[i].STAR){
@@ -322,7 +325,7 @@ function print(list){
         	break;
         	
         }
-                
+        text += '<h5>'+list[i].LIKE+'</h5>';
         text +='</div></div></div></div><br><br><br>';
 	}
 	

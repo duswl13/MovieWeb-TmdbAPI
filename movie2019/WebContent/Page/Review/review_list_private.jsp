@@ -419,8 +419,12 @@ if(request.getParameter("open") != null){
 											</c:when>
 										</c:choose>
 
-										<button class="button-gradiant rvdetailbtn"
-											data-toggle="modal" data-target="#rvModal">수정 / 삭제</button>
+										<h5>like : ${item.LIKE}</h5>
+
+										<button class="button-gradiant rvdetailbtn" data-toggle="modal"
+											data-target="#rvModal">수정  /  삭제</button>
+
+
 
 									</div>
 									<!-- content end -->
@@ -503,7 +507,7 @@ function print(list){
       text += '<div class="p-4">';
       text +=  '<div class="icon-space">';
       
-      if(list[i].face == 1)
+      if(list[i].FACE == 1)
         text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
         else
         text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
@@ -535,6 +539,7 @@ function print(list){
 					break;
 
 				}
+				text += '<h5>'+list[i].LIKE+'</h5>';
 
 				text += ' <button class="button-gradiant" data-toggle="modal" data-target="#rvModal" >수정 / 삭제</button>';
 
