@@ -574,7 +574,7 @@ function print(list){
 						+ '</p>';
 				text += ' <p class="prvdate floatright">' + list[i].REVIEW_DATE + '</p>'+ '<br> <br>';
 
-				
+				 
 
 				text += ' <button class="button-gradiant rvdetailbtn floatright" data-toggle="modal" data-target="#rvModal" >수정 <span class=smaller>/</span> 삭제</button>';
 
