@@ -49,7 +49,7 @@ public class SignProcessAction implements Action {
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('�̹� ���Ե� ȸ���Դϴ�.')");
+			out.println("alert('회원가입에 실패했습니다.')");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();

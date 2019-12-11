@@ -39,7 +39,7 @@ if(request.getParameter("open") != null){
  <form action="BoardModifyAction.bd" method="post" 
        enctype="multipart/form-data" name="modifyform">
  <input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM }">
-  <h1>무비 토크</h1><br>
+  
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input readOnly type="text" class="form-control" 

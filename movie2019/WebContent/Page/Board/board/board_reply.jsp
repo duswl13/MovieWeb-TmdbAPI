@@ -10,12 +10,10 @@
 <style>
 body {color:white; background:#141414;}
   tr.center-block {text-align:center;}
-  h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
   .container {width:60%;height:100%;}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
-   h1 {text-align:center; color:#2cdd9b;}
 </style>
 </head>
 <body>
@@ -47,7 +45,7 @@ if(request.getParameter("open") != null){
           value="${boarddata.BOARD_RE_LEV }">
    <input type="hidden" name="BOARD_RE_SEQ"
           value="${boarddata.BOARD_RE_SEQ }">              
-  <h1>무비 토크</h1><br>
+  <h2></h2>
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input name="BOARD_NAME" id="board_name" value="${id }"
