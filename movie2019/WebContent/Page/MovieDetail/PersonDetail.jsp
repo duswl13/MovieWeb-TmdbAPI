@@ -200,7 +200,7 @@ function printPerson(){
 			//listsize 가 4로 나누어 떨어지지 않았을 경우 빈 영화아이템이 있다는 뜻임
 			//4 - (listsize % 4) 로 몇개의 공간이 비어있는지 체크
 			var add = 4 - (listsize % 4);
-			alert(add+"개의 공간이 비어있습니다.");
+			//alert(add+"개의 공간이 비어있습니다.");
 
 			//빈 공간만큼 추가하기
 			for (var j = 0; j < add; j++) {

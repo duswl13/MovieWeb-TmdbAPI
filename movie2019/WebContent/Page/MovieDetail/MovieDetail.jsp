@@ -862,7 +862,7 @@ document.getElementById("main").style.marginLeft = "250px";
       var id = "${id}";
       
       if(id == null || id==""){
-         alert(id+'먼저 로그인 해주세요.');
+         alert('로그인이 필요합니다.');
          location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
          return;
       }
@@ -897,7 +897,7 @@ document.getElementById("main").style.marginLeft = "250px";
       var id = "${id}";
       
       if(id == null || id==""){
-         alert(id+'먼저 로그인 해주세요.');
+         alert('로그인이 필요합니다.');
          location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';
          return;
       }
@@ -1011,9 +1011,9 @@ document.getElementById("main").style.marginLeft = "250px";
          success : function(rdata) {
 
             if (rdata != 1) {
-               alert('별점 등록에 실패했습니다.');
+               	console.log('별점 등록에 실패했습니다.');
             }else if(rdata == 5){
-               alert("로그인 먼저 해주세요.");
+               alert('로그인이 필요합니다.');
             }else{
             	addReviewBtn();
             }
@@ -1040,7 +1040,7 @@ document.getElementById("main").style.marginLeft = "250px";
          success : function(rdata) {
 
             if (rdata != 1) {
-               alert('별점 점수 갱신 실패!');
+               console.log('별점 점수 갱신 실패!');
             }else{
             	addReviewBtn();
             }
@@ -1065,7 +1065,7 @@ document.getElementById("main").style.marginLeft = "250px";
          success : function(rdata) {
 
             if (rdata != 1) {
-               alert('표정 점수 갱신 실패!');
+               console.log('표정 점수 갱신 실패!');
             }else{
             	rating_face = value;
             	addReviewBtn();
@@ -1091,7 +1091,7 @@ document.getElementById("main").style.marginLeft = "250px";
          success : function(rdata) {
 
             if (rdata != 1) {
-               alert('표정 점수 등록 실패!');
+               //alert('표정 점수 등록 실패!');
             }else{
             	rating_face = value;
             	addReviewBtn();
@@ -1118,19 +1118,19 @@ document.getElementById("main").style.marginLeft = "250px";
          success : function(rdata) {
 
             if (rdata == 1) {
-               alert('표정 점수 등록 성공!');
+               //alert('표정 점수 등록 성공!');
                rating_face = value;
                addReviewBtn();
             } else {
-               alert('표정 점수 등록 실패!');
+              // alert('표정 점수 등록 실패!');
             }
 
          },
          error : function() {
-            alert('에러');
+           // alert('에러');
          },
          complete : function() {
-            alert('완료');
+           // alert('완료');
          }
 
       });
