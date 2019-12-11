@@ -74,7 +74,7 @@
 #accordian {
 	background: #000;
 	width: 250px;
-	margin: 100px auto 0 auto;
+	margin: 30px auto 0 auto;
 	color: white;
 }
 
@@ -143,7 +143,10 @@ ul {
 	color: white;
 	border: 0;
 	background-color: #141414;
-	margin-bottom: 3em;
+	margin-bottom: 1em;
+}
+#accordian h2{
+margin-top: 5px;
 }
 
 #login {
@@ -152,7 +155,7 @@ ul {
 	color: white;
 	border: 1 solid white;
 	background-color: #141414;
-	margin-top: 3em;
+	margin-top: 1em;
 }
 
 .logo {
@@ -274,7 +277,7 @@ ul {
 </c:if>				
 
 			</ul>
-<br><br>
+<br>
 			<ul>
 				<li><c:if test="${empty id}">
 						<button type="button" id="login"
