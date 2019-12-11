@@ -129,10 +129,10 @@ body {
 
 /*폰트*/
 .prvlist .mvtitle {
-    font-weight: bold;
-    color: #2cdd9b;
-    text-align: right;
-    margin-bottom: 3;
+	font-weight: bold;
+	color: #2cdd9b;
+	text-align: right;
+	margin-bottom: 3;
 }
 
 .prvtitle {
@@ -579,8 +579,11 @@ function print(list){
 				text += ' <button class="button-gradiant rvdetailbtn floatright" data-toggle="modal" data-target="#rvModal" >수정 <span class=smaller>/</span> 삭제</button>';
 
 				text += '<h5 class=float><img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width: 15px; height: 15px;"> '
-					+ '<span class=likescore>'+list[i].LIKE +'</span>'+ '</h5>';
-					
+						+ '<span class=likescore>'
+						+ list[i].LIKE
+						+ '</span>'
+						+ '</h5>';
+
 				text += '</div></div></div></div><br><br><br>';
 			}
 
