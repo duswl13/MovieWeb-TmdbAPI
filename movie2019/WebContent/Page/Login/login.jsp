@@ -1,4 +1,3 @@
-<!--login02 수정본 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -316,20 +315,18 @@ $(document).ready(function(){
     });
     
     
-    //f(x) for cookies 룰루
+    // 아이디 쿠키
     function setCookie(cookieName, value, exdays){
         var exdate = new Date();
         exdate.setDate(exdate.getDate() + exdays);
         var cookieValue = escape(value) + ((exdays==null)?"":";expires="+exdate.toGMTString());
         document.cookie = cookieName + "=" + cookieValue;
     }
-     
     function deleteCookie(cookieName){
         var expireDate = new Date();
         expireDate.setDate(expireDate.getDate() - 1);
         document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
     }
-     
     function getCookie(cookieName) {
         cookieName = cookieName + '=';
         var cookieData = document.cookie;

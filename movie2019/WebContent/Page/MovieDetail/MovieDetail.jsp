@@ -717,10 +717,11 @@ div .rvsubmit {text-align:center;}
             </div>
             <div class="reviewarea">
             <input name=movieid type=text hidden value=${movieId}>
-                  <div class="rvtitle">제목<input type=text required="required" name=rvtitle></div>
+                  <div class="rvtitle">한 줄 감상<input type=text required="required" name=rvtitle></div>
                   <div class="rvcontent">
                      <textarea placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
                         class="rvcontentarea" cols=50 rows=12 required="required" name=rvcontent></textarea>
+                  	 <span style="color:#141414; font-size:10pt;" id="counter">0/200자</span>	
                   </div>      
                   <div class=rvsubmit>${id}님이 작성한 리뷰를 <button type=submit class="submtbutton font-gradiant">저장</button>
                   </div>
@@ -756,9 +757,10 @@ div .rvsubmit {text-align:center;}
             </div>
             <div class="reviewarea">
             <input name=movieid type=text hidden value=${movieId}>
-                  <div class="rvtitle">제목<input type=text required="required" name=rvtitle value=${review.REVIEW_TITLE }></div>
+                  <div class="rvtitle">한 줄 감상<input type=text required="required" name=rvtitle value=${review.REVIEW_TITLE }></div>
                   <div class="rvcontent">
-                     <textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${review.REVIEW_CONTENT }</textarea>
+                     <textarea class="rvcontentarea2" cols=50 rows=12 required="required" name=rvcontent>${review.REVIEW_CONTENT }</textarea>
+                  	 <span style="color:#141414; font-size:10pt;" id="counter2">-/200자</span>
                   </div>      
                   <div class=rvsubmit>${review.USER_ID}님이 작성한 리뷰를 <button type=submit class="submitbutton font-gradiant">수정</button>
                   </div>
@@ -815,7 +817,7 @@ document.getElementById("main").style.marginLeft = "250px";
    printSimilar(similarlist);
 
    
-   //연수모달...
+   //리뷰 쓰기/수정하기 모달 버튼 연수
    
    var rating = false;
    var rating_value = ${star};
@@ -844,7 +846,28 @@ document.getElementById("main").style.marginLeft = "250px";
 	   }
    }
    
-   
+   //textarea 글자수 제한/카운팅
+   $('.rvcontentarea').keyup(function (e){
+	    var content = $(this).val();
+	    $('#counter').html(""+content.length+"/200자");
+	    if (content.length > 200){
+	        alert("VOSHU 리뷰는 최대 200자 입력 가능합니다.");
+	        $(this).val(content.substring(0, 200));
+	        $('#counter').html("200/200자");
+	    }
+	});
+
+   //textarea 글자수 제한/카운팅
+   $('.rvcontentarea2').keyup(function (e){
+	    var content = $(this).val();
+	    $('#counter2').html(""+content.length+"/200자");
+	    if (content.length > 200){
+	        alert("VOSHU 리뷰는 최대 200자 입력 가능합니다.");
+	        $(this).val(content.substring(0, 200));
+	        $('#counter2').html("200/200자");
+	    }
+	});
+	
    //표정 점수이미지를 클릭할경우 변화
    $('.user_mv img').click(function(){
       

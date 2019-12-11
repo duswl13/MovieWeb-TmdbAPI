@@ -311,8 +311,8 @@ button {
 </head>
 <script type="text/javascript">
 
+//각 리뷰를 수정/삭제할 수 있는 Modal을 부르는 부분
 $(function(){
-   
    $(document).on("click",".button-gradiant",function(){ 
       $.ajax({
             url : "Reviewdetail.rv",
@@ -323,13 +323,11 @@ $(function(){
             success : function(data) {
                console.log(data);
                $("#rvModal").html("");
-               $("#rvModal").html(data);
-            
+               $("#rvModal").html(data);           
             },
             error : function(err) {
                console.log("오류 발생");
             }
-
          });
    });
 });
@@ -389,34 +387,24 @@ if(request.getParameter("open") != null){
 										<p class="prvtitle">${item.REVIEW_TITLE}</p>
 										<p class=prvcontent>${item.REVIEW_CONTENT}</p>
 										<p class=prvdate>${item.REVIEW_DATE}</p>
-
 										<c:choose>
-											<c:when test="${item.STAR == 1}">
-												<p>★☆☆☆☆</p>
+											<c:when test="${item.STAR == 1}"><p>★☆☆☆☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 2}">
-												<p>★★☆☆☆</p>
+											<c:when test="${item.STAR == 2}"><p>★★☆☆☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 3}">
-												<p>★★★☆☆</p>
+											<c:when test="${item.STAR == 3}"><p>★★★☆☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 4}">
-												<p>★★★★☆</p>
+											<c:when test="${item.STAR == 4}"><p>★★★★☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 5}">
-												<p>★★★★★</p>
+											<c:when test="${item.STAR == 5}"><p>★★★★★</p>
 											</c:when>
-
 										</c:choose>
 										<h5>
-											<img class="like_img"
-												src="<%=request.getContextPath()%>/Png/like_up.svg"
+											<img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg"
 												style="width: 15px; height: 15px;"> ${item.LIKE}
 										</h5>
-
 										<button class="button-gradiant rvdetailbtn"
 											data-toggle="modal" data-target="#rvModal">수정 / 삭제</button>
-
 									</div>
 									<!-- content end -->
 								</div>

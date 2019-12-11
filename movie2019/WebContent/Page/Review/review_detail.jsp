@@ -1,4 +1,4 @@
-<!-- 모달! 여기가 모달임 내리뷰모아보기 모달 -->
+<!-- 내 리뷰 모아보기 수정/삭제 Modal -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -14,8 +14,7 @@
 					<div class="achtungfloat"></div>
 					<div class="reviewarea">
 
-						<div class="rvtitle">
-							한 줄 감상<input type=text required="required" name=rvtitle value=${vo.review_title }>
+						<div class="rvtitle"> 한 줄 감상<input type=text required="required" name=rvtitle value=${vo.review_title }>
 						</div>
 						<div class="rvcontent">
 							<textarea class="rvcontentarea" cols=50 rows=12 name=rvcontent>${vo.review_content}</textarea>
