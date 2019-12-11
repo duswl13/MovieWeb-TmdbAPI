@@ -314,12 +314,7 @@ button {
 	width: 700px
 }
 
-.prvcontent {
-	width: 300px;
-	height: 150px;
-	padding: 10px;
 
-}
 </style>
 
 
