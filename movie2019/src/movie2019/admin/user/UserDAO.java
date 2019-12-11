@@ -335,4 +335,14 @@ public class UserDAO {
 		return result;
 	}
 
+	public String getPassword(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isMember(String pass, String parameter) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

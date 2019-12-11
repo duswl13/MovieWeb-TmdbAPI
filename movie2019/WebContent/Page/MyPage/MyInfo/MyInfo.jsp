@@ -43,7 +43,30 @@ h4{
 #ed{
 	float:right;
 }
-
+#myModal{
+	display:none;
+	justify-content:center;
+}
+.modal{
+	justify-content:center;
+}
+@media screen and (min-width: 768px) { 
+        .modal:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+                left:0;
+        }
+}
+.modal-dialog {
+        display: inline-block;
+        text-align: left;
+        vertical-align: middle;
+}
+#btn{
+	text-align: right;
+}
 </style>
 
 <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -110,14 +133,38 @@ $(function(){
                         <div class="col-xs-6 col-sm-3" style="margin-top:250px;" >
                         <div id="ed">
 	                        <label><a href="user_editview.mu?user_id=${u.USER_ID }" style="color:black;" >정보 수정    <span class="glyphicon glyphicon-edit one" style="width:50px;"></span></a></label><br><br>
-	                        <label><a href="user_delete.mu" style="color:black;" >회원 탈퇴    <span class="glyphicon glyphicon-minus-sign one" style="width:50px;"></span></a></label>
+	                        <label><a href="#" style="color:black;" data-toggle="modal"	data-target="#myModal">회원 탈퇴    <span class="glyphicon glyphicon-minus-sign one" style="width:50px;"></span></a></label>
                         </div>
-                     </div>
-      
+                     </div>     
                 </div>
             </div>
             </div>
          </div>
+<body>
+	<!-- The Modal -->
+	<div class="modal" id="myModal" style="left:-250px;;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form name="deleteForm" action="user_delete.ul"
+						method="post">
+						<div class="form-group">
+							<p>회원 탈퇴를 원하시면 비밀번호를 입력해주세요.</p>
+							   <input type="password"
+								class="form-control" placeholder="비밀번호를 입력하세요."
+								name="USER_PASS" id="user_pass">
+						</div>
+						<div id="btn">
+							<button type="submit" class="btn btn-danger">탈퇴하기</button>
+							<button type="button" class="btn" data-dismiss="modal" style="background:#27AE60; color:white;">취소</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
 </div>
 </body>
 </html>
