@@ -57,11 +57,12 @@ body {
 .prvlist .col {
 	margin-top: 60px;
 	margin-left: 250px;
+	margin-bottom: 35;
 }
 
 /*표정 위치*/
 .prvlist .col .icon-space {
-	margin: -55px 620 20px;
+	margin: -55px 560 30px;
 }
 
 .prvlist .col .icon-space .icon-round {
@@ -114,16 +115,16 @@ body {
 }
 
 /*칼럼크기*/
-.mb-4, .my-4 {
-	width: 700px;
-	height: 320;
-	padding: 10px;
+.mb-4, .my-4, .p-4 {
+	width: 650px;
+	height: 340;
+	padding: 15px;
 }
 
 .content {
 	width: 580px;
 	height: 200px;
-	margin: 15px;
+	margin: 20px;
 }
 
 /*폰트*/
@@ -131,6 +132,7 @@ body {
 	font-weight: bold;
 	color: #2cdd9b;
 	text-align: right;
+	margin-bottom: 3;
 }
 
 .prvtitle {
@@ -139,7 +141,10 @@ body {
 }
 
 .prvcontent {
+	width: 510;
+	height: 75px;
 	font-size: 9pt;
+	clear: both;
 }
 
 #rvModal tr .rvtr {
@@ -285,9 +290,9 @@ div .rvsubmit {
 }
 
 button {
-	width: 120px;
-	height: 40px;
-	line-height: 40px;
+	width: 100px;
+	height: 35px;
+	line-height: 35px;
 	padding: 0px;
 	font-size: 12pt;
 	font-weight: bold;
@@ -298,12 +303,48 @@ button {
 	margin: 10px 5px;
 }
 
-/*더보기버튼*/
+/*버튼*/
+.rvdetailbtn {
+	padding: 0px;
+	margin: 0px;
+}
+
 .morebtn {
 	width: 300px;
 	padding: 15px 45px;
 	font-size: 16px;
 	font-weight: bold;
+}
+
+.likescore {
+	font-size: 10pt;
+}
+
+.content {
+	width: 500px;
+	height: 220px;
+	margin-top: 20px;
+	margin-left: 42px;
+}
+
+.floatright {
+	float: right
+}
+
+.star .floatright {
+	color: #141414
+}
+
+.prvdate {
+	font-size: 10pt;
+}
+
+.float {
+	float: left
+}
+
+.smaller {
+	font-size: 10pt;
 }
 </style>
 
@@ -381,30 +422,43 @@ if(request.getParameter("open") != null){
 
 									</div>
 									<div class=content>
-										<input id="PriRvContent" class="PriRvContent" name="PriRvContent"
-											type="hidden" value="${item.MOVIE_ID }">
+										<input id="PriRvContent" class="PriRvContent"
+											name="PriRvContent" type="hidden" value="${item.MOVIE_ID }">
 										<h6 class="mvtitle">${item.MOVIE_NAME}</h6>
-										<p class="prvtitle">${item.REVIEW_TITLE}</p>
-										<p class=prvcontent>${item.REVIEW_CONTENT}</p>
-										<p class=prvdate>${item.REVIEW_DATE}</p>
 										<c:choose>
-											<c:when test="${item.STAR == 1}"><p>★☆☆☆☆</p>
+											<c:when test="${item.STAR == 1}">
+												<p class="star floatright">★☆☆☆☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 2}"><p>★★☆☆☆</p>
+											<c:when test="${item.STAR == 2}">
+												<p class="star floatright">★★☆☆☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 3}"><p>★★★☆☆</p>
+											<c:when test="${item.STAR == 3}">
+												<p class="star floatright">★★★☆☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 4}"><p>★★★★☆</p>
+											<c:when test="${item.STAR == 4}">
+												<p class="star floatright">★★★★☆</p>
 											</c:when>
-											<c:when test="${item.STAR == 5}"><p>★★★★★</p>
+											<c:when test="${item.STAR == 5}">
+												<p class="star floatright">★★★★★</p>
 											</c:when>
 										</c:choose>
-										<h5>
-											<img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg"
-												style="width: 15px; height: 15px;"> ${item.LIKE}
+
+										<p class="prvtitle float">${item.REVIEW_TITLE}</p>
+										<p class=prvcontent>${item.REVIEW_CONTENT}</p>
+										<p class="prvdate floatright">${item.REVIEW_DATE}</p>
+
+
+										<br> <br>
+										<button class="button-gradiant rvdetailbtn floatright"
+											data-toggle="modal" data-target="#rvModal">
+											수정 <span class=smaller>/</span> 삭제
+										</button>
+										<h5 class="float">
+											<img class="like_img"
+												src="<%=request.getContextPath()%>/Png/like_up.svg"
+												style="width: 17px; height: 17px;"> <span
+												class=likescore>${item.LIKE}</span>
 										</h5>
-										<button class="button-gradiant rvdetailbtn"
-											data-toggle="modal" data-target="#rvModal">수정 / 삭제</button>
 									</div>
 									<!-- content end -->
 								</div>
@@ -418,13 +472,11 @@ if(request.getParameter("open") != null){
 				</div>
 
 				<br>
-				<br>
 				<div class="col-md-12 mt-3 text-center">
-					<a class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
+					<a
+						class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
 				</div>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br>
 			</div>
 
 		</div>
@@ -497,32 +549,40 @@ function print(list){
 				text += ' <div class=content>';
 				text += ' <input id="PriRvContent" class="PriRvContent" name="PriRvContent" type="hidden" value='+list[i].MOVIE_ID+'>';
 				text += ' <h6 class="mvtitle">' + list[i].MOVIE_NAME + '</h6>';
-				text += ' <p class="prvtitle">' + list[i].REVIEW_TITLE + '</p>';
-				text += ' <p class=prvcontent>' + list[i].REVIEW_CONTENT
-						+ '</p>';
-				text += ' <p class=prvdate>' + list[i].REVIEW_DATE + '</p>';
-
+				
 				switch (list[i].STAR) {
 				case 1:
-					text += '  <p>★☆☆☆☆</p>';
+					text += '  <p class="star floatright">★☆☆☆☆</p>';
 					break;
 				case 2:
-					text += '  <p>★★☆☆☆</p>';
+					text += '  <p class="star floatright">★★☆☆☆</p>';
 					break;
 				case 3:
-					text += '  <p>★★★☆☆</p>';
+					text += '  <p class="star floatright">★★★☆☆</p>';
 					break;
 				case 4:
-					text += '  <p>★★★★☆</p>';
+					text += '  <p class="star floatright">★★★★☆</p>';
 					break;
 				case 5:
-					text += '  <p>★★★★★</p>';
+					text += '  <p class="star floatright">★★★★★</p>';
 					break;
 
 				}
-				text += '<h5><img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width: 15px; height: 15px;"> ' + list[i].LIKE + '</h5>';
+						
+				text += ' <p class="prvtitle float">' + list[i].REVIEW_TITLE + '</p>';
+				text += ' <p class=prvcontent>' + list[i].REVIEW_CONTENT
+						+ '</p>';
+				text += ' <p class="prvdate floatright">' + list[i].REVIEW_DATE + '</p>'+ '<br> <br>';
 
-				text += ' <button class="button-gradiant" data-toggle="modal" data-target="#rvModal" >수정 / 삭제</button>';
+				 
+
+				text += ' <button class="button-gradiant rvdetailbtn floatright" data-toggle="modal" data-target="#rvModal" >수정 <span class=smaller>/</span> 삭제</button>';
+
+				text += '<h5 class=float><img class="like_img" src="<%=request.getContextPath()%>/Png/like_up.svg" style="width: 15px; height: 15px;"> '
+						+ '<span class=likescore>'
+						+ list[i].LIKE
+						+ '</span>'
+						+ '</h5>';
 
 				text += '</div></div></div></div><br><br><br>';
 			}
