@@ -1,5 +1,4 @@
-<!-- 리뷰 클릭 시 첫 화면 -->
-<!-- 이미지 들어가는 템플릿-->
+<!-- 실시간 리뷰 리스트 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
