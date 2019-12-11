@@ -288,11 +288,11 @@ color: green;
 		
 				<div class="row text-center" style="width: 80%; margin:0 auto; ">
 					<button class="col btn btn-dark-moon btn-rounded"
-						style="width: 30%" onclick="gong" id="gong">공지사항</button>
+						style="width: 30%; background:none;" onclick="gong" id="gong">공지사항</button>
 					<button class="col btn btn-dark-moon btn-rounded"
-						style="width: 30%" onclick="faq" id="faq">FAQ(자주하는 질문)</button>
+						style="width: 30%; background:none;" onclick="faq" id="faq">FAQ(자주하는 질문)</button>
 						<button class="col btn btn-dark-moon btn-rounded"
-						style="width: 30%" id="mail">Mail(고객문의)</button>
+						style="width: 30%; background:none;" id="mail">Mail(고객문의)</button>
 				</div>
 		
 
