@@ -24,7 +24,7 @@ public class ReviewListAction implements Action {
       List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
 
       int page = 1;
-      int limit = 9;
+      int limit = 8;
 
       if (request.getParameter("page") != null) {
          page = Integer.parseInt(request.getParameter("page"));

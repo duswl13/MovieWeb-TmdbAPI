@@ -25,7 +25,7 @@ public class ReviewMovieAction implements Action {
       List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
       
       int page = 1;
-      int limit = 9;
+      int limit = 8;
 
       String movieId = request.getParameter("movieId");
       

@@ -26,7 +26,7 @@ public class ReviewUserAction implements Action {
 		List<ReviewVO> reviewlist = new ArrayList<ReviewVO>();
 
 		int page = 1;
-		int limit = 9;
+		int limit = 5;
 
 		String userId = request.getParameter("userId");
 
