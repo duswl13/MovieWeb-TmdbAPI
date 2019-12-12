@@ -713,7 +713,7 @@ div .rvsubmit {
 												<p style="font-size: 11pt;">
 													<b>${p_review.REVIEW_TITLE } </b>
 												</p>
-												<p class=rvcontent2>${p_review.REVIEW_CONTENT }</p>
+												<p class=rvcontent>${p_review.REVIEW_CONTENT }</p>
 											</div>
 
 											<div style="height: 10%;">
