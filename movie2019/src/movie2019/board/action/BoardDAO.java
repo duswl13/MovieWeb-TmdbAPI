@@ -775,6 +775,7 @@ public class BoardDAO {
 		//유저 이멜 갖고왕
 		String sql = "select USER_EMAIL from USERS "
 				   + "where USER_ID = ? ";
+		
 		Member user = null;
 		try {
 			con =ds.getConnection();

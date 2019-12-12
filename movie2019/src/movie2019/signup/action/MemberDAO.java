@@ -121,25 +121,21 @@ public class MemberDAO {
 		   
 		}
 		
-      //ȸ���� ��ȣ�ϴ� ��ȭ �帣 
+      //선호장르 개수 체크 
 	  public int choice(String[] genres, String uSER_ID) {
 		try{
 			con = ds.getConnection();
 			System.out.println("getConnection");
-			
+			//한번에 여러개의 로우를 넣을 수 있는 insert all 사용
 			String sql = "INSERT ALL ";
-	
 		      for(int i = 0; i < genres.length; i++) {
-		    	  		    	  
 		         sql += "INTO USER_GENRES VALUES("
 		        	 + genres[i]+ ", '" +uSER_ID+"') ";
-		           
 		      }
-		      		      
+		   //오라클에서 제공되는 dual 테이블에서 select  		      
 		      sql += " SELECT * FROM DUAL";
 		      System.out.println(sql);
 		     pstmt = con.prepareStatement(sql);
-			
 			result=pstmt.executeUpdate();
 			
 		 } catch(java.sql.SQLIntegrityConstraintViolationException e) {

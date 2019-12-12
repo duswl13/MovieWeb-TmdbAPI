@@ -15,6 +15,10 @@ body {color:black; background:#141414;}
   #upfile {display:none;}
   img {width:20px;}
    h1 {text-align:center; color:#2cdd9b;}
+    #b-ti {color:black; margin:10px;font-weight:bold; font-size:26pt;}
+    #btn-submit {background:#2cdd9b;}
+    #btn-submit:hover {background:#1dc8cc;}
+    .btncan {background:#FE2E2E;}
 </style>
 </head>
 <body>
@@ -35,6 +39,9 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<br><br>
+<h2 id="b-ti">&nbsp;&nbsp;&nbsp;씨네필 라운지</h2>
+
 
 <br>
 <!-- enctype="multipart/form-data"이면 파일업로드 한다는 뜻 -->
@@ -68,8 +75,8 @@ if(request.getParameter("open") != null){
   </div>  
   
    <div class="form-group">
-    <button type="submit" class="btn btn-success">등록</button>
-    <button type="reset" class="btn btn-danger" onClick="history.back()">취소</button>
+    <button type="submit" class="btn" id="btn-submit">등록</button>
+    <button type="reset" class="btn btncan" onClick="history.back()">취소</button>
   </div>  
  </form>
 </div>

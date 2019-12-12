@@ -550,10 +550,5 @@ $(".previous").click(function(){
 
 
 </script>
-<script type="text/javascript">
-function send_mail(){
-    window.open("Page/Board/Sign/mailSender.jsp", "", "width=370, height=360, resizable=no, scrollbars=no, status=no");
-}
-</script>
 
 </html>

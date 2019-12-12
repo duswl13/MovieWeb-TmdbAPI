@@ -15,7 +15,7 @@
 <style>
  body {color:black; background:#141414;}
   th, .center {text-align:center;}
-  .container {width:60%;  height:100%; background:white; color:"black"; border-radius:"1%";}
+  .container {width:60%;  height:full; background:white; color:"black"; border-radius:"1%";}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
@@ -28,6 +28,7 @@
   
   }
   a {text-decoration:none;}
+   #b-ti {color:black; margin:10px;font-weight:bold; font-size:26pt;}
    h1 {text-align:center; color:#2cdd9b;}
  #mailModal {
     display:none;
@@ -41,7 +42,7 @@
 #text {font-size:11px; color:darkgray; margin-bottom: 3px;}
  #writer {color:black; font-size:11pt;}
  #date {color:black; font-size:11pt; text-align:right;}
- #writebtn {width:10%; position:relative; height:80px;}
+ #writebtn {width:10%; position:relative; top:-80px; height:80px;}
  #writebtn {background:#2cdd9b;}
  #writebtn:hover {background:#1dc8cc;}
  #combtn {color:black;}
@@ -72,6 +73,10 @@ if(request.getParameter("open") != null){
 <input type="hidden" id="loginemail" value="${usermail.email} " name="loginemail">
 
 <div class="container">
+<br><br>
+<h2 id="b-ti">&nbsp;&nbsp;&nbsp;씨네필 라운지</h2>
+<br>
+
  <table class="table table-striped">
  <tr>
  <!-- 글제목 -->
@@ -117,24 +122,24 @@ if(request.getParameter("open") != null){
  <!-- 로그인한 회원만 답변 쓸 수 있게 -->
    <c:if test="${!empty id }">
    <a href="BoardReplyView.bd?num=${boarddata.BOARD_NUM }">
-   <button type="button" class="btn btn-primary">답변</button>
+   <button type="button" class="btn btn-outline-secondary">답변</button>
    </a>
    </c:if>
    
    <!-- 작성자와 관리자만 수정/삭제 가능하게 -->
    <c:if test="${boarddata.BOARD_NAME == id || id == 'admin' }">
     <a href="BoardModifyView.bd?num=${boarddata.BOARD_NUM}">
-    <button type="button" class="btn btn-info">수정</button>
+    <button type="button" class="btn btn-outline-info">수정</button>
     </a>
     
    <!-- 글 삭제 -->
     <a href="#">
-    <button class="btn btn-danger" data-toggle="modal"
+    <button class="btn btn-outline-danger" data-toggle="modal"
              data-target="#myModal">삭제</button>
     </a>
    </c:if>
    <a href="./BoardList.bd">
-    <button type="button" class="btn btn-primary">목록</button>
+    <button type="button" class="btn btn-outline-primary">목록</button>
    </a>
    <!-- 신고 메일 보내기 -->
    <!-- 로그인한 회원만 신고할 수 있게 -->
@@ -191,7 +196,8 @@ if(request.getParameter("open") != null){
         </label>
         <br><div id="text">관리자에게 신고 메일이 전송됩니다</div>
 
-        <!-- 관리자 메일 (현재는 지연 메일) -->
+        <!-- 관리자 메일 -->
+        <input type="hidden" name="senderMail" id="senderMail" value="dlwldus0922@gmail.com">  
         <input type="hidden" name="receiveMail" id="receiveMail" value="dlwldus0922@gmail.com">    
         <button type="button" class="btn btn-danger" id="police" >신고<i class="fa fa-sign-out"></i></button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
@@ -206,7 +212,7 @@ if(request.getParameter("open") != null){
    <span id="count">[${count }]</span></button><br>
 
    <div id="comment">
-   <table class="table table-striped">
+   <table class="table">
         <thead>
          
         </thead>
@@ -221,6 +227,7 @@ if(request.getParameter("open") != null){
         <button id="writebtn" class="btn float-right">등록</button>
         
         </div>
+        <br><br>
         </div>
         </div>
        
@@ -245,7 +252,7 @@ function mail_send(){
 		url: "Mail.bd",
 		data:{
 			"senderId" : "${id}", //신고하는 사람 아이디 (로그인 하고 있는 사람)
-			"senderMail" : $("#loginmail").val(), //신고하는 사람 메일
+			"senderMail" : $("#senderMail").val(), //신고하는 사람 메일
 			"receiveMail" : $("#receiveMail").val(), //관리자 메일
 			"subject" : "[신고접수] 작성자:"+ $("#writer").text()+" 제목:"+$("#b_subject").text(), //메일 제목
 			"content": "신고 사유:"+$("#singo").val() //메일 내용

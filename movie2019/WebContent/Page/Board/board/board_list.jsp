@@ -19,7 +19,7 @@
                 justify-content:center; /* 가운데 정렬 */}
   #searchForm {width:300px; display:flex; justify-content:center; }
  #id {text-align:center;}
- #b-ti {color:black; margin:10px;}
+ #b-ti {color:black; margin:10px;font-weight:bold; font-size:26pt;}
  a {text-decoration:none;}
  #searchForm, #writebtn {
    margin-bottom:20px;
