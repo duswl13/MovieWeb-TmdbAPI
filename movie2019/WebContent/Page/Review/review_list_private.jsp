@@ -147,7 +147,7 @@ a:hover {
 	font-weight: bold;
 	color: #2cdd9b;
 	text-align: right;
-	margin-bottom: 3;
+	margin-bottom: 20px;
 }
 
 .prvtitle {
@@ -207,7 +207,7 @@ a:hover {
 }
 
 #rvModal textarea {
-	width: 90%;
+	width: 95%;
 	background: #edf1f2;
 	border: 0px solid SteelBlue;
 	border-radius: 0px;
@@ -215,6 +215,7 @@ a:hover {
 	font-size: 10pt;
 	padding: 5px;
 	margin: 5px;
+
 }
 
 #rvModal .title {
@@ -266,9 +267,11 @@ a:hover {
 }
 
 #rvModal .floatright {
-	float: right;
-	padding: 0px;
-	margin-top: -20px;
+    float: right;
+    padding: 0px;
+    font-size: 12pt;
+    margin-top: -40px;
+    margin-right: -70px;
 }
 
 #rvModal .reviewarea {
@@ -361,7 +364,186 @@ button {
 .smaller {
 	font-size: 10pt;
 }
+
+/*연수모달*/
+#rvModal, #rvModal2 {
+	display: none
+} /*처음에 모달 안 보이게*/
+.modal-content {
+	padding: 30px;
+}
+
+tr .rvtr {
+	text-align: center
+}
+
+td .rvtd {
+	padding: 10px;
+}
+
+button {
+	width: 150px;
+	height: 40px;
+	line-height: 40px;
+	padding: 0px;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 10px 5px;
+}
+
+.btn-gradiant {
+	background: #2cdd9b;
+	background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b
+		0%, #1dc8cc 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#2cdd9b),
+		to(#1dc8cc));
+	background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+	background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+	background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+.btn-gradiant:hover {
+	background: #1dc8cc;
+	background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc
+		0%, #2cdd9b 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#1dc8cc),
+		to(#2cdd9b));
+	background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+	background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+	background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+}
+
+span {
+	font-size: 8pt;
+}
+
+input {
+	background: #edf1f2;
+	border: 0px solid SteelBlue;
+	border-radius: 0px;
+	color: #141414;
+	font-size: 9pt;
+	padding: 5px;
+	margin: 5px;
+}
+
+textarea {
+	width: 90%;
+	background: #edf1f2;
+	border: 0px solid SteelBlue;
+	border-radius: 0px;
+	color: #141414;
+	font-size: 10pt;
+	padding: 5px;
+	margin: 5px;
+}
+
+.title {
+	color: #27AE60
+} /**/
+.bg-gradiant {
+	background: #1dc8cc;
+	background: -webkit-linear-gradient(legacy-direction(to right), #1dc8cc
+		0%, #2cdd9b 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#1dc8cc),
+		to(#2cdd9b));
+	background: -webkit-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+	background: -o-linear-gradient(left, #1dc8cc 0%, #2cdd9b 100%);
+	background: linear-gradient(to right, #1dc8cc 0%, #2cdd9b 100%);
+}
+
+.bg-gradiant:hover {
+	background: #2cdd9b;
+	background: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b
+		0%, #1dc8cc 100%);
+	background: -webkit-gradient(linear, left top, right top, from(#2cdd9b),
+		to(#1dc8cc));
+	background: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+	background: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+	background: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+.font-gradiant {
+	color: #2cdd9b;
+	color: -webkit-linear-gradient(legacy-direction(to right), #2cdd9b 0%,
+		#1dc8cc 100%);
+	color: -webkit-gradient(linear, left top, right top, from(#2cdd9b),
+		to(#1dc8cc));
+	color: -webkit-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+	color: -o-linear-gradient(left, #2cdd9b 0%, #1dc8cc 100%);
+	color: linear-gradient(to right, #2cdd9b 0%, #1dc8cc 100%);
+}
+
+.submtbutton {
+	width: 40px;
+	font-size: 12pt;
+	background: none;
+}
+
+button .modalclose {
+	color: #2cdd9b;
+	font-size: 13pt;
+}
+
+.floatright {
+	float: right;
+	padding: 0px;
+	margin-top: -20px;
+}
+
+.reviewarea {
+	right: clear;
+}
+
+div .rvsubmit {
+	text-align: center;
+}
+
+/* modal position(center)*/
+.modal {
+	text-align: center;
+}
+
+@
+@media screen and (min-width: 768px) {
+	.modal:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: " ";
+		height: 100%;
+	}
+}
+
+.modal-dialog {
+	display: inline-block;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.modal-content {
+	margin-top: 160px;
+	margin-left: auto;
+}
+
+
+.contentwrap{
+    width: 255px;
+    height:135px;
+    position: absolute;
+    overflow: hidden;
+}
+
+
+.floatleft{float:left; font-size:10pt}
+
+.floatright{float:right}
+
+.clear{clear:both}
 </style>
+
 
 
 </head>
@@ -498,7 +680,7 @@ if(request.getParameter("open") != null){
 					<br>
 					<div class="col-md-12 mt-3 text-center">
 						<a
-							class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
+							class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span style="font-size:12pt;">더보기</span></a>
 					</div>
 					<br> <br> <br>
 				</div>
