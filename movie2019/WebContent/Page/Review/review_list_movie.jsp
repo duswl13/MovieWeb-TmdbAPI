@@ -265,9 +265,12 @@ li .current {
 
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
-<c:forEach var="r" items="${reviewlist}">
+
+<c:forEach var="r" items="${reviewlist}" varStatus="status">
+<c:if test = "${status.count==1}" >
 		<h2 class=readme>VOSHU 회원들이 <b class=titlebold>${r.MOVIE_NAME}</b>에 남긴 리뷰</h2>
 		<p class=readme style="font-size:11pt;">아이디를 클릭하면 그 회원이 남긴 리뷰를 모두 볼 수 있어요.</p>
+</c:if>
 </c:forEach>
 
 		<br>
