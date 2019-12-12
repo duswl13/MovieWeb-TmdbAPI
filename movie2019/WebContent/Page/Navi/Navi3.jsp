@@ -153,14 +153,14 @@ ul {
 </head>
 <body>
 
-
-
 	<div id="mySidenav" class="sidenav">
 		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-		<a href="<%=request.getContextPath()%>/main.ml"><span class=logo>VOSHU</span></a>
+
+		<a href="<%=request.getContextPath()%>/main.ml"><span class="logo voshu-gradiant">VOSHU</span></a>
 
 		<div id="accordian">
+
 
 
 
@@ -172,7 +172,7 @@ ul {
 			<ul>
 				<li>
 					<h2>
-						<a href='<%=request.getContextPath()%>/MovieList.ml?option=1'>영화</a>
+						<a href='<%=request.getContextPath()%>/MovieList.ml?re=false&option=1'>영화</a>
 					</h2>
 
 				</li>
@@ -182,51 +182,83 @@ ul {
 					</h2>
 				</li>
 				<li>
-					<h2>
-						<a href='<%=request.getContextPath()%>/Page/Review/r_list.jsp'>리뷰</a>
-					</h2>
+					<h2>리뷰</h2>  <!-- 연수수정 -->
+					
+						<ul>
+
+						<li><a
+							href='<%=request.getContextPath()%>/ReviewList.rv'>실시간 리뷰</a></li>
+							
+						<c:if test="${!empty id}">
+							<li><a
+							href="<%=request.getContextPath()%>/ReviewPrivateList.rv">내 리뷰 모아 보기</a></li>
+						</c:if>
+					</ul>
 				</li>
 				<li>
 					<h2>
-						<a href="<%=request.getContextPath()%>/Page/Board/board/board_list.jsp">게시판</a>
+						<a href="BoardList.bd">게시판</a>
 					</h2>
 				</li>
 
 				<li>
 					<h2>마이페이지</h2>
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/user_info.mu">내 정보 수정</a></li>
-						<li><a href="<%=request.getContextPath()%>/hidden_list.mh">숨긴 콘텐츠 관리</a></li>
+
+						<li><a
+							href="<%=request.getContextPath()%>/user_info.mu">내
+								정보 수정</a></li>
+						<li><a
+							href="<%=request.getContextPath()%>/hidden_list.mh">숨긴
+								콘텐츠 관리</a></li>
+
 					</ul>
 				</li>
 				<li>
-					<h2>공지사항</h2>
+
+					<h2>
+						<a href="<%=request.getContextPath()%>/list.gong">공지사항</a>
+					</h2>
+
 				</li>
-				<li>
-							
-								<h2><a href="<%=request.getContextPath()%>/list.gong">공지사항</a></h2>
-							
-						</li>
 <c:if test="${id == 'admin1' || id == 'admin2' || id == 'admin3' || id == 'admin4'}">     				
-						
+				
 				<li>
 					<h2>관리자 페이지</h2>
 					<ul>
-						<li><a href="<%=request.getContextPath()%>/NoticeList.bo">공지사항 관리</a></li>
-						<li><a href="<%=request.getContextPath()%>/FAQList.fa">FAQ 관리</a></li>
-						<li><a href="<%=request.getContextPath()%>/user_list.ul">회원 관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/NoticeList.bo">공지사항
+								관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/FAQList.fa">FAQ
+								관리</a></li>
+						<li><a href="<%=request.getContextPath()%>/user_list.ul">회원
+								관리</a></li>
 					</ul>
 				</li>
 </c:if>				
-				
-			</ul>
 
+			</ul>
+<br>
 			<ul>
-				<li><button type="button" id="login" onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.jsp'">Login</button></li>
-			</ul>
+				<li><c:if test="${empty id}">
+						<button type="button" id="login"
+							onclick="location.href='<%=request.getContextPath()%>/Page/Login/login.jsp'">로그인</button>
+					</c:if> <c:if test="${!empty id}">
+						<c:if test="${id == 'admin1' || id == 'admin2' || id == 'admin3' || id == 'admin4'}">
+							<span class=hello>관리자 ${id}님 보슈</span>
+							<button type="button" id="login"
+								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
+						</c:if>
 
+						<c:if test="${id != 'admin1' && id != 'admin2' && id != 'admin3' && id != 'admin4'}">
+							<span class=hello>일반회원 ${id}님 보슈</span>
+							<button type="button" id="login"
+								onclick="location.href='<%=request.getContextPath()%>/logout.lg'">로그아웃</button>
+						</c:if>
+					</c:if></li>
+			</ul>
 		</div>
 	</div>
+
 
 	<script>
 		openNav();
