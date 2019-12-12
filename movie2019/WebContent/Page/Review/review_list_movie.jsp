@@ -89,16 +89,16 @@ body {
 
 /*가운데 동글 아이콘*/
 .icon-round {
-	width: 35px;
-	height: 35px;
-	line-height: 28px;
-	text-align: center;
-	border-radius: 100%;
-	display: inline-block;
-	position: absolute;
-    right: -245px;
-    top: 13px;
-	max-height: 300px;
+    width: 35px;
+    height: 35px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 100%;
+    display: inline-block;
+    position: absolute;
+    right: -17px;
+    top: 15px;
+    max-height: 300px;
 }
 
 .bg-gradiant {

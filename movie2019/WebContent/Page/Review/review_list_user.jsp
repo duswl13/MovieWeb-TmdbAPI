@@ -73,7 +73,7 @@ a:hover {
 
 /*표정 위치*/
 .prvlist .col .icon-space {
-	margin: -55px 560 30px;
+    margin: -55px -22 30px;
 }
 
 .prvlist .col .icon-space .icon-round {
@@ -94,8 +94,8 @@ a:hover {
 
 /*표정 크기*/
 .prvlist .icon-round {
-	width: 35px;
-	line-height: 35px;
+	width: 38px;
+	line-height: 38px;
 }
 
 .prvlist .btn-success-gradiant {
