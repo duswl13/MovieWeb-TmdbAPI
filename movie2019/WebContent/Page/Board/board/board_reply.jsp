@@ -8,12 +8,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
-body {color:white; background:#141414;}
+body {color:black; background:#141414;}
   tr.center-block {text-align:center;}
-  .container {width:60%;height:100%;}
+ .container {width:60%; height:100%; background:white; color:"black"; border-radius:"1%";}
   label {font-weight:bold;}
   #upfile {display:none;}
   img {width:20px;}
+   #b-ti {color:black; margin:10px;font-weight:bold; font-size:26pt;}
+   .btncan {background:#FE2E2E;}
+   .btngo {background:#2cdd9b;}
+   .btngo:hover {background:#1dc8cc;}
 </style>
 </head>
 <body>
@@ -35,6 +39,11 @@ if(request.getParameter("open") != null){
 <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<br><br>
+<h2 id="b-ti">&nbsp;&nbsp;&nbsp;씨네필 라운지</h2>
+<br>
+
+
  <form action="BoardReplyAction.bd" method="post"
        name="boardform">
    <%-- 답변을 추가하기 위해서는 답변의 원문글에 대한
@@ -45,7 +54,7 @@ if(request.getParameter("open") != null){
           value="${boarddata.BOARD_RE_LEV }">
    <input type="hidden" name="BOARD_RE_SEQ"
           value="${boarddata.BOARD_RE_SEQ }">              
-  <h2></h2>
+
   <div class="form-group">
     <label for="board_name">글쓴이</label>
      <input name="BOARD_NAME" id="board_name" value="${id }"
@@ -65,8 +74,8 @@ if(request.getParameter("open") != null){
   </div>   
 
    <div class="form-group">
-    <input type="submit" class="btn btn-primary" value="등록">
-    <input type="button" class="btn btn-danger" 
+    <input type="submit" class="btn btngo" value="등록">
+    <input type="button" class="btn btncan" 
            value="취소" onClick="history.go(-1)">
    </div>  
  </form>

@@ -32,20 +32,18 @@ public class SignProcessAction implements Action {
 		MemberDAO mdao = new MemberDAO();
 		int result = mdao.insert(m);
 		
-		//���� �� ���
+		//장르선택
 		if(result==1) { 
 			//선택한 장르를 배열로
 			String[] genres = request.getParameterValues("genre");
-			
 						
 			mdao.choice(genres, USER_ID);
-			
 			
 			forward.setRedirect(true);
 			forward.setPath("Page/Login/login.jsp");
 			
 			
-		}else if(result==-1) { //���Ե� ���̵�
+		}else if(result==-1) { //가입실패
 			response.setContentType("text/html; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

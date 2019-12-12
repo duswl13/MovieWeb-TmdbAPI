@@ -8,13 +8,17 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <style>
-body {color:white; background:#141414;}
+body {color:black; background:#141414;}
   tr.center-block {text-align:center;}
   h1 {font-size:1.5rem; text-align:center; color:#1a92b9;}
-  .container {width:60%;height:100%;}
+  .container {width:60%; height:100%; background:white; color:"black"; border-radius:"1%";}
   label {font-weight:bold;}
   #upfile {display:none;}
+   #b-ti {color:black; margin:10px;font-weight:bold; font-size:26pt;}
    h1 {text-align:center; color:#2cdd9b;}
+   .btnmo {background:#2cdd9b;}
+   .btnmo:hover {background:#1dc8cc;}
+   .btncan {background:#FE2E2E;}
 </style>
 </head>
 <body>
@@ -36,12 +40,16 @@ if(request.getParameter("open") != null){
       <span style="font-size: 30px; cursor: pointer; color: white;"
          onclick="openNav()">&#9776;</span>
 <div class="container">
+<br><br>
+<h2 id="b-ti">&nbsp;&nbsp;&nbsp;씨네필 라운지</h2>
+<br>
+
  <form action="BoardModifyAction.bd" method="post" 
        enctype="multipart/form-data" name="modifyform">
  <input type="hidden" name="BOARD_NUM" value="${boarddata.BOARD_NUM }">
   
   <div class="form-group">
-    <label for="board_name">글쓴이</label>
+    <label for="board_name"></label>
      <input readOnly type="text" class="form-control" 
             value="${boarddata.BOARD_NAME }">
   </div>
@@ -71,8 +79,8 @@ if(request.getParameter("open") != null){
   </c:if>
   
    <div class="form-group">
-    <button type="submit" class="btn btn-primary">수정</button>
-    <button type="reset" class="btn btn-danger"
+    <button type="submit" class="btn btnmo">수정</button>
+    <button type="reset" class="btn btncan" 
                          onClick="history.go(-1)">취소</button>
   </div>  
  </form>

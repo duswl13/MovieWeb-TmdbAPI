@@ -14,7 +14,8 @@ public class MailAction implements Action {
 		String senderMail = request.getParameter("senderMail");
 		String receiveMail = request.getParameter("receiveMail");
 		String subject = request.getParameter("subject");
-		String content = request.getParameter("content");		
+		String content = request.getParameter("content");	
+		
 		MailVO vo =new MailVO();
 		vo.setSenderId(senderId);
 		vo.setSenderMail(senderMail);  
@@ -22,6 +23,7 @@ public class MailAction implements Action {
 		vo.setSubject(subject);
 		vo.setContent(content);
 		System.out.println(vo);
+		
 		MailSender sender = new MailSender();
 		try {
 			sender.mailSend(vo);

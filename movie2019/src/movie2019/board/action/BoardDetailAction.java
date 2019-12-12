@@ -31,13 +31,13 @@ public class BoardDetailAction implements Action {
 		String id = (String)session.getAttribute("id");
 		
 		
-		
-		//로그인한 회원 메일 가져와야하는디...
+		//로그인한 회원 메일
 		Member mem = new Member();
 		mem = boarddao.usermail(id);
 	      
-	      request.setAttribute("mem", mem);
+	     request.setAttribute("mem", mem);
 	      
+	     
 		ActionForward forward = new ActionForward();
 
 		if(boarddata==null) {
