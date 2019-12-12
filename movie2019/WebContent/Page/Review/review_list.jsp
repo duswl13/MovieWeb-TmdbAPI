@@ -37,6 +37,7 @@ body {
 .center-block {
 	display: flex;
 	justify-content: center; /*가운데정렬*/
+	padding:0px;
 }
 
 .col {
@@ -61,15 +62,21 @@ body {
 .rvlist .rvtitle {
 	font-size: 10pt;
 	font-weight: bold;
+	margin-bottom:0px;
 }
 
+/*리뷰내용부분*/
 .rvcontent {
-	font-size: 9pt;
+    font-size: 9pt;
+    width: 170px;
+    height: 140px;
+    overflow-y: auto;
 }
 
 .rvbottom1, .rvbottom2 {
 	color: #141414;
-	font-size: 8pt;
+	font-size: 9pt;
+	font-weight:bold;
 }
 
 /*왼쪽 이미지*/
@@ -77,9 +84,8 @@ body {
 	position: relative;
 	background-size: cover;
 	background-position: center center;
-	max-height: 250px;
-	min-height: 250px;
-}
+	max-height: 270px;
+	min-height: 270px;	}
 
 /*가운데 동글 아이콘*/
 .icon-round {
@@ -90,8 +96,8 @@ body {
 	border-radius: 100%;
 	display: inline-block;
 	position: absolute;
-	right: -18px;
-	top: 13px;
+    right: -245px;
+    top: 13px;
 	max-height: 300px;
 }
 
@@ -184,14 +190,17 @@ a:hover {
 
 .star {
 	color: gold;
-	font-size: 12pt;
+	font-size: 10pt;
 	font-weight: bold;
+	margin-bottom: 10px;
 }
 
 .mb-4, .my-4 {
-	margin-bottom: 4rem !important;
-	width: 350px;
-	height: 250px;
+	margin-bottom: 6.5rem !important;
+	margin-left:50px;
+	margin-right: 40px;
+	width: 390px;
+	height: 270px;
 }
 
 .page-item {
@@ -215,6 +224,17 @@ a:hover {
 li .current {
 	font-weight: bold;
 }
+
+.like {clear:both}
+
+.floatleft {float:left}
+.floatright {float:right}
+
+::-webkit-scrollbar {width: 7px; height: 7px; border: 0px; }
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 7px; background: none;}
+::-webkit-scrollbar-track {background: none; border:0px; -webkit-border-radius: 0px; border-radius:0px; -webkit-box-shadow: 0}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background:#e8e8e8; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0}
+
 </style>
 
 
@@ -249,9 +269,9 @@ li .current {
 			onclick="openNav()">&#9776;</span>
 
 		<h2 class=readme>VOSHU 회원들은 지금 어떤 영화를 보고 있을까요?</h2>
-		<p class=readme>리뷰를 남기시려면 왼쪽 메뉴에서 원하는 영화를 검색해보세요.</p>
+		<p class=readme style="font-size:11pt;">리뷰를 남기시려면, 왼쪽 메뉴에서 원하는 영화를 검색해보세요.</p>
 
-		<br>
+		<br><br>
 
 		<!-- 글이 있는 경우 -->
 		<c:if test="${listcount > 0 }">
@@ -292,10 +312,7 @@ li .current {
 												<p class="rvtitle">
 													<a href="moviedetail.ml?open=false&id=${r.MOVIE_ID}">${r.MOVIE_NAME}</a>
 												</p>
-												<p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}<br>${r.REVIEW_DATE}</p>
-												<br>
-
-												<c:choose>
+													<c:choose>
 													<c:when test="${r.STAR == 1}">
 														<p class=star>★☆☆☆☆</p>
 
@@ -317,17 +334,14 @@ li .current {
 														<p class=star>★★★★★</p>
 													</c:when>
 												</c:choose>
+												<p class=rvcontent>${r.REVIEW_TITLE}<br>${r.REVIEW_CONTENT}</p>
 
-												<p class=rvbottom1>
-													<a href="ReviewUserList.rv?userId=${r.USER_ID}"
-														title="보슈 회원 ${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>님이 남긴 리뷰
-												</p>
+												
 
-
-												<span class="like"
+												<p class="like floatleft"
 													Onclick='addLike("${r.USER_ID}","${r.MOVIE_ID}")'> <c:choose>
 														<c:when test="${r.LIKECHECK == 1 }">
-															<img class="like_img"
+															<img class="like_img" 
 																src="<%=request.getContextPath()%>/Png/like_up.svg"
 																style="width: 15px; height: 15px;">
 														</c:when>
@@ -336,9 +350,14 @@ li .current {
 																src="<%=request.getContextPath()%>/Png/like_default.svg"
 																style="width: 15px; height: 15px;">
 														</c:otherwise>
-													</c:choose> <span class="like_count">${r.LIKE }</span>
+													</c:choose><span class="like_count" style="font-size:8pt">${r.LIKE }</span>
 
-												</span>
+												</p>
+												
+												<p class="rvbottom1 floatright" style="margin-right:10px;">
+													<a href="ReviewUserList.rv?userId=${r.USER_ID}"
+														title="${r.USER_ID}님의 리뷰 더보기">${r.USER_ID}</a>
+												</p>
 											</div>
 
 										</div>
@@ -350,6 +369,7 @@ li .current {
 						</c:forEach>
 
 					</div>
+					<br>
 					<div class="center-block">
 						<div class=row>
 							<div class=col>
@@ -397,7 +417,7 @@ li .current {
 
 		<!-- 게시글이 없는 경우 -->
 		<c:if test="${listcount == 0 }">
-			<font size=5>등록된 리뷰가 없습니다.</font>
+			<h3 class=readme>등록된 리뷰가 없습니다.</h3>
 		</c:if>
 
 
@@ -426,7 +446,7 @@ function addLike(userID,movieID){
 				$('.like_img:eq('+click+')').prop('src',"<%=request.getContextPath()%>/Png/like_up.svg");
 				$('.like_count:eq('+click+')').text(Number($('.like_count:eq('+click+')').text())+1);
 				}else if(data == -1){
-				alert("이미 좋아요 한 리뷰입니다.");
+				alert("좋아요는 한 번만 누를 수 있습니다.");
 				}else{
 				alert("로그인한 회원만 좋아요 할 수 있습니다.");
 				location.href='<%=request.getContextPath()%>/Page/Login/login.jsp';

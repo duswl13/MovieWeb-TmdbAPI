@@ -34,6 +34,21 @@ body {
 	color: #141414;
 }
 
+a {
+	color: #1dc8cc;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #2cdd9b;
+	text-decoration: none;
+}
+
+.readme {
+	color: #edf1f2;
+	margin-left: 150px;
+}
+
 .prvlist {
 	font-family: "Montserrat", sans-serif;
 	font-weight: 300;
@@ -394,92 +409,107 @@ if(request.getParameter("open") != null){
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-		<h2></h2>
+		<h2 class=readme>내가 VOSHU에 남긴 리뷰들</h2>
+		<p class=readme style="font-size: 11pt;">영화가 잘 기억나지 않는다면 영화 제목을
+			클릭해 상세정보를 확인해 보슈.</p>
 
 		<br>
-		<div class="prvlist">
-			<div class="container">
-				<div class="modal" id="rvModal"></div>
-				<!-- Row  -->
-				<div class="row">
 
-					<c:forEach items="${reviewlist }" var="item">
-						<!-- Column -->
-						<div class="col-md-4 col">
-							<div class="card card-shadow border-0 mb-4">
-								<div class="p-4">
-									<div class="icon-space">
-										<c:choose>
-											<c:when test="${item.FACE == 1}">
-												<img src="<%=request.getContextPath()%>/Png/happy1.svg"
-													class="icon-round bg-white display-5 rounded-circle">
-											</c:when>
-											<c:otherwise>
-												<img src="<%=request.getContextPath()%>/Png/neutral.svg"
-													class="icon-round bg-white display-5 rounded-circle">
-											</c:otherwise>
-										</c:choose>
+		<!-- 글이 있는 경우 -->
+		<c:if test="${listcount > 0 }">
 
+
+			<div class="prvlist">
+				<div class="container">
+					<div class="modal" id="rvModal"></div>
+					<!-- Row  -->
+					<div class="row">
+
+						<c:forEach items="${reviewlist }" var="item">
+							<!-- Column -->
+							<div class="col-md-4 col">
+								<div class="card card-shadow border-0 mb-4">
+									<div class="p-4">
+										<div class="icon-space">
+											<c:choose>
+												<c:when test="${item.FACE == 1}">
+													<img src="<%=request.getContextPath()%>/Png/happy1.svg"
+														class="icon-round bg-white display-5 rounded-circle">
+												</c:when>
+												<c:otherwise>
+													<img src="<%=request.getContextPath()%>/Png/neutral.svg"
+														class="icon-round bg-white display-5 rounded-circle">
+												</c:otherwise>
+											</c:choose>
+
+										</div>
+										<div class=content>
+											<input id="PriRvContent" class="PriRvContent"
+												name="PriRvContent" type="hidden" value="${item.MOVIE_ID }">
+											<h6 class="mvtitle">
+												<a href="moviedetail.ml?open=false&id=${item.MOVIE_ID}">${item.MOVIE_NAME}</a>
+											</h6>
+											<c:choose>
+												<c:when test="${item.STAR == 1}">
+													<p class="star floatright">★☆☆☆☆</p>
+												</c:when>
+												<c:when test="${item.STAR == 2}">
+													<p class="star floatright">★★☆☆☆</p>
+												</c:when>
+												<c:when test="${item.STAR == 3}">
+													<p class="star floatright">★★★☆☆</p>
+												</c:when>
+												<c:when test="${item.STAR == 4}">
+													<p class="star floatright">★★★★☆</p>
+												</c:when>
+												<c:when test="${item.STAR == 5}">
+													<p class="star floatright">★★★★★</p>
+												</c:when>
+											</c:choose>
+
+											<p class="prvtitle float">${item.REVIEW_TITLE}</p>
+											<p class=prvcontent>${item.REVIEW_CONTENT}</p>
+											<p class="prvdate floatright">${item.REVIEW_DATE}</p>
+
+
+											<br> <br>
+											<button class="button-gradiant rvdetailbtn floatright"
+												data-toggle="modal" data-target="#rvModal">
+												수정 <span class=smaller>/</span> 삭제
+											</button>
+											<h5 class="float">
+												<img class="like_img"
+													src="<%=request.getContextPath()%>/Png/like_up.svg"
+													style="width: 17px; height: 17px;"> <span
+													class=likescore>${item.LIKE}</span>
+											</h5>
+										</div>
+										<!-- content end -->
 									</div>
-									<div class=content>
-										<input id="PriRvContent" class="PriRvContent"
-											name="PriRvContent" type="hidden" value="${item.MOVIE_ID }">
-										<h6 class="mvtitle">${item.MOVIE_NAME}</h6>
-										<c:choose>
-											<c:when test="${item.STAR == 1}">
-												<p class="star floatright">★☆☆☆☆</p>
-											</c:when>
-											<c:when test="${item.STAR == 2}">
-												<p class="star floatright">★★☆☆☆</p>
-											</c:when>
-											<c:when test="${item.STAR == 3}">
-												<p class="star floatright">★★★☆☆</p>
-											</c:when>
-											<c:when test="${item.STAR == 4}">
-												<p class="star floatright">★★★★☆</p>
-											</c:when>
-											<c:when test="${item.STAR == 5}">
-												<p class="star floatright">★★★★★</p>
-											</c:when>
-										</c:choose>
-
-										<p class="prvtitle float">${item.REVIEW_TITLE}</p>
-										<p class=prvcontent>${item.REVIEW_CONTENT}</p>
-										<p class="prvdate floatright">${item.REVIEW_DATE}</p>
-
-
-										<br> <br>
-										<button class="button-gradiant rvdetailbtn floatright"
-											data-toggle="modal" data-target="#rvModal">
-											수정 <span class=smaller>/</span> 삭제
-										</button>
-										<h5 class="float">
-											<img class="like_img"
-												src="<%=request.getContextPath()%>/Png/like_up.svg"
-												style="width: 17px; height: 17px;"> <span
-												class=likescore>${item.LIKE}</span>
-										</h5>
-									</div>
-									<!-- content end -->
 								</div>
 							</div>
-						</div>
-						<br>
-						<br>
-						<br>
-					</c:forEach>
+							<br>
+							<br>
+							<br>
+						</c:forEach>
 
+					</div>
+
+					<br>
+					<div class="col-md-12 mt-3 text-center">
+						<a
+							class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
+					</div>
+					<br> <br> <br>
 				</div>
 
-				<br>
-				<div class="col-md-12 mt-3 text-center">
-					<a
-						class="btn btn-success-gradiant text-white border-0 btn-md morebtn"><span>더보기</span></a>
-				</div>
-				<br> <br> <br>
 			</div>
+		</c:if>
 
-		</div>
+		<!-- 게시글이 없는 경우 -->
+		<c:if test="${listcount == 0 }">
+			<h3 class=readme>등록된 리뷰가 없습니다.</h3>
+		</c:if>
 	</div>
 
 	<!-- 추가... -->

@@ -432,11 +432,14 @@ div .rvsubmit {
 
 .rvcontent {
 	font-size: 10pt;
-	overflow-y:scroll;
+	overflow-y:auto;
 	width: 255px;
 	height: 135px;
 	padding:3px;
 	  margin-left:5px;
+}
+.rvcontent2 {
+
 }
 
 .contentwrap{
@@ -447,10 +450,16 @@ div .rvsubmit {
 }
 
 ::-webkit-scrollbar {width: 7px; height: 7px; border: 0px; }
-::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 7px; background: #141414}
-::-webkit-scrollbar-track {background: #141414; border:0px; -webkit-border-radius: 0px; border-radius:0px; -webkit-box-shadow: 0}
-::-webkit-scrollbar-thumb {height: 50px; width: 50px; background:#707070; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {display: block; height: 7px; background: none;}
+::-webkit-scrollbar-track {background: none; border:0px; -webkit-border-radius: 0px; border-radius:0px; -webkit-box-shadow: 0}
+::-webkit-scrollbar-thumb {height: 50px; width: 50px; background:#3b3b3b; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow: 0}
 
+
+.floatleft{float:left}
+
+.floatright{float:right}
+
+.clear{clear:both}
 </style>
 
 <script>
@@ -704,13 +713,13 @@ div .rvsubmit {
 												<p style="font-size: 11pt;">
 													<b>${p_review.REVIEW_TITLE } </b>
 												</p>
-												<p class=rvcontent>${p_review.REVIEW_CONTENT }</p>
+												<p class=rvcontent2>${p_review.REVIEW_CONTENT }</p>
 											</div>
 
 											<div style="height: 10%;">
 												<span class="review_id" style="font-size: 10pt;">${ p_review.USER_ID}</span>
 
-												<span class="review_like"> <img class="like_img"
+												 <img class="like_img"
 													src="<%=request.getContextPath()%>/Png/like_up.svg"
 													style="width: 15px; height: 15px;"><span
 													class=likescore>&nbsp;${p_review.REVIEW_LIKE}</span>
@@ -768,9 +777,9 @@ div .rvsubmit {
 
 							</div>
 							<div class="reviewarea">
-								<input name=movieid type=text hidden value=${movieId}>
+								<input name=movieid type=text type=hidden value=${movieId}>
 								<div class="rvtitle">
-									한 줄 감상<input type=text required="required" name=rvtitle>
+									한 줄 감상<input type=text required="required" name=rvtitle class=clear>
 								</div>
 								<div class="rvcontent">
 									<textarea placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
@@ -809,25 +818,23 @@ div .rvsubmit {
 						method=post>
 
 						<div class="outermodal">
-							<button type="button" class="close modalclose"
+							<button type="button" class="close modalclose floatright"
 								data-dismiss="modal" aria-label="Close">X</button>
-							<div class="achtungfloat">
-								<h4 class="mvtitle font-gradiant">${list.title}</h4>
-
+								<h4 class="mvtitle font-gradiant floatleft">${list.title}</h4>
 							</div>
-							<div class="reviewarea">
+							<div class="reviewarea clear">
 								<input name=movieid type=text hidden value=${movieId}>
 								<div class="rvtitle">
-									한 줄 감상<input type=text required="required" name=rvtitle
+									한 줄 감상<input type=text cols=50 required="required" name=rvtitle class=clear
 										value=${review.REVIEW_TITLE }>
 								</div>
-							<div class=contentwrap>
-								<div class="rvcontent">
+							
+								<div class="rvcontent2">
 									<textarea class="rvcontentarea2" cols=50 rows=12
 										required="required" style="resize: none;" name=rvcontent>${review.REVIEW_CONTENT }</textarea>
-									<span style="color: #141414; font-size: 10pt;" id="counter2">-/200자</span>
+									<p style="color: #141414; font-size: 10pt; margin-left:15px;" id="counter2" >-/200자</p>
 								</div>
-							</div>
+							
 								<div class=rvsubmit>${review.USER_ID}님이
 									작성한 리뷰를
 									<button type=submit class="submitbutton font-gradiant">수정</button>
