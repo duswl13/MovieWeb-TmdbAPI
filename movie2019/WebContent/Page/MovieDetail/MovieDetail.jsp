@@ -271,9 +271,7 @@ iframe {
 #rvModal, #rvModal2 {
 	display: none
 } /*처음에 모달 안 보이게*/
-.modal-content {
-	padding: 30px;
-}
+
 
 tr .rvtr {
 	text-align: center
@@ -426,8 +424,10 @@ div .rvsubmit {
 }
 
 .modal-content {
+	padding: 40px;
 	margin-top: 160px;
 	margin-left: auto;
+	width:500px;
 }
 
 .rvcontent {
@@ -436,7 +436,7 @@ div .rvsubmit {
 	width: 255px;
 	height: 135px;
 	padding:3px;
-	  margin-left:5px;
+	margin-left:5px;
 }
 .rvcontent2 {
 
@@ -457,7 +457,11 @@ div .rvsubmit {
 
 .floatleft{float:left}
 
-.floatright{float:right}
+.floatright{
+	float:right;     
+	margin-top: -40px;
+    margin-right: -65px;
+    font-size: 13pt;}
 
 .clear{clear:both}
 </style>
