@@ -621,7 +621,7 @@ function print(list){
 					text += ' <p class=prvcontent>' + list[i].REVIEW_CONTENT
 							+ '</p>';
 					text += ' <p class="prvdate floatright">' + list[i].REVIEW_DATE + '</p>'+ '<br> <br>';
-        			text += '<h5>'+ list[i].LIKE +'</h5>';
+        			
 
         			
 					text += '<p class="rvbottom1 floatright userid">' + list[i].USER_ID + '</p>';
