@@ -761,7 +761,7 @@ div .rvsubmit {
 
 
 
-	<!-- 연수  modal 시작-->
+	<!-- 연수  modal1 시작-->
 	<div class="modal" id="rvModal">
 		<div class="modal-dialog ">
 			<div class="modal-content">
@@ -774,20 +774,19 @@ div .rvsubmit {
 						method=post>
 
 						<div class="outermodal">
-							<button type="button" class="close modalclose"
+							<button type="button" class="close modalclose floatright"
 								data-dismiss="modal" aria-label="Close">X</button>
-							<div class="achtungfloat">
-								<h4 class="mvtitle font-gradiant">${list.title}</h4>
-
+								<h4 class="mvtitle font-gradiant floatleft">${list.title}</h4>
 							</div>
-							<div class="reviewarea">
-								<input name=movieid type=text type=hidden value=${movieId}>
-								<div class="rvtitle">
-									한 줄 감상<input type=text required="required" name=rvtitle class=clear>
+							
+							<div class="reviewarea2 clear">
+								<input name=movieid type=text hidden value=${movieId}>
+								<div class="rvtitle clear">
+									한 줄 감상<input type=text required="required" name=rvtitle clear>
 								</div>
-								<div class="rvcontent">
-									<textarea placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
-										style="resize: none;" class="rvcontentarea" cols=50 rows=12
+								<div class="rvcontent2">
+									<textarea class="rvcontentarea2" placeholder="이 영화에 대한 감상을 자유롭게 표현해보슈."
+										style="resize: none;" cols=50 rows=12
 										required="required" name=rvcontent></textarea>
 									<span style="color: #141414; font-size: 10pt;" id="counter">0/200자</span>
 								</div>
@@ -826,14 +825,14 @@ div .rvsubmit {
 								data-dismiss="modal" aria-label="Close">X</button>
 								<h4 class="mvtitle font-gradiant floatleft">${list.title}</h4>
 							</div>
-							<div class="reviewarea clear">
+							<div class="reviewarea2 clear">
 								<input name=movieid type=text hidden value=${movieId}>
 								<div class="rvtitle">
 									한 줄 감상<input type=text cols=50 required="required" name=rvtitle class=clear
 										value=${review.REVIEW_TITLE }>
 								</div>
 							
-								<div class="rvcontent2">
+								<div class="rvcontent">
 									<textarea class="rvcontentarea2" cols=50 rows=12
 										required="required" style="resize: none;" name=rvcontent>${review.REVIEW_CONTENT }</textarea>
 									<p style="color: #141414; font-size: 10pt; margin-left:15px;" id="counter2" >-/200자</p>
@@ -926,7 +925,7 @@ document.getElementById("main").style.marginLeft = "250px";
    }
    
    //textarea 글자수 제한/카운팅
-   $('.rvcontentarea').keyup(function (e){
+   $('.rvcontentarea2').keyup(function (e){
 	    var content = $(this).val();
 	    $('#counter').html(""+content.length+"/200자");
 	    if (content.length > 200){

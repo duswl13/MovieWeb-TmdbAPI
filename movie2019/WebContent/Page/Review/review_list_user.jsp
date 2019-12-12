@@ -1,5 +1,4 @@
-<!-- 리뷰 클릭 시 첫 화면 -->
-<!-- 이미지 들어가는 템플릿-->
+<!-- 회원 아이디 클릭 시 리뷰 모아보기 -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -386,9 +385,11 @@ if(request.getParameter("open") != null){
 		<span style="font-size: 30px; cursor: pointer; color: white;"
 			onclick="openNav()">&#9776;</span>
 
-<c:forEach var="r" items="${reviewlist}">
+<c:forEach var="r" items="${reviewlist}" varStatus="status">
+<c:if test = "${status.count==1}" >
 		<h2 class=readme>VOSHU 회원  <b class=titlebold>${r.USER_ID}</b>님이 남긴 리뷰 리스트</h2>
 		<p class=readme style="font-size:11pt;">영화 제목을 클릭하면 상세 정보를 볼 수 있어요.</p>
+</c:if>
 </c:forEach>
 
 
@@ -578,49 +579,54 @@ $('.btn-success-gradiant').click(function(){
 });
 
 function print(list){
-	
-	var text = "";
-	
-	for(var i = 0; i < list.length; i++){
-		text += '<div class="col-md-4 col">';
-		text += '<div class="card card-shadow border-0 mb-4">';
-		text += '<div class="p-4">';
-		text +=  '<div class="icon-space">';
-		
-		if(list[i].FACE == 1)
-        text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
-        else
-        text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
-              
-                  
-        text += '</div>';
-        text += ' <div class=content>';
-        text += ' <h6 class="mvtitle">'+list[i].MOVIE_NAME+'</h6>';
-        text += ' <p class="prvtitle">'+list[i].REVIEW_TITLE+'</p>';
-        text += ' <p class=prvcontent>'+list[i].REVIEW_CONTENT+'</p>';
-      
-        text += ' <p class=prvdate>'+list[i].REVIEW_DATE+'</p>';
-                
-        switch(list[i].STAR){
-        case 1:
-        	text += '  <p>★☆☆☆☆</p>';
-        	break;
-        case 2:
-        	text += '  <p>★★☆☆☆</p>';
-        	break;
-        case 3:
-        	text += '  <p>★★★☆☆</p>';
-        	break;
-        case 4:
-        	text += '  <p>★★★★☆</p>';
-        	break;
-        case 5:
-        	text += '  <p>★★★★★</p>';
-        	break;
-        	
-        }
-        text += '<h5>'+list[i].LIKE+'</h5>';
-        text +='</div></div></div></div><br><br><br>';
+	   
+	   var text = "";
+	   
+	   for(var i = 0; i < list.length; i++){
+	      text += '<div class="col-md-4 col">';
+	      text += '<div class="card card-shadow border-0 mb-4">';
+	      text += '<div class="p-4">';
+	      text +=  '<div class="icon-space">';
+	      
+	      if(list[i].FACE == 1)
+	        text += '<img src="<%=request.getContextPath()%>/Png/happy1.svg" class="icon-round bg-white display-5 rounded-circle">';
+	        else
+	        text += '<img src="<%=request.getContextPath()%>/Png/neutral.svg" class="icon-round bg-white display-5 rounded-circle">';
+
+					text += '</div>';
+					text += ' <div class=content>';
+					text += ' <input id="PriRvContent" class="PriRvContent" name="PriRvContent" type="hidden" value='+list[i].MOVIE_ID+'>';
+					text += ' <h6 class="mvtitle">' + list[i].MOVIE_NAME + '</h6>';
+					
+					switch (list[i].STAR) {
+					case 1:
+						text += '  <p class="star floatright">★☆☆☆☆</p>';
+						break;
+					case 2:
+						text += '  <p class="star floatright">★★☆☆☆</p>';
+						break;
+					case 3:
+						text += '  <p class="star floatright">★★★☆☆</p>';
+						break;
+					case 4:
+						text += '  <p class="star floatright">★★★★☆</p>';
+						break;
+					case 5:
+						text += '  <p class="star floatright">★★★★★</p>';
+						break;
+
+					}
+							
+					text += ' <p class="prvtitle float">' + list[i].REVIEW_TITLE + '</p>';
+					text += ' <p class=prvcontent>' + list[i].REVIEW_CONTENT
+							+ '</p>';
+					text += ' <p class="prvdate floatright">' + list[i].REVIEW_DATE + '</p>'+ '<br> <br>';
+        			
+
+        			
+					text += '<p class="rvbottom1 floatright userid">' + list[i].USER_ID + '</p>';
+        			
+					text +='</div></div></div></div><br><br><br>';
 	}
 	
 	$('.row').append( text);
