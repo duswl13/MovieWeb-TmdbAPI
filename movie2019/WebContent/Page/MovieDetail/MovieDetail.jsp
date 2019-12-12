@@ -832,7 +832,7 @@ div .rvsubmit {
 										value=${review.REVIEW_TITLE }>
 								</div>
 							
-								<div class="rvcontent">
+								<div class="rvcontent2">
 									<textarea class="rvcontentarea2" cols=50 rows=12
 										required="required" style="resize: none;" name=rvcontent>${review.REVIEW_CONTENT }</textarea>
 									<p style="color: #141414; font-size: 10pt; margin-left:15px;" id="counter2" >-/200자</p>
